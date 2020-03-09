@@ -7,12 +7,12 @@
 
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
 
-<title>分类: -[SpringMVC] -[前端] - 小温 blog</title>
+<title>分类: 前端 - 小温 blog</title>
 
 
     <meta property="og:type" content="website">
 <meta property="og:title" content="小温 blog">
-<meta property="og:url" content="http://wjw.today/categories/SpringMVC-%E5%89%8D%E7%AB%AF/index.html">
+<meta property="og:url" content="http://wjw.today/categories/%E5%89%8D%E7%AB%AF/index.html">
 <meta property="og:site_name" content="小温 blog">
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="http://wjw.today/images/og_image.png">
@@ -26,13 +26,13 @@
 
 
 
-<link rel="icon" href="/images/favicon.svg">
+<link rel="icon" href="/images/cow.svg">
 
 
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.7.2/css/bulma.css">
 <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.4.1/css/all.css">
 <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Ubuntu:400,600|Source+Code+Pro">
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@9.12.0/styles/atom-one-light.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@9.12.0/styles/atom-one-dark.css">
 
 
     
@@ -131,7 +131,7 @@
         <ul>
             <li><a href="/categories">分类</a></li>
             
-            <li class="is-active"><a href="#" aria-current="page">-[SpringMVC] -[前端]</a></li>
+            <li class="is-active"><a href="#" aria-current="page">前端</a></li>
         </ul>
         </nav>
     </div>
@@ -147,14 +147,14 @@
                 <time class="level-item has-text-grey" datetime="2020-03-09T07:46:13.000Z">2020-03-09</time>
                 
                 <div class="level-item">
-                <a class="has-link-grey -link" href="/categories/SpringMVC-%E5%89%8D%E7%AB%AF/">-[SpringMVC] -[前端]</a>
+                <a class="has-link-grey -link" href="/categories/SpringMVC/">SpringMVC</a>&nbsp;/&nbsp;<a class="has-link-grey -link" href="/categories/%E5%89%8D%E7%AB%AF/">前端</a>
                 </div>
                 
                 
                 <span class="level-item has-text-grey">
                     
                     
-                    7 分钟 读完 (大约 1034 个字)
+                    7 分钟 读完 (大约 1035 个字)
                 </span>
                 
                 
@@ -163,7 +163,7 @@
         
         <h1 class="title is-size-3 is-size-4-mobile has-text-weight-normal">
             
-                <a class="has-link-black-ter" href="/2020/03/09/json%E5%AF%B9%E8%B1%A1-json%E5%AD%97%E7%AC%A6%E4%B8%B2-%E5%8F%82%E6%95%B0%E5%AD%97%E7%AC%A6%E4%B8%B2%E7%9A%84%E4%B8%80%E4%BA%9B%E5%9D%91/">SpringMVC接收前端参数为null的探索</a>
+                <a class="has-link-black-ter" href="/2020/03/09/SpringMVC%E6%8E%A5%E6%94%B6%E5%89%8D%E7%AB%AF%E5%8F%82%E6%95%B0%E4%B8%BAnull%E7%9A%84%E6%8E%A2%E7%B4%A2/">SpringMVC接收前端参数为null的探索</a>
             
         </h1>
         <div class="content">
@@ -177,93 +177,16 @@
 </li>
 </ul>
 <p>文章将会排列组合= =，举例说明各种搭配如何成功接收数据。</p>
-<h3 id="form-url-get-一个个接收-Bean类型"><a href="#form-url-get-一个个接收-Bean类型" class="headerlink" title="form/url + get + 一个个接收/Bean类型"></a>form/url + get + 一个个接收/Bean类型</h3><p>get请求基本没有什么坑，controller层一个个接和用实体类接都没有问题</p>
-<p>html</p>
-<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">form</span> <span class="attr">action</span>=<span class="string">"testGet"</span>&gt;</span></span><br><span class="line">    单个<span class="tag">&lt;<span class="name">input</span> <span class="attr">type</span>=<span class="string">"text"</span> <span class="attr">name</span>=<span class="string">"a"</span>&gt;</span><span class="tag">&lt;<span class="name">br</span>&gt;</span></span><br><span class="line">    姓名：<span class="tag">&lt;<span class="name">input</span> <span class="attr">type</span>=<span class="string">"text"</span> <span class="attr">name</span>=<span class="string">"username"</span>&gt;</span><span class="tag">&lt;<span class="name">br</span>&gt;</span></span><br><span class="line">    年龄：<span class="tag">&lt;<span class="name">input</span> <span class="attr">type</span>=<span class="string">"text"</span> <span class="attr">name</span>=<span class="string">"age"</span>&gt;</span><span class="tag">&lt;<span class="name">br</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">input</span> <span class="attr">type</span>=<span class="string">"submit"</span> <span class="attr">value</span>=<span class="string">"提交"</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">form</span>&gt;</span></span><br></pre></td></tr></table></figure>
-
-<p>controller</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@RequestMapping</span>(<span class="string">"/testGet"</span>)</span><br><span class="line"><span class="function"><span class="keyword">public</span> String <span class="title">testGet</span><span class="params">(<span class="keyword">int</span> a, User user)</span></span>&#123;</span><br><span class="line">    System.out.println(<span class="string">"testGet方法执行了"</span>);</span><br><span class="line">    System.out.println(a);</span><br><span class="line">    System.out.println(user);</span><br><span class="line">    <span class="keyword">return</span> <span class="string">"success"</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p><img src="https://s2.ax1x.com/2020/03/09/89UfW6.png" alt="正常接收.png"></p>
-<h3 id="form-post-字符串类型"><a href="#form-post-字符串类型" class="headerlink" title="form + post + 字符串类型"></a>form + post + 字符串类型</h3><p>用一整个<code>String body</code>接收</p>
-<p>html</p>
-<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">form</span> <span class="attr">action</span>=<span class="string">"testPostString"</span> <span class="attr">method</span>=<span class="string">"post"</span>&gt;</span></span><br><span class="line">    姓名<span class="tag">&lt;<span class="name">input</span> <span class="attr">type</span>=<span class="string">"text"</span> <span class="attr">name</span>=<span class="string">"username"</span> /&gt;</span><span class="tag">&lt;<span class="name">br</span>&gt;</span></span><br><span class="line">    年龄<span class="tag">&lt;<span class="name">input</span> <span class="attr">type</span>=<span class="string">"text"</span> <span class="attr">name</span>=<span class="string">"age"</span> /&gt;</span><span class="tag">&lt;<span class="name">br</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">input</span> <span class="attr">type</span>=<span class="string">"submit"</span> <span class="attr">value</span>=<span class="string">"提交"</span> /&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">form</span>&gt;</span></span><br></pre></td></tr></table></figure>
-
-<p>controller</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@RequestMapping</span>(<span class="string">"/testPostString"</span>)</span><br><span class="line"><span class="function"><span class="keyword">public</span> String <span class="title">testPostString</span><span class="params">(@RequestBody String body)</span></span>&#123;</span><br><span class="line">    System.out.println(<span class="string">"testPostString方法执行了"</span>);</span><br><span class="line">    System.out.println(body);</span><br><span class="line">    <span class="keyword">return</span> <span class="string">"success"</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>可以看到form表单发送的数据格式</p>
-<p><img src="https://s2.ax1x.com/2020/03/09/89wFzV.png" alt="89wFzV.png"></p>
-<p>这种类似于get请求时发送url格式的参数我称为“参数字符串”，用一个String body接收是没问题的。就是麻烦了一点，需要接收后再处理成json对象</p>
-<h3 id="form-post-Bean类型"><a href="#form-post-Bean类型" class="headerlink" title="form + post + Bean类型"></a>form + post + Bean类型</h3><p>这个组合获取不到值会报415，就是类型不匹配(String和User)，解决方法是在controller方法的参数上加<strong>@ModelAttribute</strong>注解</p>
-<p>html</p>
-<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">form</span> <span class="attr">action</span>=<span class="string">"testPostBean"</span> <span class="attr">method</span>=<span class="string">"post"</span>&gt;</span></span><br><span class="line">    姓名<span class="tag">&lt;<span class="name">input</span> <span class="attr">type</span>=<span class="string">"text"</span> <span class="attr">name</span>=<span class="string">"username"</span> /&gt;</span><span class="tag">&lt;<span class="name">br</span>&gt;</span></span><br><span class="line">    年龄<span class="tag">&lt;<span class="name">input</span> <span class="attr">type</span>=<span class="string">"text"</span> <span class="attr">name</span>=<span class="string">"age"</span> /&gt;</span><span class="tag">&lt;<span class="name">br</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">input</span> <span class="attr">type</span>=<span class="string">"submit"</span> <span class="attr">value</span>=<span class="string">"提交"</span> /&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">form</span>&gt;</span></span><br></pre></td></tr></table></figure>
-
-<p>controller</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@RequestMapping</span>(<span class="string">"/testPostBean"</span>)</span><br><span class="line"><span class="function"><span class="keyword">public</span> String <span class="title">testPostBean</span><span class="params">(@ModelAttribute User user)</span></span>&#123;</span><br><span class="line">    System.out.println(<span class="string">"testPostBean方法执行了"</span>);</span><br><span class="line">    System.out.println(user);</span><br><span class="line">    <span class="keyword">return</span> <span class="string">"success"</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>加了注解就可以自动封装</p>
-<p><img src="https://s2.ax1x.com/2020/03/09/89wIyT.png" alt="89wIyT.png"></p>
-<h3 id="ajax-get-post-bean类型"><a href="#ajax-get-post-bean类型" class="headerlink" title="ajax + get/post + bean类型"></a>ajax + get/post + bean类型</h3><p>异步的请求，发送给后台的就是两种：json或者json字符串，这个我觉得真的有点坑</p>
-<blockquote>
-<p>这篇csdn博客写的很详细：<a href="https://blog.csdn.net/qq_37960007/article/details/79542727">https://blog.csdn.net/qq_37960007/article/details/79542727</a></p>
-</blockquote>
-<p>根据这位博主的描述我直接给出这两种的写法，再做说明</p>
-<table>
-<thead>
-<tr>
-<th>两种可行办法</th>
-</tr>
-</thead>
-<tbody><tr>
-<td>json字符串 + contentType指定为json + Bean接收</td>
-</tr>
-<tr>
-<td>json对象 + contentType不指定 + Bean接收</td>
-</tr>
-</tbody></table>
-<h4 id="法1"><a href="#法1" class="headerlink" title="法1"></a>法1</h4><p>ajax</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">$.ajax(&#123;</span><br><span class="line">    url: <span class="string">"testAjax"</span>,</span><br><span class="line">    contentType: <span class="string">"application/json;charset=utf-8"</span>,</span><br><span class="line">    data:<span class="string">'&#123;"username": "haha", "age": 20&#125;'</span>,</span><br><span class="line">    dataType: <span class="string">"json"</span>,</span><br><span class="line">    type: <span class="string">"post"</span>,</span><br><span class="line">    success:<span class="function"><span class="keyword">function</span> (<span class="params">data</span>) </span>&#123;</span><br><span class="line">        alert(data);</span><br><span class="line">        alert(data.age);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
-
-<p>controller</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@RequestMapping</span>(<span class="string">"/testAjax"</span>)</span><br><span class="line"><span class="keyword">public</span> <span class="meta">@ResponseBody</span> <span class="function">User <span class="title">testAjax</span><span class="params">(@RequestBody User user)</span></span>&#123;</span><br><span class="line">    System.out.println(<span class="string">"testAjax方法执行了"</span>);</span><br><span class="line">    System.out.println(user);</span><br><span class="line">    user.setAge(<span class="number">100</span>);</span><br><span class="line">    <span class="keyword">return</span> user;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>同时需要jackson的maven坐标</p>
-<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>com.fasterxml.jackson.core<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>jackson-databind<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">version</span>&gt;</span>2.10.3<span class="tag">&lt;/<span class="name">version</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>com.fasterxml.jackson.core<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>jackson-core<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">version</span>&gt;</span>2.10.3<span class="tag">&lt;/<span class="name">version</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>com.fasterxml.jackson.core<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>jackson-annotations<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">version</span>&gt;</span>2.10.3<span class="tag">&lt;/<span class="name">version</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br></pre></td></tr></table></figure>
-
-<p>效果如下，确实能接收（@ResponseBody注解是将User类变成json格式返回给前端，这个不是接收，不是我们要讨论的）</p>
-<p><img src="https://s2.ax1x.com/2020/03/09/89fuu9.png" alt="89fuu9.png"></p>
-<h4 id="法2"><a href="#法2" class="headerlink" title="法2"></a>法2</h4><p>ajax</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">$.ajax(&#123;</span><br><span class="line">    url: <span class="string">"testAjax2"</span>,</span><br><span class="line">    data:&#123;<span class="string">"username"</span>: <span class="string">"haha"</span>, <span class="string">"age"</span>: <span class="number">20</span>&#125;,</span><br><span class="line">    dataType: <span class="string">"json"</span>,</span><br><span class="line">    type: <span class="string">"post"</span>,</span><br><span class="line">    success:<span class="function"><span class="keyword">function</span> (<span class="params">data</span>) </span>&#123;</span><br><span class="line">        alert(data);</span><br><span class="line">        alert(data.age);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
-
-<p>controller</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@RequestMapping</span>(<span class="string">"/testAjax2"</span>)</span><br><span class="line"><span class="keyword">public</span> <span class="meta">@ResponseBody</span> <span class="function">User <span class="title">testAjax2</span><span class="params">(@ModelAttribute User user)</span></span>&#123;</span><br><span class="line">    System.out.println(<span class="string">"testAjax方法执行了"</span>);</span><br><span class="line">    System.out.println(user);</span><br><span class="line">    user.setAge(<span class="number">100</span>);</span><br><span class="line">    <span class="keyword">return</span> user;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>也是可以的</p>
-<p>区别在哪里？</p>
-<ol>
-<li>json字符串和json对象</li>
-</ol>
-<p><img src="https://s2.ax1x.com/2020/03/09/89oAl8.png" alt="89oAl8.png"></p>
-<p>你不要问那些键加不加双引号行不行，值加不加双引号行不行，其实都可以，但是<strong>如果你写的标准的话</strong>他们就相差一对单引号！</p>
-<ol start="2">
-<li>是否有<code>contentType: &quot;application/json;charset=utf-8&quot;</code></li>
-</ol>
-<p>这个是指定发送给后台的类型，如果<strong>指定了json</strong>，那么说明：应该写<strong>json字符串</strong>，因为它会自动帮你转换这个字符串</p>
-<p>如果<strong>没指定</strong>，则应该直接写<strong>json对象</strong>，因为它不会帮你转换，别弄反了</p>
-<ol start="3">
-<li>controller层的区别</li>
-</ol>
-<p>如果是用json字符串，那么controller就应该导入jackson的jar包，通过它来帮助我们完成映射</p>
-<p>如果是用json对象，那么controller就使用@ModelAttribute，情况就行普通post的Bean封装</p>
-<p>真的是天坑！！！！</p>
-<blockquote>
-<p>ps：json对象 -&gt; json字符串可以通过字符串的拼接或者JSON.stringify()</p>
-<p>​         json字符串 -&gt; json对象可以手动去除字符串或者JSON.parse()</p>
-</blockquote>
-
         </div>
         
+        
+        <div class="level is-mobile">
+            <div class="level-start">
+                <div class="level-item">
+                <a class="button is-size-7 is-light" href="/2020/03/09/SpringMVC%E6%8E%A5%E6%94%B6%E5%89%8D%E7%AB%AF%E5%8F%82%E6%95%B0%E4%B8%BAnull%E7%9A%84%E6%8E%A2%E7%B4%A2/#more">阅读更多</a>
+                </div>
+            </div>
+        </div>
         
         
     </div>
@@ -303,7 +226,7 @@
                     
                     <p class="is-size-6 is-flex is-flex-center has-text-grey">
                         <i class="fas fa-map-marker-alt has-mr-7"></i>
-                        <span>中国</span>
+                        <span>China, Shaoguan</span>
                     </p>
                     
                 </div>
@@ -329,7 +252,7 @@
                     </p>
                     <a href="/categories">
                         <p class="title has-text-weight-normal">
-                            2
+                            3
                         </p>
                     </a>
                 </div>
@@ -405,9 +328,9 @@
             </h3>
             <ul class="menu-list">
             <li>
-        <a class="level is-marginless" href="/categories/SpringMVC-%E5%89%8D%E7%AB%AF/">
+        <a class="level is-marginless" href="/categories/Others/">
             <span class="level-start">
-                <span class="level-item">-[SpringMVC] -[前端]</span>
+                <span class="level-item">Others</span>
             </span>
             <span class="level-end">
                 <span class="level-item tag">1</span>
@@ -416,6 +339,14 @@
         <a class="level is-marginless" href="/categories/SpringMVC/">
             <span class="level-start">
                 <span class="level-item">SpringMVC</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">2</span>
+            </span>
+        </a></li><li>
+        <a class="level is-marginless" href="/categories/%E5%89%8D%E7%AB%AF/">
+            <span class="level-start">
+                <span class="level-item">前端</span>
             </span>
             <span class="level-end">
                 <span class="level-item tag">1</span>
@@ -431,7 +362,7 @@
         <h3 class="menu-label">
             标签云
         </h3>
-        <a href="/tags/json-%E4%BA%A4%E4%BA%92-%E5%9D%91/" style="font-size: 10px;">json 交互 坑</a> <a href="/tags/markdown/" style="font-size: 10px;">markdown</a> <a href="/tags/springmvc-%E5%BC%80%E5%8F%91/" style="font-size: 10px;">springmvc 开发</a>
+        <a href="/tags/json-%E4%BA%A4%E4%BA%92-%E5%9D%91-springmvc/" style="font-size: 10px;">json 交互 坑 springmvc</a> <a href="/tags/markdown/" style="font-size: 10px;">markdown</a> <a href="/tags/springmvc-%E5%BC%80%E5%8F%91/" style="font-size: 10px;">springmvc 开发</a>
     </div>
 </div>
     
@@ -446,7 +377,7 @@
         
         <article class="media">
             
-            <a href="/2020/03/09/json%E5%AF%B9%E8%B1%A1-json%E5%AD%97%E7%AC%A6%E4%B8%B2-%E5%8F%82%E6%95%B0%E5%AD%97%E7%AC%A6%E4%B8%B2%E7%9A%84%E4%B8%80%E4%BA%9B%E5%9D%91/" class="media-left">
+            <a href="/2020/03/09/SpringMVC%E6%8E%A5%E6%94%B6%E5%89%8D%E7%AB%AF%E5%8F%82%E6%95%B0%E4%B8%BAnull%E7%9A%84%E6%8E%A2%E7%B4%A2/" class="media-left">
                 <p class="image is-64x64">
                     <img class="thumbnail" src="/images/thumbnail.svg" alt="SpringMVC接收前端参数为null的探索">
                 </p>
@@ -455,9 +386,9 @@
             <div class="media-content">
                 <div class="content">
                     <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2020-03-09T07:46:13.000Z">2020-03-09</time></div>
-                    <a href="/2020/03/09/json%E5%AF%B9%E8%B1%A1-json%E5%AD%97%E7%AC%A6%E4%B8%B2-%E5%8F%82%E6%95%B0%E5%AD%97%E7%AC%A6%E4%B8%B2%E7%9A%84%E4%B8%80%E4%BA%9B%E5%9D%91/" class="title has-link-black-ter is-size-6 has-text-weight-normal">SpringMVC接收前端参数为null的探索</a>
+                    <a href="/2020/03/09/SpringMVC%E6%8E%A5%E6%94%B6%E5%89%8D%E7%AB%AF%E5%8F%82%E6%95%B0%E4%B8%BAnull%E7%9A%84%E6%8E%A2%E7%B4%A2/" class="title has-link-black-ter is-size-6 has-text-weight-normal">SpringMVC接收前端参数为null的探索</a>
                     <p class="is-size-7 is-uppercase">
-                        <a class="has-link-grey -link" href="/categories/SpringMVC-%E5%89%8D%E7%AB%AF/">-[SpringMVC] -[前端]</a>
+                        <a class="has-link-grey -link" href="/categories/SpringMVC/">SpringMVC</a> / <a class="has-link-grey -link" href="/categories/%E5%89%8D%E7%AB%AF/">前端</a>
                     </p>
                 </div>
             </div>
@@ -495,7 +426,7 @@
                     <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2020-03-06T15:48:31.000Z">2020-03-06</time></div>
                     <a href="/2020/03/06/markdown%E4%BD%BF%E7%94%A8/" class="title has-link-black-ter is-size-6 has-text-weight-normal">markdown使用</a>
                     <p class="is-size-7 is-uppercase">
-                        
+                        <a class="has-link-grey -link" href="/categories/Others/">Others</a>
                     </p>
                 </div>
             </div>
@@ -537,8 +468,8 @@
             <div class="field is-grouped is-grouped-multiline">
                 
                 <div class="control">
-                    <a class="tags has-addons" href="/tags/json-%E4%BA%A4%E4%BA%92-%E5%9D%91/">
-                        <span class="tag">json 交互 坑</span>
+                    <a class="tags has-addons" href="/tags/json-%E4%BA%A4%E4%BA%92-%E5%9D%91-springmvc/">
+                        <span class="tag">json 交互 坑 springmvc</span>
                         <span class="tag is-grey">1</span>
                     </a>
                 </div>
@@ -581,7 +512,7 @@
         
         <article class="media">
             
-            <a href="/2020/03/09/json%E5%AF%B9%E8%B1%A1-json%E5%AD%97%E7%AC%A6%E4%B8%B2-%E5%8F%82%E6%95%B0%E5%AD%97%E7%AC%A6%E4%B8%B2%E7%9A%84%E4%B8%80%E4%BA%9B%E5%9D%91/" class="media-left">
+            <a href="/2020/03/09/SpringMVC%E6%8E%A5%E6%94%B6%E5%89%8D%E7%AB%AF%E5%8F%82%E6%95%B0%E4%B8%BAnull%E7%9A%84%E6%8E%A2%E7%B4%A2/" class="media-left">
                 <p class="image is-64x64">
                     <img class="thumbnail" src="/images/thumbnail.svg" alt="SpringMVC接收前端参数为null的探索">
                 </p>
@@ -590,9 +521,9 @@
             <div class="media-content">
                 <div class="content">
                     <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2020-03-09T07:46:13.000Z">2020-03-09</time></div>
-                    <a href="/2020/03/09/json%E5%AF%B9%E8%B1%A1-json%E5%AD%97%E7%AC%A6%E4%B8%B2-%E5%8F%82%E6%95%B0%E5%AD%97%E7%AC%A6%E4%B8%B2%E7%9A%84%E4%B8%80%E4%BA%9B%E5%9D%91/" class="title has-link-black-ter is-size-6 has-text-weight-normal">SpringMVC接收前端参数为null的探索</a>
+                    <a href="/2020/03/09/SpringMVC%E6%8E%A5%E6%94%B6%E5%89%8D%E7%AB%AF%E5%8F%82%E6%95%B0%E4%B8%BAnull%E7%9A%84%E6%8E%A2%E7%B4%A2/" class="title has-link-black-ter is-size-6 has-text-weight-normal">SpringMVC接收前端参数为null的探索</a>
                     <p class="is-size-7 is-uppercase">
-                        <a class="has-link-grey -link" href="/categories/SpringMVC-%E5%89%8D%E7%AB%AF/">-[SpringMVC] -[前端]</a>
+                        <a class="has-link-grey -link" href="/categories/SpringMVC/">SpringMVC</a> / <a class="has-link-grey -link" href="/categories/%E5%89%8D%E7%AB%AF/">前端</a>
                     </p>
                 </div>
             </div>
@@ -630,7 +561,7 @@
                     <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2020-03-06T15:48:31.000Z">2020-03-06</time></div>
                     <a href="/2020/03/06/markdown%E4%BD%BF%E7%94%A8/" class="title has-link-black-ter is-size-6 has-text-weight-normal">markdown使用</a>
                     <p class="is-size-7 is-uppercase">
-                        
+                        <a class="has-link-grey -link" href="/categories/Others/">Others</a>
                     </p>
                 </div>
             </div>
@@ -672,8 +603,8 @@
             <div class="field is-grouped is-grouped-multiline">
                 
                 <div class="control">
-                    <a class="tags has-addons" href="/tags/json-%E4%BA%A4%E4%BA%92-%E5%9D%91/">
-                        <span class="tag">json 交互 坑</span>
+                    <a class="tags has-addons" href="/tags/json-%E4%BA%A4%E4%BA%92-%E5%9D%91-springmvc/">
+                        <span class="tag">json 交互 坑 springmvc</span>
                         <span class="tag is-grey">1</span>
                     </a>
                 </div>
