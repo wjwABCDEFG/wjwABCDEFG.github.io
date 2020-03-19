@@ -129,17 +129,27 @@
     
 <div class="card">
     
+    <div class="card-image">
+        <a href="/2020/03/20/ssm%E6%95%B4%E5%90%88%E8%AF%B4%E6%98%8E/" class="image is-7by1">
+            <img class="thumbnail" src="/headImg/head6.jpg" alt="ssm整合说明">
+        </a>
+    </div>
+    
     <div class="card-content article ">
         
         <div class="level article-meta is-size-7 is-uppercase is-mobile is-overflow-x-auto">
             <div class="level-left">
                 <time class="level-item has-text-grey" datetime="2020-03-19T17:21:57.000Z">2020-03-20</time>
                 
+                <div class="level-item">
+                <a class="has-link-grey -link" href="/categories/Mybatis/">Mybatis</a>&nbsp;/&nbsp;<a class="has-link-grey -link" href="/categories/Spring/">Spring</a>&nbsp;/&nbsp;<a class="has-link-grey -link" href="/categories/SpringMVC/">SpringMVC</a>
+                </div>
+                
                 
                 <span class="level-item has-text-grey">
                     
                     
-                    3 分钟 读完 (大约 413 个字)
+                    3 分钟 读完 (大约 414 个字)
                 </span>
                 
                 
@@ -162,14 +172,6 @@
 <ol start="2">
 <li>springmvc的xml中开启注解扫描时只扫描controller包</li>
 </ol>
-<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">&lt;!--开启注解扫描，只扫描Controller--&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">context:component-scan</span> <span class="attr">base-package</span>=<span class="string">"com.wjw"</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">context:include-filter</span> <span class="attr">type</span>=<span class="string">"annotation"</span> <span class="attr">expression</span>=<span class="string">"org.springframework.stereotype.Controller"</span>/&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">context:component-scan</span>&gt;</span></span><br></pre></td></tr></table></figure>
-
-
-
-<h1 id="2-Spring整合SpringMVC"><a href="#2-Spring整合SpringMVC" class="headerlink" title="2. Spring整合SpringMVC"></a>2. Spring整合SpringMVC</h1><p>还记得我们在单个测试Spring的时候我们是如何进行的吗？</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Test</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">findOneTest</span><span class="params">()</span></span>&#123;</span><br><span class="line">    ApplicationContext ac = <span class="keyword">new</span> ClassPathXmlApplicationContext(<span class="string">"bean.xml"</span>);</span><br><span class="line">    AccountService service = ac.getBean(<span class="string">"accountService"</span>, AccountService<span class="class">.<span class="keyword">class</span>)</span>;</span><br><span class="line">    Account account = service.findOne(<span class="number">2</span>);</span><br><span class="line">    System.out.println(account);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>大家都是经验丰富的人才，我们怎么可能在controller层写这种代码呢？？？</p>
         </div>
         
         
@@ -567,7 +569,7 @@
                     </p>
                     <a href="/categories">
                         <p class="title has-text-weight-normal">
-                            4
+                            5
                         </p>
                     </a>
                 </div>
@@ -579,7 +581,7 @@
                     </p>
                     <a href="/tags">
                         <p class="title has-text-weight-normal">
-                            7
+                            8
                         </p>
                     </a>
                 </div>
@@ -643,6 +645,14 @@
             </h3>
             <ul class="menu-list">
             <li>
+        <a class="level is-marginless" href="/categories/Mybatis/">
+            <span class="level-start">
+                <span class="level-item">Mybatis</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">1</span>
+            </span>
+        </a></li><li>
         <a class="level is-marginless" href="/categories/Others/">
             <span class="level-start">
                 <span class="level-item">Others</span>
@@ -656,7 +666,7 @@
                 <span class="level-item">Spring</span>
             </span>
             <span class="level-end">
-                <span class="level-item tag">1</span>
+                <span class="level-item tag">2</span>
             </span>
         </a></li><li>
         <a class="level is-marginless" href="/categories/SpringMVC/">
@@ -664,7 +674,7 @@
                 <span class="level-item">SpringMVC</span>
             </span>
             <span class="level-end">
-                <span class="level-item tag">3</span>
+                <span class="level-item tag">4</span>
             </span>
         </a></li><li>
         <a class="level is-marginless" href="/categories/%E5%89%8D%E7%AB%AF/">
@@ -693,7 +703,7 @@
             
             <a href="/2020/03/20/ssm%E6%95%B4%E5%90%88%E8%AF%B4%E6%98%8E/" class="media-left">
                 <p class="image is-64x64">
-                    <img class="thumbnail" src="/images/thumbnail.svg" alt="ssm整合说明">
+                    <img class="thumbnail" src="/headImg/head6.jpg" alt="ssm整合说明">
                 </p>
             </a>
             
@@ -702,7 +712,7 @@
                     <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2020-03-19T17:21:57.000Z">2020-03-20</time></div>
                     <a href="/2020/03/20/ssm%E6%95%B4%E5%90%88%E8%AF%B4%E6%98%8E/" class="title has-link-black-ter is-size-6 has-text-weight-normal">ssm整合说明</a>
                     <p class="is-size-7 is-uppercase">
-                        
+                        <a class="has-link-grey -link" href="/categories/Mybatis/">Mybatis</a> / <a class="has-link-grey -link" href="/categories/Spring/">Spring</a> / <a class="has-link-grey -link" href="/categories/SpringMVC/">SpringMVC</a>
                     </p>
                 </div>
             </div>
@@ -834,16 +844,23 @@
                 </div>
                 
                 <div class="control">
+                    <a class="tags has-addons" href="/tags/mybatis/">
+                        <span class="tag">mybatis</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
                     <a class="tags has-addons" href="/tags/spring/">
                         <span class="tag">spring</span>
-                        <span class="tag is-grey">1</span>
+                        <span class="tag is-grey">2</span>
                     </a>
                 </div>
                 
                 <div class="control">
                     <a class="tags has-addons" href="/tags/springmvc/">
                         <span class="tag">springmvc</span>
-                        <span class="tag is-grey">3</span>
+                        <span class="tag is-grey">4</span>
                     </a>
                 </div>
                 
@@ -878,7 +895,7 @@
         <h3 class="menu-label">
             标签云
         </h3>
-        <a href="/tags/json/" style="font-size: 10px;">json</a> <a href="/tags/markdown/" style="font-size: 10px;">markdown</a> <a href="/tags/spring/" style="font-size: 10px;">spring</a> <a href="/tags/springmvc/" style="font-size: 20px;">springmvc</a> <a href="/tags/%E4%BA%A4%E4%BA%92/" style="font-size: 10px;">交互</a> <a href="/tags/%E5%9D%91/" style="font-size: 10px;">坑</a> <a href="/tags/%E5%BC%80%E5%8F%91/" style="font-size: 20px;">开发</a>
+        <a href="/tags/json/" style="font-size: 10px;">json</a> <a href="/tags/markdown/" style="font-size: 10px;">markdown</a> <a href="/tags/mybatis/" style="font-size: 10px;">mybatis</a> <a href="/tags/spring/" style="font-size: 13.33px;">spring</a> <a href="/tags/springmvc/" style="font-size: 20px;">springmvc</a> <a href="/tags/%E4%BA%A4%E4%BA%92/" style="font-size: 10px;">交互</a> <a href="/tags/%E5%9D%91/" style="font-size: 10px;">坑</a> <a href="/tags/%E5%BC%80%E5%8F%91/" style="font-size: 16.67px;">开发</a>
     </div>
 </div>
         
@@ -903,7 +920,7 @@
             
             <a href="/2020/03/20/ssm%E6%95%B4%E5%90%88%E8%AF%B4%E6%98%8E/" class="media-left">
                 <p class="image is-64x64">
-                    <img class="thumbnail" src="/images/thumbnail.svg" alt="ssm整合说明">
+                    <img class="thumbnail" src="/headImg/head6.jpg" alt="ssm整合说明">
                 </p>
             </a>
             
@@ -912,7 +929,7 @@
                     <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2020-03-19T17:21:57.000Z">2020-03-20</time></div>
                     <a href="/2020/03/20/ssm%E6%95%B4%E5%90%88%E8%AF%B4%E6%98%8E/" class="title has-link-black-ter is-size-6 has-text-weight-normal">ssm整合说明</a>
                     <p class="is-size-7 is-uppercase">
-                        
+                        <a class="has-link-grey -link" href="/categories/Mybatis/">Mybatis</a> / <a class="has-link-grey -link" href="/categories/Spring/">Spring</a> / <a class="has-link-grey -link" href="/categories/SpringMVC/">SpringMVC</a>
                     </p>
                 </div>
             </div>
@@ -1044,16 +1061,23 @@
                 </div>
                 
                 <div class="control">
+                    <a class="tags has-addons" href="/tags/mybatis/">
+                        <span class="tag">mybatis</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
                     <a class="tags has-addons" href="/tags/spring/">
                         <span class="tag">spring</span>
-                        <span class="tag is-grey">1</span>
+                        <span class="tag is-grey">2</span>
                     </a>
                 </div>
                 
                 <div class="control">
                     <a class="tags has-addons" href="/tags/springmvc/">
                         <span class="tag">springmvc</span>
-                        <span class="tag is-grey">3</span>
+                        <span class="tag is-grey">4</span>
                     </a>
                 </div>
                 
@@ -1088,7 +1112,7 @@
         <h3 class="menu-label">
             标签云
         </h3>
-        <a href="/tags/json/" style="font-size: 10px;">json</a> <a href="/tags/markdown/" style="font-size: 10px;">markdown</a> <a href="/tags/spring/" style="font-size: 10px;">spring</a> <a href="/tags/springmvc/" style="font-size: 20px;">springmvc</a> <a href="/tags/%E4%BA%A4%E4%BA%92/" style="font-size: 10px;">交互</a> <a href="/tags/%E5%9D%91/" style="font-size: 10px;">坑</a> <a href="/tags/%E5%BC%80%E5%8F%91/" style="font-size: 20px;">开发</a>
+        <a href="/tags/json/" style="font-size: 10px;">json</a> <a href="/tags/markdown/" style="font-size: 10px;">markdown</a> <a href="/tags/mybatis/" style="font-size: 10px;">mybatis</a> <a href="/tags/spring/" style="font-size: 13.33px;">spring</a> <a href="/tags/springmvc/" style="font-size: 20px;">springmvc</a> <a href="/tags/%E4%BA%A4%E4%BA%92/" style="font-size: 10px;">交互</a> <a href="/tags/%E5%9D%91/" style="font-size: 10px;">坑</a> <a href="/tags/%E5%BC%80%E5%8F%91/" style="font-size: 16.67px;">开发</a>
     </div>
 </div>
     
