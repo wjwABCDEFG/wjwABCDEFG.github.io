@@ -130,6 +130,73 @@
 <div class="card">
     
     <div class="card-image">
+        <a href="/2020/03/18/Spring%E5%85%A5%E9%97%A8%E7%AC%94%E8%AE%B01/" class="image is-7by1">
+            <img class="thumbnail" src="/headImg/head5.jpg" alt="Spring入门笔记1">
+        </a>
+    </div>
+    
+    <div class="card-content article ">
+        
+        <div class="level article-meta is-size-7 is-uppercase is-mobile is-overflow-x-auto">
+            <div class="level-left">
+                <time class="level-item has-text-grey" datetime="2020-03-18T05:01:04.000Z">2020-03-18</time>
+                
+                <div class="level-item">
+                <a class="has-link-grey -link" href="/categories/Spring/">Spring</a>
+                </div>
+                
+                
+                <span class="level-item has-text-grey">
+                    
+                    
+                    3 分钟 读完 (大约 521 个字)
+                </span>
+                
+                
+            </div>
+        </div>
+        
+        <h1 class="title is-size-3 is-size-4-mobile has-text-weight-normal">
+            
+                <a class="has-link-black-ter" href="/2020/03/18/Spring%E5%85%A5%E9%97%A8%E7%AC%94%E8%AE%B01/">Spring入门笔记1</a>
+            
+        </h1>
+        <div class="content">
+            <h1><span id="1-程序耦合度spring的作用ioc的原理">1. 程序耦合度/spring的作用/ioc的原理</span></h1><p>以前的程序存在两点不足：</p>
+<ol>
+<li>诸如一些配置信息写在了类中，编译后改不了了，比如数据库的连接信息，如果是写在类中，以后想换数据库就只能动手改源码。解决办法就是通过读取xml或者properties的方式，编译后xml也还在，以后想修改数据库就可以只改变xml的内容。</li>
+</ol>
+<ol start="2">
+<li>创建对象的时候我们通过new的方式，比如在写service层的时候，我们需要new userDao()，这样子的话，如果没有先写好dao层，或者说两个人负责编写两个层等等，就必须等另一个人先写完，这样就不好。后来我们的解决办法是用工厂模式解耦，将new一个实例交给工厂类。这样确实解耦了，但是工厂类还是要改源码，最好的方式还是像xml一样需要的时候来读取。</li>
+</ol>
+<p>这就是所谓的耦合度，在我看来，</p>
+<p>spring的ioc称为控制反转，<strong>就是解决了new的问题</strong>，将对象所在的类的路径写在xml中，需要用到对象的时候通过反射来创建对象，相当于编写了一个工厂类的作用。</p>
+<p>spring的di称为依赖注入，就是解决了你不知道何时需要从工厂类中创建一个对象的问题，通过依赖注入来告知你想什么时候创建一个对象，需要用到的时候自动从ioc容器中获取而不是new。</p>
+<p>借用网上的一张图</p>
+<p><img src="https://s1.ax1x.com/2020/03/20/86nreH.png" alt="ioc简易理解.png"></p>
+<blockquote>
+<p>图片来源<a href="https://www.cnblogs.com/superjt/p/4311577.html，这篇博客对IOC的概念讲的很棒">https://www.cnblogs.com/superjt/p/4311577.html，这篇博客对IOC的概念讲的很棒</a></p>
+</blockquote>
+<h1><span id="2-如何通过spring的ioc来创建对象从而代替new">2. 如何通过spring的ioc来创建对象从而代替new</span></h1><h2><span id="21-xml方式">2.1 xml方式</span></h2><p><img src="https://s1.ax1x.com/2020/03/20/86MBOU.png" alt="bean.xml.png"></p>
+
+        </div>
+        
+        
+        
+    </div>
+</div>
+
+
+
+
+
+
+
+
+    
+<div class="card">
+    
+    <div class="card-image">
         <a href="/2020/03/14/SpringMVC%E5%85%A5%E9%97%A8%E7%AC%94%E8%AE%B02/" class="image is-7by1">
             <img class="thumbnail" src="/headImg/head4.jpg" alt="SpringMVC入门笔记2">
         </a>
@@ -285,7 +352,7 @@
                 <span class="level-item has-text-grey">
                     
                     
-                    15 分钟 读完 (大约 2191 个字)
+                    16 分钟 读完 (大约 2398 个字)
                 </span>
                 
                 
@@ -301,8 +368,8 @@
             <blockquote>
 <p>先讲一些自己的理解和概念性的东西，可以跳过直接看第3部分</p>
 </blockquote>
-<h1 id="SpringMVC的作用"><a href="#SpringMVC的作用" class="headerlink" title="SpringMVC的作用"></a>SpringMVC的作用</h1><p>SpringMVC实际上就是代替了原来Servlet中的作用，为什么使用SpringMVC，其实我们内心也很清楚，原来写Servlet的时候要么是继承了Servlet接口复写5个生命周期方法（init service … destory），要么继承HttpServlet接口复写doGet和doPost方法，非常繁琐。或者高级一点的进行servlet抽取，通过方法名代表访问路径，其实这就相当于springmvc的简易模型。</p>
-<p>而SpringMVC就是完成了“一个普通类也可以处理http请求” 这么一个功能。</p>
+<h1 id="1-SpringMVC的作用"><a href="#1-SpringMVC的作用" class="headerlink" title="1. SpringMVC的作用"></a>1. SpringMVC的作用</h1><p>SpringMVC实际上就是代替了原来Servlet中的作用，为什么使用SpringMVC，其实我们内心也很清楚，原来写Servlet的时候要么是继承了Servlet接口复写5个生命周期方法（init service … destory），要么继承HttpServlet接口复写doGet和doPost方法，非常繁琐。或者高级一点的进行servlet抽取，通过方法名代表访问路径，其实这就相当于springmvc的简易模型。</p>
+<p>而SpringMVC就是完成了*<em>“一个普通类也可以处理http请求” *</em>这么一个功能。</p>
         </div>
         
         
@@ -427,7 +494,7 @@
                     </p>
                     <a href="/archives">
                         <p class="title has-text-weight-normal">
-                            4
+                            5
                         </p>
                     </a>
                 </div>
@@ -439,7 +506,7 @@
                     </p>
                     <a href="/categories">
                         <p class="title has-text-weight-normal">
-                            3
+                            4
                         </p>
                     </a>
                 </div>
@@ -451,7 +518,7 @@
                     </p>
                     <a href="/tags">
                         <p class="title has-text-weight-normal">
-                            6
+                            7
                         </p>
                     </a>
                 </div>
@@ -523,6 +590,14 @@
                 <span class="level-item tag">1</span>
             </span>
         </a></li><li>
+        <a class="level is-marginless" href="/categories/Spring/">
+            <span class="level-start">
+                <span class="level-item">Spring</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">1</span>
+            </span>
+        </a></li><li>
         <a class="level is-marginless" href="/categories/SpringMVC/">
             <span class="level-start">
                 <span class="level-item">SpringMVC</span>
@@ -555,6 +630,25 @@
         
         <article class="media">
             
+            <a href="/2020/03/18/Spring%E5%85%A5%E9%97%A8%E7%AC%94%E8%AE%B01/" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="/headImg/head5.jpg" alt="Spring入门笔记1">
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2020-03-18T05:01:04.000Z">2020-03-18</time></div>
+                    <a href="/2020/03/18/Spring%E5%85%A5%E9%97%A8%E7%AC%94%E8%AE%B01/" class="title has-link-black-ter is-size-6 has-text-weight-normal">Spring入门笔记1</a>
+                    <p class="is-size-7 is-uppercase">
+                        <a class="has-link-grey -link" href="/categories/Spring/">Spring</a>
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+        <article class="media">
+            
             <a href="/2020/03/14/SpringMVC%E5%85%A5%E9%97%A8%E7%AC%94%E8%AE%B02/" class="media-left">
                 <p class="image is-64x64">
                     <img class="thumbnail" src="/headImg/head4.jpg" alt="SpringMVC入门笔记2">
@@ -646,7 +740,7 @@
                     <span class="level-item">三月 2020</span>
                 </span>
                 <span class="level-end">
-                    <span class="level-item tag">4</span>
+                    <span class="level-item tag">5</span>
                 </span>
             </a>
         </li>
@@ -679,6 +773,13 @@
                 </div>
                 
                 <div class="control">
+                    <a class="tags has-addons" href="/tags/spring/">
+                        <span class="tag">spring</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
                     <a class="tags has-addons" href="/tags/springmvc/">
                         <span class="tag">springmvc</span>
                         <span class="tag is-grey">3</span>
@@ -702,7 +803,7 @@
                 <div class="control">
                     <a class="tags has-addons" href="/tags/%E5%BC%80%E5%8F%91/">
                         <span class="tag">开发</span>
-                        <span class="tag is-grey">2</span>
+                        <span class="tag is-grey">3</span>
                     </a>
                 </div>
                 
@@ -716,7 +817,7 @@
         <h3 class="menu-label">
             标签云
         </h3>
-        <a href="/tags/json/" style="font-size: 10px;">json</a> <a href="/tags/markdown/" style="font-size: 10px;">markdown</a> <a href="/tags/springmvc/" style="font-size: 20px;">springmvc</a> <a href="/tags/%E4%BA%A4%E4%BA%92/" style="font-size: 10px;">交互</a> <a href="/tags/%E5%9D%91/" style="font-size: 10px;">坑</a> <a href="/tags/%E5%BC%80%E5%8F%91/" style="font-size: 15px;">开发</a>
+        <a href="/tags/json/" style="font-size: 10px;">json</a> <a href="/tags/markdown/" style="font-size: 10px;">markdown</a> <a href="/tags/spring/" style="font-size: 10px;">spring</a> <a href="/tags/springmvc/" style="font-size: 20px;">springmvc</a> <a href="/tags/%E4%BA%A4%E4%BA%92/" style="font-size: 10px;">交互</a> <a href="/tags/%E5%9D%91/" style="font-size: 10px;">坑</a> <a href="/tags/%E5%BC%80%E5%8F%91/" style="font-size: 20px;">开发</a>
     </div>
 </div>
         
@@ -739,6 +840,25 @@
         
         <article class="media">
             
+            <a href="/2020/03/18/Spring%E5%85%A5%E9%97%A8%E7%AC%94%E8%AE%B01/" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="/headImg/head5.jpg" alt="Spring入门笔记1">
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2020-03-18T05:01:04.000Z">2020-03-18</time></div>
+                    <a href="/2020/03/18/Spring%E5%85%A5%E9%97%A8%E7%AC%94%E8%AE%B01/" class="title has-link-black-ter is-size-6 has-text-weight-normal">Spring入门笔记1</a>
+                    <p class="is-size-7 is-uppercase">
+                        <a class="has-link-grey -link" href="/categories/Spring/">Spring</a>
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+        <article class="media">
+            
             <a href="/2020/03/14/SpringMVC%E5%85%A5%E9%97%A8%E7%AC%94%E8%AE%B02/" class="media-left">
                 <p class="image is-64x64">
                     <img class="thumbnail" src="/headImg/head4.jpg" alt="SpringMVC入门笔记2">
@@ -830,7 +950,7 @@
                     <span class="level-item">三月 2020</span>
                 </span>
                 <span class="level-end">
-                    <span class="level-item tag">4</span>
+                    <span class="level-item tag">5</span>
                 </span>
             </a>
         </li>
@@ -863,6 +983,13 @@
                 </div>
                 
                 <div class="control">
+                    <a class="tags has-addons" href="/tags/spring/">
+                        <span class="tag">spring</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
                     <a class="tags has-addons" href="/tags/springmvc/">
                         <span class="tag">springmvc</span>
                         <span class="tag is-grey">3</span>
@@ -886,7 +1013,7 @@
                 <div class="control">
                     <a class="tags has-addons" href="/tags/%E5%BC%80%E5%8F%91/">
                         <span class="tag">开发</span>
-                        <span class="tag is-grey">2</span>
+                        <span class="tag is-grey">3</span>
                     </a>
                 </div>
                 
@@ -900,7 +1027,7 @@
         <h3 class="menu-label">
             标签云
         </h3>
-        <a href="/tags/json/" style="font-size: 10px;">json</a> <a href="/tags/markdown/" style="font-size: 10px;">markdown</a> <a href="/tags/springmvc/" style="font-size: 20px;">springmvc</a> <a href="/tags/%E4%BA%A4%E4%BA%92/" style="font-size: 10px;">交互</a> <a href="/tags/%E5%9D%91/" style="font-size: 10px;">坑</a> <a href="/tags/%E5%BC%80%E5%8F%91/" style="font-size: 15px;">开发</a>
+        <a href="/tags/json/" style="font-size: 10px;">json</a> <a href="/tags/markdown/" style="font-size: 10px;">markdown</a> <a href="/tags/spring/" style="font-size: 10px;">spring</a> <a href="/tags/springmvc/" style="font-size: 20px;">springmvc</a> <a href="/tags/%E4%BA%A4%E4%BA%92/" style="font-size: 10px;">交互</a> <a href="/tags/%E5%9D%91/" style="font-size: 10px;">坑</a> <a href="/tags/%E5%BC%80%E5%8F%91/" style="font-size: 20px;">开发</a>
     </div>
 </div>
     
