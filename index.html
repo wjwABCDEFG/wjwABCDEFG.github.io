@@ -129,6 +129,72 @@
     
 <div class="card">
     
+    <div class="card-content article ">
+        
+        <div class="level article-meta is-size-7 is-uppercase is-mobile is-overflow-x-auto">
+            <div class="level-left">
+                <time class="level-item has-text-grey" datetime="2020-03-19T17:21:57.000Z">2020-03-20</time>
+                
+                
+                <span class="level-item has-text-grey">
+                    
+                    
+                    3 分钟 读完 (大约 413 个字)
+                </span>
+                
+                
+            </div>
+        </div>
+        
+        <h1 class="title is-size-3 is-size-4-mobile has-text-weight-normal">
+            
+                <a class="has-link-black-ter" href="/2020/03/20/ssm%E6%95%B4%E5%90%88%E8%AF%B4%E6%98%8E/">ssm整合说明</a>
+            
+        </h1>
+        <div class="content">
+            <h1 id="1-单个框架自身使用时和原来不同的地方"><a href="#1-单个框架自身使用时和原来不同的地方" class="headerlink" title="1. 单个框架自身使用时和原来不同的地方"></a>1. 单个框架自身使用时和原来不同的地方</h1><ol>
+<li>spring的xml中开启注解扫描时不需要扫描controller包</li>
+</ol>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">&lt;!--开启注解扫描，controller不需要扫描--&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">context:component-scan</span> <span class="attr">base-package</span>=<span class="string">"com.wjw"</span> &gt;</span></span><br><span class="line">    <span class="comment">&lt;!--配置包下哪些要扫描(include)或者不扫描(exclude)的类--&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">context:exclude-filter</span> <span class="attr">type</span>=<span class="string">"annotation"</span> <span class="attr">expression</span>=<span class="string">"org.springframework.stereotype.Controller"</span>/&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">context:component-scan</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<br/>
+
+<ol start="2">
+<li>springmvc的xml中开启注解扫描时只扫描controller包</li>
+</ol>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">&lt;!--开启注解扫描，只扫描Controller--&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">context:component-scan</span> <span class="attr">base-package</span>=<span class="string">"com.wjw"</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">context:include-filter</span> <span class="attr">type</span>=<span class="string">"annotation"</span> <span class="attr">expression</span>=<span class="string">"org.springframework.stereotype.Controller"</span>/&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">context:component-scan</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+
+
+<h1 id="2-Spring整合SpringMVC"><a href="#2-Spring整合SpringMVC" class="headerlink" title="2. Spring整合SpringMVC"></a>2. Spring整合SpringMVC</h1><p>还记得我们在单个测试Spring的时候我们是如何进行的吗？</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Test</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">findOneTest</span><span class="params">()</span></span>&#123;</span><br><span class="line">    ApplicationContext ac = <span class="keyword">new</span> ClassPathXmlApplicationContext(<span class="string">"bean.xml"</span>);</span><br><span class="line">    AccountService service = ac.getBean(<span class="string">"accountService"</span>, AccountService<span class="class">.<span class="keyword">class</span>)</span>;</span><br><span class="line">    Account account = service.findOne(<span class="number">2</span>);</span><br><span class="line">    System.out.println(account);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>大家都是经验丰富的人才，我们怎么可能在controller层写这种代码呢？？？</p>
+        </div>
+        
+        
+        <div class="level is-mobile">
+            <div class="level-start">
+                <div class="level-item">
+                <a class="button is-size-7 is-light" href="/2020/03/20/ssm%E6%95%B4%E5%90%88%E8%AF%B4%E6%98%8E/#more">阅读更多</a>
+                </div>
+            </div>
+        </div>
+        
+        
+    </div>
+</div>
+
+
+
+
+
+
+
+
+    
+<div class="card">
+    
     <div class="card-image">
         <a href="/2020/03/18/Spring%E5%85%A5%E9%97%A8%E7%AC%94%E8%AE%B01/" class="image is-7by1">
             <img class="thumbnail" src="/headImg/head5.jpg" alt="Spring入门笔记1">
@@ -149,7 +215,7 @@
                 <span class="level-item has-text-grey">
                     
                     
-                    3 分钟 读完 (大约 521 个字)
+                    11 分钟 读完 (大约 1661 个字)
                 </span>
                 
                 
@@ -162,25 +228,20 @@
             
         </h1>
         <div class="content">
-            <h1><span id="1-程序耦合度spring的作用ioc的原理">1. 程序耦合度/spring的作用/ioc的原理</span></h1><p>以前的程序存在两点不足：</p>
+            <h1 id="1-程序耦合度-spring的作用-ioc的原理"><a href="#1-程序耦合度-spring的作用-ioc的原理" class="headerlink" title="1. 程序耦合度/spring的作用/ioc的原理"></a>1. 程序耦合度/spring的作用/ioc的原理</h1><p>以前的程序存在两点不足：</p>
 <ol>
 <li>诸如一些配置信息写在了类中，编译后改不了了，比如数据库的连接信息，如果是写在类中，以后想换数据库就只能动手改源码。解决办法就是通过读取xml或者properties的方式，编译后xml也还在，以后想修改数据库就可以只改变xml的内容。</li>
 </ol>
-<ol start="2">
-<li>创建对象的时候我们通过new的方式，比如在写service层的时候，我们需要new userDao()，这样子的话，如果没有先写好dao层，或者说两个人负责编写两个层等等，就必须等另一个人先写完，这样就不好。后来我们的解决办法是用工厂模式解耦，将new一个实例交给工厂类。这样确实解耦了，但是工厂类还是要改源码，最好的方式还是像xml一样需要的时候来读取。</li>
-</ol>
-<p>这就是所谓的耦合度，在我看来，</p>
-<p>spring的ioc称为控制反转，<strong>就是解决了new的问题</strong>，将对象所在的类的路径写在xml中，需要用到对象的时候通过反射来创建对象，相当于编写了一个工厂类的作用。</p>
-<p>spring的di称为依赖注入，就是解决了你不知道何时需要从工厂类中创建一个对象的问题，通过依赖注入来告知你想什么时候创建一个对象，需要用到的时候自动从ioc容器中获取而不是new。</p>
-<p>借用网上的一张图</p>
-<p><img src="https://s1.ax1x.com/2020/03/20/86nreH.png" alt="ioc简易理解.png"></p>
-<blockquote>
-<p>图片来源<a href="https://www.cnblogs.com/superjt/p/4311577.html，这篇博客对IOC的概念讲的很棒">https://www.cnblogs.com/superjt/p/4311577.html，这篇博客对IOC的概念讲的很棒</a></p>
-</blockquote>
-<h1><span id="2-如何通过spring的ioc来创建对象从而代替new">2. 如何通过spring的ioc来创建对象从而代替new</span></h1><h2><span id="21-xml方式">2.1 xml方式</span></h2><p><img src="https://s1.ax1x.com/2020/03/20/86MBOU.png" alt="bean.xml.png"></p>
-
         </div>
         
+        
+        <div class="level is-mobile">
+            <div class="level-start">
+                <div class="level-item">
+                <a class="button is-size-7 is-light" href="/2020/03/18/Spring%E5%85%A5%E9%97%A8%E7%AC%94%E8%AE%B01/#more">阅读更多</a>
+                </div>
+            </div>
+        </div>
         
         
     </div>
@@ -352,7 +413,7 @@
                 <span class="level-item has-text-grey">
                     
                     
-                    16 分钟 读完 (大约 2398 个字)
+                    16 分钟 读完 (大约 2454 个字)
                 </span>
                 
                 
@@ -494,7 +555,7 @@
                     </p>
                     <a href="/archives">
                         <p class="title has-text-weight-normal">
-                            5
+                            6
                         </p>
                     </a>
                 </div>
@@ -630,6 +691,25 @@
         
         <article class="media">
             
+            <a href="/2020/03/20/ssm%E6%95%B4%E5%90%88%E8%AF%B4%E6%98%8E/" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="/images/thumbnail.svg" alt="ssm整合说明">
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2020-03-19T17:21:57.000Z">2020-03-20</time></div>
+                    <a href="/2020/03/20/ssm%E6%95%B4%E5%90%88%E8%AF%B4%E6%98%8E/" class="title has-link-black-ter is-size-6 has-text-weight-normal">ssm整合说明</a>
+                    <p class="is-size-7 is-uppercase">
+                        
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+        <article class="media">
+            
             <a href="/2020/03/18/Spring%E5%85%A5%E9%97%A8%E7%AC%94%E8%AE%B01/" class="media-left">
                 <p class="image is-64x64">
                     <img class="thumbnail" src="/headImg/head5.jpg" alt="Spring入门笔记1">
@@ -704,25 +784,6 @@
             </div>
         </article>
         
-        <article class="media">
-            
-            <a href="/2020/03/06/markdown%E4%BD%BF%E7%94%A8/" class="media-left">
-                <p class="image is-64x64">
-                    <img class="thumbnail" src="/headImg/head1.jpg" alt="markdown使用">
-                </p>
-            </a>
-            
-            <div class="media-content">
-                <div class="content">
-                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2020-03-06T15:48:31.000Z">2020-03-06</time></div>
-                    <a href="/2020/03/06/markdown%E4%BD%BF%E7%94%A8/" class="title has-link-black-ter is-size-6 has-text-weight-normal">markdown使用</a>
-                    <p class="is-size-7 is-uppercase">
-                        <a class="has-link-grey -link" href="/categories/Others/">Others</a>
-                    </p>
-                </div>
-            </div>
-        </article>
-        
     </div>
 </div>
         
@@ -740,7 +801,7 @@
                     <span class="level-item">三月 2020</span>
                 </span>
                 <span class="level-end">
-                    <span class="level-item tag">5</span>
+                    <span class="level-item tag">6</span>
                 </span>
             </a>
         </li>
@@ -840,6 +901,25 @@
         
         <article class="media">
             
+            <a href="/2020/03/20/ssm%E6%95%B4%E5%90%88%E8%AF%B4%E6%98%8E/" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="/images/thumbnail.svg" alt="ssm整合说明">
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2020-03-19T17:21:57.000Z">2020-03-20</time></div>
+                    <a href="/2020/03/20/ssm%E6%95%B4%E5%90%88%E8%AF%B4%E6%98%8E/" class="title has-link-black-ter is-size-6 has-text-weight-normal">ssm整合说明</a>
+                    <p class="is-size-7 is-uppercase">
+                        
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+        <article class="media">
+            
             <a href="/2020/03/18/Spring%E5%85%A5%E9%97%A8%E7%AC%94%E8%AE%B01/" class="media-left">
                 <p class="image is-64x64">
                     <img class="thumbnail" src="/headImg/head5.jpg" alt="Spring入门笔记1">
@@ -914,25 +994,6 @@
             </div>
         </article>
         
-        <article class="media">
-            
-            <a href="/2020/03/06/markdown%E4%BD%BF%E7%94%A8/" class="media-left">
-                <p class="image is-64x64">
-                    <img class="thumbnail" src="/headImg/head1.jpg" alt="markdown使用">
-                </p>
-            </a>
-            
-            <div class="media-content">
-                <div class="content">
-                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2020-03-06T15:48:31.000Z">2020-03-06</time></div>
-                    <a href="/2020/03/06/markdown%E4%BD%BF%E7%94%A8/" class="title has-link-black-ter is-size-6 has-text-weight-normal">markdown使用</a>
-                    <p class="is-size-7 is-uppercase">
-                        <a class="has-link-grey -link" href="/categories/Others/">Others</a>
-                    </p>
-                </div>
-            </div>
-        </article>
-        
     </div>
 </div>
     
@@ -950,7 +1011,7 @@
                     <span class="level-item">三月 2020</span>
                 </span>
                 <span class="level-end">
-                    <span class="level-item tag">5</span>
+                    <span class="level-item tag">6</span>
                 </span>
             </a>
         </li>

@@ -160,7 +160,7 @@
                 <span class="level-item has-text-grey">
                     
                     
-                    3 分钟 读完 (大约 521 个字)
+                    11 分钟 读完 (大约 1661 个字)
                 </span>
                 
                 
@@ -173,25 +173,20 @@
             
         </h1>
         <div class="content">
-            <h1><span id="1-程序耦合度spring的作用ioc的原理">1. 程序耦合度/spring的作用/ioc的原理</span></h1><p>以前的程序存在两点不足：</p>
+            <h1 id="1-程序耦合度-spring的作用-ioc的原理"><a href="#1-程序耦合度-spring的作用-ioc的原理" class="headerlink" title="1. 程序耦合度/spring的作用/ioc的原理"></a>1. 程序耦合度/spring的作用/ioc的原理</h1><p>以前的程序存在两点不足：</p>
 <ol>
 <li>诸如一些配置信息写在了类中，编译后改不了了，比如数据库的连接信息，如果是写在类中，以后想换数据库就只能动手改源码。解决办法就是通过读取xml或者properties的方式，编译后xml也还在，以后想修改数据库就可以只改变xml的内容。</li>
 </ol>
-<ol start="2">
-<li>创建对象的时候我们通过new的方式，比如在写service层的时候，我们需要new userDao()，这样子的话，如果没有先写好dao层，或者说两个人负责编写两个层等等，就必须等另一个人先写完，这样就不好。后来我们的解决办法是用工厂模式解耦，将new一个实例交给工厂类。这样确实解耦了，但是工厂类还是要改源码，最好的方式还是像xml一样需要的时候来读取。</li>
-</ol>
-<p>这就是所谓的耦合度，在我看来，</p>
-<p>spring的ioc称为控制反转，<strong>就是解决了new的问题</strong>，将对象所在的类的路径写在xml中，需要用到对象的时候通过反射来创建对象，相当于编写了一个工厂类的作用。</p>
-<p>spring的di称为依赖注入，就是解决了你不知道何时需要从工厂类中创建一个对象的问题，通过依赖注入来告知你想什么时候创建一个对象，需要用到的时候自动从ioc容器中获取而不是new。</p>
-<p>借用网上的一张图</p>
-<p><img src="https://s1.ax1x.com/2020/03/20/86nreH.png" alt="ioc简易理解.png"></p>
-<blockquote>
-<p>图片来源<a href="https://www.cnblogs.com/superjt/p/4311577.html，这篇博客对IOC的概念讲的很棒">https://www.cnblogs.com/superjt/p/4311577.html，这篇博客对IOC的概念讲的很棒</a></p>
-</blockquote>
-<h1><span id="2-如何通过spring的ioc来创建对象从而代替new">2. 如何通过spring的ioc来创建对象从而代替new</span></h1><h2><span id="21-xml方式">2.1 xml方式</span></h2><p><img src="https://s1.ax1x.com/2020/03/20/86MBOU.png" alt="bean.xml.png"></p>
-
         </div>
         
+        
+        <div class="level is-mobile">
+            <div class="level-start">
+                <div class="level-item">
+                <a class="button is-size-7 is-light" href="/2020/03/18/Spring%E5%85%A5%E9%97%A8%E7%AC%94%E8%AE%B01/#more">阅读更多</a>
+                </div>
+            </div>
+        </div>
         
         
     </div>
@@ -245,7 +240,7 @@
                     </p>
                     <a href="/archives">
                         <p class="title has-text-weight-normal">
-                            5
+                            6
                         </p>
                     </a>
                 </div>
@@ -381,6 +376,25 @@
         
         <article class="media">
             
+            <a href="/2020/03/20/ssm%E6%95%B4%E5%90%88%E8%AF%B4%E6%98%8E/" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="/images/thumbnail.svg" alt="ssm整合说明">
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2020-03-19T17:21:57.000Z">2020-03-20</time></div>
+                    <a href="/2020/03/20/ssm%E6%95%B4%E5%90%88%E8%AF%B4%E6%98%8E/" class="title has-link-black-ter is-size-6 has-text-weight-normal">ssm整合说明</a>
+                    <p class="is-size-7 is-uppercase">
+                        
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+        <article class="media">
+            
             <a href="/2020/03/18/Spring%E5%85%A5%E9%97%A8%E7%AC%94%E8%AE%B01/" class="media-left">
                 <p class="image is-64x64">
                     <img class="thumbnail" src="/headImg/head5.jpg" alt="Spring入门笔记1">
@@ -455,25 +469,6 @@
             </div>
         </article>
         
-        <article class="media">
-            
-            <a href="/2020/03/06/markdown%E4%BD%BF%E7%94%A8/" class="media-left">
-                <p class="image is-64x64">
-                    <img class="thumbnail" src="/headImg/head1.jpg" alt="markdown使用">
-                </p>
-            </a>
-            
-            <div class="media-content">
-                <div class="content">
-                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2020-03-06T15:48:31.000Z">2020-03-06</time></div>
-                    <a href="/2020/03/06/markdown%E4%BD%BF%E7%94%A8/" class="title has-link-black-ter is-size-6 has-text-weight-normal">markdown使用</a>
-                    <p class="is-size-7 is-uppercase">
-                        <a class="has-link-grey -link" href="/categories/Others/">Others</a>
-                    </p>
-                </div>
-            </div>
-        </article>
-        
     </div>
 </div>
         
@@ -491,7 +486,7 @@
                     <span class="level-item">三月 2020</span>
                 </span>
                 <span class="level-end">
-                    <span class="level-item tag">5</span>
+                    <span class="level-item tag">6</span>
                 </span>
             </a>
         </li>
@@ -591,6 +586,25 @@
         
         <article class="media">
             
+            <a href="/2020/03/20/ssm%E6%95%B4%E5%90%88%E8%AF%B4%E6%98%8E/" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="/images/thumbnail.svg" alt="ssm整合说明">
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2020-03-19T17:21:57.000Z">2020-03-20</time></div>
+                    <a href="/2020/03/20/ssm%E6%95%B4%E5%90%88%E8%AF%B4%E6%98%8E/" class="title has-link-black-ter is-size-6 has-text-weight-normal">ssm整合说明</a>
+                    <p class="is-size-7 is-uppercase">
+                        
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+        <article class="media">
+            
             <a href="/2020/03/18/Spring%E5%85%A5%E9%97%A8%E7%AC%94%E8%AE%B01/" class="media-left">
                 <p class="image is-64x64">
                     <img class="thumbnail" src="/headImg/head5.jpg" alt="Spring入门笔记1">
@@ -665,25 +679,6 @@
             </div>
         </article>
         
-        <article class="media">
-            
-            <a href="/2020/03/06/markdown%E4%BD%BF%E7%94%A8/" class="media-left">
-                <p class="image is-64x64">
-                    <img class="thumbnail" src="/headImg/head1.jpg" alt="markdown使用">
-                </p>
-            </a>
-            
-            <div class="media-content">
-                <div class="content">
-                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2020-03-06T15:48:31.000Z">2020-03-06</time></div>
-                    <a href="/2020/03/06/markdown%E4%BD%BF%E7%94%A8/" class="title has-link-black-ter is-size-6 has-text-weight-normal">markdown使用</a>
-                    <p class="is-size-7 is-uppercase">
-                        <a class="has-link-grey -link" href="/categories/Others/">Others</a>
-                    </p>
-                </div>
-            </div>
-        </article>
-        
     </div>
 </div>
     
@@ -701,7 +696,7 @@
                     <span class="level-item">三月 2020</span>
                 </span>
                 <span class="level-end">
-                    <span class="level-item tag">5</span>
+                    <span class="level-item tag">6</span>
                 </span>
             </a>
         </li>
