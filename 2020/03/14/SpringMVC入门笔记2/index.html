@@ -32,7 +32,7 @@
 
 
 
-<link rel="icon" href="/images/cow.svg">
+<link rel="icon" href="/images/favicon.ico">
 
 
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.7.2/css/bulma.css">
@@ -82,7 +82,7 @@
         <div class="navbar-brand is-flex-center">
             <a class="navbar-item navbar-logo" href="/">
             
-                <img src="/images/logo.svg" alt="SpringMVC入门笔记2" height="28">
+                <img src="/images/logo.png" alt="SpringMVC入门笔记2" height="28">
             
             </a>
         </div>
@@ -171,7 +171,7 @@
             
         </h1>
         <div class="content">
-            <h1><span id="1-springmvc的文件上传">1. SpringMVC的文件上传</span></h1><h2><span id="11-文件上传的必要前提">1.1 文件上传的必要前提</span></h2><ul>
+            <h1 id="1-SpringMVC的文件上传"><a href="#1-SpringMVC的文件上传" class="headerlink" title="1. SpringMVC的文件上传"></a>1. SpringMVC的文件上传</h1><h2 id="1-1-文件上传的必要前提"><a href="#1-1-文件上传的必要前提" class="headerlink" title="1.1 文件上传的必要前提"></a>1.1 文件上传的必要前提</h2><ul>
 <li><p>form表单的enctype取值必须是：muitipart/form-data（默认值是：application/x-www-form-urlencoded），enctype：是表单请求正文的类型</p>
 </li>
 <li><p>必须是POST请求</p>
@@ -183,14 +183,14 @@
 </ul>
 <a id="more"></a>
 
-  <br>
+  <br/>
 
-<h2><span id="12-springmvc实现文件上传">1.2 SpringMVC实现文件上传</span></h2><ol>
+<h2 id="1-2-SpringMVC实现文件上传"><a href="#1-2-SpringMVC实现文件上传" class="headerlink" title="1.2 SpringMVC实现文件上传"></a>1.2 SpringMVC实现文件上传</h2><ol>
 <li>添加maven依赖坐标</li>
 </ol>
 <figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>commons-fileupload<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>commons-fileupload<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">version</span>&gt;</span>1.4<span class="tag">&lt;/<span class="name">version</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>commons-io<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>commons-io<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">version</span>&gt;</span>2.6<span class="tag">&lt;/<span class="name">version</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br></pre></td></tr></table></figure>
 
-  <br>
+  <br/>
 
 <ol start="2">
 <li>springmvc.xml中配置文件解析器</li>
@@ -198,7 +198,7 @@
 <p>需要注意的是，这里的id必须叫做multipartResolver，不能自己乱改</p>
 <figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">bean</span> <span class="attr">id</span>=<span class="string">"multipartResolver"</span> <span class="attr">class</span>=<span class="string">"org.springframework.web.multipart.commons.CommonsMultipartResolver"</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">"maxUploadSize"</span> <span class="attr">value</span>=<span class="string">"10485760"</span> /&gt;</span>  <span class="comment">&lt;!--单位是字节--&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">bean</span>&gt;</span></span><br></pre></td></tr></table></figure>
 
-  <br>
+  <br/>
 
 <ol start="3">
 <li>html</li>
@@ -210,7 +210,7 @@
 <p>name=”upload”可以改，但是要和下面的controller层接收方法的参数名一致</p>
 <figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">form</span> <span class="attr">action</span>=<span class="string">"user/fileUpload2"</span> <span class="attr">method</span>=<span class="string">"post"</span> <span class="attr">enctype</span>=<span class="string">"multipart/form-data"</span>&gt;</span></span><br><span class="line">    选择文件：<span class="tag">&lt;<span class="name">input</span> <span class="attr">type</span>=<span class="string">"file"</span> <span class="attr">name</span>=<span class="string">"upload"</span> /&gt;</span><span class="tag">&lt;<span class="name">br</span> /&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">input</span> <span class="attr">type</span>=<span class="string">"submit"</span> <span class="attr">value</span>=<span class="string">"上传"</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">form</span>&gt;</span></span><br></pre></td></tr></table></figure>
 
-  <br>
+  <br/>
 
 <ol start="4">
 <li>controller</li>
@@ -218,9 +218,9 @@
 <p>注意这里的参数名upload要和html表单的文件的name属性名一致</p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@RequestMapping</span>(<span class="string">"/fileUpload2"</span>)</span><br><span class="line"><span class="function"><span class="keyword">public</span> String <span class="title">fileUpload2</span><span class="params">(HttpServletRequest request, MultipartFile upload)</span> thro</span></span><br><span class="line"><span class="function">    <span class="comment">//springmvc方式上传文件</span></span></span><br><span class="line"><span class="function">    <span class="comment">//上传的位置(文件夹目录)</span></span></span><br><span class="line"><span class="function">    String path </span>= request.getSession().getServletContext().getRealPath(<span class="string">"/uploads</span></span><br><span class="line"><span class="string">    File file = new File(path);</span></span><br><span class="line"><span class="string">    //如果不存在，就创建</span></span><br><span class="line"><span class="string">    if (!file.exists())&#123;</span></span><br><span class="line"><span class="string">        //创建文件夹</span></span><br><span class="line"><span class="string">        file.mkdirs();</span></span><br><span class="line"><span class="string">    &#125;</span></span><br><span class="line"><span class="string">    //获取上传文件名称</span></span><br><span class="line"><span class="string">    String fileName = upload.getOriginalFilename();</span></span><br><span class="line"><span class="string">    //为了两次上传导致文件名相同而冲突，所以我们用uuid设置filename</span></span><br><span class="line"><span class="string">    String uuid = UUID.randomUUID().toString().replace("</span>-<span class="string">", "</span><span class="string">");</span></span><br><span class="line"><span class="string">    // 完成文件上传</span></span><br><span class="line"><span class="string">    fileName = uuid + "</span>_<span class="string">" + fileName;</span></span><br><span class="line"><span class="string">    upload.transferTo(new File(path, fileName));</span></span><br><span class="line"><span class="string">    return "</span>success<span class="string">";</span></span><br><span class="line"><span class="string">&#125;</span></span><br></pre></td></tr></table></figure>
 
-  <br>
+  <br/>
 
-<h2><span id="13-jersey跨服务器上传">1.3 jersey跨服务器上传</span></h2><p>在实际开发中，我们会有很多处理不同功能的服务器。例如：</p>
+<h2 id="1-3-jersey跨服务器上传"><a href="#1-3-jersey跨服务器上传" class="headerlink" title="1.3 jersey跨服务器上传"></a>1.3 jersey跨服务器上传</h2><p>在实际开发中，我们会有很多处理不同功能的服务器。例如：</p>
 <ul>
 <li><p>应用服务器：负责部署我们的应用</p>
 </li>
@@ -231,61 +231,61 @@
 <li><p>文件服务器：负责存储用户上传文件的服务器。</p>
 </li>
 </ul>
-<h3><span id="131-步骤">1.3.1 步骤</span></h3><ol>
+<h3 id="1-3-1-步骤"><a href="#1-3-1-步骤" class="headerlink" title="1.3.1 步骤"></a>1.3.1 步骤</h3><ol>
 <li>新增pom坐标</li>
 </ol>
 <figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>com.sun.jersey<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>jersey-client<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">version</span>&gt;</span>1.19.4<span class="tag">&lt;/<span class="name">version</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>com.sun.jersey<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>jersey-core<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">version</span>&gt;</span>1.19.4<span class="tag">&lt;/<span class="name">version</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br></pre></td></tr></table></figure>
 
-  <br>
+  <br/>
 
 <ol start="2">
 <li>创建新的module或者project作为图片服务器，并配置好tomcat（详情略），要注意在target中手动创建文件夹,tomcat两个端口不能冲突</li>
 </ol>
-<img src="https://s1.ax1x.com/2020/03/12/8Z1uxx.png" alt="只要添加目录和tomcat.png" style="zoom:80%;">
+<img src="https://s1.ax1x.com/2020/03/12/8Z1uxx.png" alt="只要添加目录和tomcat.png" style="zoom:80%;" />
 
-  <br>
+  <br/>
 
 <ol start="3">
 <li>html同上</li>
 </ol>
 <figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">form</span> <span class="attr">action</span>=<span class="string">"user/fileUpload3"</span> <span class="attr">method</span>=<span class="string">"post"</span> <span class="attr">enctype</span>=<span class="string">"multipart/form-data"</span>&gt;</span></span><br><span class="line">    选择文件：<span class="tag">&lt;<span class="name">input</span> <span class="attr">type</span>=<span class="string">"file"</span> <span class="attr">name</span>=<span class="string">"upload"</span> /&gt;</span><span class="tag">&lt;<span class="name">br</span> /&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">input</span> <span class="attr">type</span>=<span class="string">"submit"</span> <span class="attr">value</span>=<span class="string">"上传"</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">form</span>&gt;</span></span><br></pre></td></tr></table></figure>
 
-  <br>
+  <br/>
 
 <ol start="4">
 <li>controller</li>
 </ol>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@RequestMapping</span>(<span class="string">"/fileUpload3"</span>)</span><br><span class="line"><span class="function"><span class="keyword">public</span> String <span class="title">fileUpload3</span><span class="params">(MultipartFile upload)</span> <span class="keyword">throws</span> Exception </span>&#123;</span><br><span class="line">    <span class="comment">//跨服务器方式上传文件</span></span><br><span class="line">    <span class="comment">//定义上传文件服务器路径</span></span><br><span class="line">    String path = <span class="string">"http://localhost:9090/uploads/"</span>;</span><br><span class="line">    <span class="comment">//获取上传文件名称</span></span><br><span class="line">    String fileName = upload.getOriginalFilename();</span><br><span class="line">    <span class="comment">//为了两次上传导致文件名相同而冲突，所以我们用uuid设置filename</span></span><br><span class="line">    String uuid = UUID.randomUUID().toString().replace(<span class="string">"-"</span>, <span class="string">""</span>);</span><br><span class="line">    fileName = uuid + <span class="string">"_"</span> + fileName;</span><br><span class="line">    <span class="comment">//创建客户端对象</span></span><br><span class="line">    Client client = Client.create();</span><br><span class="line">    <span class="comment">//和图片服务器进行连接</span></span><br><span class="line">    WebResource webResources = client.resource(path + fileName);</span><br><span class="line">    <span class="comment">//上传文件</span></span><br><span class="line">    webResources.put(upload.getBytes());</span><br><span class="line">    <span class="keyword">return</span> <span class="string">"success"</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
-  <br>
+  <br/>
 
-<h3><span id="132-常见错误的解决">1.3.2 常见错误的解决：</span></h3><h4><span id="403错误">403错误</span></h4><p>权限问题</p>
+<h3 id="1-3-2-常见错误的解决："><a href="#1-3-2-常见错误的解决：" class="headerlink" title="1.3.2 常见错误的解决："></a>1.3.2 常见错误的解决：</h3><h4 id="403错误"><a href="#403错误" class="headerlink" title="403错误"></a>403错误</h4><p>权限问题</p>
 <p>打开tomcat安装目录apache-tomcat-8.5.46\conf\web.xml，ctrl+F搜索<code>&lt;servlet-name&gt;default&lt;/servlet-name&gt;</code>找到如下图所示的位置，在如下图位置加入</p>
 <figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">init-param</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;<span class="name">param-name</span>&gt;</span>readonly<span class="tag">&lt;/<span class="name">param-name</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;<span class="name">param-value</span>&gt;</span>false<span class="tag">&lt;/<span class="name">param-value</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">init-param</span>&gt;</span></span><br></pre></td></tr></table></figure>
 
 <p>效果如下</p>
 <p><img src="https://s1.ax1x.com/2020/03/12/8Zks3Q.png" alt="添加后的图.png"></p>
-  <br>
+  <br/>
 
-<h4><span id="404错误">404错误</span></h4><p>目录问题，fileupload的tomcat配置改为根目录即可</p>
+<h4 id="404错误"><a href="#404错误" class="headerlink" title="404错误"></a>404错误</h4><p>目录问题，fileupload的tomcat配置改为根目录即可</p>
 <p><img src="https://s1.ax1x.com/2020/03/12/8ZFvlj.png" alt="tomcat中不要带虚拟目录.png"></p>
 <p>或者你不想改虚拟目录，那就要在应用服务器这边把上传的图片服务器的路径中加入刚刚的虚拟目录也是可以的</p>
 <p><img src="https://s1.ax1x.com/2020/03/12/8ZZgRU.png" alt="另一种方式，加入虚拟目录.png"></p>
-  <br>
+  <br/>
 
-<h4><span id="405错误">405错误</span></h4><p>同403错误</p>
-  <br>
+<h4 id="405错误"><a href="#405错误" class="headerlink" title="405错误"></a>405错误</h4><p>同403错误</p>
+  <br/>
 
-<h4><span id="409错误">409错误</span></h4><p>文件夹为空问题，因为上传图片的目录是uploads，所以手动在图片服务器的target目录创建uploads文件夹</p>
-  <br>
+<h4 id="409错误"><a href="#409错误" class="headerlink" title="409错误"></a>409错误</h4><p>文件夹为空问题，因为上传图片的目录是uploads，所以手动在图片服务器的target目录创建uploads文件夹</p>
+  <br/>
 
-<h4><span id="500错误">500错误</span></h4><p>原因复杂</p>
-  <br>
+<h4 id="500错误"><a href="#500错误" class="headerlink" title="500错误"></a>500错误</h4><p>原因复杂</p>
+  <br/>
 
-<h1><span id="2-springmvc异常处理">2. SpringMVC异常处理</span></h1><p>为了避免浏览器直接弹出错误</p>
+<h1 id="2-SpringMVC异常处理"><a href="#2-SpringMVC异常处理" class="headerlink" title="2. SpringMVC异常处理"></a>2. SpringMVC异常处理</h1><p>为了避免浏览器直接弹出错误</p>
 <p><img src="https://s1.ax1x.com/2020/03/14/8MGAW8.png" alt="浏览器错误展示.png"></p>
 <p>让界面友好一点（比如页面提示系统正在维护中），我们可以通过异常处理器来跳转错误页面</p>
-  <br>
+  <br/>
 
 <p>springmvc.xml中</p>
 <p><strong>id只能是这个名字sysExceptionResolver</strong>，不能乱改</p>
@@ -302,9 +302,9 @@
 
 <p>使用方法如下</p>
 <p><img src="https://s1.ax1x.com/2020/03/14/8M8zsH.png" alt="这样使用.png"></p>
-  <br>
+  <br/>
 
-<h1><span id="3-springmvc拦截器">3. SpringMVC拦截器</span></h1><p>跟servlet中的过滤器filter一样，改名拦截器。有一丢丢不同，拦截器不会拦jsp，html，css，images等静态资源，但是过滤器如果配置了/*，全部都会拦下来。</p>
+<h1 id="3-SpringMVC拦截器"><a href="#3-SpringMVC拦截器" class="headerlink" title="3. SpringMVC拦截器"></a>3. SpringMVC拦截器</h1><p>跟servlet中的过滤器filter一样，改名拦截器。有一丢丢不同，拦截器不会拦jsp，html，css，images等静态资源，但是过滤器如果配置了/*，全部都会拦下来。</p>
 <p>springmvc.xml中</p>
 <figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">&lt;!--配置拦截器--&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">mvc:interceptors</span>&gt;</span></span><br><span class="line">    <span class="comment">&lt;!--配置每个拦截器--&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">mvc:interceptor</span>&gt;</span></span><br><span class="line">        <span class="comment">&lt;!--拦截具体方法--&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">mvc:mapping</span> <span class="attr">path</span>=<span class="string">"/user/*"</span>/&gt;</span></span><br><span class="line">        <span class="comment">&lt;!--不拦截的方法--&gt;</span></span><br><span class="line">        <span class="comment">&lt;!--&lt;mvc:exclude-mapping path=""/&gt;--&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">bean</span> <span class="attr">class</span>=<span class="string">"com.wjw.interceptor.MyInterceptor"</span>/&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">mvc:interceptor</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">mvc:interceptors</span>&gt;</span></span><br></pre></td></tr></table></figure>
 
@@ -312,7 +312,7 @@
 <li><p>可以使用多个<code>&lt;mvc:interceptor&gt;</code>标签来指定多个拦截器，拦截器的顺序就是配置顺序</p>
 </li>
 <li><p>mvc:mapping和mvc:exclude-mapping是一组相对的标签，设置拦截路径和不拦截路径</p>
-<br>
+<br/>
 
 </li>
 </ul>
@@ -502,36 +502,44 @@
                     目录
                 </h3>
                 <ul class="menu-list"><li>
-        <a class="is-flex" href="#undefined">
-        <span class="has-mr-6">1</span>
+        <a class="is-flex" href="#1-SpringMVC的文件上传">
+        <!-- 目录是否自动编号 -->
+        <!-- <span class="has-mr-6">1</span> -->
         <span>1. SpringMVC的文件上传</span>
         </a><ul class="menu-list"><li>
-        <a class="is-flex" href="#undefined">
-        <span class="has-mr-6">1.1</span>
+        <a class="is-flex" href="#1-1-文件上传的必要前提">
+        <!-- 目录是否自动编号 -->
+        <!-- <span class="has-mr-6">1.1</span> -->
         <span>1.1 文件上传的必要前提</span>
         </a></li><li>
-        <a class="is-flex" href="#undefined">
-        <span class="has-mr-6">1.2</span>
+        <a class="is-flex" href="#1-2-SpringMVC实现文件上传">
+        <!-- 目录是否自动编号 -->
+        <!-- <span class="has-mr-6">1.2</span> -->
         <span>1.2 SpringMVC实现文件上传</span>
         </a></li><li>
-        <a class="is-flex" href="#undefined">
-        <span class="has-mr-6">1.3</span>
+        <a class="is-flex" href="#1-3-jersey跨服务器上传">
+        <!-- 目录是否自动编号 -->
+        <!-- <span class="has-mr-6">1.3</span> -->
         <span>1.3 jersey跨服务器上传</span>
         </a><ul class="menu-list"><li>
-        <a class="is-flex" href="#undefined">
-        <span class="has-mr-6">1.3.1</span>
+        <a class="is-flex" href="#1-3-1-步骤">
+        <!-- 目录是否自动编号 -->
+        <!-- <span class="has-mr-6">1.3.1</span> -->
         <span>1.3.1 步骤</span>
         </a></li><li>
-        <a class="is-flex" href="#undefined">
-        <span class="has-mr-6">1.3.2</span>
+        <a class="is-flex" href="#1-3-2-常见错误的解决：">
+        <!-- 目录是否自动编号 -->
+        <!-- <span class="has-mr-6">1.3.2</span> -->
         <span>1.3.2 常见错误的解决：</span>
         </a></li></ul></li></ul></li><li>
-        <a class="is-flex" href="#undefined">
-        <span class="has-mr-6">2</span>
+        <a class="is-flex" href="#2-SpringMVC异常处理">
+        <!-- 目录是否自动编号 -->
+        <!-- <span class="has-mr-6">2</span> -->
         <span>2. SpringMVC异常处理</span>
         </a></li><li>
-        <a class="is-flex" href="#undefined">
-        <span class="has-mr-6">3</span>
+        <a class="is-flex" href="#3-SpringMVC拦截器">
+        <!-- 目录是否自动编号 -->
+        <!-- <span class="has-mr-6">3</span> -->
         <span>3. SpringMVC拦截器</span>
         </a></li></ul>
             </div>
@@ -1056,7 +1064,7 @@
             <div class="level-start has-text-centered-mobile">
                 <a class="footer-logo is-block has-mb-6" href="/">
                 
-                    <img src="/images/logo.svg" alt="SpringMVC入门笔记2" height="28">
+                    <img src="/images/logo.png" alt="SpringMVC入门笔记2" height="28">
                 
                 </a>
                 <p class="is-size-7">

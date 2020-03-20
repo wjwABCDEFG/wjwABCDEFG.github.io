@@ -33,7 +33,7 @@
 
 
 
-<link rel="icon" href="/images/cow.svg">
+<link rel="icon" href="/images/favicon.ico">
 
 
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.7.2/css/bulma.css">
@@ -83,7 +83,7 @@
         <div class="navbar-brand is-flex-center">
             <a class="navbar-item navbar-logo" href="/">
             
-                <img src="/images/logo.svg" alt="ssm整合说明" height="28">
+                <img src="/images/logo.png" alt="ssm整合说明" height="28">
             
             </a>
         </div>
@@ -172,12 +172,12 @@
             
         </h1>
         <div class="content">
-            <h1><span id="1-单个框架自身使用时和原来不同的地方">1. 单个框架自身使用时和原来不同的地方</span></h1><ol>
+            <h1 id="1-单个框架自身使用时和原来不同的地方"><a href="#1-单个框架自身使用时和原来不同的地方" class="headerlink" title="1. 单个框架自身使用时和原来不同的地方"></a>1. 单个框架自身使用时和原来不同的地方</h1><ol>
 <li>spring的xml中开启注解扫描时不需要扫描controller包</li>
 </ol>
 <figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">&lt;!--开启注解扫描，controller不需要扫描--&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">context:component-scan</span> <span class="attr">base-package</span>=<span class="string">"com.wjw"</span> &gt;</span></span><br><span class="line">    <span class="comment">&lt;!--配置包下哪些要扫描(include)或者不扫描(exclude)的类--&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">context:exclude-filter</span> <span class="attr">type</span>=<span class="string">"annotation"</span> <span class="attr">expression</span>=<span class="string">"org.springframework.stereotype.Controller"</span>/&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">context:component-scan</span>&gt;</span></span><br></pre></td></tr></table></figure>
 
-<br>
+<br/>
 
 <ol start="2">
 <li>springmvc的xml中开启注解扫描时只扫描controller包</li>
@@ -188,13 +188,13 @@
 
 
 
-<h1><span id="2-spring整合springmvc">2. Spring整合SpringMVC</span></h1><p>还记得我们在单个测试Spring的时候我们是如何进行的吗？</p>
+<h1 id="2-Spring整合SpringMVC"><a href="#2-Spring整合SpringMVC" class="headerlink" title="2. Spring整合SpringMVC"></a>2. Spring整合SpringMVC</h1><p>还记得我们在单个测试Spring的时候我们是如何进行的吗？</p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Test</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">findOneTest</span><span class="params">()</span></span>&#123;</span><br><span class="line">    ApplicationContext ac = <span class="keyword">new</span> ClassPathXmlApplicationContext(<span class="string">"bean.xml"</span>);</span><br><span class="line">    AccountService service = ac.getBean(<span class="string">"accountService"</span>, AccountService<span class="class">.<span class="keyword">class</span>)</span>;</span><br><span class="line">    Account account = service.findOne(<span class="number">2</span>);</span><br><span class="line">    System.out.println(account);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
 <p>大家都是经验丰富的人才，我们怎么可能在controller层写这种代码呢？？？</p>
 <!--more-->
 
-<br>
+<br/>
 
 <p>我们当然想在controller层直接注入一个service对象，然后直接调用service.method()呀，但是我们的程序是从web.xml开始的，我们只设置了启动时加载springmvc.xml，是没有加载spring的xml的（我这里叫applicationContext.xml）,所以需要做如下修改：</p>
 <ol>
@@ -202,7 +202,7 @@
 </ol>
 <figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>org.springframework<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>spring-web<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">version</span>&gt;</span>5.2.3.RELEASE<span class="tag">&lt;/<span class="name">version</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br></pre></td></tr></table></figure>
 
-<br>
+<br/>
 
 <ol start="2">
 <li>然后我们需要在web.xml中加上</li>
@@ -210,7 +210,7 @@
 <figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">&lt;!--配置Spring监听器,默认只加载WEB-INF文件夹下的配置文件，多一级目录都不可以--&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">listener</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">listener-class</span>&gt;</span>org.springframework.web.context.ContextLoaderListener<span class="tag">&lt;/<span class="name">listener-class</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">listener</span>&gt;</span></span><br><span class="line"><span class="comment">&lt;!--但是我们文件在resources目录下，所以需要设置配置文件的路径--&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">context-param</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">param-name</span>&gt;</span>contextConfigLocation<span class="tag">&lt;/<span class="name">param-name</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">param-value</span>&gt;</span>classpath:applicationContext.xml<span class="tag">&lt;/<span class="name">param-value</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">context-param</span>&gt;</span></span><br></pre></td></tr></table></figure>
 
 <p>这样就既能加载springmvc的xml，也能加载spring的xml了</p>
-<br>
+<br/>
 
 <ol start="3">
 <li>这时候我们就可以在controller层简化使用了</li>
@@ -395,12 +395,14 @@
                     目录
                 </h3>
                 <ul class="menu-list"><li>
-        <a class="is-flex" href="#undefined">
-        <span class="has-mr-6">1</span>
+        <a class="is-flex" href="#1-单个框架自身使用时和原来不同的地方">
+        <!-- 目录是否自动编号 -->
+        <!-- <span class="has-mr-6">1</span> -->
         <span>1. 单个框架自身使用时和原来不同的地方</span>
         </a></li><li>
-        <a class="is-flex" href="#undefined">
-        <span class="has-mr-6">2</span>
+        <a class="is-flex" href="#2-Spring整合SpringMVC">
+        <!-- 目录是否自动编号 -->
+        <!-- <span class="has-mr-6">2</span> -->
         <span>2. Spring整合SpringMVC</span>
         </a></li></ul>
             </div>
@@ -925,7 +927,7 @@
             <div class="level-start has-text-centered-mobile">
                 <a class="footer-logo is-block has-mb-6" href="/">
                 
-                    <img src="/images/logo.svg" alt="ssm整合说明" height="28">
+                    <img src="/images/logo.png" alt="ssm整合说明" height="28">
                 
                 </a>
                 <p class="is-size-7">
