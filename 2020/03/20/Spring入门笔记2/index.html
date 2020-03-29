@@ -82,7 +82,7 @@
         <div class="navbar-brand is-flex-center">
             <a class="navbar-item navbar-logo" href="/">
             
-                <img src="/images/logo.png" alt="Spring入门笔记2" height="28">
+                <img src="images/loading.gif" data-original="/images/logo.png" alt="Spring入门笔记2" height="28">
             
             </a>
         </div>
@@ -140,7 +140,7 @@
     
     <div class="card-image">
         <span  class="image is-7by1">
-            <img class="thumbnail" src="/headImg/head7.jpg" alt="Spring入门笔记2">
+            <img class="thumbnail" src="images/loading.gif" data-original="/headImg/head7.jpg" alt="Spring入门笔记2">
         </span>
     </div>
     
@@ -173,7 +173,7 @@
         <div class="content">
             <h1 id="1-Spring整合junit"><a href="#1-Spring整合junit" class="headerlink" title="1. Spring整合junit"></a>1. Spring整合junit</h1><p><strong>注意：spring5.x必须对应junit4.12及以上版本，否则报init初始化错误</strong></p>
 <p>就是为了避免重复代码</p>
-<p><img src="https://s1.ax1x.com/2020/03/22/84eo5D.png" alt="这些写一次就好了.png"></p>
+<p><img src="images/loading.gif" data-original="https://s1.ax1x.com/2020/03/22/84eo5D.png" alt="这些写一次就好了.png"></p>
 <a id="more"></a>
 
 <p>其实可以用junit的注解@Before去做的，但是公司开发的时候开发工程师和测试工程师时两个人，测试工程师只关注service.findAll()这个接口，对于上面红色框框出的代码，可能测试工程师不懂spring，所以必须由开发工程师写，但是开发又不写@before代码块，只写这个空测试类</p>
@@ -183,7 +183,7 @@
 <ol>
 <li>导坐标</li>
 </ol>
-<p><img src="https://s1.ax1x.com/2020/03/22/84eXrt.png" alt=""></p>
+<p><img src="images/loading.gif" data-original="https://s1.ax1x.com/2020/03/22/84eXrt.png" alt=""></p>
 <br/>
 
 <ol start="2">
@@ -198,13 +198,13 @@
 <p>@ContextConfiguration</p>
 <p>两个属性：locations：指定xml的位置，记得加上classpath:</p>
 <p>classes：指定注解类所在位置</p>
-<p><img src="https://s1.ax1x.com/2020/03/22/84n9w6.png" alt="步骤2 3示意图"></p>
+<p><img src="images/loading.gif" data-original="https://s1.ax1x.com/2020/03/22/84n9w6.png" alt="步骤2 3示意图"></p>
 <br/>
 
 <ol start="4">
 <li>注入</li>
 </ol>
-<p><img src="https://s1.ax1x.com/2020/03/22/84nVld.png" alt="注入"></p>
+<p><img src="images/loading.gif" data-original="https://s1.ax1x.com/2020/03/22/84nVld.png" alt="注入"></p>
 <br/>
 
 <h1 id="2-Spring中的AOP"><a href="#2-Spring中的AOP" class="headerlink" title="2. Spring中的AOP"></a>2. Spring中的AOP</h1><h2 id="2-1-AOP的概念以及作用（了解，代码看看就行）"><a href="#2-1-AOP的概念以及作用（了解，代码看看就行）" class="headerlink" title="2.1 AOP的概念以及作用（了解，代码看看就行）"></a>2.1 AOP的概念以及作用（了解，代码看看就行）</h2><p>AOP的本质是动态代理，就是方法增强，比如原来有一个方法funA()，里面输出了一句”world”，现在通过AOP/动态代理等方式对funA()进行改造，使得可以在执行funA之前先输出一句”hello”，在执行funA之后输出”!!!!”，这就是方法增强。</p>
@@ -214,7 +214,7 @@
 <p>提交事务(正常)</p>
 <p>回滚事务(异常)</p>
 <p>释放连接</p>
-<p> <img src="https://s1.ax1x.com/2020/03/22/84nBhF.png" alt=""></p>
+<p> <img src="images/loading.gif" data-original="https://s1.ax1x.com/2020/03/22/84nBhF.png" alt=""></p>
 <p>如果每个方法都要这样写就太麻烦了，因此我们通过aop来实现对业务层的方法增强，之后事务管理器负责：</p>
 <p>开启事务</p>
 <p>提交事务(正常)</p>
@@ -225,7 +225,7 @@
 <br/>
 
 <p>使用AOP/动态代理后</p>
-<p><img src="https://s1.ax1x.com/2020/03/22/84n4hD.png" alt=""></p>
+<p><img src="images/loading.gif" data-original="https://s1.ax1x.com/2020/03/22/84n4hD.png" alt=""></p>
 <p>而事务的管理交给代理类（这里先用动态代理介绍方法增强，AOP原理相同，<strong>随便看一下代码，后期我们使用spring的事务管理器，就不用自己写代码了</strong>）</p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * 用于创建Service的代理对象的工厂</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">BeanFactory</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">private</span> AccountService accountService;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">final</span> <span class="keyword">void</span> <span class="title">setAccountService</span><span class="params">(AccountService accountService)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">this</span>.accountService = accountService;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">private</span> TransactionManager txManager;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">setTxManager</span><span class="params">(TransactionManager txManager)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">this</span>.txManager = txManager;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> AccountService <span class="title">getAccountService</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> (AccountService) Proxy.newProxyInstance(accountService.getClass().getClassLoader(),</span><br><span class="line">                accountService.getClass().getInterfaces(),</span><br><span class="line">                <span class="keyword">new</span> InvocationHandler() &#123;</span><br><span class="line">                    <span class="comment">/**</span></span><br><span class="line"><span class="comment">                     * 添加事务的支持</span></span><br><span class="line"><span class="comment">                     * <span class="doctag">@param</span> proxy</span></span><br><span class="line"><span class="comment">                     * <span class="doctag">@param</span> method</span></span><br><span class="line"><span class="comment">                     * <span class="doctag">@param</span> args</span></span><br><span class="line"><span class="comment">                     * <span class="doctag">@return</span></span></span><br><span class="line"><span class="comment">                     * <span class="doctag">@throws</span> Throwable</span></span><br><span class="line"><span class="comment">                     */</span></span><br><span class="line">                    <span class="function"><span class="keyword">public</span> Object <span class="title">invoke</span><span class="params">(Object proxy, Method method, Object[] args)</span> <span class="keyword">throws</span> Throwable </span>&#123;</span><br><span class="line">                        Object returnValue = <span class="keyword">null</span>;</span><br><span class="line">                        <span class="keyword">try</span> &#123;</span><br><span class="line">                            <span class="comment">//1.开启事务</span></span><br><span class="line">                            txManager.beginTransaction();</span><br><span class="line">                            <span class="comment">//2.执行事务</span></span><br><span class="line">                            returnValue = method.invoke(accountService, args);</span><br><span class="line">                            <span class="comment">//3.提交事务</span></span><br><span class="line">                            txManager.commit();</span><br><span class="line">                            <span class="comment">//4.返回结果</span></span><br><span class="line">                            <span class="keyword">return</span> returnValue;</span><br><span class="line">                        &#125; <span class="keyword">catch</span> (Exception e) &#123;</span><br><span class="line">                            <span class="comment">//5.回滚操作</span></span><br><span class="line">                            txManager.rollback();</span><br><span class="line">                            <span class="keyword">throw</span> <span class="keyword">new</span> RuntimeException(e);</span><br><span class="line">                        &#125; <span class="keyword">finally</span> &#123;</span><br><span class="line">                            <span class="comment">//6.释放连接</span></span><br><span class="line">                            txManager.release();</span><br><span class="line">                        &#125;</span><br><span class="line">                    &#125;</span><br><span class="line">                &#125;);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
@@ -243,7 +243,7 @@
 
 <h3 id="2-1-1-动态代理的写法（了解，小插曲）"><a href="#2-1-1-动态代理的写法（了解，小插曲）" class="headerlink" title="2.1.1 动态代理的写法（了解，小插曲）"></a>2.1.1 动态代理的写法（了解，小插曲）</h3><p>有人说，哎呀 我不会写动态代理，这又是匿名内部类的又是什么Proxy</p>
 <p>我说你会你就会，你认真看啊</p>
-<p><img src="https://s1.ax1x.com/2020/03/22/84uHGF.png" alt="动态代理"></p>
+<p><img src="images/loading.gif" data-original="https://s1.ax1x.com/2020/03/22/84uHGF.png" alt="动态代理"></p>
 <p>其实要记的就只有</p>
 <ol>
 <li><p>你得知道动态代理是什么类下的什么方法吧：<code>Proxy.newProxyInstance()</code></p>
@@ -322,22 +322,22 @@
 <p><code>&lt;aop:after-returning&gt;</code>后置通知，在切入点正常执行后执行</p>
 <p><code>&lt;aop:after-throwing&gt;</code>异常通知，在切入点方法执行异常后执行（相当于catch）</p>
 <p><code>&lt;aop:after&gt;</code>最终通知，无论是否正常都会执行（相当于finally）</p>
-<p><img src="https://s1.ax1x.com/2020/03/22/84MFYT.png" alt="通知标签"></p>
+<p><img src="images/loading.gif" data-original="https://s1.ax1x.com/2020/03/22/84MFYT.png" alt="通知标签"></p>
 <p><code>&lt;aop:around&gt;</code>环绕通知，其实环绕通知就是上面所有通知的总和，在环绕通知中，<strong>代码写在哪里就是什么通知</strong>。Spring框架为我们提供了一个接口：<strong>ProceedingJoinPoint</strong>。该接口有一个方法<strong>proceed()</strong>，此方法就相当于明确调用切入点方法。该接口可以作为环绕通知的方法<strong>参数</strong></p>
-<p><img src="https://s1.ax1x.com/2020/03/22/84MKTx.png" alt="84MKTx.png"></p>
+<p><img src="images/loading.gif" data-original="https://s1.ax1x.com/2020/03/22/84MKTx.png" alt="84MKTx.png"></p>
 <p>简单地说，spring的环绕通知就是我们可以用代码的方式写所有的通知，位置就是不同的方式。（其实就是动态代理本来的写法）</p>
 <br/>
 
 <h2 id="2-5-简化重复pointcut，可以单独抽取出来"><a href="#2-5-简化重复pointcut，可以单独抽取出来" class="headerlink" title="2.5 简化重复pointcut，可以单独抽取出来"></a>2.5 简化重复pointcut，可以单独抽取出来</h2><p><code>&lt;aop:pointcut&gt;</code>标签 id是唯一标识，expression就是原来的表达式</p>
 <p>原来表达式不再用pointcut而是用point-ref，值就是<code>&lt;aop:pointcut&gt;</code>的id</p>
-<p><img src="https://s1.ax1x.com/2020/03/22/84MG1e.png" alt=""></p>
+<p><img src="images/loading.gif" data-original="https://s1.ax1x.com/2020/03/22/84MG1e.png" alt=""></p>
 <p>也可以将<code>&lt;aop:pointcut&gt;</code>标签配置在<code>&lt;aop:aspect&gt;</code>外面，这样所有切面可用，<strong>注意：一定要在aspect前面</strong></p>
-<p><img src="https://s1.ax1x.com/2020/03/22/84MU0I.png" alt="位置"></p>
+<p><img src="images/loading.gif" data-original="https://s1.ax1x.com/2020/03/22/84MU0I.png" alt="位置"></p>
 <br/>
 
 <h1 id="3-注解方式AOP"><a href="#3-注解方式AOP" class="headerlink" title="3. 注解方式AOP"></a>3. 注解方式AOP</h1><h2 id="要使用注解AOP，必须如下配置"><a href="#要使用注解AOP，必须如下配置" class="headerlink" title="要使用注解AOP，必须如下配置"></a>要使用注解AOP，必须如下配置</h2><p><strong>要注意，这段约束在官网是没有现成的，先搜xmlns:aop的约束复制下来，再找xmlns:context找到红框中的三段复制下来</strong></p>
 <p><code>&lt;aop:aspectj-autoproxy&gt;</code>是开启注解AOP的钥匙</p>
-<p><img src="https://s1.ax1x.com/2020/03/22/84MBh8.png" alt=""></p>
+<p><img src="images/loading.gif" data-original="https://s1.ax1x.com/2020/03/22/84MBh8.png" alt=""></p>
 <br/>
 
 <p>切面类有这几点</p>
@@ -359,14 +359,14 @@
 <br/>
 
 <h2 id="3-6-After-“methodName-”"><a href="#3-6-After-“methodName-”" class="headerlink" title="3.6 @After(“methodName()”)"></a>3.6 @After(“methodName()”)</h2><p>注意不要少了括号，最终通知</p>
-<p><img src="https://s1.ax1x.com/2020/03/22/84M7jJ.png" alt=""></p>
+<p><img src="images/loading.gif" data-original="https://s1.ax1x.com/2020/03/22/84M7jJ.png" alt=""></p>
 <br/>
 
 <h2 id="注意事项："><a href="#注意事项：" class="headerlink" title="注意事项："></a>注意事项：</h2><p><strong>spring的注解方式AOP的通知顺序是：前置  最终  后置/异常</strong></p>
-<p><img src="https://s1.ax1x.com/2020/03/22/84MXAx.png" alt=""></p>
+<p><img src="images/loading.gif" data-original="https://s1.ax1x.com/2020/03/22/84MXAx.png" alt=""></p>
 <p>最终通知的位置不对</p>
 <p><strong>而使用环绕通知的话，因为是自己写的，所以位置和xml还有理解中的是一致的</strong></p>
-<p><img src="https://s1.ax1x.com/2020/03/22/84QS3D.png" alt=""></p>
+<p><img src="images/loading.gif" data-original="https://s1.ax1x.com/2020/03/22/84QS3D.png" alt=""></p>
 <br/>
 
 <h2 id="完全不用XML的方式"><a href="#完全不用XML的方式" class="headerlink" title="完全不用XML的方式"></a>完全不用XML的方式</h2><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Configuration</span></span><br><span class="line"><span class="meta">@ComponentScan</span>(basePackages=<span class="string">"com.itheima"</span>)</span><br><span class="line"><span class="meta">@EnableAspectJAutoProxy</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">SpringConfiguration</span> </span>&#123;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
@@ -386,9 +386,9 @@
 <p>也就是说，对于前置通知是事务的开启，后置通知是事务的提交，异常通知是事务的回滚，最终通知是连接的释放这种基本上是固定操作</p>
 <p>spring封装了一个DataSourceTransactionManager自动完成，只要是在2中的transaction-manager中引用了这个类，那么就不必关注这几个操作了</p>
 <p>更多的是关注不同方法对于事务的处理（事务的属性）比如在上一个事务未完成前下一个事务是否可以读取（find就可以其他操作则不行）</p>
-<p><img src="https://s1.ax1x.com/2020/03/22/84QeC8.png" alt=""></p>
+<p><img src="images/loading.gif" data-original="https://s1.ax1x.com/2020/03/22/84QeC8.png" alt=""></p>
 <p>数据源还是原来的，也给出截图</p>
-<p><img src="https://s1.ax1x.com/2020/03/22/84QMuj.png" alt=""></p>
+<p><img src="images/loading.gif" data-original="https://s1.ax1x.com/2020/03/22/84QMuj.png" alt=""></p>
 <br/>
 
 <h2 id="4-2-基于注解的声明式事务控制"><a href="#4-2-基于注解的声明式事务控制" class="headerlink" title="4.2 基于注解的声明式事务控制"></a>4.2 基于注解的声明式事务控制</h2><p>使用步骤</p>
@@ -398,21 +398,21 @@
  <br/>
 
 <p>别忘了这些细节的东西</p>
-<p><img src="https://s1.ax1x.com/2020/03/22/84QYCT.png" alt="84QYCT.png"></p>
-<p><img src="https://s1.ax1x.com/2020/03/22/84Qt8U.png" alt=""></p>
+<p><img src="images/loading.gif" data-original="https://s1.ax1x.com/2020/03/22/84QYCT.png" alt="84QYCT.png"></p>
+<p><img src="images/loading.gif" data-original="https://s1.ax1x.com/2020/03/22/84Qt8U.png" alt=""></p>
 <p>所以只能自己补上（@AutoWired可以不要，用的是xml）</p>
-<p><img src="https://s1.ax1x.com/2020/03/22/84Qwr9.png" alt=""></p>
-<p><img src="https://s1.ax1x.com/2020/03/22/84QDV1.png" alt=""></p>
+<p><img src="images/loading.gif" data-original="https://s1.ax1x.com/2020/03/22/84Qwr9.png" alt=""></p>
+<p><img src="images/loading.gif" data-original="https://s1.ax1x.com/2020/03/22/84QDV1.png" alt=""></p>
 <br/>
 
 <h2 id="4-3-纯注解的声明式事务控制"><a href="#4-3-纯注解的声明式事务控制" class="headerlink" title="4.3 纯注解的声明式事务控制"></a>4.3 纯注解的声明式事务控制</h2><p>算了，别整这些有的没的，反正也没人用</p>
 <br/>
 
-<h1 id="附录："><a href="#附录：" class="headerlink" title="附录："></a>附录：</h1><h2 id="ioc下通过继承JdbcDaoSupport如何注入数据源"><a href="#ioc下通过继承JdbcDaoSupport如何注入数据源" class="headerlink" title="ioc下通过继承JdbcDaoSupport如何注入数据源"></a>ioc下通过继承JdbcDaoSupport如何注入数据源</h2><p><img src="https://s1.ax1x.com/2020/03/22/84Qc8O.png" alt=""></p>
+<h1 id="附录："><a href="#附录：" class="headerlink" title="附录："></a>附录：</h1><h2 id="ioc下通过继承JdbcDaoSupport如何注入数据源"><a href="#ioc下通过继承JdbcDaoSupport如何注入数据源" class="headerlink" title="ioc下通过继承JdbcDaoSupport如何注入数据源"></a>ioc下通过继承JdbcDaoSupport如何注入数据源</h2><p><img src="images/loading.gif" data-original="https://s1.ax1x.com/2020/03/22/84Qc8O.png" alt=""></p>
 <p>这是由于类中使用的是继承方式</p>
-<p><img src="https://s1.ax1x.com/2020/03/22/84Qfrd.png" alt=""></p>
+<p><img src="images/loading.gif" data-original="https://s1.ax1x.com/2020/03/22/84Qfrd.png" alt=""></p>
 <p>事实上就自动获得了所有父类的方法，而父类的class文件里我们可以看到setDataSource方法，因此我们只要根据这个set方法设置dao的注入就好了</p>
-<p><img src="https://s1.ax1x.com/2020/03/22/84Q5VI.png" alt=""></p>
+<p><img src="images/loading.gif" data-original="https://s1.ax1x.com/2020/03/22/84Q5VI.png" alt=""></p>
 
         </div>
         
@@ -499,7 +499,7 @@
                 <div>
                     
                     <figure class="image is-128x128 has-mb-6">
-                        <img class="" src="/images/avatar.jpeg" alt="wjwABCDEFG">
+                        <img class="" src="images/loading.gif" data-original="/images/avatar.jpeg" alt="wjwABCDEFG">
                     </figure>
                     
                     <p class="is-size-4 is-block">
@@ -802,7 +802,7 @@
             
             <a href="/2020/03/20/Spring%E5%85%A5%E9%97%A8%E7%AC%94%E8%AE%B02/" class="media-left">
                 <p class="image is-64x64">
-                    <img class="thumbnail" src="/headImg/head7.jpg" alt="Spring入门笔记2">
+                    <img class="thumbnail" src="images/loading.gif" data-original="/headImg/head7.jpg" alt="Spring入门笔记2">
                 </p>
             </a>
             
@@ -821,7 +821,7 @@
             
             <a href="/2020/03/20/ssm%E6%95%B4%E5%90%88%E8%AF%B4%E6%98%8E/" class="media-left">
                 <p class="image is-64x64">
-                    <img class="thumbnail" src="/headImg/head6.jpg" alt="ssm整合说明">
+                    <img class="thumbnail" src="images/loading.gif" data-original="/headImg/head6.jpg" alt="ssm整合说明">
                 </p>
             </a>
             
@@ -840,7 +840,7 @@
             
             <a href="/2020/03/18/Spring%E5%85%A5%E9%97%A8%E7%AC%94%E8%AE%B01/" class="media-left">
                 <p class="image is-64x64">
-                    <img class="thumbnail" src="/headImg/head5.jpg" alt="Spring入门笔记1">
+                    <img class="thumbnail" src="images/loading.gif" data-original="/headImg/head5.jpg" alt="Spring入门笔记1">
                 </p>
             </a>
             
@@ -859,7 +859,7 @@
             
             <a href="/2020/03/14/SpringMVC%E5%85%A5%E9%97%A8%E7%AC%94%E8%AE%B02/" class="media-left">
                 <p class="image is-64x64">
-                    <img class="thumbnail" src="/headImg/head4.jpg" alt="SpringMVC入门笔记2">
+                    <img class="thumbnail" src="images/loading.gif" data-original="/headImg/head4.jpg" alt="SpringMVC入门笔记2">
                 </p>
             </a>
             
@@ -878,7 +878,7 @@
             
             <a href="/2020/03/09/SpringMVC%E6%8E%A5%E6%94%B6%E5%89%8D%E7%AB%AF%E5%8F%82%E6%95%B0%E4%B8%BAnull%E7%9A%84%E6%8E%A2%E7%B4%A2/" class="media-left">
                 <p class="image is-64x64">
-                    <img class="thumbnail" src="/headImg/head2.jpg" alt="SpringMVC接收前端参数为null的探索">
+                    <img class="thumbnail" src="images/loading.gif" data-original="/headImg/head2.jpg" alt="SpringMVC接收前端参数为null的探索">
                 </p>
             </a>
             
@@ -1019,7 +1019,7 @@
             
             <a href="/2020/03/20/Spring%E5%85%A5%E9%97%A8%E7%AC%94%E8%AE%B02/" class="media-left">
                 <p class="image is-64x64">
-                    <img class="thumbnail" src="/headImg/head7.jpg" alt="Spring入门笔记2">
+                    <img class="thumbnail" src="images/loading.gif" data-original="/headImg/head7.jpg" alt="Spring入门笔记2">
                 </p>
             </a>
             
@@ -1038,7 +1038,7 @@
             
             <a href="/2020/03/20/ssm%E6%95%B4%E5%90%88%E8%AF%B4%E6%98%8E/" class="media-left">
                 <p class="image is-64x64">
-                    <img class="thumbnail" src="/headImg/head6.jpg" alt="ssm整合说明">
+                    <img class="thumbnail" src="images/loading.gif" data-original="/headImg/head6.jpg" alt="ssm整合说明">
                 </p>
             </a>
             
@@ -1057,7 +1057,7 @@
             
             <a href="/2020/03/18/Spring%E5%85%A5%E9%97%A8%E7%AC%94%E8%AE%B01/" class="media-left">
                 <p class="image is-64x64">
-                    <img class="thumbnail" src="/headImg/head5.jpg" alt="Spring入门笔记1">
+                    <img class="thumbnail" src="images/loading.gif" data-original="/headImg/head5.jpg" alt="Spring入门笔记1">
                 </p>
             </a>
             
@@ -1076,7 +1076,7 @@
             
             <a href="/2020/03/14/SpringMVC%E5%85%A5%E9%97%A8%E7%AC%94%E8%AE%B02/" class="media-left">
                 <p class="image is-64x64">
-                    <img class="thumbnail" src="/headImg/head4.jpg" alt="SpringMVC入门笔记2">
+                    <img class="thumbnail" src="images/loading.gif" data-original="/headImg/head4.jpg" alt="SpringMVC入门笔记2">
                 </p>
             </a>
             
@@ -1095,7 +1095,7 @@
             
             <a href="/2020/03/09/SpringMVC%E6%8E%A5%E6%94%B6%E5%89%8D%E7%AB%AF%E5%8F%82%E6%95%B0%E4%B8%BAnull%E7%9A%84%E6%8E%A2%E7%B4%A2/" class="media-left">
                 <p class="image is-64x64">
-                    <img class="thumbnail" src="/headImg/head2.jpg" alt="SpringMVC接收前端参数为null的探索">
+                    <img class="thumbnail" src="images/loading.gif" data-original="/headImg/head2.jpg" alt="SpringMVC接收前端参数为null的探索">
                 </p>
             </a>
             
@@ -1227,7 +1227,7 @@
             <div class="level-start has-text-centered-mobile">
                 <a class="footer-logo is-block has-mb-6" href="/">
                 
-                    <img src="/images/logo.png" alt="Spring入门笔记2" height="28">
+                    <img src="images/loading.gif" data-original="/images/logo.png" alt="Spring入门笔记2" height="28">
                 
                 </a>
                 <p class="is-size-7">
@@ -1401,5 +1401,5 @@ document.addEventListener('DOMContentLoaded', function () {
 <link rel="stylesheet" href="/css/search.css">
 <link rel="stylesheet" href="/css/insight.css">
     
-</body>
+<script>!function(e){var c=Array.prototype.slice.call(document.querySelectorAll("img[data-original]"));function i(){for(var r=0;r<c.length;r++)t=c[r],0<=(n=t.getBoundingClientRect()).bottom&&0<=n.left&&n.top<=(e.innerHeight||document.documentElement.clientHeight)&&function(){var t,n,e,i,o=c[r];t=o,n=function(){c=c.filter(function(t){return o!==t})},e=new Image,i=t.getAttribute("data-original"),e.onload=function(){t.src=i,n&&n()},e.src=i}();var t,n}i(),e.addEventListener("scroll",function(){var t,n;t=i,n=e,clearTimeout(t.tId),t.tId=setTimeout(function(){t.call(n)},500)})}(this);</script><script>window.addEventListener("load",function(){var t=/\.(gif|jpg|jpeg|tiff|png)$/i,r=/^data:image\/[a-z]+;base64,/;Array.prototype.slice.call(document.querySelectorAll("img[data-original]")).forEach(function(a){var e=a.parentNode;"A"===e.tagName&&(e.href.match(t)||e.href.match(r))&&(e.href=a.dataset.original)})});</script></body>
 </html>

@@ -82,7 +82,7 @@
         <div class="navbar-brand is-flex-center">
             <a class="navbar-item navbar-logo" href="/">
             
-                <img src="/images/logo.png" alt="SpringMVC入门笔记1" height="28">
+                <img src="images/loading.gif" data-original="/images/logo.png" alt="SpringMVC入门笔记1" height="28">
             
             </a>
         </div>
@@ -140,7 +140,7 @@
     
     <div class="card-image">
         <span  class="image is-7by1">
-            <img class="thumbnail" src="/headImg/head3.jpg" alt="SpringMVC入门笔记1">
+            <img class="thumbnail" src="images/loading.gif" data-original="/headImg/head3.jpg" alt="SpringMVC入门笔记1">
         </span>
     </div>
     
@@ -210,13 +210,13 @@
 </li>
 </ul>
 <p>流程如下</p>
-<p><img src="https://s2.ax1x.com/2020/03/07/3jgHS0.png" alt="SpringMVC组件.png"></p>
+<p><img src="images/loading.gif" data-original="https://s2.ax1x.com/2020/03/07/3jgHS0.png" alt="SpringMVC组件.png"></p>
   <br/>
 
 <h1 id="2-web项目的环境搭建"><a href="#2-web项目的环境搭建" class="headerlink" title="2. web项目的环境搭建"></a>2. web项目的环境搭建</h1><p>既然是web应用，当然要使用Maven骨架创建一个webapp项目，这样结构比较标准！注意不要选错了</p>
-<p><img src="https://s2.ax1x.com/2020/03/07/3jDpKH.png" alt="搭建1.png"></p>
+<p><img src="images/loading.gif" data-original="https://s2.ax1x.com/2020/03/07/3jDpKH.png" alt="搭建1.png"></p>
 <p>这里添加archetypeCatalog参数的值为internal可以快一点</p>
-<p><img src="https://s2.ax1x.com/2020/03/07/3jrAm9.png" alt="搭建2.png"></p>
+<p><img src="images/loading.gif" data-original="https://s2.ax1x.com/2020/03/07/3jrAm9.png" alt="搭建2.png"></p>
 <p>后面就一路next了</p>
 <p><strong>注意</strong>，由于使用骨架创建的项目没有java和resources目录，而我们熟悉的项目结构是</p>
 <p>└─src</p>
@@ -226,8 +226,8 @@
 <p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;└─webapp</p>
 <p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;└─WEB-INF</p>
 <p>所以我们需要手动创建java和resources目录并把他们标记成source root和resources root，否则的话没有办法创建java类和配置文件，具体做法如下</p>
-<p><img src="https://s2.ax1x.com/2020/03/07/3jy4oR.png" alt="搭建3.png"></p>
-<p><img src="https://s2.ax1x.com/2020/03/07/3jygQU.png" alt="搭建4.png"></p>
+<p><img src="images/loading.gif" data-original="https://s2.ax1x.com/2020/03/07/3jy4oR.png" alt="搭建3.png"></p>
+<p><img src="images/loading.gif" data-original="https://s2.ax1x.com/2020/03/07/3jygQU.png" alt="搭建4.png"></p>
 <p>配置好tomcat就可以了，这里就不介绍了</p>
 <p>​    <br/></p>
 <h1 id="3-SpringMVC使用"><a href="#3-SpringMVC使用" class="headerlink" title="3. SpringMVC使用"></a>3. SpringMVC使用</h1><h2 id="3-1-pom坐标"><a href="#3-1-pom坐标" class="headerlink" title="3.1 pom坐标"></a>3.1 pom坐标</h2><figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">properties</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">project.build.sourceEncoding</span>&gt;</span>UTF-8<span class="tag">&lt;/<span class="name">project.build.sourceEncoding</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">maven.compiler.source</span>&gt;</span>1.8<span class="tag">&lt;/<span class="name">maven.compiler.source</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">maven.compiler.target</span>&gt;</span>1.8<span class="tag">&lt;/<span class="name">maven.compiler.target</span>&gt;</span></span><br><span class="line">  <span class="comment">&lt;!--版本锁定--&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">spring.version</span>&gt;</span>5.2.3.RELEASE<span class="tag">&lt;/<span class="name">spring.version</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">properties</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">dependencies</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>org.springframework<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>spring-context<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">version</span>&gt;</span>$&#123;spring.version&#125;<span class="tag">&lt;/<span class="name">version</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>org.springframework<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>spring-web<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">version</span>&gt;</span>$&#123;spring.version&#125;<span class="tag">&lt;/<span class="name">version</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>org.springframework<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>spring-webmvc<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">version</span>&gt;</span>$&#123;spring.version&#125;<span class="tag">&lt;/<span class="name">version</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>javax.servlet<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>servlet-api<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">version</span>&gt;</span>2.5<span class="tag">&lt;/<span class="name">version</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">scope</span>&gt;</span>provided<span class="tag">&lt;/<span class="name">scope</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>javax.servlet.jsp<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>jsp-api<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">version</span>&gt;</span>2.0<span class="tag">&lt;/<span class="name">version</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">scope</span>&gt;</span>provided<span class="tag">&lt;/<span class="name">scope</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">dependencies</span>&gt;</span></span><br></pre></td></tr></table></figure>
@@ -239,13 +239,13 @@
 <h2 id="3-3-resources文件夹下新建springmvc-xml文件并写入"><a href="#3-3-resources文件夹下新建springmvc-xml文件并写入" class="headerlink" title="3.3 resources文件夹下新建springmvc.xml文件并写入"></a>3.3 resources文件夹下新建springmvc.xml文件并写入</h2><figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?xml version="1.0" encoding="UTF-8"?&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">beans</span> <span class="attr">xmlns</span>=<span class="string">"http://www.springframework.org/schema/beans"</span></span></span><br><span class="line"><span class="tag">       <span class="attr">xmlns:mvc</span>=<span class="string">"http://www.springframework.org/schema/mvc"</span></span></span><br><span class="line"><span class="tag">       <span class="attr">xmlns:context</span>=<span class="string">"http://www.springframework.org/schema/context"</span></span></span><br><span class="line"><span class="tag">       <span class="attr">xmlns:xsi</span>=<span class="string">"http://www.w3.org/2001/XMLSchema-instance"</span></span></span><br><span class="line"><span class="tag">       <span class="attr">xsi:schemaLocation</span>=<span class="string">"</span></span></span><br><span class="line"><span class="tag"><span class="string">        http://www.springframework.org/schema/beans</span></span></span><br><span class="line"><span class="tag"><span class="string">        http://www.springframework.org/schema/beans/spring-beans.xsd</span></span></span><br><span class="line"><span class="tag"><span class="string">        http://www.springframework.org/schema/mvc</span></span></span><br><span class="line"><span class="tag"><span class="string">        http://www.springframework.org/schema/mvc/spring-mvc.xsd</span></span></span><br><span class="line"><span class="tag"><span class="string">        http://www.springframework.org/schema/context</span></span></span><br><span class="line"><span class="tag"><span class="string">        http://www.springframework.org/schema/context/spring-context.xsd"</span>&gt;</span></span><br><span class="line"></span><br><span class="line">    <span class="comment">&lt;!--开启注解扫描--&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">context:component-scan</span> <span class="attr">base-package</span>=<span class="string">"com.wjw"</span>&gt;</span><span class="tag">&lt;/<span class="name">context:component-scan</span>&gt;</span></span><br><span class="line"></span><br><span class="line">    <span class="comment">&lt;!--配置视图解析器--&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">bean</span> <span class="attr">id</span>=<span class="string">"internalResourceViewResolver"</span> <span class="attr">class</span>=<span class="string">"org.springframework.web.servlet.view.InternalResourceViewResolver"</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">"prefix"</span> <span class="attr">value</span>=<span class="string">"/WEB-INF/pages/"</span>&gt;</span><span class="tag">&lt;/<span class="name">property</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">"suffix"</span> <span class="attr">value</span>=<span class="string">".jsp"</span>&gt;</span><span class="tag">&lt;/<span class="name">property</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">bean</span>&gt;</span></span><br><span class="line"></span><br><span class="line">    <span class="comment">&lt;!--开启SpringMVC框架注解的支持--&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">mvc:annotation-driven</span>/&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="tag">&lt;/<span class="name">beans</span>&gt;</span></span><br></pre></td></tr></table></figure>
 
 <p>其中internalResourceViewResolver中配置的路径就是Controller类中return自动跳转的对应页面</p>
-<p><img src="https://s2.ax1x.com/2020/03/07/3jfnh9.png" alt="目录结构.png"></p>
+<p><img src="images/loading.gif" data-original="https://s2.ax1x.com/2020/03/07/3jfnh9.png" alt="目录结构.png"></p>
 <p>​    <br/></p>
 <h2 id="3-4-普通的类代替servlet"><a href="#3-4-普通的类代替servlet" class="headerlink" title="3.4 普通的类代替servlet"></a>3.4 普通的类代替servlet</h2><p>java文件夹中创建一个名为controller的包和一个HelloController类（也就是我们俗称的controller层），如果类上方也有@RequestMapping(“/user”)标签，则表示多级目录，那么前端页面需要访问user/hello</p>
-<p><img src="https://s2.ax1x.com/2020/03/07/3jfNhd.png" alt="controller类的写法.png"></p>
+<p><img src="images/loading.gif" data-original="https://s2.ax1x.com/2020/03/07/3jfNhd.png" alt="controller类的写法.png"></p>
 <p>能自动对应上前端页面的名称是因为springmvc.xml中视图解析器中写明了路径</p>
 <p>​    <br/></p>
-<h2 id="3-5-随便写一个html-jsp页面提交请求"><a href="#3-5-随便写一个html-jsp页面提交请求" class="headerlink" title="3.5 随便写一个html/jsp页面提交请求"></a>3.5 随便写一个html/jsp页面提交请求</h2><p><img src="https://s2.ax1x.com/2020/03/07/3jfhj0.png" alt="前端如何发送请求.png"></p>
+<h2 id="3-5-随便写一个html-jsp页面提交请求"><a href="#3-5-随便写一个html-jsp页面提交请求" class="headerlink" title="3.5 随便写一个html/jsp页面提交请求"></a>3.5 随便写一个html/jsp页面提交请求</h2><p><img src="images/loading.gif" data-original="https://s2.ax1x.com/2020/03/07/3jfhj0.png" alt="前端如何发送请求.png"></p>
 <p>这时候我们就可以启动tomcat访问index.jsp了，如无意外你就可以看到控制台打印了aaa,达到跟servlet一样的效果了</p>
 <p>​    <br/></p>
 <h1 id="4-静态资源的访问方法"><a href="#4-静态资源的访问方法" class="headerlink" title="4. 静态资源的访问方法"></a>4. 静态资源的访问方法</h1><p>html/css/js/img等属于静态资源，要访问他们，必须设置静态资源不拦截。以下给出两种方法。</p>
@@ -262,11 +262,11 @@
   <br/>
 
 <h1 id="5-请求参数绑定变量和实体类"><a href="#5-请求参数绑定变量和实体类" class="headerlink" title="5. 请求参数绑定变量和实体类"></a>5. 请求参数绑定变量和实体类</h1><p>前端的请求数据总会带上参数，我们常常需要将参数封装，springmvc是通过变量名字来自动对应的，省去了原来用request.getParameter()的麻烦。</p>
-<p><img src="https://s2.ax1x.com/2020/03/07/3j56AO.png" alt="实体类写法.png"></p>
+<p><img src="images/loading.gif" data-original="https://s2.ax1x.com/2020/03/07/3j56AO.png" alt="实体类写法.png"></p>
 <p>那么前端提交的name就必须像下面那样写</p>
-<p><img src="https://s2.ax1x.com/2020/03/07/3jTO8e.png" alt="前端写法.png"></p>
+<p><img src="images/loading.gif" data-original="https://s2.ax1x.com/2020/03/07/3jTO8e.png" alt="前端写法.png"></p>
 <p>Controller层</p>
-<p><img src="https://s2.ax1x.com/2020/03/07/3jTxKA.png" alt="controller写法.png"></p>
+<p><img src="images/loading.gif" data-original="https://s2.ax1x.com/2020/03/07/3jTxKA.png" alt="controller写法.png"></p>
   <br/>
 
 <h1 id="6-获取原生Servlet的API（request和response）"><a href="#6-获取原生Servlet的API（request和response）" class="headerlink" title="6. 获取原生Servlet的API（request和response）"></a>6. 获取原生Servlet的API（request和response）</h1><p><strong>一般很少用</strong>，直接给controller的方法添加两个形参：HttpServletRequest request和HttpServletRequest response response就可以使用了</p>
@@ -287,22 +287,22 @@
 </ul>
 <h2 id="RequestParams-value-“name”"><a href="#RequestParams-value-“name”" class="headerlink" title="@RequestParams(value=“name”)"></a>@RequestParams(value=“name”)</h2><p>解决url参数可以和接收的参数名字不匹配的问题</p>
 <p>比如前端参数是name</p>
-<p><img src="https://s2.ax1x.com/2020/03/07/3jHgl4.png" alt="前端写法.png"></p>
+<p><img src="images/loading.gif" data-original="https://s2.ax1x.com/2020/03/07/3jHgl4.png" alt="前端写法.png"></p>
 <p>后台是username，对应不上，因此我们可以用这个注解指定url接收名</p>
-<p><img src="https://s2.ax1x.com/2020/03/07/3jHLXd.png" alt="controller写法.png"></p>
+<p><img src="images/loading.gif" data-original="https://s2.ax1x.com/2020/03/07/3jHLXd.png" alt="controller写法.png"></p>
   <br/>
 
 <h2 id="RequestBody"><a href="#RequestBody" class="headerlink" title="@RequestBody"></a>@RequestBody</h2><p>同上，不过是对post请求（前端通过表单提交且method=”post”，或者ajax异步时使用post）</p>
-<p><img src="https://s2.ax1x.com/2020/03/07/3jLmSU.png" alt="前端写法.png"></p>
+<p><img src="images/loading.gif" data-original="https://s2.ax1x.com/2020/03/07/3jLmSU.png" alt="前端写法.png"></p>
 <p>后台方法形参还是一个String body，这个body包括：username=哈哈&amp;age=13</p>
-<p><img src="https://s2.ax1x.com/2020/03/07/3jLQm9.png" alt="controller写法.png"></p>
+<p><img src="images/loading.gif" data-original="https://s2.ax1x.com/2020/03/07/3jLQm9.png" alt="controller写法.png"></p>
   <br/>
 
 <h2 id="PathVariable-value-”id”"><a href="#PathVariable-value-”id”" class="headerlink" title="@PathVariable(value=”id”)"></a>@PathVariable(value=”id”)</h2><p>这个注解为了restful风格而生（一种倡导/root/user/10而不是/root/user?id=10的风格）</p>
 <p>Controller层，属性value或者name都一样</p>
-<p><img src="https://s2.ax1x.com/2020/03/07/3jLv7R.png" alt="controller写法.png"></p>
+<p><img src="images/loading.gif" data-original="https://s2.ax1x.com/2020/03/07/3jLv7R.png" alt="controller写法.png"></p>
 <p>前端传值的时候的路径</p>
-<p><img src="https://s2.ax1x.com/2020/03/07/3jOAnH.png" alt="前端写法.png"></p>
+<p><img src="images/loading.gif" data-original="https://s2.ax1x.com/2020/03/07/3jOAnH.png" alt="前端写法.png"></p>
   <br/>
 
 <h2 id="RequestHeader"><a href="#RequestHeader" class="headerlink" title="@RequestHeader"></a>@RequestHeader</h2><p>用法和上面的类似，都是加在字符串形参前面，用处是获得某个请求头的值，如@RequestHeader(value=”Accept”)</p>
@@ -312,9 +312,9 @@
   <br/>
 
 <h2 id="ModelAttribute"><a href="#ModelAttribute" class="headerlink" title="@ModelAttribute"></a>@ModelAttribute</h2><p>写在方法上，也可以写在参数上。<br>写在方法上时，作用是优先于原来前端请求的对应方法，前端请求的参数会进入该方法的形参，该方法返回值会进入原先请求的方法的形参</p>
-<p><img src="https://s2.ax1x.com/2020/03/07/3jXuZ9.png" alt="controller写法.png"></p>
+<p><img src="images/loading.gif" data-original="https://s2.ax1x.com/2020/03/07/3jXuZ9.png" alt="controller写法.png"></p>
 <p>如果没有返回值，那么可以在该方法形参添加一个map，方法内用map集合存住返回值，这时可以将@ModelArrtibute写在原先请求的方法的形参参数上，属性就是map的key</p>
-<p><img src="https://s2.ax1x.com/2020/03/07/3jXYse.png" alt="controller写法.png"></p>
+<p><img src="images/loading.gif" data-original="https://s2.ax1x.com/2020/03/07/3jXYse.png" alt="controller写法.png"></p>
   <br/>
 
 <h2 id="SessionAttributes"><a href="#SessionAttributes" class="headerlink" title="@SessionAttributes"></a>@SessionAttributes</h2><p>同样的，存入session域中</p>
@@ -332,7 +332,7 @@
   <br/>
 
 <h3 id="8-1-3-返回值为ModelAndView类型"><a href="#8-1-3-返回值为ModelAndView类型" class="headerlink" title="8.1.3 返回值为ModelAndView类型"></a>8.1.3 返回值为ModelAndView类型</h3><p>这是一个专门用来处理页面跳转返回的类，其实就是String返回类型+Model类的合体，通过addObject方法存入request域和session域中，通过setViewName方法可以通过视图解析器指定跳转页面</p>
-<p><img src="https://s2.ax1x.com/2020/03/07/3jjg1K.png" alt="controller写法.png"></p>
+<p><img src="images/loading.gif" data-original="https://s2.ax1x.com/2020/03/07/3jjg1K.png" alt="controller写法.png"></p>
   <br/>
 
 <h2 id="8-2-json型"><a href="#8-2-json型" class="headerlink" title="8.2 json型"></a>8.2 json型</h2><p>正常点，这种一般都是对应异步请求</p>
@@ -342,7 +342,7 @@
   <br/>
 
 <h3 id="ResponseBody"><a href="#ResponseBody" class="headerlink" title="@ResponseBody"></a>@ResponseBody</h3><p>作用是将返回值以json的格式发送给前端，写在方法返回值类型上</p>
-<p><img src="https://s2.ax1x.com/2020/03/09/8STH8f.png" alt="controller写法.png"></p>
+<p><img src="images/loading.gif" data-original="https://s2.ax1x.com/2020/03/09/8STH8f.png" alt="controller写法.png"></p>
 <p>前端ajax请求代码</p>
 <figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">$.ajax(&#123;</span><br><span class="line">    url: <span class="string">"user/testAjax"</span>,</span><br><span class="line">    contentType: <span class="string">"application/json;charset=utf-8"</span>,</span><br><span class="line">    data:<span class="string">'&#123;"username": "hehe", '</span> +</span><br><span class="line">          <span class="string">'"password": "123", '</span> +</span><br><span class="line">          <span class="string">'"age": "20"&#125;'</span>,</span><br><span class="line">    dataType: <span class="string">"json"</span>,</span><br><span class="line">    type: <span class="string">"post"</span>,</span><br><span class="line">    success:<span class="function"><span class="keyword">function</span> (<span class="params">data</span>) </span>&#123;</span><br><span class="line">        alert(data);</span><br><span class="line">        alert(data.age);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
 
@@ -443,7 +443,7 @@
                 <div>
                     
                     <figure class="image is-128x128 has-mb-6">
-                        <img class="" src="/images/avatar.jpeg" alt="wjwABCDEFG">
+                        <img class="" src="images/loading.gif" data-original="/images/avatar.jpeg" alt="wjwABCDEFG">
                     </figure>
                     
                     <p class="is-size-4 is-block">
@@ -781,7 +781,7 @@
             
             <a href="/2020/03/20/Spring%E5%85%A5%E9%97%A8%E7%AC%94%E8%AE%B02/" class="media-left">
                 <p class="image is-64x64">
-                    <img class="thumbnail" src="/headImg/head7.jpg" alt="Spring入门笔记2">
+                    <img class="thumbnail" src="images/loading.gif" data-original="/headImg/head7.jpg" alt="Spring入门笔记2">
                 </p>
             </a>
             
@@ -800,7 +800,7 @@
             
             <a href="/2020/03/20/ssm%E6%95%B4%E5%90%88%E8%AF%B4%E6%98%8E/" class="media-left">
                 <p class="image is-64x64">
-                    <img class="thumbnail" src="/headImg/head6.jpg" alt="ssm整合说明">
+                    <img class="thumbnail" src="images/loading.gif" data-original="/headImg/head6.jpg" alt="ssm整合说明">
                 </p>
             </a>
             
@@ -819,7 +819,7 @@
             
             <a href="/2020/03/18/Spring%E5%85%A5%E9%97%A8%E7%AC%94%E8%AE%B01/" class="media-left">
                 <p class="image is-64x64">
-                    <img class="thumbnail" src="/headImg/head5.jpg" alt="Spring入门笔记1">
+                    <img class="thumbnail" src="images/loading.gif" data-original="/headImg/head5.jpg" alt="Spring入门笔记1">
                 </p>
             </a>
             
@@ -838,7 +838,7 @@
             
             <a href="/2020/03/14/SpringMVC%E5%85%A5%E9%97%A8%E7%AC%94%E8%AE%B02/" class="media-left">
                 <p class="image is-64x64">
-                    <img class="thumbnail" src="/headImg/head4.jpg" alt="SpringMVC入门笔记2">
+                    <img class="thumbnail" src="images/loading.gif" data-original="/headImg/head4.jpg" alt="SpringMVC入门笔记2">
                 </p>
             </a>
             
@@ -857,7 +857,7 @@
             
             <a href="/2020/03/09/SpringMVC%E6%8E%A5%E6%94%B6%E5%89%8D%E7%AB%AF%E5%8F%82%E6%95%B0%E4%B8%BAnull%E7%9A%84%E6%8E%A2%E7%B4%A2/" class="media-left">
                 <p class="image is-64x64">
-                    <img class="thumbnail" src="/headImg/head2.jpg" alt="SpringMVC接收前端参数为null的探索">
+                    <img class="thumbnail" src="images/loading.gif" data-original="/headImg/head2.jpg" alt="SpringMVC接收前端参数为null的探索">
                 </p>
             </a>
             
@@ -998,7 +998,7 @@
             
             <a href="/2020/03/20/Spring%E5%85%A5%E9%97%A8%E7%AC%94%E8%AE%B02/" class="media-left">
                 <p class="image is-64x64">
-                    <img class="thumbnail" src="/headImg/head7.jpg" alt="Spring入门笔记2">
+                    <img class="thumbnail" src="images/loading.gif" data-original="/headImg/head7.jpg" alt="Spring入门笔记2">
                 </p>
             </a>
             
@@ -1017,7 +1017,7 @@
             
             <a href="/2020/03/20/ssm%E6%95%B4%E5%90%88%E8%AF%B4%E6%98%8E/" class="media-left">
                 <p class="image is-64x64">
-                    <img class="thumbnail" src="/headImg/head6.jpg" alt="ssm整合说明">
+                    <img class="thumbnail" src="images/loading.gif" data-original="/headImg/head6.jpg" alt="ssm整合说明">
                 </p>
             </a>
             
@@ -1036,7 +1036,7 @@
             
             <a href="/2020/03/18/Spring%E5%85%A5%E9%97%A8%E7%AC%94%E8%AE%B01/" class="media-left">
                 <p class="image is-64x64">
-                    <img class="thumbnail" src="/headImg/head5.jpg" alt="Spring入门笔记1">
+                    <img class="thumbnail" src="images/loading.gif" data-original="/headImg/head5.jpg" alt="Spring入门笔记1">
                 </p>
             </a>
             
@@ -1055,7 +1055,7 @@
             
             <a href="/2020/03/14/SpringMVC%E5%85%A5%E9%97%A8%E7%AC%94%E8%AE%B02/" class="media-left">
                 <p class="image is-64x64">
-                    <img class="thumbnail" src="/headImg/head4.jpg" alt="SpringMVC入门笔记2">
+                    <img class="thumbnail" src="images/loading.gif" data-original="/headImg/head4.jpg" alt="SpringMVC入门笔记2">
                 </p>
             </a>
             
@@ -1074,7 +1074,7 @@
             
             <a href="/2020/03/09/SpringMVC%E6%8E%A5%E6%94%B6%E5%89%8D%E7%AB%AF%E5%8F%82%E6%95%B0%E4%B8%BAnull%E7%9A%84%E6%8E%A2%E7%B4%A2/" class="media-left">
                 <p class="image is-64x64">
-                    <img class="thumbnail" src="/headImg/head2.jpg" alt="SpringMVC接收前端参数为null的探索">
+                    <img class="thumbnail" src="images/loading.gif" data-original="/headImg/head2.jpg" alt="SpringMVC接收前端参数为null的探索">
                 </p>
             </a>
             
@@ -1206,7 +1206,7 @@
             <div class="level-start has-text-centered-mobile">
                 <a class="footer-logo is-block has-mb-6" href="/">
                 
-                    <img src="/images/logo.png" alt="SpringMVC入门笔记1" height="28">
+                    <img src="images/loading.gif" data-original="/images/logo.png" alt="SpringMVC入门笔记1" height="28">
                 
                 </a>
                 <p class="is-size-7">
@@ -1380,5 +1380,5 @@ document.addEventListener('DOMContentLoaded', function () {
 <link rel="stylesheet" href="/css/search.css">
 <link rel="stylesheet" href="/css/insight.css">
     
-</body>
+<script>!function(e){var c=Array.prototype.slice.call(document.querySelectorAll("img[data-original]"));function i(){for(var r=0;r<c.length;r++)t=c[r],0<=(n=t.getBoundingClientRect()).bottom&&0<=n.left&&n.top<=(e.innerHeight||document.documentElement.clientHeight)&&function(){var t,n,e,i,o=c[r];t=o,n=function(){c=c.filter(function(t){return o!==t})},e=new Image,i=t.getAttribute("data-original"),e.onload=function(){t.src=i,n&&n()},e.src=i}();var t,n}i(),e.addEventListener("scroll",function(){var t,n;t=i,n=e,clearTimeout(t.tId),t.tId=setTimeout(function(){t.call(n)},500)})}(this);</script><script>window.addEventListener("load",function(){var t=/\.(gif|jpg|jpeg|tiff|png)$/i,r=/^data:image\/[a-z]+;base64,/;Array.prototype.slice.call(document.querySelectorAll("img[data-original]")).forEach(function(a){var e=a.parentNode;"A"===e.tagName&&(e.href.match(t)||e.href.match(r))&&(e.href=a.dataset.original)})});</script></body>
 </html>
