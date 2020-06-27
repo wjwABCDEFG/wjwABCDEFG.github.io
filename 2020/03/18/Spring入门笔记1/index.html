@@ -7,18 +7,24 @@
 
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
 
-<title>分类: Maven - 小温 blog</title>
+<title>Spring入门笔记1 - 小温 blog</title>
 
 
-    <meta property="og:type" content="website">
-<meta property="og:title" content="小温 blog">
-<meta property="og:url" content="http://wjw.today/categories/Maven/index.html">
+    <meta name="description" content="1. 程序耦合度&#x2F;spring的作用&#x2F;ioc的原理以前的程序存在两点不足：  诸如一些配置信息写在了类中，编译后改不了了，比如数据库的连接信息，如果是写在类中，以后想换数据库就只能动手改源码。解决办法就是通过读取xml或者properties的方式，编译后xml也还在，以后想修改数据库就可以只改变xml的内容。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Spring入门笔记1">
+<meta property="og:url" content="http://wjw.today/2020/03/18/Spring%E5%85%A5%E9%97%A8%E7%AC%94%E8%AE%B01/index.html">
 <meta property="og:site_name" content="小温 blog">
+<meta property="og:description" content="1. 程序耦合度&#x2F;spring的作用&#x2F;ioc的原理以前的程序存在两点不足：  诸如一些配置信息写在了类中，编译后改不了了，比如数据库的连接信息，如果是写在类中，以后想换数据库就只能动手改源码。解决办法就是通过读取xml或者properties的方式，编译后xml也还在，以后想修改数据库就可以只改变xml的内容。">
 <meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="http://wjw.today/images/og_image.png">
+<meta property="og:image" content="http://wjw.today/headImg/head5.jpg">
+<meta property="article:published_time" content="2020-03-18T05:01:04.000Z">
+<meta property="article:modified_time" content="2020-03-21T16:40:00.719Z">
 <meta property="article:author" content="wjw">
+<meta property="article:tag" content="开发">
+<meta property="article:tag" content="spring">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="http://wjw.today/images/og_image.png">
+<meta name="twitter:image" content="http://wjw.today/headImg/head5.jpg">
 
 
 
@@ -76,7 +82,7 @@
         <div class="navbar-brand is-flex-center">
             <a class="navbar-item navbar-logo" href="/">
             
-                <img src="images/loading.gif" data-original="/images/logo.png" alt="小温 blog" height="28">
+                <img src="images/loading.gif" data-original="/images/logo.png" alt="Spring入门笔记1" height="28">
             
             </a>
         </div>
@@ -112,6 +118,10 @@
                     
                 
                 
+                <a class="navbar-item is-hidden-tablet catalogue" title="目录" href="javascript:;">
+                    <i class="fas fa-list-ul"></i>
+                </a>
+                
                 
                 <a class="navbar-item search" title="搜索" href="javascript:;">
                     <i class="fas fa-search"></i>
@@ -125,42 +135,30 @@
     <section class="section">
         <div class="container">
             <div class="columns">
-                <div class="column is-8-tablet is-8-desktop is-6-widescreen has-order-2 column-main"><div class="card">
-    <div class="card-content">
-        <nav class="breadcrumb" aria-label="breadcrumbs">
-        <ul>
-            <li><a href="/categories">分类</a></li>
-            
-            <li class="is-active"><a href="#" aria-current="page">Maven</a></li>
-        </ul>
-        </nav>
-    </div>
-</div>
-
-    
+                <div class="column is-8-tablet is-8-desktop is-6-widescreen has-order-2 column-main">
 <div class="card">
     
     <div class="card-image">
-        <a href="/2020/04/02/maven%E7%AC%94%E8%AE%B0/" class="image is-7by1">
-            <img class="thumbnail" src="images/loading.gif" data-original="/headImg/head8.jpg" alt="maven笔记">
-        </a>
+        <span  class="image is-7by1">
+            <img class="thumbnail" src="images/loading.gif" data-original="/headImg/head5.jpg" alt="Spring入门笔记1">
+        </span>
     </div>
     
     <div class="card-content article ">
         
         <div class="level article-meta is-size-7 is-uppercase is-mobile is-overflow-x-auto">
             <div class="level-left">
-                <time class="level-item has-text-grey" datetime="2020-04-02T12:32:21.000Z">2020-04-02</time>
+                <time class="level-item has-text-grey" datetime="2020-03-18T05:01:04.000Z">2020-03-18</time>
                 
                 <div class="level-item">
-                <a class="has-link-grey -link" href="/categories/Maven/">Maven</a>
+                <a class="has-link-grey -link" href="/categories/Spring/">Spring</a>
                 </div>
                 
                 
                 <span class="level-item has-text-grey">
                     
                     
-                    13 分钟 读完 (大约 1879 个字)
+                    24 分钟 读完 (大约 3622 个字)
                 </span>
                 
                 
@@ -169,22 +167,267 @@
         
         <h1 class="title is-size-3 is-size-4-mobile has-text-weight-normal">
             
-                <a class="has-link-black-ter" href="/2020/04/02/maven%E7%AC%94%E8%AE%B0/">maven笔记</a>
+                Spring入门笔记1
             
         </h1>
         <div class="content">
-            <h1 id="1-maven概念"><a href="#1-maven概念" class="headerlink" title="1. maven概念"></a>1. maven概念</h1><p>maven是一个项目管理工具，能帮助项目规范的构建（规定了项目的结构和方便的打包）以及方便的管理lib下的jar包</p>
-<p>如果所有的jar包都放进目录下，那么项目占用空间就会变得很大，通常来说资源文件（图片）&gt; lib(jar) &gt; java代码，很多时候jar包远远大于了java文件（毕竟只是文本），而maven通过本地的一个仓库专门存放jar包，然后不同的项目都从本地仓库中拿jar包，而项目中只需要给出jar包的坐标，就比较合理。</p>
+            <h1 id="1-程序耦合度-spring的作用-ioc的原理"><a href="#1-程序耦合度-spring的作用-ioc的原理" class="headerlink" title="1. 程序耦合度/spring的作用/ioc的原理"></a>1. 程序耦合度/spring的作用/ioc的原理</h1><p>以前的程序存在两点不足：</p>
+<ol>
+<li>诸如一些配置信息写在了类中，编译后改不了了，比如数据库的连接信息，如果是写在类中，以后想换数据库就只能动手改源码。解决办法就是通过读取xml或者properties的方式，编译后xml也还在，以后想修改数据库就可以只改变xml的内容。</li>
+</ol>
+<a id="more"></a>
+
+<br/>
+
+<ol start="2">
+<li>创建对象的时候我们通过new的方式，比如在写service层的时候，我们需要new userDao()，这样子的话，如果没有先写好dao层，或者说两个人负责编写两个层等等，就必须等另一个人先写完，这样就不好。后来我们的解决办法是用工厂模式解耦，将new一个实例交给工厂类。这样确实解耦了，但是工厂类还是要改源码，最好的方式还是像xml一样需要的时候来读取。</li>
+</ol>
+<br/>
+
+<p>这就是所谓的耦合度，在我看来，</p>
+<p>spring的ioc称为控制反转，<strong>就是解决了new的问题</strong>，将对象所在的类的路径写在xml中，需要用到对象的时候通过反射来创建对象，相当于编写了一个工厂类的作用。</p>
+<p>spring的di称为依赖注入，<strong>就是通过xml的方式给函数中的元素赋值</strong>，解决了你不知道何时需要从工厂类中创建一个对象的问题，通过依赖注入来告知你想什么时候创建一个对象，需要用到的时候自动从ioc容器中获取而不是new。</p>
+<br/>
+
+<p>借用网上的一张图</p>
+<p><img src="images/loading.gif" data-original="https://s1.ax1x.com/2020/03/20/86nreH.png" alt="ioc简易理解.png"></p>
+<blockquote>
+<p>图片来源<a href="https://www.cnblogs.com/superjt/p/4311577.html，这篇博客对IOC的概念讲的很棒">https://www.cnblogs.com/superjt/p/4311577.html，这篇博客对IOC的概念讲的很棒</a></p>
+</blockquote>
+<br/>
+
+<h1 id="2-如何通过spring的ioc来创建对象从而代替new"><a href="#2-如何通过spring的ioc来创建对象从而代替new" class="headerlink" title="2. 如何通过spring的ioc来创建对象从而代替new"></a>2. 如何通过spring的ioc来创建对象从而代替new</h1><h2 id="2-1-xml方式"><a href="#2-1-xml方式" class="headerlink" title="2.1 xml方式"></a>2.1 xml方式</h2><p>bean.xml</p>
+<p><img src="images/loading.gif" data-original="https://s1.ax1x.com/2020/03/20/86MBOU.png" alt="bean.xml.png"></p>
+<p>service层</p>
+<p><img src="images/loading.gif" data-original="https://s1.ax1x.com/2020/03/20/86Glyq.png" alt="service层.png"></p>
+<p>表现层（当然我们以后整合springmvc时不会在controller里面这么写，而是用spring-web包完成，那是后话了）</p>
+<p><img src="images/loading.gif" data-original="https://s1.ax1x.com/2020/03/20/86GNY4.png" alt="表现层.png"></p>
+<br/>
+
+<h2 id="2-2-注解方式"><a href="#2-2-注解方式" class="headerlink" title="2.2 注解方式"></a>2.2 注解方式</h2><p>关于注解方式，只是方式不同，我们讲思想和概念的时候以xml的方式讲，第7部分统一讲注解方式。</p>
+<br/>
+
+<h1 id="3-ApplicationContext类"><a href="#3-ApplicationContext类" class="headerlink" title="3. ApplicationContext类"></a>3. ApplicationContext类</h1><h2 id="3-1-ApplicationContext的三个常用实现类"><a href="#3-1-ApplicationContext的三个常用实现类" class="headerlink" title="3.1 ApplicationContext的三个常用实现类"></a>3.1 ApplicationContext的三个常用实现类</h2><ul>
+<li><p>ClassPathXmlApplicationContext：它可以加载类路径下的配置文件，要求配置文件必须在类路径下。不在的话，加载不了。(更常用)</p>
+</li>
+<li><p>FileSystemXmlApplicationContext：它可以加载磁盘任意路径下的配置文件(必须有访问权限）</p>
+</li>
+<li><p>AnnotationConfigApplicationContext：它是用于读取注解创建容器的。</p>
+</li>
+</ul>
+<br/>
+
+<h2 id="3-2-ApplicationContext（代表ioc）和BeanFactory（代表工厂）加载对象的区别（了解）"><a href="#3-2-ApplicationContext（代表ioc）和BeanFactory（代表工厂）加载对象的区别（了解）" class="headerlink" title="3.2 ApplicationContext（代表ioc）和BeanFactory（代表工厂）加载对象的区别（了解）"></a>3.2 ApplicationContext（代表ioc）和BeanFactory（代表工厂）加载对象的区别（了解）</h2><p>了解一下即可</p>
+<p><strong>ApplicationContext</strong>：单例对象适用</p>
+<p>采用此接口，它在构建核心容器时，创建对象采取的策略是采用立即加载的方式。也就是说，只要一读取完配置文件马上就创建配置文件中配置的对象。</p>
+<p><img src="images/loading.gif" data-original="https://s1.ax1x.com/2020/03/20/86ty7V.png" alt="ApplicationContext方式.png"></p>
+<p><strong>BeanFactory</strong>：多例对象适用</p>
+<p>它在构建核心容器时，创建对象采取的策略是采用延迟加载的方式。也就是说，什么时候根据id获取对象了，什么时候才真正的创建对象。</p>
+<p><img src="images/loading.gif" data-original="https://s1.ax1x.com/2020/03/20/86tjcd.png" alt="BeanFactory方式.png"></p>
+<p>这点我们可以通过一个accountService类的一个构造函数输出一句话来验证。</p>
+<br/>
+
+<h1 id="4-创建Bean的三种方式"><a href="#4-创建Bean的三种方式" class="headerlink" title="4. 创建Bean的三种方式"></a>4. 创建Bean的三种方式</h1><h2 id="4-1-使用默认构造函数创建"><a href="#4-1-使用默认构造函数创建" class="headerlink" title="4.1 使用默认构造函数创建"></a>4.1 使用默认构造函数创建</h2><p>也就是上面那样的</p>
+<p>在spring的配置文件中使用bean标签，配以id和class属性之后，且没有其他属性和标签时</p>
+<p>采用的就是默认构造函数创建bean对象，此时如果类中没有默认构造函数，则对象无法创建。</p>
+<p><img src="images/loading.gif" data-original="https://s1.ax1x.com/2020/03/20/86Nk9g.png" alt="使用默认构造函数.png"></p>
+<br/>
+
+<h2 id="4-2-使用普通工厂中的方法创建对象（使用某个类中的方法创建对象，并存入spring容器）"><a href="#4-2-使用普通工厂中的方法创建对象（使用某个类中的方法创建对象，并存入spring容器）" class="headerlink" title="4.2 使用普通工厂中的方法创建对象（使用某个类中的方法创建对象，并存入spring容器）"></a>4.2 使用普通工厂中的方法创建对象（使用某个类中的方法创建对象，并存入spring容器）</h2><p>比如我们使用了工厂模式，又或者使用了别人的jar包，这时候发现某个类没有默认构造函数，只有带参构造函数或者构造函数交给了工厂类来创建。</p>
+<p><img src="images/loading.gif" data-original="https://s1.ax1x.com/2020/03/20/86NtD1.png" alt="getInstance之类的方法.png"></p>
+<p>这时候就要这样创建对象</p>
+<p><img src="images/loading.gif" data-original="https://s1.ax1x.com/2020/03/20/86NaE6.png" alt="使用getInstance之类的方法.png"></p>
+<br/>
+
+<h2 id="4-3-使用工厂中的静态方法创建对象（使用某个类中的静态方法创建对象，并存入spring容器"><a href="#4-3-使用工厂中的静态方法创建对象（使用某个类中的静态方法创建对象，并存入spring容器" class="headerlink" title="4.3 使用工厂中的静态方法创建对象（使用某个类中的静态方法创建对象，并存入spring容器)"></a>4.3 使用工厂中的静态方法创建对象（使用某个类中的静态方法创建对象，并存入spring容器)</h2><p>对于静态方法</p>
+<p><img src="images/loading.gif" data-original="https://s1.ax1x.com/2020/03/20/86Nw4O.png" alt="静态方法.png"></p>
+<p>那么需要这样使用</p>
+<p><img src="images/loading.gif" data-original="https://s1.ax1x.com/2020/03/20/86NBCD.png" alt="使用静态方法.png"></p>
+<br/>
+
+<h1 id="5-bean的作用范围和生命周期（了解）"><a href="#5-bean的作用范围和生命周期（了解）" class="headerlink" title="5. bean的作用范围和生命周期（了解）"></a>5. bean的作用范围和生命周期（了解）</h1><h2 id="作用范围"><a href="#作用范围" class="headerlink" title="作用范围"></a>作用范围</h2><p>bean的作用范围调整</p>
+<p>bean标签的scope属性：</p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;作用：用于指定bean的作用范围</p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;取值： 常用的就是单例的和多例的</p>
+<ul>
+<li>singleton：单例的（默认值）</li>
+<li>prototype：多例的</li>
+<li>request：作用于web应用的请求范围</li>
+<li>session：作用于web应用的会话范围</li>
+<li>global-session：作用于集群环境的会话范围（全局会话范围），当不是集群环境时，它就是session</li>
+</ul>
+<p><img src="images/loading.gif" data-original="https://s1.ax1x.com/2020/03/20/86NI2Q.png" alt="scope属性的使用.png"></p>
+<p>似乎是制定了多例，就会像beanFactory一样在需要时才创建对象</p>
+<br/>
+
+<h2 id="生命周期"><a href="#生命周期" class="headerlink" title="生命周期"></a>生命周期</h2><ul>
+<li>单例对象</li>
+</ul>
+<p>​    出生：当容器创建时对象出生</p>
+<p>​    活着：只要容器还在，对象一直活着</p>
+<p>​    死亡：容器销毁，对象消亡</p>
+<p>​    总结：单例对象的生命周期和容器相同</p>
+<br/>
+
+<ul>
+<li>多例对象</li>
+</ul>
+<p>​    出生：当我们使用对象时spring框架为我们创建</p>
+<p>​    活着：对象只要是在使用过程中就一直活着。</p>
+<p>​    死亡：当对象长时间不用，且没有别的对象引用时，由Java的垃圾回收器回收</p>
+<p><img src="images/loading.gif" data-original="https://s1.ax1x.com/2020/03/20/86NX5T.png" alt="指定周期方法.png"></p>
+<p><img src="images/loading.gif" data-original="https://s1.ax1x.com/2020/03/20/86Nz24.png" alt="指定周期方法.png"></p>
+<br/>
+
+<h1 id="6-依赖注入Dependence-Injection"><a href="#6-依赖注入Dependence-Injection" class="headerlink" title="6. 依赖注入Dependence Injection"></a>6. 依赖注入Dependence Injection</h1><p>我们现在只是在视图层（servlet层）通过ioc创建了对象，可以打印出对象的地址，但是我们是要在service层调用dao的对象，也就是要告诉service层有了dao层的对象，总不能在service层去getBean吧，这样没有解耦还不如直接在service层new dao呢，那怎么办呢？这就是依赖注入的作用</p>
+<br/>
+
+<p>简单的说，依赖注入就是通过xml的方式给函数中的元素赋值</p>
+<p><img src="images/loading.gif" data-original="https://s1.ax1x.com/2020/03/20/8caMxe.png" alt="比如这些元素.png"></p>
+<p>比如我们要在servlet中创建service对象，那我们以前就会new service(name, age, birthday)，或者函数没有提供参数构造，只有默认构造，但是暴露了set方法（比如实体类），也是可以的new service() setName()  setAge()  setBirthday()。</p>
+<p>依赖注入也是一样需要依靠这些方法，只是不需要主动调用而已，改为在xml中给参数注入值</p>
+<br/>
+
+<h2 id="6-1-能注入的数据类型：有三类"><a href="#6-1-能注入的数据类型：有三类" class="headerlink" title="6.1 能注入的数据类型：有三类"></a>6.1 能注入的数据类型：有三类</h2><ul>
+<li><p>基本类型和String</p>
+</li>
+<li><p>其他bean类型（在配置文件中或者注解配置过的bean）</p>
+</li>
+<li><p>复杂类型/集合类型</p>
+</li>
+</ul>
+<p>三种类型的注入连同下面的注入方式一起讲，往下看</p>
+<br/>
+
+<h2 id="6-2-构造函数注入"><a href="#6-2-构造函数注入" class="headerlink" title="6.2 构造函数注入"></a>6.2 构造函数注入</h2><p><img src="images/loading.gif" data-original="https://s1.ax1x.com/2020/03/20/8casZn.png" alt=""></p>
+<br/>
+
+<h2 id="6-3-set方法注入（更常用）"><a href="#6-3-set方法注入（更常用）" class="headerlink" title="6.3 set方法注入（更常用）"></a>6.3 set方法注入（更常用）</h2><h3 id="6-3-1-基本类型和Bean类型的注入"><a href="#6-3-1-基本类型和Bean类型的注入" class="headerlink" title="6.3.1 基本类型和Bean类型的注入"></a>6.3.1 基本类型和Bean类型的注入</h3><p><img src="images/loading.gif" data-original="https://s1.ax1x.com/2020/03/20/8cabi6.png" alt="set方法注入基本类型和bean"></p>
+<br/>
+
+<h3 id="6-3-2-复杂（集合类型）的注入"><a href="#6-3-2-复杂（集合类型）的注入" class="headerlink" title="6.3.2 复杂（集合类型）的注入"></a>6.3.2 复杂（集合类型）的注入</h3><p><img src="images/loading.gif" data-original="https://s1.ax1x.com/2020/03/20/8cdQYV.png" alt="集合类型1.png"></p>
+<p><img src="images/loading.gif" data-original="https://s1.ax1x.com/2020/03/20/8cd8lF.png" alt="集合类型2.png"></p>
+<br/>
+
+<p>归为两大类</p>
+<p><img src="images/loading.gif" data-original="https://s1.ax1x.com/2020/03/20/8cdDSO.png" alt="根据结构划分为两大类.png"></p>
+<p>同一大类的可以互换，但不要这么做</p>
+<p><img src="images/loading.gif" data-original="https://s1.ax1x.com/2020/03/20/8cdcmd.png" alt="不要这样做.png"></p>
+<br/>
+
+<h1 id="7-注解方式IOC和DI"><a href="#7-注解方式IOC和DI" class="headerlink" title="7. 注解方式IOC和DI"></a>7. 注解方式IOC和DI</h1><p>其实我们回顾xml方式，其实spring的ioc和di就帮我们完成了如下几件事。</p>
+<ol>
+<li><p><code>&lt;bean&gt;</code>标签实现了对象的创建（代替了new）</p>
+</li>
+<li><p><code>&lt;property&gt;</code>标签实现了数据的注入（代替了调用函数和实参）</p>
+</li>
+<li><p>scope属性指定了bean的作用范围</p>
+</li>
+<li><p>init-method和destory-method指出了初始化函数和销毁函数（不重要）</p>
+<br/>
+
+</li>
+</ol>
+<p>因此我们用注解的方式也会实现这些操作</p>
+<h2 id="7-1-要使用注解，必须将bean-xml改成以下约束"><a href="#7-1-要使用注解，必须将bean-xml改成以下约束" class="headerlink" title="7.1 要使用注解，必须将bean.xml改成以下约束"></a>7.1 要使用注解，必须将bean.xml改成以下约束</h2><figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?xml version="1.0" encoding="UTF-8"?&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">beans</span> <span class="attr">xmlns</span>=<span class="string">"http://www.springframework.org/schema/beans"</span></span></span><br><span class="line"><span class="tag">       <span class="attr">xmlns:xsi</span>=<span class="string">"http://www.w3.org/2001/XMLSchema-instance"</span></span></span><br><span class="line"><span class="tag">       <span class="attr">xmlns:context</span>=<span class="string">"http://www.springframework.org/schema/context"</span></span></span><br><span class="line"><span class="tag">       <span class="attr">xsi:schemaLocation</span>=<span class="string">"http://www.springframework.org/schema/beans</span></span></span><br><span class="line"><span class="tag"><span class="string">        http://www.springframework.org/schema/beans/spring-beans.xsd</span></span></span><br><span class="line"><span class="tag"><span class="string">        http://www.springframework.org/schema/context</span></span></span><br><span class="line"><span class="tag"><span class="string">        http://www.springframework.org/schema/context/spring-context.xsd"</span>&gt;</span></span><br><span class="line"></span><br><span class="line">    <span class="comment">&lt;!--告知spring在创建容器时要扫描的包，配置所需要的标签不是在beans的约束中，而是一个名称为</span></span><br><span class="line"><span class="comment">    context名称空间和约束中--&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">context:component-scan</span> <span class="attr">base-package</span>=<span class="string">"com.wjw"</span>&gt;</span><span class="tag">&lt;/<span class="name">context:component-scan</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">beans</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p><strong>包名记得改</strong></p>
+<br/>
+
+<h2 id="7-2-Component"><a href="#7-2-Component" class="headerlink" title="7.2 @Component"></a>7.2 @Component</h2><p>作用：和<code>&lt;bean&gt;</code>标签一样，用于把当前类的对象存入spring容器中</p>
+<p><strong>写在类上，要new的类上</strong></p>
+<p><img src="images/loading.gif" data-original="https://s1.ax1x.com/2020/03/20/8czZPH.png" alt=""></p>
+<p>其中的value属性就是id，若不指定，默认值为首字母小写类名</p>
+<p>由于只有一个属性，所以可以直接写@Component(“accountDao1”)</p>
+ <br/>
+
+<p>getBean时的实参就是上面的id</p>
+<p><img src="images/loading.gif" data-original="https://s1.ax1x.com/2020/03/20/8cz7JH.png" alt=""></p>
+<h3 id="7-2-1-Controller：一般用在表现层"><a href="#7-2-1-Controller：一般用在表现层" class="headerlink" title="7.2.1 @Controller：一般用在表现层"></a>7.2.1 @Controller：一般用在表现层</h3><h3 id="7-2-2-Service：一般用在业务层"><a href="#7-2-2-Service：一般用在业务层" class="headerlink" title="7.2.2 @Service：一般用在业务层"></a>7.2.2 @Service：一般用在业务层</h3><h3 id="7-2-3-Repository：一般用在持久层"><a href="#7-2-3-Repository：一般用在持久层" class="headerlink" title="7.2.3 @Repository：一般用在持久层"></a>7.2.3 @Repository：一般用在持久层</h3><p>以上三个注解他们的作用和属性与Component一模一样。</p>
+<p>他们三个是spring框架为我们提供明确的三层使用的注解，使我们的三层对象更加清晰。</p>
+<br/>
+
+<h2 id="7-3-Autowired"><a href="#7-3-Autowired" class="headerlink" title="7.3 @Autowired"></a>7.3 @Autowired</h2><p><strong>写在调用方的方法/变量上</strong></p>
+<p><img src="images/loading.gif" data-original="https://s1.ax1x.com/2020/03/20/8gSgAS.png" alt=""></p>
+<p>Autowired为什么叫auto呢，因为他会自动注入，也就是说，如果只有一个dao实现类，那么这个注入会自动<strong>根据类型</strong>匹配到这个实现类，如下图：</p>
+<p><img src="images/loading.gif" data-original="https://s1.ax1x.com/2020/03/20/8gpl4g.png" alt="Autowired原理示意图"></p>
+<p>自动按类型注入：是不管key，直接在value中找类型的</p>
+<p>如果有两个dao实现类daoImpl1和daoImpl2，那么会先根据类型找出这两个dao，然后根据key（两个dao实现类的@Repository的id）找到对应的类</p>
+<p><img src="images/loading.gif" data-original="https://s1.ax1x.com/2020/03/20/8g91Z6.png" alt="Autowired原理示意图2"></p>
+<br/>
+
+<h3 id="7-3-1-Qualifier-value-”accountDaoImpl1”-：指定id"><a href="#7-3-1-Qualifier-value-”accountDaoImpl1”-：指定id" class="headerlink" title="7.3.1 @Qualifier(value=”accountDaoImpl1”)：指定id"></a>7.3.1 @Qualifier(value=”accountDaoImpl1”)：指定id</h3><p>也就是说，虽然我有两个dao实现类，但是我只用1个，如果我不想在变量名称里面写dao1 dao2，变量名我就想写accountDao，那就要通过这个@Autowired加上@Qualifier(value=”实现类ioc的id”)</p>
+<p><img src="images/loading.gif" data-original="https://s1.ax1x.com/2020/03/20/8g9OyR.png" alt="@Qualifier使用方法"></p>
+<p>另外，只有在Qualifier给变量注入时才需要和Autowired一起写，如果是作为方法参数时是可以单独使用的</p>
+<p><img src="images/loading.gif" data-original="https://s1.ax1x.com/2020/03/20/8gC01J.png" alt="在方法上使用"></p>
+<br/>
+
+<h3 id="7-3-2-Resource-name-”accountDaoImpl1”"><a href="#7-3-2-Resource-name-”accountDaoImpl1”" class="headerlink" title="7.3.2 @Resource(name=”accountDaoImpl1”)"></a>7.3.2 @Resource(name=”accountDaoImpl1”)</h3><p>如果我不想写两个@，又想实现@Qualifier的功能怎么办，就用这个注解</p>
+<br/>
+
+<h3 id="注意："><a href="#注意：" class="headerlink" title="注意："></a>注意：</h3><p>以上三个注入都只能注入其他bean类型的数据，而基本类型和String类型无法使用上述注解实现。</p>
+<p>另外，集合类型的注入只能通过XML来实现。</p>
+<br/>
+
+<h3 id="7-3-3-Value-value-SpEL表达式"><a href="#7-3-3-Value-value-SpEL表达式" class="headerlink" title="7.3.3 @Value(value=${SpEL表达式})"></a>7.3.3 @Value(value=${SpEL表达式})</h3><p>用于注入基本类型和String类型的数据</p>
+<br/>
+
+<h2 id="7-3-Scope"><a href="#7-3-Scope" class="headerlink" title="7.3 @Scope"></a>7.3 @Scope</h2><p>他们的作用就和在bean标签中使用scope属性实现的功能是一样的</p>
+<p>写在类上（@Component下方），用于改变bean的作用范围</p>
+<p>取值依然是singleton（默认）</p>
+<p>​        prototype</p>
+<p>​        …</p>
+<br/>
+
+<h2 id="7-4-Predistroy和-PostConstruct"><a href="#7-4-Predistroy和-PostConstruct" class="headerlink" title="7.4 @Predistroy和@PostConstruct"></a>7.4 @Predistroy和@PostConstruct</h2><p>他们的作用就和在bean标签中使用init-method和destroy-methode的作用是一样的</p>
+<p>写在方法上方，销毁和初始化</p>
+<br/>
+
+<h2 id="以下为完全不用XML的方式"><a href="#以下为完全不用XML的方式" class="headerlink" title="以下为完全不用XML的方式"></a>以下为完全不用XML的方式</h2><br/>
+
+<h2 id="7-5-Configuration、-Bean、-ComponentScan-basePackages-“com-wjw”"><a href="#7-5-Configuration、-Bean、-ComponentScan-basePackages-“com-wjw”" class="headerlink" title="7.5 @Configuration、@Bean、@ComponentScan(basePackages = “com.wjw”)"></a>7.5 @Configuration、@Bean、@ComponentScan(basePackages = “com.wjw”)</h2><p>我们发现，比如要在Service中注入dao则需要在serviceImpl中的定义dao语句上面加上@Autowired。但是有时候我们用的是<strong>jar包中的类</strong>，比如在queryRunner中传入连接池对象，这时候queryRunner和dataSource都不是我们自己写的类，那要如何注入和放进ioc容器呢？</p>
+<p>我们只能自己写一个类创建queryRunner对象并加入ioc容器中</p>
+<p><img src="images/loading.gif" data-original="https://s1.ax1x.com/2020/03/20/8gi7Y8.png" alt="自己写配置类"></p>
+<p>同时，测试的时候applicationContext要改成注解AnnotationConfigApplicationContext类</p>
+<p><img src="images/loading.gif" data-original="https://s1.ax1x.com/2020/03/20/8gFGnA.png" alt="测试用例中不再是读取xml"></p>
+<p><img src="images/loading.gif" data-original="https://s1.ax1x.com/2020/03/20/8gF01g.png" alt="手动写getDatasource方法"></p>
+<p>这时候bean.xml可以不需要了</p>
+<br/>
+
+<h2 id="7-6-多个配置类和-Import"><a href="#7-6-多个配置类和-Import" class="headerlink" title="7.6 多个配置类和@Import"></a>7.6 多个配置类和@Import</h2><p>其实只有一个配置类的时候@Configuration加不加都行（最好加），但是如果有多个配置类，则一定要加，多个配置类实现有三种方式：</p>
+<ol>
+<li>指定多个类座位配置文件，但是这样两个配置类理解成“兄弟关系”，但其实是包含关系</li>
+</ol>
+<p><img src="images/loading.gif" data-original="https://s1.ax1x.com/2020/03/20/8gkcKH.png" alt="兄弟关系"></p>
+<ol start="2">
+<li>配置类a中扫描配置类b的包名，同时配置类b也要有@Configuration</li>
+</ol>
+<p><img src="images/loading.gif" data-original="https://s1.ax1x.com/2020/03/20/8gAAd1.png" alt="类a中添加类b"></p>
+<ol start="3">
+<li>@Import，在需要的一个配置类中导入另一个配置类，形成我们理解上的“从属关系”</li>
+</ol>
+<p><img src="images/loading.gif" data-original="https://s1.ax1x.com/2020/03/20/8gVgr4.png" alt="使用@import"></p>
+<br/>
+
+<h2 id="7-7-PropertySource、-Value"><a href="#7-7-PropertySource、-Value" class="headerlink" title="7.7 @PropertySource、@Value"></a>7.7 @PropertySource、@Value</h2><p><img src="images/loading.gif" data-original="https://s1.ax1x.com/2020/03/20/8gZdyD.png" alt="外部加载配置信息"></p>
+<p>不要写死连接信息，也就是如何通过<em>外部文件</em>（.properties来获取信息，通过SpEL表达式）</p>
+<p>如果properties文件在包下那么就classpath:packagename/xxx.properties</p>
+<p><em>classpath:  这是真实路径，文件编译后在target/classes目录下</em></p>
+ <br/>
+
+<p>做完这些一看，哦吼，还不如xml方式，<strong>所以最简单的方法是自己写的类用注解，jar包中的类用xml</strong></p>
+
         </div>
         
-        
-        <div class="level is-mobile">
+        <div class="level is-size-7 is-uppercase">
             <div class="level-start">
                 <div class="level-item">
-                <a class="button is-size-7 is-light" href="/2020/04/02/maven%E7%AC%94%E8%AE%B0/#more">阅读更多</a>
+                    <span class="is-size-6 has-text-grey has-mr-7">#</span>
+                    <a class="has-link-grey -link" href="/tags/spring/" rel="tag">spring</a>, <a class="has-link-grey -link" href="/tags/%E5%BC%80%E5%8F%91/" rel="tag">开发</a>
                 </div>
             </div>
         </div>
+        
         
         
     </div>
@@ -192,9 +435,62 @@
 
 
 
+<div class="card">
+    <div class="card-content">
+        <h3 class="menu-label has-text-centered">喜欢这篇文章？打赏一下作者吧</h3>
+        <div class="buttons is-centered">
+            
+                
+<div class="notification is-danger">
+    You forgot to set the <code>qrcode</code> for Alipay. Please set it in <code>_config.yml</code>.
+</div>
+
+                
+                
+<div class="notification is-danger">
+    You forgot to set the <code>qrcode</code> for Wechat. Please set it in <code>_config.yml</code>.
+</div>
+
+                
+                <!-- Visit https://www.paypal.com/donate/buttons/ to get your donate button -->
+
+<div class="notification is-danger">
+    You forgot to set the <code>business</code> and <code>currency_code</code> for Paypal. Please set it in <code>_config.yml</code>.
+</div>
+
+                
+                
+<div class="notification is-danger">
+    You forgot to set the <code>url</code> Patreon. Please set it in <code>_config.yml</code>.
+</div>
+
+                
+        </div>
+    </div>
+</div>
 
 
 
+<div class="card card-transparent">
+    <div class="level post-navigation is-flex-wrap is-mobile">
+        
+        <div class="level-start">
+            <a class="level level-item has-link-grey  article-nav-prev" href="/2020/03/20/Spring%E5%85%A5%E9%97%A8%E7%AC%94%E8%AE%B02/">
+                <i class="level-item fas fa-chevron-left"></i>
+                <span class="level-item">Spring入门笔记2</span>
+            </a>
+        </div>
+        
+        
+        <div class="level-end">
+            <a class="level level-item has-link-grey  article-nav-next" href="/2020/03/14/SpringMVC%E5%85%A5%E9%97%A8%E7%AC%94%E8%AE%B02/">
+                <span class="level-item">SpringMVC入门笔记2</span>
+                <i class="level-item fas fa-chevron-right"></i>
+            </a>
+        </div>
+        
+    </div>
+</div>
 
 
 </div>
@@ -291,6 +587,203 @@
 </div>
     
         
+
+    <div class="card widget" id="toc">
+        <div class="card-content">
+            <div class="menu">
+                <h3 class="menu-label">
+                    目录
+                </h3>
+                <ul class="menu-list"><li>
+        <a class="is-flex" href="#1-程序耦合度-spring的作用-ioc的原理">
+        <!-- 目录是否自动编号 -->
+        <!-- <span class="has-mr-6">1</span> -->
+        <span>1. 程序耦合度/spring的作用/ioc的原理</span>
+        </a></li><li>
+        <a class="is-flex" href="#2-如何通过spring的ioc来创建对象从而代替new">
+        <!-- 目录是否自动编号 -->
+        <!-- <span class="has-mr-6">2</span> -->
+        <span>2. 如何通过spring的ioc来创建对象从而代替new</span>
+        </a><ul class="menu-list"><li>
+        <a class="is-flex" href="#2-1-xml方式">
+        <!-- 目录是否自动编号 -->
+        <!-- <span class="has-mr-6">2.1</span> -->
+        <span>2.1 xml方式</span>
+        </a></li><li>
+        <a class="is-flex" href="#2-2-注解方式">
+        <!-- 目录是否自动编号 -->
+        <!-- <span class="has-mr-6">2.2</span> -->
+        <span>2.2 注解方式</span>
+        </a></li></ul></li><li>
+        <a class="is-flex" href="#3-ApplicationContext类">
+        <!-- 目录是否自动编号 -->
+        <!-- <span class="has-mr-6">3</span> -->
+        <span>3. ApplicationContext类</span>
+        </a><ul class="menu-list"><li>
+        <a class="is-flex" href="#3-1-ApplicationContext的三个常用实现类">
+        <!-- 目录是否自动编号 -->
+        <!-- <span class="has-mr-6">3.1</span> -->
+        <span>3.1 ApplicationContext的三个常用实现类</span>
+        </a></li><li>
+        <a class="is-flex" href="#3-2-ApplicationContext（代表ioc）和BeanFactory（代表工厂）加载对象的区别（了解）">
+        <!-- 目录是否自动编号 -->
+        <!-- <span class="has-mr-6">3.2</span> -->
+        <span>3.2 ApplicationContext（代表ioc）和BeanFactory（代表工厂）加载对象的区别（了解）</span>
+        </a></li></ul></li><li>
+        <a class="is-flex" href="#4-创建Bean的三种方式">
+        <!-- 目录是否自动编号 -->
+        <!-- <span class="has-mr-6">4</span> -->
+        <span>4. 创建Bean的三种方式</span>
+        </a><ul class="menu-list"><li>
+        <a class="is-flex" href="#4-1-使用默认构造函数创建">
+        <!-- 目录是否自动编号 -->
+        <!-- <span class="has-mr-6">4.1</span> -->
+        <span>4.1 使用默认构造函数创建</span>
+        </a></li><li>
+        <a class="is-flex" href="#4-2-使用普通工厂中的方法创建对象（使用某个类中的方法创建对象，并存入spring容器）">
+        <!-- 目录是否自动编号 -->
+        <!-- <span class="has-mr-6">4.2</span> -->
+        <span>4.2 使用普通工厂中的方法创建对象（使用某个类中的方法创建对象，并存入spring容器）</span>
+        </a></li><li>
+        <a class="is-flex" href="#4-3-使用工厂中的静态方法创建对象（使用某个类中的静态方法创建对象，并存入spring容器">
+        <!-- 目录是否自动编号 -->
+        <!-- <span class="has-mr-6">4.3</span> -->
+        <span>4.3 使用工厂中的静态方法创建对象（使用某个类中的静态方法创建对象，并存入spring容器)</span>
+        </a></li></ul></li><li>
+        <a class="is-flex" href="#5-bean的作用范围和生命周期（了解）">
+        <!-- 目录是否自动编号 -->
+        <!-- <span class="has-mr-6">5</span> -->
+        <span>5. bean的作用范围和生命周期（了解）</span>
+        </a><ul class="menu-list"><li>
+        <a class="is-flex" href="#作用范围">
+        <!-- 目录是否自动编号 -->
+        <!-- <span class="has-mr-6">5.1</span> -->
+        <span>作用范围</span>
+        </a></li><li>
+        <a class="is-flex" href="#生命周期">
+        <!-- 目录是否自动编号 -->
+        <!-- <span class="has-mr-6">5.2</span> -->
+        <span>生命周期</span>
+        </a></li></ul></li><li>
+        <a class="is-flex" href="#6-依赖注入Dependence-Injection">
+        <!-- 目录是否自动编号 -->
+        <!-- <span class="has-mr-6">6</span> -->
+        <span>6. 依赖注入Dependence Injection</span>
+        </a><ul class="menu-list"><li>
+        <a class="is-flex" href="#6-1-能注入的数据类型：有三类">
+        <!-- 目录是否自动编号 -->
+        <!-- <span class="has-mr-6">6.1</span> -->
+        <span>6.1 能注入的数据类型：有三类</span>
+        </a></li><li>
+        <a class="is-flex" href="#6-2-构造函数注入">
+        <!-- 目录是否自动编号 -->
+        <!-- <span class="has-mr-6">6.2</span> -->
+        <span>6.2 构造函数注入</span>
+        </a></li><li>
+        <a class="is-flex" href="#6-3-set方法注入（更常用）">
+        <!-- 目录是否自动编号 -->
+        <!-- <span class="has-mr-6">6.3</span> -->
+        <span>6.3 set方法注入（更常用）</span>
+        </a><ul class="menu-list"><li>
+        <a class="is-flex" href="#6-3-1-基本类型和Bean类型的注入">
+        <!-- 目录是否自动编号 -->
+        <!-- <span class="has-mr-6">6.3.1</span> -->
+        <span>6.3.1 基本类型和Bean类型的注入</span>
+        </a></li><li>
+        <a class="is-flex" href="#6-3-2-复杂（集合类型）的注入">
+        <!-- 目录是否自动编号 -->
+        <!-- <span class="has-mr-6">6.3.2</span> -->
+        <span>6.3.2 复杂（集合类型）的注入</span>
+        </a></li></ul></li></ul></li><li>
+        <a class="is-flex" href="#7-注解方式IOC和DI">
+        <!-- 目录是否自动编号 -->
+        <!-- <span class="has-mr-6">7</span> -->
+        <span>7. 注解方式IOC和DI</span>
+        </a><ul class="menu-list"><li>
+        <a class="is-flex" href="#7-1-要使用注解，必须将bean-xml改成以下约束">
+        <!-- 目录是否自动编号 -->
+        <!-- <span class="has-mr-6">7.1</span> -->
+        <span>7.1 要使用注解，必须将bean.xml改成以下约束</span>
+        </a></li><li>
+        <a class="is-flex" href="#7-2-Component">
+        <!-- 目录是否自动编号 -->
+        <!-- <span class="has-mr-6">7.2</span> -->
+        <span>7.2 @Component</span>
+        </a><ul class="menu-list"><li>
+        <a class="is-flex" href="#7-2-1-Controller：一般用在表现层">
+        <!-- 目录是否自动编号 -->
+        <!-- <span class="has-mr-6">7.2.1</span> -->
+        <span>7.2.1 @Controller：一般用在表现层</span>
+        </a></li><li>
+        <a class="is-flex" href="#7-2-2-Service：一般用在业务层">
+        <!-- 目录是否自动编号 -->
+        <!-- <span class="has-mr-6">7.2.2</span> -->
+        <span>7.2.2 @Service：一般用在业务层</span>
+        </a></li><li>
+        <a class="is-flex" href="#7-2-3-Repository：一般用在持久层">
+        <!-- 目录是否自动编号 -->
+        <!-- <span class="has-mr-6">7.2.3</span> -->
+        <span>7.2.3 @Repository：一般用在持久层</span>
+        </a></li></ul></li><li>
+        <a class="is-flex" href="#7-3-Autowired">
+        <!-- 目录是否自动编号 -->
+        <!-- <span class="has-mr-6">7.3</span> -->
+        <span>7.3 @Autowired</span>
+        </a><ul class="menu-list"><li>
+        <a class="is-flex" href="#7-3-1-Qualifier-value-”accountDaoImpl1”-：指定id">
+        <!-- 目录是否自动编号 -->
+        <!-- <span class="has-mr-6">7.3.1</span> -->
+        <span>7.3.1 @Qualifier(value=”accountDaoImpl1”)：指定id</span>
+        </a></li><li>
+        <a class="is-flex" href="#7-3-2-Resource-name-”accountDaoImpl1”">
+        <!-- 目录是否自动编号 -->
+        <!-- <span class="has-mr-6">7.3.2</span> -->
+        <span>7.3.2 @Resource(name=”accountDaoImpl1”)</span>
+        </a></li><li>
+        <a class="is-flex" href="#注意：">
+        <!-- 目录是否自动编号 -->
+        <!-- <span class="has-mr-6">7.3.3</span> -->
+        <span>注意：</span>
+        </a></li><li>
+        <a class="is-flex" href="#7-3-3-Value-value-SpEL表达式">
+        <!-- 目录是否自动编号 -->
+        <!-- <span class="has-mr-6">7.3.4</span> -->
+        <span>7.3.3 @Value(value=${SpEL表达式})</span>
+        </a></li></ul></li><li>
+        <a class="is-flex" href="#7-3-Scope">
+        <!-- 目录是否自动编号 -->
+        <!-- <span class="has-mr-6">7.4</span> -->
+        <span>7.3 @Scope</span>
+        </a></li><li>
+        <a class="is-flex" href="#7-4-Predistroy和-PostConstruct">
+        <!-- 目录是否自动编号 -->
+        <!-- <span class="has-mr-6">7.5</span> -->
+        <span>7.4 @Predistroy和@PostConstruct</span>
+        </a></li><li>
+        <a class="is-flex" href="#以下为完全不用XML的方式">
+        <!-- 目录是否自动编号 -->
+        <!-- <span class="has-mr-6">7.6</span> -->
+        <span>以下为完全不用XML的方式</span>
+        </a></li><li>
+        <a class="is-flex" href="#7-5-Configuration、-Bean、-ComponentScan-basePackages-“com-wjw”">
+        <!-- 目录是否自动编号 -->
+        <!-- <span class="has-mr-6">7.7</span> -->
+        <span>7.5 @Configuration、@Bean、@ComponentScan(basePackages = “com.wjw”)</span>
+        </a></li><li>
+        <a class="is-flex" href="#7-6-多个配置类和-Import">
+        <!-- 目录是否自动编号 -->
+        <!-- <span class="has-mr-6">7.8</span> -->
+        <span>7.6 多个配置类和@Import</span>
+        </a></li><li>
+        <a class="is-flex" href="#7-7-PropertySource、-Value">
+        <!-- 目录是否自动编号 -->
+        <!-- <span class="has-mr-6">7.9</span> -->
+        <span>7.7 @PropertySource、@Value</span>
+        </a></li></ul></li></ul>
+            </div>
+        </div>
+    </div>
+
     
         <div class="card widget">
     <div class="card-content">
@@ -967,7 +1460,7 @@
             <div class="level-start has-text-centered-mobile">
                 <a class="footer-logo is-block has-mb-6" href="/">
                 
-                    <img src="images/loading.gif" data-original="/images/logo.png" alt="小温 blog" height="28">
+                    <img src="images/loading.gif" data-original="/images/logo.png" alt="Spring入门笔记1" height="28">
                 
                 </a>
                 <p class="is-size-7">
