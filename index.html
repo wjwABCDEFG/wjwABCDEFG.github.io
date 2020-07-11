@@ -149,7 +149,7 @@
                 <span class="level-item has-text-grey">
                     
                     
-                    7 分钟 读完 (大约 1092 个字)
+                    7 分钟 读完 (大约 1120 个字)
                 </span>
                 
                 
@@ -176,86 +176,17 @@
 <blockquote>
 <p> 具体参考这篇博客，不展开了<a href="http://wjw.today/2020/07/11/Java%E5%AE%9E%E7%8E%B0%E6%A0%91%E7%9A%84%E9%81%8D%E5%8E%86%E5%8F%8A%E4%BA%8C%E5%8F%89%E6%A0%91%E5%8F%AF%E8%A7%86%E5%8C%96/">http://wjw.today/2020/07/11/Java实现树的遍历及二叉树可视化/</a></p>
 </blockquote>
-<br>
-
-<h1 id="2-前-中–-gt-后"><a href="#2-前-中–-gt-后" class="headerlink" title="2. 前+中–&gt;后"></a>2. 前+中–&gt;后</h1><p>不绕弯子，直接给出技巧再做题</p>
-<blockquote>
-<ol>
-<li>看前序遍历：第一个为根节点</li>
-<li>看中序遍历：找到步骤1中的根节点，左边的全为左子树，右边的全为右子树</li>
-<li>将左子树看成独立的树，重复步骤1和2，直到只有一个元素，不用脑子就可以做出来啦！</li>
-</ol>
-</blockquote>
-<p>下面进入实战环节（牛客网原题）：</p>
-<p>对某二叉树进行先序遍历的结果是ABDEFC,中序遍历的结果是DBFEAC，则后序遍历的结果是（）</p>
-<ol>
-<li>（参照步骤1）发现根节点是A</li>
-<li>（参照步骤2）划分出左右子树</li>
-</ol>
-<p><img src="images/loading.gif" data-original="https://s1.ax1x.com/2020/07/10/UMWqyQ.png" alt=""></p>
-<ol start="3">
-<li><p>（参照步骤1）带着这些左子树看前序遍历，那么前序遍历的顺序是BDEF对吧，<strong>将左子树看成是一颗独立的树</strong>，于是此时由<strong>步骤1</strong>得根节点是B</p>
-</li>
-<li><p>（参照步骤2）在子树中继续划分出左右子树</p>
-</li>
-</ol>
-<p><img src="images/loading.gif" data-original="https://s1.ax1x.com/2020/07/10/UMhAgS.png" alt=""></p>
-<ol start="5">
-<li>还不明白？那么继续，只有一个字母的就直接填上去了，剩下FE，看前序遍历则是EF，既然已经知道是右子树，那么<strong>将右子树看成是一颗独立的树</strong>，（参照步骤1）于是此时由<strong>步骤1</strong>得根节点是E</li>
-<li>（参照步骤2）划分左右子树，发现只有左子树了，放哪就不必多说了</li>
-</ol>
-<p><img src="images/loading.gif" data-original="https://s1.ax1x.com/2020/07/10/UMhrvD.png" alt=""></p>
-<p>做多两题，发现掌握了技巧后画出树根本不需要脑子！</p>
-<p>画出树后，再做后序遍历就不难了，我就不说了，答案DFEBCA</p>
-<br>
-
-<h1 id="3-中-后–-gt-前"><a href="#3-中-后–-gt-前" class="headerlink" title="3. 中+后–&gt;前"></a>3. 中+后–&gt;前</h1><p>中序的作用仍然是划分左右子树，后序的作用其实跟前序一样，不过得反过来从后面开始看，最后一个才是根节点</p>
-<blockquote>
-<ol>
-<li>看后序遍历：最后一个为根节点</li>
-<li>看中序遍历：找到步骤1中的根节点，左边的全为左子树，右边的全为右子树</li>
-<li>将左子树看成独立的树，重复步骤1和2，直到只有一个元素，不用脑子就可以做出来啦！</li>
-</ol>
-</blockquote>
-<p>看题：</p>
-<p>中序遍历: GBEDAFCH</p>
-<p>后序遍历：GEDBFHCA</p>
-<p>我就直接来了</p>
-<ol>
-<li>看后序，根节点是A</li>
-<li>看中序，左边GBED右边FCH</li>
-</ol>
-<p><img src="images/loading.gif" data-original="https://s1.ax1x.com/2020/07/11/UM4QZd.png" alt=""></p>
-<ol start="3">
-<li><p>看后序，要先看右子树（因为后序是“左右根”，之前说了反过来看那么根完了到右），FHC说明根节点是C</p>
-</li>
-<li><p>看中序，左边F右边H，左右都只有一个了，完成</p>
-</li>
-</ol>
-<p><img src="images/loading.gif" data-original="https://s1.ax1x.com/2020/07/11/UM5Ewj.png" alt=""></p>
-<ol start="4">
-<li>看后序，GEDB说明根节点是B</li>
-<li>看中序，左边单G，右边ED</li>
-</ol>
-<p><img src="images/loading.gif" data-original="https://s1.ax1x.com/2020/07/11/UM5MlT.png" alt=""></p>
-<ol start="6">
-<li><p>看后序，是ED，说明D是根节点</p>
-</li>
-<li><p>看中序，左边E，完成</p>
-</li>
-</ol>
-<p><img src="images/loading.gif" data-original="https://s1.ax1x.com/2020/07/11/UM5r0H.png" alt=""></p>
-<br>
-
-<h1 id="4-前-后–-gt-无法确定"><a href="#4-前-后–-gt-无法确定" class="headerlink" title="4. 前+后–&gt;无法确定"></a>4. 前+后–&gt;无法确定</h1><p>这种情况树不唯一</p>
-<h1 id="5-java实现前序-中序推出树"><a href="#5-java实现前序-中序推出树" class="headerlink" title="5. java实现前序+中序推出树"></a>5. java实现前序+中序推出树</h1><p>实现的思路根上面自己思考的思路其实是一样的，不断重复步骤12的过程就是递归</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> Node&lt;Integer&gt; <span class="title">reConstructBinaryTree</span><span class="params">(<span class="keyword">int</span>[] pre, <span class="keyword">int</span>[] in)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">if</span> (pre.length == <span class="number">0</span> || in.length == <span class="number">0</span>) &#123;</span><br><span class="line">            <span class="keyword">return</span> <span class="keyword">null</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        Node&lt;Integer&gt; node = <span class="keyword">new</span> Node&lt;&gt;(pre[<span class="number">0</span>]);</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; in.length; i++) &#123;</span><br><span class="line">            <span class="keyword">if</span> (pre[<span class="number">0</span>] == in[i]) &#123;  <span class="comment">//中序中找到前序的根，划分左右子树</span></span><br><span class="line">                node.left = reConstructBinaryTree(Arrays.copyOfRange(pre, <span class="number">1</span>, i + <span class="number">1</span>), Arrays.copyOfRange(in, <span class="number">0</span>, i));</span><br><span class="line">                node.right = reConstructBinaryTree(Arrays.copyOfRange(pre, i + <span class="number">1</span>, pre.length), Arrays.copyOfRange(in, i + <span class="number">1</span>, in.length));</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> node;</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
-
-<p>搭配上个博客的可视化二叉树工具类一起食用，看看你做对了吗</p>
-<p><img src="images/loading.gif" data-original="https://s1.ax1x.com/2020/07/11/UMHaLT.png" alt=""></p>
-
+<p>下面我们来看看如何通过前序和中序推出后序和整棵树的形状</p>
         </div>
         
+        
+        <div class="level is-mobile">
+            <div class="level-start">
+                <div class="level-item">
+                <a class="button is-size-7 is-light" href="/2020/07/11/%E6%A0%B9%E6%8D%AE%E4%B8%A4%E5%BA%8F%E9%81%8D%E5%8E%86%E6%8E%A8%E5%87%BA%E6%A0%91%E7%9A%84%E5%BD%A2%E7%8A%B6/#more">阅读更多</a>
+                </div>
+            </div>
+        </div>
         
         
     </div>
