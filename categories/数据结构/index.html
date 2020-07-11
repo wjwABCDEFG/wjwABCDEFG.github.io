@@ -141,6 +141,148 @@
 <div class="card">
     
     <div class="card-image">
+        <a href="/2020/07/11/%E6%A0%B9%E6%8D%AE%E4%B8%A4%E5%BA%8F%E9%81%8D%E5%8E%86%E6%8E%A8%E5%87%BA%E6%A0%91%E7%9A%84%E5%BD%A2%E7%8A%B6/" class="image is-7by1">
+            <img class="thumbnail" src="images/loading.gif" data-original="/headImg/head12.jpg" alt="根据两序遍历推出树的形状">
+        </a>
+    </div>
+    
+    <div class="card-content article ">
+        
+        <div class="level article-meta is-size-7 is-uppercase is-mobile is-overflow-x-auto">
+            <div class="level-left">
+                <time class="level-item has-text-grey" datetime="2020-07-11T10:22:36.000Z">2020-07-11</time>
+                
+                <div class="level-item">
+                <a class="has-link-grey -link" href="/categories/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/">数据结构</a>
+                </div>
+                
+                
+                <span class="level-item has-text-grey">
+                    
+                    
+                    7 分钟 读完 (大约 1092 个字)
+                </span>
+                
+                
+            </div>
+        </div>
+        
+        <h1 class="title is-size-3 is-size-4-mobile has-text-weight-normal">
+            
+                <a class="has-link-black-ter" href="/2020/07/11/%E6%A0%B9%E6%8D%AE%E4%B8%A4%E5%BA%8F%E9%81%8D%E5%8E%86%E6%8E%A8%E5%87%BA%E6%A0%91%E7%9A%84%E5%BD%A2%E7%8A%B6/">根据两序遍历推出树的形状</a>
+            
+        </h1>
+        <div class="content">
+            <blockquote>
+<p>前言：太久了都快忘了，最近做了一下笔试题遇到这题，发现经常考这种题，先把技巧记录下来，有了技巧后简直不要太轻松</p>
+</blockquote>
+<h1 id="1-树的三种遍历"><a href="#1-树的三种遍历" class="headerlink" title="1. 树的三种遍历"></a>1. 树的三种遍历</h1><ul>
+<li><p>前序遍历（根左右）</p>
+</li>
+<li><p>中序遍历（左根右）</p>
+</li>
+<li><p>后序遍历（左右根）</p>
+</li>
+</ul>
+<blockquote>
+<p> 具体参考这篇博客，不展开了<a href="http://wjw.today/2020/07/11/Java%E5%AE%9E%E7%8E%B0%E6%A0%91%E7%9A%84%E9%81%8D%E5%8E%86%E5%8F%8A%E4%BA%8C%E5%8F%89%E6%A0%91%E5%8F%AF%E8%A7%86%E5%8C%96/">http://wjw.today/2020/07/11/Java实现树的遍历及二叉树可视化/</a></p>
+</blockquote>
+<br>
+
+<h1 id="2-前-中–-gt-后"><a href="#2-前-中–-gt-后" class="headerlink" title="2. 前+中–&gt;后"></a>2. 前+中–&gt;后</h1><p>不绕弯子，直接给出技巧再做题</p>
+<blockquote>
+<ol>
+<li>看前序遍历：第一个为根节点</li>
+<li>看中序遍历：找到步骤1中的根节点，左边的全为左子树，右边的全为右子树</li>
+<li>将左子树看成独立的树，重复步骤1和2，直到只有一个元素，不用脑子就可以做出来啦！</li>
+</ol>
+</blockquote>
+<p>下面进入实战环节（牛客网原题）：</p>
+<p>对某二叉树进行先序遍历的结果是ABDEFC,中序遍历的结果是DBFEAC，则后序遍历的结果是（）</p>
+<ol>
+<li>（参照步骤1）发现根节点是A</li>
+<li>（参照步骤2）划分出左右子树</li>
+</ol>
+<p><img src="images/loading.gif" data-original="https://s1.ax1x.com/2020/07/10/UMWqyQ.png" alt=""></p>
+<ol start="3">
+<li><p>（参照步骤1）带着这些左子树看前序遍历，那么前序遍历的顺序是BDEF对吧，<strong>将左子树看成是一颗独立的树</strong>，于是此时由<strong>步骤1</strong>得根节点是B</p>
+</li>
+<li><p>（参照步骤2）在子树中继续划分出左右子树</p>
+</li>
+</ol>
+<p><img src="images/loading.gif" data-original="https://s1.ax1x.com/2020/07/10/UMhAgS.png" alt=""></p>
+<ol start="5">
+<li>还不明白？那么继续，只有一个字母的就直接填上去了，剩下FE，看前序遍历则是EF，既然已经知道是右子树，那么<strong>将右子树看成是一颗独立的树</strong>，（参照步骤1）于是此时由<strong>步骤1</strong>得根节点是E</li>
+<li>（参照步骤2）划分左右子树，发现只有左子树了，放哪就不必多说了</li>
+</ol>
+<p><img src="images/loading.gif" data-original="https://s1.ax1x.com/2020/07/10/UMhrvD.png" alt=""></p>
+<p>做多两题，发现掌握了技巧后画出树根本不需要脑子！</p>
+<p>画出树后，再做后序遍历就不难了，我就不说了，答案DFEBCA</p>
+<br>
+
+<h1 id="3-中-后–-gt-前"><a href="#3-中-后–-gt-前" class="headerlink" title="3. 中+后–&gt;前"></a>3. 中+后–&gt;前</h1><p>中序的作用仍然是划分左右子树，后序的作用其实跟前序一样，不过得反过来从后面开始看，最后一个才是根节点</p>
+<blockquote>
+<ol>
+<li>看后序遍历：最后一个为根节点</li>
+<li>看中序遍历：找到步骤1中的根节点，左边的全为左子树，右边的全为右子树</li>
+<li>将左子树看成独立的树，重复步骤1和2，直到只有一个元素，不用脑子就可以做出来啦！</li>
+</ol>
+</blockquote>
+<p>看题：</p>
+<p>中序遍历: GBEDAFCH</p>
+<p>后序遍历：GEDBFHCA</p>
+<p>我就直接来了</p>
+<ol>
+<li>看后序，根节点是A</li>
+<li>看中序，左边GBED右边FCH</li>
+</ol>
+<p><img src="images/loading.gif" data-original="https://s1.ax1x.com/2020/07/11/UM4QZd.png" alt=""></p>
+<ol start="3">
+<li><p>看后序，要先看右子树（因为后序是“左右根”，之前说了反过来看那么根完了到右），FHC说明根节点是C</p>
+</li>
+<li><p>看中序，左边F右边H，左右都只有一个了，完成</p>
+</li>
+</ol>
+<p><img src="images/loading.gif" data-original="https://s1.ax1x.com/2020/07/11/UM5Ewj.png" alt=""></p>
+<ol start="4">
+<li>看后序，GEDB说明根节点是B</li>
+<li>看中序，左边单G，右边ED</li>
+</ol>
+<p><img src="images/loading.gif" data-original="https://s1.ax1x.com/2020/07/11/UM5MlT.png" alt=""></p>
+<ol start="6">
+<li><p>看后序，是ED，说明D是根节点</p>
+</li>
+<li><p>看中序，左边E，完成</p>
+</li>
+</ol>
+<p><img src="images/loading.gif" data-original="https://s1.ax1x.com/2020/07/11/UM5r0H.png" alt=""></p>
+<br>
+
+<h1 id="4-前-后–-gt-无法确定"><a href="#4-前-后–-gt-无法确定" class="headerlink" title="4. 前+后–&gt;无法确定"></a>4. 前+后–&gt;无法确定</h1><p>这种情况树不唯一</p>
+<h1 id="5-java实现前序-中序推出树"><a href="#5-java实现前序-中序推出树" class="headerlink" title="5. java实现前序+中序推出树"></a>5. java实现前序+中序推出树</h1><p>实现的思路根上面自己思考的思路其实是一样的，不断重复步骤12的过程就是递归</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> Node&lt;Integer&gt; <span class="title">reConstructBinaryTree</span><span class="params">(<span class="keyword">int</span>[] pre, <span class="keyword">int</span>[] in)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">if</span> (pre.length == <span class="number">0</span> || in.length == <span class="number">0</span>) &#123;</span><br><span class="line">            <span class="keyword">return</span> <span class="keyword">null</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        Node&lt;Integer&gt; node = <span class="keyword">new</span> Node&lt;&gt;(pre[<span class="number">0</span>]);</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; in.length; i++) &#123;</span><br><span class="line">            <span class="keyword">if</span> (pre[<span class="number">0</span>] == in[i]) &#123;  <span class="comment">//中序中找到前序的根，划分左右子树</span></span><br><span class="line">                node.left = reConstructBinaryTree(Arrays.copyOfRange(pre, <span class="number">1</span>, i + <span class="number">1</span>), Arrays.copyOfRange(in, <span class="number">0</span>, i));</span><br><span class="line">                node.right = reConstructBinaryTree(Arrays.copyOfRange(pre, i + <span class="number">1</span>, pre.length), Arrays.copyOfRange(in, i + <span class="number">1</span>, in.length));</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> node;</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
+
+<p>搭配上个博客的可视化二叉树工具类一起食用，看看你做对了吗</p>
+<p><img src="images/loading.gif" data-original="https://s1.ax1x.com/2020/07/11/UMHaLT.png" alt=""></p>
+
+        </div>
+        
+        
+        
+    </div>
+</div>
+
+
+
+
+
+
+
+
+    
+<div class="card">
+    
+    <div class="card-image">
         <a href="/2020/07/11/Java%E5%AE%9E%E7%8E%B0%E6%A0%91%E7%9A%84%E9%81%8D%E5%8E%86%E5%8F%8A%E4%BA%8C%E5%8F%89%E6%A0%91%E5%8F%AF%E8%A7%86%E5%8C%96/" class="image is-7by1">
             <img class="thumbnail" src="images/loading.gif" data-original="/headImg/head11.jpg" alt="Java实现树的遍历及二叉树可视化">
         </a>
@@ -160,7 +302,7 @@
                 <span class="level-item has-text-grey">
                     
                     
-                    11 分钟 读完 (大约 1712 个字)
+                    11 分钟 读完 (大约 1713 个字)
                 </span>
                 
                 
@@ -177,83 +319,16 @@
 <li>前序遍历（根左右）</li>
 </ul>
 <p><img src="images/loading.gif" data-original="https://s1.ax1x.com/2020/07/11/UMHHSI.png" alt=""></p>
-<ul>
-<li>中序遍历（左根右）</li>
-</ul>
-<p><img src="images/loading.gif" data-original="https://s1.ax1x.com/2020/07/11/UMHXm8.png" alt=""></p>
-<ul>
-<li>后序遍历（左右根）</li>
-</ul>
-<p><img src="images/loading.gif" data-original="https://s1.ax1x.com/2020/07/11/UMbV7F.png" alt=""></p>
-<ul>
-<li>层次遍历（一层层）</li>
-</ul>
-<p>不难发现，其实名字中的“前中后”指的是“根”的位置</p>
-<h1 id="2-java实现（递归和栈）"><a href="#2-java实现（递归和栈）" class="headerlink" title="2. java实现（递归和栈）"></a>2. java实现（递归和栈）</h1><p>递归方式我就不多说了，栈方式的话按照如下顺序：</p>
-<p>根节点入栈</p>
-<p>进入左节点，节点不为空则入栈，重复直到节点为空则出栈（此时出的这个是最后一个不为空的节点）</p>
-<p>进入右节点，节点不为空则入栈，重复直到栈为空结束</p>
-<p>通用模板</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">List&lt;Integer&gt; res = <span class="keyword">new</span> ArrayList&lt;&gt;();</span><br><span class="line"><span class="function"><span class="keyword">public</span> List&lt;Integer&gt; <span class="title">traversal</span><span class="params">(TreeNode root)</span> </span>&#123;</span><br><span class="line">    Stack&lt;TreeNode&gt; stack = <span class="keyword">new</span> Stack&lt;&gt;();</span><br><span class="line">    stack.push(root);</span><br><span class="line">    root = root.left;</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">while</span> (!stack.empty() || root != <span class="keyword">null</span>)&#123;</span><br><span class="line">        <span class="keyword">if</span>(root!=<span class="keyword">null</span>)&#123;</span><br><span class="line">            stack.push(root);</span><br><span class="line">            root = root.left;</span><br><span class="line">        &#125;<span class="keyword">else</span> &#123;</span><br><span class="line">            root = stack.pop();</span><br><span class="line">            root = root.right;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> res;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>不要乱写代码，记下这套模板，前中后序遍历只差一句res.add(root.val);只是位置不同而已</p>
-<h2 id="2-1-前序遍历"><a href="#2-1-前序遍历" class="headerlink" title="2.1 前序遍历"></a>2.1 前序遍历</h2><p>力扣原题<a href="https://leetcode-cn.com/problems/binary-tree-preorder-traversal/">https://leetcode-cn.com/problems/binary-tree-preorder-traversal/</a></p>
-<p>递归方式</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> </span>&#123;</span><br><span class="line">    <span class="keyword">private</span> List&lt;Integer&gt; res = <span class="keyword">new</span> ArrayList&lt;&gt;();</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> List&lt;Integer&gt; <span class="title">preorderTraversal</span><span class="params">(TreeNode root)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">if</span>(root != <span class="keyword">null</span>)&#123;</span><br><span class="line">            res.add(root.val);</span><br><span class="line">            preorderTraversal(root.left);</span><br><span class="line">            preorderTraversal(root.right);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> res;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>栈方式</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> </span>&#123;</span><br><span class="line">    <span class="keyword">private</span> List&lt;Integer&gt; res = <span class="keyword">new</span> ArrayList&lt;&gt;();</span><br><span class="line">    <span class="function"><span class="keyword">public</span> List&lt;Integer&gt; <span class="title">preorderTraversal</span><span class="params">(TreeNode root)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">if</span> (root == <span class="keyword">null</span>)&#123;	<span class="comment">//这句就是力扣专属测试用例root为null的情况了，你懂的</span></span><br><span class="line">            <span class="keyword">return</span> res;</span><br><span class="line">        &#125;</span><br><span class="line">        Stack&lt;TreeNode&gt; stack = <span class="keyword">new</span> Stack&lt;&gt;();</span><br><span class="line">        res.add(root.val);	<span class="comment">//前序加在这里</span></span><br><span class="line">        stack.push(root);</span><br><span class="line">        root = root.left;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">while</span> (!stack.empty() || root != <span class="keyword">null</span>)&#123;</span><br><span class="line">            <span class="keyword">if</span> (root != <span class="keyword">null</span>)&#123;</span><br><span class="line">                res.add(root.val);	<span class="comment">//前序还要加在这里</span></span><br><span class="line">                stack.push(root);</span><br><span class="line">                root = root.left;</span><br><span class="line">            &#125;<span class="keyword">else</span> &#123;</span><br><span class="line">                root = stack.pop();</span><br><span class="line">                root = root.right;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> res;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<br>
-
-<h2 id="2-2-中序遍历"><a href="#2-2-中序遍历" class="headerlink" title="2.2 中序遍历"></a>2.2 中序遍历</h2><p>力扣原题<a href="https://leetcode-cn.com/problems/binary-tree-inorder-traversal/">https://leetcode-cn.com/problems/binary-tree-inorder-traversal/</a></p>
-<p>递归方式</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> </span>&#123;</span><br><span class="line">    List&lt;Integer&gt; re = <span class="keyword">new</span> ArrayList&lt;&gt;();</span><br><span class="line">    <span class="function"><span class="keyword">public</span> List&lt;Integer&gt; <span class="title">inorderTraversal</span><span class="params">(TreeNode root)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">if</span>(root != <span class="keyword">null</span>)&#123;</span><br><span class="line">            inorderTraversal(root.left);</span><br><span class="line">            re.add(root.val);</span><br><span class="line">            inorderTraversal(root.right);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> re;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>栈方式</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> </span>&#123;</span><br><span class="line">    List&lt;Integer&gt; res = <span class="keyword">new</span> ArrayList&lt;&gt;();</span><br><span class="line">    <span class="function"><span class="keyword">public</span> List&lt;Integer&gt; <span class="title">inorderTraversal</span><span class="params">(TreeNode root)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">if</span> (root == <span class="keyword">null</span>)&#123;</span><br><span class="line">            <span class="keyword">return</span> res;</span><br><span class="line">        &#125;</span><br><span class="line">        Stack&lt;TreeNode&gt;  stack = <span class="keyword">new</span> Stack&lt;&gt;();</span><br><span class="line">        stack.push(root);</span><br><span class="line">        root = root.left;</span><br><span class="line">        </span><br><span class="line">        <span class="keyword">while</span> (!stack.empty() || root != <span class="keyword">null</span>)&#123;</span><br><span class="line">            <span class="keyword">if</span>(root!=<span class="keyword">null</span>)&#123;</span><br><span class="line">                stack.push(root);</span><br><span class="line">                root = root.left;</span><br><span class="line">            &#125;<span class="keyword">else</span> &#123;</span><br><span class="line">                root = stack.pop();</span><br><span class="line">                res.add(root.val);		<span class="comment">//中序加在这里</span></span><br><span class="line">                root = root.right;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> res;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<br>
-
-<h2 id="2-3-后序遍历"><a href="#2-3-后序遍历" class="headerlink" title="2.3 后序遍历"></a>2.3 后序遍历</h2><p>递归方式</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> </span>&#123;</span><br><span class="line">    List&lt;Integer&gt; res = <span class="keyword">new</span> ArrayList&lt;&gt;();</span><br><span class="line">    <span class="function"><span class="keyword">public</span> List&lt;Integer&gt; <span class="title">postorderTraversal</span><span class="params">(TreeNode root)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">if</span>(root != <span class="keyword">null</span>)&#123;</span><br><span class="line">            postorderTraversal(root.left);</span><br><span class="line">            postorderTraversal(root.right);</span><br><span class="line">            res.add(root.val);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> res;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>栈方式</p>
-<p>后序遍历使用栈方式有点不同，栈方式都是：根节点入栈，左节点入栈出栈，右节点入栈出栈。res.add(root.val);前序只需要加在根节点入栈前，中序只需要加在右节点出栈前。而对于后序遍历，按理来说应该加载右节点出栈后，但是左节点出栈和右节点出栈都是同一段代码段，我们无法判断root = stack.pop();是左节点出栈还是右节点出栈，因此我们要在右节点入栈时记录下来，如果出栈时==记录，那么说明是右节点出栈。</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> </span>&#123;</span><br><span class="line">List&lt;Integer&gt; res = <span class="keyword">new</span> ArrayList&lt;&gt;();</span><br><span class="line">    <span class="function"><span class="keyword">public</span> List&lt;Integer&gt; <span class="title">postorderTraversal</span><span class="params">(TreeNode root)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">if</span> (root == <span class="keyword">null</span>)&#123;</span><br><span class="line">            <span class="keyword">return</span> res;</span><br><span class="line">        &#125;</span><br><span class="line">        TreeNode stored = <span class="keyword">null</span>;     <span class="comment">//用来记录右节点</span></span><br><span class="line">        Stack&lt;TreeNode&gt; stack = <span class="keyword">new</span> Stack&lt;&gt;();</span><br><span class="line">        stack.push(root);</span><br><span class="line">        root = root.left;</span><br><span class="line">        </span><br><span class="line">        <span class="keyword">while</span> (!stack.empty() || root != <span class="keyword">null</span>)&#123;</span><br><span class="line">            <span class="keyword">if</span> (root != <span class="keyword">null</span>)&#123;</span><br><span class="line">                stack.push(root);</span><br><span class="line">                root = root.left;</span><br><span class="line">            &#125;<span class="keyword">else</span>&#123;</span><br><span class="line">                root = stack.peek();	<span class="comment">//这里不同，不要直接pop</span></span><br><span class="line">                <span class="keyword">if</span> (root.right == <span class="keyword">null</span> || root.right == stored)&#123;    <span class="comment">//这就说明是右节点已经遍历过了，准备出栈了</span></span><br><span class="line">                    res.add(root.val);</span><br><span class="line">                    stack.pop();</span><br><span class="line">                    stored = root;	<span class="comment">//记录下来</span></span><br><span class="line">                    root = <span class="keyword">null</span>;</span><br><span class="line">                &#125;<span class="keyword">else</span> &#123;</span><br><span class="line">                    root = root.right;</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> res;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>当然，如果你只记得模板，没关系，我们可以将前序遍历改造成根右左（root = root.left和root.right换一下位置），然后reverse这个列表</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> </span>&#123;</span><br><span class="line">    <span class="keyword">private</span> List&lt;Integer&gt; res = <span class="keyword">new</span> ArrayList&lt;&gt;();</span><br><span class="line">    <span class="function"><span class="keyword">public</span> List&lt;Integer&gt; <span class="title">postorderTraversal</span><span class="params">(TreeNode root)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">if</span> (root == <span class="keyword">null</span>)&#123;</span><br><span class="line">            <span class="keyword">return</span> res;</span><br><span class="line">        &#125;</span><br><span class="line">        Stack&lt;TreeNode&gt; stack = <span class="keyword">new</span> Stack&lt;&gt;();</span><br><span class="line">        res.add(root.val);</span><br><span class="line">        stack.push(root);</span><br><span class="line">        root = root.right;	<span class="comment">//先右</span></span><br><span class="line"></span><br><span class="line">        <span class="keyword">while</span> (!stack.empty() || root != <span class="keyword">null</span>)&#123;</span><br><span class="line">            <span class="keyword">if</span> (root != <span class="keyword">null</span>)&#123;</span><br><span class="line">                res.add(root.val);</span><br><span class="line">                stack.push(root);</span><br><span class="line">                root = root.right;	<span class="comment">//先右</span></span><br><span class="line">            &#125;<span class="keyword">else</span> &#123;</span><br><span class="line">                root = stack.pop();</span><br><span class="line">                root = root.left;	<span class="comment">//再左</span></span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="comment">// 精髓！ -- 换一种思路来解题 -- 通过一个方向相反的近似解，最后在答案基础上做反转</span></span><br><span class="line">        <span class="comment">// 反转结果，得到 ： 左 -&gt; 右 -&gt; 根</span></span><br><span class="line">        Collections.reverse(res);</span><br><span class="line">        <span class="keyword">return</span> res;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<br>
-
-<h2 id="2-4-颜色标记法（大佬说可以前中后序遍历都相同的代码）"><a href="#2-4-颜色标记法（大佬说可以前中后序遍历都相同的代码）" class="headerlink" title="2.4 颜色标记法（大佬说可以前中后序遍历都相同的代码）"></a>2.4 颜色标记法（大佬说可以前中后序遍历都相同的代码）</h2><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span>:</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">inorderTraversal</span><span class="params">(self, root: TreeNode)</span> -&gt; List[int]:</span></span><br><span class="line">        stack,rst = [root],[]</span><br><span class="line">        <span class="keyword">while</span> stack:</span><br><span class="line">            i = stack.pop()</span><br><span class="line">            <span class="keyword">if</span> isinstance(i,TreeNode):</span><br><span class="line">                stack.extend([i.right,i.val,i.left])</span><br><span class="line">            <span class="keyword">elif</span> isinstance(i,int):</span><br><span class="line">                rst.append(i)</span><br><span class="line">        <span class="keyword">return</span> rst</span><br></pre></td></tr></table></figure>
-
-<p>java实现详见</p>
-<blockquote>
-<p><a href="https://leetcode-cn.com/problems/binary-tree-inorder-traversal/solution/yan-se-biao-ji-fa-yi-chong-tong-yong-qie-jian-ming/">https://leetcode-cn.com/problems/binary-tree-inorder-traversal/solution/yan-se-biao-ji-fa-yi-chong-tong-yong-qie-jian-ming/</a></p>
-</blockquote>
-<br>
-
-<h2 id="2-5-另一套模板"><a href="#2-5-另一套模板" class="headerlink" title="2.5 另一套模板"></a>2.5 另一套模板</h2><p>网上有些很简洁的版本，这个风格我是比较喜欢的，前序如下，自己摸索</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> List&lt;Integer&gt; <span class="title">preorderTraversal</span><span class="params">(TreeNode root)</span> </span>&#123;</span><br><span class="line">        ArrayList&lt;Integer&gt; list = <span class="keyword">new</span> ArrayList&lt;&gt;();</span><br><span class="line">        <span class="keyword">if</span>(root == <span class="keyword">null</span>) <span class="keyword">return</span> list;	<span class="comment">//力扣专属测试用例</span></span><br><span class="line">        Stack&lt;TreeNode&gt; stack = <span class="keyword">new</span> Stack&lt;&gt;();</span><br><span class="line">        stack.push(root);</span><br><span class="line">        <span class="keyword">while</span> (!stack.isEmpty()) &#123;</span><br><span class="line">            TreeNode node = stack.pop();</span><br><span class="line">            <span class="keyword">if</span>(node == <span class="keyword">null</span>) <span class="keyword">continue</span>;</span><br><span class="line">            <span class="comment">// 这样的输出顺序是：根 -&gt; 左 -&gt; 右</span></span><br><span class="line">            list.add(node.val);</span><br><span class="line">            stack.push(node.right);</span><br><span class="line">            stack.push(node.left);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> list;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<br>
-
-<h1 id="3-二叉树的可视化"><a href="#3-二叉树的可视化" class="headerlink" title="3. 二叉树的可视化"></a>3. 二叉树的可视化</h1><p>参考网上的代码，在测试的时候通常要先构造一棵树，但是又没办法查看就很无奈，创建两个类</p>
-<p><img src="images/loading.gif" data-original="https://s1.ax1x.com/2020/07/11/Uldi11.png" alt=""></p>
-<p>直接复制即可食用（为了匹配任何类型，这里用了泛型）</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * 树节点</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Node</span>&lt;<span class="title">T</span> <span class="keyword">extends</span> <span class="title">Comparable</span>&lt;?&gt;&gt; </span>&#123;</span><br><span class="line">    <span class="keyword">public</span> Node&lt;T&gt; left, right;</span><br><span class="line">    <span class="keyword">public</span> T data;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="title">Node</span><span class="params">(T data)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">this</span>.data = data;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>TreeVisualUtil代码，直接复制即可食用，要改的地方我用注释标好了</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> org.junit.Test;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> java.util.ArrayList;</span><br><span class="line"><span class="keyword">import</span> java.util.Collections;</span><br><span class="line"><span class="keyword">import</span> java.util.List;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">TreeVisualUtil</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> &lt;T extends Comparable&lt;?&gt;&gt; <span class="function"><span class="keyword">void</span> <span class="title">printNode</span><span class="params">(Node&lt;T&gt; root)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">int</span> maxLevel = TreeVisualUtil.maxLevel(root);</span><br><span class="line"></span><br><span class="line">        printNodeInternal(Collections.singletonList(root), <span class="number">1</span>, maxLevel);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">static</span> &lt;T extends Comparable&lt;?&gt;&gt; <span class="function"><span class="keyword">void</span> <span class="title">printNodeInternal</span><span class="params">(List&lt;Node&lt;T&gt;&gt; nodes, <span class="keyword">int</span> level, <span class="keyword">int</span> maxLevel)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">if</span> (nodes.isEmpty() || TreeVisualUtil.isAllElementsNull(nodes)) &#123;</span><br><span class="line">            <span class="keyword">return</span>;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">int</span> floor = maxLevel - level;</span><br><span class="line">        <span class="keyword">int</span> endgeLines = (<span class="keyword">int</span>) Math.pow(<span class="number">2</span>, (Math.max(floor - <span class="number">1</span>, <span class="number">0</span>)));</span><br><span class="line">        <span class="keyword">int</span> firstSpaces = (<span class="keyword">int</span>) Math.pow(<span class="number">2</span>, (floor)) - <span class="number">1</span>;</span><br><span class="line">        <span class="keyword">int</span> betweenSpaces = (<span class="keyword">int</span>) Math.pow(<span class="number">2</span>, (floor + <span class="number">1</span>)) - <span class="number">1</span>;</span><br><span class="line"></span><br><span class="line">        TreeVisualUtil.printWhitespaces(firstSpaces);</span><br><span class="line"></span><br><span class="line">        List&lt;Node&lt;T&gt;&gt; newNodes = <span class="keyword">new</span> ArrayList&lt;Node&lt;T&gt;&gt;();</span><br><span class="line">        <span class="keyword">for</span> (Node&lt;T&gt; node : nodes) &#123;</span><br><span class="line">            <span class="keyword">if</span> (node != <span class="keyword">null</span>) &#123;</span><br><span class="line">                System.out.print(node.data);</span><br><span class="line">                newNodes.add(node.left);</span><br><span class="line">                newNodes.add(node.right);</span><br><span class="line">            &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">                newNodes.add(<span class="keyword">null</span>);</span><br><span class="line">                newNodes.add(<span class="keyword">null</span>);</span><br><span class="line">                System.out.print(<span class="string">" "</span>);</span><br><span class="line">            &#125;</span><br><span class="line"></span><br><span class="line">            TreeVisualUtil.printWhitespaces(betweenSpaces);</span><br><span class="line">        &#125;</span><br><span class="line">        System.out.println(<span class="string">""</span>);</span><br><span class="line"></span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">1</span>; i &lt;= endgeLines; i++) &#123;</span><br><span class="line">            <span class="keyword">for</span> (Node&lt;T&gt; node : nodes) &#123;</span><br><span class="line">                TreeVisualUtil.printWhitespaces(firstSpaces - i);</span><br><span class="line">                <span class="keyword">if</span> (node == <span class="keyword">null</span>) &#123;</span><br><span class="line">                    TreeVisualUtil.printWhitespaces(endgeLines + endgeLines + i + <span class="number">1</span>);</span><br><span class="line">                    <span class="keyword">continue</span>;</span><br><span class="line">                &#125;</span><br><span class="line"></span><br><span class="line">                <span class="keyword">if</span> (node.left != <span class="keyword">null</span>) &#123;</span><br><span class="line">                    System.out.print(<span class="string">"/"</span>);</span><br><span class="line">                &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">                    TreeVisualUtil.printWhitespaces(<span class="number">1</span>);</span><br><span class="line">                &#125;</span><br><span class="line"></span><br><span class="line">                TreeVisualUtil.printWhitespaces(i + i - <span class="number">1</span>);</span><br><span class="line"></span><br><span class="line">                <span class="keyword">if</span> (node.right != <span class="keyword">null</span>) &#123;</span><br><span class="line">                    System.out.print(<span class="string">"\\"</span>);</span><br><span class="line">                &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">                    TreeVisualUtil.printWhitespaces(<span class="number">1</span>);</span><br><span class="line">                &#125;</span><br><span class="line"></span><br><span class="line">                TreeVisualUtil.printWhitespaces(endgeLines + endgeLines - i);</span><br><span class="line">            &#125;</span><br><span class="line"></span><br><span class="line">            System.out.println(<span class="string">""</span>);</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        printNodeInternal(newNodes, level + <span class="number">1</span>, maxLevel);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">printWhitespaces</span><span class="params">(<span class="keyword">int</span> count)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; count; i++) &#123;</span><br><span class="line">            System.out.print(<span class="string">" "</span>);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">static</span> &lt;T extends Comparable&lt;?&gt;&gt; <span class="function"><span class="keyword">int</span> <span class="title">maxLevel</span><span class="params">(Node&lt;T&gt; node)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">if</span> (node == <span class="keyword">null</span>) &#123;</span><br><span class="line">            <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">return</span> Math.max(TreeVisualUtil.maxLevel(node.left), TreeVisualUtil.maxLevel(node.right)) + <span class="number">1</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">static</span> &lt;T&gt; <span class="function"><span class="keyword">boolean</span> <span class="title">isAllElementsNull</span><span class="params">(List&lt;T&gt; list)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">for</span> (Object object : list) &#123;</span><br><span class="line">            <span class="keyword">if</span> (object != <span class="keyword">null</span>) &#123;</span><br><span class="line">                <span class="keyword">return</span> <span class="keyword">false</span>;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">true</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * 只需要修改这里按部就班构造自己的树，运行main方法即可</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="function"><span class="keyword">private</span> <span class="keyword">static</span> Node&lt;String&gt; <span class="title">myTree</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        Node&lt;String&gt; root = <span class="keyword">new</span> Node&lt;&gt;(<span class="string">"A"</span>);</span><br><span class="line">        root.left = <span class="keyword">new</span> Node&lt;&gt;(<span class="string">"B"</span>);</span><br><span class="line">        root.right = <span class="keyword">new</span> Node&lt;&gt;(<span class="string">"C"</span>);</span><br><span class="line">        root.left.left = <span class="keyword">new</span> Node&lt;&gt;(<span class="string">"D"</span>);</span><br><span class="line">        root.left.right = <span class="keyword">new</span> Node&lt;&gt;(<span class="string">"E"</span>);</span><br><span class="line">        root.left.right.left = <span class="keyword">new</span> Node&lt;&gt;(<span class="string">"F"</span>);</span><br><span class="line"></span><br><span class="line">        <span class="keyword">return</span> root;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Test</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">test</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="comment">//要在别的类中使用只需要调用下面这句话即可，参数传入自己的root节点</span></span><br><span class="line">        TreeVisualUtil.printNode(myTree());</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>效果如下，还不错！</p>
-<p><img src="images/loading.gif" data-original="https://s1.ax1x.com/2020/07/11/Ulwpb8.png" alt=""></p>
-<p><img src="images/loading.gif" data-original="https://s1.ax1x.com/2020/07/11/UlwVvq.png" alt=""></p>
-
         </div>
         
+        
+        <div class="level is-mobile">
+            <div class="level-start">
+                <div class="level-item">
+                <a class="button is-size-7 is-light" href="/2020/07/11/Java%E5%AE%9E%E7%8E%B0%E6%A0%91%E7%9A%84%E9%81%8D%E5%8E%86%E5%8F%8A%E4%BA%8C%E5%8F%89%E6%A0%91%E5%8F%AF%E8%A7%86%E5%8C%96/#more">阅读更多</a>
+                </div>
+            </div>
+        </div>
         
         
     </div>
@@ -307,7 +382,7 @@
                     </p>
                     <a href="/archives">
                         <p class="title has-text-weight-normal">
-                            11
+                            12
                         </p>
                     </a>
                 </div>
@@ -456,7 +531,7 @@
                 <span class="level-item">数据结构</span>
             </span>
             <span class="level-end">
-                <span class="level-item tag">1</span>
+                <span class="level-item tag">2</span>
             </span>
         </a></li>
             </ul>
@@ -472,6 +547,25 @@
         <h3 class="menu-label">
             推荐阅读
         </h3>
+        
+        <article class="media">
+            
+            <a href="/2020/07/11/%E6%A0%B9%E6%8D%AE%E4%B8%A4%E5%BA%8F%E9%81%8D%E5%8E%86%E6%8E%A8%E5%87%BA%E6%A0%91%E7%9A%84%E5%BD%A2%E7%8A%B6/" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="images/loading.gif" data-original="/headImg/head12.jpg" alt="根据两序遍历推出树的形状">
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2020-07-11T10:22:36.000Z">2020-07-11</time></div>
+                    <a href="/2020/07/11/%E6%A0%B9%E6%8D%AE%E4%B8%A4%E5%BA%8F%E9%81%8D%E5%8E%86%E6%8E%A8%E5%87%BA%E6%A0%91%E7%9A%84%E5%BD%A2%E7%8A%B6/" class="title has-link-black-ter is-size-6 has-text-weight-normal">根据两序遍历推出树的形状</a>
+                    <p class="is-size-7 is-uppercase">
+                        <a class="has-link-grey -link" href="/categories/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/">数据结构</a>
+                    </p>
+                </div>
+            </div>
+        </article>
         
         <article class="media">
             
@@ -534,7 +628,7 @@
             
             <a href="/2020/06/27/SpringCloud%E7%AC%94%E8%AE%B0/" class="media-left">
                 <p class="image is-64x64">
-                    <img class="thumbnail" src="images/loading.gif" data-original="/headImg/head7.jpg" alt="SpringCloud笔记">
+                    <img class="thumbnail" src="images/loading.gif" data-original="/headImg/head6.jpg" alt="SpringCloud笔记">
                 </p>
             </a>
             
@@ -544,25 +638,6 @@
                     <a href="/2020/06/27/SpringCloud%E7%AC%94%E8%AE%B0/" class="title has-link-black-ter is-size-6 has-text-weight-normal">SpringCloud笔记</a>
                     <p class="is-size-7 is-uppercase">
                         <a class="has-link-grey -link" href="/categories/SpringCloud/">SpringCloud</a>
-                    </p>
-                </div>
-            </div>
-        </article>
-        
-        <article class="media">
-            
-            <a href="/2020/04/02/maven%E7%AC%94%E8%AE%B0/" class="media-left">
-                <p class="image is-64x64">
-                    <img class="thumbnail" src="images/loading.gif" data-original="/headImg/head8.jpg" alt="maven笔记">
-                </p>
-            </a>
-            
-            <div class="media-content">
-                <div class="content">
-                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2020-04-02T12:32:21.000Z">2020-04-02</time></div>
-                    <a href="/2020/04/02/maven%E7%AC%94%E8%AE%B0/" class="title has-link-black-ter is-size-6 has-text-weight-normal">maven笔记</a>
-                    <p class="is-size-7 is-uppercase">
-                        <a class="has-link-grey -link" href="/categories/Maven/">Maven</a>
                     </p>
                 </div>
             </div>
@@ -585,7 +660,7 @@
                     <span class="level-item">七月 2020</span>
                 </span>
                 <span class="level-end">
-                    <span class="level-item tag">1</span>
+                    <span class="level-item tag">2</span>
                 </span>
             </a>
         </li>
@@ -723,7 +798,7 @@
                 <div class="control">
                     <a class="tags has-addons" href="/tags/tree/">
                         <span class="tag">tree</span>
-                        <span class="tag is-grey">1</span>
+                        <span class="tag is-grey">2</span>
                     </a>
                 </div>
                 
@@ -758,14 +833,14 @@
                 <div class="control">
                     <a class="tags has-addons" href="/tags/%E6%8B%9B%E8%81%98%E7%AC%94%E8%AF%95/">
                         <span class="tag">招聘笔试</span>
-                        <span class="tag is-grey">1</span>
+                        <span class="tag is-grey">2</span>
                     </a>
                 </div>
                 
                 <div class="control">
                     <a class="tags has-addons" href="/tags/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/">
                         <span class="tag">数据结构</span>
-                        <span class="tag is-grey">1</span>
+                        <span class="tag is-grey">2</span>
                     </a>
                 </div>
                 
@@ -779,7 +854,7 @@
         <h3 class="menu-label">
             标签云
         </h3>
-        <a href="/tags/eureka/" style="font-size: 10px;">eureka</a> <a href="/tags/feign/" style="font-size: 10px;">feign</a> <a href="/tags/http/" style="font-size: 10px;">http</a> <a href="/tags/hystrix/" style="font-size: 10px;">hystrix</a> <a href="/tags/json/" style="font-size: 10px;">json</a> <a href="/tags/markdown/" style="font-size: 10px;">markdown</a> <a href="/tags/maven/" style="font-size: 10px;">maven</a> <a href="/tags/mysql/" style="font-size: 10px;">mysql</a> <a href="/tags/ribbon/" style="font-size: 10px;">ribbon</a> <a href="/tags/spring/" style="font-size: 13.33px;">spring</a> <a href="/tags/springcloud/" style="font-size: 10px;">springcloud</a> <a href="/tags/springmvc/" style="font-size: 16.67px;">springmvc</a> <a href="/tags/tree/" style="font-size: 10px;">tree</a> <a href="/tags/zuul/" style="font-size: 10px;">zuul</a> <a href="/tags/%E4%BA%A4%E4%BA%92/" style="font-size: 10px;">交互</a> <a href="/tags/%E5%9D%91/" style="font-size: 10px;">坑</a> <a href="/tags/%E5%BC%80%E5%8F%91/" style="font-size: 20px;">开发</a> <a href="/tags/%E6%8B%9B%E8%81%98%E7%AC%94%E8%AF%95/" style="font-size: 10px;">招聘笔试</a> <a href="/tags/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/" style="font-size: 10px;">数据结构</a>
+        <a href="/tags/eureka/" style="font-size: 10px;">eureka</a> <a href="/tags/feign/" style="font-size: 10px;">feign</a> <a href="/tags/http/" style="font-size: 10px;">http</a> <a href="/tags/hystrix/" style="font-size: 10px;">hystrix</a> <a href="/tags/json/" style="font-size: 10px;">json</a> <a href="/tags/markdown/" style="font-size: 10px;">markdown</a> <a href="/tags/maven/" style="font-size: 10px;">maven</a> <a href="/tags/mysql/" style="font-size: 10px;">mysql</a> <a href="/tags/ribbon/" style="font-size: 10px;">ribbon</a> <a href="/tags/spring/" style="font-size: 13.33px;">spring</a> <a href="/tags/springcloud/" style="font-size: 10px;">springcloud</a> <a href="/tags/springmvc/" style="font-size: 16.67px;">springmvc</a> <a href="/tags/tree/" style="font-size: 13.33px;">tree</a> <a href="/tags/zuul/" style="font-size: 10px;">zuul</a> <a href="/tags/%E4%BA%A4%E4%BA%92/" style="font-size: 10px;">交互</a> <a href="/tags/%E5%9D%91/" style="font-size: 10px;">坑</a> <a href="/tags/%E5%BC%80%E5%8F%91/" style="font-size: 20px;">开发</a> <a href="/tags/%E6%8B%9B%E8%81%98%E7%AC%94%E8%AF%95/" style="font-size: 13.33px;">招聘笔试</a> <a href="/tags/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/" style="font-size: 13.33px;">数据结构</a>
     </div>
 </div>
         
@@ -802,6 +877,25 @@
         
         <article class="media">
             
+            <a href="/2020/07/11/%E6%A0%B9%E6%8D%AE%E4%B8%A4%E5%BA%8F%E9%81%8D%E5%8E%86%E6%8E%A8%E5%87%BA%E6%A0%91%E7%9A%84%E5%BD%A2%E7%8A%B6/" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="images/loading.gif" data-original="/headImg/head12.jpg" alt="根据两序遍历推出树的形状">
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2020-07-11T10:22:36.000Z">2020-07-11</time></div>
+                    <a href="/2020/07/11/%E6%A0%B9%E6%8D%AE%E4%B8%A4%E5%BA%8F%E9%81%8D%E5%8E%86%E6%8E%A8%E5%87%BA%E6%A0%91%E7%9A%84%E5%BD%A2%E7%8A%B6/" class="title has-link-black-ter is-size-6 has-text-weight-normal">根据两序遍历推出树的形状</a>
+                    <p class="is-size-7 is-uppercase">
+                        <a class="has-link-grey -link" href="/categories/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/">数据结构</a>
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+        <article class="media">
+            
             <a href="/2020/07/11/Java%E5%AE%9E%E7%8E%B0%E6%A0%91%E7%9A%84%E9%81%8D%E5%8E%86%E5%8F%8A%E4%BA%8C%E5%8F%89%E6%A0%91%E5%8F%AF%E8%A7%86%E5%8C%96/" class="media-left">
                 <p class="image is-64x64">
                     <img class="thumbnail" src="images/loading.gif" data-original="/headImg/head11.jpg" alt="Java实现树的遍历及二叉树可视化">
@@ -861,7 +955,7 @@
             
             <a href="/2020/06/27/SpringCloud%E7%AC%94%E8%AE%B0/" class="media-left">
                 <p class="image is-64x64">
-                    <img class="thumbnail" src="images/loading.gif" data-original="/headImg/head7.jpg" alt="SpringCloud笔记">
+                    <img class="thumbnail" src="images/loading.gif" data-original="/headImg/head6.jpg" alt="SpringCloud笔记">
                 </p>
             </a>
             
@@ -871,25 +965,6 @@
                     <a href="/2020/06/27/SpringCloud%E7%AC%94%E8%AE%B0/" class="title has-link-black-ter is-size-6 has-text-weight-normal">SpringCloud笔记</a>
                     <p class="is-size-7 is-uppercase">
                         <a class="has-link-grey -link" href="/categories/SpringCloud/">SpringCloud</a>
-                    </p>
-                </div>
-            </div>
-        </article>
-        
-        <article class="media">
-            
-            <a href="/2020/04/02/maven%E7%AC%94%E8%AE%B0/" class="media-left">
-                <p class="image is-64x64">
-                    <img class="thumbnail" src="images/loading.gif" data-original="/headImg/head8.jpg" alt="maven笔记">
-                </p>
-            </a>
-            
-            <div class="media-content">
-                <div class="content">
-                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2020-04-02T12:32:21.000Z">2020-04-02</time></div>
-                    <a href="/2020/04/02/maven%E7%AC%94%E8%AE%B0/" class="title has-link-black-ter is-size-6 has-text-weight-normal">maven笔记</a>
-                    <p class="is-size-7 is-uppercase">
-                        <a class="has-link-grey -link" href="/categories/Maven/">Maven</a>
                     </p>
                 </div>
             </div>
@@ -912,7 +987,7 @@
                     <span class="level-item">七月 2020</span>
                 </span>
                 <span class="level-end">
-                    <span class="level-item tag">1</span>
+                    <span class="level-item tag">2</span>
                 </span>
             </a>
         </li>
@@ -1050,7 +1125,7 @@
                 <div class="control">
                     <a class="tags has-addons" href="/tags/tree/">
                         <span class="tag">tree</span>
-                        <span class="tag is-grey">1</span>
+                        <span class="tag is-grey">2</span>
                     </a>
                 </div>
                 
@@ -1085,14 +1160,14 @@
                 <div class="control">
                     <a class="tags has-addons" href="/tags/%E6%8B%9B%E8%81%98%E7%AC%94%E8%AF%95/">
                         <span class="tag">招聘笔试</span>
-                        <span class="tag is-grey">1</span>
+                        <span class="tag is-grey">2</span>
                     </a>
                 </div>
                 
                 <div class="control">
                     <a class="tags has-addons" href="/tags/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/">
                         <span class="tag">数据结构</span>
-                        <span class="tag is-grey">1</span>
+                        <span class="tag is-grey">2</span>
                     </a>
                 </div>
                 
@@ -1106,7 +1181,7 @@
         <h3 class="menu-label">
             标签云
         </h3>
-        <a href="/tags/eureka/" style="font-size: 10px;">eureka</a> <a href="/tags/feign/" style="font-size: 10px;">feign</a> <a href="/tags/http/" style="font-size: 10px;">http</a> <a href="/tags/hystrix/" style="font-size: 10px;">hystrix</a> <a href="/tags/json/" style="font-size: 10px;">json</a> <a href="/tags/markdown/" style="font-size: 10px;">markdown</a> <a href="/tags/maven/" style="font-size: 10px;">maven</a> <a href="/tags/mysql/" style="font-size: 10px;">mysql</a> <a href="/tags/ribbon/" style="font-size: 10px;">ribbon</a> <a href="/tags/spring/" style="font-size: 13.33px;">spring</a> <a href="/tags/springcloud/" style="font-size: 10px;">springcloud</a> <a href="/tags/springmvc/" style="font-size: 16.67px;">springmvc</a> <a href="/tags/tree/" style="font-size: 10px;">tree</a> <a href="/tags/zuul/" style="font-size: 10px;">zuul</a> <a href="/tags/%E4%BA%A4%E4%BA%92/" style="font-size: 10px;">交互</a> <a href="/tags/%E5%9D%91/" style="font-size: 10px;">坑</a> <a href="/tags/%E5%BC%80%E5%8F%91/" style="font-size: 20px;">开发</a> <a href="/tags/%E6%8B%9B%E8%81%98%E7%AC%94%E8%AF%95/" style="font-size: 10px;">招聘笔试</a> <a href="/tags/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/" style="font-size: 10px;">数据结构</a>
+        <a href="/tags/eureka/" style="font-size: 10px;">eureka</a> <a href="/tags/feign/" style="font-size: 10px;">feign</a> <a href="/tags/http/" style="font-size: 10px;">http</a> <a href="/tags/hystrix/" style="font-size: 10px;">hystrix</a> <a href="/tags/json/" style="font-size: 10px;">json</a> <a href="/tags/markdown/" style="font-size: 10px;">markdown</a> <a href="/tags/maven/" style="font-size: 10px;">maven</a> <a href="/tags/mysql/" style="font-size: 10px;">mysql</a> <a href="/tags/ribbon/" style="font-size: 10px;">ribbon</a> <a href="/tags/spring/" style="font-size: 13.33px;">spring</a> <a href="/tags/springcloud/" style="font-size: 10px;">springcloud</a> <a href="/tags/springmvc/" style="font-size: 16.67px;">springmvc</a> <a href="/tags/tree/" style="font-size: 13.33px;">tree</a> <a href="/tags/zuul/" style="font-size: 10px;">zuul</a> <a href="/tags/%E4%BA%A4%E4%BA%92/" style="font-size: 10px;">交互</a> <a href="/tags/%E5%9D%91/" style="font-size: 10px;">坑</a> <a href="/tags/%E5%BC%80%E5%8F%91/" style="font-size: 20px;">开发</a> <a href="/tags/%E6%8B%9B%E8%81%98%E7%AC%94%E8%AF%95/" style="font-size: 13.33px;">招聘笔试</a> <a href="/tags/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/" style="font-size: 13.33px;">数据结构</a>
     </div>
 </div>
     

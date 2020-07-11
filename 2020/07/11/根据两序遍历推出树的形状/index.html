@@ -7,37 +7,25 @@
 
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
 
-<title>标签 - 小温 blog</title>
+<title>根据两序遍历推出树的形状 - 小温 blog</title>
 
 
-    <meta property="og:type" content="website">
-<meta property="og:title" content="小温 blog">
-<meta property="og:url" content="http://wjw.today/tags/index.html">
+    <meta name="description" content="前言：太久了都快忘了，最近做了一下笔试题遇到这题，发现经常考这种题，先把技巧记录下来，有了技巧后简直不要太轻松  1. 树的三种遍历 前序遍历（根左右）  中序遍历（左根右）  后序遍历（左右根）     具体参考这篇博客，不展开了http:&#x2F;&#x2F;wjw.today&#x2F;2020&#x2F;07&#x2F;11&#x2F;Java实现树的遍历及二叉树可视化&#x2F;    2. 前+中–&gt;后不绕弯子，直接给出技巧再做题   看前序遍">
+<meta property="og:type" content="article">
+<meta property="og:title" content="根据两序遍历推出树的形状">
+<meta property="og:url" content="http://wjw.today/2020/07/11/%E6%A0%B9%E6%8D%AE%E4%B8%A4%E5%BA%8F%E9%81%8D%E5%8E%86%E6%8E%A8%E5%87%BA%E6%A0%91%E7%9A%84%E5%BD%A2%E7%8A%B6/index.html">
 <meta property="og:site_name" content="小温 blog">
+<meta property="og:description" content="前言：太久了都快忘了，最近做了一下笔试题遇到这题，发现经常考这种题，先把技巧记录下来，有了技巧后简直不要太轻松  1. 树的三种遍历 前序遍历（根左右）  中序遍历（左根右）  后序遍历（左右根）     具体参考这篇博客，不展开了http:&#x2F;&#x2F;wjw.today&#x2F;2020&#x2F;07&#x2F;11&#x2F;Java实现树的遍历及二叉树可视化&#x2F;    2. 前+中–&gt;后不绕弯子，直接给出技巧再做题   看前序遍">
 <meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="http://wjw.today/images/og_image.png">
+<meta property="og:image" content="http://wjw.today/headImg/head12.jpg">
+<meta property="article:published_time" content="2020-07-11T10:22:36.000Z">
+<meta property="article:modified_time" content="2020-07-11T10:22:36.753Z">
 <meta property="article:author" content="wjw">
-<meta property="article:tag" content="springmvc">
-<meta property="article:tag" content="开发">
-<meta property="article:tag" content="json">
-<meta property="article:tag" content="交互">
-<meta property="article:tag" content="坑">
-<meta property="article:tag" content="spring">
-<meta property="article:tag" content="markdown">
-<meta property="article:tag" content="maven">
-<meta property="article:tag" content="springcloud">
-<meta property="article:tag" content="zuul">
-<meta property="article:tag" content="eureka">
-<meta property="article:tag" content="ribbon">
-<meta property="article:tag" content="hystrix">
-<meta property="article:tag" content="feign">
-<meta property="article:tag" content="mysql">
-<meta property="article:tag" content="http">
 <meta property="article:tag" content="数据结构">
 <meta property="article:tag" content="招聘笔试">
 <meta property="article:tag" content="tree">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="http://wjw.today/images/og_image.png">
+<meta name="twitter:image" content="http://wjw.today/headImg/head12.jpg">
 
 
 
@@ -95,7 +83,7 @@
         <div class="navbar-brand is-flex-center">
             <a class="navbar-item navbar-logo" href="/">
             
-                <img src="images/loading.gif" data-original="/images/logo.png" alt="小温 blog" height="28">
+                <img src="images/loading.gif" data-original="/images/logo.png" alt="根据两序遍历推出树的形状" height="28">
             
             </a>
         </div>
@@ -112,7 +100,7 @@
                 <a class="navbar-item"
                 href="/categories">分类</a>
                 
-                <a class="navbar-item is-active"
+                <a class="navbar-item"
                 href="/tags">标签</a>
                 
                 <a class="navbar-item"
@@ -131,6 +119,10 @@
                     
                 
                 
+                <a class="navbar-item is-hidden-tablet catalogue" title="目录" href="javascript:;">
+                    <i class="fas fa-list-ul"></i>
+                </a>
+                
                 
                 <a class="navbar-item search" title="搜索" href="javascript:;">
                     <i class="fas fa-search"></i>
@@ -144,151 +136,204 @@
     <section class="section">
         <div class="container">
             <div class="columns">
-                <div class="column is-8-tablet is-8-desktop is-6-widescreen has-order-2 column-main"><div class="card widget">
-    <div class="card-content">
-        <div class="menu">
-            <h3 class="menu-label">
-                标签
-            </h3>
-            <div class="field is-grouped is-grouped-multiline">
+                <div class="column is-8-tablet is-8-desktop is-6-widescreen has-order-2 column-main">
+<div class="card">
+    
+    <div class="card-image">
+        <span  class="image is-7by1">
+            <img class="thumbnail" src="images/loading.gif" data-original="/headImg/head12.jpg" alt="根据两序遍历推出树的形状">
+        </span>
+    </div>
+    
+    <div class="card-content article ">
+        
+        <div class="level article-meta is-size-7 is-uppercase is-mobile is-overflow-x-auto">
+            <div class="level-left">
+                <time class="level-item has-text-grey" datetime="2020-07-11T10:22:36.000Z">2020-07-11</time>
                 
-                <div class="control">
-                    <a class="tags has-addons" href="/tags/eureka/">
-                        <span class="tag">eureka</span>
-                        <span class="tag is-grey">1</span>
-                    </a>
+                <div class="level-item">
+                <a class="has-link-grey -link" href="/categories/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/">数据结构</a>
                 </div>
                 
-                <div class="control">
-                    <a class="tags has-addons" href="/tags/feign/">
-                        <span class="tag">feign</span>
-                        <span class="tag is-grey">1</span>
-                    </a>
-                </div>
                 
-                <div class="control">
-                    <a class="tags has-addons" href="/tags/http/">
-                        <span class="tag">http</span>
-                        <span class="tag is-grey">1</span>
-                    </a>
-                </div>
+                <span class="level-item has-text-grey">
+                    
+                    
+                    7 分钟 读完 (大约 1092 个字)
+                </span>
                 
-                <div class="control">
-                    <a class="tags has-addons" href="/tags/hystrix/">
-                        <span class="tag">hystrix</span>
-                        <span class="tag is-grey">1</span>
-                    </a>
-                </div>
-                
-                <div class="control">
-                    <a class="tags has-addons" href="/tags/json/">
-                        <span class="tag">json</span>
-                        <span class="tag is-grey">1</span>
-                    </a>
-                </div>
-                
-                <div class="control">
-                    <a class="tags has-addons" href="/tags/markdown/">
-                        <span class="tag">markdown</span>
-                        <span class="tag is-grey">1</span>
-                    </a>
-                </div>
-                
-                <div class="control">
-                    <a class="tags has-addons" href="/tags/maven/">
-                        <span class="tag">maven</span>
-                        <span class="tag is-grey">1</span>
-                    </a>
-                </div>
-                
-                <div class="control">
-                    <a class="tags has-addons" href="/tags/mysql/">
-                        <span class="tag">mysql</span>
-                        <span class="tag is-grey">1</span>
-                    </a>
-                </div>
-                
-                <div class="control">
-                    <a class="tags has-addons" href="/tags/ribbon/">
-                        <span class="tag">ribbon</span>
-                        <span class="tag is-grey">1</span>
-                    </a>
-                </div>
-                
-                <div class="control">
-                    <a class="tags has-addons" href="/tags/spring/">
-                        <span class="tag">spring</span>
-                        <span class="tag is-grey">2</span>
-                    </a>
-                </div>
-                
-                <div class="control">
-                    <a class="tags has-addons" href="/tags/springcloud/">
-                        <span class="tag">springcloud</span>
-                        <span class="tag is-grey">1</span>
-                    </a>
-                </div>
-                
-                <div class="control">
-                    <a class="tags has-addons" href="/tags/springmvc/">
-                        <span class="tag">springmvc</span>
-                        <span class="tag is-grey">3</span>
-                    </a>
-                </div>
-                
-                <div class="control">
-                    <a class="tags has-addons" href="/tags/tree/">
-                        <span class="tag">tree</span>
-                        <span class="tag is-grey">2</span>
-                    </a>
-                </div>
-                
-                <div class="control">
-                    <a class="tags has-addons" href="/tags/zuul/">
-                        <span class="tag">zuul</span>
-                        <span class="tag is-grey">1</span>
-                    </a>
-                </div>
-                
-                <div class="control">
-                    <a class="tags has-addons" href="/tags/%E4%BA%A4%E4%BA%92/">
-                        <span class="tag">交互</span>
-                        <span class="tag is-grey">1</span>
-                    </a>
-                </div>
-                
-                <div class="control">
-                    <a class="tags has-addons" href="/tags/%E5%9D%91/">
-                        <span class="tag">坑</span>
-                        <span class="tag is-grey">1</span>
-                    </a>
-                </div>
-                
-                <div class="control">
-                    <a class="tags has-addons" href="/tags/%E5%BC%80%E5%8F%91/">
-                        <span class="tag">开发</span>
-                        <span class="tag is-grey">6</span>
-                    </a>
-                </div>
-                
-                <div class="control">
-                    <a class="tags has-addons" href="/tags/%E6%8B%9B%E8%81%98%E7%AC%94%E8%AF%95/">
-                        <span class="tag">招聘笔试</span>
-                        <span class="tag is-grey">2</span>
-                    </a>
-                </div>
-                
-                <div class="control">
-                    <a class="tags has-addons" href="/tags/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/">
-                        <span class="tag">数据结构</span>
-                        <span class="tag is-grey">2</span>
-                    </a>
-                </div>
                 
             </div>
         </div>
+        
+        <h1 class="title is-size-3 is-size-4-mobile has-text-weight-normal">
+            
+                根据两序遍历推出树的形状
+            
+        </h1>
+        <div class="content">
+            <blockquote>
+<p>前言：太久了都快忘了，最近做了一下笔试题遇到这题，发现经常考这种题，先把技巧记录下来，有了技巧后简直不要太轻松</p>
+</blockquote>
+<h1 id="1-树的三种遍历"><a href="#1-树的三种遍历" class="headerlink" title="1. 树的三种遍历"></a>1. 树的三种遍历</h1><ul>
+<li><p>前序遍历（根左右）</p>
+</li>
+<li><p>中序遍历（左根右）</p>
+</li>
+<li><p>后序遍历（左右根）</p>
+</li>
+</ul>
+<blockquote>
+<p> 具体参考这篇博客，不展开了<a href="http://wjw.today/2020/07/11/Java%E5%AE%9E%E7%8E%B0%E6%A0%91%E7%9A%84%E9%81%8D%E5%8E%86%E5%8F%8A%E4%BA%8C%E5%8F%89%E6%A0%91%E5%8F%AF%E8%A7%86%E5%8C%96/">http://wjw.today/2020/07/11/Java实现树的遍历及二叉树可视化/</a></p>
+</blockquote>
+<br>
+
+<h1 id="2-前-中–-gt-后"><a href="#2-前-中–-gt-后" class="headerlink" title="2. 前+中–&gt;后"></a>2. 前+中–&gt;后</h1><p>不绕弯子，直接给出技巧再做题</p>
+<blockquote>
+<ol>
+<li>看前序遍历：第一个为根节点</li>
+<li>看中序遍历：找到步骤1中的根节点，左边的全为左子树，右边的全为右子树</li>
+<li>将左子树看成独立的树，重复步骤1和2，直到只有一个元素，不用脑子就可以做出来啦！</li>
+</ol>
+</blockquote>
+<p>下面进入实战环节（牛客网原题）：</p>
+<p>对某二叉树进行先序遍历的结果是ABDEFC,中序遍历的结果是DBFEAC，则后序遍历的结果是（）</p>
+<ol>
+<li>（参照步骤1）发现根节点是A</li>
+<li>（参照步骤2）划分出左右子树</li>
+</ol>
+<p><img src="images/loading.gif" data-original="https://s1.ax1x.com/2020/07/10/UMWqyQ.png" alt=""></p>
+<ol start="3">
+<li><p>（参照步骤1）带着这些左子树看前序遍历，那么前序遍历的顺序是BDEF对吧，<strong>将左子树看成是一颗独立的树</strong>，于是此时由<strong>步骤1</strong>得根节点是B</p>
+</li>
+<li><p>（参照步骤2）在子树中继续划分出左右子树</p>
+</li>
+</ol>
+<p><img src="images/loading.gif" data-original="https://s1.ax1x.com/2020/07/10/UMhAgS.png" alt=""></p>
+<ol start="5">
+<li>还不明白？那么继续，只有一个字母的就直接填上去了，剩下FE，看前序遍历则是EF，既然已经知道是右子树，那么<strong>将右子树看成是一颗独立的树</strong>，（参照步骤1）于是此时由<strong>步骤1</strong>得根节点是E</li>
+<li>（参照步骤2）划分左右子树，发现只有左子树了，放哪就不必多说了</li>
+</ol>
+<p><img src="images/loading.gif" data-original="https://s1.ax1x.com/2020/07/10/UMhrvD.png" alt=""></p>
+<p>做多两题，发现掌握了技巧后画出树根本不需要脑子！</p>
+<p>画出树后，再做后序遍历就不难了，我就不说了，答案DFEBCA</p>
+<br>
+
+<h1 id="3-中-后–-gt-前"><a href="#3-中-后–-gt-前" class="headerlink" title="3. 中+后–&gt;前"></a>3. 中+后–&gt;前</h1><p>中序的作用仍然是划分左右子树，后序的作用其实跟前序一样，不过得反过来从后面开始看，最后一个才是根节点</p>
+<blockquote>
+<ol>
+<li>看后序遍历：最后一个为根节点</li>
+<li>看中序遍历：找到步骤1中的根节点，左边的全为左子树，右边的全为右子树</li>
+<li>将左子树看成独立的树，重复步骤1和2，直到只有一个元素，不用脑子就可以做出来啦！</li>
+</ol>
+</blockquote>
+<p>看题：</p>
+<p>中序遍历: GBEDAFCH</p>
+<p>后序遍历：GEDBFHCA</p>
+<p>我就直接来了</p>
+<ol>
+<li>看后序，根节点是A</li>
+<li>看中序，左边GBED右边FCH</li>
+</ol>
+<p><img src="images/loading.gif" data-original="https://s1.ax1x.com/2020/07/11/UM4QZd.png" alt=""></p>
+<ol start="3">
+<li><p>看后序，要先看右子树（因为后序是“左右根”，之前说了反过来看那么根完了到右），FHC说明根节点是C</p>
+</li>
+<li><p>看中序，左边F右边H，左右都只有一个了，完成</p>
+</li>
+</ol>
+<p><img src="images/loading.gif" data-original="https://s1.ax1x.com/2020/07/11/UM5Ewj.png" alt=""></p>
+<ol start="4">
+<li>看后序，GEDB说明根节点是B</li>
+<li>看中序，左边单G，右边ED</li>
+</ol>
+<p><img src="images/loading.gif" data-original="https://s1.ax1x.com/2020/07/11/UM5MlT.png" alt=""></p>
+<ol start="6">
+<li><p>看后序，是ED，说明D是根节点</p>
+</li>
+<li><p>看中序，左边E，完成</p>
+</li>
+</ol>
+<p><img src="images/loading.gif" data-original="https://s1.ax1x.com/2020/07/11/UM5r0H.png" alt=""></p>
+<br>
+
+<h1 id="4-前-后–-gt-无法确定"><a href="#4-前-后–-gt-无法确定" class="headerlink" title="4. 前+后–&gt;无法确定"></a>4. 前+后–&gt;无法确定</h1><p>这种情况树不唯一</p>
+<h1 id="5-java实现前序-中序推出树"><a href="#5-java实现前序-中序推出树" class="headerlink" title="5. java实现前序+中序推出树"></a>5. java实现前序+中序推出树</h1><p>实现的思路根上面自己思考的思路其实是一样的，不断重复步骤12的过程就是递归</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> Node&lt;Integer&gt; <span class="title">reConstructBinaryTree</span><span class="params">(<span class="keyword">int</span>[] pre, <span class="keyword">int</span>[] in)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">if</span> (pre.length == <span class="number">0</span> || in.length == <span class="number">0</span>) &#123;</span><br><span class="line">            <span class="keyword">return</span> <span class="keyword">null</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        Node&lt;Integer&gt; node = <span class="keyword">new</span> Node&lt;&gt;(pre[<span class="number">0</span>]);</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; in.length; i++) &#123;</span><br><span class="line">            <span class="keyword">if</span> (pre[<span class="number">0</span>] == in[i]) &#123;  <span class="comment">//中序中找到前序的根，划分左右子树</span></span><br><span class="line">                node.left = reConstructBinaryTree(Arrays.copyOfRange(pre, <span class="number">1</span>, i + <span class="number">1</span>), Arrays.copyOfRange(in, <span class="number">0</span>, i));</span><br><span class="line">                node.right = reConstructBinaryTree(Arrays.copyOfRange(pre, i + <span class="number">1</span>, pre.length), Arrays.copyOfRange(in, i + <span class="number">1</span>, in.length));</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> node;</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
+
+<p>搭配上个博客的可视化二叉树工具类一起食用，看看你做对了吗</p>
+<p><img src="images/loading.gif" data-original="https://s1.ax1x.com/2020/07/11/UMHaLT.png" alt=""></p>
+
+        </div>
+        
+        <div class="level is-size-7 is-uppercase">
+            <div class="level-start">
+                <div class="level-item">
+                    <span class="is-size-6 has-text-grey has-mr-7">#</span>
+                    <a class="has-link-grey -link" href="/tags/tree/" rel="tag">tree</a>, <a class="has-link-grey -link" href="/tags/%E6%8B%9B%E8%81%98%E7%AC%94%E8%AF%95/" rel="tag">招聘笔试</a>, <a class="has-link-grey -link" href="/tags/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/" rel="tag">数据结构</a>
+                </div>
+            </div>
+        </div>
+        
+        
+        
     </div>
-</div></div>
+</div>
+
+
+
+<div class="card">
+    <div class="card-content">
+        <h3 class="menu-label has-text-centered">喜欢这篇文章？打赏一下作者吧</h3>
+        <div class="buttons is-centered">
+            
+                
+<div class="notification is-danger">
+    You forgot to set the <code>qrcode</code> for Alipay. Please set it in <code>_config.yml</code>.
+</div>
+
+                
+                
+<div class="notification is-danger">
+    You forgot to set the <code>qrcode</code> for Wechat. Please set it in <code>_config.yml</code>.
+</div>
+
+                
+                <!-- Visit https://www.paypal.com/donate/buttons/ to get your donate button -->
+
+<div class="notification is-danger">
+    You forgot to set the <code>business</code> and <code>currency_code</code> for Paypal. Please set it in <code>_config.yml</code>.
+</div>
+
+                
+                
+<div class="notification is-danger">
+    You forgot to set the <code>url</code> Patreon. Please set it in <code>_config.yml</code>.
+</div>
+
+                
+        </div>
+    </div>
+</div>
+
+
+
+<div class="card card-transparent">
+    <div class="level post-navigation is-flex-wrap is-mobile">
+        
+        
+        <div class="level-end">
+            <a class="level level-item has-link-grey  article-nav-next" href="/2020/07/11/Java%E5%AE%9E%E7%8E%B0%E6%A0%91%E7%9A%84%E9%81%8D%E5%8E%86%E5%8F%8A%E4%BA%8C%E5%8F%89%E6%A0%91%E5%8F%AF%E8%A7%86%E5%8C%96/">
+                <span class="level-item">Java实现树的遍历及二叉树可视化</span>
+                <i class="level-item fas fa-chevron-right"></i>
+            </a>
+        </div>
+        
+    </div>
+</div>
+
+
+</div>
                 
 
 
@@ -382,6 +427,43 @@
 </div>
     
         
+
+    <div class="card widget" id="toc">
+        <div class="card-content">
+            <div class="menu">
+                <h3 class="menu-label">
+                    目录
+                </h3>
+                <ul class="menu-list"><li>
+        <a class="is-flex" href="#1-树的三种遍历">
+        <!-- 目录是否自动编号 -->
+        <!-- <span class="has-mr-6">1</span> -->
+        <span>1. 树的三种遍历</span>
+        </a></li><li>
+        <a class="is-flex" href="#2-前-中–-gt-后">
+        <!-- 目录是否自动编号 -->
+        <!-- <span class="has-mr-6">2</span> -->
+        <span>2. 前+中–>后</span>
+        </a></li><li>
+        <a class="is-flex" href="#3-中-后–-gt-前">
+        <!-- 目录是否自动编号 -->
+        <!-- <span class="has-mr-6">3</span> -->
+        <span>3. 中+后–>前</span>
+        </a></li><li>
+        <a class="is-flex" href="#4-前-后–-gt-无法确定">
+        <!-- 目录是否自动编号 -->
+        <!-- <span class="has-mr-6">4</span> -->
+        <span>4. 前+后–>无法确定</span>
+        </a></li><li>
+        <a class="is-flex" href="#5-java实现前序-中序推出树">
+        <!-- 目录是否自动编号 -->
+        <!-- <span class="has-mr-6">5</span> -->
+        <span>5. java实现前序+中序推出树</span>
+        </a></li></ul>
+            </div>
+        </div>
+    </div>
+
     
         <div class="card widget">
     <div class="card-content">
@@ -1144,7 +1226,7 @@
             <div class="level-start has-text-centered-mobile">
                 <a class="footer-logo is-block has-mb-6" href="/">
                 
-                    <img src="images/loading.gif" data-original="/images/logo.png" alt="小温 blog" height="28">
+                    <img src="images/loading.gif" data-original="/images/logo.png" alt="根据两序遍历推出树的形状" height="28">
                 
                 </a>
                 <p class="is-size-7">
