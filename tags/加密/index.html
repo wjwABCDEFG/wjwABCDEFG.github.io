@@ -7,12 +7,12 @@
 
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
 
-<title>标签: json - 小温 blog</title>
+<title>标签: 加密 - 小温 blog</title>
 
 
     <meta property="og:type" content="website">
 <meta property="og:title" content="小温 blog">
-<meta property="og:url" content="http://wjw.today/tags/json/index.html">
+<meta property="og:url" content="http://wjw.today/tags/%E5%8A%A0%E5%AF%86/index.html">
 <meta property="og:site_name" content="小温 blog">
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="http://wjw.today/images/og_image.png">
@@ -130,7 +130,7 @@
         <nav class="breadcrumb" aria-label="breadcrumbs">
         <ul>
             <li><a href="/tags">标签</a></li>
-            <li class="is-active"><a href="#" aria-current="page">json</a></li>
+            <li class="is-active"><a href="#" aria-current="page">加密</a></li>
         </ul>
         </nav>
     </div>
@@ -140,8 +140,8 @@
 <div class="card">
     
     <div class="card-image">
-        <a href="/2020/03/09/SpringMVC%E6%8E%A5%E6%94%B6%E5%89%8D%E7%AB%AF%E5%8F%82%E6%95%B0%E4%B8%BAnull%E7%9A%84%E6%8E%A2%E7%B4%A2/" class="image is-7by1">
-            <img class="thumbnail" src="images/loading.gif" data-original="https://s1.ax1x.com/2020/07/24/UvDe2j.md.jpg" alt="SpringMVC接收前端参数为null的探索">
+        <a href="/2020/07/24/JWT+RSA%E9%9D%9E%E5%AF%B9%E7%A7%B0%E5%8A%A0%E5%AF%86%E5%AE%9E%E7%8E%B0%E6%97%A0%E7%8A%B6%E6%80%81%E7%99%BB%E5%BD%95/" class="image is-7by1">
+            <img class="thumbnail" src="images/loading.gif" data-original="https://s1.ax1x.com/2020/07/24/Uvr2hF.md.jpg" alt="JWT+RSA非对称加密实现无状态登录">
         </a>
     </div>
     
@@ -149,17 +149,17 @@
         
         <div class="level article-meta is-size-7 is-uppercase is-mobile is-overflow-x-auto">
             <div class="level-left">
-                <time class="level-item has-text-grey" datetime="2020-03-09T07:46:13.000Z">2020-03-09</time>
+                <time class="level-item has-text-grey" datetime="2020-07-24T09:34:21.000Z">2020-07-24</time>
                 
                 <div class="level-item">
-                <a class="has-link-grey -link" href="/categories/SpringMVC/">SpringMVC</a>&nbsp;/&nbsp;<a class="has-link-grey -link" href="/categories/%E5%89%8D%E7%AB%AF/">前端</a>
+                <a class="has-link-grey -link" href="/categories/SpringCloud/">SpringCloud</a>
                 </div>
                 
                 
                 <span class="level-item has-text-grey">
                     
                     
-                    8 分钟 读完 (大约 1170 个字)
+                    18 分钟 读完 (大约 2636 个字)
                 </span>
                 
                 
@@ -168,27 +168,18 @@
         
         <h1 class="title is-size-3 is-size-4-mobile has-text-weight-normal">
             
-                <a class="has-link-black-ter" href="/2020/03/09/SpringMVC%E6%8E%A5%E6%94%B6%E5%89%8D%E7%AB%AF%E5%8F%82%E6%95%B0%E4%B8%BAnull%E7%9A%84%E6%8E%A2%E7%B4%A2/">SpringMVC接收前端参数为null的探索</a>
+                <a class="has-link-black-ter" href="/2020/07/24/JWT+RSA%E9%9D%9E%E5%AF%B9%E7%A7%B0%E5%8A%A0%E5%AF%86%E5%AE%9E%E7%8E%B0%E6%97%A0%E7%8A%B6%E6%80%81%E7%99%BB%E5%BD%95/">JWT+RSA非对称加密实现无状态登录</a>
             
         </h1>
         <div class="content">
-            <p>在使用SpringMVC时接收前端参数有时后会<strong>无法封装，获得null值，报415错误</strong>的问题，原因就是有时候我们搞不懂json对象、json字符串、参数字符串之间的区别。</p>
-<ul>
-<li><p>提交方式：form/url，ajax</p>
-</li>
-<li><p>请求方式：get，post</p>
-</li>
-<li><p>接收方式：一个个参数接收，封装实体类(Bean类型)</p>
-</li>
-</ul>
-<p>文章将会排列组合= =，举例说明各种搭配如何成功接收数据。</p>
+            <h1 id="1-问题"><a href="#1-问题" class="headerlink" title="1. 问题"></a>1. 问题</h1><p>以前我们的登录都是将当前登录的用户信息放在session中，但是session是保存在服务器的，在分布式环境下服务器不只有一台，那就容易找不到登录的用户信息，所以应该是保存在客户端也就是cookie中的，但是存在cookie中有个问题，就是要进行一些操作时需要获取当前登录的用户信息，那么要将cookie中的user发送过去，这一来二去老是携带着明文的用户名和密码，就很不安全，会被人用一些技术手段拦截，那么就获取了你的账号密码信息。</p>
         </div>
         
         
         <div class="level is-mobile">
             <div class="level-start">
                 <div class="level-item">
-                <a class="button is-size-7 is-light" href="/2020/03/09/SpringMVC%E6%8E%A5%E6%94%B6%E5%89%8D%E7%AB%AF%E5%8F%82%E6%95%B0%E4%B8%BAnull%E7%9A%84%E6%8E%A2%E7%B4%A2/#more">阅读更多</a>
+                <a class="button is-size-7 is-light" href="/2020/07/24/JWT+RSA%E9%9D%9E%E5%AF%B9%E7%A7%B0%E5%8A%A0%E5%AF%86%E5%AE%9E%E7%8E%B0%E6%97%A0%E7%8A%B6%E6%80%81%E7%99%BB%E5%BD%95/#more">阅读更多</a>
                 </div>
             </div>
         </div>

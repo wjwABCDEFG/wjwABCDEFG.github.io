@@ -17,14 +17,14 @@
 <meta property="og:site_name" content="小温 blog">
 <meta property="og:description" content="1. SpringMVC的文件上传1.1 文件上传的必要前提 form表单的enctype取值必须是：muitipart&#x2F;form-data（默认值是：application&#x2F;x-www-form-urlencoded），enctype：是表单请求正文的类型  必须是POST请求  html中通过&lt;input type&#x3D;&quot;file&quot; &#x2F;&gt; 来提交  commons-">
 <meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="http://wjw.today/headImg/head4.jpg">
+<meta property="og:image" content="https://s1.ax1x.com/2020/07/24/UvrckT.md.jpg">
 <meta property="article:published_time" content="2020-03-13T18:20:39.000Z">
-<meta property="article:modified_time" content="2020-03-19T16:46:22.908Z">
+<meta property="article:modified_time" content="2020-07-24T10:49:46.619Z">
 <meta property="article:author" content="wjw">
 <meta property="article:tag" content="springmvc">
 <meta property="article:tag" content="开发">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="http://wjw.today/headImg/head4.jpg">
+<meta name="twitter:image" content="https://s1.ax1x.com/2020/07/24/UvrckT.md.jpg">
 
 
 
@@ -140,7 +140,7 @@
     
     <div class="card-image">
         <span  class="image is-7by1">
-            <img class="thumbnail" src="images/loading.gif" data-original="/headImg/head4.jpg" alt="SpringMVC入门笔记2">
+            <img class="thumbnail" src="images/loading.gif" data-original="https://s1.ax1x.com/2020/07/24/UvrckT.md.jpg" alt="SpringMVC入门笔记2">
         </span>
     </div>
     
@@ -158,7 +158,7 @@
                 <span class="level-item has-text-grey">
                     
                     
-                    10 分钟 读完 (大约 1540 个字)
+                    12 分钟 读完 (大约 1750 个字)
                 </span>
                 
                 
@@ -310,7 +310,9 @@
   <br/>
 
 <h1 id="3-SpringMVC拦截器"><a href="#3-SpringMVC拦截器" class="headerlink" title="3. SpringMVC拦截器"></a>3. SpringMVC拦截器</h1><p>跟servlet中的过滤器filter一样，改名拦截器。有一丢丢不同，拦截器不会拦jsp，html，css，images等静态资源，但是过滤器如果配置了/*，全部都会拦下来。</p>
-<p>springmvc.xml中</p>
+<h2 id="3-1-xml方式"><a href="#3-1-xml方式" class="headerlink" title="3.1 xml方式"></a>3.1 xml方式</h2><ol>
+<li>springmvc.xml中</li>
+</ol>
 <figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">&lt;!--配置拦截器--&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">mvc:interceptors</span>&gt;</span></span><br><span class="line">    <span class="comment">&lt;!--配置每个拦截器--&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">mvc:interceptor</span>&gt;</span></span><br><span class="line">        <span class="comment">&lt;!--拦截具体方法--&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">mvc:mapping</span> <span class="attr">path</span>=<span class="string">"/user/*"</span>/&gt;</span></span><br><span class="line">        <span class="comment">&lt;!--不拦截的方法--&gt;</span></span><br><span class="line">        <span class="comment">&lt;!--&lt;mvc:exclude-mapping path=""/&gt;--&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">bean</span> <span class="attr">class</span>=<span class="string">"com.wjw.interceptor.MyInterceptor"</span>/&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">mvc:interceptor</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">mvc:interceptors</span>&gt;</span></span><br></pre></td></tr></table></figure>
 
 <ul>
@@ -318,17 +320,35 @@
 </li>
 <li><p>mvc:mapping和mvc:exclude-mapping是一组相对的标签，设置拦截路径和不拦截路径</p>
 <br/>
-
 </li>
 </ul>
-<p>自定义拦截器类</p>
+<ol start="2">
+<li>自定义拦截器类</li>
+</ol>
 <ul>
-<li>继承HandlerInterceptor</li>
+<li>实现HandlerInterceptor接口</li>
 <li>preHandle：预处理 controller方法前执行</li>
 <li>postHandle：后处理 controller方法后，jsp/html执行之前</li>
 <li>afterCompletion：最后处理 页面执行后执行的方法</li>
 </ul>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">MyInterceptor</span> <span class="keyword">implements</span> <span class="title">HandlerInterceptor</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * 预处理 controller方法前执行</span></span><br><span class="line"><span class="comment">     * return true为放行，执行下一个拦截器或controller方法</span></span><br><span class="line"><span class="comment">     * return false则不放行，可以通过request和response来跳转</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@param</span> request</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@param</span> response</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@param</span> handler</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@return</span></span></span><br><span class="line"><span class="comment">     * <span class="doctag">@throws</span> Exception</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">boolean</span> <span class="title">preHandle</span><span class="params">(HttpServletRequest request, HttpServletResponse response, Object handler)</span> <span class="keyword">throws</span> Exception </span>&#123;</span><br><span class="line">        System.out.println(<span class="string">"拦截器预处理运行了"</span>);</span><br><span class="line">        <span class="comment">//request.getRequestDispatcher("/WEB-INF/pages/error.jsp").forward(request, response);</span></span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">true</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * 后处理 controller方法后，jsp/html执行之前</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@param</span> request</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@param</span> response</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@param</span> handler</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@param</span> modelAndView</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@throws</span> Exception</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">postHandle</span><span class="params">(HttpServletRequest request, HttpServletResponse response, Object handler, ModelAndView modelAndView)</span> <span class="keyword">throws</span> Exception </span>&#123;</span><br><span class="line">        System.out.println(<span class="string">"拦截器后处理"</span>);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * 页面执行后执行的方法</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@param</span> request</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@param</span> response</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@param</span> handler</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@param</span> ex</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@throws</span> Exception</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">afterCompletion</span><span class="params">(HttpServletRequest request, HttpServletResponse response, Object handler, Exception ex)</span> <span class="keyword">throws</span> Exception </span>&#123;</span><br><span class="line">		System.out.println(<span class="string">"afterCompletion方法"</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>实现HandlerInterceptor接口需要实现三个方法，为了偷懒，可以</p>
+<p><code>extends HandlerInterceptorAdapter</code></p>
+<p>HandlerInterceptorAdapter是HandlerInterceptor接口的默认实现类，那么你需要哪个方法就overwrite哪个方法就行，其他写法上是一样的。</p>
+<br>
+
+<h2 id="不使用xml的方式"><a href="#不使用xml的方式" class="headerlink" title="不使用xml的方式"></a>不使用xml的方式</h2><p>spring当然也支持java配置类的方式，何况如果使用了springboot使用java配置类就更多了</p>
+<ol>
+<li>拦截器还是跟上面一样实现HandlerInterceptor接口或者继承HandlerInterceptorAdapte类，但是要在类上方加上@Component注解</li>
+</ol>
+<p><img src="images/loading.gif" data-original="https://s1.ax1x.com/2020/07/22/UHBn2T.png" alt=""></p>
+<ol start="2">
+<li>xml不需要了，创建一个java配置类，实现WebMvcConfigurer接口，复写addInterceptors方法，具体代码如下：</li>
+</ol>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Configuration</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">WjwMvcConfiguration</span> <span class="keyword">implements</span> <span class="title">WebMvcConfigurer</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Autowired</span></span><br><span class="line">    <span class="keyword">private</span> LoginInterceptor loginInterceptor;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">addInterceptors</span><span class="params">(InterceptorRegistry registry)</span> </span>&#123;</span><br><span class="line">        registry.addInterceptor(loginInterceptor).addPathPatterns(<span class="string">"/**"</span>);   <span class="comment">//拦截所有路径</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
         </div>
         
         <div class="level is-size-7 is-uppercase">
@@ -412,7 +432,7 @@
                     </p>
                     <a href="/archives">
                         <p class="title has-text-weight-normal">
-                            14
+                            16
                         </p>
                     </a>
                 </div>
@@ -436,7 +456,7 @@
                     </p>
                     <a href="/tags">
                         <p class="title has-text-weight-normal">
-                            21
+                            22
                         </p>
                     </a>
                 </div>
@@ -501,7 +521,17 @@
         <!-- 目录是否自动编号 -->
         <!-- <span class="has-mr-6">3</span> -->
         <span>3. SpringMVC拦截器</span>
-        </a></li></ul>
+        </a><ul class="menu-list"><li>
+        <a class="is-flex" href="#3-1-xml方式">
+        <!-- 目录是否自动编号 -->
+        <!-- <span class="has-mr-6">3.1</span> -->
+        <span>3.1 xml方式</span>
+        </a></li><li>
+        <a class="is-flex" href="#不使用xml的方式">
+        <!-- 目录是否自动编号 -->
+        <!-- <span class="has-mr-6">3.2</span> -->
+        <span>不使用xml的方式</span>
+        </a></li></ul></li></ul>
             </div>
         </div>
     </div>
@@ -537,7 +567,7 @@
                 <span class="level-item">Others</span>
             </span>
             <span class="level-end">
-                <span class="level-item tag">2</span>
+                <span class="level-item tag">3</span>
             </span>
         </a></li><li>
         <a class="level is-marginless" href="/categories/Spring/">
@@ -561,7 +591,7 @@
                 <span class="level-item">SpringCloud</span>
             </span>
             <span class="level-end">
-                <span class="level-item tag">2</span>
+                <span class="level-item tag">3</span>
             </span>
         </a></li><li>
         <a class="level is-marginless" href="/categories/SpringMVC/">
@@ -604,9 +634,47 @@
         
         <article class="media">
             
+            <a href="/2020/07/24/%E9%98%BF%E9%87%8C%E7%9F%AD%E4%BF%A1/" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="images/loading.gif" data-original="https://s1.ax1x.com/2020/07/24/Uvro0x.md.jpg" alt="阿里短信">
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2020-07-24T09:39:45.000Z">2020-07-24</time></div>
+                    <a href="/2020/07/24/%E9%98%BF%E9%87%8C%E7%9F%AD%E4%BF%A1/" class="title has-link-black-ter is-size-6 has-text-weight-normal">阿里短信</a>
+                    <p class="is-size-7 is-uppercase">
+                        <a class="has-link-grey -link" href="/categories/Others/">Others</a>
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+        <article class="media">
+            
+            <a href="/2020/07/24/JWT+RSA%E9%9D%9E%E5%AF%B9%E7%A7%B0%E5%8A%A0%E5%AF%86%E5%AE%9E%E7%8E%B0%E6%97%A0%E7%8A%B6%E6%80%81%E7%99%BB%E5%BD%95/" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="images/loading.gif" data-original="https://s1.ax1x.com/2020/07/24/Uvr2hF.md.jpg" alt="JWT+RSA非对称加密实现无状态登录">
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2020-07-24T09:34:21.000Z">2020-07-24</time></div>
+                    <a href="/2020/07/24/JWT+RSA%E9%9D%9E%E5%AF%B9%E7%A7%B0%E5%8A%A0%E5%AF%86%E5%AE%9E%E7%8E%B0%E6%97%A0%E7%8A%B6%E6%80%81%E7%99%BB%E5%BD%95/" class="title has-link-black-ter is-size-6 has-text-weight-normal">JWT+RSA非对称加密实现无状态登录</a>
+                    <p class="is-size-7 is-uppercase">
+                        <a class="has-link-grey -link" href="/categories/SpringCloud/">SpringCloud</a>
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+        <article class="media">
+            
             <a href="/2020/07/18/ribbon%E5%92%8Chytrix%E8%B6%85%E6%97%B6%E8%B8%A9%E5%9D%91%E8%AE%B0%E5%BD%95/" class="media-left">
                 <p class="image is-64x64">
-                    <img class="thumbnail" src="images/loading.gif" data-original="https://s1.ax1x.com/2020/07/20/UfQPtU.jpg" alt="ribbon和hytrix超时踩坑记录">
+                    <img class="thumbnail" src="images/loading.gif" data-original="https://s1.ax1x.com/2020/07/20/UfQPtU.md.jpg" alt="ribbon和hytrix超时踩坑记录">
                 </p>
             </a>
             
@@ -625,7 +693,7 @@
             
             <a href="/2020/07/14/fastDFS%E7%9A%84%E5%AE%89%E8%A3%85%E5%92%8Cspringboot%E5%AE%8C%E6%88%90%E6%96%87%E4%BB%B6%E4%B8%8A%E4%BC%A0/" class="media-left">
                 <p class="image is-64x64">
-                    <img class="thumbnail" src="images/loading.gif" data-original="/headImg/head13.jpg" alt="fastDFS的安装和springboot完成文件上传">
+                    <img class="thumbnail" src="images/loading.gif" data-original="https://s1.ax1x.com/2020/07/24/UvDxoT.md.jpg" alt="fastDFS的安装和springboot完成文件上传">
                 </p>
             </a>
             
@@ -644,7 +712,7 @@
             
             <a href="/2020/07/11/%E6%A0%B9%E6%8D%AE%E4%B8%A4%E5%BA%8F%E9%81%8D%E5%8E%86%E6%8E%A8%E5%87%BA%E6%A0%91%E7%9A%84%E5%BD%A2%E7%8A%B6/" class="media-left">
                 <p class="image is-64x64">
-                    <img class="thumbnail" src="images/loading.gif" data-original="/headImg/head12.jpg" alt="根据两序遍历推出树的形状">
+                    <img class="thumbnail" src="images/loading.gif" data-original="https://s1.ax1x.com/2020/07/24/UvDje0.md.jpg" alt="根据两序遍历推出树的形状">
                 </p>
             </a>
             
@@ -659,44 +727,6 @@
             </div>
         </article>
         
-        <article class="media">
-            
-            <a href="/2020/07/11/Java%E5%AE%9E%E7%8E%B0%E6%A0%91%E7%9A%84%E9%81%8D%E5%8E%86%E5%8F%8A%E4%BA%8C%E5%8F%89%E6%A0%91%E5%8F%AF%E8%A7%86%E5%8C%96/" class="media-left">
-                <p class="image is-64x64">
-                    <img class="thumbnail" src="images/loading.gif" data-original="/headImg/head11.jpg" alt="Java实现树的遍历及二叉树可视化">
-                </p>
-            </a>
-            
-            <div class="media-content">
-                <div class="content">
-                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2020-07-11T09:47:25.000Z">2020-07-11</time></div>
-                    <a href="/2020/07/11/Java%E5%AE%9E%E7%8E%B0%E6%A0%91%E7%9A%84%E9%81%8D%E5%8E%86%E5%8F%8A%E4%BA%8C%E5%8F%89%E6%A0%91%E5%8F%AF%E8%A7%86%E5%8C%96/" class="title has-link-black-ter is-size-6 has-text-weight-normal">Java实现树的遍历及二叉树可视化</a>
-                    <p class="is-size-7 is-uppercase">
-                        <a class="has-link-grey -link" href="/categories/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/">数据结构</a>
-                    </p>
-                </div>
-            </div>
-        </article>
-        
-        <article class="media">
-            
-            <a href="/2020/06/27/java%E4%B8%BB%E5%8A%A8%E5%8F%91%E9%80%81http%E8%AF%B7%E6%B1%82/" class="media-left">
-                <p class="image is-64x64">
-                    <img class="thumbnail" src="images/loading.gif" data-original="/headImg/head10.jpg" alt="java主动发送http请求">
-                </p>
-            </a>
-            
-            <div class="media-content">
-                <div class="content">
-                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2020-06-27T15:36:34.000Z">2020-06-27</time></div>
-                    <a href="/2020/06/27/java%E4%B8%BB%E5%8A%A8%E5%8F%91%E9%80%81http%E8%AF%B7%E6%B1%82/" class="title has-link-black-ter is-size-6 has-text-weight-normal">java主动发送http请求</a>
-                    <p class="is-size-7 is-uppercase">
-                        <a class="has-link-grey -link" href="/categories/Others/">Others</a>
-                    </p>
-                </div>
-            </div>
-        </article>
-        
     </div>
 </div>
         
@@ -705,7 +735,7 @@
         <h3 class="menu-label">
             标签云
         </h3>
-        <a href="/tags/eureka/" style="font-size: 10px;">eureka</a> <a href="/tags/fastDFS/" style="font-size: 10px;">fastDFS</a> <a href="/tags/feign/" style="font-size: 10px;">feign</a> <a href="/tags/http/" style="font-size: 10px;">http</a> <a href="/tags/hystrix/" style="font-size: 10px;">hystrix</a> <a href="/tags/json/" style="font-size: 10px;">json</a> <a href="/tags/markdown/" style="font-size: 10px;">markdown</a> <a href="/tags/maven/" style="font-size: 10px;">maven</a> <a href="/tags/mysql/" style="font-size: 10px;">mysql</a> <a href="/tags/ribbon/" style="font-size: 10px;">ribbon</a> <a href="/tags/spring/" style="font-size: 13.33px;">spring</a> <a href="/tags/springboot/" style="font-size: 10px;">springboot</a> <a href="/tags/springcloud/" style="font-size: 13.33px;">springcloud</a> <a href="/tags/springmvc/" style="font-size: 16.67px;">springmvc</a> <a href="/tags/tree/" style="font-size: 13.33px;">tree</a> <a href="/tags/zuul/" style="font-size: 10px;">zuul</a> <a href="/tags/%E4%BA%A4%E4%BA%92/" style="font-size: 10px;">交互</a> <a href="/tags/%E5%9D%91/" style="font-size: 10px;">坑</a> <a href="/tags/%E5%BC%80%E5%8F%91/" style="font-size: 20px;">开发</a> <a href="/tags/%E6%8B%9B%E8%81%98%E7%AC%94%E8%AF%95/" style="font-size: 13.33px;">招聘笔试</a> <a href="/tags/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/" style="font-size: 13.33px;">数据结构</a>
+        <a href="/tags/eureka/" style="font-size: 10px;">eureka</a> <a href="/tags/fastDFS/" style="font-size: 10px;">fastDFS</a> <a href="/tags/feign/" style="font-size: 10px;">feign</a> <a href="/tags/http/" style="font-size: 10px;">http</a> <a href="/tags/hystrix/" style="font-size: 10px;">hystrix</a> <a href="/tags/json/" style="font-size: 10px;">json</a> <a href="/tags/markdown/" style="font-size: 10px;">markdown</a> <a href="/tags/maven/" style="font-size: 10px;">maven</a> <a href="/tags/mysql/" style="font-size: 10px;">mysql</a> <a href="/tags/ribbon/" style="font-size: 10px;">ribbon</a> <a href="/tags/spring/" style="font-size: 13.33px;">spring</a> <a href="/tags/springboot/" style="font-size: 10px;">springboot</a> <a href="/tags/springcloud/" style="font-size: 13.33px;">springcloud</a> <a href="/tags/springmvc/" style="font-size: 16.67px;">springmvc</a> <a href="/tags/tree/" style="font-size: 13.33px;">tree</a> <a href="/tags/zuul/" style="font-size: 10px;">zuul</a> <a href="/tags/%E4%BA%A4%E4%BA%92/" style="font-size: 10px;">交互</a> <a href="/tags/%E5%8A%A0%E5%AF%86/" style="font-size: 10px;">加密</a> <a href="/tags/%E5%9D%91/" style="font-size: 10px;">坑</a> <a href="/tags/%E5%BC%80%E5%8F%91/" style="font-size: 20px;">开发</a> <a href="/tags/%E6%8B%9B%E8%81%98%E7%AC%94%E8%AF%95/" style="font-size: 13.33px;">招聘笔试</a> <a href="/tags/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/" style="font-size: 13.33px;">数据结构</a>
     </div>
 </div>
         
@@ -728,9 +758,47 @@
         
         <article class="media">
             
+            <a href="/2020/07/24/%E9%98%BF%E9%87%8C%E7%9F%AD%E4%BF%A1/" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="images/loading.gif" data-original="https://s1.ax1x.com/2020/07/24/Uvro0x.md.jpg" alt="阿里短信">
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2020-07-24T09:39:45.000Z">2020-07-24</time></div>
+                    <a href="/2020/07/24/%E9%98%BF%E9%87%8C%E7%9F%AD%E4%BF%A1/" class="title has-link-black-ter is-size-6 has-text-weight-normal">阿里短信</a>
+                    <p class="is-size-7 is-uppercase">
+                        <a class="has-link-grey -link" href="/categories/Others/">Others</a>
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+        <article class="media">
+            
+            <a href="/2020/07/24/JWT+RSA%E9%9D%9E%E5%AF%B9%E7%A7%B0%E5%8A%A0%E5%AF%86%E5%AE%9E%E7%8E%B0%E6%97%A0%E7%8A%B6%E6%80%81%E7%99%BB%E5%BD%95/" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="images/loading.gif" data-original="https://s1.ax1x.com/2020/07/24/Uvr2hF.md.jpg" alt="JWT+RSA非对称加密实现无状态登录">
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2020-07-24T09:34:21.000Z">2020-07-24</time></div>
+                    <a href="/2020/07/24/JWT+RSA%E9%9D%9E%E5%AF%B9%E7%A7%B0%E5%8A%A0%E5%AF%86%E5%AE%9E%E7%8E%B0%E6%97%A0%E7%8A%B6%E6%80%81%E7%99%BB%E5%BD%95/" class="title has-link-black-ter is-size-6 has-text-weight-normal">JWT+RSA非对称加密实现无状态登录</a>
+                    <p class="is-size-7 is-uppercase">
+                        <a class="has-link-grey -link" href="/categories/SpringCloud/">SpringCloud</a>
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+        <article class="media">
+            
             <a href="/2020/07/18/ribbon%E5%92%8Chytrix%E8%B6%85%E6%97%B6%E8%B8%A9%E5%9D%91%E8%AE%B0%E5%BD%95/" class="media-left">
                 <p class="image is-64x64">
-                    <img class="thumbnail" src="images/loading.gif" data-original="https://s1.ax1x.com/2020/07/20/UfQPtU.jpg" alt="ribbon和hytrix超时踩坑记录">
+                    <img class="thumbnail" src="images/loading.gif" data-original="https://s1.ax1x.com/2020/07/20/UfQPtU.md.jpg" alt="ribbon和hytrix超时踩坑记录">
                 </p>
             </a>
             
@@ -749,7 +817,7 @@
             
             <a href="/2020/07/14/fastDFS%E7%9A%84%E5%AE%89%E8%A3%85%E5%92%8Cspringboot%E5%AE%8C%E6%88%90%E6%96%87%E4%BB%B6%E4%B8%8A%E4%BC%A0/" class="media-left">
                 <p class="image is-64x64">
-                    <img class="thumbnail" src="images/loading.gif" data-original="/headImg/head13.jpg" alt="fastDFS的安装和springboot完成文件上传">
+                    <img class="thumbnail" src="images/loading.gif" data-original="https://s1.ax1x.com/2020/07/24/UvDxoT.md.jpg" alt="fastDFS的安装和springboot完成文件上传">
                 </p>
             </a>
             
@@ -768,7 +836,7 @@
             
             <a href="/2020/07/11/%E6%A0%B9%E6%8D%AE%E4%B8%A4%E5%BA%8F%E9%81%8D%E5%8E%86%E6%8E%A8%E5%87%BA%E6%A0%91%E7%9A%84%E5%BD%A2%E7%8A%B6/" class="media-left">
                 <p class="image is-64x64">
-                    <img class="thumbnail" src="images/loading.gif" data-original="/headImg/head12.jpg" alt="根据两序遍历推出树的形状">
+                    <img class="thumbnail" src="images/loading.gif" data-original="https://s1.ax1x.com/2020/07/24/UvDje0.md.jpg" alt="根据两序遍历推出树的形状">
                 </p>
             </a>
             
@@ -783,44 +851,6 @@
             </div>
         </article>
         
-        <article class="media">
-            
-            <a href="/2020/07/11/Java%E5%AE%9E%E7%8E%B0%E6%A0%91%E7%9A%84%E9%81%8D%E5%8E%86%E5%8F%8A%E4%BA%8C%E5%8F%89%E6%A0%91%E5%8F%AF%E8%A7%86%E5%8C%96/" class="media-left">
-                <p class="image is-64x64">
-                    <img class="thumbnail" src="images/loading.gif" data-original="/headImg/head11.jpg" alt="Java实现树的遍历及二叉树可视化">
-                </p>
-            </a>
-            
-            <div class="media-content">
-                <div class="content">
-                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2020-07-11T09:47:25.000Z">2020-07-11</time></div>
-                    <a href="/2020/07/11/Java%E5%AE%9E%E7%8E%B0%E6%A0%91%E7%9A%84%E9%81%8D%E5%8E%86%E5%8F%8A%E4%BA%8C%E5%8F%89%E6%A0%91%E5%8F%AF%E8%A7%86%E5%8C%96/" class="title has-link-black-ter is-size-6 has-text-weight-normal">Java实现树的遍历及二叉树可视化</a>
-                    <p class="is-size-7 is-uppercase">
-                        <a class="has-link-grey -link" href="/categories/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/">数据结构</a>
-                    </p>
-                </div>
-            </div>
-        </article>
-        
-        <article class="media">
-            
-            <a href="/2020/06/27/java%E4%B8%BB%E5%8A%A8%E5%8F%91%E9%80%81http%E8%AF%B7%E6%B1%82/" class="media-left">
-                <p class="image is-64x64">
-                    <img class="thumbnail" src="images/loading.gif" data-original="/headImg/head10.jpg" alt="java主动发送http请求">
-                </p>
-            </a>
-            
-            <div class="media-content">
-                <div class="content">
-                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2020-06-27T15:36:34.000Z">2020-06-27</time></div>
-                    <a href="/2020/06/27/java%E4%B8%BB%E5%8A%A8%E5%8F%91%E9%80%81http%E8%AF%B7%E6%B1%82/" class="title has-link-black-ter is-size-6 has-text-weight-normal">java主动发送http请求</a>
-                    <p class="is-size-7 is-uppercase">
-                        <a class="has-link-grey -link" href="/categories/Others/">Others</a>
-                    </p>
-                </div>
-            </div>
-        </article>
-        
     </div>
 </div>
     
@@ -829,7 +859,7 @@
         <h3 class="menu-label">
             标签云
         </h3>
-        <a href="/tags/eureka/" style="font-size: 10px;">eureka</a> <a href="/tags/fastDFS/" style="font-size: 10px;">fastDFS</a> <a href="/tags/feign/" style="font-size: 10px;">feign</a> <a href="/tags/http/" style="font-size: 10px;">http</a> <a href="/tags/hystrix/" style="font-size: 10px;">hystrix</a> <a href="/tags/json/" style="font-size: 10px;">json</a> <a href="/tags/markdown/" style="font-size: 10px;">markdown</a> <a href="/tags/maven/" style="font-size: 10px;">maven</a> <a href="/tags/mysql/" style="font-size: 10px;">mysql</a> <a href="/tags/ribbon/" style="font-size: 10px;">ribbon</a> <a href="/tags/spring/" style="font-size: 13.33px;">spring</a> <a href="/tags/springboot/" style="font-size: 10px;">springboot</a> <a href="/tags/springcloud/" style="font-size: 13.33px;">springcloud</a> <a href="/tags/springmvc/" style="font-size: 16.67px;">springmvc</a> <a href="/tags/tree/" style="font-size: 13.33px;">tree</a> <a href="/tags/zuul/" style="font-size: 10px;">zuul</a> <a href="/tags/%E4%BA%A4%E4%BA%92/" style="font-size: 10px;">交互</a> <a href="/tags/%E5%9D%91/" style="font-size: 10px;">坑</a> <a href="/tags/%E5%BC%80%E5%8F%91/" style="font-size: 20px;">开发</a> <a href="/tags/%E6%8B%9B%E8%81%98%E7%AC%94%E8%AF%95/" style="font-size: 13.33px;">招聘笔试</a> <a href="/tags/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/" style="font-size: 13.33px;">数据结构</a>
+        <a href="/tags/eureka/" style="font-size: 10px;">eureka</a> <a href="/tags/fastDFS/" style="font-size: 10px;">fastDFS</a> <a href="/tags/feign/" style="font-size: 10px;">feign</a> <a href="/tags/http/" style="font-size: 10px;">http</a> <a href="/tags/hystrix/" style="font-size: 10px;">hystrix</a> <a href="/tags/json/" style="font-size: 10px;">json</a> <a href="/tags/markdown/" style="font-size: 10px;">markdown</a> <a href="/tags/maven/" style="font-size: 10px;">maven</a> <a href="/tags/mysql/" style="font-size: 10px;">mysql</a> <a href="/tags/ribbon/" style="font-size: 10px;">ribbon</a> <a href="/tags/spring/" style="font-size: 13.33px;">spring</a> <a href="/tags/springboot/" style="font-size: 10px;">springboot</a> <a href="/tags/springcloud/" style="font-size: 13.33px;">springcloud</a> <a href="/tags/springmvc/" style="font-size: 16.67px;">springmvc</a> <a href="/tags/tree/" style="font-size: 13.33px;">tree</a> <a href="/tags/zuul/" style="font-size: 10px;">zuul</a> <a href="/tags/%E4%BA%A4%E4%BA%92/" style="font-size: 10px;">交互</a> <a href="/tags/%E5%8A%A0%E5%AF%86/" style="font-size: 10px;">加密</a> <a href="/tags/%E5%9D%91/" style="font-size: 10px;">坑</a> <a href="/tags/%E5%BC%80%E5%8F%91/" style="font-size: 20px;">开发</a> <a href="/tags/%E6%8B%9B%E8%81%98%E7%AC%94%E8%AF%95/" style="font-size: 13.33px;">招聘笔试</a> <a href="/tags/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/" style="font-size: 13.33px;">数据结构</a>
     </div>
 </div>
     
