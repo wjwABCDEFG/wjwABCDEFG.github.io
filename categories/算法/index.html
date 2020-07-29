@@ -7,12 +7,12 @@
 
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
 
-<title>标签: 数据结构 - 小温 blog</title>
+<title>分类: 算法 - 小温 blog</title>
 
 
     <meta property="og:type" content="website">
 <meta property="og:title" content="小温 blog">
-<meta property="og:url" content="http://wjw.today/tags/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/index.html">
+<meta property="og:url" content="http://wjw.today/categories/%E7%AE%97%E6%B3%95/index.html">
 <meta property="og:site_name" content="小温 blog">
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="http://wjw.today/images/og_image.png">
@@ -129,8 +129,9 @@
     <div class="card-content">
         <nav class="breadcrumb" aria-label="breadcrumbs">
         <ul>
-            <li><a href="/tags">标签</a></li>
-            <li class="is-active"><a href="#" aria-current="page">数据结构</a></li>
+            <li><a href="/categories">分类</a></li>
+            
+            <li class="is-active"><a href="#" aria-current="page">算法</a></li>
         </ul>
         </nav>
     </div>
@@ -140,8 +141,8 @@
 <div class="card">
     
     <div class="card-image">
-        <a href="/2020/07/11/%E6%A0%B9%E6%8D%AE%E4%B8%A4%E5%BA%8F%E9%81%8D%E5%8E%86%E6%8E%A8%E5%87%BA%E6%A0%91%E7%9A%84%E5%BD%A2%E7%8A%B6/" class="image is-7by1">
-            <img class="thumbnail" src="images/loading.gif" data-original="https://s1.ax1x.com/2020/07/30/anpdAJ.md.jpg" alt="根据两序遍历推出树的形状">
+        <a href="/2020/07/29/5-%E6%9C%80%E9%95%BF%E5%9B%9E%E6%96%87%E5%AD%90%E4%B8%B2/" class="image is-7by1">
+            <img class="thumbnail" src="images/loading.gif" data-original="https://s1.ax1x.com/2020/07/30/anpJXT.md.jpg" alt="5 最长回文子串">
         </a>
     </div>
     
@@ -149,17 +150,17 @@
         
         <div class="level article-meta is-size-7 is-uppercase is-mobile is-overflow-x-auto">
             <div class="level-left">
-                <time class="level-item has-text-grey" datetime="2020-07-11T10:22:36.000Z">2020-07-11</time>
+                <time class="level-item has-text-grey" datetime="2020-07-29T14:59:51.000Z">2020-07-29</time>
                 
                 <div class="level-item">
-                <a class="has-link-grey -link" href="/categories/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/">数据结构</a>
+                <a class="has-link-grey -link" href="/categories/%E7%AE%97%E6%B3%95/">算法</a>
                 </div>
                 
                 
                 <span class="level-item has-text-grey">
                     
                     
-                    7 分钟 读完 (大约 1120 个字)
+                    4 分钟 读完 (大约 530 个字)
                 </span>
                 
                 
@@ -168,97 +169,34 @@
         
         <h1 class="title is-size-3 is-size-4-mobile has-text-weight-normal">
             
-                <a class="has-link-black-ter" href="/2020/07/11/%E6%A0%B9%E6%8D%AE%E4%B8%A4%E5%BA%8F%E9%81%8D%E5%8E%86%E6%8E%A8%E5%87%BA%E6%A0%91%E7%9A%84%E5%BD%A2%E7%8A%B6/">根据两序遍历推出树的形状</a>
+                <a class="has-link-black-ter" href="/2020/07/29/5-%E6%9C%80%E9%95%BF%E5%9B%9E%E6%96%87%E5%AD%90%E4%B8%B2/">5 最长回文子串</a>
             
         </h1>
         <div class="content">
             <blockquote>
-<p>前言：太久了都快忘了，最近做了一下笔试题遇到这题，发现经常考这种题，先把技巧记录下来，有了技巧后简直不要太轻松</p>
+<p>力扣第5题<a href="https://leetcode-cn.com/problems/longest-palindromic-substring/">https://leetcode-cn.com/problems/longest-palindromic-substring/</a></p>
 </blockquote>
-<h1 id="1-树的三种遍历"><a href="#1-树的三种遍历" class="headerlink" title="1. 树的三种遍历"></a>1. 树的三种遍历</h1><ul>
-<li><p>前序遍历（根左右）</p>
-</li>
-<li><p>中序遍历（左根右）</p>
-</li>
-<li><p>后序遍历（左右根）</p>
-</li>
-</ul>
-<blockquote>
-<p> 具体参考这篇博客，不展开了<a href="http://wjw.today/2020/07/11/Java%E5%AE%9E%E7%8E%B0%E6%A0%91%E7%9A%84%E9%81%8D%E5%8E%86%E5%8F%8A%E4%BA%8C%E5%8F%89%E6%A0%91%E5%8F%AF%E8%A7%86%E5%8C%96/">http://wjw.today/2020/07/11/Java实现树的遍历及二叉树可视化/</a></p>
-</blockquote>
-<p>下面我们来看看如何通过前序和中序推出后序和整棵树的形状</p>
+<p>给定一个字符串 <code>s</code>，找到 <code>s</code> 中最长的回文子串。你可以假设 <code>s</code> 的最大长度为 1000。</p>
+<p><strong>示例 1：</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">输入: &quot;babad&quot;</span><br><span class="line">输出: &quot;bab&quot;</span><br><span class="line">注意: &quot;aba&quot; 也是一个有效答案。</span><br></pre></td></tr></table></figure>
+
+<p><strong>示例 2：</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">输入: &quot;cbbd&quot;</span><br><span class="line">输出: &quot;bb&quot;</span><br></pre></td></tr></table></figure>
+
+
+
+<p><strong>思路：</strong></p>
+<p>首先想到的是暴力法，外层循环遍历begin下标，内层循环遍历end下标，然后对圈起来的字符串判断是否回文（又遍历一遍）提交超时。</p>
+<p>因此遍历的下标i应该是作为中间的字符，向两边扩散。还要注意的是aba和abba两种型的处理。在评论区看到<a href="https://leetcode-cn.com/u/tang-zhu-7/">糖丶7</a>的方法，非常巧妙且简单：</p>
+<p>1.所有中间相同的字符都当成一个字符从而解决了abba和aba的问题。比如abba，1作为中间字符，low=1,high则一直往后找直到不为b,high=2</p>
+<p>2.然后往外扩展对比low–和high++</p>
+<p>3.最妙的是，记录了第一步的ans=high并return ans赋值给i，遍历完第一个b后直接跳过中间的所有b，细节拉满</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">five_</span>最长回文子串<span class="title">_other</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Test</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">test</span><span class="params">()</span></span>&#123;</span><br><span class="line">        String str = <span class="string">"abba"</span>;</span><br><span class="line">        String res = longestPalindrome(str);</span><br><span class="line">        System.out.println(res);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> String <span class="title">longestPalindrome</span><span class="params">(String s)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">if</span> (s == <span class="keyword">null</span> || s.length() == <span class="number">0</span>) &#123;</span><br><span class="line">            <span class="keyword">return</span> <span class="string">""</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">int</span>[] range = <span class="keyword">new</span> <span class="keyword">int</span>[<span class="number">2</span>];   <span class="comment">//保存了起始位置和结束位置</span></span><br><span class="line">        <span class="keyword">char</span>[] str = s.toCharArray();</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; s.length(); i++) &#123;</span><br><span class="line">            <span class="comment">// 把回文看成中间的部分全是同一字符，左右部分相对称</span></span><br><span class="line">            <span class="comment">// 找到下一个与当前字符不同的字符</span></span><br><span class="line">            i = findLongest(str, i, range);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> s.substring(range[<span class="number">0</span>], range[<span class="number">1</span>] + <span class="number">1</span>);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">int</span> <span class="title">findLongest</span><span class="params">(<span class="keyword">char</span>[] str, <span class="keyword">int</span> low, <span class="keyword">int</span>[] range)</span> </span>&#123;</span><br><span class="line">        <span class="comment">// 查找中间部分</span></span><br><span class="line">        <span class="keyword">int</span> high = low;</span><br><span class="line">        <span class="keyword">while</span> (high &lt; str.length - <span class="number">1</span> &amp;&amp; str[high + <span class="number">1</span>] == str[low]) &#123;</span><br><span class="line">            high++;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="comment">// 定位中间部分的最后一个字符</span></span><br><span class="line">        <span class="keyword">int</span> ans = high;</span><br><span class="line">        <span class="comment">// 从中间向左右扩散</span></span><br><span class="line">        <span class="keyword">while</span> (low &gt; <span class="number">0</span> &amp;&amp; high &lt; str.length - <span class="number">1</span> &amp;&amp; str[low - <span class="number">1</span>] == str[high + <span class="number">1</span>]) &#123;</span><br><span class="line">            low--;</span><br><span class="line">            high++;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="comment">// 记录最大长度</span></span><br><span class="line">        <span class="keyword">if</span> (high - low &gt; range[<span class="number">1</span>] - range[<span class="number">0</span>]) &#123;</span><br><span class="line">            range[<span class="number">0</span>] = low;</span><br><span class="line">            range[<span class="number">1</span>] = high;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> ans;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>真的是太妙了，每一步都是细节，我愿称之为最强！</p>
+
         </div>
         
-        
-        <div class="level is-mobile">
-            <div class="level-start">
-                <div class="level-item">
-                <a class="button is-size-7 is-light" href="/2020/07/11/%E6%A0%B9%E6%8D%AE%E4%B8%A4%E5%BA%8F%E9%81%8D%E5%8E%86%E6%8E%A8%E5%87%BA%E6%A0%91%E7%9A%84%E5%BD%A2%E7%8A%B6/#more">阅读更多</a>
-                </div>
-            </div>
-        </div>
-        
-        
-    </div>
-</div>
-
-
-
-
-
-
-
-
-    
-<div class="card">
-    
-    <div class="card-image">
-        <a href="/2020/07/11/Java%E5%AE%9E%E7%8E%B0%E6%A0%91%E7%9A%84%E9%81%8D%E5%8E%86%E5%8F%8A%E4%BA%8C%E5%8F%89%E6%A0%91%E5%8F%AF%E8%A7%86%E5%8C%96/" class="image is-7by1">
-            <img class="thumbnail" src="images/loading.gif" data-original="https://s1.ax1x.com/2020/07/30/anpU74.md.jpg" alt="Java实现树的遍历及二叉树可视化">
-        </a>
-    </div>
-    
-    <div class="card-content article ">
-        
-        <div class="level article-meta is-size-7 is-uppercase is-mobile is-overflow-x-auto">
-            <div class="level-left">
-                <time class="level-item has-text-grey" datetime="2020-07-11T09:47:25.000Z">2020-07-11</time>
-                
-                <div class="level-item">
-                <a class="has-link-grey -link" href="/categories/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/">数据结构</a>
-                </div>
-                
-                
-                <span class="level-item has-text-grey">
-                    
-                    
-                    11 分钟 读完 (大约 1713 个字)
-                </span>
-                
-                
-            </div>
-        </div>
-        
-        <h1 class="title is-size-3 is-size-4-mobile has-text-weight-normal">
-            
-                <a class="has-link-black-ter" href="/2020/07/11/Java%E5%AE%9E%E7%8E%B0%E6%A0%91%E7%9A%84%E9%81%8D%E5%8E%86%E5%8F%8A%E4%BA%8C%E5%8F%89%E6%A0%91%E5%8F%AF%E8%A7%86%E5%8C%96/">Java实现树的遍历及二叉树可视化</a>
-            
-        </h1>
-        <div class="content">
-            <h1 id="1-树的遍历说明"><a href="#1-树的遍历说明" class="headerlink" title="1. 树的遍历说明"></a>1. 树的遍历说明</h1><ul>
-<li>前序遍历（根左右）</li>
-</ul>
-<p><img src="images/loading.gif" data-original="https://s1.ax1x.com/2020/07/11/UMHHSI.png" alt=""></p>
-        </div>
-        
-        
-        <div class="level is-mobile">
-            <div class="level-start">
-                <div class="level-item">
-                <a class="button is-size-7 is-light" href="/2020/07/11/Java%E5%AE%9E%E7%8E%B0%E6%A0%91%E7%9A%84%E9%81%8D%E5%8E%86%E5%8F%8A%E4%BA%8C%E5%8F%89%E6%A0%91%E5%8F%AF%E8%A7%86%E5%8C%96/#more">阅读更多</a>
-                </div>
-            </div>
-        </div>
         
         
     </div>

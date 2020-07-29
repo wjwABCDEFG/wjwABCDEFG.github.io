@@ -130,8 +130,266 @@
 <div class="card">
     
     <div class="card-image">
+        <a href="/2020/07/29/5-%E6%9C%80%E9%95%BF%E5%9B%9E%E6%96%87%E5%AD%90%E4%B8%B2/" class="image is-7by1">
+            <img class="thumbnail" src="images/loading.gif" data-original="https://s1.ax1x.com/2020/07/30/anpJXT.md.jpg" alt="5 最长回文子串">
+        </a>
+    </div>
+    
+    <div class="card-content article ">
+        
+        <div class="level article-meta is-size-7 is-uppercase is-mobile is-overflow-x-auto">
+            <div class="level-left">
+                <time class="level-item has-text-grey" datetime="2020-07-29T14:59:51.000Z">2020-07-29</time>
+                
+                <div class="level-item">
+                <a class="has-link-grey -link" href="/categories/%E7%AE%97%E6%B3%95/">算法</a>
+                </div>
+                
+                
+                <span class="level-item has-text-grey">
+                    
+                    
+                    4 分钟 读完 (大约 530 个字)
+                </span>
+                
+                
+            </div>
+        </div>
+        
+        <h1 class="title is-size-3 is-size-4-mobile has-text-weight-normal">
+            
+                <a class="has-link-black-ter" href="/2020/07/29/5-%E6%9C%80%E9%95%BF%E5%9B%9E%E6%96%87%E5%AD%90%E4%B8%B2/">5 最长回文子串</a>
+            
+        </h1>
+        <div class="content">
+            <blockquote>
+<p>力扣第5题<a href="https://leetcode-cn.com/problems/longest-palindromic-substring/">https://leetcode-cn.com/problems/longest-palindromic-substring/</a></p>
+</blockquote>
+<p>给定一个字符串 <code>s</code>，找到 <code>s</code> 中最长的回文子串。你可以假设 <code>s</code> 的最大长度为 1000。</p>
+<p><strong>示例 1：</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">输入: &quot;babad&quot;</span><br><span class="line">输出: &quot;bab&quot;</span><br><span class="line">注意: &quot;aba&quot; 也是一个有效答案。</span><br></pre></td></tr></table></figure>
+
+<p><strong>示例 2：</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">输入: &quot;cbbd&quot;</span><br><span class="line">输出: &quot;bb&quot;</span><br></pre></td></tr></table></figure>
+
+
+
+<p><strong>思路：</strong></p>
+<p>首先想到的是暴力法，外层循环遍历begin下标，内层循环遍历end下标，然后对圈起来的字符串判断是否回文（又遍历一遍）提交超时。</p>
+<p>因此遍历的下标i应该是作为中间的字符，向两边扩散。还要注意的是aba和abba两种型的处理。在评论区看到<a href="https://leetcode-cn.com/u/tang-zhu-7/">糖丶7</a>的方法，非常巧妙且简单：</p>
+<p>1.所有中间相同的字符都当成一个字符从而解决了abba和aba的问题。比如abba，1作为中间字符，low=1,high则一直往后找直到不为b,high=2</p>
+<p>2.然后往外扩展对比low–和high++</p>
+<p>3.最妙的是，记录了第一步的ans=high并return ans赋值给i，遍历完第一个b后直接跳过中间的所有b，细节拉满</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">five_</span>最长回文子串<span class="title">_other</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Test</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">test</span><span class="params">()</span></span>&#123;</span><br><span class="line">        String str = <span class="string">"abba"</span>;</span><br><span class="line">        String res = longestPalindrome(str);</span><br><span class="line">        System.out.println(res);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> String <span class="title">longestPalindrome</span><span class="params">(String s)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">if</span> (s == <span class="keyword">null</span> || s.length() == <span class="number">0</span>) &#123;</span><br><span class="line">            <span class="keyword">return</span> <span class="string">""</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">int</span>[] range = <span class="keyword">new</span> <span class="keyword">int</span>[<span class="number">2</span>];   <span class="comment">//保存了起始位置和结束位置</span></span><br><span class="line">        <span class="keyword">char</span>[] str = s.toCharArray();</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; s.length(); i++) &#123;</span><br><span class="line">            <span class="comment">// 把回文看成中间的部分全是同一字符，左右部分相对称</span></span><br><span class="line">            <span class="comment">// 找到下一个与当前字符不同的字符</span></span><br><span class="line">            i = findLongest(str, i, range);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> s.substring(range[<span class="number">0</span>], range[<span class="number">1</span>] + <span class="number">1</span>);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">int</span> <span class="title">findLongest</span><span class="params">(<span class="keyword">char</span>[] str, <span class="keyword">int</span> low, <span class="keyword">int</span>[] range)</span> </span>&#123;</span><br><span class="line">        <span class="comment">// 查找中间部分</span></span><br><span class="line">        <span class="keyword">int</span> high = low;</span><br><span class="line">        <span class="keyword">while</span> (high &lt; str.length - <span class="number">1</span> &amp;&amp; str[high + <span class="number">1</span>] == str[low]) &#123;</span><br><span class="line">            high++;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="comment">// 定位中间部分的最后一个字符</span></span><br><span class="line">        <span class="keyword">int</span> ans = high;</span><br><span class="line">        <span class="comment">// 从中间向左右扩散</span></span><br><span class="line">        <span class="keyword">while</span> (low &gt; <span class="number">0</span> &amp;&amp; high &lt; str.length - <span class="number">1</span> &amp;&amp; str[low - <span class="number">1</span>] == str[high + <span class="number">1</span>]) &#123;</span><br><span class="line">            low--;</span><br><span class="line">            high++;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="comment">// 记录最大长度</span></span><br><span class="line">        <span class="keyword">if</span> (high - low &gt; range[<span class="number">1</span>] - range[<span class="number">0</span>]) &#123;</span><br><span class="line">            range[<span class="number">0</span>] = low;</span><br><span class="line">            range[<span class="number">1</span>] = high;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> ans;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>真的是太妙了，每一步都是细节，我愿称之为最强！</p>
+
+        </div>
+        
+        
+        
+    </div>
+</div>
+
+
+
+
+
+
+
+
+    
+<div class="card">
+    
+    <div class="card-image">
+        <a href="/2020/07/28/%E6%9C%80%E7%9F%AD%E4%BD%9C%E4%B8%9A%E4%BC%98%E5%85%88%E7%AE%97%E6%B3%95(SJF)/" class="image is-7by1">
+            <img class="thumbnail" src="images/loading.gif" data-original="https://source.acexy.cn/view/XOb1CgW" alt="最短作业优先算法(SJF)">
+        </a>
+    </div>
+    
+    <div class="card-content article ">
+        
+        <div class="level article-meta is-size-7 is-uppercase is-mobile is-overflow-x-auto">
+            <div class="level-left">
+                <time class="level-item has-text-grey" datetime="2020-07-28T13:54:43.000Z">2020-07-28</time>
+                
+                <div class="level-item">
+                <a class="has-link-grey -link" href="/categories/Others/">Others</a>
+                </div>
+                
+                
+                <span class="level-item has-text-grey">
+                    
+                    
+                    5 分钟 读完 (大约 719 个字)
+                </span>
+                
+                
+            </div>
+        </div>
+        
+        <h1 class="title is-size-3 is-size-4-mobile has-text-weight-normal">
+            
+                <a class="has-link-black-ter" href="/2020/07/28/%E6%9C%80%E7%9F%AD%E4%BD%9C%E4%B8%9A%E4%BC%98%E5%85%88%E7%AE%97%E6%B3%95(SJF)/">最短作业优先算法(SJF)</a>
+            
+        </h1>
+        <div class="content">
+            <p>就是CPU选择先运行耗时短的任务，比如任务A需要3s，任务B需要5s，那么程序选择先运行A</p>
+<br>
+
+<p>5个程序ABCDE同时提交给CPU执行（虽然式同时提交，但是有先后，假装A比B快那么一点点的一点点的一点点好了）</p>
+<table>
+<thead>
+<tr>
+<th>作业名</th>
+<th>执行时间</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>A</td>
+<td>5</td>
+</tr>
+<tr>
+<td>B</td>
+<td>5</td>
+</tr>
+<tr>
+<td>C</td>
+<td>2</td>
+</tr>
+<tr>
+<td>D</td>
+<td>3</td>
+</tr>
+<tr>
+<td>E</td>
+<td>4</td>
+</tr>
+</tbody></table>
+<p>那么运行顺序为</p>
+<p><img src="images/loading.gif" data-original="https://s1.ax1x.com/2020/07/28/aVnDrq.png" alt=""></p>
+<p><strong>平均等待时间=(任务开始时间 - 任务提交时间)/n</strong></p>
+<p>等待时间</p>
+<p>A:9-0      B:14-0      C:0-0      D:2-0      E:5-0</p>
+<p>平均等待时间=30/5=6</p>
+<br>
+
+<p>如果不是同时提交，那么出现非抢占式和抢占式两种情况</p>
+<p><strong>非抢占式</strong>：同一时间则选择先运行耗时短的任务，不同时间则按照先来先服务(FCFS)</p>
+<table>
+<thead>
+<tr>
+<th>作业名</th>
+<th>提交时间</th>
+<th>执行时间</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>A</td>
+<td>0</td>
+<td>5</td>
+</tr>
+<tr>
+<td>B</td>
+<td>1</td>
+<td>5</td>
+</tr>
+<tr>
+<td>C</td>
+<td>2</td>
+<td>2</td>
+</tr>
+<tr>
+<td>D</td>
+<td>3</td>
+<td>3</td>
+</tr>
+<tr>
+<td>E</td>
+<td>4</td>
+<td>4</td>
+</tr>
+</tbody></table>
+<p>0s时：只有A，因此先执行A，因为是非抢占式，所以BCDE提交时即使执行时间可能更短（比如C为2）也只能等待A执行完，A执行完为5s，此时BCDE相当于同时提交，情况和第一种一样，因此顺序是CDEB</p>
+<p><img src="images/loading.gif" data-original="https://s1.ax1x.com/2020/07/28/aVn3rt.png" alt=""></p>
+<p>等待时间</p>
+<p>A:0-0     B:14​-1     C:5-2     D:7-3     E:10-4</p>
+<p>平均等待时间=(0+13+3+4+6)/5=5.2</p>
+<br>
+
+<p><strong>抢占式</strong>：新任务提交时，就判断正在运行中剩下的时间和新任务的执行时间，那个短先执行哪个，原任务如果被抢占，则中途暂停</p>
+<p>仍然是这个例子</p>
+<table>
+<thead>
+<tr>
+<th>作业名</th>
+<th>提交时间</th>
+<th>执行时间</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>A</td>
+<td>0</td>
+<td>5</td>
+</tr>
+<tr>
+<td>B</td>
+<td>1</td>
+<td>5</td>
+</tr>
+<tr>
+<td>C</td>
+<td>2</td>
+<td>2</td>
+</tr>
+<tr>
+<td>D</td>
+<td>3</td>
+<td>3</td>
+</tr>
+<tr>
+<td>E</td>
+<td>4</td>
+<td>4</td>
+</tr>
+</tbody></table>
+<p>1s时：B提交，但是此时A为4，因此继续运行A</p>
+<p>2s时：C提交，此时A为3C为2，因此抢占运行C，A被中断还剩3s</p>
+<p>4s时：C运行完，所有任务都为提交状态，A和C为3s，因为A先来，所以先运行A</p>
+<p>流程如下</p>
+<p><img src="images/loading.gif" data-original="https://s1.ax1x.com/2020/07/28/aVM1M9.png" alt=""></p>
+<p>等待时间</p>
+<p>A:4-2（这个2是第一段的时间）     B:14-1     C:2-2     D:7-3     E:10-4</p>
+<p>平均等待时间=(2+13+0+4+6)/5=5</p>
+<br>
+
+<p>有了开始时间和完成时间，至于要算其他的给出公式就能计算</p>
+<p>周转时间=作业完成时间—作业提交时间;<br>平均周转时间=(作业1的周转时间+…+作业n的周转时间)/n;<br>带权周转时间=作业周转时间/作业实际运行时间;<br>平均带权周转时间=(作业1的带权周转时间+…+作业n的带权周转时间)/n;</p>
+<p><em>算这些不是有手就行？</em></p>
+<br>
+
+<p>sjf算法能让平均等待时间最短，因为先执行了简单任务，当然实际应用中是理想情况，因为不知道任务执行时间是多久。</p>
+
+        </div>
+        
+        
+        
+    </div>
+</div>
+
+
+
+
+
+
+
+
+    
+<div class="card">
+    
+    <div class="card-image">
         <a href="/2020/07/27/%E7%AE%80%E5%8D%95%E5%B7%A5%E5%8E%82%E6%A8%A1%E5%BC%8F/" class="image is-7by1">
-            <img class="thumbnail" src="images/loading.gif" data-original="https://s1.ax1x.com/2020/07/29/aZBIzj.md.jpg" alt="简单工厂模式">
+            <img class="thumbnail" src="images/loading.gif" data-original="https://s1.ax1x.com/2020/07/30/anptnU.md.jpg" alt="简单工厂模式">
         </a>
     </div>
     
@@ -191,7 +449,7 @@
     
     <div class="card-image">
         <a href="/2020/07/24/%E9%98%BF%E9%87%8C%E7%9F%AD%E4%BF%A1/" class="image is-7by1">
-            <img class="thumbnail" src="images/loading.gif" data-original="https://s1.ax1x.com/2020/07/29/aZBLwV.md.jpg" alt="阿里短信">
+            <img class="thumbnail" src="images/loading.gif" data-original="https://s1.ax1x.com/2020/07/30/anp0hR.md.jpg" alt="阿里短信">
         </a>
     </div>
     
@@ -251,7 +509,7 @@
     
     <div class="card-image">
         <a href="/2020/07/24/JWT+RSA%E9%9D%9E%E5%AF%B9%E7%A7%B0%E5%8A%A0%E5%AF%86%E5%AE%9E%E7%8E%B0%E6%97%A0%E7%8A%B6%E6%80%81%E7%99%BB%E5%BD%95/" class="image is-7by1">
-            <img class="thumbnail" src="images/loading.gif" data-original="https://s1.ax1x.com/2020/07/29/aZBqe0.md.jpg" alt="JWT+RSA非对称加密实现无状态登录">
+            <img class="thumbnail" src="images/loading.gif" data-original="https://s1.ax1x.com/2020/07/30/anpwN9.md.jpg" alt="JWT+RSA非对称加密实现无状态登录">
         </a>
     </div>
     
@@ -310,7 +568,7 @@
     
     <div class="card-image">
         <a href="/2020/07/18/ribbon%E5%92%8Chytrix%E8%B6%85%E6%97%B6%E8%B8%A9%E5%9D%91%E8%AE%B0%E5%BD%95/" class="image is-7by1">
-            <img class="thumbnail" src="images/loading.gif" data-original="https://s1.ax1x.com/2020/07/29/aZBvYF.md.jpg" alt="ribbon和hytrix超时踩坑记录">
+            <img class="thumbnail" src="images/loading.gif" data-original="https://source.acexy.cn/view/XOY2GHQ" alt="ribbon和hytrix超时踩坑记录">
         </a>
     </div>
     
@@ -373,7 +631,7 @@
     
     <div class="card-image">
         <a href="/2020/07/14/fastDFS%E7%9A%84%E5%AE%89%E8%A3%85%E5%92%8Cspringboot%E5%AE%8C%E6%88%90%E6%96%87%E4%BB%B6%E4%B8%8A%E4%BC%A0/" class="image is-7by1">
-            <img class="thumbnail" src="images/loading.gif" data-original="https://s1.ax1x.com/2020/07/29/aZBjFU.md.jpg" alt="fastDFS的安装和springboot完成文件上传">
+            <img class="thumbnail" src="images/loading.gif" data-original="https://source.acexy.cn/view/XOb1Alr" alt="fastDFS的安装和springboot完成文件上传">
         </a>
     </div>
     
@@ -439,7 +697,7 @@
     
     <div class="card-image">
         <a href="/2020/07/11/%E6%A0%B9%E6%8D%AE%E4%B8%A4%E5%BA%8F%E9%81%8D%E5%8E%86%E6%8E%A8%E5%87%BA%E6%A0%91%E7%9A%84%E5%BD%A2%E7%8A%B6/" class="image is-7by1">
-            <img class="thumbnail" src="images/loading.gif" data-original="https://s1.ax1x.com/2020/07/29/aZBHLq.md.jpg" alt="根据两序遍历推出树的形状">
+            <img class="thumbnail" src="images/loading.gif" data-original="https://s1.ax1x.com/2020/07/30/anpdAJ.md.jpg" alt="根据两序遍历推出树的形状">
         </a>
     </div>
     
@@ -512,7 +770,7 @@
     
     <div class="card-image">
         <a href="/2020/07/11/Java%E5%AE%9E%E7%8E%B0%E6%A0%91%E7%9A%84%E9%81%8D%E5%8E%86%E5%8F%8A%E4%BA%8C%E5%8F%89%E6%A0%91%E5%8F%AF%E8%A7%86%E5%8C%96/" class="image is-7by1">
-            <img class="thumbnail" src="images/loading.gif" data-original="https://s1.ax1x.com/2020/07/29/aZB7yn.md.jpg" alt="Java实现树的遍历及二叉树可视化">
+            <img class="thumbnail" src="images/loading.gif" data-original="https://s1.ax1x.com/2020/07/30/anpU74.md.jpg" alt="Java实现树的遍历及二叉树可视化">
         </a>
     </div>
     
@@ -574,7 +832,7 @@
     
     <div class="card-image">
         <a href="/2020/06/27/java%E4%B8%BB%E5%8A%A8%E5%8F%91%E9%80%81http%E8%AF%B7%E6%B1%82/" class="image is-7by1">
-            <img class="thumbnail" src="images/loading.gif" data-original="https://s1.ax1x.com/2020/07/29/aZBOoT.md.jpg" alt="java主动发送http请求">
+            <img class="thumbnail" src="images/loading.gif" data-original="https://s1.ax1x.com/2020/07/30/anpitA.md.jpg" alt="java主动发送http请求">
         </a>
     </div>
     
@@ -618,131 +876,6 @@
             <div class="level-start">
                 <div class="level-item">
                 <a class="button is-size-7 is-light" href="/2020/06/27/java%E4%B8%BB%E5%8A%A8%E5%8F%91%E9%80%81http%E8%AF%B7%E6%B1%82/#more">阅读更多</a>
-                </div>
-            </div>
-        </div>
-        
-        
-    </div>
-</div>
-
-
-
-
-
-
-
-
-    
-<div class="card">
-    
-    <div class="card-image">
-        <a href="/2020/06/27/linux%E4%B8%8Bmysql%E7%9A%84%E5%AE%89%E8%A3%85/" class="image is-7by1">
-            <img class="thumbnail" src="images/loading.gif" data-original="https://s1.ax1x.com/2020/07/29/aZBTQs.md.jpg" alt="linux下mysql的安装">
-        </a>
-    </div>
-    
-    <div class="card-content article ">
-        
-        <div class="level article-meta is-size-7 is-uppercase is-mobile is-overflow-x-auto">
-            <div class="level-left">
-                <time class="level-item has-text-grey" datetime="2020-06-27T15:25:18.000Z">2020-06-27</time>
-                
-                <div class="level-item">
-                <a class="has-link-grey -link" href="/categories/Mysql/">Mysql</a>
-                </div>
-                
-                
-                <span class="level-item has-text-grey">
-                    
-                    
-                    2 分钟 读完 (大约 333 个字)
-                </span>
-                
-                
-            </div>
-        </div>
-        
-        <h1 class="title is-size-3 is-size-4-mobile has-text-weight-normal">
-            
-                <a class="has-link-black-ter" href="/2020/06/27/linux%E4%B8%8Bmysql%E7%9A%84%E5%AE%89%E8%A3%85/">linux下mysql的安装</a>
-            
-        </h1>
-        <div class="content">
-            <p>网上一大堆乱七八糟的，特别复杂，还自己下载，自己编译，又自己写配置文件。我跟你说：没必要！几个命令就搞定了</p>
-<p>跟着这个节奏来</p>
-<ol>
-<li>添加仓库</li>
-</ol>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">wget -i -c https://dev.mysql.com/get/mysql80-community-release-el7-3.noarch.rpm</span><br></pre></td></tr></table></figure>
-        </div>
-        
-        
-        <div class="level is-mobile">
-            <div class="level-start">
-                <div class="level-item">
-                <a class="button is-size-7 is-light" href="/2020/06/27/linux%E4%B8%8Bmysql%E7%9A%84%E5%AE%89%E8%A3%85/#more">阅读更多</a>
-                </div>
-            </div>
-        </div>
-        
-        
-    </div>
-</div>
-
-
-
-
-
-
-
-
-    
-<div class="card">
-    
-    <div class="card-image">
-        <a href="/2020/06/27/SpringCloud%E7%AC%94%E8%AE%B0/" class="image is-7by1">
-            <img class="thumbnail" src="images/loading.gif" data-original="https://s1.ax1x.com/2020/07/29/aZBxW4.md.jpg" alt="SpringCloud笔记">
-        </a>
-    </div>
-    
-    <div class="card-content article ">
-        
-        <div class="level article-meta is-size-7 is-uppercase is-mobile is-overflow-x-auto">
-            <div class="level-left">
-                <time class="level-item has-text-grey" datetime="2020-06-27T15:11:15.000Z">2020-06-27</time>
-                
-                <div class="level-item">
-                <a class="has-link-grey -link" href="/categories/SpringCloud/">SpringCloud</a>
-                </div>
-                
-                
-                <span class="level-item has-text-grey">
-                    
-                    
-                    1 小时 读完 (大约 8179 个字)
-                </span>
-                
-                
-            </div>
-        </div>
-        
-        <h1 class="title is-size-3 is-size-4-mobile has-text-weight-normal">
-            
-                <a class="has-link-black-ter" href="/2020/06/27/SpringCloud%E7%AC%94%E8%AE%B0/">SpringCloud笔记</a>
-            
-        </h1>
-        <div class="content">
-            <h1 id="1-分布式概述"><a href="#1-分布式概述" class="headerlink" title="1. 分布式概述"></a>1. 分布式概述</h1><p>回顾我们以前的项目，从大一到大三，架构慢慢的演变，从一开始堆在一起（乱成一团），到分成多个包，三层架构（水平拆分），到前后端分离成两个项目，后面后台部分分成多个模块小组开发（垂直拆分）等等</p>
-<p>传统架构–&gt;水平拆分–&gt;垂直拆分（最早的分布式）–&gt;soa(dubbo)–&gt;微服务(springCloud)</p>
-<p>接下来我们要接触到一些分布式，解决一些高并发情况</p>
-        </div>
-        
-        
-        <div class="level is-mobile">
-            <div class="level-start">
-                <div class="level-item">
-                <a class="button is-size-7 is-light" href="/2020/06/27/SpringCloud%E7%AC%94%E8%AE%B0/#more">阅读更多</a>
                 </div>
             </div>
         </div>
@@ -818,7 +951,7 @@
                     </p>
                     <a href="/archives">
                         <p class="title has-text-weight-normal">
-                            17
+                            19
                         </p>
                     </a>
                 </div>
@@ -830,7 +963,7 @@
                     </p>
                     <a href="/categories">
                         <p class="title has-text-weight-normal">
-                            10
+                            11
                         </p>
                     </a>
                 </div>
@@ -842,7 +975,7 @@
                     </p>
                     <a href="/tags">
                         <p class="title has-text-weight-normal">
-                            23
+                            24
                         </p>
                     </a>
                 </div>
@@ -891,7 +1024,7 @@
                 <span class="level-item">Others</span>
             </span>
             <span class="level-end">
-                <span class="level-item tag">3</span>
+                <span class="level-item tag">4</span>
             </span>
         </a></li><li>
         <a class="level is-marginless" href="/categories/Spring/">
@@ -942,6 +1075,14 @@
                 <span class="level-item tag">2</span>
             </span>
         </a></li><li>
+        <a class="level is-marginless" href="/categories/%E7%AE%97%E6%B3%95/">
+            <span class="level-start">
+                <span class="level-item">算法</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">1</span>
+            </span>
+        </a></li><li>
         <a class="level is-marginless" href="/categories/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/">
             <span class="level-start">
                 <span class="level-item">设计模式</span>
@@ -966,9 +1107,47 @@
         
         <article class="media">
             
+            <a href="/2020/07/29/5-%E6%9C%80%E9%95%BF%E5%9B%9E%E6%96%87%E5%AD%90%E4%B8%B2/" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="images/loading.gif" data-original="https://s1.ax1x.com/2020/07/30/anpJXT.md.jpg" alt="5 最长回文子串">
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2020-07-29T14:59:51.000Z">2020-07-29</time></div>
+                    <a href="/2020/07/29/5-%E6%9C%80%E9%95%BF%E5%9B%9E%E6%96%87%E5%AD%90%E4%B8%B2/" class="title has-link-black-ter is-size-6 has-text-weight-normal">5 最长回文子串</a>
+                    <p class="is-size-7 is-uppercase">
+                        <a class="has-link-grey -link" href="/categories/%E7%AE%97%E6%B3%95/">算法</a>
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+        <article class="media">
+            
+            <a href="/2020/07/28/%E6%9C%80%E7%9F%AD%E4%BD%9C%E4%B8%9A%E4%BC%98%E5%85%88%E7%AE%97%E6%B3%95(SJF)/" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="images/loading.gif" data-original="https://source.acexy.cn/view/XOb1CgW" alt="最短作业优先算法(SJF)">
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2020-07-28T13:54:43.000Z">2020-07-28</time></div>
+                    <a href="/2020/07/28/%E6%9C%80%E7%9F%AD%E4%BD%9C%E4%B8%9A%E4%BC%98%E5%85%88%E7%AE%97%E6%B3%95(SJF)/" class="title has-link-black-ter is-size-6 has-text-weight-normal">最短作业优先算法(SJF)</a>
+                    <p class="is-size-7 is-uppercase">
+                        <a class="has-link-grey -link" href="/categories/Others/">Others</a>
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+        <article class="media">
+            
             <a href="/2020/07/27/%E7%AE%80%E5%8D%95%E5%B7%A5%E5%8E%82%E6%A8%A1%E5%BC%8F/" class="media-left">
                 <p class="image is-64x64">
-                    <img class="thumbnail" src="images/loading.gif" data-original="https://s1.ax1x.com/2020/07/29/aZBIzj.md.jpg" alt="简单工厂模式">
+                    <img class="thumbnail" src="images/loading.gif" data-original="https://s1.ax1x.com/2020/07/30/anptnU.md.jpg" alt="简单工厂模式">
                 </p>
             </a>
             
@@ -987,7 +1166,7 @@
             
             <a href="/2020/07/24/%E9%98%BF%E9%87%8C%E7%9F%AD%E4%BF%A1/" class="media-left">
                 <p class="image is-64x64">
-                    <img class="thumbnail" src="images/loading.gif" data-original="https://s1.ax1x.com/2020/07/29/aZBLwV.md.jpg" alt="阿里短信">
+                    <img class="thumbnail" src="images/loading.gif" data-original="https://s1.ax1x.com/2020/07/30/anp0hR.md.jpg" alt="阿里短信">
                 </p>
             </a>
             
@@ -1006,7 +1185,7 @@
             
             <a href="/2020/07/24/JWT+RSA%E9%9D%9E%E5%AF%B9%E7%A7%B0%E5%8A%A0%E5%AF%86%E5%AE%9E%E7%8E%B0%E6%97%A0%E7%8A%B6%E6%80%81%E7%99%BB%E5%BD%95/" class="media-left">
                 <p class="image is-64x64">
-                    <img class="thumbnail" src="images/loading.gif" data-original="https://s1.ax1x.com/2020/07/29/aZBqe0.md.jpg" alt="JWT+RSA非对称加密实现无状态登录">
+                    <img class="thumbnail" src="images/loading.gif" data-original="https://s1.ax1x.com/2020/07/30/anpwN9.md.jpg" alt="JWT+RSA非对称加密实现无状态登录">
                 </p>
             </a>
             
@@ -1021,44 +1200,6 @@
             </div>
         </article>
         
-        <article class="media">
-            
-            <a href="/2020/07/18/ribbon%E5%92%8Chytrix%E8%B6%85%E6%97%B6%E8%B8%A9%E5%9D%91%E8%AE%B0%E5%BD%95/" class="media-left">
-                <p class="image is-64x64">
-                    <img class="thumbnail" src="images/loading.gif" data-original="https://s1.ax1x.com/2020/07/29/aZBvYF.md.jpg" alt="ribbon和hytrix超时踩坑记录">
-                </p>
-            </a>
-            
-            <div class="media-content">
-                <div class="content">
-                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2020-07-18T15:06:18.000Z">2020-07-18</time></div>
-                    <a href="/2020/07/18/ribbon%E5%92%8Chytrix%E8%B6%85%E6%97%B6%E8%B8%A9%E5%9D%91%E8%AE%B0%E5%BD%95/" class="title has-link-black-ter is-size-6 has-text-weight-normal">ribbon和hytrix超时踩坑记录</a>
-                    <p class="is-size-7 is-uppercase">
-                        <a class="has-link-grey -link" href="/categories/SpringCloud/">SpringCloud</a>
-                    </p>
-                </div>
-            </div>
-        </article>
-        
-        <article class="media">
-            
-            <a href="/2020/07/14/fastDFS%E7%9A%84%E5%AE%89%E8%A3%85%E5%92%8Cspringboot%E5%AE%8C%E6%88%90%E6%96%87%E4%BB%B6%E4%B8%8A%E4%BC%A0/" class="media-left">
-                <p class="image is-64x64">
-                    <img class="thumbnail" src="images/loading.gif" data-original="https://s1.ax1x.com/2020/07/29/aZBjFU.md.jpg" alt="fastDFS的安装和springboot完成文件上传">
-                </p>
-            </a>
-            
-            <div class="media-content">
-                <div class="content">
-                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2020-07-14T08:25:17.000Z">2020-07-14</time></div>
-                    <a href="/2020/07/14/fastDFS%E7%9A%84%E5%AE%89%E8%A3%85%E5%92%8Cspringboot%E5%AE%8C%E6%88%90%E6%96%87%E4%BB%B6%E4%B8%8A%E4%BC%A0/" class="title has-link-black-ter is-size-6 has-text-weight-normal">fastDFS的安装和springboot完成文件上传</a>
-                    <p class="is-size-7 is-uppercase">
-                        <a class="has-link-grey -link" href="/categories/SpringBoot/">SpringBoot</a>
-                    </p>
-                </div>
-            </div>
-        </article>
-        
     </div>
 </div>
         
@@ -1067,7 +1208,7 @@
         <h3 class="menu-label">
             标签云
         </h3>
-        <a href="/tags/eureka/" style="font-size: 10px;">eureka</a> <a href="/tags/fastDFS/" style="font-size: 10px;">fastDFS</a> <a href="/tags/feign/" style="font-size: 10px;">feign</a> <a href="/tags/http/" style="font-size: 10px;">http</a> <a href="/tags/hystrix/" style="font-size: 10px;">hystrix</a> <a href="/tags/json/" style="font-size: 10px;">json</a> <a href="/tags/markdown/" style="font-size: 10px;">markdown</a> <a href="/tags/maven/" style="font-size: 10px;">maven</a> <a href="/tags/mysql/" style="font-size: 10px;">mysql</a> <a href="/tags/ribbon/" style="font-size: 10px;">ribbon</a> <a href="/tags/spring/" style="font-size: 13.33px;">spring</a> <a href="/tags/springboot/" style="font-size: 10px;">springboot</a> <a href="/tags/springcloud/" style="font-size: 13.33px;">springcloud</a> <a href="/tags/springmvc/" style="font-size: 16.67px;">springmvc</a> <a href="/tags/tree/" style="font-size: 13.33px;">tree</a> <a href="/tags/zuul/" style="font-size: 10px;">zuul</a> <a href="/tags/%E4%BA%A4%E4%BA%92/" style="font-size: 10px;">交互</a> <a href="/tags/%E5%8A%A0%E5%AF%86/" style="font-size: 10px;">加密</a> <a href="/tags/%E5%9D%91/" style="font-size: 10px;">坑</a> <a href="/tags/%E5%AD%A6%E4%B9%A0%E8%AE%B0%E5%BD%95/" style="font-size: 10px;">学习记录</a> <a href="/tags/%E5%BC%80%E5%8F%91/" style="font-size: 20px;">开发</a> <a href="/tags/%E6%8B%9B%E8%81%98%E7%AC%94%E8%AF%95/" style="font-size: 13.33px;">招聘笔试</a> <a href="/tags/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/" style="font-size: 13.33px;">数据结构</a>
+        <a href="/tags/eureka/" style="font-size: 10px;">eureka</a> <a href="/tags/fastDFS/" style="font-size: 10px;">fastDFS</a> <a href="/tags/feign/" style="font-size: 10px;">feign</a> <a href="/tags/http/" style="font-size: 10px;">http</a> <a href="/tags/hystrix/" style="font-size: 10px;">hystrix</a> <a href="/tags/json/" style="font-size: 10px;">json</a> <a href="/tags/markdown/" style="font-size: 10px;">markdown</a> <a href="/tags/maven/" style="font-size: 10px;">maven</a> <a href="/tags/mysql/" style="font-size: 10px;">mysql</a> <a href="/tags/ribbon/" style="font-size: 10px;">ribbon</a> <a href="/tags/spring/" style="font-size: 13.33px;">spring</a> <a href="/tags/springboot/" style="font-size: 10px;">springboot</a> <a href="/tags/springcloud/" style="font-size: 13.33px;">springcloud</a> <a href="/tags/springmvc/" style="font-size: 16.67px;">springmvc</a> <a href="/tags/tree/" style="font-size: 13.33px;">tree</a> <a href="/tags/zuul/" style="font-size: 10px;">zuul</a> <a href="/tags/%E4%BA%A4%E4%BA%92/" style="font-size: 10px;">交互</a> <a href="/tags/%E5%8A%9B%E6%89%A3/" style="font-size: 10px;">力扣</a> <a href="/tags/%E5%8A%A0%E5%AF%86/" style="font-size: 10px;">加密</a> <a href="/tags/%E5%9D%91/" style="font-size: 10px;">坑</a> <a href="/tags/%E5%AD%A6%E4%B9%A0%E8%AE%B0%E5%BD%95/" style="font-size: 10px;">学习记录</a> <a href="/tags/%E5%BC%80%E5%8F%91/" style="font-size: 20px;">开发</a> <a href="/tags/%E6%8B%9B%E8%81%98%E7%AC%94%E8%AF%95/" style="font-size: 13.33px;">招聘笔试</a> <a href="/tags/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/" style="font-size: 13.33px;">数据结构</a>
     </div>
 </div>
         
@@ -1090,9 +1231,47 @@
         
         <article class="media">
             
+            <a href="/2020/07/29/5-%E6%9C%80%E9%95%BF%E5%9B%9E%E6%96%87%E5%AD%90%E4%B8%B2/" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="images/loading.gif" data-original="https://s1.ax1x.com/2020/07/30/anpJXT.md.jpg" alt="5 最长回文子串">
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2020-07-29T14:59:51.000Z">2020-07-29</time></div>
+                    <a href="/2020/07/29/5-%E6%9C%80%E9%95%BF%E5%9B%9E%E6%96%87%E5%AD%90%E4%B8%B2/" class="title has-link-black-ter is-size-6 has-text-weight-normal">5 最长回文子串</a>
+                    <p class="is-size-7 is-uppercase">
+                        <a class="has-link-grey -link" href="/categories/%E7%AE%97%E6%B3%95/">算法</a>
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+        <article class="media">
+            
+            <a href="/2020/07/28/%E6%9C%80%E7%9F%AD%E4%BD%9C%E4%B8%9A%E4%BC%98%E5%85%88%E7%AE%97%E6%B3%95(SJF)/" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="images/loading.gif" data-original="https://source.acexy.cn/view/XOb1CgW" alt="最短作业优先算法(SJF)">
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2020-07-28T13:54:43.000Z">2020-07-28</time></div>
+                    <a href="/2020/07/28/%E6%9C%80%E7%9F%AD%E4%BD%9C%E4%B8%9A%E4%BC%98%E5%85%88%E7%AE%97%E6%B3%95(SJF)/" class="title has-link-black-ter is-size-6 has-text-weight-normal">最短作业优先算法(SJF)</a>
+                    <p class="is-size-7 is-uppercase">
+                        <a class="has-link-grey -link" href="/categories/Others/">Others</a>
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+        <article class="media">
+            
             <a href="/2020/07/27/%E7%AE%80%E5%8D%95%E5%B7%A5%E5%8E%82%E6%A8%A1%E5%BC%8F/" class="media-left">
                 <p class="image is-64x64">
-                    <img class="thumbnail" src="images/loading.gif" data-original="https://s1.ax1x.com/2020/07/29/aZBIzj.md.jpg" alt="简单工厂模式">
+                    <img class="thumbnail" src="images/loading.gif" data-original="https://s1.ax1x.com/2020/07/30/anptnU.md.jpg" alt="简单工厂模式">
                 </p>
             </a>
             
@@ -1111,7 +1290,7 @@
             
             <a href="/2020/07/24/%E9%98%BF%E9%87%8C%E7%9F%AD%E4%BF%A1/" class="media-left">
                 <p class="image is-64x64">
-                    <img class="thumbnail" src="images/loading.gif" data-original="https://s1.ax1x.com/2020/07/29/aZBLwV.md.jpg" alt="阿里短信">
+                    <img class="thumbnail" src="images/loading.gif" data-original="https://s1.ax1x.com/2020/07/30/anp0hR.md.jpg" alt="阿里短信">
                 </p>
             </a>
             
@@ -1130,7 +1309,7 @@
             
             <a href="/2020/07/24/JWT+RSA%E9%9D%9E%E5%AF%B9%E7%A7%B0%E5%8A%A0%E5%AF%86%E5%AE%9E%E7%8E%B0%E6%97%A0%E7%8A%B6%E6%80%81%E7%99%BB%E5%BD%95/" class="media-left">
                 <p class="image is-64x64">
-                    <img class="thumbnail" src="images/loading.gif" data-original="https://s1.ax1x.com/2020/07/29/aZBqe0.md.jpg" alt="JWT+RSA非对称加密实现无状态登录">
+                    <img class="thumbnail" src="images/loading.gif" data-original="https://s1.ax1x.com/2020/07/30/anpwN9.md.jpg" alt="JWT+RSA非对称加密实现无状态登录">
                 </p>
             </a>
             
@@ -1145,44 +1324,6 @@
             </div>
         </article>
         
-        <article class="media">
-            
-            <a href="/2020/07/18/ribbon%E5%92%8Chytrix%E8%B6%85%E6%97%B6%E8%B8%A9%E5%9D%91%E8%AE%B0%E5%BD%95/" class="media-left">
-                <p class="image is-64x64">
-                    <img class="thumbnail" src="images/loading.gif" data-original="https://s1.ax1x.com/2020/07/29/aZBvYF.md.jpg" alt="ribbon和hytrix超时踩坑记录">
-                </p>
-            </a>
-            
-            <div class="media-content">
-                <div class="content">
-                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2020-07-18T15:06:18.000Z">2020-07-18</time></div>
-                    <a href="/2020/07/18/ribbon%E5%92%8Chytrix%E8%B6%85%E6%97%B6%E8%B8%A9%E5%9D%91%E8%AE%B0%E5%BD%95/" class="title has-link-black-ter is-size-6 has-text-weight-normal">ribbon和hytrix超时踩坑记录</a>
-                    <p class="is-size-7 is-uppercase">
-                        <a class="has-link-grey -link" href="/categories/SpringCloud/">SpringCloud</a>
-                    </p>
-                </div>
-            </div>
-        </article>
-        
-        <article class="media">
-            
-            <a href="/2020/07/14/fastDFS%E7%9A%84%E5%AE%89%E8%A3%85%E5%92%8Cspringboot%E5%AE%8C%E6%88%90%E6%96%87%E4%BB%B6%E4%B8%8A%E4%BC%A0/" class="media-left">
-                <p class="image is-64x64">
-                    <img class="thumbnail" src="images/loading.gif" data-original="https://s1.ax1x.com/2020/07/29/aZBjFU.md.jpg" alt="fastDFS的安装和springboot完成文件上传">
-                </p>
-            </a>
-            
-            <div class="media-content">
-                <div class="content">
-                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2020-07-14T08:25:17.000Z">2020-07-14</time></div>
-                    <a href="/2020/07/14/fastDFS%E7%9A%84%E5%AE%89%E8%A3%85%E5%92%8Cspringboot%E5%AE%8C%E6%88%90%E6%96%87%E4%BB%B6%E4%B8%8A%E4%BC%A0/" class="title has-link-black-ter is-size-6 has-text-weight-normal">fastDFS的安装和springboot完成文件上传</a>
-                    <p class="is-size-7 is-uppercase">
-                        <a class="has-link-grey -link" href="/categories/SpringBoot/">SpringBoot</a>
-                    </p>
-                </div>
-            </div>
-        </article>
-        
     </div>
 </div>
     
@@ -1191,7 +1332,7 @@
         <h3 class="menu-label">
             标签云
         </h3>
-        <a href="/tags/eureka/" style="font-size: 10px;">eureka</a> <a href="/tags/fastDFS/" style="font-size: 10px;">fastDFS</a> <a href="/tags/feign/" style="font-size: 10px;">feign</a> <a href="/tags/http/" style="font-size: 10px;">http</a> <a href="/tags/hystrix/" style="font-size: 10px;">hystrix</a> <a href="/tags/json/" style="font-size: 10px;">json</a> <a href="/tags/markdown/" style="font-size: 10px;">markdown</a> <a href="/tags/maven/" style="font-size: 10px;">maven</a> <a href="/tags/mysql/" style="font-size: 10px;">mysql</a> <a href="/tags/ribbon/" style="font-size: 10px;">ribbon</a> <a href="/tags/spring/" style="font-size: 13.33px;">spring</a> <a href="/tags/springboot/" style="font-size: 10px;">springboot</a> <a href="/tags/springcloud/" style="font-size: 13.33px;">springcloud</a> <a href="/tags/springmvc/" style="font-size: 16.67px;">springmvc</a> <a href="/tags/tree/" style="font-size: 13.33px;">tree</a> <a href="/tags/zuul/" style="font-size: 10px;">zuul</a> <a href="/tags/%E4%BA%A4%E4%BA%92/" style="font-size: 10px;">交互</a> <a href="/tags/%E5%8A%A0%E5%AF%86/" style="font-size: 10px;">加密</a> <a href="/tags/%E5%9D%91/" style="font-size: 10px;">坑</a> <a href="/tags/%E5%AD%A6%E4%B9%A0%E8%AE%B0%E5%BD%95/" style="font-size: 10px;">学习记录</a> <a href="/tags/%E5%BC%80%E5%8F%91/" style="font-size: 20px;">开发</a> <a href="/tags/%E6%8B%9B%E8%81%98%E7%AC%94%E8%AF%95/" style="font-size: 13.33px;">招聘笔试</a> <a href="/tags/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/" style="font-size: 13.33px;">数据结构</a>
+        <a href="/tags/eureka/" style="font-size: 10px;">eureka</a> <a href="/tags/fastDFS/" style="font-size: 10px;">fastDFS</a> <a href="/tags/feign/" style="font-size: 10px;">feign</a> <a href="/tags/http/" style="font-size: 10px;">http</a> <a href="/tags/hystrix/" style="font-size: 10px;">hystrix</a> <a href="/tags/json/" style="font-size: 10px;">json</a> <a href="/tags/markdown/" style="font-size: 10px;">markdown</a> <a href="/tags/maven/" style="font-size: 10px;">maven</a> <a href="/tags/mysql/" style="font-size: 10px;">mysql</a> <a href="/tags/ribbon/" style="font-size: 10px;">ribbon</a> <a href="/tags/spring/" style="font-size: 13.33px;">spring</a> <a href="/tags/springboot/" style="font-size: 10px;">springboot</a> <a href="/tags/springcloud/" style="font-size: 13.33px;">springcloud</a> <a href="/tags/springmvc/" style="font-size: 16.67px;">springmvc</a> <a href="/tags/tree/" style="font-size: 13.33px;">tree</a> <a href="/tags/zuul/" style="font-size: 10px;">zuul</a> <a href="/tags/%E4%BA%A4%E4%BA%92/" style="font-size: 10px;">交互</a> <a href="/tags/%E5%8A%9B%E6%89%A3/" style="font-size: 10px;">力扣</a> <a href="/tags/%E5%8A%A0%E5%AF%86/" style="font-size: 10px;">加密</a> <a href="/tags/%E5%9D%91/" style="font-size: 10px;">坑</a> <a href="/tags/%E5%AD%A6%E4%B9%A0%E8%AE%B0%E5%BD%95/" style="font-size: 10px;">学习记录</a> <a href="/tags/%E5%BC%80%E5%8F%91/" style="font-size: 20px;">开发</a> <a href="/tags/%E6%8B%9B%E8%81%98%E7%AC%94%E8%AF%95/" style="font-size: 13.33px;">招聘笔试</a> <a href="/tags/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/" style="font-size: 13.33px;">数据结构</a>
     </div>
 </div>
     
