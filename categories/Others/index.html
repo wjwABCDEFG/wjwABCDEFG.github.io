@@ -160,7 +160,7 @@
                 <span class="level-item has-text-grey">
                     
                     
-                    5 分钟 读完 (大约 719 个字)
+                    5 分钟 读完 (大约 720 个字)
                 </span>
                 
                 
@@ -177,140 +177,16 @@
 <br>
 
 <p>5个程序ABCDE同时提交给CPU执行（虽然式同时提交，但是有先后，假装A比B快那么一点点的一点点的一点点好了）</p>
-<table>
-<thead>
-<tr>
-<th>作业名</th>
-<th>执行时间</th>
-</tr>
-</thead>
-<tbody><tr>
-<td>A</td>
-<td>5</td>
-</tr>
-<tr>
-<td>B</td>
-<td>5</td>
-</tr>
-<tr>
-<td>C</td>
-<td>2</td>
-</tr>
-<tr>
-<td>D</td>
-<td>3</td>
-</tr>
-<tr>
-<td>E</td>
-<td>4</td>
-</tr>
-</tbody></table>
-<p>那么运行顺序为</p>
-<p><img src="images/loading.gif" data-original="https://s1.ax1x.com/2020/07/28/aVnDrq.png" alt=""></p>
-<p><strong>平均等待时间=(任务开始时间 - 任务提交时间)/n</strong></p>
-<p>等待时间</p>
-<p>A:9-0      B:14-0      C:0-0      D:2-0      E:5-0</p>
-<p>平均等待时间=30/5=6</p>
-<br>
-
-<p>如果不是同时提交，那么出现非抢占式和抢占式两种情况</p>
-<p><strong>非抢占式</strong>：同一时间则选择先运行耗时短的任务，不同时间则按照先来先服务(FCFS)</p>
-<table>
-<thead>
-<tr>
-<th>作业名</th>
-<th>提交时间</th>
-<th>执行时间</th>
-</tr>
-</thead>
-<tbody><tr>
-<td>A</td>
-<td>0</td>
-<td>5</td>
-</tr>
-<tr>
-<td>B</td>
-<td>1</td>
-<td>5</td>
-</tr>
-<tr>
-<td>C</td>
-<td>2</td>
-<td>2</td>
-</tr>
-<tr>
-<td>D</td>
-<td>3</td>
-<td>3</td>
-</tr>
-<tr>
-<td>E</td>
-<td>4</td>
-<td>4</td>
-</tr>
-</tbody></table>
-<p>0s时：只有A，因此先执行A，因为是非抢占式，所以BCDE提交时即使执行时间可能更短（比如C为2）也只能等待A执行完，A执行完为5s，此时BCDE相当于同时提交，情况和第一种一样，因此顺序是CDEB</p>
-<p><img src="images/loading.gif" data-original="https://s1.ax1x.com/2020/07/28/aVn3rt.png" alt=""></p>
-<p>等待时间</p>
-<p>A:0-0     B:14​-1     C:5-2     D:7-3     E:10-4</p>
-<p>平均等待时间=(0+13+3+4+6)/5=5.2</p>
-<br>
-
-<p><strong>抢占式</strong>：新任务提交时，就判断正在运行中剩下的时间和新任务的执行时间，那个短先执行哪个，原任务如果被抢占，则中途暂停</p>
-<p>仍然是这个例子</p>
-<table>
-<thead>
-<tr>
-<th>作业名</th>
-<th>提交时间</th>
-<th>执行时间</th>
-</tr>
-</thead>
-<tbody><tr>
-<td>A</td>
-<td>0</td>
-<td>5</td>
-</tr>
-<tr>
-<td>B</td>
-<td>1</td>
-<td>5</td>
-</tr>
-<tr>
-<td>C</td>
-<td>2</td>
-<td>2</td>
-</tr>
-<tr>
-<td>D</td>
-<td>3</td>
-<td>3</td>
-</tr>
-<tr>
-<td>E</td>
-<td>4</td>
-<td>4</td>
-</tr>
-</tbody></table>
-<p>1s时：B提交，但是此时A为4，因此继续运行A</p>
-<p>2s时：C提交，此时A为3C为2，因此抢占运行C，A被中断还剩3s</p>
-<p>4s时：C运行完，所有任务都为提交状态，A和C为3s，因为A先来，所以先运行A</p>
-<p>流程如下</p>
-<p><img src="images/loading.gif" data-original="https://s1.ax1x.com/2020/07/28/aVM1M9.png" alt=""></p>
-<p>等待时间</p>
-<p>A:4-2（这个2是第一段的时间）     B:14-1     C:2-2     D:7-3     E:10-4</p>
-<p>平均等待时间=(2+13+0+4+6)/5=5</p>
-<br>
-
-<p>有了开始时间和完成时间，至于要算其他的给出公式就能计算</p>
-<p>周转时间=作业完成时间—作业提交时间;<br>平均周转时间=(作业1的周转时间+…+作业n的周转时间)/n;<br>带权周转时间=作业周转时间/作业实际运行时间;<br>平均带权周转时间=(作业1的带权周转时间+…+作业n的带权周转时间)/n;</p>
-<p><em>算这些不是有手就行？</em></p>
-<br>
-
-<p>sjf算法能让平均等待时间最短，因为先执行了简单任务，当然实际应用中是理想情况，因为不知道任务执行时间是多久。</p>
-
         </div>
         
+        
+        <div class="level is-mobile">
+            <div class="level-start">
+                <div class="level-item">
+                <a class="button is-size-7 is-light" href="/2020/07/28/%E6%9C%80%E7%9F%AD%E4%BD%9C%E4%B8%9A%E4%BC%98%E5%85%88%E7%AE%97%E6%B3%95(SJF)/#more">阅读更多</a>
+                </div>
+            </div>
+        </div>
         
         
     </div>
@@ -328,7 +204,7 @@
     
     <div class="card-image">
         <a href="/2020/07/24/%E9%98%BF%E9%87%8C%E7%9F%AD%E4%BF%A1/" class="image is-7by1">
-            <img class="thumbnail" src="images/loading.gif" data-original="https://s1.ax1x.com/2020/07/30/anp0hR.md.jpg" alt="阿里短信">
+            <img class="thumbnail" src="images/loading.gif" data-original="https://source.acexy.cn/view/XOY2GHQ" alt="阿里短信">
         </a>
     </div>
     
@@ -388,7 +264,7 @@
     
     <div class="card-image">
         <a href="/2020/06/27/java%E4%B8%BB%E5%8A%A8%E5%8F%91%E9%80%81http%E8%AF%B7%E6%B1%82/" class="image is-7by1">
-            <img class="thumbnail" src="images/loading.gif" data-original="https://s1.ax1x.com/2020/07/30/anpitA.md.jpg" alt="java主动发送http请求">
+            <img class="thumbnail" src="images/loading.gif" data-original="https://wx1.sbimg.cn/2020/07/30/P7qc1.md.jpg" alt="java主动发送http请求">
         </a>
     </div>
     
@@ -452,7 +328,7 @@
     
     <div class="card-image">
         <a href="/2020/03/06/markdown%E4%BD%BF%E7%94%A8/" class="image is-7by1">
-            <img class="thumbnail" src="images/loading.gif" data-original="https://s1.ax1x.com/2020/07/30/anpu7Q.md.jpg)" alt="markdown使用">
+            <img class="thumbnail" src="images/loading.gif" data-original="https://wx2.sbimg.cn/2020/07/29/P79in.md.jpg" alt="markdown使用">
         </a>
     </div>
     
@@ -726,7 +602,7 @@
             
             <a href="/2020/07/29/5-%E6%9C%80%E9%95%BF%E5%9B%9E%E6%96%87%E5%AD%90%E4%B8%B2/" class="media-left">
                 <p class="image is-64x64">
-                    <img class="thumbnail" src="images/loading.gif" data-original="https://s1.ax1x.com/2020/07/30/anpJXT.md.jpg" alt="5 最长回文子串">
+                    <img class="thumbnail" src="images/loading.gif" data-original="https://source.acexy.cn/view/XOb1+A1" alt="5 最长回文子串">
                 </p>
             </a>
             
@@ -764,7 +640,7 @@
             
             <a href="/2020/07/27/%E7%AE%80%E5%8D%95%E5%B7%A5%E5%8E%82%E6%A8%A1%E5%BC%8F/" class="media-left">
                 <p class="image is-64x64">
-                    <img class="thumbnail" src="images/loading.gif" data-original="https://s1.ax1x.com/2020/07/30/anptnU.md.jpg" alt="简单工厂模式">
+                    <img class="thumbnail" src="images/loading.gif" data-original="https://source.acexy.cn/view/XOb1Do2" alt="简单工厂模式">
                 </p>
             </a>
             
@@ -783,7 +659,7 @@
             
             <a href="/2020/07/24/%E9%98%BF%E9%87%8C%E7%9F%AD%E4%BF%A1/" class="media-left">
                 <p class="image is-64x64">
-                    <img class="thumbnail" src="images/loading.gif" data-original="https://s1.ax1x.com/2020/07/30/anp0hR.md.jpg" alt="阿里短信">
+                    <img class="thumbnail" src="images/loading.gif" data-original="https://source.acexy.cn/view/XOY2GHQ" alt="阿里短信">
                 </p>
             </a>
             
@@ -850,7 +726,7 @@
             
             <a href="/2020/07/29/5-%E6%9C%80%E9%95%BF%E5%9B%9E%E6%96%87%E5%AD%90%E4%B8%B2/" class="media-left">
                 <p class="image is-64x64">
-                    <img class="thumbnail" src="images/loading.gif" data-original="https://s1.ax1x.com/2020/07/30/anpJXT.md.jpg" alt="5 最长回文子串">
+                    <img class="thumbnail" src="images/loading.gif" data-original="https://source.acexy.cn/view/XOb1+A1" alt="5 最长回文子串">
                 </p>
             </a>
             
@@ -888,7 +764,7 @@
             
             <a href="/2020/07/27/%E7%AE%80%E5%8D%95%E5%B7%A5%E5%8E%82%E6%A8%A1%E5%BC%8F/" class="media-left">
                 <p class="image is-64x64">
-                    <img class="thumbnail" src="images/loading.gif" data-original="https://s1.ax1x.com/2020/07/30/anptnU.md.jpg" alt="简单工厂模式">
+                    <img class="thumbnail" src="images/loading.gif" data-original="https://source.acexy.cn/view/XOb1Do2" alt="简单工厂模式">
                 </p>
             </a>
             
@@ -907,7 +783,7 @@
             
             <a href="/2020/07/24/%E9%98%BF%E9%87%8C%E7%9F%AD%E4%BF%A1/" class="media-left">
                 <p class="image is-64x64">
-                    <img class="thumbnail" src="images/loading.gif" data-original="https://s1.ax1x.com/2020/07/30/anp0hR.md.jpg" alt="阿里短信">
+                    <img class="thumbnail" src="images/loading.gif" data-original="https://source.acexy.cn/view/XOY2GHQ" alt="阿里短信">
                 </p>
             </a>
             

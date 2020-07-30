@@ -159,7 +159,7 @@
                 <span class="level-item has-text-grey">
                     
                     
-                    3 分钟 读完 (大约 521 个字)
+                    3 分钟 读完 (大约 522 个字)
                 </span>
                 
                 
@@ -177,33 +177,16 @@
 </blockquote>
 <p>给定一个数组，它的第 i 个元素是一支给定股票第 i 天的价格。</p>
 <p>如果你最多只允许完成一笔交易（即买入和卖出一支股票一次），设计一个算法来计算你所能获取的最大利润。</p>
-<p>注意：你不能在买入股票前卖出股票。</p>
-<p><strong>示例 1:</strong></p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">输入: [7,1,5,3,6,4]</span><br><span class="line">输出: 5</span><br><span class="line">解释: 在第 2 天（股票价格 &#x3D; 1）的时候买入，在第 5 天（股票价格 &#x3D; 6）的时候卖出，最大利润 &#x3D; 6-1 &#x3D; 5 。</span><br><span class="line">     注意利润不能是 7-1 &#x3D; 6, 因为卖出价格需要大于买入价格；同时，你不能在买入前卖出股票。</span><br></pre></td></tr></table></figure>
-
-<p><strong>示例 2:</strong></p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">输入: [7,6,4,3,1]</span><br><span class="line">输出: 0</span><br><span class="line">解释: 在这种情况下, 没有交易完成, 所以最大利润为 0。</span><br></pre></td></tr></table></figure>
-
-<p><strong>思路：</strong></p>
-<p>经典的动态规划题</p>
-<ol>
-<li><p>dp数组含义：dp[i]代表到第i天最佳利润，则dp[n]就是最终最大利润</p>
-</li>
-<li><p>初始条件：dp[0] = 0，没买入卖出之前默认利润为0</p>
-</li>
-<li><p>关系式：dp[i] = Math.max(今天卖出去的话获得的最大利润, 之前卖的话最大利润即dp[i-1]);</p>
-</li>
-</ol>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">one_two_one_</span>买卖股票的最佳时机 </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Test</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">test</span><span class="params">()</span></span>&#123;</span><br><span class="line">        <span class="keyword">int</span>[] prices = &#123;<span class="number">2</span>,<span class="number">6</span>,<span class="number">1</span>,<span class="number">7</span>&#125;;</span><br><span class="line">        <span class="keyword">int</span> res = maxProfit(prices);</span><br><span class="line">        System.out.println(res);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">maxProfit</span><span class="params">(<span class="keyword">int</span>[] prices)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">if</span> (prices.length == <span class="number">0</span>)&#123;</span><br><span class="line">            <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">int</span> n = prices.length;</span><br><span class="line">        <span class="keyword">int</span>[] dp = <span class="keyword">new</span> <span class="keyword">int</span>[n];  <span class="comment">//dp[i]代表到第i天为止最佳收入</span></span><br><span class="line">        <span class="keyword">int</span> buy = <span class="number">0</span>;    <span class="comment">//当前最佳买入日期</span></span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">1</span>; i &lt; n; i++) &#123;</span><br><span class="line">            <span class="keyword">if</span> (prices[i] &lt; prices[buy])&#123;</span><br><span class="line">                buy = i;</span><br><span class="line">            &#125;</span><br><span class="line">            dp[i] = Math.max(prices[i] - prices[buy], dp[i - <span class="number">1</span>]);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> dp[n - <span class="number">1</span>];</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>经典的动态规划题，跟着3步走就完事儿~</p>
-<p>可以优化一下：dp[i]只和dp[i-1]有关，所以可以不用数组而只用一个变量保存</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">maxProfit</span><span class="params">(<span class="keyword">int</span>[] prices)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">if</span> (prices.length == <span class="number">0</span>)&#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">int</span> n = prices.length;</span><br><span class="line">    <span class="keyword">int</span> res = <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">int</span> buy = <span class="number">0</span>;    <span class="comment">//当前最佳买入日期</span></span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">1</span>; i &lt; n; i++) &#123;</span><br><span class="line">        <span class="keyword">if</span> (prices[i] &lt; prices[buy])&#123;</span><br><span class="line">            buy = i;</span><br><span class="line">        &#125;</span><br><span class="line">        res = Math.max(prices[i] - prices[buy], res);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> res;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>时间也由2ms变为1ms</p>
-
         </div>
         
+        
+        <div class="level is-mobile">
+            <div class="level-start">
+                <div class="level-item">
+                <a class="button is-size-7 is-light" href="/2020/07/30/121-%E4%B9%B0%E5%8D%96%E8%82%A1%E7%A5%A8%E7%9A%84%E6%9C%80%E4%BD%B3%E6%97%B6%E6%9C%BA/#more">阅读更多</a>
+                </div>
+            </div>
+        </div>
         
         
     </div>
@@ -221,7 +204,7 @@
     
     <div class="card-image">
         <a href="/2020/07/29/5-%E6%9C%80%E9%95%BF%E5%9B%9E%E6%96%87%E5%AD%90%E4%B8%B2/" class="image is-7by1">
-            <img class="thumbnail" src="images/loading.gif" data-original="https://s1.ax1x.com/2020/07/30/anpJXT.md.jpg" alt="5 最长回文子串">
+            <img class="thumbnail" src="images/loading.gif" data-original="https://source.acexy.cn/view/XOb1+A1" alt="5 最长回文子串">
         </a>
     </div>
     
@@ -496,7 +479,7 @@
             
             <a href="/2020/07/29/5-%E6%9C%80%E9%95%BF%E5%9B%9E%E6%96%87%E5%AD%90%E4%B8%B2/" class="media-left">
                 <p class="image is-64x64">
-                    <img class="thumbnail" src="images/loading.gif" data-original="https://s1.ax1x.com/2020/07/30/anpJXT.md.jpg" alt="5 最长回文子串">
+                    <img class="thumbnail" src="images/loading.gif" data-original="https://source.acexy.cn/view/XOb1+A1" alt="5 最长回文子串">
                 </p>
             </a>
             
@@ -534,7 +517,7 @@
             
             <a href="/2020/07/27/%E7%AE%80%E5%8D%95%E5%B7%A5%E5%8E%82%E6%A8%A1%E5%BC%8F/" class="media-left">
                 <p class="image is-64x64">
-                    <img class="thumbnail" src="images/loading.gif" data-original="https://s1.ax1x.com/2020/07/30/anptnU.md.jpg" alt="简单工厂模式">
+                    <img class="thumbnail" src="images/loading.gif" data-original="https://source.acexy.cn/view/XOb1Do2" alt="简单工厂模式">
                 </p>
             </a>
             
@@ -553,7 +536,7 @@
             
             <a href="/2020/07/24/%E9%98%BF%E9%87%8C%E7%9F%AD%E4%BF%A1/" class="media-left">
                 <p class="image is-64x64">
-                    <img class="thumbnail" src="images/loading.gif" data-original="https://s1.ax1x.com/2020/07/30/anp0hR.md.jpg" alt="阿里短信">
+                    <img class="thumbnail" src="images/loading.gif" data-original="https://source.acexy.cn/view/XOY2GHQ" alt="阿里短信">
                 </p>
             </a>
             
@@ -620,7 +603,7 @@
             
             <a href="/2020/07/29/5-%E6%9C%80%E9%95%BF%E5%9B%9E%E6%96%87%E5%AD%90%E4%B8%B2/" class="media-left">
                 <p class="image is-64x64">
-                    <img class="thumbnail" src="images/loading.gif" data-original="https://s1.ax1x.com/2020/07/30/anpJXT.md.jpg" alt="5 最长回文子串">
+                    <img class="thumbnail" src="images/loading.gif" data-original="https://source.acexy.cn/view/XOb1+A1" alt="5 最长回文子串">
                 </p>
             </a>
             
@@ -658,7 +641,7 @@
             
             <a href="/2020/07/27/%E7%AE%80%E5%8D%95%E5%B7%A5%E5%8E%82%E6%A8%A1%E5%BC%8F/" class="media-left">
                 <p class="image is-64x64">
-                    <img class="thumbnail" src="images/loading.gif" data-original="https://s1.ax1x.com/2020/07/30/anptnU.md.jpg" alt="简单工厂模式">
+                    <img class="thumbnail" src="images/loading.gif" data-original="https://source.acexy.cn/view/XOb1Do2" alt="简单工厂模式">
                 </p>
             </a>
             
@@ -677,7 +660,7 @@
             
             <a href="/2020/07/24/%E9%98%BF%E9%87%8C%E7%9F%AD%E4%BF%A1/" class="media-left">
                 <p class="image is-64x64">
-                    <img class="thumbnail" src="images/loading.gif" data-original="https://s1.ax1x.com/2020/07/30/anp0hR.md.jpg" alt="阿里短信">
+                    <img class="thumbnail" src="images/loading.gif" data-original="https://source.acexy.cn/view/XOY2GHQ" alt="阿里短信">
                 </p>
             </a>
             
