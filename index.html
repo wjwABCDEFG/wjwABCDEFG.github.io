@@ -130,6 +130,112 @@
 <div class="card">
     
     <div class="card-image">
+        <a href="/2020/08/27/84-%E6%9F%B1%E7%8A%B6%E5%9B%BE%E4%B8%AD%E7%9A%84%E6%9C%80%E5%A4%A7%E7%9F%A9%E5%BD%A2/" class="image is-7by1">
+            <img class="thumbnail" src="images/loading.gif" data-original="https://wx2.sbimg.cn/2020/07/30/P7vXA.md.jpg" alt="84-柱状图中的最大矩形">
+        </a>
+    </div>
+    
+    <div class="card-content article ">
+        
+        <div class="level article-meta is-size-7 is-uppercase is-mobile is-overflow-x-auto">
+            <div class="level-left">
+                <time class="level-item has-text-grey" datetime="2020-08-27T04:58:13.000Z">2020-08-27</time>
+                
+                <div class="level-item">
+                <a class="has-link-grey -link" href="/categories/%E7%AE%97%E6%B3%95/">算法</a>
+                </div>
+                
+                
+                <span class="level-item has-text-grey">
+                    
+                    
+                    7 分钟 读完 (大约 997 个字)
+                </span>
+                
+                
+            </div>
+        </div>
+        
+        <h1 class="title is-size-3 is-size-4-mobile has-text-weight-normal">
+            
+                <a class="has-link-black-ter" href="/2020/08/27/84-%E6%9F%B1%E7%8A%B6%E5%9B%BE%E4%B8%AD%E7%9A%84%E6%9C%80%E5%A4%A7%E7%9F%A9%E5%BD%A2/">84-柱状图中的最大矩形</a>
+            
+        </h1>
+        <div class="content">
+            <p>前言：实习的公司真是个学习的好地方，展南安排任务慢慢开始对接测试人员，学宇教我上班划划水！有问题就去烦萌萌！嘿嘿，今天看到萌萌在刷力扣，给我发来了这道题</p>
+<blockquote>
+<p>力扣原题<a href="https://leetcode-cn.com/problems/largest-rectangle-in-histogram/">https://leetcode-cn.com/problems/largest-rectangle-in-histogram/</a></p>
+</blockquote>
+<p>题目我就不贴了，关键是第一次接触到单调栈。</p>
+<br>
+
+<h1 id="1-暴力法"><a href="#1-暴力法" class="headerlink" title="1. 暴力法"></a>1. 暴力法</h1><p>思路很简单，遍历，向左向右找到比当前heights[i]低的柱，下标为left和right，然后底(right - left - 1) * 高(heights[i])</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">largestRectangleArea</span><span class="params">(<span class="keyword">int</span>[] heights)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">if</span> (heights == <span class="keyword">null</span> || heights.length == <span class="number">0</span>) <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">int</span> max = Integer.MIN_VALUE;</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; heights.length; i++) &#123;</span><br><span class="line">        <span class="comment">//往左找，往右找</span></span><br><span class="line">        <span class="keyword">int</span> left = i, right = i;</span><br><span class="line">        <span class="keyword">while</span> (left &gt;= <span class="number">0</span> &amp;&amp; heights[left] &gt;= heights[i]) left--;</span><br><span class="line">        <span class="keyword">while</span> (right &lt; heights.length &amp;&amp; heights[right] &gt;= heights[i]) right++;</span><br><span class="line">        max = Math.max(max, heights[i] * (right - left - <span class="number">1</span>));</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> max;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>用时1034ms！只有java能过，python使用这种方法超时。</p>
+<h1 id="2-单调栈"><a href="#2-单调栈" class="headerlink" title="2. 单调栈"></a>2. 单调栈</h1><p>第一次接触这个概念，但是其实并不是第一次接触单调栈的题目。这个不是一个数据结构，只是一种思维，让栈的元素单调递增或者递减，使用的场景有：遍历到i时，需要往后/前看，看到满足某个条件时需要跟i作比较。</p>
+<p>通过一些具体题目来看什么时候使用：</p>
+<ul>
+<li>本题：在柱状图中，能够勾勒出来的矩形的最大面积。遍历到i时，往后找heights[right]比heights[i]小的元素，说明i处最大的矩形高为heights[i]，宽为right - i - 1</li>
+<li>能看的到的楼：趋势科技秋招笔试题，大概是有一排高低不同的楼，人依次站在每栋楼的楼顶往后看，能看到多少栋楼的楼顶（趋势科技改了题目，可以往前看也可以往后看，当时不知道单调栈的概念）</li>
+</ul>
+<blockquote>
+<p>大佬讲解<a href="https://leetcode-cn.com/problems/largest-rectangle-in-histogram/solution/bao-li-jie-fa-zhan-by-liweiwei1419/">https://leetcode-cn.com/problems/largest-rectangle-in-histogram/solution/bao-li-jie-fa-zhan-by-liweiwei1419/</a></p>
+</blockquote>
+<p>我直接贴完整代码</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * 单调栈，思路：</span></span><br><span class="line"><span class="comment"> * 栈中存的是下标，代表了矩形宽度的起点start,i代表end位置，heights[i]代表了当前柱状图的高度，heights[stack.peek]就代表栈顶高度</span></span><br><span class="line"><span class="comment"> * 低高（12）类型，入栈：因此栈顶的值就是：以栈顶柱状图高度（heights[stack.peek]）为矩形的起点start</span></span><br><span class="line"><span class="comment"> * 高低（21）类型，出栈：遇到比栈顶对应的高度小的（heights[i] &lt; heights[stack.peek]），说明以heights[stack.peek]为高的矩形被确定，宽度为i - stack.peek() - 1</span></span><br><span class="line"><span class="comment"> * 循环上述出栈过程直到满足12类型，每次出栈对比累计最大值和当前矩形最大值</span></span><br><span class="line"><span class="comment"> * 哨兵的添加：最后栈中剩下的满足12类型，为了方便继续比较，则增加末尾哨兵为0变成120，于是遍历到0的时候20满足了21类型，2出栈，10也满足21类型，结束。</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">eight_four_</span>柱状图中的最大矩形<span class="title">_other</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Test</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">test</span><span class="params">()</span></span>&#123;</span><br><span class="line">        <span class="keyword">int</span>[] heights = &#123;<span class="number">2</span>, <span class="number">1</span>, <span class="number">5</span>, <span class="number">6</span>, <span class="number">2</span>, <span class="number">3</span>&#125;;</span><br><span class="line">        <span class="keyword">int</span> res = largestRectangleArea(heights);</span><br><span class="line">        System.out.println(res);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">largestRectangleArea</span><span class="params">(<span class="keyword">int</span>[] heights)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">int</span> len = heights.length;</span><br><span class="line">        <span class="keyword">if</span> (len == <span class="number">0</span>) <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">if</span> (len == <span class="number">1</span>) <span class="keyword">return</span> heights[<span class="number">0</span>];</span><br><span class="line"></span><br><span class="line">        <span class="keyword">int</span> res = <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">int</span>[] newHeights = <span class="keyword">new</span> <span class="keyword">int</span>[len + <span class="number">2</span>];</span><br><span class="line">        newHeights[<span class="number">0</span>] = <span class="number">0</span>;</span><br><span class="line">        System.arraycopy(heights, <span class="number">0</span>, newHeights, <span class="number">1</span>, len);</span><br><span class="line">        newHeights[len + <span class="number">1</span>] = <span class="number">0</span>;</span><br><span class="line">        len += <span class="number">2</span>;</span><br><span class="line">        heights = newHeights;</span><br><span class="line"></span><br><span class="line">        Deque&lt;Integer&gt; stack = <span class="keyword">new</span> ArrayDeque&lt;&gt;(len);</span><br><span class="line">        <span class="comment">// 先放入哨兵，在循环里就不用做非空判断</span></span><br><span class="line">        stack.addLast(<span class="number">0</span>);</span><br><span class="line"></span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">1</span>; i &lt; len; i++) &#123;</span><br><span class="line">            <span class="keyword">while</span> (heights[i] &lt; heights[stack.peekLast()]) &#123;</span><br><span class="line">                <span class="keyword">int</span> curHeight = heights[stack.pollLast()];</span><br><span class="line">                <span class="keyword">int</span> curWidth = i - stack.peekLast() - <span class="number">1</span>;</span><br><span class="line">                res = Math.max(res, curHeight * curWidth);</span><br><span class="line">            &#125;</span><br><span class="line">            stack.addLast(i);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> res;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>10ms，估计时间的消耗在System.arraycopy，还有别的写法，占坑。</p>
+<h1 id="3-其他单调栈系列题目"><a href="#3-其他单调栈系列题目" class="headerlink" title="3. 其他单调栈系列题目"></a>3. 其他单调栈系列题目</h1><p>留坑慢慢填哈</p>
+<ul>
+<li><ol start="42">
+<li>接雨水（困难）</li>
+</ol>
+</li>
+<li><ol start="739">
+<li>每日温度（中等）</li>
+</ol>
+</li>
+<li><ol start="496">
+<li>下一个更大元素 I（简单）</li>
+</ol>
+</li>
+<li><ol start="316">
+<li>去除重复字母（困难）</li>
+</ol>
+</li>
+<li><ol start="901">
+<li>股票价格跨度（中等）</li>
+</ol>
+</li>
+<li><ol start="402">
+<li>移掉K位数字    </li>
+</ol>
+</li>
+<li><ol start="581">
+<li>最短无序连续子数组    </li>
+</ol>
+</li>
+</ul>
+
+        </div>
+        
+        
+        
+    </div>
+</div>
+
+
+
+
+
+
+
+
+    
+<div class="card">
+    
+    <div class="card-image">
         <a href="/2020/08/19/Java%E4%BA%8C%E5%8F%89%E6%A0%91%E7%9A%84%E5%B1%82%E6%AC%A1%E9%81%8D%E5%8E%86/" class="image is-7by1">
             <img class="thumbnail" src="images/loading.gif" data-original="https://wx2.sbimg.cn/2020/07/30/P7ZnY.md.jpg" alt="Java二叉树的层次遍历">
         </a>
@@ -685,65 +791,6 @@
 
 
 
-    
-<div class="card">
-    
-    <div class="card-image">
-        <a href="/2020/07/24/JWT+RSA%E9%9D%9E%E5%AF%B9%E7%A7%B0%E5%8A%A0%E5%AF%86%E5%AE%9E%E7%8E%B0%E6%97%A0%E7%8A%B6%E6%80%81%E7%99%BB%E5%BD%95/" class="image is-7by1">
-            <img class="thumbnail" src="images/loading.gif" data-original="https://wx2.sbimg.cn/2020/07/30/P7eY2.md.jpg" alt="JWT+RSA非对称加密实现无状态登录">
-        </a>
-    </div>
-    
-    <div class="card-content article ">
-        
-        <div class="level article-meta is-size-7 is-uppercase is-mobile is-overflow-x-auto">
-            <div class="level-left">
-                <time class="level-item has-text-grey" datetime="2020-07-24T09:34:21.000Z">2020-07-24</time>
-                
-                <div class="level-item">
-                <a class="has-link-grey -link" href="/categories/SpringCloud/">SpringCloud</a>
-                </div>
-                
-                
-                <span class="level-item has-text-grey">
-                    
-                    
-                    18 分钟 读完 (大约 2636 个字)
-                </span>
-                
-                
-            </div>
-        </div>
-        
-        <h1 class="title is-size-3 is-size-4-mobile has-text-weight-normal">
-            
-                <a class="has-link-black-ter" href="/2020/07/24/JWT+RSA%E9%9D%9E%E5%AF%B9%E7%A7%B0%E5%8A%A0%E5%AF%86%E5%AE%9E%E7%8E%B0%E6%97%A0%E7%8A%B6%E6%80%81%E7%99%BB%E5%BD%95/">JWT+RSA非对称加密实现无状态登录</a>
-            
-        </h1>
-        <div class="content">
-            <h1 id="1-问题"><a href="#1-问题" class="headerlink" title="1. 问题"></a>1. 问题</h1><p>以前我们的登录都是将当前登录的用户信息放在session中，但是session是保存在服务器的，在分布式环境下服务器不只有一台，那就容易找不到登录的用户信息，所以应该是保存在客户端也就是cookie中的，但是存在cookie中有个问题，就是要进行一些操作时需要获取当前登录的用户信息，那么要将cookie中的user发送过去，这一来二去老是携带着明文的用户名和密码，就很不安全，会被人用一些技术手段拦截，那么就获取了你的账号密码信息。</p>
-        </div>
-        
-        
-        <div class="level is-mobile">
-            <div class="level-start">
-                <div class="level-item">
-                <a class="button is-size-7 is-light" href="/2020/07/24/JWT+RSA%E9%9D%9E%E5%AF%B9%E7%A7%B0%E5%8A%A0%E5%AF%86%E5%AE%9E%E7%8E%B0%E6%97%A0%E7%8A%B6%E6%80%81%E7%99%BB%E5%BD%95/#more">阅读更多</a>
-                </div>
-            </div>
-        </div>
-        
-        
-    </div>
-</div>
-
-
-
-
-
-
-
-
 
     
 <div class="card card-transparent">
@@ -806,7 +853,7 @@
                     </p>
                     <a href="/archives">
                         <p class="title has-text-weight-normal">
-                            24
+                            25
                         </p>
                     </a>
                 </div>
@@ -830,7 +877,7 @@
                     </p>
                     <a href="/tags">
                         <p class="title has-text-weight-normal">
-                            28
+                            30
                         </p>
                     </a>
                 </div>
@@ -935,7 +982,7 @@
                 <span class="level-item">算法</span>
             </span>
             <span class="level-end">
-                <span class="level-item tag">5</span>
+                <span class="level-item tag">6</span>
             </span>
         </a></li><li>
         <a class="level is-marginless" href="/categories/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/">
@@ -962,6 +1009,25 @@
         
         <article class="media">
             
+            <a href="/2020/08/27/84-%E6%9F%B1%E7%8A%B6%E5%9B%BE%E4%B8%AD%E7%9A%84%E6%9C%80%E5%A4%A7%E7%9F%A9%E5%BD%A2/" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="images/loading.gif" data-original="https://wx2.sbimg.cn/2020/07/30/P7vXA.md.jpg" alt="84-柱状图中的最大矩形">
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2020-08-27T04:58:13.000Z">2020-08-27</time></div>
+                    <a href="/2020/08/27/84-%E6%9F%B1%E7%8A%B6%E5%9B%BE%E4%B8%AD%E7%9A%84%E6%9C%80%E5%A4%A7%E7%9F%A9%E5%BD%A2/" class="title has-link-black-ter is-size-6 has-text-weight-normal">84-柱状图中的最大矩形</a>
+                    <p class="is-size-7 is-uppercase">
+                        <a class="has-link-grey -link" href="/categories/%E7%AE%97%E6%B3%95/">算法</a>
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+        <article class="media">
+            
             <a href="/2020/08/19/Java%E4%BA%8C%E5%8F%89%E6%A0%91%E7%9A%84%E5%B1%82%E6%AC%A1%E9%81%8D%E5%8E%86/" class="media-left">
                 <p class="image is-64x64">
                     <img class="thumbnail" src="images/loading.gif" data-original="https://wx2.sbimg.cn/2020/07/30/P7ZnY.md.jpg" alt="Java二叉树的层次遍历">
@@ -1036,25 +1102,6 @@
             </div>
         </article>
         
-        <article class="media">
-            
-            <a href="/2020/07/30/121-%E4%B9%B0%E5%8D%96%E8%82%A1%E7%A5%A8%E7%9A%84%E6%9C%80%E4%BD%B3%E6%97%B6%E6%9C%BA/" class="media-left">
-                <p class="image is-64x64">
-                    <img class="thumbnail" src="images/loading.gif" data-original="https://source.acexy.cn/view/XOb3T9n" alt="121 买卖股票的最佳时机">
-                </p>
-            </a>
-            
-            <div class="media-content">
-                <div class="content">
-                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2020-07-29T19:33:54.000Z">2020-07-30</time></div>
-                    <a href="/2020/07/30/121-%E4%B9%B0%E5%8D%96%E8%82%A1%E7%A5%A8%E7%9A%84%E6%9C%80%E4%BD%B3%E6%97%B6%E6%9C%BA/" class="title has-link-black-ter is-size-6 has-text-weight-normal">121 买卖股票的最佳时机</a>
-                    <p class="is-size-7 is-uppercase">
-                        <a class="has-link-grey -link" href="/categories/%E7%AE%97%E6%B3%95/">算法</a>
-                    </p>
-                </div>
-            </div>
-        </article>
-        
     </div>
 </div>
         
@@ -1063,7 +1110,7 @@
         <h3 class="menu-label">
             标签云
         </h3>
-        <a href="/tags/eureka/" style="font-size: 10px;">eureka</a> <a href="/tags/fastDFS/" style="font-size: 10px;">fastDFS</a> <a href="/tags/feign/" style="font-size: 10px;">feign</a> <a href="/tags/http/" style="font-size: 10px;">http</a> <a href="/tags/hystrix/" style="font-size: 10px;">hystrix</a> <a href="/tags/json/" style="font-size: 10px;">json</a> <a href="/tags/lintcode/" style="font-size: 10px;">lintcode</a> <a href="/tags/markdown/" style="font-size: 10px;">markdown</a> <a href="/tags/maven/" style="font-size: 10px;">maven</a> <a href="/tags/mysql/" style="font-size: 10px;">mysql</a> <a href="/tags/ribbon/" style="font-size: 10px;">ribbon</a> <a href="/tags/spring/" style="font-size: 12.5px;">spring</a> <a href="/tags/springboot/" style="font-size: 10px;">springboot</a> <a href="/tags/springcloud/" style="font-size: 12.5px;">springcloud</a> <a href="/tags/springmvc/" style="font-size: 15px;">springmvc</a> <a href="/tags/zuul/" style="font-size: 10px;">zuul</a> <a href="/tags/%E4%BA%8C%E5%8F%89%E6%A0%91/" style="font-size: 10px;">二叉树</a> <a href="/tags/%E4%BA%A4%E4%BA%92/" style="font-size: 10px;">交互</a> <a href="/tags/%E5%89%91%E6%8C%87offer/" style="font-size: 10px;">剑指offer</a> <a href="/tags/%E5%8A%9B%E6%89%A3/" style="font-size: 17.5px;">力扣</a> <a href="/tags/%E5%8A%A0%E5%AF%86/" style="font-size: 10px;">加密</a> <a href="/tags/%E5%9D%91/" style="font-size: 10px;">坑</a> <a href="/tags/%E5%AD%A6%E4%B9%A0%E8%AE%B0%E5%BD%95/" style="font-size: 10px;">学习记录</a> <a href="/tags/%E5%BC%80%E5%8F%91/" style="font-size: 20px;">开发</a> <a href="/tags/%E6%8B%9B%E8%81%98%E7%AC%94%E8%AF%95/" style="font-size: 10px;">招聘笔试</a> <a href="/tags/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/" style="font-size: 15px;">数据结构</a> <a href="/tags/%E6%A0%91/" style="font-size: 12.5px;">树</a> <a href="/tags/%E7%AC%94%E8%AF%95%E9%9D%A2%E8%AF%95/" style="font-size: 12.5px;">笔试面试</a>
+        <a href="/tags/eureka/" style="font-size: 10px;">eureka</a> <a href="/tags/fastDFS/" style="font-size: 10px;">fastDFS</a> <a href="/tags/feign/" style="font-size: 10px;">feign</a> <a href="/tags/http/" style="font-size: 10px;">http</a> <a href="/tags/hystrix/" style="font-size: 10px;">hystrix</a> <a href="/tags/json/" style="font-size: 10px;">json</a> <a href="/tags/lintcode/" style="font-size: 10px;">lintcode</a> <a href="/tags/markdown/" style="font-size: 10px;">markdown</a> <a href="/tags/maven/" style="font-size: 10px;">maven</a> <a href="/tags/mysql/" style="font-size: 10px;">mysql</a> <a href="/tags/ribbon/" style="font-size: 10px;">ribbon</a> <a href="/tags/spring/" style="font-size: 12.5px;">spring</a> <a href="/tags/springboot/" style="font-size: 10px;">springboot</a> <a href="/tags/springcloud/" style="font-size: 12.5px;">springcloud</a> <a href="/tags/springmvc/" style="font-size: 15px;">springmvc</a> <a href="/tags/zuul/" style="font-size: 10px;">zuul</a> <a href="/tags/%E4%BA%8C%E5%8F%89%E6%A0%91/" style="font-size: 10px;">二叉树</a> <a href="/tags/%E4%BA%A4%E4%BA%92/" style="font-size: 10px;">交互</a> <a href="/tags/%E5%89%91%E6%8C%87offer/" style="font-size: 10px;">剑指offer</a> <a href="/tags/%E5%8A%9B%E6%89%A3/" style="font-size: 17.5px;">力扣</a> <a href="/tags/%E5%8A%A0%E5%AF%86/" style="font-size: 10px;">加密</a> <a href="/tags/%E5%9D%91/" style="font-size: 10px;">坑</a> <a href="/tags/%E5%AD%A6%E4%B9%A0%E8%AE%B0%E5%BD%95/" style="font-size: 10px;">学习记录</a> <a href="/tags/%E5%BC%80%E5%8F%91/" style="font-size: 20px;">开发</a> <a href="/tags/%E6%8B%9B%E8%81%98%E7%AC%94%E8%AF%95/" style="font-size: 10px;">招聘笔试</a> <a href="/tags/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/" style="font-size: 15px;">数据结构</a> <a href="/tags/%E6%A0%88/" style="font-size: 10px;">栈</a> <a href="/tags/%E6%A0%91/" style="font-size: 12.5px;">树</a> <a href="/tags/%E7%AC%94%E8%AF%95%E9%9D%A2%E8%AF%95/" style="font-size: 12.5px;">笔试面试</a> <a href="/tags/%E7%AE%97%E6%B3%95/" style="font-size: 10px;">算法</a>
     </div>
 </div>
         
@@ -1086,6 +1133,25 @@
         
         <article class="media">
             
+            <a href="/2020/08/27/84-%E6%9F%B1%E7%8A%B6%E5%9B%BE%E4%B8%AD%E7%9A%84%E6%9C%80%E5%A4%A7%E7%9F%A9%E5%BD%A2/" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="images/loading.gif" data-original="https://wx2.sbimg.cn/2020/07/30/P7vXA.md.jpg" alt="84-柱状图中的最大矩形">
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2020-08-27T04:58:13.000Z">2020-08-27</time></div>
+                    <a href="/2020/08/27/84-%E6%9F%B1%E7%8A%B6%E5%9B%BE%E4%B8%AD%E7%9A%84%E6%9C%80%E5%A4%A7%E7%9F%A9%E5%BD%A2/" class="title has-link-black-ter is-size-6 has-text-weight-normal">84-柱状图中的最大矩形</a>
+                    <p class="is-size-7 is-uppercase">
+                        <a class="has-link-grey -link" href="/categories/%E7%AE%97%E6%B3%95/">算法</a>
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+        <article class="media">
+            
             <a href="/2020/08/19/Java%E4%BA%8C%E5%8F%89%E6%A0%91%E7%9A%84%E5%B1%82%E6%AC%A1%E9%81%8D%E5%8E%86/" class="media-left">
                 <p class="image is-64x64">
                     <img class="thumbnail" src="images/loading.gif" data-original="https://wx2.sbimg.cn/2020/07/30/P7ZnY.md.jpg" alt="Java二叉树的层次遍历">
@@ -1160,25 +1226,6 @@
             </div>
         </article>
         
-        <article class="media">
-            
-            <a href="/2020/07/30/121-%E4%B9%B0%E5%8D%96%E8%82%A1%E7%A5%A8%E7%9A%84%E6%9C%80%E4%BD%B3%E6%97%B6%E6%9C%BA/" class="media-left">
-                <p class="image is-64x64">
-                    <img class="thumbnail" src="images/loading.gif" data-original="https://source.acexy.cn/view/XOb3T9n" alt="121 买卖股票的最佳时机">
-                </p>
-            </a>
-            
-            <div class="media-content">
-                <div class="content">
-                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2020-07-29T19:33:54.000Z">2020-07-30</time></div>
-                    <a href="/2020/07/30/121-%E4%B9%B0%E5%8D%96%E8%82%A1%E7%A5%A8%E7%9A%84%E6%9C%80%E4%BD%B3%E6%97%B6%E6%9C%BA/" class="title has-link-black-ter is-size-6 has-text-weight-normal">121 买卖股票的最佳时机</a>
-                    <p class="is-size-7 is-uppercase">
-                        <a class="has-link-grey -link" href="/categories/%E7%AE%97%E6%B3%95/">算法</a>
-                    </p>
-                </div>
-            </div>
-        </article>
-        
     </div>
 </div>
     
@@ -1187,7 +1234,7 @@
         <h3 class="menu-label">
             标签云
         </h3>
-        <a href="/tags/eureka/" style="font-size: 10px;">eureka</a> <a href="/tags/fastDFS/" style="font-size: 10px;">fastDFS</a> <a href="/tags/feign/" style="font-size: 10px;">feign</a> <a href="/tags/http/" style="font-size: 10px;">http</a> <a href="/tags/hystrix/" style="font-size: 10px;">hystrix</a> <a href="/tags/json/" style="font-size: 10px;">json</a> <a href="/tags/lintcode/" style="font-size: 10px;">lintcode</a> <a href="/tags/markdown/" style="font-size: 10px;">markdown</a> <a href="/tags/maven/" style="font-size: 10px;">maven</a> <a href="/tags/mysql/" style="font-size: 10px;">mysql</a> <a href="/tags/ribbon/" style="font-size: 10px;">ribbon</a> <a href="/tags/spring/" style="font-size: 12.5px;">spring</a> <a href="/tags/springboot/" style="font-size: 10px;">springboot</a> <a href="/tags/springcloud/" style="font-size: 12.5px;">springcloud</a> <a href="/tags/springmvc/" style="font-size: 15px;">springmvc</a> <a href="/tags/zuul/" style="font-size: 10px;">zuul</a> <a href="/tags/%E4%BA%8C%E5%8F%89%E6%A0%91/" style="font-size: 10px;">二叉树</a> <a href="/tags/%E4%BA%A4%E4%BA%92/" style="font-size: 10px;">交互</a> <a href="/tags/%E5%89%91%E6%8C%87offer/" style="font-size: 10px;">剑指offer</a> <a href="/tags/%E5%8A%9B%E6%89%A3/" style="font-size: 17.5px;">力扣</a> <a href="/tags/%E5%8A%A0%E5%AF%86/" style="font-size: 10px;">加密</a> <a href="/tags/%E5%9D%91/" style="font-size: 10px;">坑</a> <a href="/tags/%E5%AD%A6%E4%B9%A0%E8%AE%B0%E5%BD%95/" style="font-size: 10px;">学习记录</a> <a href="/tags/%E5%BC%80%E5%8F%91/" style="font-size: 20px;">开发</a> <a href="/tags/%E6%8B%9B%E8%81%98%E7%AC%94%E8%AF%95/" style="font-size: 10px;">招聘笔试</a> <a href="/tags/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/" style="font-size: 15px;">数据结构</a> <a href="/tags/%E6%A0%91/" style="font-size: 12.5px;">树</a> <a href="/tags/%E7%AC%94%E8%AF%95%E9%9D%A2%E8%AF%95/" style="font-size: 12.5px;">笔试面试</a>
+        <a href="/tags/eureka/" style="font-size: 10px;">eureka</a> <a href="/tags/fastDFS/" style="font-size: 10px;">fastDFS</a> <a href="/tags/feign/" style="font-size: 10px;">feign</a> <a href="/tags/http/" style="font-size: 10px;">http</a> <a href="/tags/hystrix/" style="font-size: 10px;">hystrix</a> <a href="/tags/json/" style="font-size: 10px;">json</a> <a href="/tags/lintcode/" style="font-size: 10px;">lintcode</a> <a href="/tags/markdown/" style="font-size: 10px;">markdown</a> <a href="/tags/maven/" style="font-size: 10px;">maven</a> <a href="/tags/mysql/" style="font-size: 10px;">mysql</a> <a href="/tags/ribbon/" style="font-size: 10px;">ribbon</a> <a href="/tags/spring/" style="font-size: 12.5px;">spring</a> <a href="/tags/springboot/" style="font-size: 10px;">springboot</a> <a href="/tags/springcloud/" style="font-size: 12.5px;">springcloud</a> <a href="/tags/springmvc/" style="font-size: 15px;">springmvc</a> <a href="/tags/zuul/" style="font-size: 10px;">zuul</a> <a href="/tags/%E4%BA%8C%E5%8F%89%E6%A0%91/" style="font-size: 10px;">二叉树</a> <a href="/tags/%E4%BA%A4%E4%BA%92/" style="font-size: 10px;">交互</a> <a href="/tags/%E5%89%91%E6%8C%87offer/" style="font-size: 10px;">剑指offer</a> <a href="/tags/%E5%8A%9B%E6%89%A3/" style="font-size: 17.5px;">力扣</a> <a href="/tags/%E5%8A%A0%E5%AF%86/" style="font-size: 10px;">加密</a> <a href="/tags/%E5%9D%91/" style="font-size: 10px;">坑</a> <a href="/tags/%E5%AD%A6%E4%B9%A0%E8%AE%B0%E5%BD%95/" style="font-size: 10px;">学习记录</a> <a href="/tags/%E5%BC%80%E5%8F%91/" style="font-size: 20px;">开发</a> <a href="/tags/%E6%8B%9B%E8%81%98%E7%AC%94%E8%AF%95/" style="font-size: 10px;">招聘笔试</a> <a href="/tags/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/" style="font-size: 15px;">数据结构</a> <a href="/tags/%E6%A0%88/" style="font-size: 10px;">栈</a> <a href="/tags/%E6%A0%91/" style="font-size: 12.5px;">树</a> <a href="/tags/%E7%AC%94%E8%AF%95%E9%9D%A2%E8%AF%95/" style="font-size: 12.5px;">笔试面试</a> <a href="/tags/%E7%AE%97%E6%B3%95/" style="font-size: 10px;">算法</a>
     </div>
 </div>
     

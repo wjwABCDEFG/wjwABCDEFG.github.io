@@ -19,7 +19,7 @@
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="https://wx1.sbimg.cn/2020/07/30/P77wm.md.jpg">
 <meta property="article:published_time" content="2020-07-11T10:22:36.000Z">
-<meta property="article:modified_time" content="2020-08-24T15:46:03.937Z">
+<meta property="article:modified_time" content="2020-08-27T04:40:01.639Z">
 <meta property="article:author" content="wjw">
 <meta property="article:tag" content="数据结构">
 <meta property="article:tag" content="笔试面试">
@@ -159,7 +159,7 @@
                 <span class="level-item has-text-grey">
                     
                     
-                    18 分钟 读完 (大约 2711 个字)
+                    18 分钟 读完 (大约 2652 个字)
                 </span>
                 
                 
@@ -311,11 +311,12 @@
 <br>
 
 <h1 id="4-前-后–-gt-无法确定"><a href="#4-前-后–-gt-无法确定" class="headerlink" title="4. 前+后–&gt;无法确定"></a>4. 前+后–&gt;无法确定</h1><p>这种情况树不唯一</p>
-<h1 id="5-附录：其他写法"><a href="#5-附录：其他写法" class="headerlink" title="5. 附录：其他写法"></a>5. 附录：其他写法</h1><p>实现的思路根上面自己思考的思路其实是一样的，不断重复步骤12的过程就是递归</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> Node&lt;Integer&gt; <span class="title">reConstructBinaryTree</span><span class="params">(<span class="keyword">int</span>[] pre, <span class="keyword">int</span>[] in)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">if</span> (pre.length == <span class="number">0</span> || in.length == <span class="number">0</span>) &#123;</span><br><span class="line">            <span class="keyword">return</span> <span class="keyword">null</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        Node&lt;Integer&gt; node = <span class="keyword">new</span> Node&lt;&gt;(pre[<span class="number">0</span>]);</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; in.length; i++) &#123;</span><br><span class="line">            <span class="keyword">if</span> (pre[<span class="number">0</span>] == in[i]) &#123;  <span class="comment">//中序中找到前序的根，划分左右子树</span></span><br><span class="line">                node.left = reConstructBinaryTree(Arrays.copyOfRange(pre, <span class="number">1</span>, i + <span class="number">1</span>), Arrays.copyOfRange(in, <span class="number">0</span>, i));</span><br><span class="line">                node.right = reConstructBinaryTree(Arrays.copyOfRange(pre, i + <span class="number">1</span>, pre.length), Arrays.copyOfRange(in, i + <span class="number">1</span>, in.length));</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> node;</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
-
-<p>搭配上个博客的可视化二叉树工具类一起食用更加，看看你做对了吗</p>
-<p><img src="images/loading.gif" data-original="https://s1.ax1x.com/2020/07/11/UMHaLT.png" alt=""></p>
+<h1 id="5-附录："><a href="#5-附录：" class="headerlink" title="5. 附录："></a>5. 附录：</h1><p>搭配上个博客的可视化二叉树工具类一起食用更加，看看你做对了吗</p>
+<blockquote>
+<p>参考/感谢：</p>
+<p>构造树的模板提取自力扣官方题解下的朋友<a href="https://leetcode-cn.com/u/shi-san-yu-yang/">十三羽扬</a></p>
+<p>直接获得第三序结果的代码参考了<a href="https://www.liuchuo.net/archives/2090">柳神的代码</a></p>
+</blockquote>
 
         </div>
         
@@ -400,7 +401,7 @@
                     </p>
                     <a href="/archives">
                         <p class="title has-text-weight-normal">
-                            24
+                            25
                         </p>
                     </a>
                 </div>
@@ -424,7 +425,7 @@
                     </p>
                     <a href="/tags">
                         <p class="title has-text-weight-normal">
-                            28
+                            30
                         </p>
                     </a>
                 </div>
@@ -500,10 +501,10 @@
         <!-- <span class="has-mr-6">4</span> -->
         <span>4. 前+后–>无法确定</span>
         </a></li><li>
-        <a class="is-flex" href="#5-附录：其他写法">
+        <a class="is-flex" href="#5-附录：">
         <!-- 目录是否自动编号 -->
         <!-- <span class="has-mr-6">5</span> -->
-        <span>5. 附录：其他写法</span>
+        <span>5. 附录：</span>
         </a></li></ul>
             </div>
         </div>
@@ -596,7 +597,7 @@
                 <span class="level-item">算法</span>
             </span>
             <span class="level-end">
-                <span class="level-item tag">5</span>
+                <span class="level-item tag">6</span>
             </span>
         </a></li><li>
         <a class="level is-marginless" href="/categories/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/">
@@ -623,6 +624,25 @@
         
         <article class="media">
             
+            <a href="/2020/08/27/84-%E6%9F%B1%E7%8A%B6%E5%9B%BE%E4%B8%AD%E7%9A%84%E6%9C%80%E5%A4%A7%E7%9F%A9%E5%BD%A2/" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="images/loading.gif" data-original="https://wx2.sbimg.cn/2020/07/30/P7vXA.md.jpg" alt="84-柱状图中的最大矩形">
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2020-08-27T04:58:13.000Z">2020-08-27</time></div>
+                    <a href="/2020/08/27/84-%E6%9F%B1%E7%8A%B6%E5%9B%BE%E4%B8%AD%E7%9A%84%E6%9C%80%E5%A4%A7%E7%9F%A9%E5%BD%A2/" class="title has-link-black-ter is-size-6 has-text-weight-normal">84-柱状图中的最大矩形</a>
+                    <p class="is-size-7 is-uppercase">
+                        <a class="has-link-grey -link" href="/categories/%E7%AE%97%E6%B3%95/">算法</a>
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+        <article class="media">
+            
             <a href="/2020/08/19/Java%E4%BA%8C%E5%8F%89%E6%A0%91%E7%9A%84%E5%B1%82%E6%AC%A1%E9%81%8D%E5%8E%86/" class="media-left">
                 <p class="image is-64x64">
                     <img class="thumbnail" src="images/loading.gif" data-original="https://wx2.sbimg.cn/2020/07/30/P7ZnY.md.jpg" alt="Java二叉树的层次遍历">
@@ -697,25 +717,6 @@
             </div>
         </article>
         
-        <article class="media">
-            
-            <a href="/2020/07/30/121-%E4%B9%B0%E5%8D%96%E8%82%A1%E7%A5%A8%E7%9A%84%E6%9C%80%E4%BD%B3%E6%97%B6%E6%9C%BA/" class="media-left">
-                <p class="image is-64x64">
-                    <img class="thumbnail" src="images/loading.gif" data-original="https://source.acexy.cn/view/XOb3T9n" alt="121 买卖股票的最佳时机">
-                </p>
-            </a>
-            
-            <div class="media-content">
-                <div class="content">
-                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2020-07-29T19:33:54.000Z">2020-07-30</time></div>
-                    <a href="/2020/07/30/121-%E4%B9%B0%E5%8D%96%E8%82%A1%E7%A5%A8%E7%9A%84%E6%9C%80%E4%BD%B3%E6%97%B6%E6%9C%BA/" class="title has-link-black-ter is-size-6 has-text-weight-normal">121 买卖股票的最佳时机</a>
-                    <p class="is-size-7 is-uppercase">
-                        <a class="has-link-grey -link" href="/categories/%E7%AE%97%E6%B3%95/">算法</a>
-                    </p>
-                </div>
-            </div>
-        </article>
-        
     </div>
 </div>
         
@@ -724,7 +725,7 @@
         <h3 class="menu-label">
             标签云
         </h3>
-        <a href="/tags/eureka/" style="font-size: 10px;">eureka</a> <a href="/tags/fastDFS/" style="font-size: 10px;">fastDFS</a> <a href="/tags/feign/" style="font-size: 10px;">feign</a> <a href="/tags/http/" style="font-size: 10px;">http</a> <a href="/tags/hystrix/" style="font-size: 10px;">hystrix</a> <a href="/tags/json/" style="font-size: 10px;">json</a> <a href="/tags/lintcode/" style="font-size: 10px;">lintcode</a> <a href="/tags/markdown/" style="font-size: 10px;">markdown</a> <a href="/tags/maven/" style="font-size: 10px;">maven</a> <a href="/tags/mysql/" style="font-size: 10px;">mysql</a> <a href="/tags/ribbon/" style="font-size: 10px;">ribbon</a> <a href="/tags/spring/" style="font-size: 12.5px;">spring</a> <a href="/tags/springboot/" style="font-size: 10px;">springboot</a> <a href="/tags/springcloud/" style="font-size: 12.5px;">springcloud</a> <a href="/tags/springmvc/" style="font-size: 15px;">springmvc</a> <a href="/tags/zuul/" style="font-size: 10px;">zuul</a> <a href="/tags/%E4%BA%8C%E5%8F%89%E6%A0%91/" style="font-size: 10px;">二叉树</a> <a href="/tags/%E4%BA%A4%E4%BA%92/" style="font-size: 10px;">交互</a> <a href="/tags/%E5%89%91%E6%8C%87offer/" style="font-size: 10px;">剑指offer</a> <a href="/tags/%E5%8A%9B%E6%89%A3/" style="font-size: 17.5px;">力扣</a> <a href="/tags/%E5%8A%A0%E5%AF%86/" style="font-size: 10px;">加密</a> <a href="/tags/%E5%9D%91/" style="font-size: 10px;">坑</a> <a href="/tags/%E5%AD%A6%E4%B9%A0%E8%AE%B0%E5%BD%95/" style="font-size: 10px;">学习记录</a> <a href="/tags/%E5%BC%80%E5%8F%91/" style="font-size: 20px;">开发</a> <a href="/tags/%E6%8B%9B%E8%81%98%E7%AC%94%E8%AF%95/" style="font-size: 10px;">招聘笔试</a> <a href="/tags/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/" style="font-size: 15px;">数据结构</a> <a href="/tags/%E6%A0%91/" style="font-size: 12.5px;">树</a> <a href="/tags/%E7%AC%94%E8%AF%95%E9%9D%A2%E8%AF%95/" style="font-size: 12.5px;">笔试面试</a>
+        <a href="/tags/eureka/" style="font-size: 10px;">eureka</a> <a href="/tags/fastDFS/" style="font-size: 10px;">fastDFS</a> <a href="/tags/feign/" style="font-size: 10px;">feign</a> <a href="/tags/http/" style="font-size: 10px;">http</a> <a href="/tags/hystrix/" style="font-size: 10px;">hystrix</a> <a href="/tags/json/" style="font-size: 10px;">json</a> <a href="/tags/lintcode/" style="font-size: 10px;">lintcode</a> <a href="/tags/markdown/" style="font-size: 10px;">markdown</a> <a href="/tags/maven/" style="font-size: 10px;">maven</a> <a href="/tags/mysql/" style="font-size: 10px;">mysql</a> <a href="/tags/ribbon/" style="font-size: 10px;">ribbon</a> <a href="/tags/spring/" style="font-size: 12.5px;">spring</a> <a href="/tags/springboot/" style="font-size: 10px;">springboot</a> <a href="/tags/springcloud/" style="font-size: 12.5px;">springcloud</a> <a href="/tags/springmvc/" style="font-size: 15px;">springmvc</a> <a href="/tags/zuul/" style="font-size: 10px;">zuul</a> <a href="/tags/%E4%BA%8C%E5%8F%89%E6%A0%91/" style="font-size: 10px;">二叉树</a> <a href="/tags/%E4%BA%A4%E4%BA%92/" style="font-size: 10px;">交互</a> <a href="/tags/%E5%89%91%E6%8C%87offer/" style="font-size: 10px;">剑指offer</a> <a href="/tags/%E5%8A%9B%E6%89%A3/" style="font-size: 17.5px;">力扣</a> <a href="/tags/%E5%8A%A0%E5%AF%86/" style="font-size: 10px;">加密</a> <a href="/tags/%E5%9D%91/" style="font-size: 10px;">坑</a> <a href="/tags/%E5%AD%A6%E4%B9%A0%E8%AE%B0%E5%BD%95/" style="font-size: 10px;">学习记录</a> <a href="/tags/%E5%BC%80%E5%8F%91/" style="font-size: 20px;">开发</a> <a href="/tags/%E6%8B%9B%E8%81%98%E7%AC%94%E8%AF%95/" style="font-size: 10px;">招聘笔试</a> <a href="/tags/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/" style="font-size: 15px;">数据结构</a> <a href="/tags/%E6%A0%88/" style="font-size: 10px;">栈</a> <a href="/tags/%E6%A0%91/" style="font-size: 12.5px;">树</a> <a href="/tags/%E7%AC%94%E8%AF%95%E9%9D%A2%E8%AF%95/" style="font-size: 12.5px;">笔试面试</a> <a href="/tags/%E7%AE%97%E6%B3%95/" style="font-size: 10px;">算法</a>
     </div>
 </div>
         
@@ -747,6 +748,25 @@
         
         <article class="media">
             
+            <a href="/2020/08/27/84-%E6%9F%B1%E7%8A%B6%E5%9B%BE%E4%B8%AD%E7%9A%84%E6%9C%80%E5%A4%A7%E7%9F%A9%E5%BD%A2/" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="images/loading.gif" data-original="https://wx2.sbimg.cn/2020/07/30/P7vXA.md.jpg" alt="84-柱状图中的最大矩形">
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2020-08-27T04:58:13.000Z">2020-08-27</time></div>
+                    <a href="/2020/08/27/84-%E6%9F%B1%E7%8A%B6%E5%9B%BE%E4%B8%AD%E7%9A%84%E6%9C%80%E5%A4%A7%E7%9F%A9%E5%BD%A2/" class="title has-link-black-ter is-size-6 has-text-weight-normal">84-柱状图中的最大矩形</a>
+                    <p class="is-size-7 is-uppercase">
+                        <a class="has-link-grey -link" href="/categories/%E7%AE%97%E6%B3%95/">算法</a>
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+        <article class="media">
+            
             <a href="/2020/08/19/Java%E4%BA%8C%E5%8F%89%E6%A0%91%E7%9A%84%E5%B1%82%E6%AC%A1%E9%81%8D%E5%8E%86/" class="media-left">
                 <p class="image is-64x64">
                     <img class="thumbnail" src="images/loading.gif" data-original="https://wx2.sbimg.cn/2020/07/30/P7ZnY.md.jpg" alt="Java二叉树的层次遍历">
@@ -821,25 +841,6 @@
             </div>
         </article>
         
-        <article class="media">
-            
-            <a href="/2020/07/30/121-%E4%B9%B0%E5%8D%96%E8%82%A1%E7%A5%A8%E7%9A%84%E6%9C%80%E4%BD%B3%E6%97%B6%E6%9C%BA/" class="media-left">
-                <p class="image is-64x64">
-                    <img class="thumbnail" src="images/loading.gif" data-original="https://source.acexy.cn/view/XOb3T9n" alt="121 买卖股票的最佳时机">
-                </p>
-            </a>
-            
-            <div class="media-content">
-                <div class="content">
-                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2020-07-29T19:33:54.000Z">2020-07-30</time></div>
-                    <a href="/2020/07/30/121-%E4%B9%B0%E5%8D%96%E8%82%A1%E7%A5%A8%E7%9A%84%E6%9C%80%E4%BD%B3%E6%97%B6%E6%9C%BA/" class="title has-link-black-ter is-size-6 has-text-weight-normal">121 买卖股票的最佳时机</a>
-                    <p class="is-size-7 is-uppercase">
-                        <a class="has-link-grey -link" href="/categories/%E7%AE%97%E6%B3%95/">算法</a>
-                    </p>
-                </div>
-            </div>
-        </article>
-        
     </div>
 </div>
     
@@ -848,7 +849,7 @@
         <h3 class="menu-label">
             标签云
         </h3>
-        <a href="/tags/eureka/" style="font-size: 10px;">eureka</a> <a href="/tags/fastDFS/" style="font-size: 10px;">fastDFS</a> <a href="/tags/feign/" style="font-size: 10px;">feign</a> <a href="/tags/http/" style="font-size: 10px;">http</a> <a href="/tags/hystrix/" style="font-size: 10px;">hystrix</a> <a href="/tags/json/" style="font-size: 10px;">json</a> <a href="/tags/lintcode/" style="font-size: 10px;">lintcode</a> <a href="/tags/markdown/" style="font-size: 10px;">markdown</a> <a href="/tags/maven/" style="font-size: 10px;">maven</a> <a href="/tags/mysql/" style="font-size: 10px;">mysql</a> <a href="/tags/ribbon/" style="font-size: 10px;">ribbon</a> <a href="/tags/spring/" style="font-size: 12.5px;">spring</a> <a href="/tags/springboot/" style="font-size: 10px;">springboot</a> <a href="/tags/springcloud/" style="font-size: 12.5px;">springcloud</a> <a href="/tags/springmvc/" style="font-size: 15px;">springmvc</a> <a href="/tags/zuul/" style="font-size: 10px;">zuul</a> <a href="/tags/%E4%BA%8C%E5%8F%89%E6%A0%91/" style="font-size: 10px;">二叉树</a> <a href="/tags/%E4%BA%A4%E4%BA%92/" style="font-size: 10px;">交互</a> <a href="/tags/%E5%89%91%E6%8C%87offer/" style="font-size: 10px;">剑指offer</a> <a href="/tags/%E5%8A%9B%E6%89%A3/" style="font-size: 17.5px;">力扣</a> <a href="/tags/%E5%8A%A0%E5%AF%86/" style="font-size: 10px;">加密</a> <a href="/tags/%E5%9D%91/" style="font-size: 10px;">坑</a> <a href="/tags/%E5%AD%A6%E4%B9%A0%E8%AE%B0%E5%BD%95/" style="font-size: 10px;">学习记录</a> <a href="/tags/%E5%BC%80%E5%8F%91/" style="font-size: 20px;">开发</a> <a href="/tags/%E6%8B%9B%E8%81%98%E7%AC%94%E8%AF%95/" style="font-size: 10px;">招聘笔试</a> <a href="/tags/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/" style="font-size: 15px;">数据结构</a> <a href="/tags/%E6%A0%91/" style="font-size: 12.5px;">树</a> <a href="/tags/%E7%AC%94%E8%AF%95%E9%9D%A2%E8%AF%95/" style="font-size: 12.5px;">笔试面试</a>
+        <a href="/tags/eureka/" style="font-size: 10px;">eureka</a> <a href="/tags/fastDFS/" style="font-size: 10px;">fastDFS</a> <a href="/tags/feign/" style="font-size: 10px;">feign</a> <a href="/tags/http/" style="font-size: 10px;">http</a> <a href="/tags/hystrix/" style="font-size: 10px;">hystrix</a> <a href="/tags/json/" style="font-size: 10px;">json</a> <a href="/tags/lintcode/" style="font-size: 10px;">lintcode</a> <a href="/tags/markdown/" style="font-size: 10px;">markdown</a> <a href="/tags/maven/" style="font-size: 10px;">maven</a> <a href="/tags/mysql/" style="font-size: 10px;">mysql</a> <a href="/tags/ribbon/" style="font-size: 10px;">ribbon</a> <a href="/tags/spring/" style="font-size: 12.5px;">spring</a> <a href="/tags/springboot/" style="font-size: 10px;">springboot</a> <a href="/tags/springcloud/" style="font-size: 12.5px;">springcloud</a> <a href="/tags/springmvc/" style="font-size: 15px;">springmvc</a> <a href="/tags/zuul/" style="font-size: 10px;">zuul</a> <a href="/tags/%E4%BA%8C%E5%8F%89%E6%A0%91/" style="font-size: 10px;">二叉树</a> <a href="/tags/%E4%BA%A4%E4%BA%92/" style="font-size: 10px;">交互</a> <a href="/tags/%E5%89%91%E6%8C%87offer/" style="font-size: 10px;">剑指offer</a> <a href="/tags/%E5%8A%9B%E6%89%A3/" style="font-size: 17.5px;">力扣</a> <a href="/tags/%E5%8A%A0%E5%AF%86/" style="font-size: 10px;">加密</a> <a href="/tags/%E5%9D%91/" style="font-size: 10px;">坑</a> <a href="/tags/%E5%AD%A6%E4%B9%A0%E8%AE%B0%E5%BD%95/" style="font-size: 10px;">学习记录</a> <a href="/tags/%E5%BC%80%E5%8F%91/" style="font-size: 20px;">开发</a> <a href="/tags/%E6%8B%9B%E8%81%98%E7%AC%94%E8%AF%95/" style="font-size: 10px;">招聘笔试</a> <a href="/tags/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/" style="font-size: 15px;">数据结构</a> <a href="/tags/%E6%A0%88/" style="font-size: 10px;">栈</a> <a href="/tags/%E6%A0%91/" style="font-size: 12.5px;">树</a> <a href="/tags/%E7%AC%94%E8%AF%95%E9%9D%A2%E8%AF%95/" style="font-size: 12.5px;">笔试面试</a> <a href="/tags/%E7%AE%97%E6%B3%95/" style="font-size: 10px;">算法</a>
     </div>
 </div>
     
