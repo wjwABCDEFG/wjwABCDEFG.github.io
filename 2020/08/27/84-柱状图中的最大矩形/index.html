@@ -10,16 +10,16 @@
 <title>84-柱状图中的最大矩形 - 小温 blog</title>
 
 
-    <meta name="description" content="前言：实习的公司真是个学习的好地方，展南安排任务慢慢开始对接测试人员，学宇教我上班划划水！有问题就去烦萌萌！嘿嘿，今天看到萌萌在刷力扣，给我发来了这道题  力扣原题https:&#x2F;&#x2F;leetcode-cn.com&#x2F;problems&#x2F;largest-rectangle-in-histogram&#x2F;  题目我就不贴了，关键是第一次接触到单调栈。   1. 暴力法思路很简单，遍历，向左向右找到比当前heig">
+    <meta name="description" content="前言：实习的公司真是个学习的好地方，展南安排任务慢慢开始对接测试人员，学宇教我上班划划水！有问题就去烦萌萌！嘿嘿，今天看到萌萌在刷力扣，给我发来了这道题  力扣原题https:&#x2F;&#x2F;leetcode-cn.com&#x2F;problems&#x2F;largest-rectangle-in-histogram&#x2F;  题目我就不贴了，关键是第一次接触到单调栈。">
 <meta property="og:type" content="article">
 <meta property="og:title" content="84-柱状图中的最大矩形">
 <meta property="og:url" content="http://wjw.today/2020/08/27/84-%E6%9F%B1%E7%8A%B6%E5%9B%BE%E4%B8%AD%E7%9A%84%E6%9C%80%E5%A4%A7%E7%9F%A9%E5%BD%A2/index.html">
 <meta property="og:site_name" content="小温 blog">
-<meta property="og:description" content="前言：实习的公司真是个学习的好地方，展南安排任务慢慢开始对接测试人员，学宇教我上班划划水！有问题就去烦萌萌！嘿嘿，今天看到萌萌在刷力扣，给我发来了这道题  力扣原题https:&#x2F;&#x2F;leetcode-cn.com&#x2F;problems&#x2F;largest-rectangle-in-histogram&#x2F;  题目我就不贴了，关键是第一次接触到单调栈。   1. 暴力法思路很简单，遍历，向左向右找到比当前heig">
+<meta property="og:description" content="前言：实习的公司真是个学习的好地方，展南安排任务慢慢开始对接测试人员，学宇教我上班划划水！有问题就去烦萌萌！嘿嘿，今天看到萌萌在刷力扣，给我发来了这道题  力扣原题https:&#x2F;&#x2F;leetcode-cn.com&#x2F;problems&#x2F;largest-rectangle-in-histogram&#x2F;  题目我就不贴了，关键是第一次接触到单调栈。">
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="https://wx2.sbimg.cn/2020/07/30/P7vXA.md.jpg">
 <meta property="article:published_time" content="2020-08-27T04:58:13.000Z">
-<meta property="article:modified_time" content="2020-08-27T05:25:55.017Z">
+<meta property="article:modified_time" content="2020-08-27T05:28:34.869Z">
 <meta property="article:author" content="wjw">
 <meta property="article:tag" content="力扣">
 <meta property="article:tag" content="栈">
@@ -159,7 +159,7 @@
                 <span class="level-item has-text-grey">
                     
                     
-                    7 分钟 读完 (大约 997 个字)
+                    7 分钟 读完 (大约 998 个字)
                 </span>
                 
                 
@@ -182,6 +182,8 @@
 <p>力扣原题<a href="https://leetcode-cn.com/problems/largest-rectangle-in-histogram/">https://leetcode-cn.com/problems/largest-rectangle-in-histogram/</a></p>
 </blockquote>
 <p>题目我就不贴了，关键是第一次接触到单调栈。</p>
+<a id="more"></a>
+
 <br>
 
 <h1 id="1-暴力法"><a href="#1-暴力法" class="headerlink" title="1. 暴力法"></a>1. 暴力法</h1><p>思路很简单，遍历，向左向右找到比当前heights[i]低的柱，下标为left和right，然后底(right - left - 1) * 高(heights[i])</p>
@@ -256,6 +258,13 @@
 <div class="card card-transparent">
     <div class="level post-navigation is-flex-wrap is-mobile">
         
+        <div class="level-start">
+            <a class="level level-item has-link-grey  article-nav-prev" href="/2020/08/27/%E6%88%91%E7%9A%84FastIO%E5%B7%A5%E5%85%B7%E7%B1%BB/">
+                <i class="level-item fas fa-chevron-left"></i>
+                <span class="level-item">我的FastIO工具类</span>
+            </a>
+        </div>
+        
         
         <div class="level-end">
             <a class="level level-item has-link-grey  article-nav-next" href="/2020/08/19/Java%E4%BA%8C%E5%8F%89%E6%A0%91%E7%9A%84%E5%B1%82%E6%AC%A1%E9%81%8D%E5%8E%86/">
@@ -309,7 +318,7 @@
                     </p>
                     <a href="/archives">
                         <p class="title has-text-weight-normal">
-                            25
+                            26
                         </p>
                     </a>
                 </div>
@@ -492,6 +501,25 @@
         
         <article class="media">
             
+            <a href="/2020/08/27/%E6%88%91%E7%9A%84FastIO%E5%B7%A5%E5%85%B7%E7%B1%BB/" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="images/loading.gif" data-original="/images/thumbnail.svg" alt="我的FastIO工具类">
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2020-08-27T05:29:16.000Z">2020-08-27</time></div>
+                    <a href="/2020/08/27/%E6%88%91%E7%9A%84FastIO%E5%B7%A5%E5%85%B7%E7%B1%BB/" class="title has-link-black-ter is-size-6 has-text-weight-normal">我的FastIO工具类</a>
+                    <p class="is-size-7 is-uppercase">
+                        
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+        <article class="media">
+            
             <a href="/2020/08/27/84-%E6%9F%B1%E7%8A%B6%E5%9B%BE%E4%B8%AD%E7%9A%84%E6%9C%80%E5%A4%A7%E7%9F%A9%E5%BD%A2/" class="media-left">
                 <p class="image is-64x64">
                     <img class="thumbnail" src="images/loading.gif" data-original="https://wx2.sbimg.cn/2020/07/30/P7vXA.md.jpg" alt="84-柱状图中的最大矩形">
@@ -559,25 +587,6 @@
                 <div class="content">
                     <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2020-08-15T17:30:26.000Z">2020-08-16</time></div>
                     <a href="/2020/08/16/252-%E4%BC%9A%E8%AE%AE%E5%AE%A4/" class="title has-link-black-ter is-size-6 has-text-weight-normal">252-会议室</a>
-                    <p class="is-size-7 is-uppercase">
-                        <a class="has-link-grey -link" href="/categories/%E7%AE%97%E6%B3%95/">算法</a>
-                    </p>
-                </div>
-            </div>
-        </article>
-        
-        <article class="media">
-            
-            <a href="/2020/08/16/160-%E7%9B%B8%E4%BA%A4%E9%93%BE%E8%A1%A8/" class="media-left">
-                <p class="image is-64x64">
-                    <img class="thumbnail" src="images/loading.gif" data-original="https://wx1.sbimg.cn/2020/07/29/P7C6e.md.jpg" alt="160-相交链表">
-                </p>
-            </a>
-            
-            <div class="media-content">
-                <div class="content">
-                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2020-08-15T16:13:48.000Z">2020-08-16</time></div>
-                    <a href="/2020/08/16/160-%E7%9B%B8%E4%BA%A4%E9%93%BE%E8%A1%A8/" class="title has-link-black-ter is-size-6 has-text-weight-normal">160-相交链表</a>
                     <p class="is-size-7 is-uppercase">
                         <a class="has-link-grey -link" href="/categories/%E7%AE%97%E6%B3%95/">算法</a>
                     </p>
@@ -616,6 +625,25 @@
         
         <article class="media">
             
+            <a href="/2020/08/27/%E6%88%91%E7%9A%84FastIO%E5%B7%A5%E5%85%B7%E7%B1%BB/" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="images/loading.gif" data-original="/images/thumbnail.svg" alt="我的FastIO工具类">
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2020-08-27T05:29:16.000Z">2020-08-27</time></div>
+                    <a href="/2020/08/27/%E6%88%91%E7%9A%84FastIO%E5%B7%A5%E5%85%B7%E7%B1%BB/" class="title has-link-black-ter is-size-6 has-text-weight-normal">我的FastIO工具类</a>
+                    <p class="is-size-7 is-uppercase">
+                        
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+        <article class="media">
+            
             <a href="/2020/08/27/84-%E6%9F%B1%E7%8A%B6%E5%9B%BE%E4%B8%AD%E7%9A%84%E6%9C%80%E5%A4%A7%E7%9F%A9%E5%BD%A2/" class="media-left">
                 <p class="image is-64x64">
                     <img class="thumbnail" src="images/loading.gif" data-original="https://wx2.sbimg.cn/2020/07/30/P7vXA.md.jpg" alt="84-柱状图中的最大矩形">
@@ -683,25 +711,6 @@
                 <div class="content">
                     <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2020-08-15T17:30:26.000Z">2020-08-16</time></div>
                     <a href="/2020/08/16/252-%E4%BC%9A%E8%AE%AE%E5%AE%A4/" class="title has-link-black-ter is-size-6 has-text-weight-normal">252-会议室</a>
-                    <p class="is-size-7 is-uppercase">
-                        <a class="has-link-grey -link" href="/categories/%E7%AE%97%E6%B3%95/">算法</a>
-                    </p>
-                </div>
-            </div>
-        </article>
-        
-        <article class="media">
-            
-            <a href="/2020/08/16/160-%E7%9B%B8%E4%BA%A4%E9%93%BE%E8%A1%A8/" class="media-left">
-                <p class="image is-64x64">
-                    <img class="thumbnail" src="images/loading.gif" data-original="https://wx1.sbimg.cn/2020/07/29/P7C6e.md.jpg" alt="160-相交链表">
-                </p>
-            </a>
-            
-            <div class="media-content">
-                <div class="content">
-                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2020-08-15T16:13:48.000Z">2020-08-16</time></div>
-                    <a href="/2020/08/16/160-%E7%9B%B8%E4%BA%A4%E9%93%BE%E8%A1%A8/" class="title has-link-black-ter is-size-6 has-text-weight-normal">160-相交链表</a>
                     <p class="is-size-7 is-uppercase">
                         <a class="has-link-grey -link" href="/categories/%E7%AE%97%E6%B3%95/">算法</a>
                     </p>
