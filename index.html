@@ -129,17 +129,27 @@
     
 <div class="card">
     
+    <div class="card-image">
+        <a href="/2020/08/27/%E6%88%91%E7%9A%84FastIO%E5%B7%A5%E5%85%B7%E7%B1%BB/" class="image is-7by1">
+            <img class="thumbnail" src="images/loading.gif" data-original="https://wx2.sbimg.cn/2020/07/30/P7UcV.md.jpg" alt="我的FastIO工具类">
+        </a>
+    </div>
+    
     <div class="card-content article ">
         
         <div class="level article-meta is-size-7 is-uppercase is-mobile is-overflow-x-auto">
             <div class="level-left">
                 <time class="level-item has-text-grey" datetime="2020-08-27T05:29:16.000Z">2020-08-27</time>
                 
+                <div class="level-item">
+                <a class="has-link-grey -link" href="/categories/%E7%AE%97%E6%B3%95/">算法</a>
+                </div>
+                
                 
                 <span class="level-item has-text-grey">
                     
                     
-                    2 分钟 读完 (大约 256 个字)
+                    2 分钟 读完 (大约 257 个字)
                 </span>
                 
                 
@@ -153,13 +163,20 @@
         </h1>
         <div class="content">
             <p>前言：Java做算法题的弊端，力扣只需要完成一个函数，其他oj平台要求使用Scanner类在控制台输入输出，其中pat最后一个测试用例是大量数据，因此java在pat中经常超时，这时候可以采用带缓存的reader和buffer而不是System.in/out。</p>
+<br>
+
 <p>这个工具类，复制即可直接食用，都是静态方法，通过FastIO.xx就可以使用</p>
 <p>方法名保持和Scanner/System.out一致</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@author</span> wjw</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@date</span> 2020/2/10 13:44</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> java.io.*;</span><br><span class="line"><span class="keyword">import</span> java.util.StringTokenizer;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">FastIO</span> </span>&#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> BufferedReader reader = <span class="keyword">new</span> BufferedReader(<span class="keyword">new</span> InputStreamReader(System.in),<span class="number">32768</span>);</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> StringTokenizer tokenizer = <span class="keyword">new</span> StringTokenizer(<span class="string">""</span>);</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> PrintWriter out = <span class="keyword">new</span> PrintWriter(<span class="keyword">new</span> OutputStreamWriter(System.out));</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">double</span> <span class="title">nextDouble</span><span class="params">()</span> <span class="keyword">throws</span> IOException</span>&#123;</span><br><span class="line">        <span class="keyword">return</span> Double.parseDouble(next());</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">float</span> <span class="title">nextFloat</span><span class="params">()</span> <span class="keyword">throws</span> IOException</span>&#123;</span><br><span class="line">        <span class="keyword">return</span> Float.parseFloat(next());</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">int</span> <span class="title">nextInt</span><span class="params">()</span> <span class="keyword">throws</span> IOException</span>&#123;</span><br><span class="line">        <span class="keyword">return</span> Integer.parseInt(next());</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> String <span class="title">next</span><span class="params">()</span> <span class="keyword">throws</span> IOException</span>&#123;</span><br><span class="line">        <span class="keyword">while</span> (!tokenizer.hasMoreTokens()) &#123;</span><br><span class="line">            tokenizer = <span class="keyword">new</span> StringTokenizer(reader.readLine());</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> tokenizer.nextToken();</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> String <span class="title">nextLine</span><span class="params">()</span> <span class="keyword">throws</span> IOException</span>&#123;</span><br><span class="line">        <span class="keyword">return</span> reader.readLine();</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">println</span><span class="params">(String str)</span></span>&#123;</span><br><span class="line">        out.println(str);</span><br><span class="line">        out.flush();</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">printf</span><span class="params">(String format, Object ... args)</span></span>&#123;</span><br><span class="line">        out.printf(format, args);</span><br><span class="line">        out.flush();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-
         </div>
         
+        
+        <div class="level is-mobile">
+            <div class="level-start">
+                <div class="level-item">
+                <a class="button is-size-7 is-light" href="/2020/08/27/%E6%88%91%E7%9A%84FastIO%E5%B7%A5%E5%85%B7%E7%B1%BB/#more">阅读更多</a>
+                </div>
+            </div>
+        </div>
         
         
     </div>
@@ -925,7 +942,7 @@
                 <span class="level-item">算法</span>
             </span>
             <span class="level-end">
-                <span class="level-item tag">6</span>
+                <span class="level-item tag">7</span>
             </span>
         </a></li><li>
         <a class="level is-marginless" href="/categories/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/">
@@ -954,7 +971,7 @@
             
             <a href="/2020/08/27/%E6%88%91%E7%9A%84FastIO%E5%B7%A5%E5%85%B7%E7%B1%BB/" class="media-left">
                 <p class="image is-64x64">
-                    <img class="thumbnail" src="images/loading.gif" data-original="/images/thumbnail.svg" alt="我的FastIO工具类">
+                    <img class="thumbnail" src="images/loading.gif" data-original="https://wx2.sbimg.cn/2020/07/30/P7UcV.md.jpg" alt="我的FastIO工具类">
                 </p>
             </a>
             
@@ -963,7 +980,7 @@
                     <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2020-08-27T05:29:16.000Z">2020-08-27</time></div>
                     <a href="/2020/08/27/%E6%88%91%E7%9A%84FastIO%E5%B7%A5%E5%85%B7%E7%B1%BB/" class="title has-link-black-ter is-size-6 has-text-weight-normal">我的FastIO工具类</a>
                     <p class="is-size-7 is-uppercase">
-                        
+                        <a class="has-link-grey -link" href="/categories/%E7%AE%97%E6%B3%95/">算法</a>
                     </p>
                 </div>
             </div>
@@ -1078,7 +1095,7 @@
             
             <a href="/2020/08/27/%E6%88%91%E7%9A%84FastIO%E5%B7%A5%E5%85%B7%E7%B1%BB/" class="media-left">
                 <p class="image is-64x64">
-                    <img class="thumbnail" src="images/loading.gif" data-original="/images/thumbnail.svg" alt="我的FastIO工具类">
+                    <img class="thumbnail" src="images/loading.gif" data-original="https://wx2.sbimg.cn/2020/07/30/P7UcV.md.jpg" alt="我的FastIO工具类">
                 </p>
             </a>
             
@@ -1087,7 +1104,7 @@
                     <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2020-08-27T05:29:16.000Z">2020-08-27</time></div>
                     <a href="/2020/08/27/%E6%88%91%E7%9A%84FastIO%E5%B7%A5%E5%85%B7%E7%B1%BB/" class="title has-link-black-ter is-size-6 has-text-weight-normal">我的FastIO工具类</a>
                     <p class="is-size-7 is-uppercase">
-                        
+                        <a class="has-link-grey -link" href="/categories/%E7%AE%97%E6%B3%95/">算法</a>
                     </p>
                 </div>
             </div>
