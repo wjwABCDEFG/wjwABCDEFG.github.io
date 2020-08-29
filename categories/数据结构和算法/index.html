@@ -7,12 +7,12 @@
 
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
 
-<title>分类: 算法 - 小温 blog</title>
+<title>分类: 数据结构和算法 - 小温 blog</title>
 
 
     <meta property="og:type" content="website">
 <meta property="og:title" content="小温 blog">
-<meta property="og:url" content="http://wjw.today/categories/%E7%AE%97%E6%B3%95/index.html">
+<meta property="og:url" content="http://wjw.today/categories/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E5%92%8C%E7%AE%97%E6%B3%95/index.html">
 <meta property="og:site_name" content="小温 blog">
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="http://wjw.today/images/og_image.png">
@@ -131,11 +131,80 @@
         <ul>
             <li><a href="/categories">分类</a></li>
             
-            <li class="is-active"><a href="#" aria-current="page">算法</a></li>
+            <li class="is-active"><a href="#" aria-current="page">数据结构和算法</a></li>
         </ul>
         </nav>
     </div>
 </div>
+
+    
+<div class="card">
+    
+    <div class="card-image">
+        <a href="/2020/08/29/%E5%AF%B91000000007%E5%8F%96%E6%A8%A1%E5%92%8C0x3f3f3f/" class="image is-7by1">
+            <img class="thumbnail" src="images/loading.gif" data-original="https://source.acexy.cn/view/XOb3S4e" alt="对1000000007取模和0x3f3f3f3f">
+        </a>
+    </div>
+    
+    <div class="card-content article ">
+        
+        <div class="level article-meta is-size-7 is-uppercase is-mobile is-overflow-x-auto">
+            <div class="level-left">
+                <time class="level-item has-text-grey" datetime="2020-08-29T09:05:34.000Z">2020-08-29</time>
+                
+                <div class="level-item">
+                <a class="has-link-grey -link" href="/categories/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E5%92%8C%E7%AE%97%E6%B3%95/">数据结构和算法</a>
+                </div>
+                
+                
+                <span class="level-item has-text-grey">
+                    
+                    
+                    4 分钟 读完 (大约 655 个字)
+                </span>
+                
+                
+            </div>
+        </div>
+        
+        <h1 class="title is-size-3 is-size-4-mobile has-text-weight-normal">
+            
+                <a class="has-link-black-ter" href="/2020/08/29/%E5%AF%B91000000007%E5%8F%96%E6%A8%A1%E5%92%8C0x3f3f3f/">对1000000007取模和0x3f3f3f3f</a>
+            
+        </h1>
+        <div class="content">
+            <p><strong>1. 在做到一些结果可能很大的题目时，题目会要求对1000000007取模（1八个零7），为什么？</strong><br>最终我在柳神的博客下找到了答案</p>
+<ul>
+<li><p>1000000007是一个质数（素数），对质数取余能最大程度避免冲突</p>
+</li>
+<li><p>int32位的最大值为2147483647，所以对于int32位来说1000000007足够大</p>
+</li>
+<li><p>int64位的最大值为2^63-1，对于1000000007来说它的平方不会在int64中溢出</p>
+</li>
+<li><p>所以在大数相乘的时候，因为(a∗b)%c=((a%c)∗(b%c))%c，所以相乘时两边都对1000000007取模，再保存在int64里面不会溢出</p>
+</li>
+</ul>
+        </div>
+        
+        
+        <div class="level is-mobile">
+            <div class="level-start">
+                <div class="level-item">
+                <a class="button is-size-7 is-light" href="/2020/08/29/%E5%AF%B91000000007%E5%8F%96%E6%A8%A1%E5%92%8C0x3f3f3f/#more">阅读更多</a>
+                </div>
+            </div>
+        </div>
+        
+        
+    </div>
+</div>
+
+
+
+
+
+
+
 
     
 <div class="card">
@@ -153,7 +222,7 @@
                 <time class="level-item has-text-grey" datetime="2020-08-27T05:29:16.000Z">2020-08-27</time>
                 
                 <div class="level-item">
-                <a class="has-link-grey -link" href="/categories/%E7%AE%97%E6%B3%95/">算法</a>
+                <a class="has-link-grey -link" href="/categories/Util%E5%B7%A5%E5%85%B7%E7%B1%BB/">Util工具类</a>&nbsp;/&nbsp;<a class="has-link-grey -link" href="/categories/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E5%92%8C%E7%AE%97%E6%B3%95/">数据结构和算法</a>
                 </div>
                 
                 
@@ -216,7 +285,7 @@
                 <time class="level-item has-text-grey" datetime="2020-08-27T04:58:13.000Z">2020-08-27</time>
                 
                 <div class="level-item">
-                <a class="has-link-grey -link" href="/categories/%E7%AE%97%E6%B3%95/">算法</a>
+                <a class="has-link-grey -link" href="/categories/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E5%92%8C%E7%AE%97%E6%B3%95/">数据结构和算法</a>
                 </div>
                 
                 
@@ -267,6 +336,66 @@
 <div class="card">
     
     <div class="card-image">
+        <a href="/2020/08/19/Java%E4%BA%8C%E5%8F%89%E6%A0%91%E7%9A%84%E5%B1%82%E6%AC%A1%E9%81%8D%E5%8E%86/" class="image is-7by1">
+            <img class="thumbnail" src="images/loading.gif" data-original="https://wx2.sbimg.cn/2020/07/30/P7ZnY.md.jpg" alt="Java二叉树的层次遍历">
+        </a>
+    </div>
+    
+    <div class="card-content article ">
+        
+        <div class="level article-meta is-size-7 is-uppercase is-mobile is-overflow-x-auto">
+            <div class="level-left">
+                <time class="level-item has-text-grey" datetime="2020-08-19T13:26:38.000Z">2020-08-19</time>
+                
+                <div class="level-item">
+                <a class="has-link-grey -link" href="/categories/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E5%92%8C%E7%AE%97%E6%B3%95/">数据结构和算法</a>
+                </div>
+                
+                
+                <span class="level-item has-text-grey">
+                    
+                    
+                    3 分钟 读完 (大约 512 个字)
+                </span>
+                
+                
+            </div>
+        </div>
+        
+        <h1 class="title is-size-3 is-size-4-mobile has-text-weight-normal">
+            
+                <a class="has-link-black-ter" href="/2020/08/19/Java%E4%BA%8C%E5%8F%89%E6%A0%91%E7%9A%84%E5%B1%82%E6%AC%A1%E9%81%8D%E5%8E%86/">Java二叉树的层次遍历</a>
+            
+        </h1>
+        <div class="content">
+            <h1 id="1-层次遍历和BFS"><a href="#1-层次遍历和BFS" class="headerlink" title="1. 层次遍历和BFS"></a>1. 层次遍历和BFS</h1><p>之前写过二叉树的前中后序遍历，不懂的<a href="http://wjw.today/2020/07/11/Java实现树的遍历及二叉树可视化/">点这里</a>，今天介绍的是层次遍历，层次遍历概念很简单，我直接盗用力扣上面的图了，采用BFS也是显而易见的</p>
+<p><img src="images/loading.gif" data-original="https://pic.leetcode-cn.com/fdcd3bd27f4008948084f6ec86b58535e71f66862bd89a34bd6fe4cc42d68e89.gif" alt="对比图"></p>
+        </div>
+        
+        
+        <div class="level is-mobile">
+            <div class="level-start">
+                <div class="level-item">
+                <a class="button is-size-7 is-light" href="/2020/08/19/Java%E4%BA%8C%E5%8F%89%E6%A0%91%E7%9A%84%E5%B1%82%E6%AC%A1%E9%81%8D%E5%8E%86/#more">阅读更多</a>
+                </div>
+            </div>
+        </div>
+        
+        
+    </div>
+</div>
+
+
+
+
+
+
+
+
+    
+<div class="card">
+    
+    <div class="card-image">
         <a href="/2020/08/16/56-%E5%90%88%E5%B9%B6%E5%8C%BA%E9%97%B4/" class="image is-7by1">
             <img class="thumbnail" src="images/loading.gif" data-original="https://wx1.sbimg.cn/2020/07/30/P7Yj4.md.jpg" alt="56-合并区间">
         </a>
@@ -279,7 +408,7 @@
                 <time class="level-item has-text-grey" datetime="2020-08-15T17:46:01.000Z">2020-08-16</time>
                 
                 <div class="level-item">
-                <a class="has-link-grey -link" href="/categories/%E7%AE%97%E6%B3%95/">算法</a>
+                <a class="has-link-grey -link" href="/categories/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E5%92%8C%E7%AE%97%E6%B3%95/">数据结构和算法</a>
                 </div>
                 
                 
@@ -343,7 +472,7 @@
                 <time class="level-item has-text-grey" datetime="2020-08-15T17:30:26.000Z">2020-08-16</time>
                 
                 <div class="level-item">
-                <a class="has-link-grey -link" href="/categories/%E7%AE%97%E6%B3%95/">算法</a>
+                <a class="has-link-grey -link" href="/categories/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E5%92%8C%E7%AE%97%E6%B3%95/">数据结构和算法</a>
                 </div>
                 
                 
@@ -407,7 +536,7 @@
                 <time class="level-item has-text-grey" datetime="2020-08-15T16:13:48.000Z">2020-08-16</time>
                 
                 <div class="level-item">
-                <a class="has-link-grey -link" href="/categories/%E7%AE%97%E6%B3%95/">算法</a>
+                <a class="has-link-grey -link" href="/categories/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E5%92%8C%E7%AE%97%E6%B3%95/">数据结构和算法</a>
                 </div>
                 
                 
@@ -471,7 +600,7 @@
                 <time class="level-item has-text-grey" datetime="2020-07-29T19:33:54.000Z">2020-07-30</time>
                 
                 <div class="level-item">
-                <a class="has-link-grey -link" href="/categories/%E7%AE%97%E6%B3%95/">算法</a>
+                <a class="has-link-grey -link" href="/categories/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E5%92%8C%E7%AE%97%E6%B3%95/">数据结构和算法</a>
                 </div>
                 
                 
@@ -534,7 +663,7 @@
                 <time class="level-item has-text-grey" datetime="2020-07-29T14:59:51.000Z">2020-07-29</time>
                 
                 <div class="level-item">
-                <a class="has-link-grey -link" href="/categories/%E7%AE%97%E6%B3%95/">算法</a>
+                <a class="has-link-grey -link" href="/categories/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E5%92%8C%E7%AE%97%E6%B3%95/">数据结构和算法</a>
                 </div>
                 
                 
@@ -580,6 +709,91 @@
 
 
 
+    
+<div class="card">
+    
+    <div class="card-image">
+        <a href="/2020/07/11/%E6%A0%B9%E6%8D%AE%E4%B8%A4%E5%BA%8F%E9%81%8D%E5%8E%86%E6%8E%A8%E5%87%BA%E6%A0%91%E7%9A%84%E5%BD%A2%E7%8A%B6/" class="image is-7by1">
+            <img class="thumbnail" src="images/loading.gif" data-original="https://wx1.sbimg.cn/2020/07/30/P77wm.md.jpg" alt="根据两序遍历推出第三序以及构建树">
+        </a>
+    </div>
+    
+    <div class="card-content article ">
+        
+        <div class="level article-meta is-size-7 is-uppercase is-mobile is-overflow-x-auto">
+            <div class="level-left">
+                <time class="level-item has-text-grey" datetime="2020-07-11T10:22:36.000Z">2020-07-11</time>
+                
+                <div class="level-item">
+                <a class="has-link-grey -link" href="/categories/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E5%92%8C%E7%AE%97%E6%B3%95/">数据结构和算法</a>
+                </div>
+                
+                
+                <span class="level-item has-text-grey">
+                    
+                    
+                    18 分钟 读完 (大约 2652 个字)
+                </span>
+                
+                
+            </div>
+        </div>
+        
+        <h1 class="title is-size-3 is-size-4-mobile has-text-weight-normal">
+            
+                <a class="has-link-black-ter" href="/2020/07/11/%E6%A0%B9%E6%8D%AE%E4%B8%A4%E5%BA%8F%E9%81%8D%E5%8E%86%E6%8E%A8%E5%87%BA%E6%A0%91%E7%9A%84%E5%BD%A2%E7%8A%B6/">根据两序遍历推出第三序以及构建树</a>
+            
+        </h1>
+        <div class="content">
+            <blockquote>
+<p>前言：太久了都快忘了，最近做了一下笔试题遇到这题，发现经常考这种题，先把技巧记录下来，有了技巧后简直不要太轻松</p>
+</blockquote>
+<h1 id="1-树的三种遍历"><a href="#1-树的三种遍历" class="headerlink" title="1. 树的三种遍历"></a>1. 树的三种遍历</h1><ul>
+<li>前序遍历（根左右）</li>
+<li>中序遍历（左根右）</li>
+<li>后序遍历（左右根）</li>
+</ul>
+        </div>
+        
+        
+        <div class="level is-mobile">
+            <div class="level-start">
+                <div class="level-item">
+                <a class="button is-size-7 is-light" href="/2020/07/11/%E6%A0%B9%E6%8D%AE%E4%B8%A4%E5%BA%8F%E9%81%8D%E5%8E%86%E6%8E%A8%E5%87%BA%E6%A0%91%E7%9A%84%E5%BD%A2%E7%8A%B6/#more">阅读更多</a>
+                </div>
+            </div>
+        </div>
+        
+        
+    </div>
+</div>
+
+
+
+
+
+
+
+
+
+    
+<div class="card card-transparent">
+    <nav class="pagination is-centered" role="navigation" aria-label="pagination">
+        <div class="pagination-previous is-invisible is-hidden-mobile">
+            <a class="is-flex-grow has-text-black-ter" href="/categories/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E5%92%8C%E7%AE%97%E6%B3%95/page/0/">上一页</a>
+        </div>
+        <div class="pagination-next">
+            <a class="is-flex-grow has-text-black-ter" href="/categories/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E5%92%8C%E7%AE%97%E6%B3%95/page/2/">下一页</a>
+        </div>
+        <ul class="pagination-list is-hidden-mobile">
+            
+            <li><a class="pagination-link is-current" href="/categories/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E5%92%8C%E7%AE%97%E6%B3%95/">1</a></li>
+            
+            <li><a class="pagination-link has-text-black-ter" href="/categories/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E5%92%8C%E7%AE%97%E6%B3%95/page/2/">2</a></li>
+            
+        </ul>
+    </nav>
+</div>
 </div>
                 
 
@@ -621,7 +835,7 @@
                     </p>
                     <a href="/archives">
                         <p class="title has-text-weight-normal">
-                            26
+                            28
                         </p>
                     </a>
                 </div>
@@ -633,7 +847,7 @@
                     </p>
                     <a href="/categories">
                         <p class="title has-text-weight-normal">
-                            11
+                            12
                         </p>
                     </a>
                 </div>
@@ -726,7 +940,15 @@
                 <span class="level-item">SpringMVC</span>
             </span>
             <span class="level-end">
-                <span class="level-item tag">4</span>
+                <span class="level-item tag">3</span>
+            </span>
+        </a></li><li>
+        <a class="level is-marginless" href="/categories/Util%E5%B7%A5%E5%85%B7%E7%B1%BB/">
+            <span class="level-start">
+                <span class="level-item">Util工具类</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">1</span>
             </span>
         </a></li><li>
         <a class="level is-marginless" href="/categories/%E5%89%8D%E7%AB%AF/">
@@ -734,23 +956,23 @@
                 <span class="level-item">前端</span>
             </span>
             <span class="level-end">
-                <span class="level-item tag">2</span>
+                <span class="level-item tag">1</span>
             </span>
         </a></li><li>
-        <a class="level is-marginless" href="/categories/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/">
+        <a class="level is-marginless" href="/categories/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E5%92%8C%E7%AE%97%E6%B3%95/">
             <span class="level-start">
-                <span class="level-item">数据结构</span>
+                <span class="level-item">数据结构和算法</span>
             </span>
             <span class="level-end">
-                <span class="level-item tag">2</span>
+                <span class="level-item tag">11</span>
             </span>
         </a></li><li>
-        <a class="level is-marginless" href="/categories/%E7%AE%97%E6%B3%95/">
+        <a class="level is-marginless" href="/categories/%E7%94%9F%E6%B4%BB%E9%9A%8F%E7%AC%94/">
             <span class="level-start">
-                <span class="level-item">算法</span>
+                <span class="level-item">生活随笔</span>
             </span>
             <span class="level-end">
-                <span class="level-item tag">7</span>
+                <span class="level-item tag">1</span>
             </span>
         </a></li><li>
         <a class="level is-marginless" href="/categories/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/">
@@ -777,6 +999,44 @@
         
         <article class="media">
             
+            <a href="/2020/08/29/%E5%AF%B91000000007%E5%8F%96%E6%A8%A1%E5%92%8C0x3f3f3f/" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="images/loading.gif" data-original="https://source.acexy.cn/view/XOb3S4e" alt="对1000000007取模和0x3f3f3f3f">
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2020-08-29T09:05:34.000Z">2020-08-29</time></div>
+                    <a href="/2020/08/29/%E5%AF%B91000000007%E5%8F%96%E6%A8%A1%E5%92%8C0x3f3f3f/" class="title has-link-black-ter is-size-6 has-text-weight-normal">对1000000007取模和0x3f3f3f3f</a>
+                    <p class="is-size-7 is-uppercase">
+                        <a class="has-link-grey -link" href="/categories/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E5%92%8C%E7%AE%97%E6%B3%95/">数据结构和算法</a>
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+        <article class="media">
+            
+            <a href="/2020/08/27/%E5%85%AB%E6%9C%88%E9%9A%8F%E7%AC%94/" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="images/loading.gif" data-original="https://source.acexy.cn/view/XOb3S4e" alt="八月随笔">
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2020-08-27T13:41:47.000Z">2020-08-27</time></div>
+                    <a href="/2020/08/27/%E5%85%AB%E6%9C%88%E9%9A%8F%E7%AC%94/" class="title has-link-black-ter is-size-6 has-text-weight-normal">八月随笔</a>
+                    <p class="is-size-7 is-uppercase">
+                        <a class="has-link-grey -link" href="/categories/%E7%94%9F%E6%B4%BB%E9%9A%8F%E7%AC%94/">生活随笔</a>
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+        <article class="media">
+            
             <a href="/2020/08/27/%E6%88%91%E7%9A%84FastIO%E5%B7%A5%E5%85%B7%E7%B1%BB/" class="media-left">
                 <p class="image is-64x64">
                     <img class="thumbnail" src="images/loading.gif" data-original="https://wx2.sbimg.cn/2020/07/30/P7UcV.md.jpg" alt="我的FastIO工具类">
@@ -788,7 +1048,7 @@
                     <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2020-08-27T05:29:16.000Z">2020-08-27</time></div>
                     <a href="/2020/08/27/%E6%88%91%E7%9A%84FastIO%E5%B7%A5%E5%85%B7%E7%B1%BB/" class="title has-link-black-ter is-size-6 has-text-weight-normal">我的FastIO工具类</a>
                     <p class="is-size-7 is-uppercase">
-                        <a class="has-link-grey -link" href="/categories/%E7%AE%97%E6%B3%95/">算法</a>
+                        <a class="has-link-grey -link" href="/categories/Util%E5%B7%A5%E5%85%B7%E7%B1%BB/">Util工具类</a> / <a class="has-link-grey -link" href="/categories/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E5%92%8C%E7%AE%97%E6%B3%95/">数据结构和算法</a>
                     </p>
                 </div>
             </div>
@@ -807,7 +1067,7 @@
                     <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2020-08-27T04:58:13.000Z">2020-08-27</time></div>
                     <a href="/2020/08/27/84-%E6%9F%B1%E7%8A%B6%E5%9B%BE%E4%B8%AD%E7%9A%84%E6%9C%80%E5%A4%A7%E7%9F%A9%E5%BD%A2/" class="title has-link-black-ter is-size-6 has-text-weight-normal">84-柱状图中的最大矩形</a>
                     <p class="is-size-7 is-uppercase">
-                        <a class="has-link-grey -link" href="/categories/%E7%AE%97%E6%B3%95/">算法</a>
+                        <a class="has-link-grey -link" href="/categories/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E5%92%8C%E7%AE%97%E6%B3%95/">数据结构和算法</a>
                     </p>
                 </div>
             </div>
@@ -826,45 +1086,7 @@
                     <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2020-08-19T13:26:38.000Z">2020-08-19</time></div>
                     <a href="/2020/08/19/Java%E4%BA%8C%E5%8F%89%E6%A0%91%E7%9A%84%E5%B1%82%E6%AC%A1%E9%81%8D%E5%8E%86/" class="title has-link-black-ter is-size-6 has-text-weight-normal">Java二叉树的层次遍历</a>
                     <p class="is-size-7 is-uppercase">
-                        <a class="has-link-grey -link" href="/categories/SpringMVC/">SpringMVC</a> / <a class="has-link-grey -link" href="/categories/%E5%89%8D%E7%AB%AF/">前端</a>
-                    </p>
-                </div>
-            </div>
-        </article>
-        
-        <article class="media">
-            
-            <a href="/2020/08/16/56-%E5%90%88%E5%B9%B6%E5%8C%BA%E9%97%B4/" class="media-left">
-                <p class="image is-64x64">
-                    <img class="thumbnail" src="images/loading.gif" data-original="https://wx1.sbimg.cn/2020/07/30/P7Yj4.md.jpg" alt="56-合并区间">
-                </p>
-            </a>
-            
-            <div class="media-content">
-                <div class="content">
-                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2020-08-15T17:46:01.000Z">2020-08-16</time></div>
-                    <a href="/2020/08/16/56-%E5%90%88%E5%B9%B6%E5%8C%BA%E9%97%B4/" class="title has-link-black-ter is-size-6 has-text-weight-normal">56-合并区间</a>
-                    <p class="is-size-7 is-uppercase">
-                        <a class="has-link-grey -link" href="/categories/%E7%AE%97%E6%B3%95/">算法</a>
-                    </p>
-                </div>
-            </div>
-        </article>
-        
-        <article class="media">
-            
-            <a href="/2020/08/16/252-%E4%BC%9A%E8%AE%AE%E5%AE%A4/" class="media-left">
-                <p class="image is-64x64">
-                    <img class="thumbnail" src="images/loading.gif" data-original="https://wx1.sbimg.cn/2020/07/30/P7HlU.md.jpg" alt="252-会议室">
-                </p>
-            </a>
-            
-            <div class="media-content">
-                <div class="content">
-                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2020-08-15T17:30:26.000Z">2020-08-16</time></div>
-                    <a href="/2020/08/16/252-%E4%BC%9A%E8%AE%AE%E5%AE%A4/" class="title has-link-black-ter is-size-6 has-text-weight-normal">252-会议室</a>
-                    <p class="is-size-7 is-uppercase">
-                        <a class="has-link-grey -link" href="/categories/%E7%AE%97%E6%B3%95/">算法</a>
+                        <a class="has-link-grey -link" href="/categories/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E5%92%8C%E7%AE%97%E6%B3%95/">数据结构和算法</a>
                     </p>
                 </div>
             </div>
@@ -878,7 +1100,7 @@
         <h3 class="menu-label">
             标签云
         </h3>
-        <a href="/tags/eureka/" style="font-size: 10px;">eureka</a> <a href="/tags/fastDFS/" style="font-size: 10px;">fastDFS</a> <a href="/tags/feign/" style="font-size: 10px;">feign</a> <a href="/tags/http/" style="font-size: 10px;">http</a> <a href="/tags/hystrix/" style="font-size: 10px;">hystrix</a> <a href="/tags/json/" style="font-size: 10px;">json</a> <a href="/tags/lintcode/" style="font-size: 10px;">lintcode</a> <a href="/tags/markdown/" style="font-size: 10px;">markdown</a> <a href="/tags/maven/" style="font-size: 10px;">maven</a> <a href="/tags/mysql/" style="font-size: 10px;">mysql</a> <a href="/tags/ribbon/" style="font-size: 10px;">ribbon</a> <a href="/tags/spring/" style="font-size: 12.5px;">spring</a> <a href="/tags/springboot/" style="font-size: 10px;">springboot</a> <a href="/tags/springcloud/" style="font-size: 12.5px;">springcloud</a> <a href="/tags/springmvc/" style="font-size: 15px;">springmvc</a> <a href="/tags/zuul/" style="font-size: 10px;">zuul</a> <a href="/tags/%E4%BA%8C%E5%8F%89%E6%A0%91/" style="font-size: 10px;">二叉树</a> <a href="/tags/%E4%BA%A4%E4%BA%92/" style="font-size: 10px;">交互</a> <a href="/tags/%E5%89%91%E6%8C%87offer/" style="font-size: 10px;">剑指offer</a> <a href="/tags/%E5%8A%9B%E6%89%A3/" style="font-size: 17.5px;">力扣</a> <a href="/tags/%E5%8A%A0%E5%AF%86/" style="font-size: 10px;">加密</a> <a href="/tags/%E5%9D%91/" style="font-size: 10px;">坑</a> <a href="/tags/%E5%AD%A6%E4%B9%A0%E8%AE%B0%E5%BD%95/" style="font-size: 10px;">学习记录</a> <a href="/tags/%E5%BC%80%E5%8F%91/" style="font-size: 20px;">开发</a> <a href="/tags/%E6%8B%9B%E8%81%98%E7%AC%94%E8%AF%95/" style="font-size: 10px;">招聘笔试</a> <a href="/tags/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/" style="font-size: 15px;">数据结构</a> <a href="/tags/%E6%A0%88/" style="font-size: 10px;">栈</a> <a href="/tags/%E6%A0%91/" style="font-size: 12.5px;">树</a> <a href="/tags/%E7%AC%94%E8%AF%95%E9%9D%A2%E8%AF%95/" style="font-size: 12.5px;">笔试面试</a> <a href="/tags/%E7%AE%97%E6%B3%95/" style="font-size: 10px;">算法</a>
+        <a href="/tags/eureka/" style="font-size: 10px;">eureka</a> <a href="/tags/fastDFS/" style="font-size: 10px;">fastDFS</a> <a href="/tags/feign/" style="font-size: 10px;">feign</a> <a href="/tags/http/" style="font-size: 10px;">http</a> <a href="/tags/hystrix/" style="font-size: 10px;">hystrix</a> <a href="/tags/json/" style="font-size: 10px;">json</a> <a href="/tags/lintcode/" style="font-size: 10px;">lintcode</a> <a href="/tags/markdown/" style="font-size: 10px;">markdown</a> <a href="/tags/maven/" style="font-size: 10px;">maven</a> <a href="/tags/mysql/" style="font-size: 10px;">mysql</a> <a href="/tags/ribbon/" style="font-size: 10px;">ribbon</a> <a href="/tags/spring/" style="font-size: 12.5px;">spring</a> <a href="/tags/springboot/" style="font-size: 10px;">springboot</a> <a href="/tags/springcloud/" style="font-size: 12.5px;">springcloud</a> <a href="/tags/springmvc/" style="font-size: 15px;">springmvc</a> <a href="/tags/zuul/" style="font-size: 10px;">zuul</a> <a href="/tags/%E4%BA%8C%E5%8F%89%E6%A0%91/" style="font-size: 10px;">二叉树</a> <a href="/tags/%E4%BA%A4%E4%BA%92/" style="font-size: 10px;">交互</a> <a href="/tags/%E5%89%91%E6%8C%87offer/" style="font-size: 10px;">剑指offer</a> <a href="/tags/%E5%8A%9B%E6%89%A3/" style="font-size: 17.5px;">力扣</a> <a href="/tags/%E5%8A%A0%E5%AF%86/" style="font-size: 10px;">加密</a> <a href="/tags/%E5%9D%91/" style="font-size: 10px;">坑</a> <a href="/tags/%E5%AD%A6%E4%B9%A0%E8%AE%B0%E5%BD%95/" style="font-size: 10px;">学习记录</a> <a href="/tags/%E5%BC%80%E5%8F%91/" style="font-size: 20px;">开发</a> <a href="/tags/%E6%8B%9B%E8%81%98%E7%AC%94%E8%AF%95/" style="font-size: 10px;">招聘笔试</a> <a href="/tags/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/" style="font-size: 15px;">数据结构</a> <a href="/tags/%E6%A0%88/" style="font-size: 10px;">栈</a> <a href="/tags/%E6%A0%91/" style="font-size: 12.5px;">树</a> <a href="/tags/%E7%AC%94%E8%AF%95%E9%9D%A2%E8%AF%95/" style="font-size: 12.5px;">笔试面试</a> <a href="/tags/%E7%AE%97%E6%B3%95/" style="font-size: 12.5px;">算法</a>
     </div>
 </div>
         
@@ -901,6 +1123,44 @@
         
         <article class="media">
             
+            <a href="/2020/08/29/%E5%AF%B91000000007%E5%8F%96%E6%A8%A1%E5%92%8C0x3f3f3f/" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="images/loading.gif" data-original="https://source.acexy.cn/view/XOb3S4e" alt="对1000000007取模和0x3f3f3f3f">
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2020-08-29T09:05:34.000Z">2020-08-29</time></div>
+                    <a href="/2020/08/29/%E5%AF%B91000000007%E5%8F%96%E6%A8%A1%E5%92%8C0x3f3f3f/" class="title has-link-black-ter is-size-6 has-text-weight-normal">对1000000007取模和0x3f3f3f3f</a>
+                    <p class="is-size-7 is-uppercase">
+                        <a class="has-link-grey -link" href="/categories/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E5%92%8C%E7%AE%97%E6%B3%95/">数据结构和算法</a>
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+        <article class="media">
+            
+            <a href="/2020/08/27/%E5%85%AB%E6%9C%88%E9%9A%8F%E7%AC%94/" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="images/loading.gif" data-original="https://source.acexy.cn/view/XOb3S4e" alt="八月随笔">
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2020-08-27T13:41:47.000Z">2020-08-27</time></div>
+                    <a href="/2020/08/27/%E5%85%AB%E6%9C%88%E9%9A%8F%E7%AC%94/" class="title has-link-black-ter is-size-6 has-text-weight-normal">八月随笔</a>
+                    <p class="is-size-7 is-uppercase">
+                        <a class="has-link-grey -link" href="/categories/%E7%94%9F%E6%B4%BB%E9%9A%8F%E7%AC%94/">生活随笔</a>
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+        <article class="media">
+            
             <a href="/2020/08/27/%E6%88%91%E7%9A%84FastIO%E5%B7%A5%E5%85%B7%E7%B1%BB/" class="media-left">
                 <p class="image is-64x64">
                     <img class="thumbnail" src="images/loading.gif" data-original="https://wx2.sbimg.cn/2020/07/30/P7UcV.md.jpg" alt="我的FastIO工具类">
@@ -912,7 +1172,7 @@
                     <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2020-08-27T05:29:16.000Z">2020-08-27</time></div>
                     <a href="/2020/08/27/%E6%88%91%E7%9A%84FastIO%E5%B7%A5%E5%85%B7%E7%B1%BB/" class="title has-link-black-ter is-size-6 has-text-weight-normal">我的FastIO工具类</a>
                     <p class="is-size-7 is-uppercase">
-                        <a class="has-link-grey -link" href="/categories/%E7%AE%97%E6%B3%95/">算法</a>
+                        <a class="has-link-grey -link" href="/categories/Util%E5%B7%A5%E5%85%B7%E7%B1%BB/">Util工具类</a> / <a class="has-link-grey -link" href="/categories/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E5%92%8C%E7%AE%97%E6%B3%95/">数据结构和算法</a>
                     </p>
                 </div>
             </div>
@@ -931,7 +1191,7 @@
                     <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2020-08-27T04:58:13.000Z">2020-08-27</time></div>
                     <a href="/2020/08/27/84-%E6%9F%B1%E7%8A%B6%E5%9B%BE%E4%B8%AD%E7%9A%84%E6%9C%80%E5%A4%A7%E7%9F%A9%E5%BD%A2/" class="title has-link-black-ter is-size-6 has-text-weight-normal">84-柱状图中的最大矩形</a>
                     <p class="is-size-7 is-uppercase">
-                        <a class="has-link-grey -link" href="/categories/%E7%AE%97%E6%B3%95/">算法</a>
+                        <a class="has-link-grey -link" href="/categories/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E5%92%8C%E7%AE%97%E6%B3%95/">数据结构和算法</a>
                     </p>
                 </div>
             </div>
@@ -950,45 +1210,7 @@
                     <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2020-08-19T13:26:38.000Z">2020-08-19</time></div>
                     <a href="/2020/08/19/Java%E4%BA%8C%E5%8F%89%E6%A0%91%E7%9A%84%E5%B1%82%E6%AC%A1%E9%81%8D%E5%8E%86/" class="title has-link-black-ter is-size-6 has-text-weight-normal">Java二叉树的层次遍历</a>
                     <p class="is-size-7 is-uppercase">
-                        <a class="has-link-grey -link" href="/categories/SpringMVC/">SpringMVC</a> / <a class="has-link-grey -link" href="/categories/%E5%89%8D%E7%AB%AF/">前端</a>
-                    </p>
-                </div>
-            </div>
-        </article>
-        
-        <article class="media">
-            
-            <a href="/2020/08/16/56-%E5%90%88%E5%B9%B6%E5%8C%BA%E9%97%B4/" class="media-left">
-                <p class="image is-64x64">
-                    <img class="thumbnail" src="images/loading.gif" data-original="https://wx1.sbimg.cn/2020/07/30/P7Yj4.md.jpg" alt="56-合并区间">
-                </p>
-            </a>
-            
-            <div class="media-content">
-                <div class="content">
-                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2020-08-15T17:46:01.000Z">2020-08-16</time></div>
-                    <a href="/2020/08/16/56-%E5%90%88%E5%B9%B6%E5%8C%BA%E9%97%B4/" class="title has-link-black-ter is-size-6 has-text-weight-normal">56-合并区间</a>
-                    <p class="is-size-7 is-uppercase">
-                        <a class="has-link-grey -link" href="/categories/%E7%AE%97%E6%B3%95/">算法</a>
-                    </p>
-                </div>
-            </div>
-        </article>
-        
-        <article class="media">
-            
-            <a href="/2020/08/16/252-%E4%BC%9A%E8%AE%AE%E5%AE%A4/" class="media-left">
-                <p class="image is-64x64">
-                    <img class="thumbnail" src="images/loading.gif" data-original="https://wx1.sbimg.cn/2020/07/30/P7HlU.md.jpg" alt="252-会议室">
-                </p>
-            </a>
-            
-            <div class="media-content">
-                <div class="content">
-                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2020-08-15T17:30:26.000Z">2020-08-16</time></div>
-                    <a href="/2020/08/16/252-%E4%BC%9A%E8%AE%AE%E5%AE%A4/" class="title has-link-black-ter is-size-6 has-text-weight-normal">252-会议室</a>
-                    <p class="is-size-7 is-uppercase">
-                        <a class="has-link-grey -link" href="/categories/%E7%AE%97%E6%B3%95/">算法</a>
+                        <a class="has-link-grey -link" href="/categories/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E5%92%8C%E7%AE%97%E6%B3%95/">数据结构和算法</a>
                     </p>
                 </div>
             </div>
@@ -1002,7 +1224,7 @@
         <h3 class="menu-label">
             标签云
         </h3>
-        <a href="/tags/eureka/" style="font-size: 10px;">eureka</a> <a href="/tags/fastDFS/" style="font-size: 10px;">fastDFS</a> <a href="/tags/feign/" style="font-size: 10px;">feign</a> <a href="/tags/http/" style="font-size: 10px;">http</a> <a href="/tags/hystrix/" style="font-size: 10px;">hystrix</a> <a href="/tags/json/" style="font-size: 10px;">json</a> <a href="/tags/lintcode/" style="font-size: 10px;">lintcode</a> <a href="/tags/markdown/" style="font-size: 10px;">markdown</a> <a href="/tags/maven/" style="font-size: 10px;">maven</a> <a href="/tags/mysql/" style="font-size: 10px;">mysql</a> <a href="/tags/ribbon/" style="font-size: 10px;">ribbon</a> <a href="/tags/spring/" style="font-size: 12.5px;">spring</a> <a href="/tags/springboot/" style="font-size: 10px;">springboot</a> <a href="/tags/springcloud/" style="font-size: 12.5px;">springcloud</a> <a href="/tags/springmvc/" style="font-size: 15px;">springmvc</a> <a href="/tags/zuul/" style="font-size: 10px;">zuul</a> <a href="/tags/%E4%BA%8C%E5%8F%89%E6%A0%91/" style="font-size: 10px;">二叉树</a> <a href="/tags/%E4%BA%A4%E4%BA%92/" style="font-size: 10px;">交互</a> <a href="/tags/%E5%89%91%E6%8C%87offer/" style="font-size: 10px;">剑指offer</a> <a href="/tags/%E5%8A%9B%E6%89%A3/" style="font-size: 17.5px;">力扣</a> <a href="/tags/%E5%8A%A0%E5%AF%86/" style="font-size: 10px;">加密</a> <a href="/tags/%E5%9D%91/" style="font-size: 10px;">坑</a> <a href="/tags/%E5%AD%A6%E4%B9%A0%E8%AE%B0%E5%BD%95/" style="font-size: 10px;">学习记录</a> <a href="/tags/%E5%BC%80%E5%8F%91/" style="font-size: 20px;">开发</a> <a href="/tags/%E6%8B%9B%E8%81%98%E7%AC%94%E8%AF%95/" style="font-size: 10px;">招聘笔试</a> <a href="/tags/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/" style="font-size: 15px;">数据结构</a> <a href="/tags/%E6%A0%88/" style="font-size: 10px;">栈</a> <a href="/tags/%E6%A0%91/" style="font-size: 12.5px;">树</a> <a href="/tags/%E7%AC%94%E8%AF%95%E9%9D%A2%E8%AF%95/" style="font-size: 12.5px;">笔试面试</a> <a href="/tags/%E7%AE%97%E6%B3%95/" style="font-size: 10px;">算法</a>
+        <a href="/tags/eureka/" style="font-size: 10px;">eureka</a> <a href="/tags/fastDFS/" style="font-size: 10px;">fastDFS</a> <a href="/tags/feign/" style="font-size: 10px;">feign</a> <a href="/tags/http/" style="font-size: 10px;">http</a> <a href="/tags/hystrix/" style="font-size: 10px;">hystrix</a> <a href="/tags/json/" style="font-size: 10px;">json</a> <a href="/tags/lintcode/" style="font-size: 10px;">lintcode</a> <a href="/tags/markdown/" style="font-size: 10px;">markdown</a> <a href="/tags/maven/" style="font-size: 10px;">maven</a> <a href="/tags/mysql/" style="font-size: 10px;">mysql</a> <a href="/tags/ribbon/" style="font-size: 10px;">ribbon</a> <a href="/tags/spring/" style="font-size: 12.5px;">spring</a> <a href="/tags/springboot/" style="font-size: 10px;">springboot</a> <a href="/tags/springcloud/" style="font-size: 12.5px;">springcloud</a> <a href="/tags/springmvc/" style="font-size: 15px;">springmvc</a> <a href="/tags/zuul/" style="font-size: 10px;">zuul</a> <a href="/tags/%E4%BA%8C%E5%8F%89%E6%A0%91/" style="font-size: 10px;">二叉树</a> <a href="/tags/%E4%BA%A4%E4%BA%92/" style="font-size: 10px;">交互</a> <a href="/tags/%E5%89%91%E6%8C%87offer/" style="font-size: 10px;">剑指offer</a> <a href="/tags/%E5%8A%9B%E6%89%A3/" style="font-size: 17.5px;">力扣</a> <a href="/tags/%E5%8A%A0%E5%AF%86/" style="font-size: 10px;">加密</a> <a href="/tags/%E5%9D%91/" style="font-size: 10px;">坑</a> <a href="/tags/%E5%AD%A6%E4%B9%A0%E8%AE%B0%E5%BD%95/" style="font-size: 10px;">学习记录</a> <a href="/tags/%E5%BC%80%E5%8F%91/" style="font-size: 20px;">开发</a> <a href="/tags/%E6%8B%9B%E8%81%98%E7%AC%94%E8%AF%95/" style="font-size: 10px;">招聘笔试</a> <a href="/tags/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/" style="font-size: 15px;">数据结构</a> <a href="/tags/%E6%A0%88/" style="font-size: 10px;">栈</a> <a href="/tags/%E6%A0%91/" style="font-size: 12.5px;">树</a> <a href="/tags/%E7%AC%94%E8%AF%95%E9%9D%A2%E8%AF%95/" style="font-size: 12.5px;">笔试面试</a> <a href="/tags/%E7%AE%97%E6%B3%95/" style="font-size: 12.5px;">算法</a>
     </div>
 </div>
     
