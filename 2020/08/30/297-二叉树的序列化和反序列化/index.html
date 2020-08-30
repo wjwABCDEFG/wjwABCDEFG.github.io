@@ -7,25 +7,23 @@
 
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
 
-<title>根据两序遍历推出第三序以及构建树 - 小温 blog</title>
+<title>297-二叉树的序列化和反序列化 - 小温 blog</title>
 
 
-    <meta name="description" content="前言：太久了都快忘了，最近做了一下笔试题遇到这题，发现经常考这种题，先把技巧记录下来，有了技巧后简直不要太轻松  1. 树的三种遍历 前序遍历（根左右） 中序遍历（左根右） 后序遍历（左右根）">
+    <meta name="description" content="力扣297 &#x2F; 剑指offer37  https:&#x2F;&#x2F;leetcode-cn.com&#x2F;problems&#x2F;serialize-and-deserialize-binary-tree&#x2F; https:&#x2F;&#x2F;leetcode-cn.com&#x2F;problems&#x2F;xu-lie-hua-er-cha-shu-lcof&#x2F;  Java 优化后稳定12ms">
 <meta property="og:type" content="article">
-<meta property="og:title" content="根据两序遍历推出第三序以及构建树">
-<meta property="og:url" content="http://wjw.today/2020/07/11/%E6%A0%B9%E6%8D%AE%E4%B8%A4%E5%BA%8F%E9%81%8D%E5%8E%86%E6%8E%A8%E5%87%BA%E6%A0%91%E7%9A%84%E5%BD%A2%E7%8A%B6/index.html">
+<meta property="og:title" content="297-二叉树的序列化和反序列化">
+<meta property="og:url" content="http://wjw.today/2020/08/30/297-%E4%BA%8C%E5%8F%89%E6%A0%91%E7%9A%84%E5%BA%8F%E5%88%97%E5%8C%96%E5%92%8C%E5%8F%8D%E5%BA%8F%E5%88%97%E5%8C%96/index.html">
 <meta property="og:site_name" content="小温 blog">
-<meta property="og:description" content="前言：太久了都快忘了，最近做了一下笔试题遇到这题，发现经常考这种题，先把技巧记录下来，有了技巧后简直不要太轻松  1. 树的三种遍历 前序遍历（根左右） 中序遍历（左根右） 后序遍历（左右根）">
+<meta property="og:description" content="力扣297 &#x2F; 剑指offer37  https:&#x2F;&#x2F;leetcode-cn.com&#x2F;problems&#x2F;serialize-and-deserialize-binary-tree&#x2F; https:&#x2F;&#x2F;leetcode-cn.com&#x2F;problems&#x2F;xu-lie-hua-er-cha-shu-lcof&#x2F;  Java 优化后稳定12ms">
 <meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="https://wx1.sbimg.cn/2020/07/30/P77wm.md.jpg">
-<meta property="article:published_time" content="2020-07-11T10:22:36.000Z">
-<meta property="article:modified_time" content="2020-08-27T06:42:44.659Z">
+<meta property="og:image" content="https://source.acexy.cn/view/XOb3WBR">
+<meta property="article:published_time" content="2020-08-30T06:38:17.000Z">
+<meta property="article:modified_time" content="2020-08-30T07:33:21.362Z">
 <meta property="article:author" content="wjw">
-<meta property="article:tag" content="数据结构">
-<meta property="article:tag" content="笔试面试">
-<meta property="article:tag" content="二叉树">
+<meta property="article:tag" content="力扣，树">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="https://wx1.sbimg.cn/2020/07/30/P77wm.md.jpg">
+<meta name="twitter:image" content="https://source.acexy.cn/view/XOb3WBR">
 
 
 
@@ -83,7 +81,7 @@
         <div class="navbar-brand is-flex-center">
             <a class="navbar-item navbar-logo" href="/">
             
-                <img src="images/loading.gif" data-original="https://s1.ax1x.com/2020/07/20/UfKyGQ.md.png" alt="根据两序遍历推出第三序以及构建树" height="28">
+                <img src="images/loading.gif" data-original="https://s1.ax1x.com/2020/07/20/UfKyGQ.md.png" alt="297-二叉树的序列化和反序列化" height="28">
             
             </a>
         </div>
@@ -141,7 +139,7 @@
     
     <div class="card-image">
         <span  class="image is-7by1">
-            <img class="thumbnail" src="images/loading.gif" data-original="https://wx1.sbimg.cn/2020/07/30/P77wm.md.jpg" alt="根据两序遍历推出第三序以及构建树">
+            <img class="thumbnail" src="images/loading.gif" data-original="https://source.acexy.cn/view/XOb3WBR" alt="297-二叉树的序列化和反序列化">
         </span>
     </div>
     
@@ -149,7 +147,7 @@
         
         <div class="level article-meta is-size-7 is-uppercase is-mobile is-overflow-x-auto">
             <div class="level-left">
-                <time class="level-item has-text-grey" datetime="2020-07-11T10:22:36.000Z">2020-07-11</time>
+                <time class="level-item has-text-grey" datetime="2020-08-30T06:38:17.000Z">2020-08-30</time>
                 
                 <div class="level-item">
                 <a class="has-link-grey -link" href="/categories/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E5%92%8C%E7%AE%97%E6%B3%95/">数据结构和算法</a>
@@ -159,7 +157,7 @@
                 <span class="level-item has-text-grey">
                     
                     
-                    18 分钟 读完 (大约 2652 个字)
+                    5 分钟 读完 (大约 810 个字)
                 </span>
                 
                 
@@ -173,150 +171,56 @@
         
         <h1 class="title is-size-3 is-size-4-mobile has-text-weight-normal">
             
-                根据两序遍历推出第三序以及构建树
+                297-二叉树的序列化和反序列化
             
         </h1>
         <div class="content">
-            <blockquote>
-<p>前言：太久了都快忘了，最近做了一下笔试题遇到这题，发现经常考这种题，先把技巧记录下来，有了技巧后简直不要太轻松</p>
+            <p>力扣297 / 剑指offer37</p>
+<blockquote>
+<p><a href="https://leetcode-cn.com/problems/serialize-and-deserialize-binary-tree/">https://leetcode-cn.com/problems/serialize-and-deserialize-binary-tree/</a></p>
+<p><a href="https://leetcode-cn.com/problems/xu-lie-hua-er-cha-shu-lcof/">https://leetcode-cn.com/problems/xu-lie-hua-er-cha-shu-lcof/</a></p>
 </blockquote>
-<h1 id="1-树的三种遍历"><a href="#1-树的三种遍历" class="headerlink" title="1. 树的三种遍历"></a>1. 树的三种遍历</h1><ul>
-<li>前序遍历（根左右）</li>
-<li>中序遍历（左根右）</li>
-<li>后序遍历（左右根）</li>
-</ul>
+<p>Java 优化后稳定12ms</p>
 <a id="more"></a>
 
-<blockquote>
-<p> Java实现参考这篇博客，不展开了<a href="http://wjw.today/2020/07/11/Java%E5%AE%9E%E7%8E%B0%E6%A0%91%E7%9A%84%E9%81%8D%E5%8E%86%E5%8F%8A%E4%BA%8C%E5%8F%89%E6%A0%91%E5%8F%AF%E8%A7%86%E5%8C%96/">Java实现树的遍历及二叉树可视化</a></p>
-</blockquote>
-<p>下面我们来看看如何通过前序和中序推出后序以及构造二叉树</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">你可以将以下二叉树：</span><br><span class="line">     1</span><br><span class="line">    &#x2F; \</span><br><span class="line">   2   3</span><br><span class="line">  &#x2F;   &#x2F;</span><br><span class="line"> 4   5</span><br><span class="line"></span><br><span class="line">序列化为 &quot;[1,2,3,4,null,5]&quot;</span><br></pre></td></tr></table></figure>
+
+<p>这是一道困难题，题目没有要求采用什么顺序进行序列化，只要能序列化能还原就行</p>
+<p>示例用的是层次遍历，其实力扣以前的树题目也都是采用这个，本文也采用这个</p>
 <br>
 
-<h1 id="2-前-中–-gt-后"><a href="#2-前-中–-gt-后" class="headerlink" title="2. 前+中–&gt;后"></a>2. 前+中–&gt;后</h1><h2 id="2-1-手写结果"><a href="#2-1-手写结果" class="headerlink" title="2.1 手写结果"></a>2.1 手写结果</h2><p>不绕弯子，直接给出技巧再做题</p>
-<blockquote>
+<h1 id="我的BFS解法"><a href="#我的BFS解法" class="headerlink" title="我的BFS解法"></a>我的BFS解法</h1><p><strong>serialize()</strong>：将二叉树层次遍历序列化为字符串</p>
+<p>要注意和普通的bfs模板不同的地方：</p>
 <ol>
-<li>看前序遍历：第一个为根节点</li>
-<li>看中序遍历：找到步骤1中的根节点，左边的全为左子树，右边的全为右子树</li>
-<li>将左子树看成独立的树，重复步骤1和2，直到只有一个元素，不用脑子就可以做出来啦！</li>
-</ol>
-</blockquote>
-<p>下面进入实战环节（牛客网原题）：</p>
-<p>对某二叉树进行先序遍历的结果是ABDEFC,中序遍历的结果是DBFEAC，则后序遍历的结果是（）</p>
-<ol>
-<li>（参照步骤1）发现根节点是A</li>
-<li>（参照步骤2）划分出左右子树</li>
-</ol>
-<p><img src="images/loading.gif" data-original="https://s1.ax1x.com/2020/07/10/UMWqyQ.png" alt=""></p>
-<ol start="3">
-<li><p>（参照步骤1）带着这些左子树看前序遍历，那么前序遍历的顺序是BDEF对吧，<strong>将左子树看成是一颗独立的树</strong>，于是此时由<strong>步骤1</strong>得根节点是B</p>
+<li><p>去掉if(cur.left != null)，要把null也加进来，并append(“null,”)</p>
 </li>
-<li><p>（参照步骤2）在子树中继续划分出左右子树</p>
+<li><p>第一步改造后会在queue的末尾产生多余null值（1,2,3,4,null,5,null），要去除多余的null则需改变while结束条件：记录有效节点数而不是!queue.isEmpty()</p>
 </li>
 </ol>
-<p><img src="images/loading.gif" data-original="https://s1.ax1x.com/2020/07/10/UMhAgS.png" alt=""></p>
-<ol start="5">
-<li>还不明白？那么继续，只有一个字母的就直接填上去了，剩下FE，看前序遍历则是EF，既然已经知道是右子树，那么<strong>将右子树看成是一颗独立的树</strong>，（参照步骤1）于是此时由<strong>步骤1</strong>得根节点是E</li>
-<li>（参照步骤2）划分左右子树，发现只有左子树了，放哪就不必多说了</li>
-</ol>
-<p><img src="images/loading.gif" data-original="https://s1.ax1x.com/2020/07/10/UMhrvD.png" alt=""></p>
-<p>做多两题，发现掌握了技巧后画出树根本不需要脑子！</p>
-<p>画出树后，再做后序遍历就不难了，我就不说了，答案DFEBCA</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> String <span class="title">serialize</span><span class="params">(TreeNode root)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">if</span> (root == <span class="keyword">null</span>) <span class="keyword">return</span> <span class="string">"[]"</span>;</span><br><span class="line">        StringBuilder sb = <span class="keyword">new</span> StringBuilder(<span class="string">"["</span>);</span><br><span class="line">        Queue&lt;TreeNode&gt; queue = <span class="keyword">new</span> LinkedList&lt;&gt;();</span><br><span class="line">        queue.offer(root);</span><br><span class="line">        <span class="keyword">int</span> validNum = <span class="number">1</span>;   <span class="comment">//记录有效节点数</span></span><br><span class="line">        <span class="keyword">while</span> (validNum != <span class="number">0</span>)&#123;</span><br><span class="line">            TreeNode cur = queue.poll();</span><br><span class="line">            <span class="keyword">if</span> (cur != <span class="keyword">null</span>)&#123;</span><br><span class="line">                validNum--;</span><br><span class="line">                sb.append(cur.val);</span><br><span class="line">                queue.offer(cur.left);  <span class="comment">//null也加进来</span></span><br><span class="line">                <span class="keyword">if</span> (cur.left != <span class="keyword">null</span>) validNum++;   <span class="comment">//null不计入有效节点</span></span><br><span class="line">                queue.offer(cur.right);  <span class="comment">//null也加进来</span></span><br><span class="line">                <span class="keyword">if</span> (cur.right != <span class="keyword">null</span>) validNum++;   <span class="comment">//null不计入有效节点</span></span><br><span class="line">            &#125;<span class="keyword">else</span> &#123;</span><br><span class="line">                sb.append(<span class="string">"null"</span>);</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">if</span> (validNum != <span class="number">0</span>) sb.append(<span class="string">","</span>);</span><br><span class="line">        &#125;</span><br><span class="line">        sb.append(<span class="string">"]"</span>);</span><br><span class="line">        <span class="keyword">return</span> sb.toString();</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
+
+<p>优化了一下，<code>if (validNum != 0) sb.append(&quot;,&quot;);</code>原来使用<code>sb.setLength</code>内部还是调用了Arrays.fill，里面是循环，原来在12-16ms波动</p>
 <br>
 
-<p>下面来看代码实现</p>
-<h2 id="2-2-Java实现：构造树"><a href="#2-2-Java实现：构造树" class="headerlink" title="2.2 Java实现：构造树"></a>2.2 Java实现：构造树</h2><blockquote>
-<p>力扣105原题：<a href="https://leetcode-cn.com/problems/construct-binary-tree-from-preorder-and-inorder-traversal/">https://leetcode-cn.com/problems/construct-binary-tree-from-preorder-and-inorder-traversal/</a></p>
-</blockquote>
-<p>老规矩，直接给模板，这是我个人在力扣评论区找到的风格比较喜欢的一套，下面的中+后–&gt;前也是这个模板</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">private</span> <span class="keyword">int</span> pre = <span class="number">0</span>, in = <span class="number">0</span>;	<span class="comment">//记录当前前序，中序的下标位置</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> TreeNode <span class="title">buildTree</span><span class="params">(<span class="keyword">int</span>[] preorder, <span class="keyword">int</span>[] inorder)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">return</span> recursive(preorder, inorder, Integer.MAX_VALUE);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">//rootVal是当前节点的值，以当前这个节点作为根节点构造左右子树，没有的话为Integer.MAX_VALUE（比如根节点想象成无限大的某个父节点的左子树）</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> TreeNode <span class="title">recursive</span><span class="params">(<span class="keyword">int</span>[] preorder, <span class="keyword">int</span>[] inorder, <span class="keyword">int</span> rootVal)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">if</span> (pre &gt;= preorder.length) <span class="keyword">return</span> <span class="keyword">null</span>;	<span class="comment">//结束条件是前序下标大于长度</span></span><br><span class="line">    <span class="keyword">if</span> (inorder[in] == rootVal) &#123;	<span class="comment">//递归结束条件是找到中序下标</span></span><br><span class="line">        in++;</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">null</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">int</span> curVal = preorder[pre++];	<span class="comment">//下一个根节点和值</span></span><br><span class="line">    TreeNode cur = <span class="keyword">new</span> TreeNode(curVal);</span><br><span class="line">    cur.left = recursive(preorder, inorder, curVal);</span><br><span class="line">    cur.right = recursive(preorder, inorder, rootVal);</span><br><span class="line">    <span class="keyword">return</span> cur;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>只需稍微的看一下这两点</p>
-<ul>
-<li>一个是pre和in以及他们的++</li>
-<li>一个是recursive的第三个参数代表了分界点的值，也就是当前这个节点作为了它的左右子树的根节点，rootVal就是当前这个节点的值。传的参数思考过程如下：</li>
-</ul>
-<p><strong>从整棵树的根节点开始想</strong>：cur.left这一句就是前序数组中的节点作为了根节点（回想2.1介绍的东西），cur.right这一句的根节点实际上是一开始传入的节点（就是代码注释中：想象成树的根节点是无限大的某个父节点的左子树）那句，因此是传进来的rootVal。能理解吧…</p>
-<br>
-
-<p>那么说到这里，如何从中序+后序推出前序的代码自己都能修改了吧：pre和in一开始的位置变成末尾，++变成–，先cur.right再cur.left，改好了可以滑到3.2节去对比代码吧！</p>
-<br>
-
-<h2 id="2-3-Java实现：直接获得后序结果"><a href="#2-3-Java实现：直接获得后序结果" class="headerlink" title="2.3 Java实现：直接获得后序结果"></a>2.3 Java实现：直接获得后序结果</h2><p>现在，我们可以通过前序+中序–&gt;构建树–&gt;后序遍历树–&gt;获得后序遍历结果。诚然，代码的话，可以不构建树而直接获得后序遍历结果，我直接贴完整的代码</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">one_zero_five_</span>从前序与中序遍历获得后序遍历 </span>&#123;</span><br><span class="line">    <span class="meta">@Test</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">test</span><span class="params">()</span></span>&#123;</span><br><span class="line">        <span class="keyword">int</span>[] preorder = &#123;<span class="number">3</span>,<span class="number">9</span>,<span class="number">20</span>,<span class="number">15</span>,<span class="number">7</span>&#125;;</span><br><span class="line">        <span class="keyword">int</span>[] inorder = &#123;<span class="number">9</span>,<span class="number">3</span>,<span class="number">15</span>,<span class="number">20</span>,<span class="number">7</span>&#125;;</span><br><span class="line">        totalLen = inorder.length;</span><br><span class="line">        <span class="keyword">int</span>[] res = buildPost(preorder, inorder, <span class="number">0</span>, totalLen - <span class="number">1</span>, <span class="number">0</span>);</span><br><span class="line">        System.out.println(Arrays.toString(res));</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">int</span> post, totalLen;</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">int</span>[] postorder = <span class="keyword">null</span>;</span><br><span class="line"></span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * 直接获得后序结果</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@param</span> preorder 前序数组</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@param</span> inorder 中序数组</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@param</span> start 子树在中序数组中的起始下标</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@param</span> end 子树在中序数组中的结束下标</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@param</span> rootIndex 子树根节点在数组中的下标</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@return</span> 后序数组</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">int</span>[] buildPost(<span class="keyword">int</span>[] preorder, <span class="keyword">int</span>[] inorder, <span class="keyword">int</span> start, <span class="keyword">int</span> end, <span class="keyword">int</span> rootIndex)&#123;</span><br><span class="line">        <span class="keyword">if</span> (postorder == <span class="keyword">null</span>) postorder = <span class="keyword">new</span> <span class="keyword">int</span>[totalLen];   <span class="comment">//第一次进入才构建，后期可以考虑放进构造函数</span></span><br><span class="line">        <span class="keyword">if</span> (start &gt; end) <span class="keyword">return</span> <span class="keyword">null</span>;</span><br><span class="line">        <span class="keyword">int</span> i = start;  <span class="comment">//i代表前序遍历的根节点在中序中的下标</span></span><br><span class="line">        <span class="keyword">while</span> (i &lt; end &amp;&amp; inorder[i] != preorder[rootIndex]) i++;</span><br><span class="line">        postorder[post++] = preorder[rootIndex];</span><br><span class="line">        buildPost(preorder, inorder, start, i - <span class="number">1</span>, rootIndex + <span class="number">1</span>); <span class="comment">//构建左子树，start ~ (i - 1)，rootIndex:</span></span><br><span class="line">        buildPost(preorder, inorder, i + <span class="number">1</span>, end, rootIndex + i - start + <span class="number">1</span>); <span class="comment">//构建右子树，(i + 1) ~ end，rootIndex:</span></span><br><span class="line">        <span class="keyword">return</span> postorder;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>看起来吓人函数体除了注释一共才8行！！其实这个理解起来更容易，</p>
-<ul>
-<li>start为0，end为len-1，rootIndex一开始为为前序的开始所以是0，那么preorder[rootIndex]就是根节点</li>
-<li>在中序中找到这个根节点，i为下标，那么inorder[i]左边为左子树，右边为右子树</li>
-<li>那么左子树的范围是start ~ (i - 1)，根节点在前序下标为：rootIndex  +1</li>
-<li>右子树的范围是(i + 1) ~ end，前序是根左右，那么右子树的根节点为：当前根节点位置 + 左子树长度 + 1，左子树长度怎么计算呢？从中序（左根右）那里计算可得i - start就是左子树长度，因此根节点下标为rootIndex + (i - start) + 1</li>
-</ul>
-<br>
-
-<h1 id="3-中-后–-gt-前"><a href="#3-中-后–-gt-前" class="headerlink" title="3. 中+后–&gt;前"></a>3. 中+后–&gt;前</h1><h2 id="3-1-手写结果"><a href="#3-1-手写结果" class="headerlink" title="3.1 手写结果"></a>3.1 手写结果</h2><p>中序的作用仍然是划分左右子树，后序的作用其实跟前序一样，不过得反过来从后面开始看，最后一个才是根节点</p>
-<blockquote>
-<ol>
-<li>看后序遍历：最后一个为根节点</li>
-<li>看中序遍历：找到步骤1中的根节点，左边的全为左子树，右边的全为右子树</li>
-<li>将左子树看成独立的树，重复步骤1和2，直到只有一个元素，不用脑子就可以做出来啦！</li>
-</ol>
-</blockquote>
-<p>看题：</p>
-<p>中序遍历: GBEDAFCH</p>
-<p>后序遍历：GEDBFHCA</p>
-<p>我就直接来了</p>
-<ol>
-<li>看后序，根节点是A</li>
-<li>看中序，左边GBED右边FCH</li>
-</ol>
-<p><img src="images/loading.gif" data-original="https://s1.ax1x.com/2020/07/11/UM4QZd.png" alt=""></p>
-<ol start="3">
-<li><p>看后序，要先看右子树（因为后序是“左右根”，之前说了反过来看那么根完了到右），FHC说明根节点是C</p>
-</li>
-<li><p>看中序，左边F右边H，左右都只有一个了，完成</p>
-</li>
-</ol>
-<p><img src="images/loading.gif" data-original="https://s1.ax1x.com/2020/07/11/UM5Ewj.png" alt=""></p>
-<ol start="4">
-<li>看后序，GEDB说明根节点是B</li>
-<li>看中序，左边单G，右边ED</li>
-</ol>
-<p><img src="images/loading.gif" data-original="https://s1.ax1x.com/2020/07/11/UM5MlT.png" alt=""></p>
-<ol start="6">
-<li><p>看后序，是ED，说明D是根节点</p>
-</li>
-<li><p>看中序，左边E，完成</p>
-</li>
-</ol>
-<p><img src="images/loading.gif" data-original="https://s1.ax1x.com/2020/07/11/UM5r0H.png" alt=""></p>
-<br>
-
-<h2 id="3-2-Java实现：构造树"><a href="#3-2-Java实现：构造树" class="headerlink" title="3.2 Java实现：构造树"></a>3.2 Java实现：构造树</h2><p>根据2.2中的套路模板，只需稍微修改一下顺序即可获得正确答案</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">private</span> <span class="keyword">int</span> in, post;</span><br><span class="line"><span class="function"><span class="keyword">public</span> TreeNode <span class="title">buildTree</span><span class="params">(<span class="keyword">int</span>[] inorder, <span class="keyword">int</span>[] postorder)</span> </span>&#123;</span><br><span class="line">    in = inorder.length - <span class="number">1</span>;	<span class="comment">//从后面开始</span></span><br><span class="line">    post = postorder.length - <span class="number">1</span>;</span><br><span class="line">    <span class="keyword">return</span> recursive(inorder, postorder, Integer.MAX_VALUE);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">public</span> TreeNode <span class="title">recursive</span><span class="params">(<span class="keyword">int</span>[] inorder, <span class="keyword">int</span>[] postorder, <span class="keyword">int</span> rootVal)</span></span>&#123;</span><br><span class="line">    <span class="keyword">if</span> (post &lt; <span class="number">0</span>) <span class="keyword">return</span> <span class="keyword">null</span>;</span><br><span class="line">    <span class="keyword">if</span> (inorder[in] == rootVal)&#123;</span><br><span class="line">        in--;</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">null</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">int</span> curVal = postorder[post--];</span><br><span class="line">    TreeNode cur = <span class="keyword">new</span> TreeNode(curVal);</span><br><span class="line">    cur.right = recursive(inorder, postorder, curVal);	<span class="comment">//后序是先右再左</span></span><br><span class="line">    cur.left = recursive(inorder, postorder, rootVal);</span><br><span class="line">    <span class="keyword">return</span> cur;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-
+<p><strong>deserialize()</strong>：反序列化，用层次遍历字符串序列重构二叉树</p>
+<p>遍历一遍，因为字符串是记录了null的，因此肯定是一左一右，树这边，需要用队列记录根节点才知道挂到哪一棵树上</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> TreeNode <span class="title">deserialize</span><span class="params">(String data)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">if</span> (data.equals(<span class="string">"[]"</span>)) <span class="keyword">return</span> <span class="keyword">null</span>;</span><br><span class="line">    String[] nodes = data.substring(<span class="number">1</span>, data.length() - <span class="number">1</span>).split(<span class="string">","</span>);</span><br><span class="line">    TreeNode root = <span class="keyword">new</span> TreeNode(Integer.parseInt(nodes[<span class="number">0</span>]));</span><br><span class="line">    Queue&lt;TreeNode&gt; queue = <span class="keyword">new</span> LinkedList&lt;&gt;();</span><br><span class="line">    queue.offer(root);</span><br><span class="line">    <span class="keyword">int</span> i = <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">while</span> (i &lt; nodes.length)&#123;</span><br><span class="line">        TreeNode cur = queue.poll();</span><br><span class="line">        i++;</span><br><span class="line">        <span class="keyword">if</span> (i &lt; nodes.length &amp;&amp; !<span class="string">"null"</span>.equals(nodes[i]))&#123;</span><br><span class="line">            cur.left = <span class="keyword">new</span> TreeNode(Integer.parseInt(nodes[i]));</span><br><span class="line">            queue.offer(cur.left);</span><br><span class="line">        &#125;</span><br><span class="line">        i++;</span><br><span class="line">        <span class="keyword">if</span> (i &lt; nodes.length &amp;&amp; !<span class="string">"null"</span>.equals(nodes[i]))&#123;</span><br><span class="line">            cur.right = <span class="keyword">new</span> TreeNode(Integer.parseInt(nodes[i]));</span><br><span class="line">            queue.offer(cur.right);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> root;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
 <br>
 
-<h2 id="3-3-Java实现：直接获得前序结果"><a href="#3-3-Java实现：直接获得前序结果" class="headerlink" title="3.3 Java实现：直接获得前序结果"></a>3.3 Java实现：直接获得前序结果</h2><p>也是跟2.3一样的模板，理解了就好了</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">one_zero_six_</span>从中序与后序遍历获得前序遍历 </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Test</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">test2</span><span class="params">()</span></span>&#123;</span><br><span class="line">        <span class="keyword">int</span>[] inorder = &#123;<span class="number">9</span>,<span class="number">3</span>,<span class="number">15</span>,<span class="number">20</span>,<span class="number">7</span>&#125;;</span><br><span class="line">        <span class="keyword">int</span>[] postorder = &#123;<span class="number">9</span>,<span class="number">15</span>,<span class="number">7</span>,<span class="number">20</span>,<span class="number">3</span>&#125;;</span><br><span class="line">        totalLen = inorder.length;</span><br><span class="line">        <span class="keyword">int</span>[] res = buildPre(inorder, postorder, <span class="number">0</span>, totalLen - <span class="number">1</span>, totalLen - <span class="number">1</span>);</span><br><span class="line">        System.out.println(Arrays.toString(res));</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">int</span> pre, in, post, totalLen;</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">int</span>[] preorder = <span class="keyword">null</span>;</span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * 直接获得前序结果</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@param</span> inorder 中序数组</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@param</span> postorder 后序数组</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@param</span> start 子树在中序数组中的起始下标</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@param</span> end 子树在中序数组中的结束下标</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@param</span> rootIndex 子树根节点在数组中的下标</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@return</span> 前序数组</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">int</span>[] buildPre(<span class="keyword">int</span>[] inorder, <span class="keyword">int</span>[] postorder, <span class="keyword">int</span> start, <span class="keyword">int</span> end, <span class="keyword">int</span> rootIndex) &#123;</span><br><span class="line">        <span class="keyword">if</span> (preorder == <span class="keyword">null</span>) preorder = <span class="keyword">new</span> <span class="keyword">int</span>[totalLen];</span><br><span class="line">        <span class="keyword">if</span> (start &gt; end) <span class="keyword">return</span> <span class="keyword">null</span>;  <span class="comment">//结束，随便返回</span></span><br><span class="line">        <span class="keyword">int</span> i = start;  <span class="comment">//i为后序数组的某个值在中序数组中的位置</span></span><br><span class="line">        <span class="keyword">while</span> (i &lt; end &amp;&amp; inorder[i] != postorder[rootIndex]) i++;  <span class="comment">//以i为分隔符，inorder左边为左子树，右边为右子树</span></span><br><span class="line">        preorder[pre++] = postorder[rootIndex];</span><br><span class="line">        buildPre(inorder, postorder, start, i - <span class="number">1</span>, rootIndex - <span class="number">1</span> - end + i);  <span class="comment">//左子树，根节点下标为rootIndex - (end - i + 1)</span></span><br><span class="line">        buildPre(inorder, postorder, i + <span class="number">1</span>, end, rootIndex - <span class="number">1</span>);	<span class="comment">//右子树，根节点下标为rootIndex - 1</span></span><br><span class="line">        <span class="keyword">return</span> preorder;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h1 id="DFS解法"><a href="#DFS解法" class="headerlink" title="DFS解法"></a>DFS解法</h1><p>我看到时间短的解法都是DFS，我也没有做，找了个提交记录2ms的，有时间再看，记录一下</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Codec</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// Encodes a tree to a single string.</span></span><br><span class="line">    StringBuilder res;</span><br><span class="line">    <span class="keyword">int</span> i ;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> String <span class="title">serialize</span><span class="params">(TreeNode root)</span> </span>&#123;</span><br><span class="line">        res = <span class="keyword">new</span> StringBuilder();</span><br><span class="line">        serializeDFS(root);</span><br><span class="line">        <span class="keyword">return</span> res.toString();</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">serializeDFS</span><span class="params">(TreeNode root)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">if</span> (root==<span class="keyword">null</span>) &#123;</span><br><span class="line">            res.append(<span class="string">"#"</span>);</span><br><span class="line">            <span class="keyword">return</span> ;</span><br><span class="line">        &#125;</span><br><span class="line">        res.append((<span class="keyword">char</span>) (root.val+<span class="string">'0'</span>));</span><br><span class="line">        serializeDFS(root.left);</span><br><span class="line">        serializeDFS(root.right);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// Decodes your encoded data to tree.</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> TreeNode <span class="title">deserialize</span><span class="params">(String data)</span> </span>&#123;</span><br><span class="line">       <span class="keyword">return</span> deserializeDFS(data.toCharArray());</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> TreeNode <span class="title">deserializeDFS</span><span class="params">(<span class="keyword">char</span>[] chars)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">if</span> (chars[i]==<span class="string">'#'</span>) &#123;</span><br><span class="line">            i++;</span><br><span class="line">            <span class="keyword">return</span> <span class="keyword">null</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        TreeNode root = <span class="keyword">new</span> TreeNode(chars[i++]-<span class="string">'0'</span>);</span><br><span class="line">        root.left = deserializeDFS(chars);</span><br><span class="line">        root.right = deserializeDFS(chars);</span><br><span class="line">        <span class="keyword">return</span> root;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
-<ul>
-<li>start为0，end为len-1，rootIndex一开始为为后序的最后所以是len-1，那么postorder[rootIndex]就是根节点</li>
-<li>在中序中找到这个根节点，i为下标，那么inorder[i]左边为左子树，右边为右子树</li>
-<li>那么左子树的范围是start ~ (i - 1)，根节点下标为：当前根节点下标 - 右子树长度 - 1，右子树长度怎么计算呢？从中序那里计算可得end - i就是右子树长度，因此根节点下标为rootIndex - (end - i) - 1</li>
-<li>右子树的范围是(i + 1) ~ end，根节点在后序的下标为rootIndex - 1</li>
-</ul>
 <br>
 
-<h1 id="4-前-后–-gt-无法确定"><a href="#4-前-后–-gt-无法确定" class="headerlink" title="4. 前+后–&gt;无法确定"></a>4. 前+后–&gt;无法确定</h1><p>这种情况树不唯一</p>
-<h1 id="5-附录："><a href="#5-附录：" class="headerlink" title="5. 附录："></a>5. 附录：</h1><p>搭配上个博客的可视化二叉树工具类一起食用更加，看看你做对了吗</p>
-<blockquote>
-<p>参考/感谢：</p>
-<p>构造树的模板提取自力扣官方题解下的朋友<a href="https://leetcode-cn.com/u/shi-san-yu-yang/">十三羽扬</a></p>
-<p>直接获得第三序结果的代码参考了<a href="https://www.liuchuo.net/archives/2090">柳神的代码</a></p>
-</blockquote>
+<h1 id="娱乐解法"><a href="#娱乐解法" class="headerlink" title="娱乐解法"></a>娱乐解法</h1><p>提交完后我去提交记录里看了看0ms和1ms的示例…</p>
+<p><em>以下代码仅供娱乐</em></p>
+<p>0ms     笑死我了，真是人才，由于不限定序列化的方式，因此判题系统只判断deserialize函数</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Codec</span> </span>&#123;</span><br><span class="line">	TreeNode node;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> String <span class="title">serialize</span><span class="params">(TreeNode root)</span> </span>&#123;</span><br><span class="line">        node = root;</span><br><span class="line">        <span class="keyword">return</span> <span class="string">" "</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> TreeNode <span class="title">deserialize</span><span class="params">(String data)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> node;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>32ms     c语言强转，看起来可行，但实际上是在内存中取地址，跨机发送和网络传输地址不同不可行</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">char</span>* <span class="title">serialize</span><span class="params">(struct TreeNode* root)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">return</span> (<span class="keyword">char</span> *)root;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function">struct TreeNode* <span class="title">deserialize</span><span class="params">(<span class="keyword">char</span>* data)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">return</span> (struct TreeNode *)data;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
 
         </div>
         
@@ -324,7 +228,7 @@
             <div class="level-start">
                 <div class="level-item">
                     <span class="is-size-6 has-text-grey has-mr-7">#</span>
-                    <a class="has-link-grey -link" href="/tags/%E4%BA%8C%E5%8F%89%E6%A0%91/" rel="tag">二叉树</a>, <a class="has-link-grey -link" href="/tags/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/" rel="tag">数据结构</a>, <a class="has-link-grey -link" href="/tags/%E7%AC%94%E8%AF%95%E9%9D%A2%E8%AF%95/" rel="tag">笔试面试</a>
+                    <a class="has-link-grey -link" href="/tags/%E5%8A%9B%E6%89%A3%EF%BC%8C%E6%A0%91/" rel="tag">力扣，树</a>
                 </div>
             </div>
         </div>
@@ -341,17 +245,10 @@
 <div class="card card-transparent">
     <div class="level post-navigation is-flex-wrap is-mobile">
         
-        <div class="level-start">
-            <a class="level level-item has-link-grey  article-nav-prev" href="/2020/07/14/fastDFS%E7%9A%84%E5%AE%89%E8%A3%85%E5%92%8Cspringboot%E5%AE%8C%E6%88%90%E6%96%87%E4%BB%B6%E4%B8%8A%E4%BC%A0/">
-                <i class="level-item fas fa-chevron-left"></i>
-                <span class="level-item">fastDFS的安装和springboot完成文件上传</span>
-            </a>
-        </div>
-        
         
         <div class="level-end">
-            <a class="level level-item has-link-grey  article-nav-next" href="/2020/07/11/Java%E5%AE%9E%E7%8E%B0%E6%A0%91%E7%9A%84%E9%81%8D%E5%8E%86%E5%8F%8A%E4%BA%8C%E5%8F%89%E6%A0%91%E5%8F%AF%E8%A7%86%E5%8C%96/">
-                <span class="level-item">Java实现树的遍历及二叉树可视化</span>
+            <a class="level level-item has-link-grey  article-nav-next" href="/2020/08/29/116-117-%E5%A1%AB%E5%85%85%E6%AF%8F%E4%B8%AA%E8%8A%82%E7%82%B9%E7%9A%84%E4%B8%8B%E4%B8%80%E4%B8%AA%E5%8F%B3%E4%BE%A7%E8%8A%82%E7%82%B9%E6%8C%87%E9%92%88/">
+                <span class="level-item">116/117-填充每个节点的下一个右侧节点指针</span>
                 <i class="level-item fas fa-chevron-right"></i>
             </a>
         </div>
@@ -451,60 +348,20 @@
                     目录
                 </h3>
                 <ul class="menu-list"><li>
-        <a class="is-flex" href="#1-树的三种遍历">
+        <a class="is-flex" href="#我的BFS解法">
         <!-- 目录是否自动编号 -->
         <!-- <span class="has-mr-6">1</span> -->
-        <span>1. 树的三种遍历</span>
+        <span>我的BFS解法</span>
         </a></li><li>
-        <a class="is-flex" href="#2-前-中–-gt-后">
+        <a class="is-flex" href="#DFS解法">
         <!-- 目录是否自动编号 -->
         <!-- <span class="has-mr-6">2</span> -->
-        <span>2. 前+中–>后</span>
-        </a><ul class="menu-list"><li>
-        <a class="is-flex" href="#2-1-手写结果">
-        <!-- 目录是否自动编号 -->
-        <!-- <span class="has-mr-6">2.1</span> -->
-        <span>2.1 手写结果</span>
+        <span>DFS解法</span>
         </a></li><li>
-        <a class="is-flex" href="#2-2-Java实现：构造树">
-        <!-- 目录是否自动编号 -->
-        <!-- <span class="has-mr-6">2.2</span> -->
-        <span>2.2 Java实现：构造树</span>
-        </a></li><li>
-        <a class="is-flex" href="#2-3-Java实现：直接获得后序结果">
-        <!-- 目录是否自动编号 -->
-        <!-- <span class="has-mr-6">2.3</span> -->
-        <span>2.3 Java实现：直接获得后序结果</span>
-        </a></li></ul></li><li>
-        <a class="is-flex" href="#3-中-后–-gt-前">
+        <a class="is-flex" href="#娱乐解法">
         <!-- 目录是否自动编号 -->
         <!-- <span class="has-mr-6">3</span> -->
-        <span>3. 中+后–>前</span>
-        </a><ul class="menu-list"><li>
-        <a class="is-flex" href="#3-1-手写结果">
-        <!-- 目录是否自动编号 -->
-        <!-- <span class="has-mr-6">3.1</span> -->
-        <span>3.1 手写结果</span>
-        </a></li><li>
-        <a class="is-flex" href="#3-2-Java实现：构造树">
-        <!-- 目录是否自动编号 -->
-        <!-- <span class="has-mr-6">3.2</span> -->
-        <span>3.2 Java实现：构造树</span>
-        </a></li><li>
-        <a class="is-flex" href="#3-3-Java实现：直接获得前序结果">
-        <!-- 目录是否自动编号 -->
-        <!-- <span class="has-mr-6">3.3</span> -->
-        <span>3.3 Java实现：直接获得前序结果</span>
-        </a></li></ul></li><li>
-        <a class="is-flex" href="#4-前-后–-gt-无法确定">
-        <!-- 目录是否自动编号 -->
-        <!-- <span class="has-mr-6">4</span> -->
-        <span>4. 前+后–>无法确定</span>
-        </a></li><li>
-        <a class="is-flex" href="#5-附录：">
-        <!-- 目录是否自动编号 -->
-        <!-- <span class="has-mr-6">5</span> -->
-        <span>5. 附录：</span>
+        <span>娱乐解法</span>
         </a></li></ul>
             </div>
         </div>
@@ -873,7 +730,7 @@
             <div class="level-start has-text-centered-mobile">
                 <a class="footer-logo is-block has-mb-6" href="/">
                 
-                    <img src="images/loading.gif" data-original="https://s1.ax1x.com/2020/07/20/UfKyGQ.md.png" alt="根据两序遍历推出第三序以及构建树" height="28">
+                    <img src="images/loading.gif" data-original="https://s1.ax1x.com/2020/07/20/UfKyGQ.md.png" alt="297-二叉树的序列化和反序列化" height="28">
                 
                 </a>
                 <p class="is-size-7">
