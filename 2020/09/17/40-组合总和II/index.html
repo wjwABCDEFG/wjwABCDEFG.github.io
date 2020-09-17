@@ -7,18 +7,24 @@
 
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
 
-<title>分类: -[Util工具类] -[前端] - 小温 blog</title>
+<title>40-组合总和II - 小温 blog</title>
 
 
-    <meta property="og:type" content="website">
-<meta property="og:title" content="小温 blog">
-<meta property="og:url" content="http://wjw.today/categories/Util%E5%B7%A5%E5%85%B7%E7%B1%BB-%E5%89%8D%E7%AB%AF/index.html">
+    <meta name="description" content="力扣40  https:&#x2F;&#x2F;leetcode-cn.com&#x2F;problems&#x2F;combination-sum-ii&#x2F;  无脑套回溯模板就vans了 这题能评中等，大概率是因为去重的方式吧">
+<meta property="og:type" content="article">
+<meta property="og:title" content="40-组合总和II">
+<meta property="og:url" content="http://wjw.today/2020/09/17/40-%E7%BB%84%E5%90%88%E6%80%BB%E5%92%8CII/index.html">
 <meta property="og:site_name" content="小温 blog">
+<meta property="og:description" content="力扣40  https:&#x2F;&#x2F;leetcode-cn.com&#x2F;problems&#x2F;combination-sum-ii&#x2F;  无脑套回溯模板就vans了 这题能评中等，大概率是因为去重的方式吧">
 <meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="http://wjw.today/images/og_image.png">
+<meta property="og:image" content="https://wx1.sbimg.cn/2020/09/18/GDBH6.md.jpg">
+<meta property="article:published_time" content="2020-09-17T15:40:20.000Z">
+<meta property="article:modified_time" content="2020-09-17T16:39:55.205Z">
 <meta property="article:author" content="wjw">
+<meta property="article:tag" content="力扣">
+<meta property="article:tag" content="回溯">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="http://wjw.today/images/og_image.png">
+<meta name="twitter:image" content="https://wx1.sbimg.cn/2020/09/18/GDBH6.md.jpg">
 
 
 
@@ -76,7 +82,7 @@
         <div class="navbar-brand is-flex-center">
             <a class="navbar-item navbar-logo" href="/">
             
-                <img src="images/loading.gif" data-original="https://s1.ax1x.com/2020/07/20/UfKyGQ.md.png" alt="小温 blog" height="28">
+                <img src="images/loading.gif" data-original="https://s1.ax1x.com/2020/07/20/UfKyGQ.md.png" alt="40-组合总和II" height="28">
             
             </a>
         </div>
@@ -112,6 +118,10 @@
                     
                 
                 
+                <a class="navbar-item is-hidden-tablet catalogue" title="目录" href="javascript:;">
+                    <i class="fas fa-list-ul"></i>
+                </a>
+                
                 
                 <a class="navbar-item search" title="搜索" href="javascript:;">
                     <i class="fas fa-search"></i>
@@ -125,72 +135,77 @@
     <section class="section">
         <div class="container">
             <div class="columns">
-                <div class="column is-8-tablet is-8-desktop is-6-widescreen has-order-2 column-main"><div class="card">
-    <div class="card-content">
-        <nav class="breadcrumb" aria-label="breadcrumbs">
-        <ul>
-            <li><a href="/categories">分类</a></li>
-            
-            <li class="is-active"><a href="#" aria-current="page">-[Util工具类] -[前端]</a></li>
-        </ul>
-        </nav>
-    </div>
-</div>
-
-    
+                <div class="column is-8-tablet is-8-desktop is-6-widescreen has-order-2 column-main">
 <div class="card">
     
     <div class="card-image">
-        <a href="/2020/09/16/JS%E4%BB%8Eurl%E4%B8%AD%E8%8E%B7%E5%8F%96%E8%AF%B7%E6%B1%82%E5%8F%82%E6%95%B0%E5%B7%A5%E5%85%B7%E7%B1%BB/" class="image is-7by1">
-            <img class="thumbnail" src="images/loading.gif" data-original="https://wx1.sbimg.cn/2020/09/10/9zvbJ.md.jpg" alt="JS从url中获取请求参数工具类">
-        </a>
+        <span  class="image is-7by1">
+            <img class="thumbnail" src="images/loading.gif" data-original="https://wx1.sbimg.cn/2020/09/18/GDBH6.md.jpg" alt="40-组合总和II">
+        </span>
     </div>
     
     <div class="card-content article ">
         
         <div class="level article-meta is-size-7 is-uppercase is-mobile is-overflow-x-auto">
             <div class="level-left">
-                <time class="level-item has-text-grey" datetime="2020-09-16T13:11:35.000Z">2020-09-16</time>
+                <time class="level-item has-text-grey" datetime="2020-09-17T15:40:20.000Z">2020-09-17</time>
                 
                 <div class="level-item">
-                <a class="has-link-grey -link" href="/categories/Util%E5%B7%A5%E5%85%B7%E7%B1%BB-%E5%89%8D%E7%AB%AF/">-[Util工具类] -[前端]</a>
+                <a class="has-link-grey -link" href="/categories/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E5%92%8C%E7%AE%97%E6%B3%95/">数据结构和算法</a>
                 </div>
                 
                 
                 <span class="level-item has-text-grey">
                     
                     
-                    1 分钟 读完 (大约 115 个字)
+                    3 分钟 读完 (大约 438 个字)
                 </span>
                 
+                
+                <span class="level-item has-text-grey" id="busuanzi_container_page_pv">
+                    <i class="far fa-eye"></i>
+                    <span id="busuanzi_value_page_pv">0</span>次访问
+                </span>
                 
             </div>
         </div>
         
         <h1 class="title is-size-3 is-size-4-mobile has-text-weight-normal">
             
-                <a class="has-link-black-ter" href="/2020/09/16/JS%E4%BB%8Eurl%E4%B8%AD%E8%8E%B7%E5%8F%96%E8%AF%B7%E6%B1%82%E5%8F%82%E6%95%B0%E5%B7%A5%E5%85%B7%E7%B1%BB/">JS从url中获取请求参数工具类</a>
+                40-组合总和II
             
         </h1>
         <div class="content">
-            <h1 id="这是一个从URL中获取参数值的工具"><a href="#这是一个从URL中获取参数值的工具" class="headerlink" title="这是一个从URL中获取参数值的工具"></a>这是一个从URL中获取参数值的工具</h1><p>例如URL为</p>
+            <p>力扣40</p>
 <blockquote>
-<p><a href="http://localhost/index.html?id=5&amp;name=张三">http://localhost/index.html?id=5&amp;name=张三</a></p>
+<p><a href="https://leetcode-cn.com/problems/combination-sum-ii/">https://leetcode-cn.com/problems/combination-sum-ii/</a></p>
 </blockquote>
-<p>那么在html中引入该头文件</p>
-<p><code>&lt;script src=&quot;js/getParameter.js&quot;&gt;&lt;/script&gt;</code></p>
-<p>后就可以通过js代码传入参数获得参数值了</p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> id = getParameter(<span class="string">"id"</span>);</span><br></pre></td></tr></table></figure>
+<p>无脑套回溯模板就vans了</p>
+<p>这题能评中等，大概率是因为去重的方式吧</p>
+<a id="more"></a>
+
+<p>题目比较简单，套模板五分钟就秒杀了吧，我就只贴leetcode模式代码了</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> List&lt;List&lt;Integer&gt;&gt; combinationSum2(<span class="keyword">int</span>[] candidates, <span class="keyword">int</span> target) &#123;</span><br><span class="line">    backtrace(candidates, target, <span class="keyword">new</span> ArrayList&lt;&gt;(), <span class="number">0</span>, <span class="number">0</span>);</span><br><span class="line">    <span class="keyword">return</span> <span class="keyword">new</span> ArrayList&lt;&gt;(res);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">private</span> Set&lt;List&lt;Integer&gt;&gt; res = <span class="keyword">new</span> HashSet&lt;&gt;();</span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">backtrace</span><span class="params">(<span class="keyword">int</span>[] candidates, <span class="keyword">int</span> target, List&lt;Integer&gt; path, <span class="keyword">int</span> index, <span class="keyword">int</span> sum)</span></span>&#123;</span><br><span class="line">    <span class="comment">//结束条件：路径中的和等于target</span></span><br><span class="line">    <span class="keyword">if</span> (sum == target)&#123;</span><br><span class="line">        ArrayList&lt;Integer&gt; re = <span class="keyword">new</span> ArrayList&lt;&gt;(path);</span><br><span class="line">        Collections.sort(re);</span><br><span class="line">        res.add(re);</span><br><span class="line">        <span class="keyword">return</span> ;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i = index; i &lt; candidates.length; i++) &#123;</span><br><span class="line">        <span class="comment">//剪枝</span></span><br><span class="line">        <span class="keyword">if</span> (sum &gt; target) <span class="keyword">return</span> ;</span><br><span class="line">        <span class="comment">//做选择</span></span><br><span class="line">        sum += candidates[i];</span><br><span class="line">        path.add(candidates[i]);</span><br><span class="line">        <span class="comment">//递归</span></span><br><span class="line">        backtrace(candidates, target, path, i + <span class="number">1</span>, sum);</span><br><span class="line">        <span class="comment">//撤销</span></span><br><span class="line">        sum -= candidates[i];</span><br><span class="line">        path.remove(path.size() - <span class="number">1</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>以上方法，慢，但不是慢在set去重，博客曾经也提到过，Set去重效果比List.contains快了不止一个数量级，实际上，HashSet去重是O(1)的，因此是慢在结束条件的Collections.sort(re);</p>
+<p>嗯，一开始就先对candidates排序，那么如果第二次加入的元素和前一次一样，那么就直接continue</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> List&lt;List&lt;Integer&gt;&gt; combinationSum2(<span class="keyword">int</span>[] candidates, <span class="keyword">int</span> target) &#123;</span><br><span class="line">    Arrays.sort(candidates);	<span class="comment">//一次性排序</span></span><br><span class="line">    backtrace2(candidates, target, <span class="keyword">new</span> ArrayList&lt;&gt;(), <span class="number">0</span>, <span class="number">0</span>);</span><br><span class="line">    <span class="keyword">return</span> <span class="keyword">new</span> ArrayList&lt;&gt;(res);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">private</span> Set&lt;List&lt;Integer&gt;&gt; res = <span class="keyword">new</span> HashSet&lt;&gt;();</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">backtrace2</span><span class="params">(<span class="keyword">int</span>[] candidates, <span class="keyword">int</span> target, List&lt;Integer&gt; path, <span class="keyword">int</span> index, <span class="keyword">int</span> sum)</span></span>&#123;</span><br><span class="line">    <span class="comment">//结束条件：路径中的和等于target</span></span><br><span class="line">    <span class="keyword">if</span> (sum == target)&#123;</span><br><span class="line">        res.add(<span class="keyword">new</span> ArrayList&lt;&gt;(path));</span><br><span class="line">        <span class="keyword">return</span> ;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i = index; i &lt; candidates.length; i++) &#123;</span><br><span class="line">        <span class="comment">//剪枝</span></span><br><span class="line">        <span class="keyword">if</span> (sum &gt; target) <span class="keyword">return</span> ;</span><br><span class="line">        <span class="comment">//做选择</span></span><br><span class="line">        <span class="keyword">if</span>(i &gt; index &amp;&amp; candidates[i] == candidates[i-<span class="number">1</span>]) <span class="keyword">continue</span>; <span class="comment">//去重，第二次加入和前一次一样，则continue</span></span><br><span class="line">        sum += candidates[i];</span><br><span class="line">        path.add(candidates[i]);</span><br><span class="line">        <span class="comment">//递归</span></span><br><span class="line">        backtrace2(candidates, target, path, i + <span class="number">1</span>, sum);</span><br><span class="line">        <span class="comment">//撤销</span></span><br><span class="line">        sum -= candidates[i];</span><br><span class="line">        path.remove(path.size() - <span class="number">1</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<br>
+
+<p>其他回溯的题目可以<a href="http://wjw.today/2020/09/11/数据结构与算法不迷路导航/#1-回溯">点击这里</a></p>
+
         </div>
         
-        
-        <div class="level is-mobile">
+        <div class="level is-size-7 is-uppercase">
             <div class="level-start">
                 <div class="level-item">
-                <a class="button is-size-7 is-light" href="/2020/09/16/JS%E4%BB%8Eurl%E4%B8%AD%E8%8E%B7%E5%8F%96%E8%AF%B7%E6%B1%82%E5%8F%82%E6%95%B0%E5%B7%A5%E5%85%B7%E7%B1%BB/#more">阅读更多</a>
+                    <span class="is-size-6 has-text-grey has-mr-7">#</span>
+                    <a class="has-link-grey -link" href="/tags/%E5%8A%9B%E6%89%A3/" rel="tag">力扣</a>, <a class="has-link-grey -link" href="/tags/%E5%9B%9E%E6%BA%AF/" rel="tag">回溯</a>
                 </div>
             </div>
         </div>
+        
         
         
     </div>
@@ -200,7 +215,19 @@
 
 
 
-
+<div class="card card-transparent">
+    <div class="level post-navigation is-flex-wrap is-mobile">
+        
+        
+        <div class="level-end">
+            <a class="level level-item has-link-grey  article-nav-next" href="/2020/09/16/131-%E5%88%86%E5%89%B2%E5%9B%9E%E6%96%87%E4%B8%B2/">
+                <span class="level-item">131-分割回文串</span>
+                <i class="level-item fas fa-chevron-right"></i>
+            </a>
+        </div>
+        
+    </div>
+</div>
 
 
 </div>
@@ -244,7 +271,7 @@
                     </p>
                     <a href="/archives">
                         <p class="title has-text-weight-normal">
-                            42
+                            43
                         </p>
                     </a>
                 </div>
@@ -256,7 +283,7 @@
                     </p>
                     <a href="/categories">
                         <p class="title has-text-weight-normal">
-                            13
+                            12
                         </p>
                     </a>
                 </div>
@@ -286,6 +313,7 @@
 </div>
     
         
+
     
         
 <div class="card widget">
@@ -296,14 +324,6 @@
             </h3>
             <ul class="menu-list">
             <li>
-        <a class="level is-marginless" href="/categories/Util%E5%B7%A5%E5%85%B7%E7%B1%BB-%E5%89%8D%E7%AB%AF/">
-            <span class="level-start">
-                <span class="level-item">-[Util工具类] -[前端]</span>
-            </span>
-            <span class="level-end">
-                <span class="level-item tag">1</span>
-            </span>
-        </a></li><li>
         <a class="level is-marginless" href="/categories/Maven/">
             <span class="level-start">
                 <span class="level-item">Maven</span>
@@ -365,7 +385,7 @@
                 <span class="level-item">Util工具类</span>
             </span>
             <span class="level-end">
-                <span class="level-item tag">2</span>
+                <span class="level-item tag">3</span>
             </span>
         </a></li><li>
         <a class="level is-marginless" href="/categories/%E5%89%8D%E7%AB%AF/">
@@ -373,7 +393,7 @@
                 <span class="level-item">前端</span>
             </span>
             <span class="level-end">
-                <span class="level-item tag">2</span>
+                <span class="level-item tag">3</span>
             </span>
         </a></li><li>
         <a class="level is-marginless" href="/categories/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E5%92%8C%E7%AE%97%E6%B3%95/">
@@ -381,7 +401,7 @@
                 <span class="level-item">数据结构和算法</span>
             </span>
             <span class="level-end">
-                <span class="level-item tag">22</span>
+                <span class="level-item tag">23</span>
             </span>
         </a></li><li>
         <a class="level is-marginless" href="/categories/%E7%94%9F%E6%B4%BB%E9%9A%8F%E7%AC%94/">
@@ -416,6 +436,25 @@
         
         <article class="media">
             
+            <a href="/2020/09/17/40-%E7%BB%84%E5%90%88%E6%80%BB%E5%92%8CII/" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="images/loading.gif" data-original="https://wx1.sbimg.cn/2020/09/18/GDBH6.md.jpg" alt="40-组合总和II">
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2020-09-17T15:40:20.000Z">2020-09-17</time></div>
+                    <a href="/2020/09/17/40-%E7%BB%84%E5%90%88%E6%80%BB%E5%92%8CII/" class="title has-link-black-ter is-size-6 has-text-weight-normal">40-组合总和II</a>
+                    <p class="is-size-7 is-uppercase">
+                        <a class="has-link-grey -link" href="/categories/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E5%92%8C%E7%AE%97%E6%B3%95/">数据结构和算法</a>
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+        <article class="media">
+            
             <a href="/2020/09/16/131-%E5%88%86%E5%89%B2%E5%9B%9E%E6%96%87%E4%B8%B2/" class="media-left">
                 <p class="image is-64x64">
                     <img class="thumbnail" src="images/loading.gif" data-original="https://s1.ax1x.com/2020/07/20/UfQPtU.md.jpg" alt="131-分割回文串">
@@ -465,7 +504,7 @@
                     <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2020-09-16T13:11:35.000Z">2020-09-16</time></div>
                     <a href="/2020/09/16/JS%E4%BB%8Eurl%E4%B8%AD%E8%8E%B7%E5%8F%96%E8%AF%B7%E6%B1%82%E5%8F%82%E6%95%B0%E5%B7%A5%E5%85%B7%E7%B1%BB/" class="title has-link-black-ter is-size-6 has-text-weight-normal">JS从url中获取请求参数工具类</a>
                     <p class="is-size-7 is-uppercase">
-                        <a class="has-link-grey -link" href="/categories/Util%E5%B7%A5%E5%85%B7%E7%B1%BB-%E5%89%8D%E7%AB%AF/">-[Util工具类] -[前端]</a>
+                        <a class="has-link-grey -link" href="/categories/Util%E5%B7%A5%E5%85%B7%E7%B1%BB/">Util工具类</a> / <a class="has-link-grey -link" href="/categories/%E5%89%8D%E7%AB%AF/">前端</a>
                     </p>
                 </div>
             </div>
@@ -490,25 +529,6 @@
             </div>
         </article>
         
-        <article class="media">
-            
-            <a href="/2020/09/12/901-%E8%82%A1%E7%A5%A8%E4%BB%B7%E6%A0%BC%E8%B7%A8%E5%BA%A6/" class="media-left">
-                <p class="image is-64x64">
-                    <img class="thumbnail" src="images/loading.gif" data-original="https://wx1.sbimg.cn/2020/09/10/9zxid.md.jpg" alt="901-股票价格跨度">
-                </p>
-            </a>
-            
-            <div class="media-content">
-                <div class="content">
-                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2020-09-12T08:41:25.000Z">2020-09-12</time></div>
-                    <a href="/2020/09/12/901-%E8%82%A1%E7%A5%A8%E4%BB%B7%E6%A0%BC%E8%B7%A8%E5%BA%A6/" class="title has-link-black-ter is-size-6 has-text-weight-normal">901-股票价格跨度</a>
-                    <p class="is-size-7 is-uppercase">
-                        <a class="has-link-grey -link" href="/categories/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E5%92%8C%E7%AE%97%E6%B3%95/">数据结构和算法</a>
-                    </p>
-                </div>
-            </div>
-        </article>
-        
     </div>
 </div>
         
@@ -517,7 +537,7 @@
         <h3 class="menu-label">
             标签云
         </h3>
-        <a href="/tags/eureka/" style="font-size: 10px;">eureka</a> <a href="/tags/fastDFS/" style="font-size: 10px;">fastDFS</a> <a href="/tags/feign/" style="font-size: 10px;">feign</a> <a href="/tags/http/" style="font-size: 10px;">http</a> <a href="/tags/hystrix/" style="font-size: 10px;">hystrix</a> <a href="/tags/json/" style="font-size: 10px;">json</a> <a href="/tags/lintcode/" style="font-size: 10px;">lintcode</a> <a href="/tags/markdown/" style="font-size: 10px;">markdown</a> <a href="/tags/maven/" style="font-size: 10px;">maven</a> <a href="/tags/mysql/" style="font-size: 10px;">mysql</a> <a href="/tags/ribbon/" style="font-size: 10px;">ribbon</a> <a href="/tags/spring/" style="font-size: 12px;">spring</a> <a href="/tags/springboot/" style="font-size: 10px;">springboot</a> <a href="/tags/springcloud/" style="font-size: 12px;">springcloud</a> <a href="/tags/springmvc/" style="font-size: 14px;">springmvc</a> <a href="/tags/zuul/" style="font-size: 10px;">zuul</a> <a href="/tags/%E4%BA%8C%E5%8F%89%E6%A0%91/" style="font-size: 10px;">二叉树</a> <a href="/tags/%E4%BA%A4%E4%BA%92/" style="font-size: 10px;">交互</a> <a href="/tags/%E5%89%91%E6%8C%87offer/" style="font-size: 10px;">剑指offer</a> <a href="/tags/%E5%8A%9B%E6%89%A3/" style="font-size: 20px;">力扣</a> <a href="/tags/%E5%8A%A0%E5%AF%86/" style="font-size: 10px;">加密</a> <a href="/tags/%E5%8A%A8%E6%80%81%E8%A7%84%E5%88%92/" style="font-size: 12px;">动态规划</a> <a href="/tags/%E5%8D%95%E8%B0%83%E6%A0%88/" style="font-size: 14px;">单调栈</a> <a href="/tags/%E5%9B%9E%E6%BA%AF/" style="font-size: 10px;">回溯</a> <a href="/tags/%E5%9D%91/" style="font-size: 10px;">坑</a> <a href="/tags/%E5%AD%97%E7%AC%A6%E4%B8%B2/" style="font-size: 10px;">字符串</a> <a href="/tags/%E5%AD%A6%E4%B9%A0%E8%AE%B0%E5%BD%95/" style="font-size: 10px;">学习记录</a> <a href="/tags/%E5%BC%80%E5%8F%91/" style="font-size: 18px;">开发</a> <a href="/tags/%E6%8B%9B%E8%81%98%E7%AC%94%E8%AF%95/" style="font-size: 10px;">招聘笔试</a> <a href="/tags/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/" style="font-size: 14px;">数据结构</a> <a href="/tags/%E6%A0%88/" style="font-size: 10px;">栈</a> <a href="/tags/%E6%A0%91/" style="font-size: 16px;">树</a> <a href="/tags/%E7%AC%94%E8%AF%95/" style="font-size: 10px;">笔试</a> <a href="/tags/%E7%AC%94%E8%AF%95%E9%9D%A2%E8%AF%95/" style="font-size: 12px;">笔试面试</a> <a href="/tags/%E7%AE%97%E6%B3%95/" style="font-size: 12px;">算法</a> <a href="/tags/%E9%80%92%E5%BD%92/" style="font-size: 10px;">递归</a>
+        <a href="/tags/eureka/" style="font-size: 10px;">eureka</a> <a href="/tags/fastDFS/" style="font-size: 10px;">fastDFS</a> <a href="/tags/feign/" style="font-size: 10px;">feign</a> <a href="/tags/http/" style="font-size: 10px;">http</a> <a href="/tags/hystrix/" style="font-size: 10px;">hystrix</a> <a href="/tags/json/" style="font-size: 10px;">json</a> <a href="/tags/lintcode/" style="font-size: 10px;">lintcode</a> <a href="/tags/markdown/" style="font-size: 10px;">markdown</a> <a href="/tags/maven/" style="font-size: 10px;">maven</a> <a href="/tags/mysql/" style="font-size: 10px;">mysql</a> <a href="/tags/ribbon/" style="font-size: 10px;">ribbon</a> <a href="/tags/spring/" style="font-size: 12px;">spring</a> <a href="/tags/springboot/" style="font-size: 10px;">springboot</a> <a href="/tags/springcloud/" style="font-size: 12px;">springcloud</a> <a href="/tags/springmvc/" style="font-size: 14px;">springmvc</a> <a href="/tags/zuul/" style="font-size: 10px;">zuul</a> <a href="/tags/%E4%BA%8C%E5%8F%89%E6%A0%91/" style="font-size: 10px;">二叉树</a> <a href="/tags/%E4%BA%A4%E4%BA%92/" style="font-size: 10px;">交互</a> <a href="/tags/%E5%89%91%E6%8C%87offer/" style="font-size: 10px;">剑指offer</a> <a href="/tags/%E5%8A%9B%E6%89%A3/" style="font-size: 20px;">力扣</a> <a href="/tags/%E5%8A%A0%E5%AF%86/" style="font-size: 10px;">加密</a> <a href="/tags/%E5%8A%A8%E6%80%81%E8%A7%84%E5%88%92/" style="font-size: 12px;">动态规划</a> <a href="/tags/%E5%8D%95%E8%B0%83%E6%A0%88/" style="font-size: 14px;">单调栈</a> <a href="/tags/%E5%9B%9E%E6%BA%AF/" style="font-size: 12px;">回溯</a> <a href="/tags/%E5%9D%91/" style="font-size: 10px;">坑</a> <a href="/tags/%E5%AD%97%E7%AC%A6%E4%B8%B2/" style="font-size: 10px;">字符串</a> <a href="/tags/%E5%AD%A6%E4%B9%A0%E8%AE%B0%E5%BD%95/" style="font-size: 10px;">学习记录</a> <a href="/tags/%E5%BC%80%E5%8F%91/" style="font-size: 18px;">开发</a> <a href="/tags/%E6%8B%9B%E8%81%98%E7%AC%94%E8%AF%95/" style="font-size: 10px;">招聘笔试</a> <a href="/tags/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/" style="font-size: 14px;">数据结构</a> <a href="/tags/%E6%A0%88/" style="font-size: 10px;">栈</a> <a href="/tags/%E6%A0%91/" style="font-size: 16px;">树</a> <a href="/tags/%E7%AC%94%E8%AF%95/" style="font-size: 10px;">笔试</a> <a href="/tags/%E7%AC%94%E8%AF%95%E9%9D%A2%E8%AF%95/" style="font-size: 12px;">笔试面试</a> <a href="/tags/%E7%AE%97%E6%B3%95/" style="font-size: 12px;">算法</a> <a href="/tags/%E9%80%92%E5%BD%92/" style="font-size: 10px;">递归</a>
     </div>
 </div>
         
@@ -540,6 +560,25 @@
         
         <article class="media">
             
+            <a href="/2020/09/17/40-%E7%BB%84%E5%90%88%E6%80%BB%E5%92%8CII/" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="images/loading.gif" data-original="https://wx1.sbimg.cn/2020/09/18/GDBH6.md.jpg" alt="40-组合总和II">
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2020-09-17T15:40:20.000Z">2020-09-17</time></div>
+                    <a href="/2020/09/17/40-%E7%BB%84%E5%90%88%E6%80%BB%E5%92%8CII/" class="title has-link-black-ter is-size-6 has-text-weight-normal">40-组合总和II</a>
+                    <p class="is-size-7 is-uppercase">
+                        <a class="has-link-grey -link" href="/categories/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E5%92%8C%E7%AE%97%E6%B3%95/">数据结构和算法</a>
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+        <article class="media">
+            
             <a href="/2020/09/16/131-%E5%88%86%E5%89%B2%E5%9B%9E%E6%96%87%E4%B8%B2/" class="media-left">
                 <p class="image is-64x64">
                     <img class="thumbnail" src="images/loading.gif" data-original="https://s1.ax1x.com/2020/07/20/UfQPtU.md.jpg" alt="131-分割回文串">
@@ -589,7 +628,7 @@
                     <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2020-09-16T13:11:35.000Z">2020-09-16</time></div>
                     <a href="/2020/09/16/JS%E4%BB%8Eurl%E4%B8%AD%E8%8E%B7%E5%8F%96%E8%AF%B7%E6%B1%82%E5%8F%82%E6%95%B0%E5%B7%A5%E5%85%B7%E7%B1%BB/" class="title has-link-black-ter is-size-6 has-text-weight-normal">JS从url中获取请求参数工具类</a>
                     <p class="is-size-7 is-uppercase">
-                        <a class="has-link-grey -link" href="/categories/Util%E5%B7%A5%E5%85%B7%E7%B1%BB-%E5%89%8D%E7%AB%AF/">-[Util工具类] -[前端]</a>
+                        <a class="has-link-grey -link" href="/categories/Util%E5%B7%A5%E5%85%B7%E7%B1%BB/">Util工具类</a> / <a class="has-link-grey -link" href="/categories/%E5%89%8D%E7%AB%AF/">前端</a>
                     </p>
                 </div>
             </div>
@@ -614,25 +653,6 @@
             </div>
         </article>
         
-        <article class="media">
-            
-            <a href="/2020/09/12/901-%E8%82%A1%E7%A5%A8%E4%BB%B7%E6%A0%BC%E8%B7%A8%E5%BA%A6/" class="media-left">
-                <p class="image is-64x64">
-                    <img class="thumbnail" src="images/loading.gif" data-original="https://wx1.sbimg.cn/2020/09/10/9zxid.md.jpg" alt="901-股票价格跨度">
-                </p>
-            </a>
-            
-            <div class="media-content">
-                <div class="content">
-                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2020-09-12T08:41:25.000Z">2020-09-12</time></div>
-                    <a href="/2020/09/12/901-%E8%82%A1%E7%A5%A8%E4%BB%B7%E6%A0%BC%E8%B7%A8%E5%BA%A6/" class="title has-link-black-ter is-size-6 has-text-weight-normal">901-股票价格跨度</a>
-                    <p class="is-size-7 is-uppercase">
-                        <a class="has-link-grey -link" href="/categories/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E5%92%8C%E7%AE%97%E6%B3%95/">数据结构和算法</a>
-                    </p>
-                </div>
-            </div>
-        </article>
-        
     </div>
 </div>
     
@@ -641,7 +661,7 @@
         <h3 class="menu-label">
             标签云
         </h3>
-        <a href="/tags/eureka/" style="font-size: 10px;">eureka</a> <a href="/tags/fastDFS/" style="font-size: 10px;">fastDFS</a> <a href="/tags/feign/" style="font-size: 10px;">feign</a> <a href="/tags/http/" style="font-size: 10px;">http</a> <a href="/tags/hystrix/" style="font-size: 10px;">hystrix</a> <a href="/tags/json/" style="font-size: 10px;">json</a> <a href="/tags/lintcode/" style="font-size: 10px;">lintcode</a> <a href="/tags/markdown/" style="font-size: 10px;">markdown</a> <a href="/tags/maven/" style="font-size: 10px;">maven</a> <a href="/tags/mysql/" style="font-size: 10px;">mysql</a> <a href="/tags/ribbon/" style="font-size: 10px;">ribbon</a> <a href="/tags/spring/" style="font-size: 12px;">spring</a> <a href="/tags/springboot/" style="font-size: 10px;">springboot</a> <a href="/tags/springcloud/" style="font-size: 12px;">springcloud</a> <a href="/tags/springmvc/" style="font-size: 14px;">springmvc</a> <a href="/tags/zuul/" style="font-size: 10px;">zuul</a> <a href="/tags/%E4%BA%8C%E5%8F%89%E6%A0%91/" style="font-size: 10px;">二叉树</a> <a href="/tags/%E4%BA%A4%E4%BA%92/" style="font-size: 10px;">交互</a> <a href="/tags/%E5%89%91%E6%8C%87offer/" style="font-size: 10px;">剑指offer</a> <a href="/tags/%E5%8A%9B%E6%89%A3/" style="font-size: 20px;">力扣</a> <a href="/tags/%E5%8A%A0%E5%AF%86/" style="font-size: 10px;">加密</a> <a href="/tags/%E5%8A%A8%E6%80%81%E8%A7%84%E5%88%92/" style="font-size: 12px;">动态规划</a> <a href="/tags/%E5%8D%95%E8%B0%83%E6%A0%88/" style="font-size: 14px;">单调栈</a> <a href="/tags/%E5%9B%9E%E6%BA%AF/" style="font-size: 10px;">回溯</a> <a href="/tags/%E5%9D%91/" style="font-size: 10px;">坑</a> <a href="/tags/%E5%AD%97%E7%AC%A6%E4%B8%B2/" style="font-size: 10px;">字符串</a> <a href="/tags/%E5%AD%A6%E4%B9%A0%E8%AE%B0%E5%BD%95/" style="font-size: 10px;">学习记录</a> <a href="/tags/%E5%BC%80%E5%8F%91/" style="font-size: 18px;">开发</a> <a href="/tags/%E6%8B%9B%E8%81%98%E7%AC%94%E8%AF%95/" style="font-size: 10px;">招聘笔试</a> <a href="/tags/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/" style="font-size: 14px;">数据结构</a> <a href="/tags/%E6%A0%88/" style="font-size: 10px;">栈</a> <a href="/tags/%E6%A0%91/" style="font-size: 16px;">树</a> <a href="/tags/%E7%AC%94%E8%AF%95/" style="font-size: 10px;">笔试</a> <a href="/tags/%E7%AC%94%E8%AF%95%E9%9D%A2%E8%AF%95/" style="font-size: 12px;">笔试面试</a> <a href="/tags/%E7%AE%97%E6%B3%95/" style="font-size: 12px;">算法</a> <a href="/tags/%E9%80%92%E5%BD%92/" style="font-size: 10px;">递归</a>
+        <a href="/tags/eureka/" style="font-size: 10px;">eureka</a> <a href="/tags/fastDFS/" style="font-size: 10px;">fastDFS</a> <a href="/tags/feign/" style="font-size: 10px;">feign</a> <a href="/tags/http/" style="font-size: 10px;">http</a> <a href="/tags/hystrix/" style="font-size: 10px;">hystrix</a> <a href="/tags/json/" style="font-size: 10px;">json</a> <a href="/tags/lintcode/" style="font-size: 10px;">lintcode</a> <a href="/tags/markdown/" style="font-size: 10px;">markdown</a> <a href="/tags/maven/" style="font-size: 10px;">maven</a> <a href="/tags/mysql/" style="font-size: 10px;">mysql</a> <a href="/tags/ribbon/" style="font-size: 10px;">ribbon</a> <a href="/tags/spring/" style="font-size: 12px;">spring</a> <a href="/tags/springboot/" style="font-size: 10px;">springboot</a> <a href="/tags/springcloud/" style="font-size: 12px;">springcloud</a> <a href="/tags/springmvc/" style="font-size: 14px;">springmvc</a> <a href="/tags/zuul/" style="font-size: 10px;">zuul</a> <a href="/tags/%E4%BA%8C%E5%8F%89%E6%A0%91/" style="font-size: 10px;">二叉树</a> <a href="/tags/%E4%BA%A4%E4%BA%92/" style="font-size: 10px;">交互</a> <a href="/tags/%E5%89%91%E6%8C%87offer/" style="font-size: 10px;">剑指offer</a> <a href="/tags/%E5%8A%9B%E6%89%A3/" style="font-size: 20px;">力扣</a> <a href="/tags/%E5%8A%A0%E5%AF%86/" style="font-size: 10px;">加密</a> <a href="/tags/%E5%8A%A8%E6%80%81%E8%A7%84%E5%88%92/" style="font-size: 12px;">动态规划</a> <a href="/tags/%E5%8D%95%E8%B0%83%E6%A0%88/" style="font-size: 14px;">单调栈</a> <a href="/tags/%E5%9B%9E%E6%BA%AF/" style="font-size: 12px;">回溯</a> <a href="/tags/%E5%9D%91/" style="font-size: 10px;">坑</a> <a href="/tags/%E5%AD%97%E7%AC%A6%E4%B8%B2/" style="font-size: 10px;">字符串</a> <a href="/tags/%E5%AD%A6%E4%B9%A0%E8%AE%B0%E5%BD%95/" style="font-size: 10px;">学习记录</a> <a href="/tags/%E5%BC%80%E5%8F%91/" style="font-size: 18px;">开发</a> <a href="/tags/%E6%8B%9B%E8%81%98%E7%AC%94%E8%AF%95/" style="font-size: 10px;">招聘笔试</a> <a href="/tags/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/" style="font-size: 14px;">数据结构</a> <a href="/tags/%E6%A0%88/" style="font-size: 10px;">栈</a> <a href="/tags/%E6%A0%91/" style="font-size: 16px;">树</a> <a href="/tags/%E7%AC%94%E8%AF%95/" style="font-size: 10px;">笔试</a> <a href="/tags/%E7%AC%94%E8%AF%95%E9%9D%A2%E8%AF%95/" style="font-size: 12px;">笔试面试</a> <a href="/tags/%E7%AE%97%E6%B3%95/" style="font-size: 12px;">算法</a> <a href="/tags/%E9%80%92%E5%BD%92/" style="font-size: 10px;">递归</a>
     </div>
 </div>
     
@@ -657,7 +677,7 @@
             <div class="level-start has-text-centered-mobile">
                 <a class="footer-logo is-block has-mb-6" href="/">
                 
-                    <img src="images/loading.gif" data-original="https://s1.ax1x.com/2020/07/20/UfKyGQ.md.png" alt="小温 blog" height="28">
+                    <img src="images/loading.gif" data-original="https://s1.ax1x.com/2020/07/20/UfKyGQ.md.png" alt="40-组合总和II" height="28">
                 
                 </a>
                 <p class="is-size-7">
