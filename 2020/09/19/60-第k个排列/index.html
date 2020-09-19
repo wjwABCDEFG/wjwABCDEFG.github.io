@@ -7,18 +7,24 @@
 
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
 
-<title>标签: json - 小温 blog</title>
+<title>60-第k个排列 - 小温 blog</title>
 
 
-    <meta property="og:type" content="website">
-<meta property="og:title" content="小温 blog">
-<meta property="og:url" content="http://wjw.today/tags/json/index.html">
+    <meta name="description" content="力扣60  https:&#x2F;&#x2F;leetcode-cn.com&#x2F;problems&#x2F;permutation-sequence&#x2F;  这题虽然是一道回溯题，但如果只是仅仅简单的回溯一下，会超时，经过剪枝和优化可以到13%。此题可以数学优化，还是有点挑战性的。再说了，我相信很多人和我一样看到题目第一个想到的肯定是先计算出开头数字，但是写起来还是回溯…">
+<meta property="og:type" content="article">
+<meta property="og:title" content="60-第k个排列">
+<meta property="og:url" content="http://wjw.today/2020/09/19/60-%E7%AC%ACk%E4%B8%AA%E6%8E%92%E5%88%97/index.html">
 <meta property="og:site_name" content="小温 blog">
+<meta property="og:description" content="力扣60  https:&#x2F;&#x2F;leetcode-cn.com&#x2F;problems&#x2F;permutation-sequence&#x2F;  这题虽然是一道回溯题，但如果只是仅仅简单的回溯一下，会超时，经过剪枝和优化可以到13%。此题可以数学优化，还是有点挑战性的。再说了，我相信很多人和我一样看到题目第一个想到的肯定是先计算出开头数字，但是写起来还是回溯…">
 <meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="http://wjw.today/images/og_image.png">
+<meta property="og:image" content="https://wx1.sbimg.cn/2020/09/18/GDRSO.md.jpg">
+<meta property="article:published_time" content="2020-09-19T08:36:06.000Z">
+<meta property="article:modified_time" content="2020-09-19T19:01:40.186Z">
 <meta property="article:author" content="wjw">
+<meta property="article:tag" content="力扣">
+<meta property="article:tag" content="回溯">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="http://wjw.today/images/og_image.png">
+<meta name="twitter:image" content="https://wx1.sbimg.cn/2020/09/18/GDRSO.md.jpg">
 
 
 
@@ -76,7 +82,7 @@
         <div class="navbar-brand is-flex-center">
             <a class="navbar-item navbar-logo" href="/">
             
-                <img src="images/loading.gif" data-original="https://s1.ax1x.com/2020/07/20/UfKyGQ.md.png" alt="小温 blog" height="28">
+                <img src="images/loading.gif" data-original="https://s1.ax1x.com/2020/07/20/UfKyGQ.md.png" alt="60-第k个排列" height="28">
             
             </a>
         </div>
@@ -112,6 +118,10 @@
                     
                 
                 
+                <a class="navbar-item is-hidden-tablet catalogue" title="目录" href="javascript:;">
+                    <i class="fas fa-list-ul"></i>
+                </a>
+                
                 
                 <a class="navbar-item search" title="搜索" href="javascript:;">
                     <i class="fas fa-search"></i>
@@ -125,73 +135,137 @@
     <section class="section">
         <div class="container">
             <div class="columns">
-                <div class="column is-8-tablet is-8-desktop is-6-widescreen has-order-2 column-main"><div class="card">
-    <div class="card-content">
-        <nav class="breadcrumb" aria-label="breadcrumbs">
-        <ul>
-            <li><a href="/tags">标签</a></li>
-            <li class="is-active"><a href="#" aria-current="page">json</a></li>
-        </ul>
-        </nav>
-    </div>
-</div>
-
-    
+                <div class="column is-8-tablet is-8-desktop is-6-widescreen has-order-2 column-main">
 <div class="card">
     
     <div class="card-image">
-        <a href="/2020/03/09/SpringMVC%E6%8E%A5%E6%94%B6%E5%89%8D%E7%AB%AF%E5%8F%82%E6%95%B0%E4%B8%BAnull%E7%9A%84%E6%8E%A2%E7%B4%A2/" class="image is-7by1">
-            <img class="thumbnail" src="images/loading.gif" data-original="https://wx1.sbimg.cn/2020/07/30/P7LLw.md.jpg" alt="SpringMVC接收前端参数为null的探索">
-        </a>
+        <span  class="image is-7by1">
+            <img class="thumbnail" src="images/loading.gif" data-original="https://wx1.sbimg.cn/2020/09/18/GDRSO.md.jpg" alt="60-第k个排列">
+        </span>
     </div>
     
     <div class="card-content article ">
         
         <div class="level article-meta is-size-7 is-uppercase is-mobile is-overflow-x-auto">
             <div class="level-left">
-                <time class="level-item has-text-grey" datetime="2020-03-09T07:46:13.000Z">2020-03-09</time>
+                <time class="level-item has-text-grey" datetime="2020-09-19T08:36:06.000Z">2020-09-19</time>
                 
                 <div class="level-item">
-                <a class="has-link-grey -link" href="/categories/SpringMVC/">SpringMVC</a>&nbsp;/&nbsp;<a class="has-link-grey -link" href="/categories/%E5%89%8D%E7%AB%AF/">前端</a>
+                <a class="has-link-grey -link" href="/categories/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E5%92%8C%E7%AE%97%E6%B3%95/">数据结构和算法</a>
                 </div>
                 
                 
                 <span class="level-item has-text-grey">
                     
                     
-                    8 分钟 读完 (大约 1170 个字)
+                    11 分钟 读完 (大约 1669 个字)
                 </span>
                 
+                
+                <span class="level-item has-text-grey" id="busuanzi_container_page_pv">
+                    <i class="far fa-eye"></i>
+                    <span id="busuanzi_value_page_pv">0</span>次访问
+                </span>
                 
             </div>
         </div>
         
         <h1 class="title is-size-3 is-size-4-mobile has-text-weight-normal">
             
-                <a class="has-link-black-ter" href="/2020/03/09/SpringMVC%E6%8E%A5%E6%94%B6%E5%89%8D%E7%AB%AF%E5%8F%82%E6%95%B0%E4%B8%BAnull%E7%9A%84%E6%8E%A2%E7%B4%A2/">SpringMVC接收前端参数为null的探索</a>
+                60-第k个排列
             
         </h1>
         <div class="content">
-            <p>在使用SpringMVC时接收前端参数有时后会<strong>无法封装，获得null值，报415错误</strong>的问题，原因就是有时候我们搞不懂json对象、json字符串、参数字符串之间的区别。</p>
-<ul>
-<li><p>提交方式：form/url，ajax</p>
-</li>
-<li><p>请求方式：get，post</p>
-</li>
-<li><p>接收方式：一个个参数接收，封装实体类(Bean类型)</p>
-</li>
-</ul>
-<p>文章将会排列组合= =，举例说明各种搭配如何成功接收数据。</p>
+            <p>力扣60</p>
+<blockquote>
+<p><a href="https://leetcode-cn.com/problems/permutation-sequence/">https://leetcode-cn.com/problems/permutation-sequence/</a></p>
+</blockquote>
+<p>这题虽然是一道回溯题，但如果只是仅仅简单的回溯一下，会超时，经过剪枝和优化可以到13%。此题可以数学优化，还是有点挑战性的。再说了，我相信很多人和我一样看到题目第一个想到的肯定是先计算出开头数字，但是写起来还是回溯…</p>
+<a id="more"></a>
+
+<p><img src="images/loading.gif" data-original="https://s1.ax1x.com/2020/09/19/wI8oJ1.png" alt=""></p>
+<br>
+
+<h1 id="1-暴力回溯-剪枝"><a href="#1-暴力回溯-剪枝" class="headerlink" title="1. 暴力回溯+剪枝"></a>1. 暴力回溯+剪枝</h1><p>先来看看最low的<strong>回溯</strong>，这份提交是会超时的，而且还做了<strong>剪枝</strong>（到k个后面的就不继续了）</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> String <span class="title">getPermutation</span><span class="params">(<span class="keyword">int</span> n, <span class="keyword">int</span> k)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">int</span>[] nums = <span class="keyword">new</span> <span class="keyword">int</span>[n];</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; n; i++) &#123;</span><br><span class="line">            nums[i] = i + <span class="number">1</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        backtrace(nums, <span class="keyword">new</span> StringBuilder(), k);</span><br><span class="line">        <span class="keyword">return</span> res.get(res.size() - <span class="number">1</span>);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">private</span> List&lt;String&gt; res = <span class="keyword">new</span> ArrayList&lt;&gt;();</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">boolean</span> max = <span class="keyword">false</span>;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">backtrace</span><span class="params">(<span class="keyword">int</span>[] nums, StringBuilder track, <span class="keyword">int</span> k)</span> </span>&#123;</span><br><span class="line">        <span class="comment">//结束条件</span></span><br><span class="line">        <span class="keyword">if</span> (track.length() == nums.length) &#123;</span><br><span class="line">            res.add(track.toString());</span><br><span class="line">            <span class="keyword">if</span> (res.size() == k) max = <span class="keyword">true</span>;</span><br><span class="line">            <span class="keyword">return</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; nums.length; i++) &#123;</span><br><span class="line">            <span class="comment">//剪枝</span></span><br><span class="line">            <span class="keyword">if</span> (max) <span class="keyword">return</span> ;</span><br><span class="line">            <span class="keyword">if</span> (track.indexOf(String.valueOf(nums[i])) != -<span class="number">1</span>) <span class="keyword">continue</span>;</span><br><span class="line">            <span class="comment">//做选择</span></span><br><span class="line">            track.append(nums[i]);</span><br><span class="line">            <span class="comment">//递归</span></span><br><span class="line">            backtrace(nums, track, k);</span><br><span class="line">            <span class="comment">//撤销</span></span><br><span class="line">            track.deleteCharAt(track.length() - <span class="number">1</span>);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><img src="images/loading.gif" data-original="https://s1.ax1x.com/2020/09/19/wIu5ge.png" alt=""></p>
+<br>
+
+<h1 id="2-提前结束条件优化"><a href="#2-提前结束条件优化" class="headerlink" title="2. 提前结束条件优化"></a>2. 提前结束条件优化</h1><p>可以看到，剪枝也超时，分析一下，可以看出track.indexOf这句可能会影响性能，我们修改为<strong>标记数组</strong>，查找的时候O(1)，并且做了空间上的优化</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> String <span class="title">getPermutation</span><span class="params">(<span class="keyword">int</span> n, <span class="keyword">int</span> k)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">int</span>[] nums = <span class="keyword">new</span> <span class="keyword">int</span>[n];</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; n; i++) &#123;</span><br><span class="line">            nums[i] = i + <span class="number">1</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        backtrace2(nums, <span class="keyword">new</span> <span class="keyword">boolean</span>[n], <span class="keyword">new</span> StringBuilder(), k);</span><br><span class="line">        <span class="keyword">return</span> res;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">private</span> String res = <span class="string">""</span>;    <span class="comment">//优化一下空间，结果只存一个</span></span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">int</span> num = <span class="number">0</span>;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">backtrace2</span><span class="params">(<span class="keyword">int</span>[] nums, <span class="keyword">boolean</span>[] flag, StringBuilder track, <span class="keyword">int</span> k)</span></span>&#123;</span><br><span class="line">        <span class="comment">//结束条件</span></span><br><span class="line">        <span class="keyword">if</span> (track.length() == nums.length)&#123;</span><br><span class="line">            res = track.toString();</span><br><span class="line">            num++;</span><br><span class="line">            <span class="keyword">return</span> ;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; nums.length; i++) &#123;</span><br><span class="line">            <span class="comment">//剪枝</span></span><br><span class="line">            <span class="keyword">if</span> (k == num) <span class="keyword">return</span> ;</span><br><span class="line">            <span class="keyword">if</span> (flag[i]) <span class="keyword">continue</span>;</span><br><span class="line">            <span class="comment">//做选择</span></span><br><span class="line">            track.append(nums[i]);</span><br><span class="line">            flag[i] = <span class="keyword">true</span>;</span><br><span class="line">            <span class="comment">//递归</span></span><br><span class="line">            backtrace2(nums, flag, track, k);</span><br><span class="line">            <span class="comment">//撤销</span></span><br><span class="line">            track.deleteCharAt(track.length() - <span class="number">1</span>);</span><br><span class="line">            flag[i] = <span class="keyword">false</span>;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><img src="images/loading.gif" data-original="https://s1.ax1x.com/2020/09/19/wIlQVs.png" alt=""></p>
+<br>
+
+<h1 id="3-数学优化"><a href="#3-数学优化" class="headerlink" title="3. 数学优化"></a>3. 数学优化</h1><p>事实上写起来并不难，而且我相信大多数人第一眼看到题目想到的应该是这个，不过写的还是回溯（因为笔试需要时间，一般不敢冒险，选择了自己熟悉的方法…）</p>
+<h2 id="3-1-总体思路和过程"><a href="#3-1-总体思路和过程" class="headerlink" title="3.1 总体思路和过程"></a>3.1 总体思路和过程</h2><p>以正常人的思维，手写可能的排列的时候一定是这样的顺序：</p>
+<p>先固定第一位是1，后三位按顺序排列</p>
+<p>234</p>
+<p>243</p>
+<p>324</p>
+<p>342</p>
+<p>423</p>
+<p>432</p>
+<p>也就是说1开头，那么剩下3位进行排列，共需A(3, 3) = 3! = 6</p>
+<p>那么第一位想要为2必须先经历完1开头的，且2开头的也有6条数据</p>
+<p>同样的，第一位想要是3，那么需经历开头1和2，那么也就是说，如果n位，那么第一位需要变成a1，那么前面有<strong>(n - 1)! * (a1 - 1)</strong></p>
+<br>
+
+<p>反过来，已知k = 9，那么k / 6 = 1余3，说明第一位肯定已经超过了1的那6条，因此第一位是2</p>
+<p>接下来确定第二位，那么变成了子问题：此时可供选择的选择列表把2去除了变为134，k为余数3，说人话就是：第一位的2已经确定了，在剩下的134中找到第3条数据。</p>
+<p>当然，程序的话就不用再写了，这是子问题，之前已经写好了，重新遍历上面的即可</p>
+<br>
+
+<h2 id="3-2-java实现步骤"><a href="#3-2-java实现步骤" class="headerlink" title="3.2 java实现步骤"></a>3.2 java实现步骤</h2><p>下面是java代码，我先贴完整代码（可以不看先，先看讲解），再一步步讲解：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">six_zero_</span>第<span class="title">k</span>个排列<span class="title">_other</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Test</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">test</span><span class="params">()</span></span>&#123;</span><br><span class="line">        String res = getPermutation(<span class="number">4</span>, <span class="number">9</span>);</span><br><span class="line">        System.out.println(res);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> String <span class="title">getPermutation</span><span class="params">(<span class="keyword">int</span> n, <span class="keyword">int</span> k)</span> </span>&#123;</span><br><span class="line">        <span class="comment">//生成排列数列表 paiLie[0] = 0! paiLie[1] = 1!  由排列公式可得n! = n * (n - 1)!</span></span><br><span class="line">        <span class="keyword">int</span>[] paiLie = <span class="keyword">new</span> <span class="keyword">int</span>[n + <span class="number">1</span>];</span><br><span class="line">        List&lt;Integer&gt; nums = <span class="keyword">new</span> LinkedList&lt;&gt;();    <span class="comment">//选择列表，也就是1234，每次被选择一位后这里就会减少一位</span></span><br><span class="line">        paiLie[<span class="number">0</span>] = <span class="number">1</span>;</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">1</span>; i &lt;= n; i++) &#123;</span><br><span class="line">            paiLie[i] = paiLie[i - <span class="number">1</span>] * i;  <span class="comment">//n! = n * (n - 1)!</span></span><br><span class="line">            nums.add(i);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="comment">//准备完毕，开始从左到右找到每一位</span></span><br><span class="line">        String res = <span class="string">""</span>;</span><br><span class="line">        k--;    <span class="comment">//这个可以回过头来看，因为下面k的计算是跟跳过的个数onceSkip相关的，onceSkip是下标，因此要先-1成下标</span></span><br><span class="line">        <span class="keyword">while</span> (nums.size() != <span class="number">0</span>)&#123;</span><br><span class="line">            <span class="keyword">int</span> onceSkip = paiLie[(nums.size() - <span class="number">1</span>)];   <span class="comment">//也就是1开头的有6条，这就是这个6，当然第二位的时候就是(n - 1)!了</span></span><br><span class="line">            <span class="keyword">int</span> index = k / onceSkip;</span><br><span class="line">            res += nums.get(index);</span><br><span class="line">            <span class="comment">//后面重复，nums变为少了当前加的这个值，k也会减去跳过的个数</span></span><br><span class="line">            nums.remove(index);</span><br><span class="line">            k -= index * onceSkip;  <span class="comment">//总共跳过的条数</span></span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> res;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<br>
+
+<p>别急，一步步来做：</p>
+<ol>
+<li>paiLie[]：先要生成上面说的排列数列表，因为每次都是n! = (n - 1)! * n，需要前一个阶乘作为基础，所以一开始生成比较好，而不是临时算。</li>
+<li>nums：同时还要生成上面说的选择列表，也就是一开始为1234，第一轮被选出2之后剩下134的这个东西</li>
+</ol>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> String <span class="title">getPermutation</span><span class="params">(<span class="keyword">int</span> n, <span class="keyword">int</span> k)</span> </span>&#123;</span><br><span class="line">    <span class="comment">//生成排列数列表 paiLie[0] = 0! paiLie[1] = 1!  由排列公式可得n! = n * (n - 1)!</span></span><br><span class="line">    <span class="keyword">int</span>[] paiLie = <span class="keyword">new</span> <span class="keyword">int</span>[n + <span class="number">1</span>];</span><br><span class="line">    List&lt;Integer&gt; nums = <span class="keyword">new</span> LinkedList&lt;&gt;();    <span class="comment">//选择列表，第一轮为1234</span></span><br><span class="line">    paiLie[<span class="number">0</span>] = <span class="number">1</span>;</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">1</span>; i &lt;= n; i++) &#123;</span><br><span class="line">        paiLie[i] = paiLie[i - <span class="number">1</span>] * i;</span><br><span class="line">        nums.add(i);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="string">""</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>打个断点看看效果</p>
+<p><img src="images/loading.gif" data-original="https://s1.ax1x.com/2020/09/20/woJMJs.png" alt=""></p>
+<p>完美（笑）</p>
+<br>
+
+<p>准备工作完成，下面看我们要完成的计算公式</p>
+<ol start="3">
+<li>总跳过数：之前说了第一位需要变成a1，那么前面有<strong>(n - 1)! * (a1 - 1)</strong>，(n - 1)!也就是开头为1的这一组会有多少条，起名onceSkip，对应的代码就是<code>onceSkip = paiLie[(nums.size() - 1)]</code>没错吧，至于a1 - 1，也就是跳过了多少组，起名index，也就是<code>index = k / onceSkip</code></li>
+</ol>
+<p>打个断点看看：res已经将第一位2加进来了</p>
+<p><img src="images/loading.gif" data-original="https://s1.ax1x.com/2020/09/20/woJH0S.png" alt=""></p>
+<p>需要注意的是题目给的k是现实的k，但是我们k计算相关的是nums.get(index)，用的是下标，因此一开始做了一次k - 1，自己试下就知道了。</p>
+<br>
+
+<ol start="4">
+<li>本轮结束第一位已加入res，开始确定第二位，子问题，进入前修改一下选择列表nums：去除已加入的2，修改k：k代表的是剩余几条数据，因此要减去已经跳过的index * onceSkip</li>
+</ol>
+<p>看代码</p>
+<p><img src="images/loading.gif" data-original="https://s1.ax1x.com/2020/09/20/woYP7F.png" alt=""></p>
+<p>就完成了，代码其实非常简单，就是计算别搞错了。</p>
+<p>力扣2ms，官方的代码1ms，但是思路一样的</p>
+<p><img src="images/loading.gif" data-original="https://s1.ax1x.com/2020/09/20/woYZ11.png" alt=""></p>
+<br>
+
+<p>其他回溯系列题目可以<a href="http://wjw.today/2020/09/11/数据结构与算法不迷路导航/#1-回溯">点击这里</a></p>
+
         </div>
         
-        
-        <div class="level is-mobile">
+        <div class="level is-size-7 is-uppercase">
             <div class="level-start">
                 <div class="level-item">
-                <a class="button is-size-7 is-light" href="/2020/03/09/SpringMVC%E6%8E%A5%E6%94%B6%E5%89%8D%E7%AB%AF%E5%8F%82%E6%95%B0%E4%B8%BAnull%E7%9A%84%E6%8E%A2%E7%B4%A2/#more">阅读更多</a>
+                    <span class="is-size-6 has-text-grey has-mr-7">#</span>
+                    <a class="has-link-grey -link" href="/tags/%E5%8A%9B%E6%89%A3/" rel="tag">力扣</a>, <a class="has-link-grey -link" href="/tags/%E5%9B%9E%E6%BA%AF/" rel="tag">回溯</a>
                 </div>
             </div>
         </div>
+        
         
         
     </div>
@@ -201,7 +275,19 @@
 
 
 
-
+<div class="card card-transparent">
+    <div class="level post-navigation is-flex-wrap is-mobile">
+        
+        
+        <div class="level-end">
+            <a class="level level-item has-link-grey  article-nav-next" href="/2020/09/19/%E5%9B%9E%E6%BA%AF%E6%A8%A1%E6%9D%BF/">
+                <span class="level-item">回溯模板</span>
+                <i class="level-item fas fa-chevron-right"></i>
+            </a>
+        </div>
+        
+    </div>
+</div>
 
 
 </div>
@@ -287,6 +373,43 @@
 </div>
     
         
+
+    <div class="card widget" id="toc">
+        <div class="card-content">
+            <div class="menu">
+                <h3 class="menu-label">
+                    目录
+                </h3>
+                <ul class="menu-list"><li>
+        <a class="is-flex" href="#1-暴力回溯-剪枝">
+        <!-- 目录是否自动编号 -->
+        <!-- <span class="has-mr-6">1</span> -->
+        <span>1. 暴力回溯+剪枝</span>
+        </a></li><li>
+        <a class="is-flex" href="#2-提前结束条件优化">
+        <!-- 目录是否自动编号 -->
+        <!-- <span class="has-mr-6">2</span> -->
+        <span>2. 提前结束条件优化</span>
+        </a></li><li>
+        <a class="is-flex" href="#3-数学优化">
+        <!-- 目录是否自动编号 -->
+        <!-- <span class="has-mr-6">3</span> -->
+        <span>3. 数学优化</span>
+        </a><ul class="menu-list"><li>
+        <a class="is-flex" href="#3-1-总体思路和过程">
+        <!-- 目录是否自动编号 -->
+        <!-- <span class="has-mr-6">3.1</span> -->
+        <span>3.1 总体思路和过程</span>
+        </a></li><li>
+        <a class="is-flex" href="#3-2-java实现步骤">
+        <!-- 目录是否自动编号 -->
+        <!-- <span class="has-mr-6">3.2</span> -->
+        <span>3.2 java实现步骤</span>
+        </a></li></ul></li></ul>
+            </div>
+        </div>
+    </div>
+
     
         
 <div class="card widget">
@@ -658,7 +781,7 @@
             <div class="level-start has-text-centered-mobile">
                 <a class="footer-logo is-block has-mb-6" href="/">
                 
-                    <img src="images/loading.gif" data-original="https://s1.ax1x.com/2020/07/20/UfKyGQ.md.png" alt="小温 blog" height="28">
+                    <img src="images/loading.gif" data-original="https://s1.ax1x.com/2020/07/20/UfKyGQ.md.png" alt="60-第k个排列" height="28">
                 
                 </a>
                 <p class="is-size-7">
