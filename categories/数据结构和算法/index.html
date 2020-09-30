@@ -141,6 +141,76 @@
 <div class="card">
     
     <div class="card-image">
+        <a href="/2020/09/30/1219-%E9%BB%84%E9%87%91%E7%9F%BF%E5%B7%A5/" class="image is-7by1">
+            <img class="thumbnail" src="images/loading.gif" data-original="https://source.acexy.cn/view/XOb3RDX" alt="1219 黄金矿工">
+        </a>
+    </div>
+    
+    <div class="card-content article ">
+        
+        <div class="level article-meta is-size-7 is-uppercase is-mobile is-overflow-x-auto">
+            <div class="level-left">
+                <time class="level-item has-text-grey" datetime="2020-09-30T05:50:40.000Z">2020-09-30</time>
+                
+                <div class="level-item">
+                <a class="has-link-grey -link" href="/categories/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E5%92%8C%E7%AE%97%E6%B3%95/">数据结构和算法</a>
+                </div>
+                
+                
+                <span class="level-item has-text-grey">
+                    
+                    
+                    4 分钟 读完 (大约 599 个字)
+                </span>
+                
+                
+            </div>
+        </div>
+        
+        <h1 class="title is-size-3 is-size-4-mobile has-text-weight-normal">
+            
+                <a class="has-link-black-ter" href="/2020/09/30/1219-%E9%BB%84%E9%87%91%E7%9F%BF%E5%B7%A5/">1219 黄金矿工</a>
+            
+        </h1>
+        <div class="content">
+            <p>力扣1219</p>
+<blockquote>
+<p><a href="https://leetcode-cn.com/problems/path-with-maximum-gold/">https://leetcode-cn.com/problems/path-with-maximum-gold/</a></p>
+</blockquote>
+<br>
+
+<p>另一种回溯类型：枚举型</p>
+<p>以前都是for循环里面递归的，但是有时候因为情况少（比如四个方向），for循环写起来反而麻烦</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">one_two_one_nine_</span>黄金矿工 </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Test</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">test</span><span class="params">()</span></span>&#123;</span><br><span class="line">        <span class="keyword">int</span>[][] grid = &#123;&#123;<span class="number">0</span>,<span class="number">6</span>,<span class="number">0</span>&#125;,</span><br><span class="line">                        &#123;<span class="number">5</span>,<span class="number">8</span>,<span class="number">7</span>&#125;,</span><br><span class="line">                        &#123;<span class="number">0</span>,<span class="number">9</span>,<span class="number">0</span>&#125;&#125;;</span><br><span class="line">        <span class="keyword">int</span> result = getMaximumGold(grid);</span><br><span class="line">        System.out.println(result);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">int</span> res = <span class="number">0</span>;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">getMaximumGold</span><span class="params">(<span class="keyword">int</span>[][] grid)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; grid.length; i++) &#123;</span><br><span class="line">            <span class="keyword">for</span> (<span class="keyword">int</span> j = <span class="number">0</span>; j &lt; grid[i].length; j++) &#123;</span><br><span class="line">                backtrace(grid, i, j, <span class="number">0</span>);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> res;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">backtrace</span><span class="params">(<span class="keyword">int</span>[][] grid, <span class="keyword">int</span> x, <span class="keyword">int</span> y, <span class="keyword">int</span> money)</span></span>&#123;</span><br><span class="line">        <span class="keyword">if</span> (!check(grid, x, y)) <span class="keyword">return</span> ;</span><br><span class="line">        <span class="keyword">if</span> (grid[x][y] == <span class="number">0</span>)&#123;   <span class="comment">//结束条件：四面为0，实际上是踏过去之后所在地为0</span></span><br><span class="line">            res = Math.max(res, money);</span><br><span class="line">            <span class="keyword">return</span> ;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="comment">//做选择</span></span><br><span class="line">        <span class="keyword">int</span> stored = grid[x][y];</span><br><span class="line">        money += stored;</span><br><span class="line">        grid[x][y] = <span class="number">0</span>; <span class="comment">//不走回头路</span></span><br><span class="line">        <span class="comment">//for循环有限，枚举代替递归</span></span><br><span class="line">        backtrace(grid, x - <span class="number">1</span>, y, money);</span><br><span class="line">        backtrace(grid, x, y - <span class="number">1</span>, money);</span><br><span class="line">        backtrace(grid, x + <span class="number">1</span>, y, money);</span><br><span class="line">        backtrace(grid, x, y + <span class="number">1</span>, money);</span><br><span class="line">        <span class="comment">//撤销</span></span><br><span class="line">        money -= stored;</span><br><span class="line">        grid[x][y] = stored;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">boolean</span> <span class="title">check</span><span class="params">(<span class="keyword">int</span>[][] grid, <span class="keyword">int</span> x, <span class="keyword">int</span> y)</span></span>&#123;</span><br><span class="line">        <span class="keyword">return</span> (x &gt;= <span class="number">0</span> &amp;&amp; x &lt; grid.length &amp;&amp; y &gt;= <span class="number">0</span> &amp;&amp; y &lt; grid[<span class="number">0</span>].length );</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>对比以前的回溯，仍然使用一个变量保存之前的状态，只是将for改成了枚举，并在枚举递归之后撤销之前的状态。同样的还有另一道题</p>
+<br>
+
+<p>2020度小满金融秋招笔试题–坚强的小昆虫</p>
+<p><img src="images/loading.gif" data-original="https://s1.ax1x.com/2020/09/30/0nqUbR.png" alt=""></p>
+<p>直接给出java代码</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">duxiaoman_002_</span>坚强的小昆虫 </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">        Scanner sc = <span class="keyword">new</span> Scanner(System.in);</span><br><span class="line">        <span class="keyword">int</span> group = sc.nextInt();</span><br><span class="line">        sc.nextLine();</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; group; i++) &#123;   <span class="comment">//每一组</span></span><br><span class="line">            flag = <span class="keyword">false</span>;</span><br><span class="line">            res = Integer.MAX_VALUE;</span><br><span class="line">            String[] temp = sc.nextLine().split(<span class="string">" "</span>);</span><br><span class="line">            <span class="keyword">int</span> n = Integer.parseInt(temp[<span class="number">0</span>]);</span><br><span class="line">            <span class="keyword">int</span> m = Integer.parseInt(temp[<span class="number">1</span>]);</span><br><span class="line">            <span class="keyword">int</span> x = <span class="number">0</span>, y = <span class="number">0</span>;   <span class="comment">//初始位置</span></span><br><span class="line">            <span class="keyword">char</span>[][] matrix = <span class="keyword">new</span> <span class="keyword">char</span>[n][m];</span><br><span class="line">            <span class="keyword">for</span> (<span class="keyword">int</span> j = <span class="number">0</span>; j &lt; n; j++) &#123;</span><br><span class="line">                matrix[j] = sc.nextLine().toCharArray();</span><br><span class="line">                <span class="keyword">for</span> (<span class="keyword">int</span> k = <span class="number">0</span>; k &lt; matrix[j].length; k++) &#123;</span><br><span class="line">                    <span class="keyword">if</span> (matrix[j][k] == <span class="string">'@'</span>)&#123;</span><br><span class="line">                        x = j;</span><br><span class="line">                        y = k;</span><br><span class="line">                    &#125;</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="comment">//处理完输入，进入正式逻辑</span></span><br><span class="line">            backtrace(matrix, x, y, <span class="number">0</span>);</span><br><span class="line">            <span class="keyword">if</span> (!flag) res = -<span class="number">1</span>;</span><br><span class="line">            System.out.println(res);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">int</span> res = Integer.MAX_VALUE;</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">boolean</span> flag = <span class="keyword">false</span>;</span><br><span class="line"></span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * 回溯</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@param</span> matrix</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">backtrace</span><span class="params">(<span class="keyword">char</span>[][] matrix, <span class="keyword">int</span> x, <span class="keyword">int</span> y, <span class="keyword">int</span> num)</span></span>&#123;</span><br><span class="line">        <span class="keyword">if</span> (matrix[x][y] == <span class="string">'#'</span>) <span class="keyword">return</span> ;</span><br><span class="line">        <span class="keyword">if</span> (matrix[x][y] == <span class="string">'*'</span>) num++;</span><br><span class="line">        <span class="comment">//结束条件</span></span><br><span class="line">        <span class="keyword">if</span> (x == <span class="number">0</span> || y == <span class="number">0</span> || x == matrix.length - <span class="number">1</span> || y == matrix[<span class="number">0</span>].length - <span class="number">1</span>)&#123;</span><br><span class="line">            res = Math.min(res, num);</span><br><span class="line">            flag = <span class="keyword">true</span>;</span><br><span class="line">            <span class="keyword">return</span> ;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="comment">//四次枚举代替for循环</span></span><br><span class="line">        <span class="keyword">char</span> stored = matrix[x][y] == <span class="string">'@'</span> ? <span class="string">'.'</span> : matrix[x][y];</span><br><span class="line">        matrix[x][y] = <span class="string">'#'</span>; <span class="comment">//不走回头路！</span></span><br><span class="line">        backtrace(matrix, x - <span class="number">1</span>, y, num);   <span class="comment">//上</span></span><br><span class="line">        backtrace(matrix, x, y - <span class="number">1</span>, num);   <span class="comment">//左</span></span><br><span class="line">        backtrace(matrix, x + <span class="number">1</span>, y, num);   <span class="comment">//下</span></span><br><span class="line">        backtrace(matrix, x, y + <span class="number">1</span>, num);   <span class="comment">//右</span></span><br><span class="line">        matrix[x][y] = stored;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>同样的也是使用stored保存之前的状态，相比传统的回溯，要注意的改动并不多</p>
+
+        </div>
+        
+        
+        
+    </div>
+</div>
+
+
+
+
+
+
+
+
+    
+<div class="card">
+    
+    <div class="card-image">
         <a href="/2020/09/19/60-%E7%AC%ACk%E4%B8%AA%E6%8E%92%E5%88%97/" class="image is-7by1">
             <img class="thumbnail" src="images/loading.gif" data-original="https://wx1.sbimg.cn/2020/09/18/GDRSO.md.jpg" alt="60-第k个排列">
         </a>
@@ -711,70 +781,6 @@
 
 
 
-    
-<div class="card">
-    
-    <div class="card-image">
-        <a href="/2020/09/09/739-%E6%AF%8F%E6%97%A5%E6%B8%A9%E5%BA%A6/" class="image is-7by1">
-            <img class="thumbnail" src="images/loading.gif" data-original="https://wx2.sbimg.cn/2020/07/30/P7nF6.md.jpg" alt="739-每日温度">
-        </a>
-    </div>
-    
-    <div class="card-content article ">
-        
-        <div class="level article-meta is-size-7 is-uppercase is-mobile is-overflow-x-auto">
-            <div class="level-left">
-                <time class="level-item has-text-grey" datetime="2020-09-09T07:29:44.000Z">2020-09-09</time>
-                
-                <div class="level-item">
-                <a class="has-link-grey -link" href="/categories/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E5%92%8C%E7%AE%97%E6%B3%95/">数据结构和算法</a>
-                </div>
-                
-                
-                <span class="level-item has-text-grey">
-                    
-                    
-                    3 分钟 读完 (大约 480 个字)
-                </span>
-                
-                
-            </div>
-        </div>
-        
-        <h1 class="title is-size-3 is-size-4-mobile has-text-weight-normal">
-            
-                <a class="has-link-black-ter" href="/2020/09/09/739-%E6%AF%8F%E6%97%A5%E6%B8%A9%E5%BA%A6/">739-每日温度</a>
-            
-        </h1>
-        <div class="content">
-            <p>力扣735</p>
-<blockquote>
-<p><a href="https://leetcode-cn.com/problems/daily-temperatures/submissions/">https://leetcode-cn.com/problems/daily-temperatures/submissions/</a></p>
-</blockquote>
-<p>自从上次做了最大矩形单调栈题目之后，最近笔试见了两题单调栈的题目了，心理作用？？赶紧补吧…</p>
-<p>题目描述的不是很清楚（可以看英文版比较明白），总之，是说往后找到比当前大的（温度高的），然后记录下标距离。</p>
-        </div>
-        
-        
-        <div class="level is-mobile">
-            <div class="level-start">
-                <div class="level-item">
-                <a class="button is-size-7 is-light" href="/2020/09/09/739-%E6%AF%8F%E6%97%A5%E6%B8%A9%E5%BA%A6/#more">阅读更多</a>
-                </div>
-            </div>
-        </div>
-        
-        
-    </div>
-</div>
-
-
-
-
-
-
-
-
 
     
 <div class="card card-transparent">
@@ -837,7 +843,7 @@
                     </p>
                     <a href="/archives">
                         <p class="title has-text-weight-normal">
-                            46
+                            48
                         </p>
                     </a>
                 </div>
@@ -966,7 +972,7 @@
                 <span class="level-item">数据结构和算法</span>
             </span>
             <span class="level-end">
-                <span class="level-item tag">24</span>
+                <span class="level-item tag">25</span>
             </span>
         </a></li><li>
         <a class="level is-marginless" href="/categories/%E7%8E%84%E5%AD%A6/">
@@ -982,7 +988,7 @@
                 <span class="level-item">生活随笔</span>
             </span>
             <span class="level-end">
-                <span class="level-item tag">1</span>
+                <span class="level-item tag">2</span>
             </span>
         </a></li><li>
         <a class="level is-marginless" href="/categories/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/">
@@ -1009,6 +1015,44 @@
         
         <article class="media">
             
+            <a href="/2020/09/30/1219-%E9%BB%84%E9%87%91%E7%9F%BF%E5%B7%A5/" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="images/loading.gif" data-original="https://source.acexy.cn/view/XOb3RDX" alt="1219 黄金矿工">
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2020-09-30T05:50:40.000Z">2020-09-30</time></div>
+                    <a href="/2020/09/30/1219-%E9%BB%84%E9%87%91%E7%9F%BF%E5%B7%A5/" class="title has-link-black-ter is-size-6 has-text-weight-normal">1219 黄金矿工</a>
+                    <p class="is-size-7 is-uppercase">
+                        <a class="has-link-grey -link" href="/categories/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E5%92%8C%E7%AE%97%E6%B3%95/">数据结构和算法</a>
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+        <article class="media">
+            
+            <a href="/2020/09/28/%E4%B9%9D%E6%9C%88%E9%9A%8F%E7%AC%94%20%E4%BC%BC%E4%B9%8E%E4%B8%80%E7%9B%B4%E5%9C%A8%E5%81%9A%E6%B2%A1%E6%9C%89%E6%84%8F%E4%B9%89%E7%9A%84%E4%BA%8B/" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="images/loading.gif" data-original="https://wx1.sbimg.cn/2020/09/28/GYgtn.md.jpg" alt="九月随笔 似乎一直在做没有意义的事">
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2020-09-28T13:46:48.000Z">2020-09-28</time></div>
+                    <a href="/2020/09/28/%E4%B9%9D%E6%9C%88%E9%9A%8F%E7%AC%94%20%E4%BC%BC%E4%B9%8E%E4%B8%80%E7%9B%B4%E5%9C%A8%E5%81%9A%E6%B2%A1%E6%9C%89%E6%84%8F%E4%B9%89%E7%9A%84%E4%BA%8B/" class="title has-link-black-ter is-size-6 has-text-weight-normal">九月随笔 似乎一直在做没有意义的事</a>
+                    <p class="is-size-7 is-uppercase">
+                        <a class="has-link-grey -link" href="/categories/%E7%94%9F%E6%B4%BB%E9%9A%8F%E7%AC%94/">生活随笔</a>
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+        <article class="media">
+            
             <a href="/2020/09/20/%E5%A4%A7%E5%88%9B%E8%AE%BA%E6%96%87/" class="media-left">
                 <p class="image is-64x64">
                     <img class="thumbnail" src="images/loading.gif" data-original="https://wx1.sbimg.cn/2020/09/18/GDdoe.md.jpg" alt="大创论文">
@@ -1064,44 +1108,6 @@
             </div>
         </article>
         
-        <article class="media">
-            
-            <a href="/2020/09/17/40-%E7%BB%84%E5%90%88%E6%80%BB%E5%92%8CII/" class="media-left">
-                <p class="image is-64x64">
-                    <img class="thumbnail" src="images/loading.gif" data-original="https://wx1.sbimg.cn/2020/09/18/GDBH6.md.jpg" alt="40-组合总和II">
-                </p>
-            </a>
-            
-            <div class="media-content">
-                <div class="content">
-                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2020-09-17T15:40:20.000Z">2020-09-17</time></div>
-                    <a href="/2020/09/17/40-%E7%BB%84%E5%90%88%E6%80%BB%E5%92%8CII/" class="title has-link-black-ter is-size-6 has-text-weight-normal">40-组合总和II</a>
-                    <p class="is-size-7 is-uppercase">
-                        <a class="has-link-grey -link" href="/categories/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E5%92%8C%E7%AE%97%E6%B3%95/">数据结构和算法</a>
-                    </p>
-                </div>
-            </div>
-        </article>
-        
-        <article class="media">
-            
-            <a href="/2020/09/16/131-%E5%88%86%E5%89%B2%E5%9B%9E%E6%96%87%E4%B8%B2/" class="media-left">
-                <p class="image is-64x64">
-                    <img class="thumbnail" src="images/loading.gif" data-original="https://s1.ax1x.com/2020/07/20/UfQPtU.md.jpg" alt="131-分割回文串">
-                </p>
-            </a>
-            
-            <div class="media-content">
-                <div class="content">
-                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2020-09-16T15:12:21.000Z">2020-09-16</time></div>
-                    <a href="/2020/09/16/131-%E5%88%86%E5%89%B2%E5%9B%9E%E6%96%87%E4%B8%B2/" class="title has-link-black-ter is-size-6 has-text-weight-normal">131-分割回文串</a>
-                    <p class="is-size-7 is-uppercase">
-                        <a class="has-link-grey -link" href="/categories/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E5%92%8C%E7%AE%97%E6%B3%95/">数据结构和算法</a>
-                    </p>
-                </div>
-            </div>
-        </article>
-        
     </div>
 </div>
         
@@ -1110,7 +1116,7 @@
         <h3 class="menu-label">
             标签云
         </h3>
-        <a href="/tags/DL-ML/" style="font-size: 10px;">DL/ML</a> <a href="/tags/eureka/" style="font-size: 10px;">eureka</a> <a href="/tags/fastDFS/" style="font-size: 10px;">fastDFS</a> <a href="/tags/feign/" style="font-size: 10px;">feign</a> <a href="/tags/http/" style="font-size: 10px;">http</a> <a href="/tags/hystrix/" style="font-size: 10px;">hystrix</a> <a href="/tags/json/" style="font-size: 10px;">json</a> <a href="/tags/lintcode/" style="font-size: 10px;">lintcode</a> <a href="/tags/markdown/" style="font-size: 10px;">markdown</a> <a href="/tags/maven/" style="font-size: 10px;">maven</a> <a href="/tags/mysql/" style="font-size: 10px;">mysql</a> <a href="/tags/ribbon/" style="font-size: 10px;">ribbon</a> <a href="/tags/spring/" style="font-size: 12px;">spring</a> <a href="/tags/springboot/" style="font-size: 10px;">springboot</a> <a href="/tags/springcloud/" style="font-size: 12px;">springcloud</a> <a href="/tags/springmvc/" style="font-size: 14px;">springmvc</a> <a href="/tags/zuul/" style="font-size: 10px;">zuul</a> <a href="/tags/%E4%BA%8C%E5%8F%89%E6%A0%91/" style="font-size: 10px;">二叉树</a> <a href="/tags/%E4%BA%A4%E4%BA%92/" style="font-size: 10px;">交互</a> <a href="/tags/%E5%89%91%E6%8C%87offer/" style="font-size: 10px;">剑指offer</a> <a href="/tags/%E5%8A%9B%E6%89%A3/" style="font-size: 20px;">力扣</a> <a href="/tags/%E5%8A%A0%E5%AF%86/" style="font-size: 10px;">加密</a> <a href="/tags/%E5%8A%A8%E6%80%81%E8%A7%84%E5%88%92/" style="font-size: 12px;">动态规划</a> <a href="/tags/%E5%8D%95%E8%B0%83%E6%A0%88/" style="font-size: 14px;">单调栈</a> <a href="/tags/%E5%9B%9E%E6%BA%AF/" style="font-size: 14px;">回溯</a> <a href="/tags/%E5%9D%91/" style="font-size: 10px;">坑</a> <a href="/tags/%E5%AD%97%E7%AC%A6%E4%B8%B2/" style="font-size: 10px;">字符串</a> <a href="/tags/%E5%AD%A6%E4%B9%A0%E8%AE%B0%E5%BD%95/" style="font-size: 10px;">学习记录</a> <a href="/tags/%E5%BC%80%E5%8F%91/" style="font-size: 18px;">开发</a> <a href="/tags/%E6%8B%9B%E8%81%98%E7%AC%94%E8%AF%95/" style="font-size: 10px;">招聘笔试</a> <a href="/tags/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/" style="font-size: 14px;">数据结构</a> <a href="/tags/%E6%A0%88/" style="font-size: 10px;">栈</a> <a href="/tags/%E6%A0%91/" style="font-size: 16px;">树</a> <a href="/tags/%E7%AC%94%E8%AF%95/" style="font-size: 10px;">笔试</a> <a href="/tags/%E7%AC%94%E8%AF%95%E9%9D%A2%E8%AF%95/" style="font-size: 12px;">笔试面试</a> <a href="/tags/%E7%AE%97%E6%B3%95/" style="font-size: 12px;">算法</a> <a href="/tags/%E9%80%92%E5%BD%92/" style="font-size: 10px;">递归</a>
+        <a href="/tags/DL-ML/" style="font-size: 10px;">DL/ML</a> <a href="/tags/eureka/" style="font-size: 10px;">eureka</a> <a href="/tags/fastDFS/" style="font-size: 10px;">fastDFS</a> <a href="/tags/feign/" style="font-size: 10px;">feign</a> <a href="/tags/http/" style="font-size: 10px;">http</a> <a href="/tags/hystrix/" style="font-size: 10px;">hystrix</a> <a href="/tags/json/" style="font-size: 10px;">json</a> <a href="/tags/lintcode/" style="font-size: 10px;">lintcode</a> <a href="/tags/markdown/" style="font-size: 10px;">markdown</a> <a href="/tags/maven/" style="font-size: 10px;">maven</a> <a href="/tags/mysql/" style="font-size: 10px;">mysql</a> <a href="/tags/ribbon/" style="font-size: 10px;">ribbon</a> <a href="/tags/spring/" style="font-size: 11.67px;">spring</a> <a href="/tags/springboot/" style="font-size: 10px;">springboot</a> <a href="/tags/springcloud/" style="font-size: 11.67px;">springcloud</a> <a href="/tags/springmvc/" style="font-size: 13.33px;">springmvc</a> <a href="/tags/zuul/" style="font-size: 10px;">zuul</a> <a href="/tags/%E4%BA%8C%E5%8F%89%E6%A0%91/" style="font-size: 10px;">二叉树</a> <a href="/tags/%E4%BA%A4%E4%BA%92/" style="font-size: 10px;">交互</a> <a href="/tags/%E5%89%91%E6%8C%87offer/" style="font-size: 10px;">剑指offer</a> <a href="/tags/%E5%8A%9B%E6%89%A3/" style="font-size: 20px;">力扣</a> <a href="/tags/%E5%8A%A0%E5%AF%86/" style="font-size: 10px;">加密</a> <a href="/tags/%E5%8A%A8%E6%80%81%E8%A7%84%E5%88%92/" style="font-size: 11.67px;">动态规划</a> <a href="/tags/%E5%8D%95%E8%B0%83%E6%A0%88/" style="font-size: 13.33px;">单调栈</a> <a href="/tags/%E5%9B%9E%E6%BA%AF/" style="font-size: 15px;">回溯</a> <a href="/tags/%E5%9D%91/" style="font-size: 10px;">坑</a> <a href="/tags/%E5%AD%97%E7%AC%A6%E4%B8%B2/" style="font-size: 10px;">字符串</a> <a href="/tags/%E5%AD%A6%E4%B9%A0%E8%AE%B0%E5%BD%95/" style="font-size: 10px;">学习记录</a> <a href="/tags/%E5%BC%80%E5%8F%91/" style="font-size: 18.33px;">开发</a> <a href="/tags/%E6%8B%9B%E8%81%98%E7%AC%94%E8%AF%95/" style="font-size: 10px;">招聘笔试</a> <a href="/tags/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/" style="font-size: 13.33px;">数据结构</a> <a href="/tags/%E6%A0%88/" style="font-size: 10px;">栈</a> <a href="/tags/%E6%A0%91/" style="font-size: 16.67px;">树</a> <a href="/tags/%E7%AC%94%E8%AF%95/" style="font-size: 10px;">笔试</a> <a href="/tags/%E7%AC%94%E8%AF%95%E9%9D%A2%E8%AF%95/" style="font-size: 11.67px;">笔试面试</a> <a href="/tags/%E7%AE%97%E6%B3%95/" style="font-size: 11.67px;">算法</a> <a href="/tags/%E9%80%92%E5%BD%92/" style="font-size: 10px;">递归</a>
     </div>
 </div>
         
@@ -1133,6 +1139,44 @@
         
         <article class="media">
             
+            <a href="/2020/09/30/1219-%E9%BB%84%E9%87%91%E7%9F%BF%E5%B7%A5/" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="images/loading.gif" data-original="https://source.acexy.cn/view/XOb3RDX" alt="1219 黄金矿工">
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2020-09-30T05:50:40.000Z">2020-09-30</time></div>
+                    <a href="/2020/09/30/1219-%E9%BB%84%E9%87%91%E7%9F%BF%E5%B7%A5/" class="title has-link-black-ter is-size-6 has-text-weight-normal">1219 黄金矿工</a>
+                    <p class="is-size-7 is-uppercase">
+                        <a class="has-link-grey -link" href="/categories/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E5%92%8C%E7%AE%97%E6%B3%95/">数据结构和算法</a>
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+        <article class="media">
+            
+            <a href="/2020/09/28/%E4%B9%9D%E6%9C%88%E9%9A%8F%E7%AC%94%20%E4%BC%BC%E4%B9%8E%E4%B8%80%E7%9B%B4%E5%9C%A8%E5%81%9A%E6%B2%A1%E6%9C%89%E6%84%8F%E4%B9%89%E7%9A%84%E4%BA%8B/" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="images/loading.gif" data-original="https://wx1.sbimg.cn/2020/09/28/GYgtn.md.jpg" alt="九月随笔 似乎一直在做没有意义的事">
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2020-09-28T13:46:48.000Z">2020-09-28</time></div>
+                    <a href="/2020/09/28/%E4%B9%9D%E6%9C%88%E9%9A%8F%E7%AC%94%20%E4%BC%BC%E4%B9%8E%E4%B8%80%E7%9B%B4%E5%9C%A8%E5%81%9A%E6%B2%A1%E6%9C%89%E6%84%8F%E4%B9%89%E7%9A%84%E4%BA%8B/" class="title has-link-black-ter is-size-6 has-text-weight-normal">九月随笔 似乎一直在做没有意义的事</a>
+                    <p class="is-size-7 is-uppercase">
+                        <a class="has-link-grey -link" href="/categories/%E7%94%9F%E6%B4%BB%E9%9A%8F%E7%AC%94/">生活随笔</a>
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+        <article class="media">
+            
             <a href="/2020/09/20/%E5%A4%A7%E5%88%9B%E8%AE%BA%E6%96%87/" class="media-left">
                 <p class="image is-64x64">
                     <img class="thumbnail" src="images/loading.gif" data-original="https://wx1.sbimg.cn/2020/09/18/GDdoe.md.jpg" alt="大创论文">
@@ -1188,44 +1232,6 @@
             </div>
         </article>
         
-        <article class="media">
-            
-            <a href="/2020/09/17/40-%E7%BB%84%E5%90%88%E6%80%BB%E5%92%8CII/" class="media-left">
-                <p class="image is-64x64">
-                    <img class="thumbnail" src="images/loading.gif" data-original="https://wx1.sbimg.cn/2020/09/18/GDBH6.md.jpg" alt="40-组合总和II">
-                </p>
-            </a>
-            
-            <div class="media-content">
-                <div class="content">
-                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2020-09-17T15:40:20.000Z">2020-09-17</time></div>
-                    <a href="/2020/09/17/40-%E7%BB%84%E5%90%88%E6%80%BB%E5%92%8CII/" class="title has-link-black-ter is-size-6 has-text-weight-normal">40-组合总和II</a>
-                    <p class="is-size-7 is-uppercase">
-                        <a class="has-link-grey -link" href="/categories/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E5%92%8C%E7%AE%97%E6%B3%95/">数据结构和算法</a>
-                    </p>
-                </div>
-            </div>
-        </article>
-        
-        <article class="media">
-            
-            <a href="/2020/09/16/131-%E5%88%86%E5%89%B2%E5%9B%9E%E6%96%87%E4%B8%B2/" class="media-left">
-                <p class="image is-64x64">
-                    <img class="thumbnail" src="images/loading.gif" data-original="https://s1.ax1x.com/2020/07/20/UfQPtU.md.jpg" alt="131-分割回文串">
-                </p>
-            </a>
-            
-            <div class="media-content">
-                <div class="content">
-                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2020-09-16T15:12:21.000Z">2020-09-16</time></div>
-                    <a href="/2020/09/16/131-%E5%88%86%E5%89%B2%E5%9B%9E%E6%96%87%E4%B8%B2/" class="title has-link-black-ter is-size-6 has-text-weight-normal">131-分割回文串</a>
-                    <p class="is-size-7 is-uppercase">
-                        <a class="has-link-grey -link" href="/categories/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E5%92%8C%E7%AE%97%E6%B3%95/">数据结构和算法</a>
-                    </p>
-                </div>
-            </div>
-        </article>
-        
     </div>
 </div>
     
@@ -1234,7 +1240,7 @@
         <h3 class="menu-label">
             标签云
         </h3>
-        <a href="/tags/DL-ML/" style="font-size: 10px;">DL/ML</a> <a href="/tags/eureka/" style="font-size: 10px;">eureka</a> <a href="/tags/fastDFS/" style="font-size: 10px;">fastDFS</a> <a href="/tags/feign/" style="font-size: 10px;">feign</a> <a href="/tags/http/" style="font-size: 10px;">http</a> <a href="/tags/hystrix/" style="font-size: 10px;">hystrix</a> <a href="/tags/json/" style="font-size: 10px;">json</a> <a href="/tags/lintcode/" style="font-size: 10px;">lintcode</a> <a href="/tags/markdown/" style="font-size: 10px;">markdown</a> <a href="/tags/maven/" style="font-size: 10px;">maven</a> <a href="/tags/mysql/" style="font-size: 10px;">mysql</a> <a href="/tags/ribbon/" style="font-size: 10px;">ribbon</a> <a href="/tags/spring/" style="font-size: 12px;">spring</a> <a href="/tags/springboot/" style="font-size: 10px;">springboot</a> <a href="/tags/springcloud/" style="font-size: 12px;">springcloud</a> <a href="/tags/springmvc/" style="font-size: 14px;">springmvc</a> <a href="/tags/zuul/" style="font-size: 10px;">zuul</a> <a href="/tags/%E4%BA%8C%E5%8F%89%E6%A0%91/" style="font-size: 10px;">二叉树</a> <a href="/tags/%E4%BA%A4%E4%BA%92/" style="font-size: 10px;">交互</a> <a href="/tags/%E5%89%91%E6%8C%87offer/" style="font-size: 10px;">剑指offer</a> <a href="/tags/%E5%8A%9B%E6%89%A3/" style="font-size: 20px;">力扣</a> <a href="/tags/%E5%8A%A0%E5%AF%86/" style="font-size: 10px;">加密</a> <a href="/tags/%E5%8A%A8%E6%80%81%E8%A7%84%E5%88%92/" style="font-size: 12px;">动态规划</a> <a href="/tags/%E5%8D%95%E8%B0%83%E6%A0%88/" style="font-size: 14px;">单调栈</a> <a href="/tags/%E5%9B%9E%E6%BA%AF/" style="font-size: 14px;">回溯</a> <a href="/tags/%E5%9D%91/" style="font-size: 10px;">坑</a> <a href="/tags/%E5%AD%97%E7%AC%A6%E4%B8%B2/" style="font-size: 10px;">字符串</a> <a href="/tags/%E5%AD%A6%E4%B9%A0%E8%AE%B0%E5%BD%95/" style="font-size: 10px;">学习记录</a> <a href="/tags/%E5%BC%80%E5%8F%91/" style="font-size: 18px;">开发</a> <a href="/tags/%E6%8B%9B%E8%81%98%E7%AC%94%E8%AF%95/" style="font-size: 10px;">招聘笔试</a> <a href="/tags/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/" style="font-size: 14px;">数据结构</a> <a href="/tags/%E6%A0%88/" style="font-size: 10px;">栈</a> <a href="/tags/%E6%A0%91/" style="font-size: 16px;">树</a> <a href="/tags/%E7%AC%94%E8%AF%95/" style="font-size: 10px;">笔试</a> <a href="/tags/%E7%AC%94%E8%AF%95%E9%9D%A2%E8%AF%95/" style="font-size: 12px;">笔试面试</a> <a href="/tags/%E7%AE%97%E6%B3%95/" style="font-size: 12px;">算法</a> <a href="/tags/%E9%80%92%E5%BD%92/" style="font-size: 10px;">递归</a>
+        <a href="/tags/DL-ML/" style="font-size: 10px;">DL/ML</a> <a href="/tags/eureka/" style="font-size: 10px;">eureka</a> <a href="/tags/fastDFS/" style="font-size: 10px;">fastDFS</a> <a href="/tags/feign/" style="font-size: 10px;">feign</a> <a href="/tags/http/" style="font-size: 10px;">http</a> <a href="/tags/hystrix/" style="font-size: 10px;">hystrix</a> <a href="/tags/json/" style="font-size: 10px;">json</a> <a href="/tags/lintcode/" style="font-size: 10px;">lintcode</a> <a href="/tags/markdown/" style="font-size: 10px;">markdown</a> <a href="/tags/maven/" style="font-size: 10px;">maven</a> <a href="/tags/mysql/" style="font-size: 10px;">mysql</a> <a href="/tags/ribbon/" style="font-size: 10px;">ribbon</a> <a href="/tags/spring/" style="font-size: 11.67px;">spring</a> <a href="/tags/springboot/" style="font-size: 10px;">springboot</a> <a href="/tags/springcloud/" style="font-size: 11.67px;">springcloud</a> <a href="/tags/springmvc/" style="font-size: 13.33px;">springmvc</a> <a href="/tags/zuul/" style="font-size: 10px;">zuul</a> <a href="/tags/%E4%BA%8C%E5%8F%89%E6%A0%91/" style="font-size: 10px;">二叉树</a> <a href="/tags/%E4%BA%A4%E4%BA%92/" style="font-size: 10px;">交互</a> <a href="/tags/%E5%89%91%E6%8C%87offer/" style="font-size: 10px;">剑指offer</a> <a href="/tags/%E5%8A%9B%E6%89%A3/" style="font-size: 20px;">力扣</a> <a href="/tags/%E5%8A%A0%E5%AF%86/" style="font-size: 10px;">加密</a> <a href="/tags/%E5%8A%A8%E6%80%81%E8%A7%84%E5%88%92/" style="font-size: 11.67px;">动态规划</a> <a href="/tags/%E5%8D%95%E8%B0%83%E6%A0%88/" style="font-size: 13.33px;">单调栈</a> <a href="/tags/%E5%9B%9E%E6%BA%AF/" style="font-size: 15px;">回溯</a> <a href="/tags/%E5%9D%91/" style="font-size: 10px;">坑</a> <a href="/tags/%E5%AD%97%E7%AC%A6%E4%B8%B2/" style="font-size: 10px;">字符串</a> <a href="/tags/%E5%AD%A6%E4%B9%A0%E8%AE%B0%E5%BD%95/" style="font-size: 10px;">学习记录</a> <a href="/tags/%E5%BC%80%E5%8F%91/" style="font-size: 18.33px;">开发</a> <a href="/tags/%E6%8B%9B%E8%81%98%E7%AC%94%E8%AF%95/" style="font-size: 10px;">招聘笔试</a> <a href="/tags/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/" style="font-size: 13.33px;">数据结构</a> <a href="/tags/%E6%A0%88/" style="font-size: 10px;">栈</a> <a href="/tags/%E6%A0%91/" style="font-size: 16.67px;">树</a> <a href="/tags/%E7%AC%94%E8%AF%95/" style="font-size: 10px;">笔试</a> <a href="/tags/%E7%AC%94%E8%AF%95%E9%9D%A2%E8%AF%95/" style="font-size: 11.67px;">笔试面试</a> <a href="/tags/%E7%AE%97%E6%B3%95/" style="font-size: 11.67px;">算法</a> <a href="/tags/%E9%80%92%E5%BD%92/" style="font-size: 10px;">递归</a>
     </div>
 </div>
     
