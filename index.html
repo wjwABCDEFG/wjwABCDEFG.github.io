@@ -130,6 +130,106 @@
 <div class="card">
     
     <div class="card-image">
+        <a href="/2020/10/09/redis%EF%BC%88%E9%9D%A2%E8%AF%95%E5%90%91%EF%BC%89/" class="image is-7by1">
+            <img class="thumbnail" src="images/loading.gif" data-original="https://source.acexy.cn/view/XULWDpi" alt="redis（面试向）">
+        </a>
+    </div>
+    
+    <div class="card-content article ">
+        
+        <div class="level article-meta is-size-7 is-uppercase is-mobile is-overflow-x-auto">
+            <div class="level-left">
+                <time class="level-item has-text-grey" datetime="2020-10-09T01:23:26.000Z">2020-10-09</time>
+                
+                <div class="level-item">
+                <a class="has-link-grey -link" href="/categories/redis/">redis</a>
+                </div>
+                
+                
+                <span class="level-item has-text-grey">
+                    
+                    
+                    11 分钟 读完 (大约 1604 个字)
+                </span>
+                
+                
+            </div>
+        </div>
+        
+        <h1 class="title is-size-3 is-size-4-mobile has-text-weight-normal">
+            
+                <a class="has-link-black-ter" href="/2020/10/09/redis%EF%BC%88%E9%9D%A2%E8%AF%95%E5%90%91%EF%BC%89/">redis（面试向）</a>
+            
+        </h1>
+        <div class="content">
+            <h1 id="1-数据存储和查找发展"><a href="#1-数据存储和查找发展" class="headerlink" title="1. 数据存储和查找发展"></a>1. 数据存储和查找发展</h1><p><strong>文件</strong>：慢，因为全量扫描-&gt;IO，因此慢</p>
+<p><strong>mysql</strong>：为什么数据库存东西，因为快，为什么，因为做了分块(datapage)，然后对这些块做了索引，所以我们先查索引，找到对应是哪块，然后只查这一块，就快很多。那要扫描索引？，将索引加载进内存并且采用B+树结构可以避免扫描整个索引。</p>
+<p><em>面试题</em>：如果表很大，增删改查会变慢吗？数据量大了，增删改是一定会变慢的。查询：得分场景，即便表很大，但是如果一个客户端发送一个简单的查询请求，索引命中了情况下，查询还是毫秒级的。但是如果高并发情况下，查询是变慢的，因为查询时间应该包括寻址时间和磁盘io时间，即使寻址是毫秒级的，但是由于带宽，吞吐等硬盘限制，高并发场景下会受到硬盘的限制而变得很慢，否则也不会出现分布式微服务上来就是redis这种事情</p>
+<p><strong>redis</strong>：综上所述，并发情况下限制主要在硬盘，那所有数据存在内存中呢？那当然快了！还真有这么一种内存型关系数据库：SAP HANA，可是内存它贵呀，动不动就上T的数据存在内存中太烧钱了。redis的产生理念：其实只有一小部分数据频繁被访问（被称为热点数据），很大一部分数据都是不经常用的就存在mysql里，因此使用redis一定要明确使用场景：热点数据。</p>
+<br>
+
+<h1 id="2-redis特点"><a href="#2-redis特点" class="headerlink" title="2. redis特点"></a>2. redis特点</h1><p>面试可不要只说一点啊，看我的！</p>
+<ul>
+<li><p>NoSQL系列，key-value形式，内存数据库：NoSQL是非关系型数据库的统称，redis以键值对的形式存在，在内存中速度会比mysql快几个量级。为什么redis是key-value型的而不是sql形式：不妨根据上面所说的大胆猜测一下，关系型数据库中通常会接触到范式，A表外键为B表的主键，而redis设计初衷就是只存一部分热点数据，因此无法确定是否包含在B中，因此redis应该只关注自身，不关注依赖。</p>
+</li>
+<li><p>有自己的数据类型，实现了计算向数据移动（这个词就很专业）：有String, Set, List, Hash, Sortedset五种类型，<strong>并且每种类型有自己的本地方法</strong>，对比memcache（所有的value都是string类型并通过json转换），如果需要取出数组第二个元素，memcache需要将整个list字符串返回，调用方拿到数据转换成列表再取第二个元素，redis可以读取list并通过lindex命令取出第二个元素并返回，也就是先计算再io，这种<strong>计算向数据移动</strong>的思想在map-reduce中有体现，可以减少传输的数据量，很快。</p>
+</li>
+<li><p>工作线程是单线程的，看下面第三点</p>
+</li>
+</ul>
+<br>
+
+<h1 id="3-redis的NIO和线程模型"><a href="#3-redis的NIO和线程模型" class="headerlink" title="3. redis的NIO和线程模型"></a>3. redis的NIO和线程模型</h1><p>redis是单线程的还是多线程的？</p>
+<p>用户对redis操作是单线程的（worker单线程），redis 6.x支持多线程，但是！！！这叫io threads，用于处理用户的请求，实际操作还是单线程的。</p>
+<h2 id="3-1-秒杀场景的redis使用"><a href="#3-1-秒杀场景的redis使用" class="headerlink" title="3.1 秒杀场景的redis使用"></a>3.1 秒杀场景的redis使用</h2><p>高并发场景，多个service线程。如果是mysql，必定会脏读，造成超卖，必定加锁同步，实际退化成所有service串行，加上前后其他业务逻辑，很慢。改用redis，单线程，本身就是串行化操作，通过decr进行商品数量减一</p>
+<p><img src="images/loading.gif" data-original="https://s1.ax1x.com/2020/10/04/08OZ3d.png" alt=""></p>
+<br>
+
+<h2 id="3-2-strace追踪线程"><a href="#3-2-strace追踪线程" class="headerlink" title="3.2 strace追踪线程"></a>3.2 strace追踪线程</h2><p>strace可以追踪一个进程以及所有线程对操作系统的系统调用有哪些。比如是否使用了fork，是否使用了epoll，是否又创建了线程</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo apt install strace</span><br></pre></td></tr></table></figure>
+
+<p>进入redis目录（src或者守护进程的都行）</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">strace -ff -o /home/wjw/stracelog/out</span><br></pre></td></tr></table></figure>
+
+<p>-ff表示监听fork系，第二个f表示包括线程</p>
+<p>-o表示输出目录为/home/wjw/stracelog并以/out为前缀</p>
+<p><img src="images/loading.gif" data-original="https://s1.ax1x.com/2020/10/05/0tYei9.png" alt=""></p>
+<p>可以进入/proc/3324/task目录下</p>
+<p><img src="images/loading.gif" data-original="https://s1.ax1x.com/2020/10/05/0tY0L8.png" alt=""></p>
+<p>这些是什么？<strong>3324是线程号，task代表任务，也就是开启了4个线程</strong></p>
+<p>用vi或者gedit打开out.3324可以看到很多epoll相关的系统调用，因此redis的线程采用了epoll多路复用的技术</p>
+<p><img src="images/loading.gif" data-original="https://s1.ax1x.com/2020/10/05/0twpRJ.png" alt=""></p>
+<p>客户端输入bgsave，服务端3324线程开启了新的线程3829进行保存，使用clone系统调用，copy on write技术</p>
+<p><img src="images/loading.gif" data-original="https://s1.ax1x.com/2020/10/05/0twuzd.png" alt=""></p>
+<p>查看strace的跟踪</p>
+<p><img src="images/loading.gif" data-original="https://s1.ax1x.com/2020/10/05/0twoTK.png" alt=""></p>
+<br>
+
+<h1 id="4-redis的安装和使用"><a href="#4-redis的安装和使用" class="headerlink" title="4. redis的安装和使用"></a>4. redis的安装和使用</h1><p>参考redis使用向文章</p>
+<br>
+
+<h1 id="5-缓存雪崩，穿透，击穿"><a href="#5-缓存雪崩，穿透，击穿" class="headerlink" title="5. 缓存雪崩，穿透，击穿"></a>5. 缓存雪崩，穿透，击穿</h1><p><strong>缓存雪崩</strong>：是说redis大量内容同时过期，因此db突然之间多了很多请求。解决方法就是随机过期时间</p>
+<p><strong>缓存穿透</strong>：查询id=-1，第一次查db，查不到就不放进redis，第二次查一定不会在redis中，又去查db，如此往复…恶意发送大量查询请求，导致一直查db，就是缓存穿透。解决办法就是把-1: null存进redis，或者限制同一个key在一段时间的请求次数，或者是使用过滤器过滤掉</p>
+<p><strong>缓存击穿</strong>：跟缓存雪崩类似，是因为过期导致的，但是不是大量内容，而是说对同一个key发出大量的请求（比如秒杀），突然过期了，导致查db。这种场景解决办法就是查db的时候加锁，过期–&gt;加锁查db–&gt;db压力小–&gt;重新放进redis–&gt;查redis</p>
+
+        </div>
+        
+        
+        
+    </div>
+</div>
+
+
+
+
+
+
+
+
+    
+<div class="card">
+    
+    <div class="card-image">
         <a href="/2020/10/08/mysql%E7%B4%A2%E5%BC%95/" class="image is-7by1">
             <img class="thumbnail" src="images/loading.gif" data-original="https://source.acexy.cn/view/XUH5MDz" alt="mysql索引">
         </a>
@@ -478,7 +578,6 @@
 <p>从大佬那里学的<a href="https://zhuanlan.zhihu.com/p/93530380，再加上自己做题过程中的一些心得">https://zhuanlan.zhihu.com/p/93530380，再加上自己做题过程中的一些心得</a></p>
 </blockquote>
 <p>模板伪代码（python看起来简洁一些）</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">result = []</span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">backtrack</span><span class="params">(路径, 选择列表)</span>:</span></span><br><span class="line">    <span class="keyword">if</span> 满足结束条件:</span><br><span class="line">        result.add(路径)</span><br><span class="line">        <span class="keyword">return</span></span><br><span class="line"></span><br><span class="line">    <span class="keyword">for</span> 选择 <span class="keyword">in</span> 选择列表:</span><br><span class="line">        剪枝</span><br><span class="line">        做选择</span><br><span class="line">        backtrack(路径, 选择列表)</span><br><span class="line">        撤销选择</span><br></pre></td></tr></table></figure>
         </div>
         
         
@@ -690,75 +789,6 @@
 
 
 
-    
-<div class="card">
-    
-    <div class="card-image">
-        <a href="/2020/09/16/70-%E7%88%AC%E6%A5%BC%E6%A2%AF%E4%BB%A5%E5%8F%8A%E8%BF%9B%E5%8C%96%E7%89%88/" class="image is-7by1">
-            <img class="thumbnail" src="images/loading.gif" data-original="https://wx1.sbimg.cn/2020/09/10/9znJU.md.jpg" alt="70-爬楼梯以及进化版">
-        </a>
-    </div>
-    
-    <div class="card-content article ">
-        
-        <div class="level article-meta is-size-7 is-uppercase is-mobile is-overflow-x-auto">
-            <div class="level-left">
-                <time class="level-item has-text-grey" datetime="2020-09-16T13:28:08.000Z">2020-09-16</time>
-                
-                <div class="level-item">
-                <a class="has-link-grey -link" href="/categories/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E5%92%8C%E7%AE%97%E6%B3%95/">数据结构和算法</a>
-                </div>
-                
-                
-                <span class="level-item has-text-grey">
-                    
-                    
-                    2 分钟 读完 (大约 369 个字)
-                </span>
-                
-                
-            </div>
-        </div>
-        
-        <h1 class="title is-size-3 is-size-4-mobile has-text-weight-normal">
-            
-                <a class="has-link-black-ter" href="/2020/09/16/70-%E7%88%AC%E6%A5%BC%E6%A2%AF%E4%BB%A5%E5%8F%8A%E8%BF%9B%E5%8C%96%E7%89%88/">70-爬楼梯以及进化版</a>
-            
-        </h1>
-        <div class="content">
-            <p>力扣70</p>
-<blockquote>
-<p><a href="https://leetcode-cn.com/problems/climbing-stairs/">https://leetcode-cn.com/problems/climbing-stairs/</a></p>
-</blockquote>
-<p>动态规划经典题，没有之一</p>
-<p>还是那三句话</p>
-<ol>
-<li>定义动态规划数组的含义</li>
-<li>找出关系式</li>
-<li>找初始值</li>
-</ol>
-        </div>
-        
-        
-        <div class="level is-mobile">
-            <div class="level-start">
-                <div class="level-item">
-                <a class="button is-size-7 is-light" href="/2020/09/16/70-%E7%88%AC%E6%A5%BC%E6%A2%AF%E4%BB%A5%E5%8F%8A%E8%BF%9B%E5%8C%96%E7%89%88/#more">阅读更多</a>
-                </div>
-            </div>
-        </div>
-        
-        
-    </div>
-</div>
-
-
-
-
-
-
-
-
 
     
 <div class="card card-transparent">
@@ -777,7 +807,7 @@
             
             <li><span class="pagination-ellipsis has-text-black-ter">&hellip;</span></li>
             
-            <li><a class="pagination-link has-text-black-ter" href="/page/5/">5</a></li>
+            <li><a class="pagination-link has-text-black-ter" href="/page/6/">6</a></li>
             
         </ul>
     </nav>
@@ -823,7 +853,7 @@
                     </p>
                     <a href="/archives">
                         <p class="title has-text-weight-normal">
-                            50
+                            51
                         </p>
                     </a>
                 </div>
@@ -835,7 +865,7 @@
                     </p>
                     <a href="/categories">
                         <p class="title has-text-weight-normal">
-                            13
+                            14
                         </p>
                     </a>
                 </div>
@@ -939,6 +969,14 @@
                 <span class="level-item tag">3</span>
             </span>
         </a></li><li>
+        <a class="level is-marginless" href="/categories/redis/">
+            <span class="level-start">
+                <span class="level-item">redis</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">1</span>
+            </span>
+        </a></li><li>
         <a class="level is-marginless" href="/categories/%E5%89%8D%E7%AB%AF/">
             <span class="level-start">
                 <span class="level-item">前端</span>
@@ -995,6 +1033,25 @@
         
         <article class="media">
             
+            <a href="/2020/10/09/redis%EF%BC%88%E9%9D%A2%E8%AF%95%E5%90%91%EF%BC%89/" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="images/loading.gif" data-original="https://source.acexy.cn/view/XULWDpi" alt="redis（面试向）">
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2020-10-09T01:23:26.000Z">2020-10-09</time></div>
+                    <a href="/2020/10/09/redis%EF%BC%88%E9%9D%A2%E8%AF%95%E5%90%91%EF%BC%89/" class="title has-link-black-ter is-size-6 has-text-weight-normal">redis（面试向）</a>
+                    <p class="is-size-7 is-uppercase">
+                        <a class="has-link-grey -link" href="/categories/redis/">redis</a>
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+        <article class="media">
+            
             <a href="/2020/10/08/mysql%E7%B4%A2%E5%BC%95/" class="media-left">
                 <p class="image is-64x64">
                     <img class="thumbnail" src="images/loading.gif" data-original="https://source.acexy.cn/view/XUH5MDz" alt="mysql索引">
@@ -1064,25 +1121,6 @@
                     <a href="/2020/09/20/%E5%A4%A7%E5%88%9B%E8%AE%BA%E6%96%87/" class="title has-link-black-ter is-size-6 has-text-weight-normal">大创论文</a>
                     <p class="is-size-7 is-uppercase">
                         <a class="has-link-grey -link" href="/categories/Others/">Others</a>
-                    </p>
-                </div>
-            </div>
-        </article>
-        
-        <article class="media">
-            
-            <a href="/2020/09/19/60-%E7%AC%ACk%E4%B8%AA%E6%8E%92%E5%88%97/" class="media-left">
-                <p class="image is-64x64">
-                    <img class="thumbnail" src="images/loading.gif" data-original="https://wx1.sbimg.cn/2020/09/18/GDRSO.md.jpg" alt="60-第k个排列">
-                </p>
-            </a>
-            
-            <div class="media-content">
-                <div class="content">
-                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2020-09-19T08:36:06.000Z">2020-09-19</time></div>
-                    <a href="/2020/09/19/60-%E7%AC%ACk%E4%B8%AA%E6%8E%92%E5%88%97/" class="title has-link-black-ter is-size-6 has-text-weight-normal">60-第k个排列</a>
-                    <p class="is-size-7 is-uppercase">
-                        <a class="has-link-grey -link" href="/categories/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E5%92%8C%E7%AE%97%E6%B3%95/">数据结构和算法</a>
                     </p>
                 </div>
             </div>
@@ -1119,6 +1157,25 @@
         
         <article class="media">
             
+            <a href="/2020/10/09/redis%EF%BC%88%E9%9D%A2%E8%AF%95%E5%90%91%EF%BC%89/" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="images/loading.gif" data-original="https://source.acexy.cn/view/XULWDpi" alt="redis（面试向）">
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2020-10-09T01:23:26.000Z">2020-10-09</time></div>
+                    <a href="/2020/10/09/redis%EF%BC%88%E9%9D%A2%E8%AF%95%E5%90%91%EF%BC%89/" class="title has-link-black-ter is-size-6 has-text-weight-normal">redis（面试向）</a>
+                    <p class="is-size-7 is-uppercase">
+                        <a class="has-link-grey -link" href="/categories/redis/">redis</a>
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+        <article class="media">
+            
             <a href="/2020/10/08/mysql%E7%B4%A2%E5%BC%95/" class="media-left">
                 <p class="image is-64x64">
                     <img class="thumbnail" src="images/loading.gif" data-original="https://source.acexy.cn/view/XUH5MDz" alt="mysql索引">
@@ -1188,25 +1245,6 @@
                     <a href="/2020/09/20/%E5%A4%A7%E5%88%9B%E8%AE%BA%E6%96%87/" class="title has-link-black-ter is-size-6 has-text-weight-normal">大创论文</a>
                     <p class="is-size-7 is-uppercase">
                         <a class="has-link-grey -link" href="/categories/Others/">Others</a>
-                    </p>
-                </div>
-            </div>
-        </article>
-        
-        <article class="media">
-            
-            <a href="/2020/09/19/60-%E7%AC%ACk%E4%B8%AA%E6%8E%92%E5%88%97/" class="media-left">
-                <p class="image is-64x64">
-                    <img class="thumbnail" src="images/loading.gif" data-original="https://wx1.sbimg.cn/2020/09/18/GDRSO.md.jpg" alt="60-第k个排列">
-                </p>
-            </a>
-            
-            <div class="media-content">
-                <div class="content">
-                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2020-09-19T08:36:06.000Z">2020-09-19</time></div>
-                    <a href="/2020/09/19/60-%E7%AC%ACk%E4%B8%AA%E6%8E%92%E5%88%97/" class="title has-link-black-ter is-size-6 has-text-weight-normal">60-第k个排列</a>
-                    <p class="is-size-7 is-uppercase">
-                        <a class="has-link-grey -link" href="/categories/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E5%92%8C%E7%AE%97%E6%B3%95/">数据结构和算法</a>
                     </p>
                 </div>
             </div>
