@@ -142,7 +142,7 @@
     
     <div class="card-image">
         <a href="/2020/10/10/456-132%E6%A8%A1%E5%BC%8F/" class="image is-7by1">
-            <img class="thumbnail" src="images/loading.gif" data-original="/l" alt="456-132模式">
+            <img class="thumbnail" src="images/loading.gif" data-original="https://source.acexy.cn/view/XTquYk4" alt="456-132模式">
         </a>
     </div>
     
@@ -160,7 +160,7 @@
                 <span class="level-item has-text-grey">
                     
                     
-                    3 分钟 读完 (大约 435 个字)
+                    3 分钟 读完 (大约 467 个字)
                 </span>
                 
                 
@@ -177,21 +177,16 @@
 <blockquote>
 <p><a href="https://leetcode-cn.com/problems/132-pattern/">https://leetcode-cn.com/problems/132-pattern/</a></p>
 </blockquote>
-<p><img src="images/loading.gif" data-original="https://s1.ax1x.com/2020/10/10/0yyVq1.png" alt=""></p>
-<p>单调栈题目，用的很巧妙，不是普通的无脑单调栈，还涉及到单调栈的一个规律：循环出栈时，出栈的序列也满足反向单调栈的特点。比如下图递减栈在4入栈时：</p>
-<p><img src="images/loading.gif" data-original="https://s1.ax1x.com/2020/10/10/0y6hAP.png" alt=""></p>
-<p>根据这一现象，可以找到：<strong>比入栈值的大/小的最大最小值</strong></p>
-<br>
-
-<p>本题思路：数组中想找132，机会最大的当然是1越小越好，2越接近3越好，2越大越好(也可以说成3越大越好，因为“2越接近3越好”)</p>
-<p><img src="images/loading.gif" data-original="https://s1.ax1x.com/2020/10/10/0yWxl8.png" alt=""></p>
-<p>我们从后往前遍历，先找比2大的3，因此构造单调递减栈，栈存的是每一个“3”，随着栈的慢慢迭代，栈顶3会越来越高，满足了“3越大越好”的题意。根据前面提到的性质，出栈的序列是递增栈，当遇到一个峰顶“3”时，最后一个出栈的就是比“3”小的最大的2，存起来，继续遍历的过程中，对比当前值（1）和存起来的（2），就知道是否满足132模式了</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//从右往左构造单调递减栈</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">boolean</span> <span class="title">find132pattern</span><span class="params">(<span class="keyword">int</span>[] nums)</span> </span>&#123;</span><br><span class="line">    Deque&lt;Integer&gt; stack = <span class="keyword">new</span> LinkedList&lt;&gt;();<span class="comment">//单调递减栈，存值比存下标简单，代表了132中的3</span></span><br><span class="line">    <span class="keyword">int</span> theTwo = Integer.MIN_VALUE;</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i = nums.length - <span class="number">1</span>; i &gt;= <span class="number">0</span>; i--)&#123;</span><br><span class="line">        <span class="keyword">if</span>(nums[i] &lt; theTwo) <span class="keyword">return</span> <span class="keyword">true</span>;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">while</span>(!stack.isEmpty() &amp;&amp; nums[i] &gt; stack.peekLast())&#123;</span><br><span class="line">            theTwo = stack.pollLast();	<span class="comment">//最后一个出的肯定是比当前入栈小的最大值</span></span><br><span class="line">        &#125;</span><br><span class="line">        stack.offerLast(nums[i]);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="keyword">false</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>总之，很巧妙我觉得</p>
-
         </div>
         
+        
+        <div class="level is-mobile">
+            <div class="level-start">
+                <div class="level-item">
+                <a class="button is-size-7 is-light" href="/2020/10/10/456-132%E6%A8%A1%E5%BC%8F/#more">阅读更多</a>
+                </div>
+            </div>
+        </div>
         
         
     </div>
@@ -746,7 +741,7 @@
                 <span class="level-item has-text-grey">
                     
                     
-                    3 分钟 读完 (大约 471 个字)
+                    3 分钟 读完 (大约 478 个字)
                 </span>
                 
                 
@@ -1026,7 +1021,7 @@
             
             <a href="/2020/10/10/456-132%E6%A8%A1%E5%BC%8F/" class="media-left">
                 <p class="image is-64x64">
-                    <img class="thumbnail" src="images/loading.gif" data-original="/l" alt="456-132模式">
+                    <img class="thumbnail" src="images/loading.gif" data-original="https://source.acexy.cn/view/XTquYk4" alt="456-132模式">
                 </p>
             </a>
             
@@ -1150,7 +1145,7 @@
             
             <a href="/2020/10/10/456-132%E6%A8%A1%E5%BC%8F/" class="media-left">
                 <p class="image is-64x64">
-                    <img class="thumbnail" src="images/loading.gif" data-original="/l" alt="456-132模式">
+                    <img class="thumbnail" src="images/loading.gif" data-original="https://source.acexy.cn/view/XTquYk4" alt="456-132模式">
                 </p>
             </a>
             
