@@ -7,23 +7,23 @@
 
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
 
-<title>我的FastIO工具类 - 小温 blog</title>
+<title>456-132模式 - 小温 blog</title>
 
 
-    <meta name="description" content="前言：Java做算法题的弊端，力扣只需要完成一个函数，其他oj平台要求使用Scanner类在控制台输入输出，其中pat最后一个测试用例是大量数据，因此java在pat中经常超时，这时候可以采用带缓存的reader和buffer而不是System.in&#x2F;out。   这个工具类，复制即可直接食用，都是静态方法，通过FastIO.xx就可以使用 方法名保持和Scanner&#x2F;System.out一致">
+    <meta name="description" content="力扣456  https:&#x2F;&#x2F;leetcode-cn.com&#x2F;problems&#x2F;132-pattern&#x2F;   单调栈题目，用的很巧妙，不是普通的无脑单调栈，还涉及到单调栈的一个规律：循环出栈时，出栈的序列也满足反向单调栈的特点。比如下图递减栈在4入栈时：  根据这一现象，可以找到：比入栈值的大&#x2F;小的最大最小值   本题思路：数组中想找132，机会最大的当然是1越小越好，2越接近3越好，2越大越好(">
 <meta property="og:type" content="article">
-<meta property="og:title" content="我的FastIO工具类">
-<meta property="og:url" content="http://wjw.today/2020/08/27/%E6%88%91%E7%9A%84FastIO%E5%B7%A5%E5%85%B7%E7%B1%BB/index.html">
+<meta property="og:title" content="456-132模式">
+<meta property="og:url" content="http://wjw.today/2020/10/10/456-132%E6%A8%A1%E5%BC%8F/index.html">
 <meta property="og:site_name" content="小温 blog">
-<meta property="og:description" content="前言：Java做算法题的弊端，力扣只需要完成一个函数，其他oj平台要求使用Scanner类在控制台输入输出，其中pat最后一个测试用例是大量数据，因此java在pat中经常超时，这时候可以采用带缓存的reader和buffer而不是System.in&#x2F;out。   这个工具类，复制即可直接食用，都是静态方法，通过FastIO.xx就可以使用 方法名保持和Scanner&#x2F;System.out一致">
+<meta property="og:description" content="力扣456  https:&#x2F;&#x2F;leetcode-cn.com&#x2F;problems&#x2F;132-pattern&#x2F;   单调栈题目，用的很巧妙，不是普通的无脑单调栈，还涉及到单调栈的一个规律：循环出栈时，出栈的序列也满足反向单调栈的特点。比如下图递减栈在4入栈时：  根据这一现象，可以找到：比入栈值的大&#x2F;小的最大最小值   本题思路：数组中想找132，机会最大的当然是1越小越好，2越接近3越好，2越大越好(">
 <meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="https://wx2.sbimg.cn/2020/07/30/P7UcV.md.jpg">
-<meta property="article:published_time" content="2020-08-27T05:29:16.000Z">
-<meta property="article:modified_time" content="2020-08-27T06:44:37.774Z">
+<meta property="og:image" content="http://wjw.today/l">
+<meta property="article:published_time" content="2020-10-10T08:25:39.000Z">
+<meta property="article:modified_time" content="2020-10-10T09:54:45.049Z">
 <meta property="article:author" content="wjw">
-<meta property="article:tag" content="算法">
+<meta property="article:tag" content="单调栈">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="https://wx2.sbimg.cn/2020/07/30/P7UcV.md.jpg">
+<meta name="twitter:image" content="http://wjw.today/l">
 
 
 
@@ -81,7 +81,7 @@
         <div class="navbar-brand is-flex-center">
             <a class="navbar-item navbar-logo" href="/">
             
-                <img src="images/loading.gif" data-original="https://s1.ax1x.com/2020/07/20/UfKyGQ.md.png" alt="我的FastIO工具类" height="28">
+                <img src="images/loading.gif" data-original="https://s1.ax1x.com/2020/07/20/UfKyGQ.md.png" alt="456-132模式" height="28">
             
             </a>
         </div>
@@ -139,7 +139,7 @@
     
     <div class="card-image">
         <span  class="image is-7by1">
-            <img class="thumbnail" src="images/loading.gif" data-original="https://wx2.sbimg.cn/2020/07/30/P7UcV.md.jpg" alt="我的FastIO工具类">
+            <img class="thumbnail" src="images/loading.gif" data-original="/l" alt="456-132模式">
         </span>
     </div>
     
@@ -147,17 +147,17 @@
         
         <div class="level article-meta is-size-7 is-uppercase is-mobile is-overflow-x-auto">
             <div class="level-left">
-                <time class="level-item has-text-grey" datetime="2020-08-27T05:29:16.000Z">2020-08-27</time>
+                <time class="level-item has-text-grey" datetime="2020-10-10T08:25:39.000Z">2020-10-10</time>
                 
                 <div class="level-item">
-                <a class="has-link-grey -link" href="/categories/Util%E5%B7%A5%E5%85%B7%E7%B1%BB/">Util工具类</a>&nbsp;/&nbsp;<a class="has-link-grey -link" href="/categories/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E5%92%8C%E7%AE%97%E6%B3%95/">数据结构和算法</a>
+                <a class="has-link-grey -link" href="/categories/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E5%92%8C%E7%AE%97%E6%B3%95/">数据结构和算法</a>
                 </div>
                 
                 
                 <span class="level-item has-text-grey">
                     
                     
-                    2 分钟 读完 (大约 257 个字)
+                    3 分钟 读完 (大约 435 个字)
                 </span>
                 
                 
@@ -171,19 +171,26 @@
         
         <h1 class="title is-size-3 is-size-4-mobile has-text-weight-normal">
             
-                我的FastIO工具类
+                456-132模式
             
         </h1>
         <div class="content">
-            <p>前言：Java做算法题的弊端，力扣只需要完成一个函数，其他oj平台要求使用Scanner类在控制台输入输出，其中pat最后一个测试用例是大量数据，因此java在pat中经常超时，这时候可以采用带缓存的reader和buffer而不是System.in/out。</p>
+            <p>力扣456</p>
+<blockquote>
+<p><a href="https://leetcode-cn.com/problems/132-pattern/">https://leetcode-cn.com/problems/132-pattern/</a></p>
+</blockquote>
+<p><img src="images/loading.gif" data-original="https://s1.ax1x.com/2020/10/10/0yyVq1.png" alt=""></p>
+<p>单调栈题目，用的很巧妙，不是普通的无脑单调栈，还涉及到单调栈的一个规律：循环出栈时，出栈的序列也满足反向单调栈的特点。比如下图递减栈在4入栈时：</p>
+<p><img src="images/loading.gif" data-original="https://s1.ax1x.com/2020/10/10/0y6hAP.png" alt=""></p>
+<p>根据这一现象，可以找到：<strong>比入栈值的大/小的最大最小值</strong></p>
 <br>
 
-<p>这个工具类，复制即可直接食用，都是静态方法，通过FastIO.xx就可以使用</p>
-<p>方法名保持和Scanner/System.out一致</p>
-<a id="more"></a>
+<p>本题思路：数组中想找132，机会最大的当然是1越小越好，2越接近3越好，2越大越好(也可以说成3越大越好，因为“2越接近3越好”)</p>
+<p><img src="images/loading.gif" data-original="https://s1.ax1x.com/2020/10/10/0yWxl8.png" alt=""></p>
+<p>我们从后往前遍历，先找比2大的3，因此构造单调递减栈，栈存的是每一个“3”，随着栈的慢慢迭代，栈顶3会越来越高，满足了“3越大越好”的题意。根据前面提到的性质，出栈的序列是递增栈，当遇到一个峰顶“3”时，最后一个出栈的就是比“3”小的最大的2，存起来，继续遍历的过程中，对比当前值（1）和存起来的（2），就知道是否满足132模式了</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//从右往左构造单调递减栈</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">boolean</span> <span class="title">find132pattern</span><span class="params">(<span class="keyword">int</span>[] nums)</span> </span>&#123;</span><br><span class="line">    Deque&lt;Integer&gt; stack = <span class="keyword">new</span> LinkedList&lt;&gt;();<span class="comment">//单调递减栈，存值比存下标简单，代表了132中的3</span></span><br><span class="line">    <span class="keyword">int</span> theTwo = Integer.MIN_VALUE;</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i = nums.length - <span class="number">1</span>; i &gt;= <span class="number">0</span>; i--)&#123;</span><br><span class="line">        <span class="keyword">if</span>(nums[i] &lt; theTwo) <span class="keyword">return</span> <span class="keyword">true</span>;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">while</span>(!stack.isEmpty() &amp;&amp; nums[i] &gt; stack.peekLast())&#123;</span><br><span class="line">            theTwo = stack.pollLast();	<span class="comment">//最后一个出的肯定是比当前入栈小的最大值</span></span><br><span class="line">        &#125;</span><br><span class="line">        stack.offerLast(nums[i]);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="keyword">false</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@author</span> wjw</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@date</span> 2020/2/10 13:44</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> java.io.*;</span><br><span class="line"><span class="keyword">import</span> java.util.StringTokenizer;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">FastIO</span> </span>&#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> BufferedReader reader = <span class="keyword">new</span> BufferedReader(<span class="keyword">new</span> InputStreamReader(System.in),<span class="number">32768</span>);</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> StringTokenizer tokenizer = <span class="keyword">new</span> StringTokenizer(<span class="string">""</span>);</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> PrintWriter out = <span class="keyword">new</span> PrintWriter(<span class="keyword">new</span> OutputStreamWriter(System.out));</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">double</span> <span class="title">nextDouble</span><span class="params">()</span> <span class="keyword">throws</span> IOException</span>&#123;</span><br><span class="line">        <span class="keyword">return</span> Double.parseDouble(next());</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">float</span> <span class="title">nextFloat</span><span class="params">()</span> <span class="keyword">throws</span> IOException</span>&#123;</span><br><span class="line">        <span class="keyword">return</span> Float.parseFloat(next());</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">int</span> <span class="title">nextInt</span><span class="params">()</span> <span class="keyword">throws</span> IOException</span>&#123;</span><br><span class="line">        <span class="keyword">return</span> Integer.parseInt(next());</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> String <span class="title">next</span><span class="params">()</span> <span class="keyword">throws</span> IOException</span>&#123;</span><br><span class="line">        <span class="keyword">while</span> (!tokenizer.hasMoreTokens()) &#123;</span><br><span class="line">            tokenizer = <span class="keyword">new</span> StringTokenizer(reader.readLine());</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> tokenizer.nextToken();</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> String <span class="title">nextLine</span><span class="params">()</span> <span class="keyword">throws</span> IOException</span>&#123;</span><br><span class="line">        <span class="keyword">return</span> reader.readLine();</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">println</span><span class="params">(String str)</span></span>&#123;</span><br><span class="line">        out.println(str);</span><br><span class="line">        out.flush();</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">printf</span><span class="params">(String format, Object ... args)</span></span>&#123;</span><br><span class="line">        out.printf(format, args);</span><br><span class="line">        out.flush();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
+<p>总之，很巧妙我觉得</p>
 
         </div>
         
@@ -191,7 +198,7 @@
             <div class="level-start">
                 <div class="level-item">
                     <span class="is-size-6 has-text-grey has-mr-7">#</span>
-                    <a class="has-link-grey -link" href="/tags/%E7%AE%97%E6%B3%95/" rel="tag">算法</a>
+                    <a class="has-link-grey -link" href="/tags/%E5%8D%95%E8%B0%83%E6%A0%88/" rel="tag">单调栈</a>
                 </div>
             </div>
         </div>
@@ -208,17 +215,10 @@
 <div class="card card-transparent">
     <div class="level post-navigation is-flex-wrap is-mobile">
         
-        <div class="level-start">
-            <a class="level level-item has-link-grey  article-nav-prev" href="/2020/08/27/%E5%85%AB%E6%9C%88%E9%9A%8F%E7%AC%94/">
-                <i class="level-item fas fa-chevron-left"></i>
-                <span class="level-item">八月随笔</span>
-            </a>
-        </div>
-        
         
         <div class="level-end">
-            <a class="level level-item has-link-grey  article-nav-next" href="/2020/08/27/84-%E6%9F%B1%E7%8A%B6%E5%9B%BE%E4%B8%AD%E7%9A%84%E6%9C%80%E5%A4%A7%E7%9F%A9%E5%BD%A2/">
-                <span class="level-item">84-柱状图中的最大矩形</span>
+            <a class="level level-item has-link-grey  article-nav-next" href="/2020/10/09/redis%EF%BC%88%E9%9D%A2%E8%AF%95%E5%90%91%EF%BC%89/">
+                <span class="level-item">redis（面试向）</span>
                 <i class="level-item fas fa-chevron-right"></i>
             </a>
         </div>
@@ -690,7 +690,7 @@
             <div class="level-start has-text-centered-mobile">
                 <a class="footer-logo is-block has-mb-6" href="/">
                 
-                    <img src="images/loading.gif" data-original="https://s1.ax1x.com/2020/07/20/UfKyGQ.md.png" alt="我的FastIO工具类" height="28">
+                    <img src="images/loading.gif" data-original="https://s1.ax1x.com/2020/07/20/UfKyGQ.md.png" alt="456-132模式" height="28">
                 
                 </a>
                 <p class="is-size-7">
