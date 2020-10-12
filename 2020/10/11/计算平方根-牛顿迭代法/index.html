@@ -7,18 +7,22 @@
 
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
 
-<title>标签: mysql - 小温 blog</title>
+<title>计算平方根-牛顿迭代法 - 小温 blog</title>
 
 
-    <meta property="og:type" content="website">
-<meta property="og:title" content="小温 blog">
-<meta property="og:url" content="http://wjw.today/tags/mysql/index.html">
+    <meta name="description" content="这是2019&#x2F;09&#x2F;06的一篇笔记，现在补上。这是《算法》第四版中提到的，如何实现sqrt(x)，当时和文德在实验室里面一起研究了一下。今天深信服笔试又遇到了简单版的题目。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="计算平方根-牛顿迭代法">
+<meta property="og:url" content="http://wjw.today/2020/10/11/%E8%AE%A1%E7%AE%97%E5%B9%B3%E6%96%B9%E6%A0%B9-%E7%89%9B%E9%A1%BF%E8%BF%AD%E4%BB%A3%E6%B3%95/index.html">
 <meta property="og:site_name" content="小温 blog">
+<meta property="og:description" content="这是2019&#x2F;09&#x2F;06的一篇笔记，现在补上。这是《算法》第四版中提到的，如何实现sqrt(x)，当时和文德在实验室里面一起研究了一下。今天深信服笔试又遇到了简单版的题目。">
 <meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="http://wjw.today/images/og_image.png">
+<meta property="og:image" content="https://b1.sbimg.org/file/chevereto-jia/2020/10/12/G8L51.md.jpg">
+<meta property="article:published_time" content="2020-10-11T13:31:37.000Z">
+<meta property="article:modified_time" content="2020-10-12T10:45:26.791Z">
 <meta property="article:author" content="wjw">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="http://wjw.today/images/og_image.png">
+<meta name="twitter:image" content="https://b1.sbimg.org/file/chevereto-jia/2020/10/12/G8L51.md.jpg">
 
 
 
@@ -76,7 +80,7 @@
         <div class="navbar-brand is-flex-center">
             <a class="navbar-item navbar-logo" href="/">
             
-                <img src="images/loading.gif" data-original="https://s1.ax1x.com/2020/07/20/UfKyGQ.md.png" alt="小温 blog" height="28">
+                <img src="images/loading.gif" data-original="https://s1.ax1x.com/2020/07/20/UfKyGQ.md.png" alt="计算平方根-牛顿迭代法" height="28">
             
             </a>
         </div>
@@ -112,6 +116,10 @@
                     
                 
                 
+                <a class="navbar-item is-hidden-tablet catalogue" title="目录" href="javascript:;">
+                    <i class="fas fa-list-ul"></i>
+                </a>
+                
                 
                 <a class="navbar-item search" title="搜索" href="javascript:;">
                     <i class="fas fa-search"></i>
@@ -125,64 +133,79 @@
     <section class="section">
         <div class="container">
             <div class="columns">
-                <div class="column is-8-tablet is-8-desktop is-6-widescreen has-order-2 column-main"><div class="card">
-    <div class="card-content">
-        <nav class="breadcrumb" aria-label="breadcrumbs">
-        <ul>
-            <li><a href="/tags">标签</a></li>
-            <li class="is-active"><a href="#" aria-current="page">mysql</a></li>
-        </ul>
-        </nav>
-    </div>
-</div>
-
-    
+                <div class="column is-8-tablet is-8-desktop is-6-widescreen has-order-2 column-main">
 <div class="card">
     
     <div class="card-image">
-        <a href="/2020/10/08/mysql%E7%B4%A2%E5%BC%95/" class="image is-7by1">
-            <img class="thumbnail" src="images/loading.gif" data-original="https://source.acexy.cn/view/XUH5MDz" alt="mysql索引">
-        </a>
+        <span  class="image is-7by1">
+            <img class="thumbnail" src="images/loading.gif" data-original="https://b1.sbimg.org/file/chevereto-jia/2020/10/12/G8L51.md.jpg" alt="计算平方根-牛顿迭代法">
+        </span>
     </div>
     
     <div class="card-content article ">
         
         <div class="level article-meta is-size-7 is-uppercase is-mobile is-overflow-x-auto">
             <div class="level-left">
-                <time class="level-item has-text-grey" datetime="2020-10-08T10:51:35.000Z">2020-10-08</time>
+                <time class="level-item has-text-grey" datetime="2020-10-11T13:31:37.000Z">2020-10-11</time>
                 
                 <div class="level-item">
-                <a class="has-link-grey -link" href="/categories/Mysql/">Mysql</a>
+                <a class="has-link-grey -link" href="/categories/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E5%92%8C%E7%AE%97%E6%B3%95/">数据结构和算法</a>
                 </div>
                 
                 
                 <span class="level-item has-text-grey">
                     
                     
-                    17 分钟 读完 (大约 2503 个字)
+                    4 分钟 读完 (大约 612 个字)
                 </span>
                 
+                
+                <span class="level-item has-text-grey" id="busuanzi_container_page_pv">
+                    <i class="far fa-eye"></i>
+                    <span id="busuanzi_value_page_pv">0</span>次访问
+                </span>
                 
             </div>
         </div>
         
         <h1 class="title is-size-3 is-size-4-mobile has-text-weight-normal">
             
-                <a class="has-link-black-ter" href="/2020/10/08/mysql%E7%B4%A2%E5%BC%95/">mysql索引</a>
+                计算平方根-牛顿迭代法
             
         </h1>
         <div class="content">
-            <h1 id="1-为什么是B-树"><a href="#1-为什么是B-树" class="headerlink" title="1. 为什么是B+树"></a>1. 为什么是B+树</h1><h2 id="1-1-哈希索引"><a href="#1-1-哈希索引" class="headerlink" title="1.1 哈希索引"></a>1.1 哈希索引</h2><p>哈希胜在查找单条数据快，只需要计算哈希函数就可以定位到索引数组下标，继而得到值，ps：索引存储的不是直接的数据库中的值，而是地址，通过索引找到地址然后就可以取数据库中地址对应的值了。</p>
+            <p>这是2019/09/06的一篇笔记，现在补上。这是《算法》第四版中提到的，如何实现sqrt(x)，当时和文德在实验室里面一起研究了一下。今天深信服笔试又遇到了简单版的题目。</p>
+<a id="more"></a>
+
+<h1 id="整数型"><a href="#整数型" class="headerlink" title="整数型"></a>整数型</h1><p>放在以前，只能求整数的平方根：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">sqrt</span><span class="params">(<span class="keyword">int</span> n)</span></span>&#123;</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>; i * i &lt; n; i++)&#123;</span><br><span class="line">        <span class="keyword">if</span>(i * i == n) <span class="keyword">return</span> i;	<span class="comment">//或者想要记录i * i &lt;= n</span></span><br><span class="line">  	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>至于深信服也是简化到int，笔试嘛…我直接</p>
+<p><code>return (int)Math.sqrt(n);</code></p>
+<p>测试用例当然是100%，能不能拿到分我就不知道了，笔试嘛谁管这个，他也没说不能用，时间重要哈</p>
+<br>
+
+<h1 id="小数型-牛顿迭代法"><a href="#小数型-牛顿迭代法" class="headerlink" title="小数型-牛顿迭代法"></a>小数型-牛顿迭代法</h1><p>再来说一下正经的sqrt实现，也就是如果是小数，你就不知道每次迭代加多少了，0.01？还是0.001？都不够精确。书中提到了牛顿迭代法：</p>
+<p><img src="images/loading.gif" data-original="https://s1.ax1x.com/2020/10/11/0gcxAA.png" alt=""></p>
+<p>假设要求√2的值，那么构造f(x) = x² - 2， 当y=0时，与x轴的交点就是√2(红点)</p>
+<p>随机取一点p，求得f(p)，斜率为2p</p>
+<p>点斜式构造(y – y0) = k(x – x0)得 y – f(p) = 2p(x - p)</p>
+<p>令y = 0，求得直线与y轴交点处x的值x = p – f(p)/2p</p>
+<p>这一点会比(4, 0)更接近红点，于是取p = 这一点并重复上述步骤，慢慢逼近红点处x的值</p>
+<p>将f(p)化开来：x = p – (p² - 2)/2p</p>
+<p>一般化，若p为x上任意一点，x则为下一个靠近点</p>
+<p>即next_x = x – (x² - 2) / 2x，化简得next_x = (x + 2/x) / 2</p>
+<p>在代码中则直接都表示为x，即x = (x + 2/x) / 2</p>
+<p>再一般化，求根号c的值：x = (x + c/x) / 2</p>
+<p>逼近个7 8次就已经很接近√2了</p>
+<br>
+
+<h1 id="Java实现"><a href="#Java实现" class="headerlink" title="Java实现"></a>Java实现</h1><p>逼近个7 8次这个说法太宽泛了，可以设置一个能接受的误差程度，比如err = 1e-15</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">double</span> <span class="title">sqrt</span><span class="params">(<span class="keyword">double</span> c)</span></span>&#123;</span><br><span class="line">    <span class="keyword">if</span>(c &lt; <span class="number">0</span>) <span class="keyword">return</span> Double.NaN;    <span class="comment">//小于0是没有平方根的</span></span><br><span class="line">    <span class="keyword">double</span> err = <span class="number">1e-15</span>;			    <span class="comment">//因为是逼近，√2是无理数，需要结束条件，也就是能接受的误差程度,否则永远循环</span></span><br><span class="line">    <span class="keyword">double</span> res = c;                 <span class="comment">//一开始取p = c，因为√2一定&lt;2</span></span><br><span class="line">    <span class="keyword">while</span>(Math.abs(res - c / res) &gt; err * res)&#123;	<span class="comment">//结束条件: abs(res² - c) &lt;= err</span></span><br><span class="line">        res = (res + c / res) / <span class="number">2.0</span>;			<span class="comment">//前面推导的公式</span></span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> res;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
         </div>
         
-        
-        <div class="level is-mobile">
-            <div class="level-start">
-                <div class="level-item">
-                <a class="button is-size-7 is-light" href="/2020/10/08/mysql%E7%B4%A2%E5%BC%95/#more">阅读更多</a>
-                </div>
-            </div>
-        </div>
         
         
     </div>
@@ -192,71 +215,19 @@
 
 
 
-
-
-
-    
-<div class="card">
-    
-    <div class="card-image">
-        <a href="/2020/06/27/linux%E4%B8%8Bmysql%E7%9A%84%E5%AE%89%E8%A3%85/" class="image is-7by1">
-            <img class="thumbnail" src="images/loading.gif" data-original="https://wx2.sbimg.cn/2020/07/30/P7z9J.md.jpg" alt="linux下mysql的安装">
-        </a>
-    </div>
-    
-    <div class="card-content article ">
+<div class="card card-transparent">
+    <div class="level post-navigation is-flex-wrap is-mobile">
         
-        <div class="level article-meta is-size-7 is-uppercase is-mobile is-overflow-x-auto">
-            <div class="level-left">
-                <time class="level-item has-text-grey" datetime="2020-06-27T15:25:18.000Z">2020-06-27</time>
-                
-                <div class="level-item">
-                <a class="has-link-grey -link" href="/categories/Mysql/">Mysql</a>
-                </div>
-                
-                
-                <span class="level-item has-text-grey">
-                    
-                    
-                    2 分钟 读完 (大约 333 个字)
-                </span>
-                
-                
-            </div>
+        
+        <div class="level-end">
+            <a class="level level-item has-link-grey  article-nav-next" href="/2020/10/10/456-132%E6%A8%A1%E5%BC%8F/">
+                <span class="level-item">456-132模式</span>
+                <i class="level-item fas fa-chevron-right"></i>
+            </a>
         </div>
-        
-        <h1 class="title is-size-3 is-size-4-mobile has-text-weight-normal">
-            
-                <a class="has-link-black-ter" href="/2020/06/27/linux%E4%B8%8Bmysql%E7%9A%84%E5%AE%89%E8%A3%85/">linux下mysql的安装</a>
-            
-        </h1>
-        <div class="content">
-            <p>网上一大堆乱七八糟的，特别复杂，还自己下载，自己编译，又自己写配置文件。我跟你说：没必要！几个命令就搞定了</p>
-<p>跟着这个节奏来</p>
-<ol>
-<li>添加仓库</li>
-</ol>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">wget -i -c https://dev.mysql.com/get/mysql80-community-release-el7-3.noarch.rpm</span><br></pre></td></tr></table></figure>
-        </div>
-        
-        
-        <div class="level is-mobile">
-            <div class="level-start">
-                <div class="level-item">
-                <a class="button is-size-7 is-light" href="/2020/06/27/linux%E4%B8%8Bmysql%E7%9A%84%E5%AE%89%E8%A3%85/#more">阅读更多</a>
-                </div>
-            </div>
-        </div>
-        
         
     </div>
 </div>
-
-
-
-
-
-
 
 
 </div>
@@ -342,6 +313,33 @@
 </div>
     
         
+
+    <div class="card widget" id="toc">
+        <div class="card-content">
+            <div class="menu">
+                <h3 class="menu-label">
+                    目录
+                </h3>
+                <ul class="menu-list"><li>
+        <a class="is-flex" href="#整数型">
+        <!-- 目录是否自动编号 -->
+        <!-- <span class="has-mr-6">1</span> -->
+        <span>整数型</span>
+        </a></li><li>
+        <a class="is-flex" href="#小数型-牛顿迭代法">
+        <!-- 目录是否自动编号 -->
+        <!-- <span class="has-mr-6">2</span> -->
+        <span>小数型-牛顿迭代法</span>
+        </a></li><li>
+        <a class="is-flex" href="#Java实现">
+        <!-- 目录是否自动编号 -->
+        <!-- <span class="has-mr-6">3</span> -->
+        <span>Java实现</span>
+        </a></li></ul>
+            </div>
+        </div>
+    </div>
+
     
         
 <div class="card widget">
@@ -721,7 +719,7 @@
             <div class="level-start has-text-centered-mobile">
                 <a class="footer-logo is-block has-mb-6" href="/">
                 
-                    <img src="images/loading.gif" data-original="https://s1.ax1x.com/2020/07/20/UfKyGQ.md.png" alt="小温 blog" height="28">
+                    <img src="images/loading.gif" data-original="https://s1.ax1x.com/2020/07/20/UfKyGQ.md.png" alt="计算平方根-牛顿迭代法" height="28">
                 
                 </a>
                 <p class="is-size-7">
