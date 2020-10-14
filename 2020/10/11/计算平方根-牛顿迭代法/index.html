@@ -19,7 +19,7 @@
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="https://b1.sbimg.org/file/chevereto-jia/2020/10/12/G8L51.md.jpg">
 <meta property="article:published_time" content="2020-10-11T13:31:37.000Z">
-<meta property="article:modified_time" content="2020-10-12T10:45:26.791Z">
+<meta property="article:modified_time" content="2020-10-14T02:36:50.881Z">
 <meta property="article:author" content="wjw">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:image" content="https://b1.sbimg.org/file/chevereto-jia/2020/10/12/G8L51.md.jpg">
@@ -156,7 +156,7 @@
                 <span class="level-item has-text-grey">
                     
                     
-                    4 分钟 读完 (大约 612 个字)
+                    5 分钟 读完 (大约 717 个字)
                 </span>
                 
                 
@@ -203,6 +203,9 @@
 <h1 id="Java实现"><a href="#Java实现" class="headerlink" title="Java实现"></a>Java实现</h1><p>逼近个7 8次这个说法太宽泛了，可以设置一个能接受的误差程度，比如err = 1e-15</p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">double</span> <span class="title">sqrt</span><span class="params">(<span class="keyword">double</span> c)</span></span>&#123;</span><br><span class="line">    <span class="keyword">if</span>(c &lt; <span class="number">0</span>) <span class="keyword">return</span> Double.NaN;    <span class="comment">//小于0是没有平方根的</span></span><br><span class="line">    <span class="keyword">double</span> err = <span class="number">1e-15</span>;			    <span class="comment">//因为是逼近，√2是无理数，需要结束条件，也就是能接受的误差程度,否则永远循环</span></span><br><span class="line">    <span class="keyword">double</span> res = c;                 <span class="comment">//一开始取p = c，因为√2一定&lt;2</span></span><br><span class="line">    <span class="keyword">while</span>(Math.abs(res - c / res) &gt; err * res)&#123;	<span class="comment">//结束条件: abs(res² - c) &lt;= err</span></span><br><span class="line">        res = (res + c / res) / <span class="number">2.0</span>;			<span class="comment">//前面推导的公式</span></span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> res;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
+<br>
+
+<p>ps：这是什么？当时看这个的时候我忽然发现，这不就类似bp神经网络的梯度下降嘛！！！！神经网络的那些听起来高大上的反向传播，梯度下降。不就正是和这个一样求导逼近的思想吗，还不如从这个牛顿迭代法开始讲解呢，更加直观。</p>
 
         </div>
         
