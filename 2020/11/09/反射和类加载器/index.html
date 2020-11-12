@@ -10,16 +10,16 @@
 <title>反射和类加载器 - 小温 blog</title>
 
 
-    <meta name="description" content="1. 程序运行阶段 代码阶段（硬盘阶段）：比如编写一个Person.java，编译成字节码Person.class，这都是存在硬盘的，而程序运行是要在内存中的  类加载器ClassLoader阶段：在第一阶段和第二阶段中间，也就是本文要讲的内容，先卖个关子，知道有这个阶段  Runtime运行时阶段：也就是new Person()，那么此时已经在内存中     2. “第二阶段”：Class类对象">
+    <meta name="description" content="1. 程序运行阶段 代码阶段（硬盘阶段）：比如编写一个Person.java，编译成字节码Person.class，这都是存在硬盘的，而程序运行是要在内存中的 类加载器ClassLoader阶段：在第一阶段和第二阶段中间，也就是本文要讲的内容，先卖个关子，知道有这个阶段 Runtime运行时阶段：也就是new Person()，那么此时已经在内存中">
 <meta property="og:type" content="article">
 <meta property="og:title" content="反射和类加载器">
 <meta property="og:url" content="http://wjw.today/2020/11/09/%E5%8F%8D%E5%B0%84%E5%92%8C%E7%B1%BB%E5%8A%A0%E8%BD%BD%E5%99%A8/index.html">
 <meta property="og:site_name" content="小温 blog">
-<meta property="og:description" content="1. 程序运行阶段 代码阶段（硬盘阶段）：比如编写一个Person.java，编译成字节码Person.class，这都是存在硬盘的，而程序运行是要在内存中的  类加载器ClassLoader阶段：在第一阶段和第二阶段中间，也就是本文要讲的内容，先卖个关子，知道有这个阶段  Runtime运行时阶段：也就是new Person()，那么此时已经在内存中     2. “第二阶段”：Class类对象">
+<meta property="og:description" content="1. 程序运行阶段 代码阶段（硬盘阶段）：比如编写一个Person.java，编译成字节码Person.class，这都是存在硬盘的，而程序运行是要在内存中的 类加载器ClassLoader阶段：在第一阶段和第二阶段中间，也就是本文要讲的内容，先卖个关子，知道有这个阶段 Runtime运行时阶段：也就是new Person()，那么此时已经在内存中">
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="https://source.acexy.cn/view/XWtKTbf">
 <meta property="article:published_time" content="2020-11-09T12:49:00.000Z">
-<meta property="article:modified_time" content="2020-11-09T13:02:43.115Z">
+<meta property="article:modified_time" content="2020-11-11T08:59:16.110Z">
 <meta property="article:author" content="wjw">
 <meta property="article:tag" content="笔试面试">
 <meta name="twitter:card" content="summary">
@@ -157,7 +157,7 @@
                 <span class="level-item has-text-grey">
                     
                     
-                    7 分钟 读完 (大约 1116 个字)
+                    7 分钟 读完 (大约 1117 个字)
                 </span>
                 
                 
@@ -176,13 +176,12 @@
         </h1>
         <div class="content">
             <h1 id="1-程序运行阶段"><a href="#1-程序运行阶段" class="headerlink" title="1. 程序运行阶段"></a>1. 程序运行阶段</h1><ol>
-<li><p>代码阶段（硬盘阶段）：比如编写一个Person.java，编译成字节码Person.class，这都是存在硬盘的，而程序运行是要在内存中的</p>
-</li>
-<li><p>类加载器ClassLoader阶段：在第一阶段和第二阶段中间，也就是本文要讲的内容，先卖个关子，知道有这个阶段</p>
-</li>
-<li><p>Runtime运行时阶段：也就是new Person()，那么此时已经在内存中</p>
-</li>
+<li>代码阶段（硬盘阶段）：比如编写一个Person.java，编译成字节码Person.class，这都是存在硬盘的，而程序运行是要在内存中的</li>
+<li>类加载器ClassLoader阶段：在第一阶段和第二阶段中间，也就是本文要讲的内容，先卖个关子，知道有这个阶段</li>
+<li>Runtime运行时阶段：也就是new Person()，那么此时已经在内存中</li>
 </ol>
+<a id="more"></a>
+
 <br>
 
 <h1 id="2-“第二阶段”：Class类对象阶段"><a href="#2-“第二阶段”：Class类对象阶段" class="headerlink" title="2. “第二阶段”：Class类对象阶段"></a>2. “第二阶段”：Class类对象阶段</h1><p>通过第一第三阶段，可以推测出第二阶段其实是把硬盘上的class文件加载进内存变成java可以识别的内容（术语叫做Class类对象）的过程，随后第三阶段便可读取。那么究竟是如何做的呢？</p>
@@ -310,7 +309,7 @@
                     </p>
                     <a href="/archives">
                         <p class="title has-text-weight-normal">
-                            63
+                            64
                         </p>
                     </a>
                 </div>
@@ -487,7 +486,7 @@
                 <span class="level-item">数据结构和算法</span>
             </span>
             <span class="level-end">
-                <span class="level-item tag">34</span>
+                <span class="level-item tag">35</span>
             </span>
         </a></li><li>
         <a class="level is-marginless" href="/categories/%E7%8E%84%E5%AD%A6/">
@@ -530,6 +529,25 @@
         
         <article class="media">
             
+            <a href="/2020/11/12/357-%E8%AE%A1%E7%AE%97%E5%90%84%E4%B8%AA%E4%BD%8D%E6%95%B0%E4%B8%8D%E5%90%8C%E7%9A%84%E6%95%B0%E5%AD%97%E4%B8%AA%E6%95%B0/" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="images/loading.gif" data-original="https://b1.sbimg.org/file/chevereto-jia/2020/11/12/GOuWA.md.jpg" alt="357-计算各个位数不同的数字个数">
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2020-11-11T16:15:27.000Z">2020-11-12</time></div>
+                    <a href="/2020/11/12/357-%E8%AE%A1%E7%AE%97%E5%90%84%E4%B8%AA%E4%BD%8D%E6%95%B0%E4%B8%8D%E5%90%8C%E7%9A%84%E6%95%B0%E5%AD%97%E4%B8%AA%E6%95%B0/" class="title has-link-black-ter is-size-6 has-text-weight-normal">357-计算各个位数不同的数字个数</a>
+                    <p class="is-size-7 is-uppercase">
+                        <a class="has-link-grey -link" href="/categories/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E5%92%8C%E7%AE%97%E6%B3%95/">数据结构和算法</a>
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+        <article class="media">
+            
             <a href="/2020/11/11/ThreadLocal/" class="media-left">
                 <p class="image is-64x64">
                     <img class="thumbnail" src="images/loading.gif" data-original="https://source.acexy.cn/view/XW2epNP" alt="ThreadLocal">
@@ -597,25 +615,6 @@
                 <div class="content">
                     <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2020-11-08T15:12:14.000Z">2020-11-08</time></div>
                     <a href="/2020/11/08/%E4%BA%8C%E5%88%86%E6%9F%A5%E6%89%BE%E6%A8%A1%E6%9D%BF/" class="title has-link-black-ter is-size-6 has-text-weight-normal">二分查找模板</a>
-                    <p class="is-size-7 is-uppercase">
-                        <a class="has-link-grey -link" href="/categories/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E5%92%8C%E7%AE%97%E6%B3%95/">数据结构和算法</a>
-                    </p>
-                </div>
-            </div>
-        </article>
-        
-        <article class="media">
-            
-            <a href="/2020/11/06/1291-%E9%A1%BA%E6%AC%A1%E6%95%B0/" class="media-left">
-                <p class="image is-64x64">
-                    <img class="thumbnail" src="images/loading.gif" data-original="https://source.acexy.cn/view/XWjBBr3" alt="1291-顺次数">
-                </p>
-            </a>
-            
-            <div class="media-content">
-                <div class="content">
-                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2020-11-06T07:52:19.000Z">2020-11-06</time></div>
-                    <a href="/2020/11/06/1291-%E9%A1%BA%E6%AC%A1%E6%95%B0/" class="title has-link-black-ter is-size-6 has-text-weight-normal">1291-顺次数</a>
                     <p class="is-size-7 is-uppercase">
                         <a class="has-link-grey -link" href="/categories/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E5%92%8C%E7%AE%97%E6%B3%95/">数据结构和算法</a>
                     </p>
@@ -654,6 +653,25 @@
         
         <article class="media">
             
+            <a href="/2020/11/12/357-%E8%AE%A1%E7%AE%97%E5%90%84%E4%B8%AA%E4%BD%8D%E6%95%B0%E4%B8%8D%E5%90%8C%E7%9A%84%E6%95%B0%E5%AD%97%E4%B8%AA%E6%95%B0/" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="images/loading.gif" data-original="https://b1.sbimg.org/file/chevereto-jia/2020/11/12/GOuWA.md.jpg" alt="357-计算各个位数不同的数字个数">
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2020-11-11T16:15:27.000Z">2020-11-12</time></div>
+                    <a href="/2020/11/12/357-%E8%AE%A1%E7%AE%97%E5%90%84%E4%B8%AA%E4%BD%8D%E6%95%B0%E4%B8%8D%E5%90%8C%E7%9A%84%E6%95%B0%E5%AD%97%E4%B8%AA%E6%95%B0/" class="title has-link-black-ter is-size-6 has-text-weight-normal">357-计算各个位数不同的数字个数</a>
+                    <p class="is-size-7 is-uppercase">
+                        <a class="has-link-grey -link" href="/categories/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E5%92%8C%E7%AE%97%E6%B3%95/">数据结构和算法</a>
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+        <article class="media">
+            
             <a href="/2020/11/11/ThreadLocal/" class="media-left">
                 <p class="image is-64x64">
                     <img class="thumbnail" src="images/loading.gif" data-original="https://source.acexy.cn/view/XW2epNP" alt="ThreadLocal">
@@ -721,25 +739,6 @@
                 <div class="content">
                     <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2020-11-08T15:12:14.000Z">2020-11-08</time></div>
                     <a href="/2020/11/08/%E4%BA%8C%E5%88%86%E6%9F%A5%E6%89%BE%E6%A8%A1%E6%9D%BF/" class="title has-link-black-ter is-size-6 has-text-weight-normal">二分查找模板</a>
-                    <p class="is-size-7 is-uppercase">
-                        <a class="has-link-grey -link" href="/categories/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E5%92%8C%E7%AE%97%E6%B3%95/">数据结构和算法</a>
-                    </p>
-                </div>
-            </div>
-        </article>
-        
-        <article class="media">
-            
-            <a href="/2020/11/06/1291-%E9%A1%BA%E6%AC%A1%E6%95%B0/" class="media-left">
-                <p class="image is-64x64">
-                    <img class="thumbnail" src="images/loading.gif" data-original="https://source.acexy.cn/view/XWjBBr3" alt="1291-顺次数">
-                </p>
-            </a>
-            
-            <div class="media-content">
-                <div class="content">
-                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2020-11-06T07:52:19.000Z">2020-11-06</time></div>
-                    <a href="/2020/11/06/1291-%E9%A1%BA%E6%AC%A1%E6%95%B0/" class="title has-link-black-ter is-size-6 has-text-weight-normal">1291-顺次数</a>
                     <p class="is-size-7 is-uppercase">
                         <a class="has-link-grey -link" href="/categories/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E5%92%8C%E7%AE%97%E6%B3%95/">数据结构和算法</a>
                     </p>

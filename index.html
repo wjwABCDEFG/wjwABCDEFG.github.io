@@ -130,6 +130,68 @@
 <div class="card">
     
     <div class="card-image">
+        <a href="/2020/11/12/357-%E8%AE%A1%E7%AE%97%E5%90%84%E4%B8%AA%E4%BD%8D%E6%95%B0%E4%B8%8D%E5%90%8C%E7%9A%84%E6%95%B0%E5%AD%97%E4%B8%AA%E6%95%B0/" class="image is-7by1">
+            <img class="thumbnail" src="images/loading.gif" data-original="https://b1.sbimg.org/file/chevereto-jia/2020/11/12/GOuWA.md.jpg" alt="357-计算各个位数不同的数字个数">
+        </a>
+    </div>
+    
+    <div class="card-content article ">
+        
+        <div class="level article-meta is-size-7 is-uppercase is-mobile is-overflow-x-auto">
+            <div class="level-left">
+                <time class="level-item has-text-grey" datetime="2020-11-11T16:15:27.000Z">2020-11-12</time>
+                
+                <div class="level-item">
+                <a class="has-link-grey -link" href="/categories/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E5%92%8C%E7%AE%97%E6%B3%95/">数据结构和算法</a>
+                </div>
+                
+                
+                <span class="level-item has-text-grey">
+                    
+                    
+                    2 分钟 读完 (大约 340 个字)
+                </span>
+                
+                
+            </div>
+        </div>
+        
+        <h1 class="title is-size-3 is-size-4-mobile has-text-weight-normal">
+            
+                <a class="has-link-black-ter" href="/2020/11/12/357-%E8%AE%A1%E7%AE%97%E5%90%84%E4%B8%AA%E4%BD%8D%E6%95%B0%E4%B8%8D%E5%90%8C%E7%9A%84%E6%95%B0%E5%AD%97%E4%B8%AA%E6%95%B0/">357-计算各个位数不同的数字个数</a>
+            
+        </h1>
+        <div class="content">
+            <p>力扣357</p>
+<blockquote>
+<p><a href="https://leetcode-cn.com/problems/count-numbers-with-unique-digits/">https://leetcode-cn.com/problems/count-numbers-with-unique-digits/</a></p>
+</blockquote>
+        </div>
+        
+        
+        <div class="level is-mobile">
+            <div class="level-start">
+                <div class="level-item">
+                <a class="button is-size-7 is-light" href="/2020/11/12/357-%E8%AE%A1%E7%AE%97%E5%90%84%E4%B8%AA%E4%BD%8D%E6%95%B0%E4%B8%8D%E5%90%8C%E7%9A%84%E6%95%B0%E5%AD%97%E4%B8%AA%E6%95%B0/#more">阅读更多</a>
+                </div>
+            </div>
+        </div>
+        
+        
+    </div>
+</div>
+
+
+
+
+
+
+
+
+    
+<div class="card">
+    
+    <div class="card-image">
         <a href="/2020/11/11/ThreadLocal/" class="image is-7by1">
             <img class="thumbnail" src="images/loading.gif" data-original="https://source.acexy.cn/view/XW2epNP" alt="ThreadLocal">
         </a>
@@ -149,7 +211,7 @@
                 <span class="level-item has-text-grey">
                     
                     
-                    10 分钟 读完 (大约 1463 个字)
+                    10 分钟 读完 (大约 1464 个字)
                 </span>
                 
                 
@@ -163,81 +225,19 @@
         </h1>
         <div class="content">
             <h1 id="作用"><a href="#作用" class="headerlink" title="作用"></a>作用</h1><ol>
-<li><p>多个线程之间的数据隔离</p>
-</li>
-<li><p>单个线程内部的简化参数（传递上下文）</p>
-</li>
+<li>多个线程之间的数据隔离</li>
+<li>单个线程内部的简化参数（传递上下文）</li>
 </ol>
-<br>
-
-<h1 id="使用"><a href="#使用" class="headerlink" title="使用"></a>使用</h1><p>使用可太简单了，一个set 一个get</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">ThreadLocal&lt;String&gt; threadLocal = <span class="keyword">new</span> ThreadLocal&lt;&gt;();</span><br><span class="line">threadLocal.set(<span class="string">"张三"</span>);</span><br><span class="line">String name = threadLocal.get();</span><br></pre></td></tr></table></figure>
-
-<br>
-
-<h1 id="原理说明"><a href="#原理说明" class="headerlink" title="原理说明"></a>原理说明</h1><h2 id="set和get究竟是怎么回事"><a href="#set和get究竟是怎么回事" class="headerlink" title="set和get究竟是怎么回事"></a>set和get究竟是怎么回事</h2><p>set方法</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">set</span><span class="params">(T value)</span> </span>&#123;</span><br><span class="line">    Thread t = Thread.currentThread();</span><br><span class="line">    ThreadLocalMap map = getMap(t);</span><br><span class="line">    <span class="keyword">if</span> (map != <span class="keyword">null</span>)</span><br><span class="line">        map.set(<span class="keyword">this</span>, value);</span><br><span class="line">    <span class="keyword">else</span></span><br><span class="line">        createMap(t, value);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>get方法</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> T <span class="title">get</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    Thread t = Thread.currentThread();</span><br><span class="line">    ThreadLocalMap map = getMap(t);</span><br><span class="line">    <span class="keyword">if</span> (map != <span class="keyword">null</span>) &#123;</span><br><span class="line">        ThreadLocalMap.Entry e = map.getEntry(<span class="keyword">this</span>);</span><br><span class="line">        <span class="keyword">if</span> (e != <span class="keyword">null</span>) &#123;</span><br><span class="line">            <span class="meta">@SuppressWarnings</span>(<span class="string">"unchecked"</span>)</span><br><span class="line">            T result = (T)e.value;</span><br><span class="line">            <span class="keyword">return</span> result;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> setInitialValue();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>由前两行可以看到根据每个currentThread获取了map，因此<strong>不同的线程获取的map自然就不同</strong>，每个线程只能操控自己的map，而对于同一个线程，不管在哪里获取的map都是同一个。</p>
-<p>而对于每个map，key为ThreadLocal这个类，value为我们set的值</p>
-<p><img src="images/loading.gif" data-original="https://s1.ax1x.com/2020/11/10/BLI8x0.png" alt=""></p>
-<p>当然这只是分析，我们可以进一步看getMap源码验证上图</p>
-<p>先看getMap方法体：</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="function">ThreadLocalMap <span class="title">getMap</span><span class="params">(Thread t)</span> </span>&#123;</span><br><span class="line">	<span class="keyword">return</span> t.threadLocals;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>直接返回了Thread类的一个属性成员</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Thread</span> <span class="keyword">implements</span> <span class="title">Runnable</span> </span>&#123;</span><br><span class="line">    </span><br><span class="line">    <span class="comment">/* ThreadLocal values pertaining to this thread. This map is maintained</span></span><br><span class="line"><span class="comment">     * by the ThreadLocal class. */</span></span><br><span class="line">    ThreadLocal.ThreadLocalMap threadLocals = <span class="keyword">null</span>;</span><br><span class="line"></span><br><span class="line">    <span class="comment">/*</span></span><br><span class="line"><span class="comment">     * InheritableThreadLocal values pertaining to this thread. This map is</span></span><br><span class="line"><span class="comment">     * maintained by the InheritableThreadLocal class.</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    ThreadLocal.ThreadLocalMap inheritableThreadLocals = <span class="keyword">null</span>;</span><br><span class="line">    </span><br><span class="line">    ...</span><br></pre></td></tr></table></figure>
-
-<p>到这里就可以完全说明<strong>不同的线程获取的map自然就不同，每个线程有自己的map</strong>了</p>
-<br>
-
-<h2 id="map真的是map吗"><a href="#map真的是map吗" class="headerlink" title="map真的是map吗"></a>map真的是map吗</h2><p>再看看这个map，他叫ThreadLocalMap，跟hashmap一样吗？</p>
-<p>部分源码如下：</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">static</span> <span class="class"><span class="keyword">class</span> <span class="title">ThreadLocalMap</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * The entries in this hash map extend WeakReference, using</span></span><br><span class="line"><span class="comment">     * its main ref field as the key (which is always a</span></span><br><span class="line"><span class="comment">     * ThreadLocal object).  Note that null keys (i.e. entry.get()</span></span><br><span class="line"><span class="comment">     * == null) mean that the key is no longer referenced, so the</span></span><br><span class="line"><span class="comment">     * entry can be expunged from table.  Such entries are referred to</span></span><br><span class="line"><span class="comment">     * as "stale entries" in the code that follows.</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="keyword">static</span> <span class="class"><span class="keyword">class</span> <span class="title">Entry</span> <span class="keyword">extends</span> <span class="title">WeakReference</span>&lt;<span class="title">ThreadLocal</span>&lt;?&gt;&gt; </span>&#123;</span><br><span class="line">        <span class="comment">/** The value associated with this ThreadLocal. */</span></span><br><span class="line">        Object value;</span><br><span class="line"></span><br><span class="line">        Entry(ThreadLocal&lt;?&gt; k, Object v) &#123;</span><br><span class="line">            <span class="keyword">super</span>(k);</span><br><span class="line">            value = v;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * The table, resized as necessary.</span></span><br><span class="line"><span class="comment">     * table.length MUST always be a power of two.</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="keyword">private</span> Entry[] table;</span><br><span class="line">    </span><br><span class="line">    ...</span><br></pre></td></tr></table></figure>
-
-<p>对比hashmap分析，我贴上Hashmap的部分源码</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">HashMap</span>&lt;<span class="title">K</span>,<span class="title">V</span>&gt; <span class="keyword">extends</span> <span class="title">AbstractMap</span>&lt;<span class="title">K</span>,<span class="title">V</span>&gt;</span></span><br><span class="line"><span class="class">    <span class="keyword">implements</span> <span class="title">Map</span>&lt;<span class="title">K</span>,<span class="title">V</span>&gt;, <span class="title">Cloneable</span>, <span class="title">Serializable</span> </span>&#123;</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">static</span> <span class="class"><span class="keyword">class</span> <span class="title">Node</span>&lt;<span class="title">K</span>,<span class="title">V</span>&gt; <span class="keyword">implements</span> <span class="title">Map</span>.<span class="title">Entry</span>&lt;<span class="title">K</span>,<span class="title">V</span>&gt; </span>&#123;</span><br><span class="line">        <span class="keyword">final</span> <span class="keyword">int</span> hash;</span><br><span class="line">        <span class="keyword">final</span> K key;</span><br><span class="line">        V value;</span><br><span class="line">        Node&lt;K,V&gt; next;</span><br><span class="line">        </span><br><span class="line">        ...</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">transient</span> Node&lt;K,V&gt;[] table;</span><br><span class="line">    </span><br><span class="line">    ...</span><br></pre></td></tr></table></figure>
-
-<p>我们都知道hashmap在树化之前是数组+链表，首先是Entry[] table，类似于hashmap“数组+链表”中的数组Node&lt;K,V&gt;[] table</p>
-<p>那链表呢？答案是<strong>没有</strong>。从上面可以看出，hashmap的有指针域Node&lt;K,V&gt; next;，但是ThreadLocalMap的Entry是一个弱引用</p>
-<p>综上所述，<strong>ThreadLocalMap其实并没有实现Map接口，只是一个Entry数组</strong></p>
-<br>
-
-<h2 id="ThreadLocalMap如何解决hash冲突"><a href="#ThreadLocalMap如何解决hash冲突" class="headerlink" title="ThreadLocalMap如何解决hash冲突"></a>ThreadLocalMap如何解决hash冲突</h2><p>既然我们知道了ThreadLocalMap只是一个Entry数组，如果定义了多个ThreadLocal</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">ThreadLocal&lt;String&gt; threadLocal1 = <span class="keyword">new</span> ThreadLocal&lt;&gt;();</span><br><span class="line">ThreadLocal&lt;Integer&gt; threadLocal2 = <span class="keyword">new</span> ThreadLocal&lt;&gt;();</span><br></pre></td></tr></table></figure>
-
-<p>存东西的时候遇到hash冲突怎么解决呢，先说结论：hashmap遇到hash冲突后会跟在此下标对应的链表后面，而ThreadLocalMap没有链表，遇到hash冲突后计算下一个下标，直到数组在某个下标处没有值</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">private</span> <span class="keyword">void</span> <span class="title">set</span><span class="params">(ThreadLocal&lt;?&gt; key, Object value)</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    Entry[] tab = table;</span><br><span class="line">    <span class="keyword">int</span> len = tab.length;</span><br><span class="line">    <span class="keyword">int</span> i = key.threadLocalHashCode &amp; (len-<span class="number">1</span>);	<span class="comment">//1.这样计算hash值</span></span><br><span class="line"></span><br><span class="line">    <span class="keyword">for</span> (Entry e = tab[i];</span><br><span class="line">         e != <span class="keyword">null</span>;</span><br><span class="line">         e = tab[i = nextIndex(i, len)]) &#123;	<span class="comment">//4.entry不为空且key不相等，说明hash冲突，一直找下一个位置</span></span><br><span class="line">        ThreadLocal&lt;?&gt; k = e.get();</span><br><span class="line"></span><br><span class="line">        <span class="keyword">if</span> (k == key) &#123;	<span class="comment">//2.key相等，覆盖旧值</span></span><br><span class="line">            e.value = value;</span><br><span class="line">            <span class="keyword">return</span>;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">if</span> (k == <span class="keyword">null</span>) &#123;	<span class="comment">//3.当前位置是空的，就初始化⼀个Entry对象放在位置i上；</span></span><br><span class="line">            replaceStaleEntry(key, value, i);</span><br><span class="line">            <span class="keyword">return</span>;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    tab[i] = <span class="keyword">new</span> Entry(key, value);</span><br><span class="line">    <span class="keyword">int</span> sz = ++size;</span><br><span class="line">    <span class="keyword">if</span> (!cleanSomeSlots(i, sz) &amp;&amp; sz &gt;= threshold)</span><br><span class="line">        rehash();</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">//nextIndex也贴出来，真的是下一个位置！！</span></span><br><span class="line"><span class="function"><span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">int</span> <span class="title">nextIndex</span><span class="params">(<span class="keyword">int</span> i, <span class="keyword">int</span> len)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">return</span> ((i + <span class="number">1</span> &lt; len) ? i + <span class="number">1</span> : <span class="number">0</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>get时候也是一样：计算hash下标–&gt;判断key是否相等–&gt;相等直接返回，不相等看下一个位置–&gt;继续判断是否相等…</p>
-<br>
-
-<h1 id="内存泄漏问题"><a href="#内存泄漏问题" class="headerlink" title="内存泄漏问题"></a>内存泄漏问题</h1><p>对于Entry，key是弱引用，在gc时会被回收，但是<strong>value得等到该ThreadLocal/线程没有强引用时才会收</strong>，如果线程一直存在，比如<strong>线程池</strong>会复用线程，那么此时value就一直无法回收，造成内存泄露问题。</p>
-<p>解决方法也很简单，finally中调用remove()方法</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">ThreadLocal&lt;String&gt; localName = <span class="keyword">new</span> ThreadLocal();</span><br><span class="line"><span class="keyword">try</span> &#123;</span><br><span class="line"> localName.set(<span class="string">"张三"</span>);</span><br><span class="line"> ……</span><br><span class="line">&#125; <span class="keyword">finally</span> &#123;</span><br><span class="line"> localName.remove();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<br>
-
-<h1 id="线程之间传递"><a href="#线程之间传递" class="headerlink" title="线程之间传递"></a>线程之间传递</h1><p>Java中的对象都是在堆中的，是线程共享的，ThreadLocal也一样，只是通过一些手段来实现线程之间的隔离，如果要实现父子线程之间的数据共享，可以使用InheritableThreadLocal</p>
-<p>其原理是判断父组件是否有InheritableThreadLocal，有就直接赋值给子线程</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//Thread的init方法中</span></span><br><span class="line"><span class="keyword">if</span> (inheritThreadLocals &amp;&amp; parent.inheritableThreadLocals != <span class="keyword">null</span>)</span><br><span class="line">            <span class="keyword">this</span>.inheritableThreadLocals =</span><br><span class="line">                ThreadLocal.createInheritedMap(parent.inheritableThreadLocals);</span><br></pre></td></tr></table></figure>
-
-<br>
-
-<h1 id="常见场景"><a href="#常见场景" class="headerlink" title="常见场景"></a>常见场景</h1><h2 id="Spring的事务控制"><a href="#Spring的事务控制" class="headerlink" title="Spring的事务控制"></a>Spring的事务控制</h2><p>最著名的肯定是Spring的事务控制了，操作数据库最终都是dao层的JDBC，那么就需要Connection连接对象，原则上来说增删改查操作都由Connection操作。本来也没什么，但是Spring为了把事务都控制在service业务层（虽然这些什么什么层本质一样，是自己抽象出来的概念），做了两件事：</p>
-<ol>
-<li>为了保证原子性：保证单个线程中的数据库操作使用的是同⼀个数据库连接，而且为了让开发者不需要将同一个Connection对象作为参数在dao的函数里传来传去，使用时感知不到Connection对象，于是使用了ThreadLocal+AOP的方式，保证了</li>
-<li>为了保证隔离性：使用ThreadLocal，各个线程之间的事务互不影响</li>
-</ol>
-<br>
-
-<h2 id="贴一个自己使用的场景：存放登录信息"><a href="#贴一个自己使用的场景：存放登录信息" class="headerlink" title="贴一个自己使用的场景：存放登录信息"></a>贴一个自己使用的场景：存放登录信息</h2><p><img src="images/loading.gif" data-original="https://s1.ax1x.com/2020/11/11/BXwLex.png" alt=""></p>
-
         </div>
         
+        
+        <div class="level is-mobile">
+            <div class="level-start">
+                <div class="level-item">
+                <a class="button is-size-7 is-light" href="/2020/11/11/ThreadLocal/#more">阅读更多</a>
+                </div>
+            </div>
+        </div>
         
         
     </div>
@@ -273,7 +273,7 @@
                 <span class="level-item has-text-grey">
                     
                     
-                    7 分钟 读完 (大约 1116 个字)
+                    7 分钟 读完 (大约 1117 个字)
                 </span>
                 
                 
@@ -287,59 +287,20 @@
         </h1>
         <div class="content">
             <h1 id="1-程序运行阶段"><a href="#1-程序运行阶段" class="headerlink" title="1. 程序运行阶段"></a>1. 程序运行阶段</h1><ol>
-<li><p>代码阶段（硬盘阶段）：比如编写一个Person.java，编译成字节码Person.class，这都是存在硬盘的，而程序运行是要在内存中的</p>
-</li>
-<li><p>类加载器ClassLoader阶段：在第一阶段和第二阶段中间，也就是本文要讲的内容，先卖个关子，知道有这个阶段</p>
-</li>
-<li><p>Runtime运行时阶段：也就是new Person()，那么此时已经在内存中</p>
-</li>
+<li>代码阶段（硬盘阶段）：比如编写一个Person.java，编译成字节码Person.class，这都是存在硬盘的，而程序运行是要在内存中的</li>
+<li>类加载器ClassLoader阶段：在第一阶段和第二阶段中间，也就是本文要讲的内容，先卖个关子，知道有这个阶段</li>
+<li>Runtime运行时阶段：也就是new Person()，那么此时已经在内存中</li>
 </ol>
-<br>
-
-<h1 id="2-“第二阶段”：Class类对象阶段"><a href="#2-“第二阶段”：Class类对象阶段" class="headerlink" title="2. “第二阶段”：Class类对象阶段"></a>2. “第二阶段”：Class类对象阶段</h1><p>通过第一第三阶段，可以推测出第二阶段其实是把硬盘上的class文件加载进内存变成java可以识别的内容（术语叫做Class类对象）的过程，随后第三阶段便可读取。那么究竟是如何做的呢？</p>
-<p><img src="images/loading.gif" data-original="https://wx1.sbimg.cn/2020/09/10/97Ld4.png" alt=""></p>
-<p>在这个阶段会把Person.class（泛指所有.class文件）文件分解成三部分加载进内存（当然不是加载成Person这个类，程序没有new，java是不知道你要什么类的，所以他是加载成上面说的统一的“Class类对象”），这个对象包括了三个东西：</p>
-<ul>
-<li>Filed[] fields：里面存放.class分解出来的成员变量</li>
-<li>Constructor[] cons：存放构造方法</li>
-<li>Method[] methods：存放成员方法</li>
-</ul>
-<p>这个从.class文件分解为各个部分并封装为Class类对象的过程其实就叫<strong>反射</strong></p>
-<p>这不是很抽象的东西，来个具体应用举例：idea对着一个String对象敲下.，会提示chatAt等一堆可以用的方法，这方法从哪来？idea内部判断了String然后提示？怎么可能，其实这就是运用了反射，读取了Method[]列表，显示出来。可以把idea看作是一个运行中的java程序，因此<strong>反射可以在运行的时候获取类的信息</strong></p>
-<br>
-
-<h1 id="3-api"><a href="#3-api" class="headerlink" title="3. api"></a>3. api</h1><p>既然知道了反射就是为了获取”Class类对象“（再次重申，不是Person类对象，他就叫Class类对象！！），那么我们可以看如何获取了，刚刚说了三个阶段，那么每个阶段都有对应的api用于获取Class类对象。</p>
-<ul>
-<li><p>Class.forName(“全类名”)：第一阶段，将字节码文件加载进内存，返回Class类对象（全限定类名：包名+类名，这个阶段没有类名，因此必须手动写全限定类名，）</p>
-</li>
-<li><p>类名.class：第二阶段，通过类名的class属性获取（这一阶段jvm已经加载好了，知道了类名，因此需要的话只要直接用类名.属性名就可以了）</p>
-</li>
-<li><p>对象名.getClass()：第三阶段，这时候你已经new Person()了，已经有对象了，getClass()是Object类提供的方法，因此你的Person类必有这个方法</p>
-</li>
-</ul>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//1.自己写一个Person类，随便给个name和age属性，略</span></span><br><span class="line">Class cls1 = Class.forName(<span class="string">"com.wjw.domain.Person"</span>);</span><br><span class="line">Class cls2 = Person<span class="class">.<span class="keyword">class</span></span>;</span><br><span class="line">Person person = <span class="keyword">new</span> Person();</span><br><span class="line">Class cls3 = person.getClass();</span><br></pre></td></tr></table></figure>
-
-<p><strong>同一个字节码文件只会被加载一次Class类对象，三种方式获得的地址都是同一个</strong></p>
-<br>
-
-<h1 id="4-双亲委派机制"><a href="#4-双亲委派机制" class="headerlink" title="4. 双亲委派机制"></a>4. 双亲委派机制</h1><p>如果自己建立一个名为java.lang.String的包和类，能不能替换掉真正的String类呢？答案是不行的。</p>
-<p>ClassLoader有三种</p>
-<p>BootstrapClassLoader ==&gt; $JAVA_HOME/jre/lib</p>
-<p>ExtClassLoader ==&gt; $JAVA_HOME/jre/lib/ext</p>
-<p>AppClassLoader ==&gt; 第三方和自己项目下的类</p>
-<p><img src="images/loading.gif" data-original="https://s1.ax1x.com/2020/11/09/B7Qd78.png" alt=""></p>
-<p><strong>所谓双亲委派机制，就是当程序读取String的时候，先从BootstrapClassLoader开始，层层往下读取，如果能够加载String，那么交由该类加载器加载，如果到AppClassLoader都没有发现该类，会报ClassNotFoundException</strong></p>
-<p>String在$JAVA_HOME/jre/lib/rt.jar下，所以被BootstrapClassLoader加载。</p>
-<p>需要查看是什么类加载器，Class类提供了getClassLoader()方法，如下</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">Person p = <span class="keyword">new</span> Person();</span><br><span class="line">System.out.println(p.getClass().getClassLoader());</span><br></pre></td></tr></table></figure>
-
-<p>如果要看上一级，就通过类加载器的getParent()</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">System.out.println(p.getClass().getClassLoader().getParent());</span><br></pre></td></tr></table></figure>
-
-<p>要注意的是，由BootstrapClassLoader加载的类getClassLoader()会为null，不是没有该类（没有会报错），而是显示不出来，已经去了c写的native里面</p>
-
         </div>
         
+        
+        <div class="level is-mobile">
+            <div class="level-start">
+                <div class="level-item">
+                <a class="button is-size-7 is-light" href="/2020/11/09/%E5%8F%8D%E5%B0%84%E5%92%8C%E7%B1%BB%E5%8A%A0%E8%BD%BD%E5%99%A8/#more">阅读更多</a>
+                </div>
+            </div>
+        </div>
         
         
     </div>
@@ -785,69 +746,6 @@
 
 
 
-    
-<div class="card">
-    
-    <div class="card-image">
-        <a href="/2020/10/14/784-%E5%AD%97%E6%AF%8D%E5%A4%A7%E5%B0%8F%E5%86%99%E5%85%A8%E6%8E%92%E5%88%97/" class="image is-7by1">
-            <img class="thumbnail" src="images/loading.gif" data-original="https://source.acexy.cn/view/XUk+jKh" alt="784-字母大小写全排列">
-        </a>
-    </div>
-    
-    <div class="card-content article ">
-        
-        <div class="level article-meta is-size-7 is-uppercase is-mobile is-overflow-x-auto">
-            <div class="level-left">
-                <time class="level-item has-text-grey" datetime="2020-10-14T02:15:20.000Z">2020-10-14</time>
-                
-                <div class="level-item">
-                <a class="has-link-grey -link" href="/categories/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E5%92%8C%E7%AE%97%E6%B3%95/">数据结构和算法</a>
-                </div>
-                
-                
-                <span class="level-item has-text-grey">
-                    
-                    
-                    2 分钟 读完 (大约 287 个字)
-                </span>
-                
-                
-            </div>
-        </div>
-        
-        <h1 class="title is-size-3 is-size-4-mobile has-text-weight-normal">
-            
-                <a class="has-link-black-ter" href="/2020/10/14/784-%E5%AD%97%E6%AF%8D%E5%A4%A7%E5%B0%8F%E5%86%99%E5%85%A8%E6%8E%92%E5%88%97/">784-字母大小写全排列</a>
-            
-        </h1>
-        <div class="content">
-            <p>力扣784</p>
-<blockquote>
-<p><a href="https://leetcode-cn.com/problems/letter-case-permutation/">https://leetcode-cn.com/problems/letter-case-permutation/</a></p>
-</blockquote>
-<p>本题和1219 黄金矿工类似，属于枚举型回溯</p>
-        </div>
-        
-        
-        <div class="level is-mobile">
-            <div class="level-start">
-                <div class="level-item">
-                <a class="button is-size-7 is-light" href="/2020/10/14/784-%E5%AD%97%E6%AF%8D%E5%A4%A7%E5%B0%8F%E5%86%99%E5%85%A8%E6%8E%92%E5%88%97/#more">阅读更多</a>
-                </div>
-            </div>
-        </div>
-        
-        
-    </div>
-</div>
-
-
-
-
-
-
-
-
 
     
 <div class="card card-transparent">
@@ -912,7 +810,7 @@
                     </p>
                     <a href="/archives">
                         <p class="title has-text-weight-normal">
-                            63
+                            64
                         </p>
                     </a>
                 </div>
@@ -1057,7 +955,7 @@
                 <span class="level-item">数据结构和算法</span>
             </span>
             <span class="level-end">
-                <span class="level-item tag">34</span>
+                <span class="level-item tag">35</span>
             </span>
         </a></li><li>
         <a class="level is-marginless" href="/categories/%E7%8E%84%E5%AD%A6/">
@@ -1100,6 +998,25 @@
         
         <article class="media">
             
+            <a href="/2020/11/12/357-%E8%AE%A1%E7%AE%97%E5%90%84%E4%B8%AA%E4%BD%8D%E6%95%B0%E4%B8%8D%E5%90%8C%E7%9A%84%E6%95%B0%E5%AD%97%E4%B8%AA%E6%95%B0/" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="images/loading.gif" data-original="https://b1.sbimg.org/file/chevereto-jia/2020/11/12/GOuWA.md.jpg" alt="357-计算各个位数不同的数字个数">
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2020-11-11T16:15:27.000Z">2020-11-12</time></div>
+                    <a href="/2020/11/12/357-%E8%AE%A1%E7%AE%97%E5%90%84%E4%B8%AA%E4%BD%8D%E6%95%B0%E4%B8%8D%E5%90%8C%E7%9A%84%E6%95%B0%E5%AD%97%E4%B8%AA%E6%95%B0/" class="title has-link-black-ter is-size-6 has-text-weight-normal">357-计算各个位数不同的数字个数</a>
+                    <p class="is-size-7 is-uppercase">
+                        <a class="has-link-grey -link" href="/categories/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E5%92%8C%E7%AE%97%E6%B3%95/">数据结构和算法</a>
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+        <article class="media">
+            
             <a href="/2020/11/11/ThreadLocal/" class="media-left">
                 <p class="image is-64x64">
                     <img class="thumbnail" src="images/loading.gif" data-original="https://source.acexy.cn/view/XW2epNP" alt="ThreadLocal">
@@ -1167,25 +1084,6 @@
                 <div class="content">
                     <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2020-11-08T15:12:14.000Z">2020-11-08</time></div>
                     <a href="/2020/11/08/%E4%BA%8C%E5%88%86%E6%9F%A5%E6%89%BE%E6%A8%A1%E6%9D%BF/" class="title has-link-black-ter is-size-6 has-text-weight-normal">二分查找模板</a>
-                    <p class="is-size-7 is-uppercase">
-                        <a class="has-link-grey -link" href="/categories/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E5%92%8C%E7%AE%97%E6%B3%95/">数据结构和算法</a>
-                    </p>
-                </div>
-            </div>
-        </article>
-        
-        <article class="media">
-            
-            <a href="/2020/11/06/1291-%E9%A1%BA%E6%AC%A1%E6%95%B0/" class="media-left">
-                <p class="image is-64x64">
-                    <img class="thumbnail" src="images/loading.gif" data-original="https://source.acexy.cn/view/XWjBBr3" alt="1291-顺次数">
-                </p>
-            </a>
-            
-            <div class="media-content">
-                <div class="content">
-                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2020-11-06T07:52:19.000Z">2020-11-06</time></div>
-                    <a href="/2020/11/06/1291-%E9%A1%BA%E6%AC%A1%E6%95%B0/" class="title has-link-black-ter is-size-6 has-text-weight-normal">1291-顺次数</a>
                     <p class="is-size-7 is-uppercase">
                         <a class="has-link-grey -link" href="/categories/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E5%92%8C%E7%AE%97%E6%B3%95/">数据结构和算法</a>
                     </p>
@@ -1224,6 +1122,25 @@
         
         <article class="media">
             
+            <a href="/2020/11/12/357-%E8%AE%A1%E7%AE%97%E5%90%84%E4%B8%AA%E4%BD%8D%E6%95%B0%E4%B8%8D%E5%90%8C%E7%9A%84%E6%95%B0%E5%AD%97%E4%B8%AA%E6%95%B0/" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="images/loading.gif" data-original="https://b1.sbimg.org/file/chevereto-jia/2020/11/12/GOuWA.md.jpg" alt="357-计算各个位数不同的数字个数">
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2020-11-11T16:15:27.000Z">2020-11-12</time></div>
+                    <a href="/2020/11/12/357-%E8%AE%A1%E7%AE%97%E5%90%84%E4%B8%AA%E4%BD%8D%E6%95%B0%E4%B8%8D%E5%90%8C%E7%9A%84%E6%95%B0%E5%AD%97%E4%B8%AA%E6%95%B0/" class="title has-link-black-ter is-size-6 has-text-weight-normal">357-计算各个位数不同的数字个数</a>
+                    <p class="is-size-7 is-uppercase">
+                        <a class="has-link-grey -link" href="/categories/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E5%92%8C%E7%AE%97%E6%B3%95/">数据结构和算法</a>
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+        <article class="media">
+            
             <a href="/2020/11/11/ThreadLocal/" class="media-left">
                 <p class="image is-64x64">
                     <img class="thumbnail" src="images/loading.gif" data-original="https://source.acexy.cn/view/XW2epNP" alt="ThreadLocal">
@@ -1291,25 +1208,6 @@
                 <div class="content">
                     <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2020-11-08T15:12:14.000Z">2020-11-08</time></div>
                     <a href="/2020/11/08/%E4%BA%8C%E5%88%86%E6%9F%A5%E6%89%BE%E6%A8%A1%E6%9D%BF/" class="title has-link-black-ter is-size-6 has-text-weight-normal">二分查找模板</a>
-                    <p class="is-size-7 is-uppercase">
-                        <a class="has-link-grey -link" href="/categories/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E5%92%8C%E7%AE%97%E6%B3%95/">数据结构和算法</a>
-                    </p>
-                </div>
-            </div>
-        </article>
-        
-        <article class="media">
-            
-            <a href="/2020/11/06/1291-%E9%A1%BA%E6%AC%A1%E6%95%B0/" class="media-left">
-                <p class="image is-64x64">
-                    <img class="thumbnail" src="images/loading.gif" data-original="https://source.acexy.cn/view/XWjBBr3" alt="1291-顺次数">
-                </p>
-            </a>
-            
-            <div class="media-content">
-                <div class="content">
-                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2020-11-06T07:52:19.000Z">2020-11-06</time></div>
-                    <a href="/2020/11/06/1291-%E9%A1%BA%E6%AC%A1%E6%95%B0/" class="title has-link-black-ter is-size-6 has-text-weight-normal">1291-顺次数</a>
                     <p class="is-size-7 is-uppercase">
                         <a class="has-link-grey -link" href="/categories/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E5%92%8C%E7%AE%97%E6%B3%95/">数据结构和算法</a>
                     </p>
