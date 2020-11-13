@@ -7,18 +7,23 @@
 
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
 
-<title>标签: ribbon - 小温 blog</title>
+<title>MySQL基础 - 小温 blog</title>
 
 
-    <meta property="og:type" content="website">
-<meta property="og:title" content="小温 blog">
-<meta property="og:url" content="http://wjw.today/tags/ribbon/index.html">
+    <meta name="description" content="1. MySQL基本架构">
+<meta property="og:type" content="article">
+<meta property="og:title" content="MySQL基础">
+<meta property="og:url" content="http://wjw.today/2020/11/04/MySQL%E5%9F%BA%E7%A1%80/index.html">
 <meta property="og:site_name" content="小温 blog">
+<meta property="og:description" content="1. MySQL基本架构">
 <meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="http://wjw.today/images/og_image.png">
+<meta property="og:image" content="https://source.acexy.cn/view/XWXapQ2">
+<meta property="article:published_time" content="2020-11-04T11:22:43.000Z">
+<meta property="article:modified_time" content="2020-11-13T03:23:14.948Z">
 <meta property="article:author" content="wjw">
+<meta property="article:tag" content="笔试面试">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="http://wjw.today/images/og_image.png">
+<meta name="twitter:image" content="https://source.acexy.cn/view/XWXapQ2">
 
 
 
@@ -76,7 +81,7 @@
         <div class="navbar-brand is-flex-center">
             <a class="navbar-item navbar-logo" href="/">
             
-                <img src="images/loading.gif" data-original="https://s1.ax1x.com/2020/07/20/UfKyGQ.md.png" alt="小温 blog" height="28">
+                <img src="images/loading.gif" data-original="https://s1.ax1x.com/2020/07/20/UfKyGQ.md.png" alt="MySQL基础" height="28">
             
             </a>
         </div>
@@ -112,6 +117,10 @@
                     
                 
                 
+                <a class="navbar-item is-hidden-tablet catalogue" title="目录" href="javascript:;">
+                    <i class="fas fa-list-ul"></i>
+                </a>
+                
                 
                 <a class="navbar-item search" title="搜索" href="javascript:;">
                     <i class="fas fa-search"></i>
@@ -125,66 +134,243 @@
     <section class="section">
         <div class="container">
             <div class="columns">
-                <div class="column is-8-tablet is-8-desktop is-6-widescreen has-order-2 column-main"><div class="card">
-    <div class="card-content">
-        <nav class="breadcrumb" aria-label="breadcrumbs">
-        <ul>
-            <li><a href="/tags">标签</a></li>
-            <li class="is-active"><a href="#" aria-current="page">ribbon</a></li>
-        </ul>
-        </nav>
-    </div>
-</div>
-
-    
+                <div class="column is-8-tablet is-8-desktop is-6-widescreen has-order-2 column-main">
 <div class="card">
     
     <div class="card-image">
-        <a href="/2020/06/27/SpringCloud%E7%AC%94%E8%AE%B0/" class="image is-7by1">
-            <img class="thumbnail" src="images/loading.gif" data-original="https://wx1.sbimg.cn/2020/07/30/P7jno.md.jpg" alt="SpringCloud笔记">
-        </a>
+        <span  class="image is-7by1">
+            <img class="thumbnail" src="images/loading.gif" data-original="https://source.acexy.cn/view/XWXapQ2" alt="MySQL基础">
+        </span>
     </div>
     
     <div class="card-content article ">
         
         <div class="level article-meta is-size-7 is-uppercase is-mobile is-overflow-x-auto">
             <div class="level-left">
-                <time class="level-item has-text-grey" datetime="2020-06-27T15:11:15.000Z">2020-06-27</time>
+                <time class="level-item has-text-grey" datetime="2020-11-04T11:22:43.000Z">2020-11-04</time>
                 
                 <div class="level-item">
-                <a class="has-link-grey -link" href="/categories/SpringCloud/">SpringCloud</a>
+                <a class="has-link-grey -link" href="/categories/Mysql/">Mysql</a>
                 </div>
                 
                 
                 <span class="level-item has-text-grey">
                     
                     
-                    1 小时 读完 (大约 8179 个字)
+                    21 分钟 读完 (大约 3113 个字)
                 </span>
                 
+                
+                <span class="level-item has-text-grey" id="busuanzi_container_page_pv">
+                    <i class="far fa-eye"></i>
+                    <span id="busuanzi_value_page_pv">0</span>次访问
+                </span>
                 
             </div>
         </div>
         
         <h1 class="title is-size-3 is-size-4-mobile has-text-weight-normal">
             
-                <a class="has-link-black-ter" href="/2020/06/27/SpringCloud%E7%AC%94%E8%AE%B0/">SpringCloud笔记</a>
+                MySQL基础
             
         </h1>
         <div class="content">
-            <h1 id="1-分布式概述"><a href="#1-分布式概述" class="headerlink" title="1. 分布式概述"></a>1. 分布式概述</h1><p>回顾我们以前的项目，从大一到大三，架构慢慢的演变，从一开始堆在一起（乱成一团），到分成多个包，三层架构（水平拆分），到前后端分离成两个项目，后面后台部分分成多个模块小组开发（垂直拆分）等等</p>
-<p>传统架构–&gt;水平拆分–&gt;垂直拆分（最早的分布式）–&gt;soa(dubbo)–&gt;微服务(springCloud)</p>
-<p>接下来我们要接触到一些分布式，解决一些高并发情况</p>
+            <h1 id="1-MySQL基本架构"><a href="#1-MySQL基本架构" class="headerlink" title="1. MySQL基本架构"></a>1. MySQL基本架构</h1><a id="more"></a>
+
+<p><img src="images/loading.gif" data-original="https://s1.ax1x.com/2020/11/04/BgMnW4.png" alt="流程"></p>
+<h2 id="连接器"><a href="#连接器" class="headerlink" title="连接器"></a><strong>连接器</strong></h2><p>客户端每发起一个连接请求，首先经过连接器，建立<strong>tcp连接</strong>，<strong>校验账号密码</strong>。连接器会维护<strong>连接列表</strong>processlist 可以通过<code>show processlist</code>查看，其中刚开启的线程处于<strong>sleep状态</strong></p>
+<p><img src="images/loading.gif" data-original="https://s1.ax1x.com/2020/11/04/BgQl9g.png" alt="BgQl9g.png"></p>
+<p>Time代表已Sleep的时间，如果<strong>超过了wait_timeout需要重连，默认8小时</strong>，可以通过<code>show variables like &#39;%timeout%&#39;</code>命令查看</p>
+<p><img src="images/loading.gif" data-original="https://s1.ax1x.com/2020/11/04/Bg1NfU.png" alt="Bg1NfU.png"></p>
+<p>为了防止断线重连，可以采用如下方法：</p>
+<ul>
+<li><strong>长连接</strong>：由于连接在内存中，容易造成<strong>OOM异常，mysql重启，jvm会Full GC</strong></li>
+<li><strong>重置连接资源</strong>：通过命令mysql_reset_connection，可以在不断线的情况下重置连接资源</li>
+</ul>
+<p>ps: 要注意让spring配置连接池bean的时候设置的maxIdleTime属性（不同连接池属性名可能不一样）要小于mysql的wait_timeout</p>
+<br>
+
+<h2 id="缓存"><a href="#缓存" class="headerlink" title="缓存"></a>缓存</h2><p>k-v形式，如果命中，直接返回数据，如果未命中，走分析器，并在获取结果后缓存，以便第二次查。因为用的少（缓存都走redis了）<strong>8.0后取消了</strong>，8.0之前，<strong>explain索引分析的时候记得加上SQL_NO_CACHE关掉</strong></p>
+<br>
+
+<h2 id="分析器"><a href="#分析器" class="headerlink" title="分析器"></a>分析器</h2><p><strong>词法分析</strong>（查询还是别的操作，哪张表，哪列等），<strong>语法分析</strong>（运行时会报SQL syntax语法错误）</p>
+<br>
+
+<h2 id="优化器"><a href="#优化器" class="headerlink" title="优化器"></a>优化器</h2><p><strong>是否使用索引，使用什么索引。有时候会用错索引，使用analyze table table_name或者强制走索引force index</strong></p>
+<br>
+
+<h2 id="执行器"><a href="#执行器" class="headerlink" title="执行器"></a>执行器</h2><p>操作引擎执行SQL</p>
+<br>
+
+<h2 id="引擎"><a href="#引擎" class="headerlink" title="引擎"></a>引擎</h2><blockquote>
+<p>参考</p>
+<p><a href="https://baijiahao.baidu.com/s?id=1655327558614401593&amp;wfr=spider&amp;for=pc">https://baijiahao.baidu.com/s?id=1655327558614401593&amp;wfr=spider&amp;for=pc</a></p>
+<p><a href="https://zhuanlan.zhihu.com/p/53619907">https://zhuanlan.zhihu.com/p/53619907</a></p>
+</blockquote>
+<p>通过<code>show engines;</code>就可以查看支持的引擎，有9种，常见的有3，4种（InnoDB，MyISAM，CSV，MEMORY）</p>
+<p><img src="images/loading.gif" data-original="https://wx2.sbimg.cn/2020/08/31/6vxYU.png" alt=""></p>
+<p>查看某张表的引擎等信息可以用<code>show table status like ‘user’ \G</code></p>
+<br>
+
+<p>一张表横向对比</p>
+<p><img src="images/loading.gif" data-original="https://wx1.sbimg.cn/2020/08/31/6vJlh.jpg" alt=""></p>
+<br>
+
+<p><strong>InnoDB</strong></p>
+<ul>
+<li>MySQL默认的事务型引擎</li>
+<li>用来处理大量短期事务，短期事务大部分是正常提交的，很少回滚</li>
+<li>通过间隙锁（next-key locking）防止幻读的出现</li>
+<li>基于聚簇索引建立，与其他存储引擎有很大的区别，聚簇索引对主键查询有很高的性能，不过它的二级索引（secondary index，非主键索引）必须包含主键列。所以如果主键列很大的话，索引会很大</li>
+<li>性能高</li>
+<li>自动崩溃恢复</li>
+</ul>
+<p>InnoDB页结构，16kb</p>
+<p><img src="images/loading.gif" data-original="https://s1.ax1x.com/2020/11/05/B2TUfA.png" alt="页结构"></p>
+<p><img src="images/loading.gif" data-original="https://s1.ax1x.com/2020/11/05/B2HhZT.png" alt=""></p>
+<p>索引B+树中⼀个节点为⼀⻚或⻚的倍数最为合适，如果读取1.2页也要读取2页</p>
+<br>
+
+<p><strong>MyISAM</strong></p>
+<ul>
+<li><p>5.1之前，MyISAM是默认的引擎</p>
+</li>
+<li><p>适用于些只读数据，或者表空间较小</p>
+</li>
+<li><p>特性：全文索引、支持压缩、空间函数。全文索引：基于分词创建的索引，也可以支持复杂的查询。压缩：如果数据在写入后不会修改，那么这个表适合MyISAM压缩表。可以使用myisampack对MyISAM表进行打包，压缩表是不可以修改数据的，可以减少磁盘IO，提升性能，压缩表也支持索引，但是索引也是只读的</p>
+</li>
+<li><p>不支持事务和行级锁（后续版本中支持了事务），对整个表加锁，而不是行锁，读取的时候对表加共享锁，写入的时候加排他锁，但是可以同时读写。但是由于没有行锁机制，所以在海量写入的时候，会导致所有查询处于Locked状态。</p>
+</li>
+<li><p>将表存储在两个文件中：数据文件、索引文件，分别是.MYD、.MYI后缀</p>
+</li>
+<li><p>行记录数取决于磁盘空间和操作系统中的单个文件最大尺寸</p>
+</li>
+<li><p>即使是Blob，Text等等长字段，也可以基于前500字符创建索引</p>
+</li>
+<li><p>可以选择延迟更新索引键，在创建表的时候指定delay_key_write选项，在每次修改执行完成时，不会立刻将修改的索引数据写入磁盘，而是写到缓存区，只有在清理缓存区或者关闭表的时候才会将索引写入磁盘。这可以极大的提升写入性能，但是在主机崩溃时会造成索引损坏，需要执行修复操作。</p>
+</li>
+</ul>
+<br>
+
+<p><strong>CSV</strong></p>
+<ul>
+<li>CSV引擎可以将普通的CSV文件作为MySQL表来处理</li>
+<li>不支持索引</li>
+<li>CSV可以在数据库运行时拷贝或者拷出文件，可以将Excel等电子表格中的数据存储为CSV文件，然后复制到MySQL中，就能在MySQL中打开使用。</li>
+<li>同样，如果将数据写入到一个CSV引擎表，其他外部程序也可以从表的数据文件中读取CSV的数据。因此CSV可以作为数据交换机制。非常好用。</li>
+</ul>
+<br>
+
+<p><strong>Memory</strong></p>
+<ul>
+<li><p>所有的数据都保存在内存中，不需要进行磁盘I/O</p>
+</li>
+<li><p>Memory表的结构在重启以后还会保留，但数据会丢失</p>
+</li>
+<li><p>需要快速地访问数据，并且这些数据不会被修改（例如将邮编和州名映射的表）</p>
+</li>
+<li><p>比MyISAM表要快一个数量级（因为在内存中）</p>
+</li>
+</ul>
+<br>
+
+<h1 id="2-MySQL索引和SQL调优"><a href="#2-MySQL索引和SQL调优" class="headerlink" title="2. MySQL索引和SQL调优"></a>2. MySQL索引和SQL调优</h1><p>关于索引，内容比较多，另外开了一篇文章==&gt;<a href="http://wjw.today/2020/10/08/mysql索引/">mysql索引</a></p>
+<br>
+
+<h1 id="3-日志系统"><a href="#3-日志系统" class="headerlink" title="3. 日志系统"></a>3. 日志系统</h1><h2 id="3-1-redo-log"><a href="#3-1-redo-log" class="headerlink" title="3.1 redo log"></a>3.1 redo log</h2><p>内容：记录数据修改操作（事务尚未提交）</p>
+<p>作用：异常宕机或者介质故障后的数据恢复（crash safe）</p>
+<p>层级：innoDB层面</p>
+<p>解释：</p>
+<p>更新语句–&gt;写redo log–&gt;更新内存数据–&gt;空闲/按策略将redo log写入磁盘，这种先写日志再写磁盘的技术称为WAL(Write Ahead logging)</p>
+<p>redo log大小是固定的，循环写。write pos走在前面，表示当前写入redo log的位置。checkpoint表示同步到磁盘的位置。如下图</p>
+<p><img src="images/loading.gif" data-original="https://s1.ax1x.com/2020/11/05/B2WuKe.png" alt=""></p>
+<p>有一条update语句执行，redo log从write pos开始往右写，到头后循环到最左边继续，当碰到check point说明redo log满了，会立即同步到磁盘。</p>
+<p>同样的，如果空闲了也会同步到磁盘，checkpoint也会往右移，当碰到write pos说明redo log空了。</p>
+<p><img src="images/loading.gif" data-original="https://s1.ax1x.com/2020/11/05/B2IREQ.png" alt="redo log刷写硬盘过程"></p>
+<h2 id="3-2-undo-log"><a href="#3-2-undo-log" class="headerlink" title="3.2 undo log"></a>3.2 undo log</h2><p>内容：记录事务开始前的值</p>
+<p>作用：用于回滚，同时可以提供多版本并发控制下的读（MVCC），也即非锁定读</p>
+<p>层级：innoDB层面</p>
+<h2 id="3-3-bin-log"><a href="#3-3-bin-log" class="headerlink" title="3.3 bin log"></a>3.3 bin log</h2><p>内容：记录二进制</p>
+<p>作用：主从复制同步，时间点还原</p>
+<p>层级：MySQL Server层面</p>
+<br>
+
+<h1 id="3-事务、隔离级别和MVCC"><a href="#3-事务、隔离级别和MVCC" class="headerlink" title="3. 事务、隔离级别和MVCC"></a>3. 事务、隔离级别和MVCC</h1><h2 id="事务"><a href="#事务" class="headerlink" title="事务"></a>事务</h2><ul>
+<li><strong>原子性（Atomicity）：</strong>一个事务（transaction）中的所有操作，要么全部完成，要么全部不完成，发生错误会被回滚（Rollback）到事务开始前的状态。</li>
+<li><strong>一致性（Consistency）：</strong>在事务开始之前和事务结束以后，数据库的完整性没有被破坏。这表示写入的资料必须完全符合所有的预设规则。比如转账一边-100另一边+100，总体不变就是其中一种预设规则。</li>
+<li><strong>隔离性（Isolation）：</strong>数据库允许多个并发事务同时对其数据进行读写和修改的能力，隔离性可以防止多个事务并发执行时由于交叉执行而导致数据的不一致。事务隔离分为不同级别，包括读未提交（Read uncommitted）、读提交（read committed）、可重复读（repeatable read）和串行化（Serializable）。</li>
+<li><strong>持久性（Durability）：</strong>事务处理结束后，对数据的修改就是永久的，即便系统故障也不会丢失。</li>
+</ul>
+<br>
+
+<h2 id="隔离级别"><a href="#隔离级别" class="headerlink" title="隔离级别"></a>隔离级别</h2><h3 id="几种隔离级别"><a href="#几种隔离级别" class="headerlink" title="几种隔离级别"></a>几种隔离级别</h3><ul>
+<li><p><strong>读未提交（READ UNCOMMITTED）</strong> ：⼀个事务还没提交时，它做的变更就能被别的事务看到。</p>
+</li>
+<li><p><strong>读提交（READ COMMITTED）</strong> ：⼀个事务提交之后，它做的变更才会被其他事务看到。</p>
+</li>
+<li><p><strong>可重复读（REPEATABLE READ）</strong>：⼀个事务执⾏过程中看到的数据，总是跟这个事务在启动时看到的数据是⼀致的。当然在可重复读隔离级别下，未提交变更对其他事务也是不可见的。</p>
+</li>
+<li><p><strong>串行化（SERIALIZABLE）</strong>：对于同⼀行记录，“写”会加“写锁”，“读”会加“读锁”，当出现读写锁冲突的时候，后访问的事务必须等前⼀个事务执⾏完成，才能继续执行。</p>
+</li>
+</ul>
+<p>通过以下mysql语句更改</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">SET [GLOBAL|SESSION] TRANSACTION ISOLATION LEVEL 上面几种level;</span><br></pre></td></tr></table></figure>
+
+<br>
+
+<h3 id="并发问题"><a href="#并发问题" class="headerlink" title="并发问题"></a>并发问题</h3><ul>
+<li><strong>脏读（dirty read）</strong> ：如果⼀个事务读到了另⼀个未提交事务修改过的数据。</li>
+</ul>
+<p><img src="images/loading.gif" data-original="https://s1.ax1x.com/2020/11/05/B2qQ4e.png" alt=""></p>
+<ul>
+<li><strong>不可重复读（non-repeatable read）</strong>：如果⼀个事务只能读到另⼀个已经提交的事务修改过的数据，并且其他事务每对该数据进⾏⼀次修改并提交后，该事务都能查询得到最新值。</li>
+</ul>
+<p><img src="images/loading.gif" data-original="https://s1.ax1x.com/2020/11/05/BRp6Kg.png" alt=""></p>
+<ul>
+<li><strong>幻读（phantom read）</strong>：如果⼀个事务先根据某些条件查询出⼀些记录，之后另⼀个事务⼜向表中插⼊了符合这些条件的记录，原先的事务再次按照该条件查询时，能把另⼀个事务插⼊的记录也读出来。</li>
+</ul>
+<p><img src="images/loading.gif" data-original="https://s1.ax1x.com/2020/11/05/BRpHr4.png" alt="幻读"></p>
+<p>ps：不可重复读和幻读有点像，主要区别在于不可重复读是两次查询某一条数据的修改，幻读是查询整张表出现的新增。也就是新增那行原来不存在所以锁不住，控制的手段也会不一样。</p>
+<h3 id="对应解决"><a href="#对应解决" class="headerlink" title="对应解决"></a>对应解决</h3><ul>
+<li><p>读未提交：啥都不能解决</p>
+</li>
+<li><p>读提交：解决脏读，事务A读取的是事务B开始前和提交后的数据</p>
+</li>
+<li><p>可重复读：解决脏读、不可重复读，事务A整个过程读取的都是事务B开始前的数据</p>
+</li>
+<li><p>串行化：解决脏读、不可重复读、幻读，事务A过程中事务B只能等待</p>
+</li>
+</ul>
+<br>
+
+<h2 id="MVCC"><a href="#MVCC" class="headerlink" title="MVCC"></a>MVCC</h2><p><strong>读提交</strong>和<strong>可重复读</strong>为什么可以读取另一个事务开始前的数据呢？这里就要提到MVCC（Multi-Version Concurrency Control ，多版本并发控制），在事务在启动的时候就“拍了个快照”，这个快照被称为<strong>一致性视图</strong>。</p>
+<p>那快照是怎么实现的呢？当然不需要完全复制一张表，而是使用了undo log中一个叫<strong>版本链</strong>的东西，事实上每一行数据都有隐藏的trx_id记录了每一个版本，还有一个roll_pointer指针域指向旧版本，形成一个undo log链表</p>
+<p><img src="images/loading.gif" data-original="https://s1.ax1x.com/2020/11/05/BRFoDS.png" alt="undo log"></p>
+<p>MVCC就是根据某一个版本生成对应的一致性视图</p>
+<p><strong>如果是读提交，则在每个SQL执行前生成</strong></p>
+<p><img src="images/loading.gif" data-original="https://s1.ax1x.com/2020/11/05/BRFjg0.png" alt="读提交生成视图时间"></p>
+<p><strong>如果是可重复读，则只在第一次查询的时候生成一次</strong></p>
+<p><img src="images/loading.gif" data-original="https://s1.ax1x.com/2020/11/05/BRkYKf.png" alt="可重复读生成视图时间"></p>
+<br>
+
+<h1 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h1><p>本文参考</p>
+<blockquote>
+<p>三太子敖丙公众号MySQL系列文章</p>
+<p>CSDN博客:二十六画生的博客（<a href="https://blog.csdn.net/u010002184/article/details/88526708）">https://blog.csdn.net/u010002184/article/details/88526708）</a></p>
+<p>CSDN博客:cwjokaka（<a href="https://blog.csdn.net/u013295276/article/details/79105163）">https://blog.csdn.net/u013295276/article/details/79105163）</a></p>
+</blockquote>
+
         </div>
         
-        
-        <div class="level is-mobile">
+        <div class="level is-size-7 is-uppercase">
             <div class="level-start">
                 <div class="level-item">
-                <a class="button is-size-7 is-light" href="/2020/06/27/SpringCloud%E7%AC%94%E8%AE%B0/#more">阅读更多</a>
+                    <span class="is-size-6 has-text-grey has-mr-7">#</span>
+                    <a class="has-link-grey -link" href="/tags/%E7%AC%94%E8%AF%95%E9%9D%A2%E8%AF%95/" rel="tag">笔试面试</a>
                 </div>
             </div>
         </div>
+        
         
         
     </div>
@@ -194,7 +380,26 @@
 
 
 
-
+<div class="card card-transparent">
+    <div class="level post-navigation is-flex-wrap is-mobile">
+        
+        <div class="level-start">
+            <a class="level level-item has-link-grey  article-nav-prev" href="/2020/11/06/10%E6%9C%88%E4%BA%8B%E8%AE%B0/">
+                <i class="level-item fas fa-chevron-left"></i>
+                <span class="level-item">10月事记</span>
+            </a>
+        </div>
+        
+        
+        <div class="level-end">
+            <a class="level level-item has-link-grey  article-nav-next" href="/2020/10/29/%E8%AE%B0%E4%B8%80%E6%AC%A1%E5%BF%AB%E9%80%9F%E6%8E%92%E5%BA%8F%E6%8E%A2%E7%A9%B6/">
+                <span class="level-item">记一次快速排序探究</span>
+                <i class="level-item fas fa-chevron-right"></i>
+            </a>
+        </div>
+        
+    </div>
+</div>
 
 
 </div>
@@ -250,7 +455,7 @@
                     </p>
                     <a href="/categories">
                         <p class="title has-text-weight-normal">
-                            15
+                            13
                         </p>
                     </a>
                 </div>
@@ -262,7 +467,7 @@
                     </p>
                     <a href="/tags">
                         <p class="title has-text-weight-normal">
-                            39
+                            29
                         </p>
                     </a>
                 </div>
@@ -280,6 +485,118 @@
 </div>
     
         
+
+    <div class="card widget" id="toc">
+        <div class="card-content">
+            <div class="menu">
+                <h3 class="menu-label">
+                    目录
+                </h3>
+                <ul class="menu-list"><li>
+        <a class="is-flex" href="#1-MySQL基本架构">
+        <!-- 目录是否自动编号 -->
+        <!-- <span class="has-mr-6">1</span> -->
+        <span>1. MySQL基本架构</span>
+        </a><ul class="menu-list"><li>
+        <a class="is-flex" href="#连接器">
+        <!-- 目录是否自动编号 -->
+        <!-- <span class="has-mr-6">1.1</span> -->
+        <span>连接器</span>
+        </a></li><li>
+        <a class="is-flex" href="#缓存">
+        <!-- 目录是否自动编号 -->
+        <!-- <span class="has-mr-6">1.2</span> -->
+        <span>缓存</span>
+        </a></li><li>
+        <a class="is-flex" href="#分析器">
+        <!-- 目录是否自动编号 -->
+        <!-- <span class="has-mr-6">1.3</span> -->
+        <span>分析器</span>
+        </a></li><li>
+        <a class="is-flex" href="#优化器">
+        <!-- 目录是否自动编号 -->
+        <!-- <span class="has-mr-6">1.4</span> -->
+        <span>优化器</span>
+        </a></li><li>
+        <a class="is-flex" href="#执行器">
+        <!-- 目录是否自动编号 -->
+        <!-- <span class="has-mr-6">1.5</span> -->
+        <span>执行器</span>
+        </a></li><li>
+        <a class="is-flex" href="#引擎">
+        <!-- 目录是否自动编号 -->
+        <!-- <span class="has-mr-6">1.6</span> -->
+        <span>引擎</span>
+        </a></li></ul></li><li>
+        <a class="is-flex" href="#2-MySQL索引和SQL调优">
+        <!-- 目录是否自动编号 -->
+        <!-- <span class="has-mr-6">2</span> -->
+        <span>2. MySQL索引和SQL调优</span>
+        </a></li><li>
+        <a class="is-flex" href="#3-日志系统">
+        <!-- 目录是否自动编号 -->
+        <!-- <span class="has-mr-6">3</span> -->
+        <span>3. 日志系统</span>
+        </a><ul class="menu-list"><li>
+        <a class="is-flex" href="#3-1-redo-log">
+        <!-- 目录是否自动编号 -->
+        <!-- <span class="has-mr-6">3.1</span> -->
+        <span>3.1 redo log</span>
+        </a></li><li>
+        <a class="is-flex" href="#3-2-undo-log">
+        <!-- 目录是否自动编号 -->
+        <!-- <span class="has-mr-6">3.2</span> -->
+        <span>3.2 undo log</span>
+        </a></li><li>
+        <a class="is-flex" href="#3-3-bin-log">
+        <!-- 目录是否自动编号 -->
+        <!-- <span class="has-mr-6">3.3</span> -->
+        <span>3.3 bin log</span>
+        </a></li></ul></li><li>
+        <a class="is-flex" href="#3-事务、隔离级别和MVCC">
+        <!-- 目录是否自动编号 -->
+        <!-- <span class="has-mr-6">4</span> -->
+        <span>3. 事务、隔离级别和MVCC</span>
+        </a><ul class="menu-list"><li>
+        <a class="is-flex" href="#事务">
+        <!-- 目录是否自动编号 -->
+        <!-- <span class="has-mr-6">4.1</span> -->
+        <span>事务</span>
+        </a></li><li>
+        <a class="is-flex" href="#隔离级别">
+        <!-- 目录是否自动编号 -->
+        <!-- <span class="has-mr-6">4.2</span> -->
+        <span>隔离级别</span>
+        </a><ul class="menu-list"><li>
+        <a class="is-flex" href="#几种隔离级别">
+        <!-- 目录是否自动编号 -->
+        <!-- <span class="has-mr-6">4.2.1</span> -->
+        <span>几种隔离级别</span>
+        </a></li><li>
+        <a class="is-flex" href="#并发问题">
+        <!-- 目录是否自动编号 -->
+        <!-- <span class="has-mr-6">4.2.2</span> -->
+        <span>并发问题</span>
+        </a></li><li>
+        <a class="is-flex" href="#对应解决">
+        <!-- 目录是否自动编号 -->
+        <!-- <span class="has-mr-6">4.2.3</span> -->
+        <span>对应解决</span>
+        </a></li></ul></li><li>
+        <a class="is-flex" href="#MVCC">
+        <!-- 目录是否自动编号 -->
+        <!-- <span class="has-mr-6">4.3</span> -->
+        <span>MVCC</span>
+        </a></li></ul></li><li>
+        <a class="is-flex" href="#参考">
+        <!-- 目录是否自动编号 -->
+        <!-- <span class="has-mr-6">5</span> -->
+        <span>参考</span>
+        </a></li></ul>
+            </div>
+        </div>
+    </div>
+
     
         
 <div class="card widget">
@@ -295,15 +612,7 @@
                 <span class="level-item">Java基础</span>
             </span>
             <span class="level-end">
-                <span class="level-item tag">1</span>
-            </span>
-        </a></li><li>
-        <a class="level is-marginless" href="/categories/Maven/">
-            <span class="level-start">
-                <span class="level-item">Maven</span>
-            </span>
-            <span class="level-end">
-                <span class="level-item tag">1</span>
+                <span class="level-item tag">2</span>
             </span>
         </a></li><li>
         <a class="level is-marginless" href="/categories/Mysql/">
@@ -327,7 +636,7 @@
                 <span class="level-item">Spring</span>
             </span>
             <span class="level-end">
-                <span class="level-item tag">2</span>
+                <span class="level-item tag">6</span>
             </span>
         </a></li><li>
         <a class="level is-marginless" href="/categories/SpringBoot/">
@@ -343,15 +652,7 @@
                 <span class="level-item">SpringCloud</span>
             </span>
             <span class="level-end">
-                <span class="level-item tag">3</span>
-            </span>
-        </a></li><li>
-        <a class="level is-marginless" href="/categories/SpringMVC/">
-            <span class="level-start">
-                <span class="level-item">SpringMVC</span>
-            </span>
-            <span class="level-end">
-                <span class="level-item tag">3</span>
+                <span class="level-item tag">2</span>
             </span>
         </a></li><li>
         <a class="level is-marginless" href="/categories/Util%E5%B7%A5%E5%85%B7%E7%B1%BB/">
@@ -475,7 +776,7 @@
                     <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2020-11-09T12:49:00.000Z">2020-11-09</time></div>
                     <a href="/2020/11/09/%E5%8F%8D%E5%B0%84%E5%92%8C%E7%B1%BB%E5%8A%A0%E8%BD%BD%E5%99%A8/" class="title has-link-black-ter is-size-6 has-text-weight-normal">反射和类加载器</a>
                     <p class="is-size-7 is-uppercase">
-                        <a class="has-link-grey -link" href="/categories/Others/">Others</a>
+                        <a class="has-link-grey -link" href="/categories/Java%E5%9F%BA%E7%A1%80/">Java基础</a>
                     </p>
                 </div>
             </div>
@@ -527,7 +828,7 @@
         <h3 class="menu-label">
             标签云
         </h3>
-        <a href="/tags/DL-ML/" style="font-size: 10px;">DL/ML</a> <a href="/tags/eureka/" style="font-size: 10px;">eureka</a> <a href="/tags/fastDFS/" style="font-size: 10px;">fastDFS</a> <a href="/tags/feign/" style="font-size: 10px;">feign</a> <a href="/tags/http/" style="font-size: 10px;">http</a> <a href="/tags/hystrix/" style="font-size: 10px;">hystrix</a> <a href="/tags/json/" style="font-size: 10px;">json</a> <a href="/tags/lintcode/" style="font-size: 10px;">lintcode</a> <a href="/tags/markdown/" style="font-size: 10px;">markdown</a> <a href="/tags/maven/" style="font-size: 10px;">maven</a> <a href="/tags/mysql/" style="font-size: 11.43px;">mysql</a> <a href="/tags/ribbon/" style="font-size: 10px;">ribbon</a> <a href="/tags/spring/" style="font-size: 11.43px;">spring</a> <a href="/tags/springboot/" style="font-size: 10px;">springboot</a> <a href="/tags/springcloud/" style="font-size: 11.43px;">springcloud</a> <a href="/tags/springmvc/" style="font-size: 12.86px;">springmvc</a> <a href="/tags/zuul/" style="font-size: 10px;">zuul</a> <a href="/tags/%E4%BA%8C%E5%88%86%E6%9F%A5%E6%89%BE/" style="font-size: 10px;">二分查找</a> <a href="/tags/%E4%BA%8C%E5%8F%89%E6%A0%91/" style="font-size: 10px;">二叉树</a> <a href="/tags/%E4%BA%A4%E4%BA%92/" style="font-size: 10px;">交互</a> <a href="/tags/%E5%89%91%E6%8C%87offer/" style="font-size: 10px;">剑指offer</a> <a href="/tags/%E5%8A%9B%E6%89%A3/" style="font-size: 20px;">力扣</a> <a href="/tags/%E5%8A%A0%E5%AF%86/" style="font-size: 10px;">加密</a> <a href="/tags/%E5%8A%A8%E6%80%81%E8%A7%84%E5%88%92/" style="font-size: 12.86px;">动态规划</a> <a href="/tags/%E5%8D%95%E8%B0%83%E6%A0%88/" style="font-size: 14.29px;">单调栈</a> <a href="/tags/%E5%9B%9E%E6%BA%AF/" style="font-size: 17.14px;">回溯</a> <a href="/tags/%E5%9D%91/" style="font-size: 10px;">坑</a> <a href="/tags/%E5%AD%97%E7%AC%A6%E4%B8%B2/" style="font-size: 10px;">字符串</a> <a href="/tags/%E5%AD%A6%E4%B9%A0%E8%AE%B0%E5%BD%95/" style="font-size: 10px;">学习记录</a> <a href="/tags/%E5%BC%80%E5%8F%91/" style="font-size: 18.57px;">开发</a> <a href="/tags/%E6%8B%9B%E8%81%98%E7%AC%94%E8%AF%95/" style="font-size: 10px;">招聘笔试</a> <a href="/tags/%E6%8E%92%E5%BA%8F/" style="font-size: 10px;">排序</a> <a href="/tags/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/" style="font-size: 12.86px;">数据结构</a> <a href="/tags/%E6%A0%88/" style="font-size: 10px;">栈</a> <a href="/tags/%E6%A0%91/" style="font-size: 15.71px;">树</a> <a href="/tags/%E7%AC%94%E8%AF%95/" style="font-size: 10px;">笔试</a> <a href="/tags/%E7%AC%94%E8%AF%95%E9%9D%A2%E8%AF%95/" style="font-size: 14.29px;">笔试面试</a> <a href="/tags/%E7%AE%97%E6%B3%95/" style="font-size: 11.43px;">算法</a> <a href="/tags/%E9%80%92%E5%BD%92/" style="font-size: 10px;">递归</a>
+        <a href="/tags/DL-ML/" style="font-size: 10px;">DL/ML</a> <a href="/tags/fastDFS/" style="font-size: 10px;">fastDFS</a> <a href="/tags/http/" style="font-size: 10px;">http</a> <a href="/tags/lintcode/" style="font-size: 10px;">lintcode</a> <a href="/tags/markdown/" style="font-size: 10px;">markdown</a> <a href="/tags/mysql/" style="font-size: 11.43px;">mysql</a> <a href="/tags/spring/" style="font-size: 11.43px;">spring</a> <a href="/tags/springboot/" style="font-size: 10px;">springboot</a> <a href="/tags/springcloud/" style="font-size: 10px;">springcloud</a> <a href="/tags/%E4%BA%8C%E5%88%86%E6%9F%A5%E6%89%BE/" style="font-size: 10px;">二分查找</a> <a href="/tags/%E4%BA%8C%E5%8F%89%E6%A0%91/" style="font-size: 10px;">二叉树</a> <a href="/tags/%E5%89%91%E6%8C%87offer/" style="font-size: 10px;">剑指offer</a> <a href="/tags/%E5%8A%9B%E6%89%A3/" style="font-size: 20px;">力扣</a> <a href="/tags/%E5%8A%A0%E5%AF%86/" style="font-size: 10px;">加密</a> <a href="/tags/%E5%8A%A8%E6%80%81%E8%A7%84%E5%88%92/" style="font-size: 12.86px;">动态规划</a> <a href="/tags/%E5%8D%95%E8%B0%83%E6%A0%88/" style="font-size: 14.29px;">单调栈</a> <a href="/tags/%E5%9B%9E%E6%BA%AF/" style="font-size: 17.14px;">回溯</a> <a href="/tags/%E5%AD%97%E7%AC%A6%E4%B8%B2/" style="font-size: 10px;">字符串</a> <a href="/tags/%E5%AD%A6%E4%B9%A0%E8%AE%B0%E5%BD%95/" style="font-size: 10px;">学习记录</a> <a href="/tags/%E5%BC%80%E5%8F%91/" style="font-size: 18.57px;">开发</a> <a href="/tags/%E6%8B%9B%E8%81%98%E7%AC%94%E8%AF%95/" style="font-size: 10px;">招聘笔试</a> <a href="/tags/%E6%8E%92%E5%BA%8F/" style="font-size: 10px;">排序</a> <a href="/tags/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/" style="font-size: 12.86px;">数据结构</a> <a href="/tags/%E6%A0%88/" style="font-size: 10px;">栈</a> <a href="/tags/%E6%A0%91/" style="font-size: 15.71px;">树</a> <a href="/tags/%E7%AC%94%E8%AF%95/" style="font-size: 10px;">笔试</a> <a href="/tags/%E7%AC%94%E8%AF%95%E9%9D%A2%E8%AF%95/" style="font-size: 14.29px;">笔试面试</a> <a href="/tags/%E7%AE%97%E6%B3%95/" style="font-size: 11.43px;">算法</a> <a href="/tags/%E9%80%92%E5%BD%92/" style="font-size: 10px;">递归</a>
     </div>
 </div>
         
@@ -599,7 +900,7 @@
                     <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2020-11-09T12:49:00.000Z">2020-11-09</time></div>
                     <a href="/2020/11/09/%E5%8F%8D%E5%B0%84%E5%92%8C%E7%B1%BB%E5%8A%A0%E8%BD%BD%E5%99%A8/" class="title has-link-black-ter is-size-6 has-text-weight-normal">反射和类加载器</a>
                     <p class="is-size-7 is-uppercase">
-                        <a class="has-link-grey -link" href="/categories/Others/">Others</a>
+                        <a class="has-link-grey -link" href="/categories/Java%E5%9F%BA%E7%A1%80/">Java基础</a>
                     </p>
                 </div>
             </div>
@@ -651,7 +952,7 @@
         <h3 class="menu-label">
             标签云
         </h3>
-        <a href="/tags/DL-ML/" style="font-size: 10px;">DL/ML</a> <a href="/tags/eureka/" style="font-size: 10px;">eureka</a> <a href="/tags/fastDFS/" style="font-size: 10px;">fastDFS</a> <a href="/tags/feign/" style="font-size: 10px;">feign</a> <a href="/tags/http/" style="font-size: 10px;">http</a> <a href="/tags/hystrix/" style="font-size: 10px;">hystrix</a> <a href="/tags/json/" style="font-size: 10px;">json</a> <a href="/tags/lintcode/" style="font-size: 10px;">lintcode</a> <a href="/tags/markdown/" style="font-size: 10px;">markdown</a> <a href="/tags/maven/" style="font-size: 10px;">maven</a> <a href="/tags/mysql/" style="font-size: 11.43px;">mysql</a> <a href="/tags/ribbon/" style="font-size: 10px;">ribbon</a> <a href="/tags/spring/" style="font-size: 11.43px;">spring</a> <a href="/tags/springboot/" style="font-size: 10px;">springboot</a> <a href="/tags/springcloud/" style="font-size: 11.43px;">springcloud</a> <a href="/tags/springmvc/" style="font-size: 12.86px;">springmvc</a> <a href="/tags/zuul/" style="font-size: 10px;">zuul</a> <a href="/tags/%E4%BA%8C%E5%88%86%E6%9F%A5%E6%89%BE/" style="font-size: 10px;">二分查找</a> <a href="/tags/%E4%BA%8C%E5%8F%89%E6%A0%91/" style="font-size: 10px;">二叉树</a> <a href="/tags/%E4%BA%A4%E4%BA%92/" style="font-size: 10px;">交互</a> <a href="/tags/%E5%89%91%E6%8C%87offer/" style="font-size: 10px;">剑指offer</a> <a href="/tags/%E5%8A%9B%E6%89%A3/" style="font-size: 20px;">力扣</a> <a href="/tags/%E5%8A%A0%E5%AF%86/" style="font-size: 10px;">加密</a> <a href="/tags/%E5%8A%A8%E6%80%81%E8%A7%84%E5%88%92/" style="font-size: 12.86px;">动态规划</a> <a href="/tags/%E5%8D%95%E8%B0%83%E6%A0%88/" style="font-size: 14.29px;">单调栈</a> <a href="/tags/%E5%9B%9E%E6%BA%AF/" style="font-size: 17.14px;">回溯</a> <a href="/tags/%E5%9D%91/" style="font-size: 10px;">坑</a> <a href="/tags/%E5%AD%97%E7%AC%A6%E4%B8%B2/" style="font-size: 10px;">字符串</a> <a href="/tags/%E5%AD%A6%E4%B9%A0%E8%AE%B0%E5%BD%95/" style="font-size: 10px;">学习记录</a> <a href="/tags/%E5%BC%80%E5%8F%91/" style="font-size: 18.57px;">开发</a> <a href="/tags/%E6%8B%9B%E8%81%98%E7%AC%94%E8%AF%95/" style="font-size: 10px;">招聘笔试</a> <a href="/tags/%E6%8E%92%E5%BA%8F/" style="font-size: 10px;">排序</a> <a href="/tags/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/" style="font-size: 12.86px;">数据结构</a> <a href="/tags/%E6%A0%88/" style="font-size: 10px;">栈</a> <a href="/tags/%E6%A0%91/" style="font-size: 15.71px;">树</a> <a href="/tags/%E7%AC%94%E8%AF%95/" style="font-size: 10px;">笔试</a> <a href="/tags/%E7%AC%94%E8%AF%95%E9%9D%A2%E8%AF%95/" style="font-size: 14.29px;">笔试面试</a> <a href="/tags/%E7%AE%97%E6%B3%95/" style="font-size: 11.43px;">算法</a> <a href="/tags/%E9%80%92%E5%BD%92/" style="font-size: 10px;">递归</a>
+        <a href="/tags/DL-ML/" style="font-size: 10px;">DL/ML</a> <a href="/tags/fastDFS/" style="font-size: 10px;">fastDFS</a> <a href="/tags/http/" style="font-size: 10px;">http</a> <a href="/tags/lintcode/" style="font-size: 10px;">lintcode</a> <a href="/tags/markdown/" style="font-size: 10px;">markdown</a> <a href="/tags/mysql/" style="font-size: 11.43px;">mysql</a> <a href="/tags/spring/" style="font-size: 11.43px;">spring</a> <a href="/tags/springboot/" style="font-size: 10px;">springboot</a> <a href="/tags/springcloud/" style="font-size: 10px;">springcloud</a> <a href="/tags/%E4%BA%8C%E5%88%86%E6%9F%A5%E6%89%BE/" style="font-size: 10px;">二分查找</a> <a href="/tags/%E4%BA%8C%E5%8F%89%E6%A0%91/" style="font-size: 10px;">二叉树</a> <a href="/tags/%E5%89%91%E6%8C%87offer/" style="font-size: 10px;">剑指offer</a> <a href="/tags/%E5%8A%9B%E6%89%A3/" style="font-size: 20px;">力扣</a> <a href="/tags/%E5%8A%A0%E5%AF%86/" style="font-size: 10px;">加密</a> <a href="/tags/%E5%8A%A8%E6%80%81%E8%A7%84%E5%88%92/" style="font-size: 12.86px;">动态规划</a> <a href="/tags/%E5%8D%95%E8%B0%83%E6%A0%88/" style="font-size: 14.29px;">单调栈</a> <a href="/tags/%E5%9B%9E%E6%BA%AF/" style="font-size: 17.14px;">回溯</a> <a href="/tags/%E5%AD%97%E7%AC%A6%E4%B8%B2/" style="font-size: 10px;">字符串</a> <a href="/tags/%E5%AD%A6%E4%B9%A0%E8%AE%B0%E5%BD%95/" style="font-size: 10px;">学习记录</a> <a href="/tags/%E5%BC%80%E5%8F%91/" style="font-size: 18.57px;">开发</a> <a href="/tags/%E6%8B%9B%E8%81%98%E7%AC%94%E8%AF%95/" style="font-size: 10px;">招聘笔试</a> <a href="/tags/%E6%8E%92%E5%BA%8F/" style="font-size: 10px;">排序</a> <a href="/tags/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/" style="font-size: 12.86px;">数据结构</a> <a href="/tags/%E6%A0%88/" style="font-size: 10px;">栈</a> <a href="/tags/%E6%A0%91/" style="font-size: 15.71px;">树</a> <a href="/tags/%E7%AC%94%E8%AF%95/" style="font-size: 10px;">笔试</a> <a href="/tags/%E7%AC%94%E8%AF%95%E9%9D%A2%E8%AF%95/" style="font-size: 14.29px;">笔试面试</a> <a href="/tags/%E7%AE%97%E6%B3%95/" style="font-size: 11.43px;">算法</a> <a href="/tags/%E9%80%92%E5%BD%92/" style="font-size: 10px;">递归</a>
     </div>
 </div>
     
@@ -667,7 +968,7 @@
             <div class="level-start has-text-centered-mobile">
                 <a class="footer-logo is-block has-mb-6" href="/">
                 
-                    <img src="images/loading.gif" data-original="https://s1.ax1x.com/2020/07/20/UfKyGQ.md.png" alt="小温 blog" height="28">
+                    <img src="images/loading.gif" data-original="https://s1.ax1x.com/2020/07/20/UfKyGQ.md.png" alt="MySQL基础" height="28">
                 
                 </a>
                 <p class="is-size-7">
