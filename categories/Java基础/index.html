@@ -160,7 +160,7 @@
                 <span class="level-item has-text-grey">
                     
                     
-                    19 分钟 读完 (大约 2859 个字)
+                    19 分钟 读完 (大约 2860 个字)
                 </span>
                 
                 
@@ -173,147 +173,17 @@
             
         </h1>
         <div class="content">
-            <h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><p>本文将介绍synchronized，cas等概念</p>
-<br>
-
-<h1 id="1-Synchronized"><a href="#1-Synchronized" class="headerlink" title="1. Synchronized"></a>1. Synchronized</h1><h2 id="1-1-锁对象是谁"><a href="#1-1-锁对象是谁" class="headerlink" title="1.1 锁对象是谁"></a>1.1 锁对象是谁</h2><p>加在代码块上</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">Object o = <span class="keyword">new</span> Object();</span><br><span class="line"><span class="keyword">synchronized</span>(o)&#123;</span><br><span class="line">    <span class="comment">//对象o就是这把锁</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>加在方法上</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">synchronized</span> <span class="keyword">void</span> <span class="title">fun</span><span class="params">()</span></span>&#123;</span><br><span class="line">    <span class="comment">//本类的对象就是这把锁</span></span><br><span class="line">    <span class="comment">//等同于synchronized(this)</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>加在静态方法上</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">synchronized</span> <span class="keyword">void</span> <span class="title">fun</span><span class="params">()</span></span>&#123;</span><br><span class="line">    <span class="comment">//本类的Class类对象</span></span><br><span class="line">    <span class="comment">//等同于synchronized(这个类.class)</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p><strong>只要锁是同一把即可实现同步</strong></p>
-<br>
-
-<h3 id="踩坑！！！"><a href="#踩坑！！！" class="headerlink" title="踩坑！！！"></a>踩坑！！！</h3><p>要注意有些时候锁住的并不是同一把锁</p>
-<p>你以为你锁住了它，其实并不然</p>
-<p>比如前面的加在代码块上那段，如果这样写：</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@author</span> wjw</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@date</span> 2020/11/21 14:56</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Synchronized</span>锁对象踩坑说明 </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">        TestSynchronized test = <span class="keyword">new</span> TestSynchronized();</span><br><span class="line"></span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; <span class="number">1000</span>; i++) &#123;</span><br><span class="line">            <span class="keyword">new</span> Thread(()-&gt;&#123;</span><br><span class="line">                test.fun();</span><br><span class="line">            &#125;).start();</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">TestSynchronized</span></span>&#123;</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">int</span> num = <span class="number">0</span>;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">fun</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        Object o = <span class="keyword">new</span> Object();	<span class="comment">//注意这里是在方法里面</span></span><br><span class="line">        <span class="keyword">synchronized</span>(o)&#123;</span><br><span class="line">            <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; <span class="number">1000</span>; i++) &#123;</span><br><span class="line">                System.out.println(Thread.currentThread().getName() + <span class="string">" : "</span> + num++);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>在多线程下每调用一次fun，锁对象o其实都new了，不是同一个，所以是起不到同步作用的，可以跑跑看，这里设置的线程数和量都比较大，不然不明显</p>
-<p>一个是最终的结果其实是不对的</p>
-<p><img src="images/loading.gif" data-original="https://s3.ax1x.com/2020/11/21/D1YViR.png" alt=""></p>
-<p>还有一个是过程可以看到其实线程之间很多时候是穿插执行的</p>
-<p><img src="images/loading.gif" data-original="https://s3.ax1x.com/2020/11/21/D1YYWt.png" alt=""></p>
-<p>所以正确的写法应当将锁对象o放在类中，通常将锁对象用final修饰(加不加都行，只是说一般都会加)，或者在main里面传过去，不管怎样，只要保证同一把锁就行</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">TestSynchronized</span></span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">final</span> Object o = <span class="keyword">new</span> Object();    <span class="comment">//将锁对象放在类上</span></span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">int</span> num = <span class="number">0</span>;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">fun</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">synchronized</span>(o)&#123;</span><br><span class="line">            <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; <span class="number">1000</span>; i++) &#123;</span><br><span class="line">                System.out.println(Thread.currentThread().getName() + <span class="string">" : "</span> + num++);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>结果如下图，可以看到结果是对的，且线程之间都是间隔的，这才是真正做到了同步</p>
-<p><img src="images/loading.gif" data-original="https://s3.ax1x.com/2020/11/21/D1tIu8.png" alt=""></p>
-<p>再比如同时有一个synchronized静态方法，和synchronized方法，也是不同的锁，并没有锁住整个类这个说法，只是将这个类的class对象作为了锁对象！！！</p>
-<blockquote>
-<p>参考</p>
-<p><a href="https://www.cnblogs.com/codebj/p/10994748.html">https://www.cnblogs.com/codebj/p/10994748.html</a></p>
-</blockquote>
-<br>
-
-<h2 id="1-2-锁升级过程"><a href="#1-2-锁升级过程" class="headerlink" title="1.2 锁升级过程"></a>1.2 锁升级过程</h2><p>旧版本java的synchronized是直接到重量级锁的，1.6以后是一个锁升级的过程：</p>
-<p>没有锁-&gt;偏向锁-&gt;轻量级锁-&gt;重量级锁</p>
-<p>偏向锁：严格来说不是锁，只有一个线程的时候，synchronized将线程标识贴在对象的markword上（markword在附录：Java对象组成中介绍了），就代表该线程持有了锁，有偏向锁的概念是因为很多时候我们用Vector，HashTable，StringBuffer的时候其实只有一个线程，如果直接锁竞争会浪费资源</p>
-<p>轻量级锁：两个及以上线程开始锁竞争，升级成轻量级锁。说到底就是一个while循环，会消耗cpu资源，但是如果线程的任务不重，其过程是很快的</p>
-<p>重量级锁：自旋一定次数后升级为重量级锁，进入等待队列，交由os调度，每次调度会有用户态到内核态的切换</p>
-<blockquote>
-<p>在JDK1.6中自旋的默认次数为10次，可以通过参数-XX:PreBlockSpin来调整</p>
-<p>JDK1.7后，去掉此参数，由jvm控制，在新的HotSpot VM里，使用动态调整的次数，所以叫做adaptive spinning（自适应自旋）</p>
-<p><a href="https://www.zhihu.com/question/31187779">https://www.zhihu.com/question/31187779</a></p>
-</blockquote>
-<br>
-
-<h2 id="1-3-轻量级锁一定比重量级锁效率高吗"><a href="#1-3-轻量级锁一定比重量级锁效率高吗" class="headerlink" title="1.3 轻量级锁一定比重量级锁效率高吗"></a>1.3 轻量级锁一定比重量级锁效率高吗</h2><p>当然这么问了答案肯定是不一定，我们分别分析他们的开销</p>
-<p>轻量级锁主要的开销在while会消耗cpu的资源，重量级锁主要的开销在用户态和内核态的切换</p>
-<p>也就是说取决于任务，如果任务简单，锁竞争的线程少的情况下while循环等待的时间是很少的，如果任务时间很久或者等待的线程太多，进入任务队列采用重量级锁反而更高效，synchronized的锁升级也正是基于这个考虑来实现的</p>
-<br>
-
-<h1 id="2-CAS"><a href="#2-CAS" class="headerlink" title="2. CAS"></a>2. CAS</h1><p>CompareAndSwap，比较并交换，也叫自旋锁，是乐观锁的一种实现</p>
-<p>相比于synchronized关键字，</p>
-<p>JUC（java.util.concurrent）包下所有类都是基于CAS的</p>
-<h2 id="2-1-说明"><a href="#2-1-说明" class="headerlink" title="2.1 说明"></a>2.1 说明</h2><p>比如线程1要将变量a的值+1，那么线程1进行如下操作</p>
-<p>读取a原值 –&gt; +1 –&gt; 写回前判断此时a是否还是原值 –&gt;是则写回 –&gt;否则循环重来</p>
-<br>
-
-<h2 id="2-2-以AtomicInteger为例"><a href="#2-2-以AtomicInteger为例" class="headerlink" title="2.2 以AtomicInteger为例"></a>2.2 以AtomicInteger为例</h2><p>AtomicInteger就是JUC下的一个类，相比于num++，它的incrementAndGet()方法可以保证原子性，于是就不用synchronized进行同步了</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">final</span> <span class="keyword">int</span> <span class="title">incrementAndGet</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    <span class="keyword">return</span> unsafe.getAndAddInt(<span class="keyword">this</span>, valueOffset, <span class="number">1</span>) + <span class="number">1</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>跟进</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">final</span> <span class="keyword">int</span> <span class="title">getAndAddInt</span><span class="params">(Object var1, <span class="keyword">long</span> var2, <span class="keyword">int</span> var4)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">int</span> var5;</span><br><span class="line">    <span class="keyword">do</span> &#123;</span><br><span class="line">        var5 = <span class="keyword">this</span>.getIntVolatile(var1, var2);</span><br><span class="line">    &#125; <span class="keyword">while</span>(!<span class="keyword">this</span>.compareAndSwapInt(var1, var2, var5, var5 + var4));</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> var5;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">//再跟进就看到是native方法了</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">final</span> <span class="keyword">native</span> <span class="keyword">boolean</span> <span class="title">compareAndSwapInt</span><span class="params">(Object var1, <span class="keyword">long</span> var2, <span class="keyword">int</span> var4, <span class="keyword">int</span> var5)</span></span>;</span><br></pre></td></tr></table></figure>
-
-<br>
-
-<h2 id="2-3-ABA问题"><a href="#2-3-ABA问题" class="headerlink" title="2.3 ABA问题"></a>2.3 ABA问题</h2><p>就是说线程1将a的值从8变为9，写回之前线程2将8变为100，线程3又将100变回8。此时线程1不是要写回前判断嘛，判断结果还是8，他以为没有变，其实中间经历了一个变化又变回的过程。</p>
-<p>ABA问题结果其实是正确的，主要取决于你的业务在不在乎。就像是跟女朋友分手了，然后女朋友跟别的男生好，中间经历了别的男人，现在她想和好，此时女朋友还是那个女朋友，但好像又不是那个女朋友，取决于你在不在乎罢了。</p>
-<p><strong>解决方式就是加版本号</strong>，</p>
-<p>//TODO 具体是怎么加的</p>
-<br>
-
-<h2 id="2-3-CAS修改值的原子性"><a href="#2-3-CAS修改值的原子性" class="headerlink" title="2.3 CAS修改值的原子性"></a>2.3 CAS修改值的原子性</h2><p>也就是判断完还是原来的值以后，要写回，这一步要保证是原子性。比如两个线程都是将0进行++，如果这里没有保证原子性，也就是没有任何同步手段，可能两个线程判断完原值0然后++，结果为1而不是2。那这一步是如何保证原子性的呢</p>
-<p>我们下载open jdk的源码，可以找到刚刚那个native的名字相同的对应cpp文件unsafe.cpp，找到对应方法Unsafe_CompareAndSwapInt()</p>
-<p><img src="images/loading.gif" data-original="https://s3.ax1x.com/2020/11/22/D8NhGj.png" alt=""></p>
-<p>继续跟进Atomic::cmpchg()</p>
-<p><img src="images/loading.gif" data-original="https://s3.ax1x.com/2020/11/22/D8NvW9.png" alt=""></p>
-<p>有个__asm__汇编指令，LOCK_IF_MP，继续跟进会发现最终实现为<code>lock cmpxchg</code>指令。</p>
-<p>在硬件层面，lock指令能锁定信号北桥，也就是<strong>锁总线</strong>，几乎所有cpu都支持lock指令</p>
-<p>ps:MP是multi processor的意思，就是说多核的时候才lock，否则只执行cmpxchg，当然现在的cpu都是多核</p>
-<br>
-
-<h1 id="附录"><a href="#附录" class="headerlink" title="附录"></a>附录</h1><h2 id="Java对象组成"><a href="#Java对象组成" class="headerlink" title="Java对象组成"></a>Java对象组成</h2><p>markword</p>
-<p>klass pointer</p>
-<p>instance data</p>
-<p>padding</p>
-<p>我们可以通过jol工具查看</p>
-<figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">&lt;dependency&gt;</span><br><span class="line">    &lt;groupId&gt;org.openjdk.jol&lt;/groupId&gt;</span><br><span class="line">    &lt;artifactId&gt;jol-core&lt;/artifactId&gt;</span><br><span class="line">    &lt;version&gt;0.9&lt;/version&gt;</span><br><span class="line">&lt;/dependency&gt;</span><br></pre></td></tr></table></figure>
-
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">Object o = <span class="keyword">new</span> Object();</span><br><span class="line">System.out.println(ClassLayout.parseInstance(o).toPrintable());</span><br></pre></td></tr></table></figure>
-
-<p>结果如下</p>
-<p><img src="images/loading.gif" data-original="https://s3.ax1x.com/2020/11/19/DuNeW8.png" alt="为了避免关键字所以名字是klass pointer，图片里面写错了"></p>
-<p>当我们加上synchronized</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">synchronized</span> (o)&#123;</span><br><span class="line">  System.out.println(ClassLayout.parseInstance(o).toPrintable());</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p><img src="images/loading.gif" data-original="https://s3.ax1x.com/2020/11/19/DuDlgP.png" alt=""></p>
-<p>其实就是锁信息，这个对象被作为锁使用，也就是所说的偏向锁的原理</p>
-<br>
-
-<h2 id="缓存行Cache-Line"><a href="#缓存行Cache-Line" class="headerlink" title="缓存行Cache Line"></a>缓存行Cache Line</h2><p>计算机cpu和主存之间读取数据速度差距太大，所以采用了三级缓存（三层是工业实践的结果），读取进缓存的时候是每次读取“一块”，<strong>这个块实际上就是一个缓存行</strong>，现在是64字节（工业实践的结果）</p>
-<p><strong>缓存一致性</strong>，有了缓存行的概念之后，要明白一个问题，就是如下图，当两个数据在同一个缓存行的时候，如果cpu1（或者某个核或者某个线程）修改了x，会通知其他cpu/核/线程，来回通知是会降低效率的</p>
-<p><img src="images/loading.gif" data-original="https://s3.ax1x.com/2020/11/22/DGN5cR.png" alt=""></p>
-<p>其实这不是很概念很虚的东西，我们可以通过两个有趣的程序来对比感受到缓存行是真实存在的</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> 缓存行示例1<span class="title">_</span>同一行 </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">long</span> COUNT = <span class="number">1_0000_0000L</span>;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">static</span> <span class="class"><span class="keyword">class</span> <span class="title">T</span></span>&#123;</span><br><span class="line">        <span class="keyword">public</span> <span class="keyword">volatile</span> <span class="keyword">long</span> x = <span class="number">0L</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> T[] arr = <span class="keyword">new</span> T[<span class="number">2</span>];</span><br><span class="line"></span><br><span class="line">    <span class="keyword">static</span> &#123;</span><br><span class="line">        arr[<span class="number">0</span>] = <span class="keyword">new</span> T();</span><br><span class="line">        arr[<span class="number">1</span>] = <span class="keyword">new</span> T();</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> <span class="keyword">throws</span> InterruptedException </span>&#123;</span><br><span class="line">        CountDownLatch latch = <span class="keyword">new</span> CountDownLatch(<span class="number">2</span>);</span><br><span class="line"></span><br><span class="line">        Thread t1 = <span class="keyword">new</span> Thread(()-&gt;&#123;</span><br><span class="line">            <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; COUNT; i++) &#123;</span><br><span class="line">                arr[<span class="number">0</span>].x = i;</span><br><span class="line">            &#125;</span><br><span class="line">            latch.countDown();</span><br><span class="line">        &#125;);</span><br><span class="line"></span><br><span class="line">        Thread t2 = <span class="keyword">new</span> Thread(()-&gt;&#123;</span><br><span class="line">            <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; COUNT; i++) &#123;</span><br><span class="line">                arr[<span class="number">1</span>].x = i;</span><br><span class="line">            &#125;</span><br><span class="line">            latch.countDown();</span><br><span class="line">        &#125;);</span><br><span class="line"></span><br><span class="line">        <span class="keyword">final</span> <span class="keyword">long</span> start = System.nanoTime();</span><br><span class="line">        t1.start();</span><br><span class="line">        t2.start();</span><br><span class="line">        latch.await();</span><br><span class="line">        System.out.println((System.nanoTime() - start) / <span class="number">100_0000</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>这段程序非常非常简单，抛开计时等不重要的代码，说到底不过是两个线程对一个T[]数组操作，T其实只有个long成员，也就是说，线程1改变T[0]的值，线程2改变T[1]的值。</p>
-<p>结果如下</p>
-<p><img src="images/loading.gif" data-original="https://s3.ax1x.com/2020/11/22/DGBSTx.png" alt=""></p>
-<p>要明白，数组是申请了连续的内存，一个long占4个字节，那么这个arr包含两个long也就是连续的16个字节。</p>
-<p>那么根据前面说的，将内存中的数据读取一个缓存行64字节进入cache，也就是说arr[0]和arr[1]都在同一个缓存行中，线程1线程2都将它们保存进自己的cache。线程1/线程2分别修改arr[0]/arr[1]的时候，需要通知对方，情况也就完全和前面那张示例图一样了。</p>
-<p>第二个程序只需要将class T的声明改成如下，其他完全一样</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">private</span> <span class="keyword">static</span> <span class="class"><span class="keyword">class</span> <span class="title">T</span></span>&#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">long</span> p1, p2, p3, p4, p5, p6, p7; <span class="comment">//前面7个</span></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">volatile</span> <span class="keyword">long</span> x = <span class="number">0L</span>;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">long</span> p9, p10, p11, p12, p13, p14, p15; <span class="comment">//后面7个</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>这样一来，x前面有7个long，后面有7个long，算上x，8*8=64个字节，也就是说arr[0]中的x和arr[1]的任何一个元素都不会在同一个缓存行</p>
-<p>此时修改的时候不需要通知对方，因为对方的缓存行中没有保存自己修改的数据</p>
-<p>执行结果如下：</p>
-<p><img src="images/loading.gif" data-original="https://s3.ax1x.com/2020/11/23/DGs43T.png" alt=""></p>
-<p>可以看到确实快了不少</p>
-<p>你可能会问，真的有人这样写代码吗？</p>
-<p>你好，有的。有个单机版最快MQ叫disruptor，里面的RingBuffer类的父类就有如下代码</p>
-<p><img src="images/loading.gif" data-original="https://s3.ax1x.com/2020/11/23/DGyk5t.png" alt=""></p>
-<blockquote>
-<p>讲个题外：MESI只是因特尔的缓存一致性协议，不要一讲到缓存一致性协议就是MESI</p>
-</blockquote>
-<br>
-
-<h2 id="主存和内存不是同一个东西"><a href="#主存和内存不是同一个东西" class="headerlink" title="主存和内存不是同一个东西"></a>主存和内存不是同一个东西</h2><p>计组一些基础概念，学的时候就很疑惑，比如主存是不是我们说的内存条啊什么的，学很久了怕自己忘记，先记下来</p>
-<p>内存是个很宽泛的概念，不同的书定义也不同，但是一般认为<strong>内存是包括cache和主存的</strong></p>
-<p>知乎上看见一张不错的图：</p>
-<p><img src="images/loading.gif" data-original="https://s3.ax1x.com/2020/11/22/DGUXZV.png" alt=""></p>
-<blockquote>
-<p>参考</p>
-<p>知乎：乔乔-缩头者的回答<a href="https://www.zhihu.com/question/28445273">https://www.zhihu.com/question/28445273</a></p>
-</blockquote>
-
+            <h1 id="引言"><a href="#引言" class="headerlink" title="引言"></a>引言</h1><p>本文将介绍synchronized，cas等概念</p>
         </div>
         
+        
+        <div class="level is-mobile">
+            <div class="level-start">
+                <div class="level-item">
+                <a class="button is-size-7 is-light" href="/2020/11/24/%E9%94%81%E5%92%8C%E5%90%8C%E6%AD%A5/#more">阅读更多</a>
+                </div>
+            </div>
+        </div>
         
         
     </div>
@@ -349,7 +219,7 @@
                 <span class="level-item has-text-grey">
                     
                     
-                    9 分钟 读完 (大约 1405 个字)
+                    9 分钟 读完 (大约 1406 个字)
                 </span>
                 
                 
@@ -364,73 +234,16 @@
         <div class="content">
             <h1 id="强引用-NormalReference"><a href="#强引用-NormalReference" class="headerlink" title="强引用(NormalReference)"></a>强引用(NormalReference)</h1><p>我们平时用的基本上都是强引用M m = new M();</p>
 <p>只要强引用在，gc不回收该对象</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//没事不要重写finalize方法，这里是为了演示gc时机</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">M</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">protected</span> <span class="keyword">void</span> <span class="title">finalize</span><span class="params">()</span> <span class="keyword">throws</span> Throwable </span>&#123;</span><br><span class="line">        System.out.println(<span class="string">"finalize方法被调用"</span>);</span><br><span class="line">        <span class="keyword">super</span>.finalize();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> 强引用 </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> <span class="keyword">throws</span> IOException </span>&#123;</span><br><span class="line">        M m = <span class="keyword">new</span> M();</span><br><span class="line">        </span><br><span class="line">        System.gc();</span><br><span class="line">        System.out.println(m);  <span class="comment">//存在强引用，gc不会回收</span></span><br><span class="line">        </span><br><span class="line">        m = <span class="keyword">null</span>;</span><br><span class="line">        System.gc();</span><br><span class="line">        System.out.println(m);  <span class="comment">//引用没了，gc回收</span></span><br><span class="line"></span><br><span class="line">        System.in.read();   <span class="comment">//阻塞main线程，垃圾回收线程需要时间</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>打印结果如下</p>
-<blockquote>
-<p>引用.M@14ae5a5<br>finalize方法被调用<br>null</p>
-</blockquote>
-<br>
-
-<h1 id="软引用-SoftReference"><a href="#软引用-SoftReference" class="headerlink" title="软引用(SoftReference)"></a>软引用(SoftReference)</h1><p>软引用对象会在堆内存不足时回收</p>
-<p>适合做缓存</p>
-<p>在开始实验之前，先将右上角run按钮左边的本类名的v按钮选择Edit Configurations在vm options添加-Xmx20M，表示将堆最大值设置为20M</p>
-<p><img src="images/loading.gif" data-original="https://s3.ax1x.com/2020/11/14/DCdBIs.png" alt=""></p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * 软引用对象会在堆内存不足时回收</span></span><br><span class="line"><span class="comment"> * 适合做缓存</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> 软引用 </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">        SoftReference&lt;<span class="keyword">byte</span>[]&gt; m = <span class="keyword">new</span> SoftReference&lt;&gt;(<span class="keyword">new</span> <span class="keyword">byte</span>[<span class="number">1024</span> * <span class="number">1024</span> * <span class="number">10</span>]);  <span class="comment">//定义一个占10M的数组</span></span><br><span class="line">        System.out.println(m.get());    <span class="comment">//有值</span></span><br><span class="line">        System.gc();</span><br><span class="line">        <span class="keyword">try</span> &#123;</span><br><span class="line">            Thread.sleep(<span class="number">1000</span>); <span class="comment">//睡1s保证gc完</span></span><br><span class="line">        &#125; <span class="keyword">catch</span> (InterruptedException e) &#123;</span><br><span class="line">            e.printStackTrace();</span><br><span class="line">        &#125;</span><br><span class="line">        System.out.println(m.get());    <span class="comment">//因为对内存充足，发现并没有被gc回收</span></span><br><span class="line">        <span class="keyword">byte</span>[] b = <span class="keyword">new</span> <span class="keyword">byte</span>[<span class="number">1024</span> * <span class="number">1024</span> * <span class="number">11</span>];  <span class="comment">//定义一个11M的数组，由于此时10+11大于20M，jvm自动gc回收</span></span><br><span class="line">        System.out.println(m.get());    <span class="comment">//被回收，为null</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>打印结果为</p>
-<blockquote>
-<p>[B@14ae5a5<br>[B@14ae5a5<br>null</p>
-</blockquote>
-<p>如果b的内存太大，堆内存装不下，那么会报OutOfMemoryError: Java heap space异常</p>
-<br>
-
-<h1 id="弱引用-WeakReference"><a href="#弱引用-WeakReference" class="headerlink" title="弱引用(WeakReference)"></a>弱引用(WeakReference)</h1><p>弱引用是遇到gc就回收</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> 弱引用 </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">        WeakReference&lt;M&gt; m = <span class="keyword">new</span> WeakReference&lt;&gt;(<span class="keyword">new</span> M());</span><br><span class="line"></span><br><span class="line">        System.out.println(m.get());    <span class="comment">//有值</span></span><br><span class="line">        System.gc();</span><br><span class="line">        System.out.println(m.get());    <span class="comment">//不管内存是否充足，遇到gc就回收</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<h2 id="ThreadLocal中的Entry"><a href="#ThreadLocal中的Entry" class="headerlink" title="ThreadLocal中的Entry"></a>ThreadLocal中的Entry</h2><p>弱引用很经典的一个例子就是ThreadLocal中的Entry，在<a href="http://wjw.today/2020/11/11/ThreadLocal/#map真的是map吗">之前的博客</a>中有分析ThreadLocal为什么是弱引用，这里再次复习一下</p>
-<p><img src="images/loading.gif" data-original="https://s3.ax1x.com/2020/11/16/DAzpQO.png" alt=""></p>
-<p>当我们ThreadLocal tl = new ThreadLocal();的时候，实际上有两个引用指向了ThreadLocal，一个是tl本身是一个强引用，一个是getMap(当前线程)得到的ThreadLocalMap，它里面的Entry的key是一个弱引用，指向了ThreadLocal。</p>
-<blockquote>
-<p> 为什么这里要使用弱引用呢？</p>
-<p>如果是强引用，则tl和key都是强引用，我们一般都是操作tl，也就是tl = null，但是key依然存在强引用，于是导致无法被gc回收，存在内存泄漏问题。</p>
-<p>使用弱引用就不会内存泄漏？</p>
-<p>不是的，即使key是弱引用，但是如果key被回收变为null，value无法被访问，依然存在内存泄漏问题。解决的办法是主动调用tl.remove();</p>
-</blockquote>
-<br>
-
-<h1 id="虚引用-PhantomReference"><a href="#虚引用-PhantomReference" class="headerlink" title="虚引用(PhantomReference)"></a>虚引用(PhantomReference)</h1><p>一般没人用，只有写类库的人会用</p>
-<p>无论是否被回收，都get不到值</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> 虚引用 </span>&#123;</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">final</span> ReferenceQueue&lt;M&gt; QUEUE = <span class="keyword">new</span> ReferenceQueue&lt;&gt;();	<span class="comment">//回收队列</span></span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">        PhantomReference&lt;M&gt; m = <span class="keyword">new</span> PhantomReference&lt;&gt;(<span class="keyword">new</span> M(), QUEUE);</span><br><span class="line">        System.out.println(m.get());    <span class="comment">//null</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>作用是回收前有个通知，相当于一个钩子函数，堆内存不足的时候并没有直接回收，而是放进QUEUE回收队列里，gc会不断判断队列里是否有值，有则poll，这就相当于一个通知，gc如果想，可以对poll出来的这个虚引用做一些特殊处理</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> 虚引用 </span>&#123;</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">final</span> List&lt;Object&gt; LIST = <span class="keyword">new</span> LinkedList&lt;&gt;();</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">final</span> ReferenceQueue&lt;M&gt; QUEUE = <span class="keyword">new</span> ReferenceQueue&lt;&gt;();  <span class="comment">//回收队列</span></span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">        PhantomReference&lt;M&gt; m = <span class="keyword">new</span> PhantomReference&lt;&gt;(<span class="keyword">new</span> M(), QUEUE);</span><br><span class="line">        System.out.println(m.get());    <span class="comment">//null</span></span><br><span class="line"></span><br><span class="line">        <span class="keyword">new</span> Thread(()-&gt;&#123;</span><br><span class="line">            <span class="keyword">while</span> (<span class="keyword">true</span>)&#123;</span><br><span class="line">                <span class="keyword">try</span> &#123;</span><br><span class="line">                    LIST.add(<span class="keyword">new</span> <span class="keyword">byte</span>[<span class="number">1024</span> * <span class="number">1024</span> * <span class="number">2</span>]);</span><br><span class="line">                    Thread.sleep(<span class="number">500</span>);</span><br><span class="line">                &#125; <span class="keyword">catch</span> (InterruptedException e) &#123;</span><br><span class="line">                    e.printStackTrace();</span><br><span class="line">                    Thread.currentThread().interrupt();</span><br><span class="line">                &#125;</span><br><span class="line">                System.out.println(m.get());</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;).start();</span><br><span class="line"></span><br><span class="line">        <span class="comment">//模拟简易垃圾回收线程</span></span><br><span class="line">        <span class="keyword">new</span> Thread(()-&gt;&#123;</span><br><span class="line">            <span class="keyword">while</span> (<span class="keyword">true</span>)&#123;   <span class="comment">//垃圾回收线程不断检查队列里面有没有</span></span><br><span class="line">                Reference&lt;? extends M&gt; poll = QUEUE.poll();</span><br><span class="line">                <span class="keyword">if</span> (poll != <span class="keyword">null</span>)&#123;</span><br><span class="line">                    System.out.println(<span class="string">"jvm回收虚引用对象"</span> + poll);</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;).start();</span><br><span class="line"></span><br><span class="line">        <span class="keyword">try</span> &#123;</span><br><span class="line">            Thread.sleep(<span class="number">500</span>);</span><br><span class="line">        &#125; <span class="keyword">catch</span> (InterruptedException e) &#123;</span><br><span class="line">            e.printStackTrace();</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>实际应用中，虚引用常被用于管理直接内存(堆外内存)</p>
-<p><img src="images/loading.gif" data-original="https://s3.ax1x.com/2020/11/14/DCy0Xt.png" alt="">当然，堆外内存不一定是硬件，只是举个例子，硬件通过驱动程序加载到内存中才能供操作系统调用，以前JVM无法直接控制堆外内存， 需要拷贝到JVM的堆中才能控制，这种拷贝需要系统调用，涉及用户态和内核态的转换</p>
-<h2 id="零拷贝技术"><a href="#零拷贝技术" class="headerlink" title="零拷贝技术"></a>零拷贝技术</h2><p>java的nio提出了zero-copy零拷贝技术，可以管理堆外内存</p>
-<p><img src="images/loading.gif" data-original="https://s3.ax1x.com/2020/11/14/DC2YDI.png" alt=""></p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ByteBuffer buffer = ByteBuffer.allocateDirect(<span class="number">1024</span>);</span><br></pre></td></tr></table></figure>
-
-<p>这个allocateDirect方法源码如下，可以看到是DirectByteBuffer，这个DirectByteBuffer什么时候回收的呢？我们可以看到这个类下有个Cleaner，就这个名字也才得到是用来负责回收对象的</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">DirectByteBuffer</span> <span class="keyword">extends</span> <span class="title">MappedByteBuffer</span> <span class="keyword">implements</span> <span class="title">DirectBuffer</span></span>&#123;</span><br><span class="line">    ...</span><br><span class="line">        </span><br><span class="line">	<span class="keyword">private</span> <span class="keyword">final</span> Cleaner cleaner;</span><br><span class="line"></span><br><span class="line">	<span class="function"><span class="keyword">public</span> Cleaner <span class="title">cleaner</span><span class="params">()</span> </span>&#123; <span class="keyword">return</span> cleaner; &#125;</span><br><span class="line"></span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">static</span> ByteBuffer <span class="title">allocateDirect</span><span class="params">(<span class="keyword">int</span> capacity)</span> </span>&#123;</span><br><span class="line">    	<span class="keyword">return</span> <span class="keyword">new</span> DirectByteBuffer(capacity);</span><br><span class="line">	&#125;</span><br><span class="line">    </span><br><span class="line">    ...</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>继续跟进Cleaner类</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Cleaner</span> <span class="keyword">extends</span> <span class="title">PhantomReference</span>&lt;<span class="title">Object</span>&gt; </span>&#123;</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">final</span> ReferenceQueue&lt;Object&gt; dummyQueue = <span class="keyword">new</span> ReferenceQueue();</span><br><span class="line">    ...</span><br></pre></td></tr></table></figure>
-
-<p>看源码讲究点到即止，是不是跟咱们自己写的 模拟简易垃圾回收线程 <del>一模一样</del> 有点相似？</p>
-<p>也就是说，这个cleaner就是通过虚引用对堆外内存进行跟踪。</p>
-<br>
-
-<blockquote>
-<p>参考</p>
-<p><a href="https://space.bilibili.com/406692798?from=search&seid=2048544262806301662">bilibili马士兵说弱引用</a></p>
-</blockquote>
-
         </div>
         
+        
+        <div class="level is-mobile">
+            <div class="level-start">
+                <div class="level-item">
+                <a class="button is-size-7 is-light" href="/2020/11/19/java%E4%B8%AD%E7%9A%84%E5%BC%95%E7%94%A8/#more">阅读更多</a>
+                </div>
+            </div>
+        </div>
         
         
     </div>
@@ -609,7 +422,7 @@
                     </p>
                     <a href="/archives">
                         <p class="title has-text-weight-normal">
-                            68
+                            69
                         </p>
                     </a>
                 </div>
@@ -730,7 +543,7 @@
                 <span class="level-item">数据结构和算法</span>
             </span>
             <span class="level-end">
-                <span class="level-item tag">36</span>
+                <span class="level-item tag">37</span>
             </span>
         </a></li><li>
         <a class="level is-marginless" href="/categories/%E7%8E%84%E5%AD%A6/">
@@ -781,6 +594,25 @@
         
         <article class="media">
             
+            <a href="/2020/11/24/31-%E4%B8%8B%E4%B8%80%E4%B8%AA%E6%8E%92%E5%88%97/" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="images/loading.gif" data-original="https://b1.sbimg.org/file/chevereto-jia/2020/11/24/Q0wrD.md.jpg" alt="31-下一个排列">
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2020-11-24T09:00:13.000Z">2020-11-24</time></div>
+                    <a href="/2020/11/24/31-%E4%B8%8B%E4%B8%80%E4%B8%AA%E6%8E%92%E5%88%97/" class="title has-link-black-ter is-size-6 has-text-weight-normal">31-下一个排列</a>
+                    <p class="is-size-7 is-uppercase">
+                        <a class="has-link-grey -link" href="/categories/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E5%92%8C%E7%AE%97%E6%B3%95/">数据结构和算法</a>
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+        <article class="media">
+            
             <a href="/2020/11/24/%E9%94%81%E5%92%8C%E5%90%8C%E6%AD%A5/" class="media-left">
                 <p class="image is-64x64">
                     <img class="thumbnail" src="images/loading.gif" data-original="https://b1.sbimg.org/file/chevereto-jia/2020/11/24/Q01F6.md.jpg" alt="锁和同步">
@@ -850,25 +682,6 @@
                     <a href="/2020/11/19/java%E4%B8%AD%E7%9A%84%E5%BC%95%E7%94%A8/" class="title has-link-black-ter is-size-6 has-text-weight-normal">java中的引用</a>
                     <p class="is-size-7 is-uppercase">
                         <a class="has-link-grey -link" href="/categories/Java%E5%9F%BA%E7%A1%80/">Java基础</a>
-                    </p>
-                </div>
-            </div>
-        </article>
-        
-        <article class="media">
-            
-            <a href="/2020/11/13/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C%E5%9F%BA%E7%A1%80/" class="media-left">
-                <p class="image is-64x64">
-                    <img class="thumbnail" src="images/loading.gif" data-original="https://source.acexy.cn/view/XW2ersS" alt="计算机网络基础">
-                </p>
-            </a>
-            
-            <div class="media-content">
-                <div class="content">
-                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2020-11-13T06:16:28.000Z">2020-11-13</time></div>
-                    <a href="/2020/11/13/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C%E5%9F%BA%E7%A1%80/" class="title has-link-black-ter is-size-6 has-text-weight-normal">计算机网络基础</a>
-                    <p class="is-size-7 is-uppercase">
-                        <a class="has-link-grey -link" href="/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/">计算机基础</a>
                     </p>
                 </div>
             </div>
@@ -905,6 +718,25 @@
         
         <article class="media">
             
+            <a href="/2020/11/24/31-%E4%B8%8B%E4%B8%80%E4%B8%AA%E6%8E%92%E5%88%97/" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="images/loading.gif" data-original="https://b1.sbimg.org/file/chevereto-jia/2020/11/24/Q0wrD.md.jpg" alt="31-下一个排列">
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2020-11-24T09:00:13.000Z">2020-11-24</time></div>
+                    <a href="/2020/11/24/31-%E4%B8%8B%E4%B8%80%E4%B8%AA%E6%8E%92%E5%88%97/" class="title has-link-black-ter is-size-6 has-text-weight-normal">31-下一个排列</a>
+                    <p class="is-size-7 is-uppercase">
+                        <a class="has-link-grey -link" href="/categories/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E5%92%8C%E7%AE%97%E6%B3%95/">数据结构和算法</a>
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+        <article class="media">
+            
             <a href="/2020/11/24/%E9%94%81%E5%92%8C%E5%90%8C%E6%AD%A5/" class="media-left">
                 <p class="image is-64x64">
                     <img class="thumbnail" src="images/loading.gif" data-original="https://b1.sbimg.org/file/chevereto-jia/2020/11/24/Q01F6.md.jpg" alt="锁和同步">
@@ -974,25 +806,6 @@
                     <a href="/2020/11/19/java%E4%B8%AD%E7%9A%84%E5%BC%95%E7%94%A8/" class="title has-link-black-ter is-size-6 has-text-weight-normal">java中的引用</a>
                     <p class="is-size-7 is-uppercase">
                         <a class="has-link-grey -link" href="/categories/Java%E5%9F%BA%E7%A1%80/">Java基础</a>
-                    </p>
-                </div>
-            </div>
-        </article>
-        
-        <article class="media">
-            
-            <a href="/2020/11/13/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C%E5%9F%BA%E7%A1%80/" class="media-left">
-                <p class="image is-64x64">
-                    <img class="thumbnail" src="images/loading.gif" data-original="https://source.acexy.cn/view/XW2ersS" alt="计算机网络基础">
-                </p>
-            </a>
-            
-            <div class="media-content">
-                <div class="content">
-                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2020-11-13T06:16:28.000Z">2020-11-13</time></div>
-                    <a href="/2020/11/13/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C%E5%9F%BA%E7%A1%80/" class="title has-link-black-ter is-size-6 has-text-weight-normal">计算机网络基础</a>
-                    <p class="is-size-7 is-uppercase">
-                        <a class="has-link-grey -link" href="/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/">计算机基础</a>
                     </p>
                 </div>
             </div>
