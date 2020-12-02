@@ -7,23 +7,23 @@
 
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
 
-<title>redis（面试向） - 小温 blog</title>
+<title>数据结构与算法不迷路导航 - 小温 blog</title>
 
 
-    <meta name="description" content="1. 数据存储和查找发展文件：慢，因为全量扫描-&gt;IO，因此慢">
+    <meta name="description" content="所有的系列都在这了，巨坑慢慢填哈，现在已经破百，打算在12月前刷够300（笔试面试比较有信心？），然后博客补一下之前做的">
 <meta property="og:type" content="article">
-<meta property="og:title" content="redis（面试向）">
-<meta property="og:url" content="http://wjw.today/2020/10/09/redis%EF%BC%88%E9%9D%A2%E8%AF%95%E5%90%91%EF%BC%89/index.html">
+<meta property="og:title" content="数据结构与算法不迷路导航">
+<meta property="og:url" content="http://wjw.today/2020/11/29/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95%E4%B8%8D%E8%BF%B7%E8%B7%AF%E5%AF%BC%E8%88%AA/index.html">
 <meta property="og:site_name" content="小温 blog">
-<meta property="og:description" content="1. 数据存储和查找发展文件：慢，因为全量扫描-&gt;IO，因此慢">
+<meta property="og:description" content="所有的系列都在这了，巨坑慢慢填哈，现在已经破百，打算在12月前刷够300（笔试面试比较有信心？），然后博客补一下之前做的">
 <meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="https://source.acexy.cn/view/XULWDpi">
-<meta property="article:published_time" content="2020-10-09T01:23:26.000Z">
-<meta property="article:modified_time" content="2020-11-11T08:24:45.876Z">
+<meta property="og:image" content="https://source.acexy.cn/view/XX9GIuI">
+<meta property="article:published_time" content="2020-11-29T15:59:59.000Z">
+<meta property="article:modified_time" content="2020-11-29T07:31:21.027Z">
 <meta property="article:author" content="wjw">
-<meta property="article:tag" content="开发">
+<meta property="article:tag" content="力扣">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="https://source.acexy.cn/view/XULWDpi">
+<meta name="twitter:image" content="https://source.acexy.cn/view/XX9GIuI">
 
 
 
@@ -81,7 +81,7 @@
         <div class="navbar-brand is-flex-center">
             <a class="navbar-item navbar-logo" href="/">
             
-                <img src="images/loading.gif" data-original="https://s1.ax1x.com/2020/07/20/UfKyGQ.md.png" alt="redis（面试向）" height="28">
+                <img src="images/loading.gif" data-original="https://s1.ax1x.com/2020/07/20/UfKyGQ.md.png" alt="数据结构与算法不迷路导航" height="28">
             
             </a>
         </div>
@@ -139,7 +139,7 @@
     
     <div class="card-image">
         <span  class="image is-7by1">
-            <img class="thumbnail" src="images/loading.gif" data-original="https://source.acexy.cn/view/XULWDpi" alt="redis（面试向）">
+            <img class="thumbnail" src="images/loading.gif" data-original="https://source.acexy.cn/view/XX9GIuI" alt="数据结构与算法不迷路导航">
         </span>
     </div>
     
@@ -147,17 +147,17 @@
         
         <div class="level article-meta is-size-7 is-uppercase is-mobile is-overflow-x-auto">
             <div class="level-left">
-                <time class="level-item has-text-grey" datetime="2020-10-09T01:23:26.000Z">2020-10-09</time>
+                <time class="level-item has-text-grey" datetime="2020-11-29T15:59:59.000Z">2020-11-29</time>
                 
                 <div class="level-item">
-                <a class="has-link-grey -link" href="/categories/redis/">redis</a>
+                <a class="has-link-grey -link" href="/categories/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E5%92%8C%E7%AE%97%E6%B3%95/">数据结构和算法</a>
                 </div>
                 
                 
                 <span class="level-item has-text-grey">
                     
                     
-                    22 分钟 读完 (大约 3353 个字)
+                    6 分钟 读完 (大约 847 个字)
                 </span>
                 
                 
@@ -171,140 +171,130 @@
         
         <h1 class="title is-size-3 is-size-4-mobile has-text-weight-normal">
             
-                redis（面试向）
+                数据结构与算法不迷路导航
             
         </h1>
         <div class="content">
-            <h1 id="1-数据存储和查找发展"><a href="#1-数据存储和查找发展" class="headerlink" title="1. 数据存储和查找发展"></a>1. 数据存储和查找发展</h1><p><strong>文件</strong>：慢，因为全量扫描-&gt;IO，因此慢</p>
+            <p>所有的系列都在这了，巨坑慢慢填哈，现在已经破百，打算在12月前刷够300（笔试面试比较有信心？），然后博客补一下之前做的</p>
 <a id="more"></a>
 
-<p><strong>mysql</strong>：为什么数据库存东西，因为快，为什么，因为做了分块(datapage)，然后对这些块做了索引，所以我们先查索引，找到对应是哪块，然后只查这一块，就快很多。那要扫描索引？，将索引加载进内存并且采用B+树结构可以避免扫描整个索引。</p>
-<p><em>面试题</em>：如果表很大，增删改查会变慢吗？数据量大了，增删改是一定会变慢的。查询：得分场景，即便表很大，但是如果一个客户端发送一个简单的查询请求，索引命中了情况下，查询还是毫秒级的。但是如果高并发情况下，查询是变慢的，因为查询时间应该包括寻址时间和磁盘io时间，即使寻址是毫秒级的，但是由于带宽，吞吐等硬盘限制，高并发场景下会受到硬盘的限制而变得很慢，否则也不会出现分布式微服务上来就是redis这种事情</p>
-<p><strong>redis</strong>：综上所述，并发情况下限制主要在硬盘，那所有数据存在内存中呢？那当然快了！还真有这么一种内存型关系数据库：SAP HANA，可是内存它贵呀，动不动就上T的数据存在内存中太烧钱了。redis的产生理念：其实只有一小部分数据频繁被访问（被称为热点数据），很大一部分数据都是不经常用的就存在mysql里，因此使用redis一定要明确使用场景：热点数据。</p>
+<h1 id="1-回溯"><a href="#1-回溯" class="headerlink" title="1. 回溯"></a>1. 回溯</h1><ul>
+<li>回溯模板</li>
+<li><a href="http://wjw.today/2020/09/16/131-分割回文串">131-分割回文串</a></li>
+<li><a href="http://wjw.today/2020/09/17/40-组合总和II/">40-组合总和II</a></li>
+<li><a href="http://wjw.today/2020/09/19/60-第k个排列/">60-第k个排列</a></li>
+<li><a href="http://wjw.today/2020/10/14/784-字母大小写全排列/">784-字母大小写全排列</a></li>
+<li><a href="http://wjw.today/2020/09/30/1219-黄金矿工/">1219-黄金矿工</a></li>
+<li><a href="http://wjw.today/2020/11/06/1291-顺次数/">1291-顺次数</a></li>
+</ul>
 <br>
 
-<h1 id="2-Redis特点"><a href="#2-Redis特点" class="headerlink" title="2. Redis特点"></a>2. Redis特点</h1><p>面试可不要只说一点啊，看我的！</p>
-<ul>
-<li><p>NoSQL系列，key-value形式，内存数据库：NoSQL是非关系型数据库的统称，redis以键值对的形式存在，在内存中速度会比mysql快几个量级。为什么redis是key-value型的而不是sql形式：不妨根据上面所说的大胆猜测一下，关系型数据库中通常会接触到范式，A表外键为B表的主键，而redis设计初衷就是只存一部分热点数据，因此无法确定是否包含在B中，因此redis应该只关注自身，不关注依赖。</p>
+<h1 id="2-动态规划"><a href="#2-动态规划" class="headerlink" title="2. 动态规划"></a>2. 动态规划</h1><ul>
+<li><a href="http://wjw.today/2020/09/14/63-不同路径II">63-不同路径II</a></li>
+<li><a href="http://wjw.today/2020/09/16/70-爬楼梯以及进化版">70-爬楼梯以及进化版</a></li>
+<li><a href="http://wjw.today/2020/11/12/357-计算各个位数不同的数字个数/">357-计算各个位数不同的数字个数</a></li>
+</ul>
+<h2 id="2-1-子数组系列"><a href="#2-1-子数组系列" class="headerlink" title="2.1 子数组系列"></a>2.1 子数组系列</h2><ul>
+<li><p><a href="http://wjw.today/2020/11/26/53-最大子序和">53-最大子序和</a></p>
 </li>
-<li><p>有自己的数据类型，实现了计算向数据移动（这个词就很专业）：有String, Set, List, Hash, Sortedset五种类型，<strong>并且每种类型有自己的本地方法</strong>，对比memcache（所有的value都是string类型并通过json转换），如果需要取出数组第二个元素，memcache需要将整个list字符串返回，调用方拿到数据转换成列表再取第二个元素，redis可以读取list并通过lindex命令取出第二个元素并返回，也就是先计算再io，这种<strong>计算向数据移动</strong>的思想在map-reduce中有体现，可以减少传输的数据量，很快。</p>
-</li>
-<li><p>工作线程是单线程的，看下面第三点</p>
+<li><p><a href="http://wjw.today/2020/11/09/152-乘积最大子数组/">152-乘积最大子数组</a></p>
 </li>
 </ul>
 <br>
 
-<h1 id="3-Redis的NIO和线程模型"><a href="#3-Redis的NIO和线程模型" class="headerlink" title="3. Redis的NIO和线程模型"></a>3. Redis的NIO和线程模型</h1><p>redis是单线程的还是多线程的？</p>
-<p>用户对redis操作是单线程的（worker单线程），redis 6.x支持多线程，但是！！！这叫io threads，用于处理用户的请求，实际操作还是单线程的。</p>
-<h2 id="3-1-秒杀场景的redis使用"><a href="#3-1-秒杀场景的redis使用" class="headerlink" title="3.1 秒杀场景的redis使用"></a>3.1 秒杀场景的redis使用</h2><p>高并发场景，多个service线程。如果是mysql不加锁，必定会脏读，造成超卖，必定加锁同步，实际退化成所有service串行，加上前后其他业务逻辑，很慢。改用redis，单线程，本身就是串行化操作，通过decr进行商品数量减一</p>
-<p><img src="images/loading.gif" data-original="https://s1.ax1x.com/2020/10/04/08OZ3d.png" alt=""></p>
-<br>
-
-<h2 id="3-2-strace追踪线程"><a href="#3-2-strace追踪线程" class="headerlink" title="3.2 strace追踪线程"></a>3.2 strace追踪线程</h2><p>strace可以追踪一个进程以及所有线程对操作系统的系统调用有哪些。比如是否使用了fork，是否使用了epoll，是否又创建了线程</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo apt install strace</span><br></pre></td></tr></table></figure>
-
-<p>进入redis目录（src或者守护进程的都行）</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">strace -ff -o /home/wjw/stracelog/out</span><br></pre></td></tr></table></figure>
-
-<p>-ff表示监听fork系，第二个f表示包括线程</p>
-<p>-o表示输出目录为/home/wjw/stracelog并以/out为前缀</p>
-<p><img src="images/loading.gif" data-original="https://s1.ax1x.com/2020/10/05/0tYei9.png" alt=""></p>
-<p>可以进入/proc/3324/task目录下</p>
-<p><img src="images/loading.gif" data-original="https://s1.ax1x.com/2020/10/05/0tY0L8.png" alt=""></p>
-<p>这些是什么？<strong>3324是线程号，task代表任务，也就是开启了4个线程</strong></p>
-<p>用vi或者gedit打开out.3324可以看到很多epoll相关的系统调用，因此redis的线程采用了epoll多路复用的技术</p>
-<p><img src="images/loading.gif" data-original="https://s1.ax1x.com/2020/10/05/0twpRJ.png" alt=""></p>
-<p>客户端输入bgsave，服务端3324线程开启了新的线程3829进行保存，使用clone系统调用，copy on write技术</p>
-<p><img src="images/loading.gif" data-original="https://s1.ax1x.com/2020/10/05/0twuzd.png" alt=""></p>
-<p>查看strace的跟踪</p>
-<p><img src="images/loading.gif" data-original="https://s1.ax1x.com/2020/10/05/0twoTK.png" alt=""></p>
-<br>
-
-<h1 id="4-Redis的安装和使用"><a href="#4-Redis的安装和使用" class="headerlink" title="4. Redis的安装和使用"></a>4. Redis的安装和使用</h1><p>参考redis使用向文章</p>
-<br>
-
-<h1 id="5-缓存雪崩，穿透，击穿"><a href="#5-缓存雪崩，穿透，击穿" class="headerlink" title="5. 缓存雪崩，穿透，击穿"></a>5. 缓存雪崩，穿透，击穿</h1><p><strong>缓存雪崩</strong>：是说redis大量内容同时过期，因此db突然之间多了很多请求。解决方法就是随机过期时间</p>
-<p><strong>缓存穿透</strong>：查询id=-1，第一次查db，查不到就不放进redis，第二次查一定不会在redis中，又去查db，如此往复…恶意发送大量查询请求，导致一直查db，就是缓存穿透。解决办法就是把-1: null存进redis，或者限制同一个key在一段时间的请求次数，或者是使用过滤器过滤掉</p>
-<p><strong>缓存击穿</strong>：跟缓存雪崩类似，是因为过期导致的，但是不是大量内容，而是说对同一个key发出大量的请求（比如秒杀），突然过期了，导致查db。这种场景解决办法就是查db的时候加锁，过期–&gt;加锁查db–&gt;db压力小–&gt;重新放进redis–&gt;查redis</p>
-<br>
-
-<h1 id="6-Redis内存回收策略"><a href="#6-Redis内存回收策略" class="headerlink" title="6. Redis内存回收策略"></a>6. Redis内存回收策略</h1><p>两个方面：</p>
-<ul>
-<li>key过期时被删除</li>
-<li>内存占用达到maxmemory触发内存溢出控制策略</li>
-</ul>
-<h2 id="6-1-删除过期key"><a href="#6-1-删除过期key" class="headerlink" title="6.1 删除过期key"></a>6.1 删除过期key</h2><p>redis不会实时监控每个key的过期时间并删除，而是采用<strong>惰性删除</strong>和<strong>定时任务删除</strong></p>
-<ul>
-<li><strong>惰性删除</strong>：过期的key并没有被直接删除，而是等到下一次访问的时候才删除。访问一个key，判断ttl，如果为0过期了，则删除并返回null，否则正常返回value。<strong>如果一直没有被访问，则会造成内存泄漏</strong></li>
-<li><strong>定时任务删除</strong>：为了解决上述内存泄漏问题，redis每秒运行10次定时任务<ul>
-<li>慢模式：随机检查20个键，过期则删除，过期超过25%，循环执行上述过程直到低于25%，超时时间为25ms</li>
-<li>快模式：逻辑和快模式相同，只是超时时间不同。如果慢模式超时则先执行一次快模式，快模式下超时时间为1ms且2s内只能运行1次</li>
-</ul>
+<h1 id="3-树"><a href="#3-树" class="headerlink" title="3. 树"></a>3. 树</h1><ul>
+<li><p><a href="http://wjw.today/2020/07/11/Java实现树的遍历及二叉树可视化/">Java实现树的前中后序遍历及二叉树可视化</a></p>
+</li>
+<li><p><a href="http://wjw.today/2020/08/19/Java二叉树的层次遍历/">Java二叉树的层次遍历</a></p>
+</li>
+<li><p><a href="http://wjw.today/2020/08/30/297-二叉树的序列化和反序列化/">297-二叉树的序列化和反序列化（困难）</a></p>
+</li>
+<li><p><a href="http://wjw.today/2020/09/05/515-在每个树行中找最大值/">515-在每个树行中找最大值（中等）</a></p>
+</li>
+<li><p><a href="http://wjw.today/2020/08/29/116-117-填充每个节点的下一个右侧节点指针/">116/117-填充每个节点的下一个右侧节点指针</a></p>
 </li>
 </ul>
 <br>
 
-<h2 id="6-2-内存溢出控制策略"><a href="#6-2-内存溢出控制策略" class="headerlink" title="6.2 内存溢出控制策略"></a>6.2 内存溢出控制策略</h2><p>当Redis所用内存达到maxmemory上限时会触发相应的溢出控制策略。具体策略受maxmemory-policy参数控制，Redis支持6种策略，如下所示：</p>
-<ol>
-<li>noeviction：默认策略，当内存不足以容纳新写入数据时，新写入操作会报错。应该没人用吧。</li>
-<li>allkeys-lru：当内存不足以容纳新写入数据时，在键空间中，移除最近最少使用的 Key。推荐使用，目前项目在用这种。</li>
-<li>allkeys-random：当内存不足以容纳新写入数据时，在键空间中，随机移除某个 Key。应该也没人用吧，你不删最少使用 Key，去随机删。</li>
-<li>volatile-lru：当内存不足以容纳新写入数据时，在设置了过期时间的键空间中，移除最近最少使用的 Key。这种情况一般是把 Redis 既当缓存，又做持久化存储的时候才用。不推荐。</li>
-<li>volatile-random：当内存不足以容纳新写入数据时，在设置了过期时间的键空间中，随机移除某个 Key。依然不推荐。</li>
-<li>volatile-ttl：当内存不足以容纳新写入数据时，在设置了过期时间的键空间中，有更早过期时间的 Key 优先移除。不推荐。如果没有对应的键，则回退到noeviction策略。</li>
-</ol>
-<blockquote>
-<p>参考<br>作者：杨鑫科<br>链接：<a href="https://www.jianshu.com/p/6a5eb0ddf57b">https://www.jianshu.com/p/6a5eb0ddf57b</a><br>来源：简书</p>
-</blockquote>
-<br>
-
-<h1 id="7-Redis持久化"><a href="#7-Redis持久化" class="headerlink" title="7. Redis持久化"></a>7. Redis持久化</h1><p>redis存在内存中，服务器故障就造成了数据丢失，可以通过一些持久化策略来保护数据</p>
-<h2 id="7-1-RDB（redis-database）"><a href="#7-1-RDB（redis-database）" class="headerlink" title="7.1 RDB（redis database）"></a>7.1 RDB（redis database）</h2><p>默认开启，将redis中的数据转换成二进制文件，调用save/bgsave/自动化时产生dump.rdb文件，适合全量备份。</p>
-<ul>
-<li>save：阻塞（调用时其他client的命令不能执行），覆盖（有旧的就替换）</li>
-<li>bgsave：后台进行，原理是保存fork出来的副本，因此调用bgsave后即使修改了也不会被保存，因为副本没有变。也阻塞但阻塞的只是fork阶段，不阻塞客户端命令，缺点是需要消耗额外的内存</li>
-<li>配置自动触发：redis.conf配置文件中设置save m n。表示m秒内数据集存在n次修改时，自动触发bgsave。</li>
+<h1 id="4-单调栈"><a href="#4-单调栈" class="headerlink" title="4. 单调栈"></a>4. 单调栈</h1><ul>
+<li><p>42-接雨水（困难）</p>
+</li>
+<li><p><a href="http://wjw.today/2020/08/27/84-柱状图中的最大矩形/">84-柱状图中的最大矩形</a></p>
+</li>
+<li><p><a href="http://wjw.today/2020/09/09/739-每日温度/">739-每日温度（中等）</a></p>
+</li>
+<li><p><a href="http://wjw.today/2020/09/11/496-下一个更大元素I/">496-下一个更大元素 I（简单）</a></p>
+</li>
+<li><p>316-去除重复字母（困难）</p>
+</li>
+<li><p><a href="http://wjw.today/2020/09/12/901-股票价格跨度">901-股票价格跨度（中等）</a></p>
+</li>
+<li><p>402-移掉K位数字    </p>
+</li>
+<li><p><a href="http://wjw.today/2020/10/10/456-132模式/">456-132模式</a></p>
+</li>
+<li><p>581-最短无序连续子数组    </p>
+</li>
 </ul>
-<p>rdb的三种触发方式都是保留了触发前最后一刻的状态，因此也称为快照</p>
-<p>恢复：将dump.rdb放在redis安装目录（可以通过config get dir命令获取）并启动redis即可</p>
 <br>
 
-<h2 id="7-2-AOF（append-only-file）"><a href="#7-2-AOF（append-only-file）" class="headerlink" title="7.2 AOF（append only file）"></a>7.2 AOF（append only file）</h2><p>默认不开启，记录的是<strong>操作命令</strong>而不是内存数据，类似于日志文件。他不是记录每一步操作，而是调用bgrewriteaof命令时将当前内存中的数据生成命令的形式保存下来</p>
-<p>也有三种触发方式</p>
-<p>（1）每修改同步always：同步持久化 每次发生数据变更会被立即记录到磁盘 性能较差但数据完整性比较好</p>
-<p>（2）每秒同步everysec：异步操作，每秒记录 如果一秒内宕机，有数据丢失</p>
-<p>（3）no：从不同步</p>
-<br>
-
-<h1 id="8-高可用架构"><a href="#8-高可用架构" class="headerlink" title="8. 高可用架构"></a>8. 高可用架构</h1><p>主从架构+哨兵模式+集群</p>
-<h2 id="8-1-主从架构"><a href="#8-1-主从架构" class="headerlink" title="8.1 主从架构"></a>8.1 主从架构</h2><p><strong>作用</strong></p>
-<ul>
-<li>读写分离：从机只读不可写，缓解了主机读压力，写从机会报错（you can’t write read only slave）</li>
-<li>容灾恢复：从机会复制主机的数据，相当于备份(采用的是记录复制的偏移量的方式，可以断点续传 )</li>
-<li>高可用：主机一挂，从机能升级为主机</li>
+<h1 id="5-排序"><a href="#5-排序" class="headerlink" title="5. 排序"></a>5. 排序</h1><ul>
+<li><a href="http://wjw.today/2020/08/16/56-合并区间/">56-合并区间</a></li>
 </ul>
-<p><strong>配置方法</strong></p>
-<ol>
-<li><p>如果是同一台主机做实验，那么要修改redis.conf(默认为6379.conf)中的端口号、pid、日志名、rdb名(默认为dump.rdb，会覆盖)</p>
+<br>
+
+<h1 id="6-字符串"><a href="#6-字符串" class="headerlink" title="6. 字符串"></a>6. 字符串</h1><ul>
+<li><p><a href="http://wjw.today/2020/09/09/字符串中的成对括号问题处理技巧/">字符串中的成对括号问题处理技巧</a></p>
 </li>
-<li><p>查看角色命令为<code>info replication</code></p>
-<p>主机会显示 role: master 并显示从机的ip和端口</p>
-<p>从机会显示 role: slave 并显示主机ip和端口</p>
+<li><p><a href="http://wjw.today/2020/07/29/5-最长回文子串/">5 最长回文子串</a></p>
 </li>
-<li><p>从机执行命令<code>slaveof 主机ip 主机端口</code>并配置认证密码即可，主机无需配置</p>
+<li><p><a href="http://wjw.today/2020/10/18/43-字符串相乘/">43-字符串相乘</a></p>
 </li>
-</ol>
-<p><strong>主从复制过程</strong></p>
-<p>首先明白两个关键字</p>
-<p>runid: master节点的唯一标识，每次启动时生成，可以通过<code>info server</code>查看</p>
-<p>offset: slave需要从哪个位置开始同步数据(可以断点续传)</p>
-<p><img src="images/loading.gif" data-original="https://s1.ax1x.com/2020/11/11/Bjtt2R.png" alt="全量复制过程"></p>
-<p>除了全量复制，还有部分复制，防止全量复制中因网络抖动而失去连接</p>
-<p><img src="images/loading.gif" data-original="https://s1.ax1x.com/2020/11/11/Bjt5dS.png" alt="部分复制过程"></p>
-<h2 id="8-2-哨兵模式"><a href="#8-2-哨兵模式" class="headerlink" title="8.2 哨兵模式"></a>8.2 哨兵模式</h2><p>哨兵就是用来监管各个机器的健康状态的，当主机宕机时，根据偏移量将某一台从机通过slaveof no one变成主机，其他主从机slaveof newIp newPort，哨兵可以帮我们自动完成这个过程。 </p>
-<h2 id="8-3-Redis集群"><a href="#8-3-Redis集群" class="headerlink" title="8.3 Redis集群"></a>8.3 Redis集群</h2><p>redis3.0之后的新特性，主从复制还不能实现高可用，因为只分担了读压力，使用Redis Cluster，多个”节点”，每个节点都采用主从架构，每个主节点都可以支持读写操作</p>
-<p>每个节点负责的区域不同，数据是不一致的，要获取数据时必须先通过crc16算法再%16384得到对应的节点地址</p>
-<p>后期新增节点可以进行hash迁移，潜移部分数据分担其他节点的压力</p>
+</ul>
+<br>
+
+<h1 id="7-贪心"><a href="#7-贪心" class="headerlink" title="7. 贪心"></a>7. 贪心</h1><br>
+
+<h1 id="8-滑动窗口"><a href="#8-滑动窗口" class="headerlink" title="8. 滑动窗口"></a>8. 滑动窗口</h1><br>
+
+<h1 id="9-链表"><a href="#9-链表" class="headerlink" title="9. 链表"></a>9. 链表</h1><ul>
+<li><a href="http://wjw.today/2020/11/25/19-删除链表的倒数第n个节点/">19-删除链表的倒数第n个节点</a></li>
+<li><a href="http://wjw.today/2020/11/27/24-两两交换链表中的节点/">24-两两交换链表中的节点</a></li>
+<li><a href="http://wjw.today/2020/11/27/61-旋转链表/">61-旋转链表</a></li>
+</ul>
+<br>
+
+<h1 id="10-二分查找"><a href="#10-二分查找" class="headerlink" title="10. 二分查找"></a>10. 二分查找</h1><ul>
+<li><a href="http://wjw.today/2020/11/08/二分查找模板/">二分查找模板</a></li>
+</ul>
+<br>
+
+<h1 id="11-双指针"><a href="#11-双指针" class="headerlink" title="11. 双指针"></a>11. 双指针</h1><ul>
+<li><p><a href="http://wjw.today/2020/11/20/11-盛水最多的容器/">11-盛水最多的容器</a></p>
+</li>
+<li><p><a href="http://wjw.today/2020/11/25/19-删除链表的倒数第n个节点/">19-删除链表的倒数第n个节点</a></p>
+</li>
+</ul>
+<br>
+
+<h1 id="思维题"><a href="#思维题" class="headerlink" title="思维题"></a>思维题</h1><ul>
+<li><p><a href="http://wjw.today/2020/11/24/31-下一个排列/">31-下一个排列</a></p>
+</li>
+<li><p><a href="http://wjw.today/2020/11/12/357-计算各个位数不同的数字个数/">357-计算各个位数不同的数字个数</a></p>
+</li>
+<li><p><a href="http://wjw.today/2020/11/26/406-根据身高重建队列/">406-根据身高重建队列</a></p>
+</li>
+</ul>
+<br>
+
+<h1 id="其他"><a href="#其他" class="headerlink" title="其他"></a>其他</h1><ul>
+<li><p><a href="http://wjw.today/2020/08/29/对1000000007取模和0x3f3f3f3f/">对1000000007取模和0x3f3f3f3f</a></p>
+</li>
+<li><p><a href="http://wjw.today/2020/08/27/我的FastIO工具类/">我的FastIO工具类</a></p>
+</li>
+<li><p><a href="http://wjw.today/2020/10/11/计算平方根-牛顿迭代法/">计算平方根-牛顿迭代法</a></p>
+</li>
+</ul>
 
         </div>
         
@@ -312,7 +302,7 @@
             <div class="level-start">
                 <div class="level-item">
                     <span class="is-size-6 has-text-grey has-mr-7">#</span>
-                    <a class="has-link-grey -link" href="/tags/%E5%BC%80%E5%8F%91/" rel="tag">开发</a>
+                    <a class="has-link-grey -link" href="/tags/%E5%8A%9B%E6%89%A3/" rel="tag">力扣</a>
                 </div>
             </div>
         </div>
@@ -330,16 +320,16 @@
     <div class="level post-navigation is-flex-wrap is-mobile">
         
         <div class="level-start">
-            <a class="level level-item has-link-grey  article-nav-prev" href="/2020/10/10/456-132%E6%A8%A1%E5%BC%8F/">
+            <a class="level level-item has-link-grey  article-nav-prev" href="/2020/12/02/volatile/">
                 <i class="level-item fas fa-chevron-left"></i>
-                <span class="level-item">456-132模式</span>
+                <span class="level-item">volatile</span>
             </a>
         </div>
         
         
         <div class="level-end">
-            <a class="level level-item has-link-grey  article-nav-next" href="/2020/10/08/mysql%E7%B4%A2%E5%BC%95/">
-                <span class="level-item">mysql索引</span>
+            <a class="level level-item has-link-grey  article-nav-next" href="/2020/11/27/61-%E6%97%8B%E8%BD%AC%E9%93%BE%E8%A1%A8/">
+                <span class="level-item">61-旋转链表</span>
                 <i class="level-item fas fa-chevron-right"></i>
             </a>
         </div>
@@ -389,7 +379,7 @@
                     </p>
                     <a href="/archives">
                         <p class="title has-text-weight-normal">
-                            74
+                            75
                         </p>
                     </a>
                 </div>
@@ -439,91 +429,76 @@
                     目录
                 </h3>
                 <ul class="menu-list"><li>
-        <a class="is-flex" href="#1-数据存储和查找发展">
+        <a class="is-flex" href="#1-回溯">
         <!-- 目录是否自动编号 -->
         <!-- <span class="has-mr-6">1</span> -->
-        <span>1. 数据存储和查找发展</span>
+        <span>1. 回溯</span>
         </a></li><li>
-        <a class="is-flex" href="#2-Redis特点">
+        <a class="is-flex" href="#2-动态规划">
         <!-- 目录是否自动编号 -->
         <!-- <span class="has-mr-6">2</span> -->
-        <span>2. Redis特点</span>
-        </a></li><li>
-        <a class="is-flex" href="#3-Redis的NIO和线程模型">
+        <span>2. 动态规划</span>
+        </a><ul class="menu-list"><li>
+        <a class="is-flex" href="#2-1-子数组系列">
+        <!-- 目录是否自动编号 -->
+        <!-- <span class="has-mr-6">2.1</span> -->
+        <span>2.1 子数组系列</span>
+        </a></li></ul></li><li>
+        <a class="is-flex" href="#3-树">
         <!-- 目录是否自动编号 -->
         <!-- <span class="has-mr-6">3</span> -->
-        <span>3. Redis的NIO和线程模型</span>
-        </a><ul class="menu-list"><li>
-        <a class="is-flex" href="#3-1-秒杀场景的redis使用">
-        <!-- 目录是否自动编号 -->
-        <!-- <span class="has-mr-6">3.1</span> -->
-        <span>3.1 秒杀场景的redis使用</span>
+        <span>3. 树</span>
         </a></li><li>
-        <a class="is-flex" href="#3-2-strace追踪线程">
-        <!-- 目录是否自动编号 -->
-        <!-- <span class="has-mr-6">3.2</span> -->
-        <span>3.2 strace追踪线程</span>
-        </a></li></ul></li><li>
-        <a class="is-flex" href="#4-Redis的安装和使用">
+        <a class="is-flex" href="#4-单调栈">
         <!-- 目录是否自动编号 -->
         <!-- <span class="has-mr-6">4</span> -->
-        <span>4. Redis的安装和使用</span>
+        <span>4. 单调栈</span>
         </a></li><li>
-        <a class="is-flex" href="#5-缓存雪崩，穿透，击穿">
+        <a class="is-flex" href="#5-排序">
         <!-- 目录是否自动编号 -->
         <!-- <span class="has-mr-6">5</span> -->
-        <span>5. 缓存雪崩，穿透，击穿</span>
+        <span>5. 排序</span>
         </a></li><li>
-        <a class="is-flex" href="#6-Redis内存回收策略">
+        <a class="is-flex" href="#6-字符串">
         <!-- 目录是否自动编号 -->
         <!-- <span class="has-mr-6">6</span> -->
-        <span>6. Redis内存回收策略</span>
-        </a><ul class="menu-list"><li>
-        <a class="is-flex" href="#6-1-删除过期key">
-        <!-- 目录是否自动编号 -->
-        <!-- <span class="has-mr-6">6.1</span> -->
-        <span>6.1 删除过期key</span>
+        <span>6. 字符串</span>
         </a></li><li>
-        <a class="is-flex" href="#6-2-内存溢出控制策略">
-        <!-- 目录是否自动编号 -->
-        <!-- <span class="has-mr-6">6.2</span> -->
-        <span>6.2 内存溢出控制策略</span>
-        </a></li></ul></li><li>
-        <a class="is-flex" href="#7-Redis持久化">
+        <a class="is-flex" href="#7-贪心">
         <!-- 目录是否自动编号 -->
         <!-- <span class="has-mr-6">7</span> -->
-        <span>7. Redis持久化</span>
-        </a><ul class="menu-list"><li>
-        <a class="is-flex" href="#7-1-RDB（redis-database）">
-        <!-- 目录是否自动编号 -->
-        <!-- <span class="has-mr-6">7.1</span> -->
-        <span>7.1 RDB（redis database）</span>
+        <span>7. 贪心</span>
         </a></li><li>
-        <a class="is-flex" href="#7-2-AOF（append-only-file）">
-        <!-- 目录是否自动编号 -->
-        <!-- <span class="has-mr-6">7.2</span> -->
-        <span>7.2 AOF（append only file）</span>
-        </a></li></ul></li><li>
-        <a class="is-flex" href="#8-高可用架构">
+        <a class="is-flex" href="#8-滑动窗口">
         <!-- 目录是否自动编号 -->
         <!-- <span class="has-mr-6">8</span> -->
-        <span>8. 高可用架构</span>
-        </a><ul class="menu-list"><li>
-        <a class="is-flex" href="#8-1-主从架构">
-        <!-- 目录是否自动编号 -->
-        <!-- <span class="has-mr-6">8.1</span> -->
-        <span>8.1 主从架构</span>
+        <span>8. 滑动窗口</span>
         </a></li><li>
-        <a class="is-flex" href="#8-2-哨兵模式">
+        <a class="is-flex" href="#9-链表">
         <!-- 目录是否自动编号 -->
-        <!-- <span class="has-mr-6">8.2</span> -->
-        <span>8.2 哨兵模式</span>
+        <!-- <span class="has-mr-6">9</span> -->
+        <span>9. 链表</span>
         </a></li><li>
-        <a class="is-flex" href="#8-3-Redis集群">
+        <a class="is-flex" href="#10-二分查找">
         <!-- 目录是否自动编号 -->
-        <!-- <span class="has-mr-6">8.3</span> -->
-        <span>8.3 Redis集群</span>
-        </a></li></ul></li></ul>
+        <!-- <span class="has-mr-6">10</span> -->
+        <span>10. 二分查找</span>
+        </a></li><li>
+        <a class="is-flex" href="#11-双指针">
+        <!-- 目录是否自动编号 -->
+        <!-- <span class="has-mr-6">11</span> -->
+        <span>11. 双指针</span>
+        </a></li><li>
+        <a class="is-flex" href="#思维题">
+        <!-- 目录是否自动编号 -->
+        <!-- <span class="has-mr-6">12</span> -->
+        <span>思维题</span>
+        </a></li><li>
+        <a class="is-flex" href="#其他">
+        <!-- 目录是否自动编号 -->
+        <!-- <span class="has-mr-6">13</span> -->
+        <span>其他</span>
+        </a></li></ul>
             </div>
         </div>
     </div>
@@ -543,7 +518,7 @@
                 <span class="level-item">Java基础</span>
             </span>
             <span class="level-end">
-                <span class="level-item tag">4</span>
+                <span class="level-item tag">5</span>
             </span>
         </a></li><li>
         <a class="level is-marginless" href="/categories/Mysql/">
@@ -658,7 +633,26 @@
         
         <article class="media">
             
-            <a href="/2020/11/27/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95%E4%B8%8D%E8%BF%B7%E8%B7%AF%E5%AF%BC%E8%88%AA/" class="media-left">
+            <a href="/2020/12/02/volatile/" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="images/loading.gif" data-original="https://source.acexy.cn/view/XYhTHth" alt="volatile">
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2020-12-02T02:15:12.000Z">2020-12-02</time></div>
+                    <a href="/2020/12/02/volatile/" class="title has-link-black-ter is-size-6 has-text-weight-normal">volatile</a>
+                    <p class="is-size-7 is-uppercase">
+                        <a class="has-link-grey -link" href="/categories/Java%E5%9F%BA%E7%A1%80/">Java基础</a>
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+        <article class="media">
+            
+            <a href="/2020/11/29/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95%E4%B8%8D%E8%BF%B7%E8%B7%AF%E5%AF%BC%E8%88%AA/" class="media-left">
                 <p class="image is-64x64">
                     <img class="thumbnail" src="images/loading.gif" data-original="https://source.acexy.cn/view/XX9GIuI" alt="数据结构与算法不迷路导航">
                 </p>
@@ -666,8 +660,8 @@
             
             <div class="media-content">
                 <div class="content">
-                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2020-11-27T15:59:59.000Z">2020-11-27</time></div>
-                    <a href="/2020/11/27/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95%E4%B8%8D%E8%BF%B7%E8%B7%AF%E5%AF%BC%E8%88%AA/" class="title has-link-black-ter is-size-6 has-text-weight-normal">数据结构与算法不迷路导航</a>
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2020-11-29T15:59:59.000Z">2020-11-29</time></div>
+                    <a href="/2020/11/29/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95%E4%B8%8D%E8%BF%B7%E8%B7%AF%E5%AF%BC%E8%88%AA/" class="title has-link-black-ter is-size-6 has-text-weight-normal">数据结构与算法不迷路导航</a>
                     <p class="is-size-7 is-uppercase">
                         <a class="has-link-grey -link" href="/categories/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E5%92%8C%E7%AE%97%E6%B3%95/">数据结构和算法</a>
                     </p>
@@ -725,25 +719,6 @@
                 <div class="content">
                     <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2020-11-26T11:59:24.000Z">2020-11-26</time></div>
                     <a href="/2020/11/26/53-%E6%9C%80%E5%A4%A7%E5%AD%90%E5%BA%8F%E5%92%8C/" class="title has-link-black-ter is-size-6 has-text-weight-normal">53-最大子序和</a>
-                    <p class="is-size-7 is-uppercase">
-                        <a class="has-link-grey -link" href="/categories/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E5%92%8C%E7%AE%97%E6%B3%95/">数据结构和算法</a>
-                    </p>
-                </div>
-            </div>
-        </article>
-        
-        <article class="media">
-            
-            <a href="/2020/11/26/406-%E6%A0%B9%E6%8D%AE%E8%BA%AB%E9%AB%98%E9%87%8D%E5%BB%BA%E9%98%9F%E5%88%97/" class="media-left">
-                <p class="image is-64x64">
-                    <img class="thumbnail" src="images/loading.gif" data-original="https://source.acexy.cn/view/XYCPTJs" alt="406-根据身高重建队列">
-                </p>
-            </a>
-            
-            <div class="media-content">
-                <div class="content">
-                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2020-11-26T01:26:15.000Z">2020-11-26</time></div>
-                    <a href="/2020/11/26/406-%E6%A0%B9%E6%8D%AE%E8%BA%AB%E9%AB%98%E9%87%8D%E5%BB%BA%E9%98%9F%E5%88%97/" class="title has-link-black-ter is-size-6 has-text-weight-normal">406-根据身高重建队列</a>
                     <p class="is-size-7 is-uppercase">
                         <a class="has-link-grey -link" href="/categories/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E5%92%8C%E7%AE%97%E6%B3%95/">数据结构和算法</a>
                     </p>
@@ -782,7 +757,26 @@
         
         <article class="media">
             
-            <a href="/2020/11/27/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95%E4%B8%8D%E8%BF%B7%E8%B7%AF%E5%AF%BC%E8%88%AA/" class="media-left">
+            <a href="/2020/12/02/volatile/" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="images/loading.gif" data-original="https://source.acexy.cn/view/XYhTHth" alt="volatile">
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2020-12-02T02:15:12.000Z">2020-12-02</time></div>
+                    <a href="/2020/12/02/volatile/" class="title has-link-black-ter is-size-6 has-text-weight-normal">volatile</a>
+                    <p class="is-size-7 is-uppercase">
+                        <a class="has-link-grey -link" href="/categories/Java%E5%9F%BA%E7%A1%80/">Java基础</a>
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+        <article class="media">
+            
+            <a href="/2020/11/29/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95%E4%B8%8D%E8%BF%B7%E8%B7%AF%E5%AF%BC%E8%88%AA/" class="media-left">
                 <p class="image is-64x64">
                     <img class="thumbnail" src="images/loading.gif" data-original="https://source.acexy.cn/view/XX9GIuI" alt="数据结构与算法不迷路导航">
                 </p>
@@ -790,8 +784,8 @@
             
             <div class="media-content">
                 <div class="content">
-                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2020-11-27T15:59:59.000Z">2020-11-27</time></div>
-                    <a href="/2020/11/27/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95%E4%B8%8D%E8%BF%B7%E8%B7%AF%E5%AF%BC%E8%88%AA/" class="title has-link-black-ter is-size-6 has-text-weight-normal">数据结构与算法不迷路导航</a>
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2020-11-29T15:59:59.000Z">2020-11-29</time></div>
+                    <a href="/2020/11/29/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95%E4%B8%8D%E8%BF%B7%E8%B7%AF%E5%AF%BC%E8%88%AA/" class="title has-link-black-ter is-size-6 has-text-weight-normal">数据结构与算法不迷路导航</a>
                     <p class="is-size-7 is-uppercase">
                         <a class="has-link-grey -link" href="/categories/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E5%92%8C%E7%AE%97%E6%B3%95/">数据结构和算法</a>
                     </p>
@@ -856,25 +850,6 @@
             </div>
         </article>
         
-        <article class="media">
-            
-            <a href="/2020/11/26/406-%E6%A0%B9%E6%8D%AE%E8%BA%AB%E9%AB%98%E9%87%8D%E5%BB%BA%E9%98%9F%E5%88%97/" class="media-left">
-                <p class="image is-64x64">
-                    <img class="thumbnail" src="images/loading.gif" data-original="https://source.acexy.cn/view/XYCPTJs" alt="406-根据身高重建队列">
-                </p>
-            </a>
-            
-            <div class="media-content">
-                <div class="content">
-                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2020-11-26T01:26:15.000Z">2020-11-26</time></div>
-                    <a href="/2020/11/26/406-%E6%A0%B9%E6%8D%AE%E8%BA%AB%E9%AB%98%E9%87%8D%E5%BB%BA%E9%98%9F%E5%88%97/" class="title has-link-black-ter is-size-6 has-text-weight-normal">406-根据身高重建队列</a>
-                    <p class="is-size-7 is-uppercase">
-                        <a class="has-link-grey -link" href="/categories/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E5%92%8C%E7%AE%97%E6%B3%95/">数据结构和算法</a>
-                    </p>
-                </div>
-            </div>
-        </article>
-        
     </div>
 </div>
     
@@ -899,7 +874,7 @@
             <div class="level-start has-text-centered-mobile">
                 <a class="footer-logo is-block has-mb-6" href="/">
                 
-                    <img src="images/loading.gif" data-original="https://s1.ax1x.com/2020/07/20/UfKyGQ.md.png" alt="redis（面试向）" height="28">
+                    <img src="images/loading.gif" data-original="https://s1.ax1x.com/2020/07/20/UfKyGQ.md.png" alt="数据结构与算法不迷路导航" height="28">
                 
                 </a>
                 <p class="is-size-7">

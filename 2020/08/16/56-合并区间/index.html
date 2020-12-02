@@ -19,7 +19,7 @@
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="https://wx1.sbimg.cn/2020/07/30/P7Yj4.md.jpg">
 <meta property="article:published_time" content="2020-08-15T17:46:01.000Z">
-<meta property="article:modified_time" content="2020-08-27T06:47:27.203Z">
+<meta property="article:modified_time" content="2020-11-28T16:15:43.945Z">
 <meta property="article:author" content="wjw">
 <meta property="article:tag" content="力扣">
 <meta name="twitter:card" content="summary">
@@ -157,7 +157,7 @@
                 <span class="level-item has-text-grey">
                     
                     
-                    5 分钟 读完 (大约 694 个字)
+                    4 分钟 读完 (大约 572 个字)
                 </span>
                 
                 
@@ -192,9 +192,9 @@
 
 <p>思路1：按左端点升序排序，推荐这样做，因为这样比较省事。排序后遍历，后一个的开始&lt;=前一个的结束，说明有交集，合并（合并细节：因为一直往后遍历，因此只需要将后一个区间的左端点改为前一个区间的左端点，右端点改为较大的那个）</p>
 <p>如：[1, 3], [2, 4]  =&gt;  [1, 3], [1, 4]，可以看到前一个其实是不需要管的，<em>后一个的左端点变成了前一个的左端点，右端点是4&gt;3所以是4</em>，这样实现了“合并”</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">five_six_</span>合并区间 </span>&#123;</span><br><span class="line">    <span class="meta">@Test</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">test</span><span class="params">()</span></span>&#123;</span><br><span class="line">        <span class="keyword">int</span>[][] nums = &#123;&#123;<span class="number">1</span>,<span class="number">3</span>&#125;,&#123;<span class="number">2</span>,<span class="number">6</span>&#125;,&#123;<span class="number">8</span>,<span class="number">10</span>&#125;,&#123;<span class="number">15</span>,<span class="number">18</span>&#125;&#125;;</span><br><span class="line"><span class="comment">//        int[][] nums = &#123;&#123;1,4&#125;,&#123;1, 4&#125;&#125;;</span></span><br><span class="line">        <span class="keyword">int</span>[][] res = merge(nums);</span><br><span class="line">        System.out.println(Arrays.deepToString(res));</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">int</span>[][] merge(<span class="keyword">int</span>[][] intervals) &#123;</span><br><span class="line">        List&lt;<span class="keyword">int</span>[]&gt; res = <span class="keyword">new</span> ArrayList&lt;&gt;();</span><br><span class="line">        <span class="keyword">if</span> (intervals.length == <span class="number">0</span> || intervals[<span class="number">0</span>].length == <span class="number">0</span>)&#123;</span><br><span class="line">            <span class="keyword">return</span> intervals;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="comment">//按起始位置排序</span></span><br><span class="line">        Arrays.sort(intervals, <span class="keyword">new</span> Comparator&lt;<span class="keyword">int</span>[]&gt;() &#123;</span><br><span class="line">            <span class="meta">@Override</span></span><br><span class="line">            <span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">compare</span><span class="params">(<span class="keyword">int</span>[] o1, <span class="keyword">int</span>[] o2)</span> </span>&#123;</span><br><span class="line">                <span class="keyword">if</span> (o1[<span class="number">0</span>] == o2[<span class="number">0</span>]) &#123;</span><br><span class="line">                    <span class="keyword">return</span> o1[<span class="number">1</span>]-o2[<span class="number">1</span>];</span><br><span class="line">                &#125;</span><br><span class="line">                <span class="keyword">return</span> o1[<span class="number">0</span>] - o2[<span class="number">0</span>];</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;);</span><br><span class="line">        <span class="keyword">int</span> i;</span><br><span class="line">        <span class="comment">//合并</span></span><br><span class="line">        <span class="keyword">for</span> (i = <span class="number">1</span>; i &lt; intervals.length; i++) &#123;</span><br><span class="line">            <span class="keyword">if</span> (intervals[i][<span class="number">0</span>] &lt;= intervals[i - <span class="number">1</span>][<span class="number">1</span>])&#123;</span><br><span class="line">                intervals[i][<span class="number">0</span>] = intervals[i - <span class="number">1</span>][<span class="number">0</span>];  <span class="comment">//细节：通过改变后面的来完成，前面那个相当于不要了，而不是合并为一个</span></span><br><span class="line">                intervals[i][<span class="number">1</span>] = Math.max(intervals[i - <span class="number">1</span>][<span class="number">1</span>], intervals[i][<span class="number">1</span>]);</span><br><span class="line">            &#125;<span class="keyword">else</span> &#123;</span><br><span class="line">                res.add(intervals[i - <span class="number">1</span>]);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="comment">//最后一个如果进了else，说明前面断开了，然而后面也没有了，直接加进去</span></span><br><span class="line">        <span class="keyword">if</span> (i == intervals.length)&#123;</span><br><span class="line">            res.add(intervals[i - <span class="number">1</span>]);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> res.toArray(<span class="keyword">new</span> <span class="keyword">int</span>[<span class="number">0</span>][]);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">int</span>[][] merge(<span class="keyword">int</span>[][] intervals) &#123;</span><br><span class="line">    List&lt;<span class="keyword">int</span>[]&gt; res = <span class="keyword">new</span> ArrayList&lt;&gt;();</span><br><span class="line">    Arrays.sort(intervals, (o1, o2) -&gt; o1[<span class="number">0</span>] == o2[<span class="number">0</span>] ? o1[<span class="number">1</span>] - o2[<span class="number">1</span>] : o1[<span class="number">0</span>] - o2[<span class="number">0</span>]);</span><br><span class="line"></span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">1</span>; i &lt; intervals.length; i++) &#123;</span><br><span class="line">        <span class="keyword">if</span> (intervals[i - <span class="number">1</span>][<span class="number">1</span>] &gt;= intervals[i][<span class="number">0</span>])&#123;</span><br><span class="line">            intervals[i][<span class="number">0</span>] = intervals[i - <span class="number">1</span>][<span class="number">0</span>];</span><br><span class="line">            intervals[i][<span class="number">1</span>] = Math.max(intervals[i - <span class="number">1</span>][<span class="number">1</span>], intervals[i][<span class="number">1</span>]);</span><br><span class="line">        &#125;<span class="keyword">else</span> &#123;</span><br><span class="line">            res.add(intervals[i - <span class="number">1</span>]);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    res.add(intervals[intervals.length - <span class="number">1</span>]);</span><br><span class="line">    <span class="keyword">return</span> res.toArray(<span class="keyword">new</span> <span class="keyword">int</span>[<span class="number">0</span>][]);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
-
+<br>
 
 <p>思路2：数轴法，其实这个也好想，甚至比思路1先想到（因为说到区间合并会先想到数轴），因此我们可以模拟数轴，进行区间染色：区间头部为2，后面为1，如[1,3]为[0,2,1,1,…]</p>
 <p>这里要注意两点：</p>
@@ -288,7 +288,7 @@
                     </p>
                     <a href="/archives">
                         <p class="title has-text-weight-normal">
-                            74
+                            75
                         </p>
                     </a>
                 </div>
@@ -346,7 +346,7 @@
                 <span class="level-item">Java基础</span>
             </span>
             <span class="level-end">
-                <span class="level-item tag">4</span>
+                <span class="level-item tag">5</span>
             </span>
         </a></li><li>
         <a class="level is-marginless" href="/categories/Mysql/">
@@ -461,7 +461,26 @@
         
         <article class="media">
             
-            <a href="/2020/11/27/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95%E4%B8%8D%E8%BF%B7%E8%B7%AF%E5%AF%BC%E8%88%AA/" class="media-left">
+            <a href="/2020/12/02/volatile/" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="images/loading.gif" data-original="https://source.acexy.cn/view/XYhTHth" alt="volatile">
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2020-12-02T02:15:12.000Z">2020-12-02</time></div>
+                    <a href="/2020/12/02/volatile/" class="title has-link-black-ter is-size-6 has-text-weight-normal">volatile</a>
+                    <p class="is-size-7 is-uppercase">
+                        <a class="has-link-grey -link" href="/categories/Java%E5%9F%BA%E7%A1%80/">Java基础</a>
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+        <article class="media">
+            
+            <a href="/2020/11/29/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95%E4%B8%8D%E8%BF%B7%E8%B7%AF%E5%AF%BC%E8%88%AA/" class="media-left">
                 <p class="image is-64x64">
                     <img class="thumbnail" src="images/loading.gif" data-original="https://source.acexy.cn/view/XX9GIuI" alt="数据结构与算法不迷路导航">
                 </p>
@@ -469,8 +488,8 @@
             
             <div class="media-content">
                 <div class="content">
-                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2020-11-27T15:59:59.000Z">2020-11-27</time></div>
-                    <a href="/2020/11/27/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95%E4%B8%8D%E8%BF%B7%E8%B7%AF%E5%AF%BC%E8%88%AA/" class="title has-link-black-ter is-size-6 has-text-weight-normal">数据结构与算法不迷路导航</a>
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2020-11-29T15:59:59.000Z">2020-11-29</time></div>
+                    <a href="/2020/11/29/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95%E4%B8%8D%E8%BF%B7%E8%B7%AF%E5%AF%BC%E8%88%AA/" class="title has-link-black-ter is-size-6 has-text-weight-normal">数据结构与算法不迷路导航</a>
                     <p class="is-size-7 is-uppercase">
                         <a class="has-link-grey -link" href="/categories/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E5%92%8C%E7%AE%97%E6%B3%95/">数据结构和算法</a>
                     </p>
@@ -528,25 +547,6 @@
                 <div class="content">
                     <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2020-11-26T11:59:24.000Z">2020-11-26</time></div>
                     <a href="/2020/11/26/53-%E6%9C%80%E5%A4%A7%E5%AD%90%E5%BA%8F%E5%92%8C/" class="title has-link-black-ter is-size-6 has-text-weight-normal">53-最大子序和</a>
-                    <p class="is-size-7 is-uppercase">
-                        <a class="has-link-grey -link" href="/categories/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E5%92%8C%E7%AE%97%E6%B3%95/">数据结构和算法</a>
-                    </p>
-                </div>
-            </div>
-        </article>
-        
-        <article class="media">
-            
-            <a href="/2020/11/26/406-%E6%A0%B9%E6%8D%AE%E8%BA%AB%E9%AB%98%E9%87%8D%E5%BB%BA%E9%98%9F%E5%88%97/" class="media-left">
-                <p class="image is-64x64">
-                    <img class="thumbnail" src="images/loading.gif" data-original="https://source.acexy.cn/view/XYCPTJs" alt="406-根据身高重建队列">
-                </p>
-            </a>
-            
-            <div class="media-content">
-                <div class="content">
-                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2020-11-26T01:26:15.000Z">2020-11-26</time></div>
-                    <a href="/2020/11/26/406-%E6%A0%B9%E6%8D%AE%E8%BA%AB%E9%AB%98%E9%87%8D%E5%BB%BA%E9%98%9F%E5%88%97/" class="title has-link-black-ter is-size-6 has-text-weight-normal">406-根据身高重建队列</a>
                     <p class="is-size-7 is-uppercase">
                         <a class="has-link-grey -link" href="/categories/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E5%92%8C%E7%AE%97%E6%B3%95/">数据结构和算法</a>
                     </p>
@@ -585,7 +585,26 @@
         
         <article class="media">
             
-            <a href="/2020/11/27/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95%E4%B8%8D%E8%BF%B7%E8%B7%AF%E5%AF%BC%E8%88%AA/" class="media-left">
+            <a href="/2020/12/02/volatile/" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="images/loading.gif" data-original="https://source.acexy.cn/view/XYhTHth" alt="volatile">
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2020-12-02T02:15:12.000Z">2020-12-02</time></div>
+                    <a href="/2020/12/02/volatile/" class="title has-link-black-ter is-size-6 has-text-weight-normal">volatile</a>
+                    <p class="is-size-7 is-uppercase">
+                        <a class="has-link-grey -link" href="/categories/Java%E5%9F%BA%E7%A1%80/">Java基础</a>
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+        <article class="media">
+            
+            <a href="/2020/11/29/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95%E4%B8%8D%E8%BF%B7%E8%B7%AF%E5%AF%BC%E8%88%AA/" class="media-left">
                 <p class="image is-64x64">
                     <img class="thumbnail" src="images/loading.gif" data-original="https://source.acexy.cn/view/XX9GIuI" alt="数据结构与算法不迷路导航">
                 </p>
@@ -593,8 +612,8 @@
             
             <div class="media-content">
                 <div class="content">
-                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2020-11-27T15:59:59.000Z">2020-11-27</time></div>
-                    <a href="/2020/11/27/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95%E4%B8%8D%E8%BF%B7%E8%B7%AF%E5%AF%BC%E8%88%AA/" class="title has-link-black-ter is-size-6 has-text-weight-normal">数据结构与算法不迷路导航</a>
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2020-11-29T15:59:59.000Z">2020-11-29</time></div>
+                    <a href="/2020/11/29/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95%E4%B8%8D%E8%BF%B7%E8%B7%AF%E5%AF%BC%E8%88%AA/" class="title has-link-black-ter is-size-6 has-text-weight-normal">数据结构与算法不迷路导航</a>
                     <p class="is-size-7 is-uppercase">
                         <a class="has-link-grey -link" href="/categories/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E5%92%8C%E7%AE%97%E6%B3%95/">数据结构和算法</a>
                     </p>
@@ -652,25 +671,6 @@
                 <div class="content">
                     <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2020-11-26T11:59:24.000Z">2020-11-26</time></div>
                     <a href="/2020/11/26/53-%E6%9C%80%E5%A4%A7%E5%AD%90%E5%BA%8F%E5%92%8C/" class="title has-link-black-ter is-size-6 has-text-weight-normal">53-最大子序和</a>
-                    <p class="is-size-7 is-uppercase">
-                        <a class="has-link-grey -link" href="/categories/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E5%92%8C%E7%AE%97%E6%B3%95/">数据结构和算法</a>
-                    </p>
-                </div>
-            </div>
-        </article>
-        
-        <article class="media">
-            
-            <a href="/2020/11/26/406-%E6%A0%B9%E6%8D%AE%E8%BA%AB%E9%AB%98%E9%87%8D%E5%BB%BA%E9%98%9F%E5%88%97/" class="media-left">
-                <p class="image is-64x64">
-                    <img class="thumbnail" src="images/loading.gif" data-original="https://source.acexy.cn/view/XYCPTJs" alt="406-根据身高重建队列">
-                </p>
-            </a>
-            
-            <div class="media-content">
-                <div class="content">
-                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2020-11-26T01:26:15.000Z">2020-11-26</time></div>
-                    <a href="/2020/11/26/406-%E6%A0%B9%E6%8D%AE%E8%BA%AB%E9%AB%98%E9%87%8D%E5%BB%BA%E9%98%9F%E5%88%97/" class="title has-link-black-ter is-size-6 has-text-weight-normal">406-根据身高重建队列</a>
                     <p class="is-size-7 is-uppercase">
                         <a class="has-link-grey -link" href="/categories/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E5%92%8C%E7%AE%97%E6%B3%95/">数据结构和算法</a>
                     </p>
