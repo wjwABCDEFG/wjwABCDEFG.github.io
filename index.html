@@ -130,6 +130,65 @@
 <div class="card">
     
     <div class="card-image">
+        <a href="/algorithms/algorithms-list-navigator/" class="image is-7by1">
+            <img class="thumbnail" src="images/loading.gif" data-original="https://source.acexy.cn/view/XX9GIuI" alt="数据结构与算法不迷路导航">
+        </a>
+    </div>
+    
+    <div class="card-content article ">
+        
+        <div class="level article-meta is-size-7 is-uppercase is-mobile is-overflow-x-auto">
+            <div class="level-left">
+                <time class="level-item has-text-grey" datetime="2020-12-07T15:59:59.000Z">2020-12-07</time>
+                
+                <div class="level-item">
+                <a class="has-link-grey -link" href="/categories/algorithms/">数据结构和算法</a>
+                </div>
+                
+                
+                <span class="level-item has-text-grey">
+                    
+                    
+                    6 分钟 读完 (大约 864 个字)
+                </span>
+                
+                
+            </div>
+        </div>
+        
+        <h1 class="title is-size-3 is-size-4-mobile has-text-weight-normal">
+            
+                <a class="has-link-black-ter" href="/algorithms/algorithms-list-navigator/">数据结构与算法不迷路导航</a>
+            
+        </h1>
+        <div class="content">
+            <p>所有的系列都在这了，巨坑慢慢填哈，现在已经破百，打算在12月前刷够300（笔试面试比较有信心？），然后博客补一下之前做的</p>
+        </div>
+        
+        
+        <div class="level is-mobile">
+            <div class="level-start">
+                <div class="level-item">
+                <a class="button is-size-7 is-light" href="/algorithms/algorithms-list-navigator/#more">阅读更多</a>
+                </div>
+            </div>
+        </div>
+        
+        
+    </div>
+</div>
+
+
+
+
+
+
+
+
+    
+<div class="card">
+    
+    <div class="card-image">
         <a href="/algorithms/654-maximum-binary-tree/" class="image is-7by1">
             <img class="thumbnail" src="images/loading.gif" data-original="https://source.acexy.cn/view/XY6wtUA" alt="654-最大二叉树">
         </a>
@@ -191,6 +250,12 @@
     
 <div class="card">
     
+    <div class="card-image">
+        <a href="/Java/%E7%BA%BF%E7%A8%8B%E5%92%8C%E7%BA%BF%E7%A8%8B%E6%B1%A0/" class="image is-7by1">
+            <img class="thumbnail" src="images/loading.gif" data-original="https://source.acexy.cn/view/XY7uH-p" alt="线程和线程池">
+        </a>
+    </div>
+    
     <div class="card-content article ">
         
         <div class="level article-meta is-size-7 is-uppercase is-mobile is-overflow-x-auto">
@@ -205,7 +270,7 @@
                 <span class="level-item has-text-grey">
                     
                     
-                    10 分钟 读完 (大约 1499 个字)
+                    18 分钟 读完 (大约 2672 个字)
                 </span>
                 
                 
@@ -214,74 +279,22 @@
         
         <h1 class="title is-size-3 is-size-4-mobile has-text-weight-normal">
             
-                <a class="has-link-black-ter" href="/Java/undefined/">线程和线程池</a>
+                <a class="has-link-black-ter" href="/Java/%E7%BA%BF%E7%A8%8B%E5%92%8C%E7%BA%BF%E7%A8%8B%E6%B1%A0/">线程和线程池</a>
             
         </h1>
         <div class="content">
-            <h1 id="1-线程和进程的区别"><a href="#1-线程和进程的区别" class="headerlink" title="1. 线程和进程的区别"></a>1. 线程和进程的区别</h1><br>
-
-<hr>
-<h1 id="2-线程的状态"><a href="#2-线程的状态" class="headerlink" title="2. 线程的状态"></a>2. 线程的状态</h1><br>
-
-<hr>
-<h1 id="3-线程池"><a href="#3-线程池" class="headerlink" title="3. 线程池"></a>3. 线程池</h1><ul>
-<li><strong>降低资源消耗</strong>：重复利用已创建的线程，降低线程创建和销毁造成的消耗。</li>
-<li><strong>提高响应速度</strong>：当任务到达时，任务可以不需要要等到线程创建就能立即执行。</li>
-<li><strong>提高线程的可管理性</strong>。线程是稀缺资源，如果无限制的创建，不仅会消耗系统资源，还会降低系统的稳定性，使用线程池可以进行统一的分配，调优和监控。</li>
-</ul>
-<h2 id="3-1-线程池的参数"><a href="#3-1-线程池的参数" class="headerlink" title="3.1 线程池的参数"></a>3.1 线程池的参数</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">public ThreadPoolExecutor(int corePoolSize,</span><br><span class="line">                          int maximumPoolSize,</span><br><span class="line">                          long keepAliveTime,</span><br><span class="line">                          TimeUnit unit,</span><br><span class="line">                          BlockingQueue&lt;Runnable&gt; workQueue,</span><br><span class="line">                          ThreadFactory threadFactory,</span><br><span class="line">                          RejectedExecutionHandler handler)</span><br></pre></td></tr></table></figure>
-
-<ul>
-<li><p>corePoolSize：核心线程数线。线程池中会维护一个最小的线程数量，即使这些线程处理空闲状态，他们也不会被销毁，除非设置了allowCoreThreadTimeOut。这里的最小线程数量即是corePoolSize</p>
-</li>
-<li><p>maximumPoolSize：最大线程数。<strong>一个任务被提交到线程池以后，首先会找有没有空闲存活线程，如果有则直接执行，如果没有则会缓存到工作队列（后面会介绍）中，如果工作队列满了，才会创建一个新线程，然后从工作队列的头部取出一个任务交由新线程来处理，而将刚提交的任务放入工作队列尾部。线程池不会无限制的去创建新线程，它会有一个最大线程数量的限制，这个数量即由maximunPoolSize指定</strong></p>
-</li>
-<li><p>keepAliveTime：一个线程如果处于空闲状态，并且当前的线程数量大于corePoolSize，那么在指定时间后，这个空闲线程会被销毁，这里的指定时间由keepAliveTime来设定</p>
-</li>
-<li><p>TimeUnit：时间单位</p>
-</li>
-<li><p>workQueue：当新任务来的时候会先判断当前运行的线程数量是否达到核心线程数，如果达到的话，新任务就会被存放在队列中，有四种任务队列</p>
-<p>①ArrayBlockingQueue</p>
-<p>基于数组的有界阻塞队列，按FIFO排序。新任务进来后，会放到该队列的队尾，有界的数组可以防止资源耗尽问题。当线程池中线程数量达到corePoolSize后，再有新任务进来，则会将任务放入该队列的队尾，等待被调度。如果队列已经是满的，则创建一个新线程，如果线程数量已经达到maxPoolSize，则会执行拒绝策略。</p>
-<p>②LinkedBlockingQueue</p>
-<p>基于链表的无界阻塞队列（其实最大容量为Interger.MAX），按照FIFO排序。由于该队列的近似无界性，当线程池中线程数量达到corePoolSize后，再有新任务进来，会一直存入该队列，而不会去创建新线程直到maxPoolSize，因此使用该工作队列时，参数maxPoolSize其实是不起作用的。</p>
-<p>③SynchronousQueue</p>
-<p>一个不缓存任务的阻塞队列，生产者放入一个任务必须等到消费者取出这个任务。也就是说新任务进来时，不会缓存，而是直接被调度执行该任务，如果没有可用线程，则创建新线程，如果线程数量达到maxPoolSize，则执行拒绝策略。说白了就是个假队列</p>
-<p>④PriorityBlockingQueue</p>
-<p>具有优先级的无界阻塞队列，优先级通过参数Comparator实现</p>
-</li>
-<li><p>ThreadFactory：线程工厂，创建一个新线程时使用的工厂，可以用来设定线程名、是否为daemon线程等等</p>
-</li>
-<li><p>RejectedExecutionHandler：拒绝策略</p>
-<ul>
-<li>AbortPolicy：抛出 <code>RejectedExecutionException</code>来拒绝新任务的处理。</li>
-<li>CallerRunsPolicy：调用执行自己的线程运行任务。您不会任务请求。但是这种策略会降低对于新任务提交速度，影响程序的整体性能。另外，这个策略喜欢增加队列容量。如果您的应用程序可以承受此延迟并且你不能任务丢弃任何一个任务请求的话，你可以选择这个策略。（说白了，谁管理任务的，谁就负责帮忙）</li>
-<li>DiscardPolicy：不处理新任务，直接丢弃掉。</li>
-<li>DiscardOldestPolicy：此策略将丢弃最早的未处理的任务请求。</li>
-</ul>
-</li>
-</ul>
-<p><img src="images/loading.gif" data-original="https://s3.ax1x.com/2020/12/02/D5vhY6.png" alt=""></p>
-<br>
-
-<h2 id="3-2-常见线程池"><a href="#3-2-常见线程池" class="headerlink" title="3.2 常见线程池"></a>3.2 常见线程池</h2><h3 id="newFixedThreadPool"><a href="#newFixedThreadPool" class="headerlink" title="newFixedThreadPool"></a>newFixedThreadPool</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">&#x2F;&#x2F; core和max是一样的</span><br><span class="line">&#x2F;&#x2F; blockQueue是无界阻塞队列</span><br><span class="line">&#x2F;&#x2F; 嗯， 不好不好！！！</span><br><span class="line">public static ExecutorService newFixedThreadPool(int nThreads) &#123;</span><br><span class="line">    return new ThreadPoolExecutor(nThreads, nThreads,</span><br><span class="line">                                  0L, TimeUnit.MILLISECONDS,</span><br><span class="line">                                  new LinkedBlockingQueue&lt;Runnable&gt;());</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<h3 id="newSingleThreadExecutor"><a href="#newSingleThreadExecutor" class="headerlink" title="newSingleThreadExecutor"></a>newSingleThreadExecutor</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">&#x2F;&#x2F; core和max无非都是1而已</span><br><span class="line">&#x2F;&#x2F; blockQueue是无界阻塞队列</span><br><span class="line">&#x2F;&#x2F; 嗯， 不好不好！！！</span><br><span class="line">public static ExecutorService newSingleThreadExecutor() &#123;</span><br><span class="line">    return new FinalizableDelegatedExecutorService</span><br><span class="line">        (new ThreadPoolExecutor(1, 1,</span><br><span class="line">                                0L, TimeUnit.MILLISECONDS,</span><br><span class="line">                                new LinkedBlockingQueue&lt;Runnable&gt;()));</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<h3 id="newCachedThreadPool"><a href="#newCachedThreadPool" class="headerlink" title="newCachedThreadPool"></a>newCachedThreadPool</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">&#x2F;&#x2F; core 0</span><br><span class="line">&#x2F;&#x2F; max有点狠，不怕暴栈？</span><br><span class="line">&#x2F;&#x2F; 队列还是SynchronousQueue，还真怕</span><br><span class="line">public static ExecutorService newCachedThreadPool() &#123;</span><br><span class="line">    return new ThreadPoolExecutor(0, Integer.MAX_VALUE,</span><br><span class="line">                                  60L, TimeUnit.SECONDS,</span><br><span class="line">                                  new SynchronousQueue&lt;Runnable&gt;());</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>还有些别的比如<strong>newScheduledThreadPool</strong>（带定时器的线程池），就不介绍了</p>
-<p>可以看到这些都太极端了，要么core等于max，要么直接为0，队列也是无界，所以阿里巴巴的规范会提示自定义线程池</p>
-<br>
-
-<h2 id="3-3-线程池的线程数量怎么确定"><a href="#3-3-线程池的线程数量怎么确定" class="headerlink" title="3.3 线程池的线程数量怎么确定"></a>3.3 线程池的线程数量怎么确定</h2><ol>
-<li>一般来说，如果是CPU密集型应用，则线程池大小设置为N+1。</li>
-<li>一般来说，如果是IO密集型应用，则线程池大小设置为2N+1。</li>
-<li>在IO优化中，线程等待时间所占比例越高，需要越多线程，线程CPU时间所占比例越高，需要越少线程。这样的估算公式可能更适合：最佳线程数目 = （（线程等待时间+线程CPU时间）/线程CPU时间 ）* CPU数目</li>
-</ol>
-
+            <h1 id="1-线程和进程的区别"><a href="#1-线程和进程的区别" class="headerlink" title="1. 线程和进程的区别"></a>1. 线程和进程的区别</h1><p>进程：<strong>资源分配的基本单位</strong>，是程序（硬盘上的QQ.exe）的一个实例，比如双击QQ.exe，程序启动，进入内存</p>
+<p>线程：<strong>程序执行的基本单位</strong>，是一个任务，比如软件管家可以同时清理垃圾和扫描病毒</p>
         </div>
         
+        
+        <div class="level is-mobile">
+            <div class="level-start">
+                <div class="level-item">
+                <a class="button is-size-7 is-light" href="/Java/%E7%BA%BF%E7%A8%8B%E5%92%8C%E7%BA%BF%E7%A8%8B%E6%B1%A0/#more">阅读更多</a>
+                </div>
+            </div>
+        </div>
         
         
     </div>
@@ -357,66 +370,7 @@
 <div class="card">
     
     <div class="card-image">
-        <a href="/algorithms/algorithms-list-navigator/" class="image is-7by1">
-            <img class="thumbnail" src="images/loading.gif" data-original="https://source.acexy.cn/view/XX9GIuI" alt="数据结构与算法不迷路导航">
-        </a>
-    </div>
-    
-    <div class="card-content article ">
-        
-        <div class="level article-meta is-size-7 is-uppercase is-mobile is-overflow-x-auto">
-            <div class="level-left">
-                <time class="level-item has-text-grey" datetime="2020-11-29T15:59:59.000Z">2020-11-29</time>
-                
-                <div class="level-item">
-                <a class="has-link-grey -link" href="/categories/algorithms/">数据结构和算法</a>
-                </div>
-                
-                
-                <span class="level-item has-text-grey">
-                    
-                    
-                    6 分钟 读完 (大约 860 个字)
-                </span>
-                
-                
-            </div>
-        </div>
-        
-        <h1 class="title is-size-3 is-size-4-mobile has-text-weight-normal">
-            
-                <a class="has-link-black-ter" href="/algorithms/algorithms-list-navigator/">数据结构与算法不迷路导航</a>
-            
-        </h1>
-        <div class="content">
-            <p>所有的系列都在这了，巨坑慢慢填哈，现在已经破百，打算在12月前刷够300（笔试面试比较有信心？），然后博客补一下之前做的</p>
-        </div>
-        
-        
-        <div class="level is-mobile">
-            <div class="level-start">
-                <div class="level-item">
-                <a class="button is-size-7 is-light" href="/algorithms/algorithms-list-navigator/#more">阅读更多</a>
-                </div>
-            </div>
-        </div>
-        
-        
-    </div>
-</div>
-
-
-
-
-
-
-
-
-    
-<div class="card">
-    
-    <div class="card-image">
-        <a href="/algorithms/undefined/" class="image is-7by1">
+        <a href="/algorithms/rotate-list/" class="image is-7by1">
             <img class="thumbnail" src="images/loading.gif" data-original="https://source.acexy.cn/view/XYIqmt3" alt="61-旋转链表">
         </a>
     </div>
@@ -435,7 +389,7 @@
                 <span class="level-item has-text-grey">
                     
                     
-                    2 分钟 读完 (大约 291 个字)
+                    2 分钟 读完 (大约 283 个字)
                 </span>
                 
                 
@@ -444,7 +398,7 @@
         
         <h1 class="title is-size-3 is-size-4-mobile has-text-weight-normal">
             
-                <a class="has-link-black-ter" href="/algorithms/undefined/">61-旋转链表</a>
+                <a class="has-link-black-ter" href="/algorithms/rotate-list/">61-旋转链表</a>
             
         </h1>
         <div class="content">
@@ -458,7 +412,7 @@
         <div class="level is-mobile">
             <div class="level-start">
                 <div class="level-item">
-                <a class="button is-size-7 is-light" href="/algorithms/undefined/#more">阅读更多</a>
+                <a class="button is-size-7 is-light" href="/algorithms/rotate-list/#more">阅读更多</a>
                 </div>
             </div>
         </div>
@@ -478,7 +432,7 @@
 <div class="card">
     
     <div class="card-image">
-        <a href="/algorithms/undefined/" class="image is-7by1">
+        <a href="/algorithms/swap-nodes-in-pairs/" class="image is-7by1">
             <img class="thumbnail" src="images/loading.gif" data-original="https://source.acexy.cn/view/XYIjGqZ" alt="24-两两交换链表中的节点">
         </a>
     </div>
@@ -497,7 +451,7 @@
                 <span class="level-item has-text-grey">
                     
                     
-                    2 分钟 读完 (大约 349 个字)
+                    2 分钟 读完 (大约 341 个字)
                 </span>
                 
                 
@@ -506,7 +460,7 @@
         
         <h1 class="title is-size-3 is-size-4-mobile has-text-weight-normal">
             
-                <a class="has-link-black-ter" href="/algorithms/undefined/">24-两两交换链表中的节点</a>
+                <a class="has-link-black-ter" href="/algorithms/swap-nodes-in-pairs/">24-两两交换链表中的节点</a>
             
         </h1>
         <div class="content">
@@ -520,7 +474,7 @@
         <div class="level is-mobile">
             <div class="level-start">
                 <div class="level-item">
-                <a class="button is-size-7 is-light" href="/algorithms/undefined/#more">阅读更多</a>
+                <a class="button is-size-7 is-light" href="/algorithms/swap-nodes-in-pairs/#more">阅读更多</a>
                 </div>
             </div>
         </div>
@@ -540,7 +494,7 @@
 <div class="card">
     
     <div class="card-image">
-        <a href="/algorithms/undefined/" class="image is-7by1">
+        <a href="/algorithms/maximum-subarray/" class="image is-7by1">
             <img class="thumbnail" src="images/loading.gif" data-original="https://b1.sbimg.org/file/chevereto-jia/2020/11/26/QC5TR.md.png" alt="53-最大子序和">
         </a>
     </div>
@@ -559,7 +513,7 @@
                 <span class="level-item has-text-grey">
                     
                     
-                    1 分钟 读完 (大约 195 个字)
+                    1 分钟 读完 (大约 206 个字)
                 </span>
                 
                 
@@ -568,7 +522,7 @@
         
         <h1 class="title is-size-3 is-size-4-mobile has-text-weight-normal">
             
-                <a class="has-link-black-ter" href="/algorithms/undefined/">53-最大子序和</a>
+                <a class="has-link-black-ter" href="/algorithms/maximum-subarray/">53-最大子序和</a>
             
         </h1>
         <div class="content">
@@ -582,7 +536,7 @@
         <div class="level is-mobile">
             <div class="level-start">
                 <div class="level-item">
-                <a class="button is-size-7 is-light" href="/algorithms/undefined/#more">阅读更多</a>
+                <a class="button is-size-7 is-light" href="/algorithms/maximum-subarray/#more">阅读更多</a>
                 </div>
             </div>
         </div>
@@ -602,7 +556,7 @@
 <div class="card">
     
     <div class="card-image">
-        <a href="/algorithms/undefined/" class="image is-7by1">
+        <a href="/algorithms/queue-reconstruction-by-height/" class="image is-7by1">
             <img class="thumbnail" src="images/loading.gif" data-original="https://source.acexy.cn/view/XYCPTJs" alt="406-根据身高重建队列">
         </a>
     </div>
@@ -621,7 +575,7 @@
                 <span class="level-item has-text-grey">
                     
                     
-                    1 分钟 读完 (大约 200 个字)
+                    1 分钟 读完 (大约 192 个字)
                 </span>
                 
                 
@@ -630,7 +584,7 @@
         
         <h1 class="title is-size-3 is-size-4-mobile has-text-weight-normal">
             
-                <a class="has-link-black-ter" href="/algorithms/undefined/">406-根据身高重建队列</a>
+                <a class="has-link-black-ter" href="/algorithms/queue-reconstruction-by-height/">406-根据身高重建队列</a>
             
         </h1>
         <div class="content">
@@ -644,7 +598,7 @@
         <div class="level is-mobile">
             <div class="level-start">
                 <div class="level-item">
-                <a class="button is-size-7 is-light" href="/algorithms/undefined/#more">阅读更多</a>
+                <a class="button is-size-7 is-light" href="/algorithms/queue-reconstruction-by-height/#more">阅读更多</a>
                 </div>
             </div>
         </div>
@@ -664,7 +618,7 @@
 <div class="card">
     
     <div class="card-image">
-        <a href="/algorithms/undefined/" class="image is-7by1">
+        <a href="/algorithms/remove-nth-node-from-end-of-list/" class="image is-7by1">
             <img class="thumbnail" src="images/loading.gif" data-original="https://b1.sbimg.org/file/chevereto-jia/2020/11/27/QCylm.md.png" alt="19-删除链表的倒数第n个节点">
         </a>
     </div>
@@ -683,7 +637,7 @@
                 <span class="level-item has-text-grey">
                     
                     
-                    1 分钟 读完 (大约 197 个字)
+                    1 分钟 读完 (大约 181 个字)
                 </span>
                 
                 
@@ -692,7 +646,7 @@
         
         <h1 class="title is-size-3 is-size-4-mobile has-text-weight-normal">
             
-                <a class="has-link-black-ter" href="/algorithms/undefined/">19-删除链表的倒数第n个节点</a>
+                <a class="has-link-black-ter" href="/algorithms/remove-nth-node-from-end-of-list/">19-删除链表的倒数第n个节点</a>
             
         </h1>
         <div class="content">
@@ -706,7 +660,7 @@
         <div class="level is-mobile">
             <div class="level-start">
                 <div class="level-item">
-                <a class="button is-size-7 is-light" href="/algorithms/undefined/#more">阅读更多</a>
+                <a class="button is-size-7 is-light" href="/algorithms/remove-nth-node-from-end-of-list/#more">阅读更多</a>
                 </div>
             </div>
         </div>
@@ -726,7 +680,7 @@
 <div class="card">
     
     <div class="card-image">
-        <a href="/algorithms/undefined/" class="image is-7by1">
+        <a href="/algorithms/next-permutation/" class="image is-7by1">
             <img class="thumbnail" src="images/loading.gif" data-original="https://b1.sbimg.org/file/chevereto-jia/2020/11/24/Q0wrD.md.jpg" alt="31-下一个排列">
         </a>
     </div>
@@ -745,7 +699,7 @@
                 <span class="level-item has-text-grey">
                     
                     
-                    3 分钟 读完 (大约 418 个字)
+                    3 分钟 读完 (大约 410 个字)
                 </span>
                 
                 
@@ -754,7 +708,7 @@
         
         <h1 class="title is-size-3 is-size-4-mobile has-text-weight-normal">
             
-                <a class="has-link-black-ter" href="/algorithms/undefined/">31-下一个排列</a>
+                <a class="has-link-black-ter" href="/algorithms/next-permutation/">31-下一个排列</a>
             
         </h1>
         <div class="content">
@@ -768,7 +722,7 @@
         <div class="level is-mobile">
             <div class="level-start">
                 <div class="level-item">
-                <a class="button is-size-7 is-light" href="/algorithms/undefined/#more">阅读更多</a>
+                <a class="button is-size-7 is-light" href="/algorithms/next-permutation/#more">阅读更多</a>
                 </div>
             </div>
         </div>
@@ -872,7 +826,7 @@
                     </p>
                     <a href="/tags">
                         <p class="title has-text-weight-normal">
-                            26
+                            25
                         </p>
                     </a>
                 </div>
@@ -1020,6 +974,25 @@
         
         <article class="media">
             
+            <a href="/algorithms/algorithms-list-navigator/" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="images/loading.gif" data-original="https://source.acexy.cn/view/XX9GIuI" alt="数据结构与算法不迷路导航">
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2020-12-07T15:59:59.000Z">2020-12-07</time></div>
+                    <a href="/algorithms/algorithms-list-navigator/" class="title has-link-black-ter is-size-6 has-text-weight-normal">数据结构与算法不迷路导航</a>
+                    <p class="is-size-7 is-uppercase">
+                        <a class="has-link-grey -link" href="/categories/algorithms/">数据结构和算法</a>
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+        <article class="media">
+            
             <a href="/algorithms/654-maximum-binary-tree/" class="media-left">
                 <p class="image is-64x64">
                     <img class="thumbnail" src="images/loading.gif" data-original="https://source.acexy.cn/view/XY6wtUA" alt="654-最大二叉树">
@@ -1039,16 +1012,16 @@
         
         <article class="media">
             
-            <a href="/Java/undefined/" class="media-left">
+            <a href="/Java/%E7%BA%BF%E7%A8%8B%E5%92%8C%E7%BA%BF%E7%A8%8B%E6%B1%A0/" class="media-left">
                 <p class="image is-64x64">
-                    <img class="thumbnail" src="images/loading.gif" data-original="/images/thumbnail.svg" alt="线程和线程池">
+                    <img class="thumbnail" src="images/loading.gif" data-original="https://source.acexy.cn/view/XY7uH-p" alt="线程和线程池">
                 </p>
             </a>
             
             <div class="media-content">
                 <div class="content">
                     <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2020-12-02T07:44:10.000Z">2020-12-02</time></div>
-                    <a href="/Java/undefined/" class="title has-link-black-ter is-size-6 has-text-weight-normal">线程和线程池</a>
+                    <a href="/Java/%E7%BA%BF%E7%A8%8B%E5%92%8C%E7%BA%BF%E7%A8%8B%E6%B1%A0/" class="title has-link-black-ter is-size-6 has-text-weight-normal">线程和线程池</a>
                     <p class="is-size-7 is-uppercase">
                         <a class="has-link-grey -link" href="/categories/Java/">Java基础</a>
                     </p>
@@ -1077,26 +1050,7 @@
         
         <article class="media">
             
-            <a href="/algorithms/algorithms-list-navigator/" class="media-left">
-                <p class="image is-64x64">
-                    <img class="thumbnail" src="images/loading.gif" data-original="https://source.acexy.cn/view/XX9GIuI" alt="数据结构与算法不迷路导航">
-                </p>
-            </a>
-            
-            <div class="media-content">
-                <div class="content">
-                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2020-11-29T15:59:59.000Z">2020-11-29</time></div>
-                    <a href="/algorithms/algorithms-list-navigator/" class="title has-link-black-ter is-size-6 has-text-weight-normal">数据结构与算法不迷路导航</a>
-                    <p class="is-size-7 is-uppercase">
-                        <a class="has-link-grey -link" href="/categories/algorithms/">数据结构和算法</a>
-                    </p>
-                </div>
-            </div>
-        </article>
-        
-        <article class="media">
-            
-            <a href="/algorithms/undefined/" class="media-left">
+            <a href="/algorithms/rotate-list/" class="media-left">
                 <p class="image is-64x64">
                     <img class="thumbnail" src="images/loading.gif" data-original="https://source.acexy.cn/view/XYIqmt3" alt="61-旋转链表">
                 </p>
@@ -1105,7 +1059,7 @@
             <div class="media-content">
                 <div class="content">
                     <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2020-11-27T07:28:06.000Z">2020-11-27</time></div>
-                    <a href="/algorithms/undefined/" class="title has-link-black-ter is-size-6 has-text-weight-normal">61-旋转链表</a>
+                    <a href="/algorithms/rotate-list/" class="title has-link-black-ter is-size-6 has-text-weight-normal">61-旋转链表</a>
                     <p class="is-size-7 is-uppercase">
                         <a class="has-link-grey -link" href="/categories/algorithms/">数据结构和算法</a>
                     </p>
@@ -1121,7 +1075,7 @@
         <h3 class="menu-label">
             标签云
         </h3>
-        <a href="/tags/DL-ML/" style="font-size: 10px;">DL/ML</a> <a href="/tags/http/" style="font-size: 10px;">http</a> <a href="/tags/lintcode/" style="font-size: 10px;">lintcode</a> <a href="/tags/markdown/" style="font-size: 10px;">markdown</a> <a href="/tags/mysql/" style="font-size: 11.67px;">mysql</a> <a href="/tags/spring/" style="font-size: 11.67px;">spring</a> <a href="/tags/springcloud/" style="font-size: 10px;">springcloud</a> <a href="/tags/%E4%BA%8C%E5%88%86%E6%9F%A5%E6%89%BE/" style="font-size: 10px;">二分查找</a> <a href="/tags/%E4%BA%8C%E5%8F%89%E6%A0%91/" style="font-size: 10px;">二叉树</a> <a href="/tags/%E5%89%91%E6%8C%87offer/" style="font-size: 10px;">剑指offer</a> <a href="/tags/%E5%8A%9B%E6%89%A3/" style="font-size: 20px;">力扣</a> <a href="/tags/%E5%8A%A0%E5%AF%86/" style="font-size: 10px;">加密</a> <a href="/tags/%E5%8A%A8%E6%80%81%E8%A7%84%E5%88%92/" style="font-size: 13.33px;">动态规划</a> <a href="/tags/%E5%8D%95%E8%B0%83%E6%A0%88/" style="font-size: 15px;">单调栈</a> <a href="/tags/%E5%9B%9E%E6%BA%AF/" style="font-size: 16.67px;">回溯</a> <a href="/tags/%E5%AD%97%E7%AC%A6%E4%B8%B2/" style="font-size: 10px;">字符串</a> <a href="/tags/%E5%AD%A6%E4%B9%A0%E8%AE%B0%E5%BD%95/" style="font-size: 10px;">学习记录</a> <a href="/tags/%E5%BC%80%E5%8F%91/" style="font-size: 18.33px;">开发</a> <a href="/tags/%E6%8E%92%E5%BA%8F/" style="font-size: 10px;">排序</a> <a href="/tags/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/" style="font-size: 13.33px;">数据结构</a> <a href="/tags/%E6%A0%88/" style="font-size: 10px;">栈</a> <a href="/tags/%E6%A0%91/" style="font-size: 15px;">树</a> <a href="/tags/%E7%AC%94%E8%AF%95/" style="font-size: 10px;">笔试</a> <a href="/tags/%E7%AC%94%E8%AF%95%E9%9D%A2%E8%AF%95/" style="font-size: 15px;">笔试面试</a> <a href="/tags/%E7%AE%97%E6%B3%95/" style="font-size: 11.67px;">算法</a> <a href="/tags/%E9%80%92%E5%BD%92/" style="font-size: 10px;">递归</a>
+        <a href="/tags/DL-ML/" style="font-size: 10px;">DL/ML</a> <a href="/tags/http/" style="font-size: 10px;">http</a> <a href="/tags/lintcode/" style="font-size: 10px;">lintcode</a> <a href="/tags/markdown/" style="font-size: 10px;">markdown</a> <a href="/tags/mysql/" style="font-size: 11.67px;">mysql</a> <a href="/tags/spring/" style="font-size: 11.67px;">spring</a> <a href="/tags/springcloud/" style="font-size: 10px;">springcloud</a> <a href="/tags/%E4%BA%8C%E5%88%86%E6%9F%A5%E6%89%BE/" style="font-size: 10px;">二分查找</a> <a href="/tags/%E5%89%91%E6%8C%87offer/" style="font-size: 10px;">剑指offer</a> <a href="/tags/%E5%8A%9B%E6%89%A3/" style="font-size: 20px;">力扣</a> <a href="/tags/%E5%8A%A0%E5%AF%86/" style="font-size: 10px;">加密</a> <a href="/tags/%E5%8A%A8%E6%80%81%E8%A7%84%E5%88%92/" style="font-size: 13.33px;">动态规划</a> <a href="/tags/%E5%8D%95%E8%B0%83%E6%A0%88/" style="font-size: 15px;">单调栈</a> <a href="/tags/%E5%9B%9E%E6%BA%AF/" style="font-size: 16.67px;">回溯</a> <a href="/tags/%E5%AD%97%E7%AC%A6%E4%B8%B2/" style="font-size: 10px;">字符串</a> <a href="/tags/%E5%AD%A6%E4%B9%A0%E8%AE%B0%E5%BD%95/" style="font-size: 10px;">学习记录</a> <a href="/tags/%E5%BC%80%E5%8F%91/" style="font-size: 18.33px;">开发</a> <a href="/tags/%E6%8E%92%E5%BA%8F/" style="font-size: 10px;">排序</a> <a href="/tags/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/" style="font-size: 13.33px;">数据结构</a> <a href="/tags/%E6%A0%88/" style="font-size: 10px;">栈</a> <a href="/tags/%E6%A0%91/" style="font-size: 15px;">树</a> <a href="/tags/%E7%AC%94%E8%AF%95/" style="font-size: 10px;">笔试</a> <a href="/tags/%E7%AC%94%E8%AF%95%E9%9D%A2%E8%AF%95/" style="font-size: 13.33px;">笔试面试</a> <a href="/tags/%E7%AE%97%E6%B3%95/" style="font-size: 10px;">算法</a> <a href="/tags/%E9%80%92%E5%BD%92/" style="font-size: 10px;">递归</a>
     </div>
 </div>
         
@@ -1144,6 +1098,25 @@
         
         <article class="media">
             
+            <a href="/algorithms/algorithms-list-navigator/" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="images/loading.gif" data-original="https://source.acexy.cn/view/XX9GIuI" alt="数据结构与算法不迷路导航">
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2020-12-07T15:59:59.000Z">2020-12-07</time></div>
+                    <a href="/algorithms/algorithms-list-navigator/" class="title has-link-black-ter is-size-6 has-text-weight-normal">数据结构与算法不迷路导航</a>
+                    <p class="is-size-7 is-uppercase">
+                        <a class="has-link-grey -link" href="/categories/algorithms/">数据结构和算法</a>
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+        <article class="media">
+            
             <a href="/algorithms/654-maximum-binary-tree/" class="media-left">
                 <p class="image is-64x64">
                     <img class="thumbnail" src="images/loading.gif" data-original="https://source.acexy.cn/view/XY6wtUA" alt="654-最大二叉树">
@@ -1163,16 +1136,16 @@
         
         <article class="media">
             
-            <a href="/Java/undefined/" class="media-left">
+            <a href="/Java/%E7%BA%BF%E7%A8%8B%E5%92%8C%E7%BA%BF%E7%A8%8B%E6%B1%A0/" class="media-left">
                 <p class="image is-64x64">
-                    <img class="thumbnail" src="images/loading.gif" data-original="/images/thumbnail.svg" alt="线程和线程池">
+                    <img class="thumbnail" src="images/loading.gif" data-original="https://source.acexy.cn/view/XY7uH-p" alt="线程和线程池">
                 </p>
             </a>
             
             <div class="media-content">
                 <div class="content">
                     <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2020-12-02T07:44:10.000Z">2020-12-02</time></div>
-                    <a href="/Java/undefined/" class="title has-link-black-ter is-size-6 has-text-weight-normal">线程和线程池</a>
+                    <a href="/Java/%E7%BA%BF%E7%A8%8B%E5%92%8C%E7%BA%BF%E7%A8%8B%E6%B1%A0/" class="title has-link-black-ter is-size-6 has-text-weight-normal">线程和线程池</a>
                     <p class="is-size-7 is-uppercase">
                         <a class="has-link-grey -link" href="/categories/Java/">Java基础</a>
                     </p>
@@ -1201,26 +1174,7 @@
         
         <article class="media">
             
-            <a href="/algorithms/algorithms-list-navigator/" class="media-left">
-                <p class="image is-64x64">
-                    <img class="thumbnail" src="images/loading.gif" data-original="https://source.acexy.cn/view/XX9GIuI" alt="数据结构与算法不迷路导航">
-                </p>
-            </a>
-            
-            <div class="media-content">
-                <div class="content">
-                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2020-11-29T15:59:59.000Z">2020-11-29</time></div>
-                    <a href="/algorithms/algorithms-list-navigator/" class="title has-link-black-ter is-size-6 has-text-weight-normal">数据结构与算法不迷路导航</a>
-                    <p class="is-size-7 is-uppercase">
-                        <a class="has-link-grey -link" href="/categories/algorithms/">数据结构和算法</a>
-                    </p>
-                </div>
-            </div>
-        </article>
-        
-        <article class="media">
-            
-            <a href="/algorithms/undefined/" class="media-left">
+            <a href="/algorithms/rotate-list/" class="media-left">
                 <p class="image is-64x64">
                     <img class="thumbnail" src="images/loading.gif" data-original="https://source.acexy.cn/view/XYIqmt3" alt="61-旋转链表">
                 </p>
@@ -1229,7 +1183,7 @@
             <div class="media-content">
                 <div class="content">
                     <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2020-11-27T07:28:06.000Z">2020-11-27</time></div>
-                    <a href="/algorithms/undefined/" class="title has-link-black-ter is-size-6 has-text-weight-normal">61-旋转链表</a>
+                    <a href="/algorithms/rotate-list/" class="title has-link-black-ter is-size-6 has-text-weight-normal">61-旋转链表</a>
                     <p class="is-size-7 is-uppercase">
                         <a class="has-link-grey -link" href="/categories/algorithms/">数据结构和算法</a>
                     </p>
@@ -1245,7 +1199,7 @@
         <h3 class="menu-label">
             标签云
         </h3>
-        <a href="/tags/DL-ML/" style="font-size: 10px;">DL/ML</a> <a href="/tags/http/" style="font-size: 10px;">http</a> <a href="/tags/lintcode/" style="font-size: 10px;">lintcode</a> <a href="/tags/markdown/" style="font-size: 10px;">markdown</a> <a href="/tags/mysql/" style="font-size: 11.67px;">mysql</a> <a href="/tags/spring/" style="font-size: 11.67px;">spring</a> <a href="/tags/springcloud/" style="font-size: 10px;">springcloud</a> <a href="/tags/%E4%BA%8C%E5%88%86%E6%9F%A5%E6%89%BE/" style="font-size: 10px;">二分查找</a> <a href="/tags/%E4%BA%8C%E5%8F%89%E6%A0%91/" style="font-size: 10px;">二叉树</a> <a href="/tags/%E5%89%91%E6%8C%87offer/" style="font-size: 10px;">剑指offer</a> <a href="/tags/%E5%8A%9B%E6%89%A3/" style="font-size: 20px;">力扣</a> <a href="/tags/%E5%8A%A0%E5%AF%86/" style="font-size: 10px;">加密</a> <a href="/tags/%E5%8A%A8%E6%80%81%E8%A7%84%E5%88%92/" style="font-size: 13.33px;">动态规划</a> <a href="/tags/%E5%8D%95%E8%B0%83%E6%A0%88/" style="font-size: 15px;">单调栈</a> <a href="/tags/%E5%9B%9E%E6%BA%AF/" style="font-size: 16.67px;">回溯</a> <a href="/tags/%E5%AD%97%E7%AC%A6%E4%B8%B2/" style="font-size: 10px;">字符串</a> <a href="/tags/%E5%AD%A6%E4%B9%A0%E8%AE%B0%E5%BD%95/" style="font-size: 10px;">学习记录</a> <a href="/tags/%E5%BC%80%E5%8F%91/" style="font-size: 18.33px;">开发</a> <a href="/tags/%E6%8E%92%E5%BA%8F/" style="font-size: 10px;">排序</a> <a href="/tags/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/" style="font-size: 13.33px;">数据结构</a> <a href="/tags/%E6%A0%88/" style="font-size: 10px;">栈</a> <a href="/tags/%E6%A0%91/" style="font-size: 15px;">树</a> <a href="/tags/%E7%AC%94%E8%AF%95/" style="font-size: 10px;">笔试</a> <a href="/tags/%E7%AC%94%E8%AF%95%E9%9D%A2%E8%AF%95/" style="font-size: 15px;">笔试面试</a> <a href="/tags/%E7%AE%97%E6%B3%95/" style="font-size: 11.67px;">算法</a> <a href="/tags/%E9%80%92%E5%BD%92/" style="font-size: 10px;">递归</a>
+        <a href="/tags/DL-ML/" style="font-size: 10px;">DL/ML</a> <a href="/tags/http/" style="font-size: 10px;">http</a> <a href="/tags/lintcode/" style="font-size: 10px;">lintcode</a> <a href="/tags/markdown/" style="font-size: 10px;">markdown</a> <a href="/tags/mysql/" style="font-size: 11.67px;">mysql</a> <a href="/tags/spring/" style="font-size: 11.67px;">spring</a> <a href="/tags/springcloud/" style="font-size: 10px;">springcloud</a> <a href="/tags/%E4%BA%8C%E5%88%86%E6%9F%A5%E6%89%BE/" style="font-size: 10px;">二分查找</a> <a href="/tags/%E5%89%91%E6%8C%87offer/" style="font-size: 10px;">剑指offer</a> <a href="/tags/%E5%8A%9B%E6%89%A3/" style="font-size: 20px;">力扣</a> <a href="/tags/%E5%8A%A0%E5%AF%86/" style="font-size: 10px;">加密</a> <a href="/tags/%E5%8A%A8%E6%80%81%E8%A7%84%E5%88%92/" style="font-size: 13.33px;">动态规划</a> <a href="/tags/%E5%8D%95%E8%B0%83%E6%A0%88/" style="font-size: 15px;">单调栈</a> <a href="/tags/%E5%9B%9E%E6%BA%AF/" style="font-size: 16.67px;">回溯</a> <a href="/tags/%E5%AD%97%E7%AC%A6%E4%B8%B2/" style="font-size: 10px;">字符串</a> <a href="/tags/%E5%AD%A6%E4%B9%A0%E8%AE%B0%E5%BD%95/" style="font-size: 10px;">学习记录</a> <a href="/tags/%E5%BC%80%E5%8F%91/" style="font-size: 18.33px;">开发</a> <a href="/tags/%E6%8E%92%E5%BA%8F/" style="font-size: 10px;">排序</a> <a href="/tags/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/" style="font-size: 13.33px;">数据结构</a> <a href="/tags/%E6%A0%88/" style="font-size: 10px;">栈</a> <a href="/tags/%E6%A0%91/" style="font-size: 15px;">树</a> <a href="/tags/%E7%AC%94%E8%AF%95/" style="font-size: 10px;">笔试</a> <a href="/tags/%E7%AC%94%E8%AF%95%E9%9D%A2%E8%AF%95/" style="font-size: 13.33px;">笔试面试</a> <a href="/tags/%E7%AE%97%E6%B3%95/" style="font-size: 10px;">算法</a> <a href="/tags/%E9%80%92%E5%BD%92/" style="font-size: 10px;">递归</a>
     </div>
 </div>
     
