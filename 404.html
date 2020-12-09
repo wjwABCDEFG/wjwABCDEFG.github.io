@@ -7,24 +7,22 @@
 
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
 
-<title>131-分割回文串 - 小温 blog</title>
+<title>小温 blog</title>
 
 
-    <meta name="description" content="力扣131  https:&#x2F;&#x2F;leetcode-cn.com&#x2F;problems&#x2F;palindrome-partitioning&#x2F;  回溯问题，一开始看到样例的结果是单个的在最后面，导致想复杂了">
-<meta property="og:type" content="article">
-<meta property="og:title" content="131-分割回文串">
-<meta property="og:url" content="http://wjw.today/algorithms/palindrome-partitioning/index.html">
+    <meta name="description" content="layout:false ---                嘿！页面不见啦                  html,     body,     div,     span,     applet,     object,     iframe,     h1,     h2,     h3,     h4,     h5,     h6,     p,     blockquote,">
+<meta property="og:type" content="website">
+<meta property="og:title" content="小温 blog">
+<meta property="og:url" content="http://wjw.today/404.html">
 <meta property="og:site_name" content="小温 blog">
-<meta property="og:description" content="力扣131  https:&#x2F;&#x2F;leetcode-cn.com&#x2F;problems&#x2F;palindrome-partitioning&#x2F;  回溯问题，一开始看到样例的结果是单个的在最后面，导致想复杂了">
+<meta property="og:description" content="layout:false ---                嘿！页面不见啦                  html,     body,     div,     span,     applet,     object,     iframe,     h1,     h2,     h3,     h4,     h5,     h6,     p,     blockquote,">
 <meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="https://s1.ax1x.com/2020/07/20/UfQPtU.md.jpg">
-<meta property="article:published_time" content="2020-09-16T15:12:21.000Z">
-<meta property="article:modified_time" content="2020-12-07T04:31:28.517Z">
+<meta property="og:image" content="http://wjw.today/images/og_image.png">
+<meta property="article:published_time" content="2020-12-09T07:56:21.081Z">
+<meta property="article:modified_time" content="2020-12-09T07:56:21.081Z">
 <meta property="article:author" content="wjw">
-<meta property="article:tag" content="力扣">
-<meta property="article:tag" content="回溯">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="https://s1.ax1x.com/2020/07/20/UfQPtU.md.jpg">
+<meta name="twitter:image" content="http://wjw.today/images/og_image.png">
 
 
 
@@ -82,7 +80,7 @@
         <div class="navbar-brand is-flex-center">
             <a class="navbar-item navbar-logo" href="/">
             
-                <img src="images/loading.gif" data-original="https://s1.ax1x.com/2020/07/20/UfKyGQ.md.png" alt="131-分割回文串" height="28">
+                <img src="images/loading.gif" data-original="https://s1.ax1x.com/2020/07/20/UfKyGQ.md.png" alt="" height="28">
             
             </a>
         </div>
@@ -118,10 +116,6 @@
                     
                 
                 
-                <a class="navbar-item is-hidden-tablet catalogue" title="目录" href="javascript:;">
-                    <i class="fas fa-list-ul"></i>
-                </a>
-                
                 
                 <a class="navbar-item search" title="搜索" href="javascript:;">
                     <i class="fas fa-search"></i>
@@ -138,74 +132,945 @@
                 <div class="column is-8-tablet is-8-desktop is-6-widescreen has-order-2 column-main">
 <div class="card">
     
-    <div class="card-image">
-        <span  class="image is-7by1">
-            <img class="thumbnail" src="images/loading.gif" data-original="https://s1.ax1x.com/2020/07/20/UfQPtU.md.jpg" alt="131-分割回文串">
-        </span>
-    </div>
-    
     <div class="card-content article ">
-        
-        <div class="level article-meta is-size-7 is-uppercase is-mobile is-overflow-x-auto">
-            <div class="level-left">
-                <time class="level-item has-text-grey" datetime="2020-09-16T15:12:21.000Z">2020-09-16</time>
-                
-                <div class="level-item">
-                <a class="has-link-grey -link" href="/categories/algorithms/">数据结构和算法</a>
-                </div>
-                
-                
-                <span class="level-item has-text-grey">
-                    
-                    
-                    2 分钟 读完 (大约 315 个字)
-                </span>
-                
-                
-                <span class="level-item has-text-grey" id="busuanzi_container_page_pv">
-                    <i class="far fa-eye"></i>
-                    <span id="busuanzi_value_page_pv">0</span>次访问
-                </span>
-                
-            </div>
-        </div>
         
         <h1 class="title is-size-3 is-size-4-mobile has-text-weight-normal">
             
-                131-分割回文串
+                
             
         </h1>
         <div class="content">
-            <p>力扣131</p>
-<blockquote>
-<p><a href="https://leetcode-cn.com/problems/palindrome-partitioning/">https://leetcode-cn.com/problems/palindrome-partitioning/</a></p>
-</blockquote>
-<p>回溯问题，一开始看到样例的结果是单个的在最后面，导致想复杂了</p>
-<a id="more"></a>
+            layout:false
+---
+<html>
 
-<p>贴完整代码</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">one_three_one_</span>分割回文串 </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Test</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">test</span><span class="params">()</span></span>&#123;</span><br><span class="line">        String s = <span class="string">""</span>;</span><br><span class="line">        partition(s);</span><br><span class="line">        System.out.println(res.toString());</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">private</span> List&lt;List&lt;String&gt;&gt; res = <span class="keyword">new</span> ArrayList&lt;&gt;();</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> List&lt;List&lt;String&gt;&gt; partition(String s) &#123;</span><br><span class="line">        backtrace(s, <span class="keyword">new</span> ArrayList&lt;&gt;(), <span class="number">0</span>);</span><br><span class="line">        <span class="keyword">return</span> res;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">backtrace</span><span class="params">(String s, List&lt;String&gt; path, <span class="keyword">int</span> splitIndex)</span></span>&#123;</span><br><span class="line">        <span class="keyword">if</span> (splitIndex == s.length())&#123;	<span class="comment">//结束条件：分割到底</span></span><br><span class="line">            res.add(<span class="keyword">new</span> ArrayList&lt;&gt;(path));</span><br><span class="line">            <span class="keyword">return</span> ;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = splitIndex; i &lt; s.length(); i++) &#123;</span><br><span class="line">            String a = s.substring(splitIndex, i + <span class="number">1</span>);	<span class="comment">//做选择</span></span><br><span class="line">            path.add(a);</span><br><span class="line">            <span class="keyword">if</span> (check(a))&#123;	<span class="comment">//条件递归</span></span><br><span class="line">                backtrace(s, path, i + <span class="number">1</span>);</span><br><span class="line">            &#125;</span><br><span class="line">            path.remove(path.size() - <span class="number">1</span>);	<span class="comment">//撤销选择</span></span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">//检验回文</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">boolean</span> <span class="title">check</span><span class="params">(String str)</span></span>&#123;</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; str.length() / <span class="number">2</span>; i++) &#123;</span><br><span class="line">            <span class="keyword">if</span> (str.charAt(i) != str.charAt(str.length() - i - <span class="number">1</span>)) <span class="keyword">return</span> <span class="keyword">false</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">true</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=11" id="mixia_vpid">
 
-<p>13ms</p>
-<br>
+  <title>嘿！页面不见啦</title>
+  <meta name=keywords content="404页面">
+  <link rel="icon" href="/images/favicon.ico">
+  <script src="https://cdn.bootcss.com/clipboard.js/1.7.1/clipboard.min.js"></script>
 
-<p>剪枝：将判断添加在add（做选择前），可以减少多次add remove操作，提升到5-8ms</p>
-<p>其他不变，只贴有变动的backtrace函数</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">backtrace</span><span class="params">(String s, List&lt;String&gt; path, <span class="keyword">int</span> splitIndex)</span></span>&#123;</span><br><span class="line">    <span class="keyword">if</span> (splitIndex == s.length())&#123;</span><br><span class="line">        res.add(<span class="keyword">new</span> ArrayList&lt;&gt;(path));</span><br><span class="line">        <span class="keyword">return</span> ;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i = splitIndex; i &lt; s.length(); i++) &#123;</span><br><span class="line">        String a = s.substring(splitIndex, i + <span class="number">1</span>);</span><br><span class="line">        <span class="keyword">if</span> (!check(a)) <span class="keyword">continue</span>;	<span class="comment">//先判断不回文，减少一次add和remove操作</span></span><br><span class="line">        path.add(a);</span><br><span class="line">        backtrace(s, path, i + <span class="number">1</span>);</span><br><span class="line">        path.remove(path.size() - <span class="number">1</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+  <style type="text/css">
+    html,
+    body,
+    div,
+    span,
+    applet,
+    object,
+    iframe,
+    h1,
+    h2,
+    h3,
+    h4,
+    h5,
+    h6,
+    p,
+    blockquote,
+    pre,
+    a,
+    abbr,
+    acronym,
+    address,
+    big,
+    cite,
+    code,
+    del,
+    dfn,
+    em,
+    img,
+    ins,
+    kbd,
+    q,
+    s,
+    samp,
+    small,
+    strike,
+    strong,
+    sub,
+    sup,
+    tt,
+    var,
+    b,
+    u,
+    i,
+    center,
+    dl,
+    dt,
+    dd,
+    ol,
+    ul,
+    li,
+    fieldset,
+    form,
+    label,
+    legend,
+    table,
+    caption,
+    article,
+    aside,
+    canvas,
+    details,
+    embed,
+    figure,
+    figcaption,
+    footer,
+    header,
+    hgroup,
+    menu,
+    nav,
+    output,
+    ruby,
+    section,
+    summary,
+    time,
+    mark,
+    audio,
+    video {
+      margin: 0;
+      padding: 0;
+      border: 0;
+      vertical-align: baseline;
+      font: inherit;
+      font-size: 100%;
+    }
 
-<br>
+    tbody,
+    tfoot,
+    thead,
+    tr,
+    th,
+    td {
+      margin: 0;
+      padding: 0;
+      border: 0;
+      font: inherit;
+      font-size: 100%;
+    }
 
-<p>其他回溯的题目可以<a href="http://wjw.today/algorithms/algorithms-list-navigator/#1-回溯">点击这里</a></p>
+    /* HTML5 display-role reset for older browsers */
+    article,
+    aside,
+    details,
+    figcaption,
+    figure,
+    footer,
+    header,
+    hgroup,
+    menu,
+    nav,
+    section {
+      display: block;
+    }
 
+    body {
+      line-height: 1;
+    }
+
+    ol,
+    ul {
+      list-style: none;
+    }
+
+    q:before,
+    q:after {
+      content: '';
+      content: none;
+    }
+
+    body {
+      width: 100%;
+      *zoom: 1;
+    }
+
+    body:before,
+    body:after {
+      display: table;
+      content: "";
+    }
+
+    body:after {
+      clear: both;
+    }
+
+    html,
+    body {
+      height: 100%;
+    }
+
+    html {
+      height: 100%;
+      max-height: 100%;
+    }
+
+    body {
+      color: #333333;
+      font-size: 1em;
+      font-family: "ff-tisa-web-pro-1", "ff-tisa-web-pro-2", "Lucida Grande", "Hiragino Sans GB", "Hiragino Sans GB W3", "Microsoft YaHei", "WenQuanYi Micro Hei", sans-serif;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    ::selection {
+      background: rgba(255, 255, 255, 0.3);
+    }
+
+    ::-moz-selection {
+      background: rgba(255, 255, 255, 0.3);
+    }
+
+    a {
+      color: #DF9C81;
+      text-decoration: none;
+    }
+
+    a:hover {
+      color: #d06c44;
+      -webkit-transition: .5s;
+      -moz-transition: .5s;
+      -o-transition: .5s;
+      -ms-transition: .5s;
+    }
+
+    h1,
+    h2,
+    h3,
+    h4,
+    h5,
+    h5 {
+      margin-top: 1.0em;
+      margin-bottom: .5em;
+      color: #333333;
+      font-weight: lighter;
+      font-family: "ff-tisa-web-pro-1", "ff-tisa-web-pro-2", "Lucida Grande", "Hiragino Sans GB", "Hiragino Sans GB W3", "Microsoft YaHei", "WenQuanYi Micro Hei", sans-serif;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    h1 {
+      margin-top: 0;
+      letter-spacing: .05em;
+      font-size: 1.8em;
+      line-height: 1.2em;
+    }
+
+    h2 {
+      font-size: 1.6em;
+    }
+
+    h3 {
+      font-size: 1.4em;
+    }
+
+    h4 {
+      font-size: 1.2em;
+    }
+
+    h4 {
+      font-size: 1.1em;
+    }
+
+    h5 {
+      font-size: 1em;
+    }
+
+    p {
+      margin-bottom: 1.3em;
+      line-height: 1.7em;
+    }
+
+    em {
+      font-style: italic;
+    }
+
+    ol,
+    ul {
+      margin: 0 0 .3em 1em;
+    }
+
+    ol li,
+    ul li {
+      margin: 0 0 .2em 0;
+      line-height: 1.6em;
+    }
+
+    ol ol,
+    ol ul,
+    ul ol,
+    ul ul {
+      margin: .1em 0 .2em 2em;
+    }
+
+    ol {
+      list-style-type: decimal;
+    }
+
+    ul {
+      list-style-type: disc;
+    }
+
+    .date,
+    .time,
+    .author,
+    .tags {
+      color: #c7c7c7;
+      font-size: .8em;
+    }
+
+    .date a,
+    .time a,
+    .author a,
+    .tags a {
+      color: #666666;
+    }
+
+    .date a:hover,
+    .time a:hover,
+    .author a:hover,
+    .tags a:hover {
+      color: #d06c44;
+    }
+
+    .footer {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      width: 100%;
+      color: #b3b3b3;
+      font-size: .7em;
+    }
+
+    .logo {
+      width: 25%;
+      border: 3px solid #FFF;
+      border-radius: 50%;
+      box-shadow: 0 0 1px 1px rgba(0, 0, 0, 0.3);
+      transition: all .5s;
+    }
+
+    .logo:hover {
+      border: 3px solid #5ba4e5;
+      transition: all .5s;
+      -webkit-transform: rotate(360deg);
+      /* Safari 和 Chrome */
+      -moz-transform: rotate(360deg);
+      /* Firefox */
+      -o-transform: rotate(350deg);
+      /* Opera */
+      transform: rotate(360deg);
+      -ms-transform: rotate(360deg);
+      /* IE 9 */
+    }
+
+    .Weibo_icon_logo {
+      width: 20px;
+      height: 20px;
+      border-radius: 50%;
+      background-position: -50px -25px;
+      box-shadow: 0 0 4px rgba(0, 0, 0, 0.3);
+      vertical-align: -2px;
+    }
+
+    .Weibo_icon {
+      display: inline-block;
+      background-image: url(../homepage/img/V_icon.png);
+      background-repeat: no-repeat;
+    }
+
+    .Weibo_icon_position {
+      position: relative;
+      top: -12px;
+      right: 42px;
+    }
+
+    hr {
+      border: none;
+    }
+
+    .hidden {
+      display: none !important;
+    }
+
+    .panel {
+      display: table;
+      width: 100%;
+      height: 100%;
+    }
+
+    .panel-title {
+      margin: 0 0 15px 0;
+      color: #FFF;
+      letter-spacing: 4px;
+      font-size: 2.5em;
+    }
+
+    .panel-subtitle {
+      color: #CCCCCC;
+      letter-spacing: 3px;
+      font-weight: lighter;
+      font-size: 1.2em;
+      font-family: "ff-tisa-web-pro-1", "ff-tisa-web-pro-2", "Lucida Grande", "Hiragino Sans GB", "Hiragino Sans GB W3", "Microsoft YaHei", "WenQuanYi Micro Hei", sans-serif;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    .panel-cover {
+      position: fixed;
+      z-index: 900;
+      display: block;
+      width: 100%;
+      height: 100%;
+      max-width: none;
+      background: url(../images/background-cover.jpg) top left no-repeat #666666;
+      background-size: cover;
+    }
+
+    .panel-cover--collapsed {
+      width: 30%;
+      max-width: 700px;
+    }
+
+    .panel-cover--overlay {
+      position: absolute;
+      top: 0;
+      right: 0;
+      bottom: 0;
+      left: 0;
+      z-index: 0;
+      display: block;
+      background-color: rgba(68, 68, 68, 0.6);
+      background-image: -webkit-linear-gradient(-410deg, rgba(68, 68, 68, 0.6) 20%, rgba(0, 0, 0, 0.9));
+      background-image: linear-gradient(140deg, rgba(68, 68, 68, 0.6) 20%, rgba(0, 0, 0, 0.9));
+    }
+
+    .panel-cover__logo {
+      margin: 0px 0px 0px 20px;
+      margin-bottom: .2em;
+    }
+
+    .panel-cover__description {
+      margin: 0 30px;
+      font-weight: 400;
+    }
+
+    .panel-cover__divider {
+      margin: 20px auto;
+      width: 50%;
+      border-top: 1px solid rgba(255, 255, 255, 0.14);
+    }
+
+    .panel-cover__divider--secondary {
+      width: 15%;
+    }
+
+    .panel-main {
+      display: table;
+      width: 100%;
+      height: 100%;
+    }
+
+    .panel-main__inner {
+      position: relative;
+      z-index: 800;
+      display: table-cell;
+      padding: 0 60px;
+      vertical-align: middle;
+    }
+
+    .panel-main__content {
+      margin: 0 auto;
+      max-width: 620px;
+    }
+
+    .panel-main__content--fixed {
+      width: 480px;
+      -webkit-transition: width 1s;
+      /* Safari */
+      transition: width 1s;
+    }
+
+    .panel-inverted {
+      color: #FFF;
+      text-align: center;
+      text-shadow: 0 1px 1px rgba(0, 0, 0, 0.4);
+      font-weight: 100;
+    }
+
+    .panel-inverted a {
+      color: #FFF;
+    }
+
+    .cover-navigation {
+      margin-top: 42px;
+    }
+
+    .cover-navigation--social {
+      margin-left: 30px;
+    }
+
+    .cover-blue {
+      background-color: rgba(37, 104, 163, 0.6);
+      background-image: -webkit-linear-gradient(-410deg, rgba(37, 104, 163, 0.6) 20%, rgba(18, 51, 80, 0.8));
+      background-image: linear-gradient(140deg, rgba(37, 104, 163, 0.6) 20%, rgba(18, 51, 80, 0.8));
+    }
+
+    .cover-green {
+      background-color: rgba(21, 111, 120, 0.6);
+      background-image: -webkit-linear-gradient(-410deg, rgba(21, 111, 120, 0.6) 20%, rgba(6, 31, 33, 0.8));
+      background-image: linear-gradient(140deg, rgba(21, 111, 120, 0.6) 20%, rgba(6, 31, 33, 0.8));
+    }
+
+    .cover-purple {
+      background-color: rgba(73, 50, 82, 0.6);
+      background-image: -webkit-linear-gradient(-410deg, rgba(73, 50, 82, 0.6) 20%, rgba(17, 11, 19, 0.8));
+      background-image: linear-gradient(140deg, rgba(73, 50, 82, 0.6) 20%, rgba(17, 11, 19, 0.8));
+    }
+
+    .cover-red {
+      background-color: rgba(119, 31, 18, 0.6);
+      background-image: -webkit-linear-gradient(-410deg, rgba(119, 31, 18, 0.6) 20%, rgba(30, 8, 5, 0.8));
+      background-image: linear-gradient(140deg, rgba(119, 31, 18, 0.6) 20%, rgba(30, 8, 5, 0.8));
+    }
+
+    .cover-orange {
+      background-color: rgba(174, 80, 4, 0.6);
+      background-image: -webkit-linear-gradient(-410deg, rgba(174, 80, 4, 0.6) 20%, rgba(74, 34, 2, 0.8));
+      background-image: linear-gradient(140deg, rgba(174, 80, 4, 0.6) 20%, rgba(74, 34, 2, 0.8));
+    }
+
+    .cover-slate {
+      background-color: rgba(60, 91, 147, 0.6);
+      background-image: -webkit-linear-gradient(-410deg, rgba(61, 66, 96, 0.6) 20%, rgba(21, 23, 34, 0.8));
+      background-image: linear-gradient(140deg, rgba(61, 66, 96, 0.6) 20%, rgba(21, 23, 34, 0.8));
+    }
+
+    .cover-disabled {
+      background: none;
+    }
+
+    .btn,
+    .navigation__item a {
+      padding: 10px 20px;
+      border: 1px solid #DF9C81;
+      border-radius: 20px;
+      color: #DF9C81;
+      text-shadow: none;
+      letter-spacing: 1px;
+      font-weight: bold;
+      font-size: .9em;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    .btn:hover,
+    .navigation__item a:hover {
+      border-color: #d06c44;
+      color: #d06c44;
+    }
+
+    .btn-border-small {
+      margin-left: 10px;
+      padding: 6px 8px;
+      border: 1px solid #DF9C81;
+      border-radius: 20px;
+      font-size: .8em;
+    }
+
+    .btn-contribute {
+      padding: 6px 8px;
+      border: 1px solid #DF9C81;
+      border-radius: 8px;
+      background-color: #DF9C81;
+      color: white;
+      font-weight: bold;
+      font-size: 1.1em;
+    }
+
+    .btn-secondary {
+      border-color: #5BA4E5;
+      color: #5BA4E5;
+    }
+
+    .btn-secondary:hover {
+      border-color: #217fd2;
+      color: #217fd2;
+    }
+
+    .btn-tertiary {
+      border-color: #999999;
+      color: #999999;
+    }
+
+    .btn-tertiary:hover {
+      border-color: #737373;
+      color: #737373;
+    }
+
+    .btn-large {
+      padding: 10px 24px;
+      font-size: 1.1em;
+    }
+
+    .btn-small {
+      padding: 8px 12px;
+      font-size: .7em;
+    }
+
+    .btn-mobile-menu {
+      position: fixed;
+      top: 0;
+      right: 0;
+      left: 0;
+      z-index: 9999;
+      display: none;
+      width: 100%;
+      height: 35px;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+      background: rgba(51, 51, 51, 0.98);
+      text-align: center;
+    }
+
+    .btn-mobile-menu__icon,
+    .btn-mobile-close__icon {
+      position: relative;
+      top: 10px;
+      color: #FFF;
+    }
+
+    nav {
+      position: relative;
+      display: inline-block;
+    }
+
+    .navigation {
+      position: relative;
+      float: left;
+      display: inline-block;
+      margin: 0;
+      list-style-type: none;
+    }
+
+    .navigation__item {
+      display: inline-block;
+      margin: 5px 1px 0 0;
+      line-height: 1em;
+    }
+
+    .navigation__item a {
+      position: relative;
+      display: block;
+      border-color: #FFF;
+      color: #FFF;
+      opacity: .8;
+    }
+
+    .navigation__item a:hover {
+      border-color: rgba(255, 255, 255, 0.3);
+      background: rgba(255, 255, 255, 0.3);
+      color: #FFF;
+      opacity: 1;
+      transition: all .3s;
+    }
+
+    .navigation--social a {
+      padding: 6px 8px 6px 9px;
+      border: 0px;
+    }
+
+    .navigation--social a .label {
+      display: none;
+    }
+
+    .navigation--social a .icon {
+      display: block;
+      font-size: 1.7em;
+    }
+
+    i {
+      font-weight: normal;
+      font-style: normal;
+      font-size: 18px;
+      font-family: 'entypo';
+    }
+
+    .social {
+      font-size: 22px;
+    }
+
+    .icon-social {
+      position: relative;
+      display: block;
+      font-size: 22px;
+      font-family: 'entypo-social';
+    }
+
+    *:focus {
+      outline: none;
+    }
+
+    .wechat[data-v] {
+      position: relative;
+    }
+
+    .qrCode[data-v] {
+      position: absolute;
+      bottom: 42px;
+      left: -25px;
+      display: none;
+      width: 92px;
+      height: 92px;
+      background-color: #fff;
+      text-align: center;
+    }
+
+    .wechat .qrCode .triangle-down[data-v] {
+      position: absolute;
+      bottom: -8px;
+      left: 50%;
+      margin-left: -6px;
+      width: 0;
+      height: 0;
+      border-top: 10px solid #fff;
+      border-right: 6px solid transparent;
+      border-left: 6px solid transparent;
+    }
+
+    .wechat:hover .qrCode[data-v] {
+      display: inline;
+    }
+
+    @media all and (max-width: 1100px) {
+      .panel-title {
+        font-size: 2em;
+      }
+
+      .panel-subtitle {
+        font-size: 1em;
+      }
+
+      .panel-cover__description {
+        margin: 0 10px;
+        font-size: .9em;
+      }
+
+      .navigation--social {
+        margin-top: 5px;
+        margin-left: 0;
+      }
+    }
+
+    @media all and (max-width: 960px) {
+      .btn-mobile-menu {
+        display: block;
+      }
+
+      .qrCode[data-v] {
+        Margin: 0px 41%;
+      }
+
+      .panel-main {
+        position: relative;
+        display: table;
+      }
+
+      .panel-cover--collapsed {
+        width: 100%;
+        max-width: none;
+      }
+
+      .panel-main__inner {
+        display: table-cell;
+        padding: 60px 10%;
+      }
+
+      .panel-cover__description {
+        display: block;
+        margin: 0 auto;
+        max-width: 600px;
+      }
+
+      .panel-cover {
+        width: 100%;
+        height: 100%;
+        background-position: center center;
+      }
+
+      .panel-cover.panel-cover--collapsed {
+        position: relative;
+        display: block;
+        padding: 0;
+        height: auto;
+        background-position: center center;
+      }
+
+      .panel-cover.panel-cover--collapsed .panel-main__inner {
+        display: block;
+        padding: 70px 0 30px 0;
+      }
+
+      .panel-cover.panel-cover--collapsed .panel-cover__logo {
+        width: 60px;
+        border-width: 2px;
+      }
+
+      .panel-cover.panel-cover--collapsed .panel-cover__description {
+        display: none;
+      }
+
+      .panel-cover.panel-cover--collapsed .panel-cover__divider {
+        display: none;
+        margin: 1em auto;
+      }
+
+      .navigation-wrapper {
+        position: fixed;
+        top: 0;
+        right: 0;
+        left: 0;
+        display: none;
+        padding: 20px 0;
+        width: 100%;
+        border-bottom: 1px solid rgba(255, 255, 255, 0.15);
+        background: rgba(51, 51, 51, 0.98);
+      }
+
+      .navigation-wrapper.visible {
+        display: block;
+      }
+
+      .cover-navigation {
+        position: relative;
+        float: left;
+        clear: left;
+        display: block;
+        width: 100%;
+      }
+
+      .cover-navigation .navigation {
+        display: block;
+        width: 100%;
+      }
+
+      .cover-navigation .navigation li {
+        margin-bottom: .4em;
+        width: 80%;
+      }
+
+      .cover-navigation.navigation--social {
+        padding-top: 5px;
+      }
+
+      .cover-navigation.navigation--social .navigation li {
+        display: inline-block;
+        width: 25.8%;
+      }
+
+      .content-wrapper {
+        margin: 0 auto;
+        width: 80%;
+        max-width: none;
+      }
+
+      .content-wrapper__inner {
+        margin-right: 0;
+        margin-left: 0;
+      }
+
+      .navigation__item {
+        margin: 0 0 .4em 0;
+        width: 100%;
+      }
+    }
+
+    @media all and (max-width: 767px) {
+      .panel-cover__logo {
+        width: 100px;
+      }
+
+      .Weibo_icon_position {
+        top: -6px;
+        right: 35px;
+      }
+
+      .qrCode[data-v] {
+        Margin: 0px 38%;
+      }
+    }
+
+    @media all and (max-width: 480px) {
+      .qrCode[data-v] {
+        Margin: 0px 30%;
+      }
+    }
+
+    @media all and (max-width: 340px) {
+      .panel-main__inner {
+        padding: 0 5%;
+      }
+
+      .panel-title {
+        margin-bottom: .1em;
+        font-size: 1.5em;
+      }
+
+      .panel-subtitle {
+        font-size: .9em;
+      }
+
+      .btn,
+      .navigation__item a {
+        margin-bottom: .4em;
+      }
+    }
+  </style>
+
+</head>
+
+<body>
+  <header class="panel-cover" style="background-image: url(https://source.acexy.cn/view/XWXapQ2)">
+
+    <div class="panel-main">
+
+      <div class="panel-main__inner panel-inverted">
+        <div class="panel-main__content">
+
+          <a href="https://wjw.today/" title="前往 小温Blog"><img src="https://s1.ax1x.com/2020/07/20/Ufuf4e.th.jpg"
+              width="150" alt="Noisky logo" class="panel-cover__logo logo"></a>
+          <h1 class="panel-cover__title panel-title"><a href="https://wjw.today/"
+              title="link to homepage for wjw'Blog">404</a></h1>
+
+
+          <hr class="panel-cover__divider">
+          <p class="panel-cover__description">对不起，您要找的页面被小温丢失了，(＞人＜；)</p>
+          <hr class="panel-cover__divider panel-cover__divider--secondary">
+
+          <p class="panel-cover__description">欢迎来到我的个人世界!</p>
+
+
+          <!-- <p class="footer">404模板 © 2019 | <a style="TEXT-DECORATION: none" href="http://www.miibeian.gov.cn"
+              rel="nofollow" target="_blank">
+              <font color="#b3b3b3">赣ICP备00000000号</font>
+            </a></p> -->
+
+          <div class="navigation-wrapper">
+            <nav class="cover-navigation cover-navigation--primary">
+              <ul class="navigation">
+                <li class="navigation__item"><a href="https://wjw.today/" title="访问博客">博客</a></li>
+
+                <!-- <li class="navigation__item"><a href="https://404.life/" target="_blank" title="玖梦's 图床">图床</a></li> -->
+
+                <li class="navigation__item"><a href="https://www.baidu.com/" title="百度一下">百度么</a></li>
+              </ul>
+            </nav>
+          </div>
         </div>
-        
-        <div class="level is-size-7 is-uppercase">
-            <div class="level-start">
-                <div class="level-item">
-                    <span class="is-size-6 has-text-grey has-mr-7">#</span>
-                    <a class="has-link-grey -link" href="/tags/%E5%8A%9B%E6%89%A3/" rel="tag">力扣</a>, <a class="has-link-grey -link" href="/tags/%E5%9B%9E%E6%BA%AF/" rel="tag">回溯</a>
-                </div>
-            </div>
+      </div>
+      <!-- 蒙版 -->
+      <div class="panel-cover--overlay cover-slate"></div>
+    </div>
+  </header>
+<script>!function(e){var c=Array.prototype.slice.call(document.querySelectorAll("img[data-original]"));function i(){for(var r=0;r<c.length;r++)t=c[r],0<=(n=t.getBoundingClientRect()).bottom&&0<=n.left&&n.top<=(e.innerHeight||document.documentElement.clientHeight)&&function(){var t,n,e,i,o=c[r];t=o,n=function(){c=c.filter(function(t){return o!==t})},e=new Image,i=t.getAttribute("data-original"),e.onload=function(){t.src=i,n&&n()},e.src=i}();var t,n}i(),e.addEventListener("scroll",function(){var t,n;t=i,n=e,clearTimeout(t.tId),t.tId=setTimeout(function(){t.call(n)},500)})}(this);</script><script>window.addEventListener("load",function(){var t=/\.(gif|jpg|jpeg|tiff|png)$/i,r=/^data:image\/[a-z]+;base64,/;Array.prototype.slice.call(document.querySelectorAll("img[data-original]")).forEach(function(a){var e=a.parentNode;"A"===e.tagName&&(e.href.match(t)||e.href.match(r))&&(e.href=a.dataset.original)})});</script><script>!function(e){var c=Array.prototype.slice.call(document.querySelectorAll("img[data-original]"));function i(){for(var r=0;r<c.length;r++)t=c[r],0<=(n=t.getBoundingClientRect()).bottom&&0<=n.left&&n.top<=(e.innerHeight||document.documentElement.clientHeight)&&function(){var t,n,e,i,o=c[r];t=o,n=function(){c=c.filter(function(t){return o!==t})},e=new Image,i=t.getAttribute("data-original"),e.onload=function(){t.src=i,n&&n()},e.src=i}();var t,n}i(),e.addEventListener("scroll",function(){var t,n;t=i,n=e,clearTimeout(t.tId),t.tId=setTimeout(function(){t.call(n)},500)})}(this);</script><script>window.addEventListener("load",function(){var t=/\.(gif|jpg|jpeg|tiff|png)$/i,r=/^data:image\/[a-z]+;base64,/;Array.prototype.slice.call(document.querySelectorAll("img[data-original]")).forEach(function(a){var e=a.parentNode;"A"===e.tagName&&(e.href.match(t)||e.href.match(r))&&(e.href=a.dataset.original)})});</script><script>!function(e){var c=Array.prototype.slice.call(document.querySelectorAll("img[data-original]"));function i(){for(var r=0;r<c.length;r++)t=c[r],0<=(n=t.getBoundingClientRect()).bottom&&0<=n.left&&n.top<=(e.innerHeight||document.documentElement.clientHeight)&&function(){var t,n,e,i,o=c[r];t=o,n=function(){c=c.filter(function(t){return o!==t})},e=new Image,i=t.getAttribute("data-original"),e.onload=function(){t.src=i,n&&n()},e.src=i}();var t,n}i(),e.addEventListener("scroll",function(){var t,n;t=i,n=e,clearTimeout(t.tId),t.tId=setTimeout(function(){t.call(n)},500)})}(this);</script><script>window.addEventListener("load",function(){var t=/\.(gif|jpg|jpeg|tiff|png)$/i,r=/^data:image\/[a-z]+;base64,/;Array.prototype.slice.call(document.querySelectorAll("img[data-original]")).forEach(function(a){var e=a.parentNode;"A"===e.tagName&&(e.href.match(t)||e.href.match(r))&&(e.href=a.dataset.original)})});</script></body>
+
+</html>
         </div>
         
         
@@ -216,27 +1081,6 @@
 
 
 
-
-<div class="card card-transparent">
-    <div class="level post-navigation is-flex-wrap is-mobile">
-        
-        <div class="level-start">
-            <a class="level level-item has-link-grey  article-nav-prev" href="/algorithms/combination-sum-ii/">
-                <i class="level-item fas fa-chevron-left"></i>
-                <span class="level-item">40-组合总和II</span>
-            </a>
-        </div>
-        
-        
-        <div class="level-end">
-            <a class="level level-item has-link-grey  article-nav-next" href="/algorithms/climbing-stairs/">
-                <span class="level-item">70-爬楼梯以及进化版</span>
-                <i class="level-item fas fa-chevron-right"></i>
-            </a>
-        </div>
-        
-    </div>
-</div>
 
 
 </div>
@@ -452,7 +1296,6 @@
         <div class="column-right-shadow is-hidden-widescreen is-sticky">
         
             
-
         
             <div class="card widget">
     <div class="card-content">
@@ -570,7 +1413,6 @@
 <div class="column is-4-tablet is-4-desktop is-3-widescreen is-hidden-touch is-hidden-desktop-only has-order-3 column-right is-sticky">
     
         
-
     
         <div class="card widget">
     <div class="card-content">
@@ -688,7 +1530,7 @@
             <div class="level-start has-text-centered-mobile">
                 <a class="footer-logo is-block has-mb-6" href="/">
                 
-                    <img src="images/loading.gif" data-original="https://s1.ax1x.com/2020/07/20/UfKyGQ.md.png" alt="131-分割回文串" height="28">
+                    <img src="images/loading.gif" data-original="https://s1.ax1x.com/2020/07/20/UfKyGQ.md.png" alt="" height="28">
                 
                 </a>
                 <p class="is-size-7">
