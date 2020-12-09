@@ -13,13 +13,13 @@
     <meta name="description" content="强引用(NormalReference)我们平时用的基本上都是强引用M m &#x3D; new M(); 只要强引用在，gc不回收该对象">
 <meta property="og:type" content="article">
 <meta property="og:title" content="java中的引用">
-<meta property="og:url" content="http://wjw.today/Java/java%E4%B8%AD%E7%9A%84%E5%BC%95%E7%94%A8/index.html">
+<meta property="og:url" content="https://wjw.today/Java/java%E4%B8%AD%E7%9A%84%E5%BC%95%E7%94%A8/index.html">
 <meta property="og:site_name" content="小温 blog">
 <meta property="og:description" content="强引用(NormalReference)我们平时用的基本上都是强引用M m &#x3D; new M(); 只要强引用在，gc不回收该对象">
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="https://source.acexy.cn/view/XXehvjf">
 <meta property="article:published_time" content="2020-11-19T03:02:17.000Z">
-<meta property="article:modified_time" content="2020-12-07T02:49:04.421Z">
+<meta property="article:modified_time" content="2020-12-09T09:28:50.355Z">
 <meta property="article:author" content="wjw">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:image" content="https://source.acexy.cn/view/XXehvjf">
@@ -204,7 +204,7 @@
 <h1 id="弱引用-WeakReference"><a href="#弱引用-WeakReference" class="headerlink" title="弱引用(WeakReference)"></a>弱引用(WeakReference)</h1><p>弱引用是遇到gc就回收</p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> 弱引用 </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">        WeakReference&lt;M&gt; m = <span class="keyword">new</span> WeakReference&lt;&gt;(<span class="keyword">new</span> M());</span><br><span class="line"></span><br><span class="line">        System.out.println(m.get());    <span class="comment">//有值</span></span><br><span class="line">        System.gc();</span><br><span class="line">        System.out.println(m.get());    <span class="comment">//不管内存是否充足，遇到gc就回收</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
-<h2 id="ThreadLocal中的Entry"><a href="#ThreadLocal中的Entry" class="headerlink" title="ThreadLocal中的Entry"></a>ThreadLocal中的Entry</h2><p>弱引用很经典的一个例子就是ThreadLocal中的Entry，在<a href="http://wjw.today/2020/11/11/ThreadLocal/#map真的是map吗">之前的博客</a>中有分析ThreadLocal为什么是弱引用，这里再次复习一下</p>
+<h2 id="ThreadLocal中的Entry"><a href="#ThreadLocal中的Entry" class="headerlink" title="ThreadLocal中的Entry"></a>ThreadLocal中的Entry</h2><p>弱引用很经典的一个例子就是ThreadLocal中的Entry，在<a href="https://wjw.today/2020/11/11/ThreadLocal/#map真的是map吗">之前的博客</a>中有分析ThreadLocal为什么是弱引用，这里再次复习一下</p>
 <p><img src="images/loading.gif" data-original="https://s3.ax1x.com/2020/11/16/DAzpQO.png" alt=""></p>
 <p>当我们ThreadLocal tl = new ThreadLocal();的时候，实际上有两个引用指向了ThreadLocal，一个是tl本身是一个强引用，一个是getMap(当前线程)得到的ThreadLocalMap，它里面的Entry的key是一个弱引用，指向了ThreadLocal。</p>
 <blockquote>
@@ -317,7 +317,7 @@
                     </p>
                     <a href="/archives">
                         <p class="title has-text-weight-normal">
-                            78
+                            80
                         </p>
                     </a>
                 </div>
@@ -436,7 +436,7 @@
                 <span class="level-item">数据结构和算法</span>
             </span>
             <span class="level-end">
-                <span class="level-item tag">43</span>
+                <span class="level-item tag">45</span>
             </span>
         </a></li><li>
         <a class="level is-marginless" href="/categories/deeplearning/">
@@ -540,6 +540,63 @@
         
         <article class="media">
             
+            <a href="/algorithms/algorithms-list-navigator/" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="images/loading.gif" data-original="https://source.acexy.cn/view/XX9GIuI" alt="数据结构与算法不迷路导航">
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2020-12-09T15:59:59.000Z">2020-12-09</time></div>
+                    <a href="/algorithms/algorithms-list-navigator/" class="title has-link-black-ter is-size-6 has-text-weight-normal">数据结构与算法不迷路导航</a>
+                    <p class="is-size-7 is-uppercase">
+                        <a class="has-link-grey -link" href="/categories/algorithms/">数据结构和算法</a>
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+        <article class="media">
+            
+            <a href="/algorithms/3sum/" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="images/loading.gif" data-original="https://b1.sbimg.org/file/chevereto-jia/2020/12/09/QQZN2.md.jpg" alt="15-三数之和">
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2020-12-09T09:08:49.000Z">2020-12-09</time></div>
+                    <a href="/algorithms/3sum/" class="title has-link-black-ter is-size-6 has-text-weight-normal">15-三数之和</a>
+                    <p class="is-size-7 is-uppercase">
+                        <a class="has-link-grey -link" href="/categories/algorithms/">数据结构和算法</a>
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+        <article class="media">
+            
+            <a href="/algorithms/longest-substring-without-repeating-characters/" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="images/loading.gif" data-original="https://source.acexy.cn/view/XZGzr5k" alt="3-无重复的最长字串">
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2020-12-09T08:52:06.000Z">2020-12-09</time></div>
+                    <a href="/algorithms/longest-substring-without-repeating-characters/" class="title has-link-black-ter is-size-6 has-text-weight-normal">3-无重复的最长字串</a>
+                    <p class="is-size-7 is-uppercase">
+                        <a class="has-link-grey -link" href="/categories/algorithms/">数据结构和算法</a>
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+        <article class="media">
+            
             <a href="/Others/why-my-blog-tips-unsafe/" class="media-left">
                 <p class="image is-64x64">
                     <img class="thumbnail" src="images/loading.gif" data-original="https://b1.sbimg.org/file/chevereto-jia/2020/12/09/QQRfN.md.jpg" alt="为什么我的博客提示不安全">
@@ -559,25 +616,6 @@
         
         <article class="media">
             
-            <a href="/algorithms/algorithms-list-navigator/" class="media-left">
-                <p class="image is-64x64">
-                    <img class="thumbnail" src="images/loading.gif" data-original="https://source.acexy.cn/view/XX9GIuI" alt="数据结构与算法不迷路导航">
-                </p>
-            </a>
-            
-            <div class="media-content">
-                <div class="content">
-                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2020-12-07T15:59:59.000Z">2020-12-07</time></div>
-                    <a href="/algorithms/algorithms-list-navigator/" class="title has-link-black-ter is-size-6 has-text-weight-normal">数据结构与算法不迷路导航</a>
-                    <p class="is-size-7 is-uppercase">
-                        <a class="has-link-grey -link" href="/categories/algorithms/">数据结构和算法</a>
-                    </p>
-                </div>
-            </div>
-        </article>
-        
-        <article class="media">
-            
             <a href="/algorithms/654-maximum-binary-tree/" class="media-left">
                 <p class="image is-64x64">
                     <img class="thumbnail" src="images/loading.gif" data-original="https://source.acexy.cn/view/XY6wtUA" alt="654-最大二叉树">
@@ -590,44 +628,6 @@
                     <a href="/algorithms/654-maximum-binary-tree/" class="title has-link-black-ter is-size-6 has-text-weight-normal">654-最大二叉树</a>
                     <p class="is-size-7 is-uppercase">
                         <a class="has-link-grey -link" href="/categories/algorithms/">数据结构和算法</a>
-                    </p>
-                </div>
-            </div>
-        </article>
-        
-        <article class="media">
-            
-            <a href="/Java/%E7%BA%BF%E7%A8%8B%E5%92%8C%E7%BA%BF%E7%A8%8B%E6%B1%A0/" class="media-left">
-                <p class="image is-64x64">
-                    <img class="thumbnail" src="images/loading.gif" data-original="https://source.acexy.cn/view/XY7uH-p" alt="线程和线程池">
-                </p>
-            </a>
-            
-            <div class="media-content">
-                <div class="content">
-                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2020-12-02T07:44:10.000Z">2020-12-02</time></div>
-                    <a href="/Java/%E7%BA%BF%E7%A8%8B%E5%92%8C%E7%BA%BF%E7%A8%8B%E6%B1%A0/" class="title has-link-black-ter is-size-6 has-text-weight-normal">线程和线程池</a>
-                    <p class="is-size-7 is-uppercase">
-                        <a class="has-link-grey -link" href="/categories/Java/">Java基础</a>
-                    </p>
-                </div>
-            </div>
-        </article>
-        
-        <article class="media">
-            
-            <a href="/Java/volatile/" class="media-left">
-                <p class="image is-64x64">
-                    <img class="thumbnail" src="images/loading.gif" data-original="https://source.acexy.cn/view/XYhTHth" alt="volatile">
-                </p>
-            </a>
-            
-            <div class="media-content">
-                <div class="content">
-                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2020-12-02T02:15:12.000Z">2020-12-02</time></div>
-                    <a href="/Java/volatile/" class="title has-link-black-ter is-size-6 has-text-weight-normal">volatile</a>
-                    <p class="is-size-7 is-uppercase">
-                        <a class="has-link-grey -link" href="/categories/Java/">Java基础</a>
                     </p>
                 </div>
             </div>
@@ -699,6 +699,63 @@
         
         <article class="media">
             
+            <a href="/algorithms/algorithms-list-navigator/" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="images/loading.gif" data-original="https://source.acexy.cn/view/XX9GIuI" alt="数据结构与算法不迷路导航">
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2020-12-09T15:59:59.000Z">2020-12-09</time></div>
+                    <a href="/algorithms/algorithms-list-navigator/" class="title has-link-black-ter is-size-6 has-text-weight-normal">数据结构与算法不迷路导航</a>
+                    <p class="is-size-7 is-uppercase">
+                        <a class="has-link-grey -link" href="/categories/algorithms/">数据结构和算法</a>
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+        <article class="media">
+            
+            <a href="/algorithms/3sum/" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="images/loading.gif" data-original="https://b1.sbimg.org/file/chevereto-jia/2020/12/09/QQZN2.md.jpg" alt="15-三数之和">
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2020-12-09T09:08:49.000Z">2020-12-09</time></div>
+                    <a href="/algorithms/3sum/" class="title has-link-black-ter is-size-6 has-text-weight-normal">15-三数之和</a>
+                    <p class="is-size-7 is-uppercase">
+                        <a class="has-link-grey -link" href="/categories/algorithms/">数据结构和算法</a>
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+        <article class="media">
+            
+            <a href="/algorithms/longest-substring-without-repeating-characters/" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="images/loading.gif" data-original="https://source.acexy.cn/view/XZGzr5k" alt="3-无重复的最长字串">
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2020-12-09T08:52:06.000Z">2020-12-09</time></div>
+                    <a href="/algorithms/longest-substring-without-repeating-characters/" class="title has-link-black-ter is-size-6 has-text-weight-normal">3-无重复的最长字串</a>
+                    <p class="is-size-7 is-uppercase">
+                        <a class="has-link-grey -link" href="/categories/algorithms/">数据结构和算法</a>
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+        <article class="media">
+            
             <a href="/Others/why-my-blog-tips-unsafe/" class="media-left">
                 <p class="image is-64x64">
                     <img class="thumbnail" src="images/loading.gif" data-original="https://b1.sbimg.org/file/chevereto-jia/2020/12/09/QQRfN.md.jpg" alt="为什么我的博客提示不安全">
@@ -718,25 +775,6 @@
         
         <article class="media">
             
-            <a href="/algorithms/algorithms-list-navigator/" class="media-left">
-                <p class="image is-64x64">
-                    <img class="thumbnail" src="images/loading.gif" data-original="https://source.acexy.cn/view/XX9GIuI" alt="数据结构与算法不迷路导航">
-                </p>
-            </a>
-            
-            <div class="media-content">
-                <div class="content">
-                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2020-12-07T15:59:59.000Z">2020-12-07</time></div>
-                    <a href="/algorithms/algorithms-list-navigator/" class="title has-link-black-ter is-size-6 has-text-weight-normal">数据结构与算法不迷路导航</a>
-                    <p class="is-size-7 is-uppercase">
-                        <a class="has-link-grey -link" href="/categories/algorithms/">数据结构和算法</a>
-                    </p>
-                </div>
-            </div>
-        </article>
-        
-        <article class="media">
-            
             <a href="/algorithms/654-maximum-binary-tree/" class="media-left">
                 <p class="image is-64x64">
                     <img class="thumbnail" src="images/loading.gif" data-original="https://source.acexy.cn/view/XY6wtUA" alt="654-最大二叉树">
@@ -749,44 +787,6 @@
                     <a href="/algorithms/654-maximum-binary-tree/" class="title has-link-black-ter is-size-6 has-text-weight-normal">654-最大二叉树</a>
                     <p class="is-size-7 is-uppercase">
                         <a class="has-link-grey -link" href="/categories/algorithms/">数据结构和算法</a>
-                    </p>
-                </div>
-            </div>
-        </article>
-        
-        <article class="media">
-            
-            <a href="/Java/%E7%BA%BF%E7%A8%8B%E5%92%8C%E7%BA%BF%E7%A8%8B%E6%B1%A0/" class="media-left">
-                <p class="image is-64x64">
-                    <img class="thumbnail" src="images/loading.gif" data-original="https://source.acexy.cn/view/XY7uH-p" alt="线程和线程池">
-                </p>
-            </a>
-            
-            <div class="media-content">
-                <div class="content">
-                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2020-12-02T07:44:10.000Z">2020-12-02</time></div>
-                    <a href="/Java/%E7%BA%BF%E7%A8%8B%E5%92%8C%E7%BA%BF%E7%A8%8B%E6%B1%A0/" class="title has-link-black-ter is-size-6 has-text-weight-normal">线程和线程池</a>
-                    <p class="is-size-7 is-uppercase">
-                        <a class="has-link-grey -link" href="/categories/Java/">Java基础</a>
-                    </p>
-                </div>
-            </div>
-        </article>
-        
-        <article class="media">
-            
-            <a href="/Java/volatile/" class="media-left">
-                <p class="image is-64x64">
-                    <img class="thumbnail" src="images/loading.gif" data-original="https://source.acexy.cn/view/XYhTHth" alt="volatile">
-                </p>
-            </a>
-            
-            <div class="media-content">
-                <div class="content">
-                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2020-12-02T02:15:12.000Z">2020-12-02</time></div>
-                    <a href="/Java/volatile/" class="title has-link-black-ter is-size-6 has-text-weight-normal">volatile</a>
-                    <p class="is-size-7 is-uppercase">
-                        <a class="has-link-grey -link" href="/categories/Java/">Java基础</a>
                     </p>
                 </div>
             </div>
@@ -884,7 +884,7 @@
 <script>
 var IcarusThemeSettings = {
     site: {
-        url: 'http://wjw.today',
+        url: 'https://wjw.today',
         external_link: {"enable":true,"exclude":[]}
     },
     article: {

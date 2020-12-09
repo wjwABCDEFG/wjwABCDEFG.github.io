@@ -13,13 +13,13 @@
     <meta name="description" content="快速排序三种实现方式大家都知道快速排序一次后左边比标兵小，右边比标兵大。但是要注意市面上现在主要有两种快速排序：一种是标兵不动版（只在每趟最后做一次交换），一种是标兵移动版。两种效率都一样，原因在于最初的论文和《算法》书中的不一样。">
 <meta property="og:type" content="article">
 <meta property="og:title" content="记一次快速排序探究">
-<meta property="og:url" content="http://wjw.today/algorithms/quicksort/index.html">
+<meta property="og:url" content="https://wjw.today/algorithms/quicksort/index.html">
 <meta property="og:site_name" content="小温 blog">
 <meta property="og:description" content="快速排序三种实现方式大家都知道快速排序一次后左边比标兵小，右边比标兵大。但是要注意市面上现在主要有两种快速排序：一种是标兵不动版（只在每趟最后做一次交换），一种是标兵移动版。两种效率都一样，原因在于最初的论文和《算法》书中的不一样。">
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="https://source.acexy.cn/view/XV4h3ru">
 <meta property="article:published_time" content="2020-10-29T11:39:43.000Z">
-<meta property="article:modified_time" content="2020-12-07T03:18:22.713Z">
+<meta property="article:modified_time" content="2020-12-09T09:28:50.356Z">
 <meta property="article:author" content="wjw">
 <meta property="article:tag" content="排序">
 <meta name="twitter:card" content="summary">
@@ -204,7 +204,7 @@
 <p>完整代码如下</p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">zhongxin_004_</span>快速排序第<span class="title">n</span>趟结果 </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Test</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">test</span><span class="params">()</span></span>&#123;</span><br><span class="line">        <span class="keyword">int</span>[] array = &#123;<span class="number">42</span>,<span class="number">35</span>,<span class="number">63</span>,<span class="number">96</span>,<span class="number">56</span>,<span class="number">11</span>,<span class="number">17</span>,<span class="number">42</span>,<span class="number">88</span>&#125;;</span><br><span class="line">        <span class="keyword">int</span>[] res = nthResultOfQuickSort(array, <span class="number">4</span>);</span><br><span class="line">        System.out.println(Arrays.toString(res));</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">int</span> sum = <span class="number">1</span>;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">int</span>[] nthResultOfQuickSort (<span class="keyword">int</span>[] array, <span class="keyword">int</span> n) &#123;</span><br><span class="line">        <span class="comment">// write code here</span></span><br><span class="line">        <span class="comment">//计算次数</span></span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">1</span>; i &lt; n; i++) &#123;</span><br><span class="line">            sum += <span class="number">2</span> * i;</span><br><span class="line">        &#125;</span><br><span class="line">        quickSort(array);</span><br><span class="line">        <span class="keyword">return</span> array;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">quickSort</span><span class="params">(<span class="keyword">int</span>[] nums)</span></span>&#123;</span><br><span class="line">        Queue&lt;<span class="keyword">int</span>[]&gt; queue = <span class="keyword">new</span> LinkedList&lt;&gt;();    <span class="comment">//存左右下标</span></span><br><span class="line">        <span class="keyword">int</span>[] idx = &#123;<span class="number">0</span>, nums.length - <span class="number">1</span>&#125;;</span><br><span class="line">        queue.offer(idx);</span><br><span class="line">        <span class="keyword">while</span> (!queue.isEmpty())&#123;</span><br><span class="line">            idx = queue.poll();</span><br><span class="line">            <span class="keyword">if</span> (idx[<span class="number">0</span>] &gt; idx[<span class="number">1</span>]) <span class="keyword">continue</span>;</span><br><span class="line">            <span class="comment">//开始一轮交换（注意不是一趟）</span></span><br><span class="line">            <span class="keyword">int</span> left = idx[<span class="number">0</span>], right = idx[<span class="number">1</span>], temp = nums[left];</span><br><span class="line">            <span class="keyword">while</span> (left &lt; right)&#123;</span><br><span class="line">                <span class="comment">//从右往左</span></span><br><span class="line">                <span class="keyword">while</span> (left &lt; right &amp;&amp; temp &lt;= nums[right]) right--;</span><br><span class="line">                <span class="keyword">if</span> (left &lt; right)&#123;</span><br><span class="line">                    nums[left] = nums[right];</span><br><span class="line">                    left++;</span><br><span class="line">                &#125;</span><br><span class="line">                <span class="comment">//从左往右</span></span><br><span class="line">                <span class="keyword">while</span> (left &lt; right &amp;&amp; temp &gt;= nums[left]) left++;</span><br><span class="line">                <span class="keyword">if</span> (left &lt; right)&#123;</span><br><span class="line">                    nums[right] = nums[left];</span><br><span class="line">                    right--;</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="comment">//交换标兵，完成后代表一轮结束</span></span><br><span class="line">            nums[left] = temp;</span><br><span class="line">            <span class="comment">//交换结束，判断是否完成了第n趟</span></span><br><span class="line">            <span class="keyword">if</span> (--sum == <span class="number">0</span>) <span class="keyword">return</span>;</span><br><span class="line">            <span class="comment">//左右入队</span></span><br><span class="line">            <span class="keyword">int</span>[] idxL = &#123;idx[<span class="number">0</span>], left - <span class="number">1</span>&#125;;</span><br><span class="line">            queue.offer(idxL);</span><br><span class="line">            <span class="keyword">int</span>[] idxR = &#123;left + <span class="number">1</span>, idx[<span class="number">1</span>]&#125;;</span><br><span class="line">            queue.offer(idxR);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
-<p>其他排序的题目<a href="http://wjw.today/algorithms/algorithms-list-navigator/#5-树">点击这里</a></p>
+<p>其他排序的题目<a href="https://wjw.today/algorithms/algorithms-list-navigator/#5-树">点击这里</a></p>
 
         </div>
         
@@ -289,7 +289,7 @@
                     </p>
                     <a href="/archives">
                         <p class="title has-text-weight-normal">
-                            78
+                            80
                         </p>
                     </a>
                 </div>
@@ -408,7 +408,7 @@
                 <span class="level-item">数据结构和算法</span>
             </span>
             <span class="level-end">
-                <span class="level-item tag">43</span>
+                <span class="level-item tag">45</span>
             </span>
         </a></li><li>
         <a class="level is-marginless" href="/categories/deeplearning/">
@@ -507,6 +507,63 @@
         
         <article class="media">
             
+            <a href="/algorithms/algorithms-list-navigator/" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="images/loading.gif" data-original="https://source.acexy.cn/view/XX9GIuI" alt="数据结构与算法不迷路导航">
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2020-12-09T15:59:59.000Z">2020-12-09</time></div>
+                    <a href="/algorithms/algorithms-list-navigator/" class="title has-link-black-ter is-size-6 has-text-weight-normal">数据结构与算法不迷路导航</a>
+                    <p class="is-size-7 is-uppercase">
+                        <a class="has-link-grey -link" href="/categories/algorithms/">数据结构和算法</a>
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+        <article class="media">
+            
+            <a href="/algorithms/3sum/" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="images/loading.gif" data-original="https://b1.sbimg.org/file/chevereto-jia/2020/12/09/QQZN2.md.jpg" alt="15-三数之和">
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2020-12-09T09:08:49.000Z">2020-12-09</time></div>
+                    <a href="/algorithms/3sum/" class="title has-link-black-ter is-size-6 has-text-weight-normal">15-三数之和</a>
+                    <p class="is-size-7 is-uppercase">
+                        <a class="has-link-grey -link" href="/categories/algorithms/">数据结构和算法</a>
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+        <article class="media">
+            
+            <a href="/algorithms/longest-substring-without-repeating-characters/" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="images/loading.gif" data-original="https://source.acexy.cn/view/XZGzr5k" alt="3-无重复的最长字串">
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2020-12-09T08:52:06.000Z">2020-12-09</time></div>
+                    <a href="/algorithms/longest-substring-without-repeating-characters/" class="title has-link-black-ter is-size-6 has-text-weight-normal">3-无重复的最长字串</a>
+                    <p class="is-size-7 is-uppercase">
+                        <a class="has-link-grey -link" href="/categories/algorithms/">数据结构和算法</a>
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+        <article class="media">
+            
             <a href="/Others/why-my-blog-tips-unsafe/" class="media-left">
                 <p class="image is-64x64">
                     <img class="thumbnail" src="images/loading.gif" data-original="https://b1.sbimg.org/file/chevereto-jia/2020/12/09/QQRfN.md.jpg" alt="为什么我的博客提示不安全">
@@ -526,25 +583,6 @@
         
         <article class="media">
             
-            <a href="/algorithms/algorithms-list-navigator/" class="media-left">
-                <p class="image is-64x64">
-                    <img class="thumbnail" src="images/loading.gif" data-original="https://source.acexy.cn/view/XX9GIuI" alt="数据结构与算法不迷路导航">
-                </p>
-            </a>
-            
-            <div class="media-content">
-                <div class="content">
-                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2020-12-07T15:59:59.000Z">2020-12-07</time></div>
-                    <a href="/algorithms/algorithms-list-navigator/" class="title has-link-black-ter is-size-6 has-text-weight-normal">数据结构与算法不迷路导航</a>
-                    <p class="is-size-7 is-uppercase">
-                        <a class="has-link-grey -link" href="/categories/algorithms/">数据结构和算法</a>
-                    </p>
-                </div>
-            </div>
-        </article>
-        
-        <article class="media">
-            
             <a href="/algorithms/654-maximum-binary-tree/" class="media-left">
                 <p class="image is-64x64">
                     <img class="thumbnail" src="images/loading.gif" data-original="https://source.acexy.cn/view/XY6wtUA" alt="654-最大二叉树">
@@ -557,44 +595,6 @@
                     <a href="/algorithms/654-maximum-binary-tree/" class="title has-link-black-ter is-size-6 has-text-weight-normal">654-最大二叉树</a>
                     <p class="is-size-7 is-uppercase">
                         <a class="has-link-grey -link" href="/categories/algorithms/">数据结构和算法</a>
-                    </p>
-                </div>
-            </div>
-        </article>
-        
-        <article class="media">
-            
-            <a href="/Java/%E7%BA%BF%E7%A8%8B%E5%92%8C%E7%BA%BF%E7%A8%8B%E6%B1%A0/" class="media-left">
-                <p class="image is-64x64">
-                    <img class="thumbnail" src="images/loading.gif" data-original="https://source.acexy.cn/view/XY7uH-p" alt="线程和线程池">
-                </p>
-            </a>
-            
-            <div class="media-content">
-                <div class="content">
-                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2020-12-02T07:44:10.000Z">2020-12-02</time></div>
-                    <a href="/Java/%E7%BA%BF%E7%A8%8B%E5%92%8C%E7%BA%BF%E7%A8%8B%E6%B1%A0/" class="title has-link-black-ter is-size-6 has-text-weight-normal">线程和线程池</a>
-                    <p class="is-size-7 is-uppercase">
-                        <a class="has-link-grey -link" href="/categories/Java/">Java基础</a>
-                    </p>
-                </div>
-            </div>
-        </article>
-        
-        <article class="media">
-            
-            <a href="/Java/volatile/" class="media-left">
-                <p class="image is-64x64">
-                    <img class="thumbnail" src="images/loading.gif" data-original="https://source.acexy.cn/view/XYhTHth" alt="volatile">
-                </p>
-            </a>
-            
-            <div class="media-content">
-                <div class="content">
-                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2020-12-02T02:15:12.000Z">2020-12-02</time></div>
-                    <a href="/Java/volatile/" class="title has-link-black-ter is-size-6 has-text-weight-normal">volatile</a>
-                    <p class="is-size-7 is-uppercase">
-                        <a class="has-link-grey -link" href="/categories/Java/">Java基础</a>
                     </p>
                 </div>
             </div>
@@ -661,6 +661,63 @@
         
         <article class="media">
             
+            <a href="/algorithms/algorithms-list-navigator/" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="images/loading.gif" data-original="https://source.acexy.cn/view/XX9GIuI" alt="数据结构与算法不迷路导航">
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2020-12-09T15:59:59.000Z">2020-12-09</time></div>
+                    <a href="/algorithms/algorithms-list-navigator/" class="title has-link-black-ter is-size-6 has-text-weight-normal">数据结构与算法不迷路导航</a>
+                    <p class="is-size-7 is-uppercase">
+                        <a class="has-link-grey -link" href="/categories/algorithms/">数据结构和算法</a>
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+        <article class="media">
+            
+            <a href="/algorithms/3sum/" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="images/loading.gif" data-original="https://b1.sbimg.org/file/chevereto-jia/2020/12/09/QQZN2.md.jpg" alt="15-三数之和">
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2020-12-09T09:08:49.000Z">2020-12-09</time></div>
+                    <a href="/algorithms/3sum/" class="title has-link-black-ter is-size-6 has-text-weight-normal">15-三数之和</a>
+                    <p class="is-size-7 is-uppercase">
+                        <a class="has-link-grey -link" href="/categories/algorithms/">数据结构和算法</a>
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+        <article class="media">
+            
+            <a href="/algorithms/longest-substring-without-repeating-characters/" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="images/loading.gif" data-original="https://source.acexy.cn/view/XZGzr5k" alt="3-无重复的最长字串">
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2020-12-09T08:52:06.000Z">2020-12-09</time></div>
+                    <a href="/algorithms/longest-substring-without-repeating-characters/" class="title has-link-black-ter is-size-6 has-text-weight-normal">3-无重复的最长字串</a>
+                    <p class="is-size-7 is-uppercase">
+                        <a class="has-link-grey -link" href="/categories/algorithms/">数据结构和算法</a>
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+        <article class="media">
+            
             <a href="/Others/why-my-blog-tips-unsafe/" class="media-left">
                 <p class="image is-64x64">
                     <img class="thumbnail" src="images/loading.gif" data-original="https://b1.sbimg.org/file/chevereto-jia/2020/12/09/QQRfN.md.jpg" alt="为什么我的博客提示不安全">
@@ -680,25 +737,6 @@
         
         <article class="media">
             
-            <a href="/algorithms/algorithms-list-navigator/" class="media-left">
-                <p class="image is-64x64">
-                    <img class="thumbnail" src="images/loading.gif" data-original="https://source.acexy.cn/view/XX9GIuI" alt="数据结构与算法不迷路导航">
-                </p>
-            </a>
-            
-            <div class="media-content">
-                <div class="content">
-                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2020-12-07T15:59:59.000Z">2020-12-07</time></div>
-                    <a href="/algorithms/algorithms-list-navigator/" class="title has-link-black-ter is-size-6 has-text-weight-normal">数据结构与算法不迷路导航</a>
-                    <p class="is-size-7 is-uppercase">
-                        <a class="has-link-grey -link" href="/categories/algorithms/">数据结构和算法</a>
-                    </p>
-                </div>
-            </div>
-        </article>
-        
-        <article class="media">
-            
             <a href="/algorithms/654-maximum-binary-tree/" class="media-left">
                 <p class="image is-64x64">
                     <img class="thumbnail" src="images/loading.gif" data-original="https://source.acexy.cn/view/XY6wtUA" alt="654-最大二叉树">
@@ -711,44 +749,6 @@
                     <a href="/algorithms/654-maximum-binary-tree/" class="title has-link-black-ter is-size-6 has-text-weight-normal">654-最大二叉树</a>
                     <p class="is-size-7 is-uppercase">
                         <a class="has-link-grey -link" href="/categories/algorithms/">数据结构和算法</a>
-                    </p>
-                </div>
-            </div>
-        </article>
-        
-        <article class="media">
-            
-            <a href="/Java/%E7%BA%BF%E7%A8%8B%E5%92%8C%E7%BA%BF%E7%A8%8B%E6%B1%A0/" class="media-left">
-                <p class="image is-64x64">
-                    <img class="thumbnail" src="images/loading.gif" data-original="https://source.acexy.cn/view/XY7uH-p" alt="线程和线程池">
-                </p>
-            </a>
-            
-            <div class="media-content">
-                <div class="content">
-                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2020-12-02T07:44:10.000Z">2020-12-02</time></div>
-                    <a href="/Java/%E7%BA%BF%E7%A8%8B%E5%92%8C%E7%BA%BF%E7%A8%8B%E6%B1%A0/" class="title has-link-black-ter is-size-6 has-text-weight-normal">线程和线程池</a>
-                    <p class="is-size-7 is-uppercase">
-                        <a class="has-link-grey -link" href="/categories/Java/">Java基础</a>
-                    </p>
-                </div>
-            </div>
-        </article>
-        
-        <article class="media">
-            
-            <a href="/Java/volatile/" class="media-left">
-                <p class="image is-64x64">
-                    <img class="thumbnail" src="images/loading.gif" data-original="https://source.acexy.cn/view/XYhTHth" alt="volatile">
-                </p>
-            </a>
-            
-            <div class="media-content">
-                <div class="content">
-                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2020-12-02T02:15:12.000Z">2020-12-02</time></div>
-                    <a href="/Java/volatile/" class="title has-link-black-ter is-size-6 has-text-weight-normal">volatile</a>
-                    <p class="is-size-7 is-uppercase">
-                        <a class="has-link-grey -link" href="/categories/Java/">Java基础</a>
                     </p>
                 </div>
             </div>
@@ -846,7 +846,7 @@
 <script>
 var IcarusThemeSettings = {
     site: {
-        url: 'http://wjw.today',
+        url: 'https://wjw.today',
         external_link: {"enable":true,"exclude":[]}
     },
     article: {
