@@ -130,6 +130,589 @@
 <div class="card">
     
     <div class="card-image">
+        <a href="/algorithms/longest-palindromic-substring/" class="image is-7by1">
+            <img class="thumbnail" src="images/loading.gif" data-original="https://source.acexy.cn/view/XOb1+A1" alt="5-最长回文子串">
+        </a>
+    </div>
+    
+    <div class="card-content article ">
+        
+        <div class="level article-meta is-size-7 is-uppercase is-mobile is-overflow-x-auto">
+            <div class="level-left">
+                <time class="level-item has-text-grey" datetime="2020-07-29T14:59:51.000Z">2020-07-29</time>
+                
+                <div class="level-item">
+                <a class="has-link-grey -link" href="/categories/algorithms/">数据结构和算法</a>
+                </div>
+                
+                
+                <span class="level-item has-text-grey">
+                    
+                    
+                    4 分钟 读完 (大约 644 个字)
+                </span>
+                
+                
+            </div>
+        </div>
+        
+        <h1 class="title is-size-3 is-size-4-mobile has-text-weight-normal">
+            
+                <a class="has-link-black-ter" href="/algorithms/longest-palindromic-substring/">5-最长回文子串</a>
+            
+        </h1>
+        <div class="content">
+            <p>力扣5</p>
+<blockquote>
+<p><a href="https://leetcode-cn.com/problems/longest-palindromic-substring/">https://leetcode-cn.com/problems/longest-palindromic-substring/</a></p>
+</blockquote>
+<p><img src="images/loading.gif" data-original="https://s3.ax1x.com/2020/11/19/DKFWBd.png" alt=""></p>
+<br>
+
+<h2 id="思路"><a href="#思路" class="headerlink" title="思路"></a>思路</h2><p>很有意思很高频的一道题，我的思路历程是这样的：</p>
+<p>确定左右然后对区间判断？  <em>不对—&gt;应该是以i为中间往两边扩散</em></p>
+<p>“aba”和”abba”好像不一样啊？  <em>只是l和r初始值不能是等于i，而是相同字母的左右边界，这样两种情况就一样了</em></p>
+<p>想明白了这两点</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> String <span class="title">longestPalindrome</span><span class="params">(String s)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">if</span> (s == <span class="keyword">null</span> || s.length() == <span class="number">0</span>) <span class="keyword">return</span> <span class="string">""</span>;</span><br><span class="line">    <span class="keyword">char</span>[] chars = s.toCharArray();</span><br><span class="line">    <span class="keyword">int</span>[] idx = <span class="keyword">new</span> <span class="keyword">int</span>[<span class="number">2</span>];	<span class="comment">//用来存最长的结果的左右下标，不要每次都substring，这样太慢</span></span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; chars.length; i++) &#123;</span><br><span class="line">        <span class="keyword">int</span> l = i, r = i;    <span class="comment">//从中间向两边找</span></span><br><span class="line">        <span class="comment">//l和r初始值应该是相同字母的左右边界</span></span><br><span class="line">        <span class="keyword">while</span> (l - <span class="number">1</span> &gt;= <span class="number">0</span> &amp;&amp; chars[l - <span class="number">1</span>] == chars[i]) l--;</span><br><span class="line">        <span class="keyword">while</span> (r + <span class="number">1</span> &lt; chars.length &amp;&amp; chars[r + <span class="number">1</span>] == chars[i]) r++;</span><br><span class="line">        <span class="keyword">while</span> (l - <span class="number">1</span> &gt;= <span class="number">0</span> &amp;&amp; r + <span class="number">1</span> &lt; chars.length)&#123;</span><br><span class="line">            <span class="keyword">if</span> (chars[l - <span class="number">1</span>] != chars[r + <span class="number">1</span>])&#123;</span><br><span class="line">                <span class="keyword">break</span>;</span><br><span class="line">            &#125;</span><br><span class="line">            l--;	<span class="comment">//左右扩散</span></span><br><span class="line">            r++;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">if</span> ((r - l) &gt; (idx[<span class="number">1</span>] - idx[<span class="number">0</span>]))&#123;</span><br><span class="line">            idx[<span class="number">0</span>] = l;</span><br><span class="line">            idx[<span class="number">1</span>] = r;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> s.substring(idx[<span class="number">0</span>], idx[<span class="number">1</span>] + <span class="number">1</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><img src="images/loading.gif" data-original="https://s3.ax1x.com/2020/11/19/DKVjMT.png" alt=""></p>
+<br>
+
+<h2 id="优化"><a href="#优化" class="headerlink" title="优化"></a>优化</h2><p>[a]代表当前遍历到了哪里</p>
+<p>对于b[b]bbb和 bb[b]bb我们可以发现其实定位l和r的初始值后是一样的，所以我们可以跳过这几种，具体有以下两点要做</p>
+<ol>
+<li>定位完r后，直接让i = r，跳过中间的所有b（[b]bbbb—&gt;bbbb[b]）</li>
+<li>这样操作后实际上没有i在中间的情况（b[b]bbb），因为我们实际上只找了最左边那次，所以可以不用再定位l，只需要定位r</li>
+</ol>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> String <span class="title">longestPalindrome</span><span class="params">(String s)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">if</span> (s == <span class="keyword">null</span> || s.length() == <span class="number">0</span>) <span class="keyword">return</span> <span class="string">""</span>;</span><br><span class="line">    <span class="keyword">char</span>[] chars = s.toCharArray();</span><br><span class="line">    <span class="keyword">int</span>[] idx = <span class="keyword">new</span> <span class="keyword">int</span>[<span class="number">2</span>];</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; chars.length; i++) &#123;</span><br><span class="line">        <span class="keyword">int</span> l = i, r = i;</span><br><span class="line">        <span class="comment">//while (l - 1 &gt;= 0 &amp;&amp; chars[l - 1] == chars[i]) l--;   //优化2，实际上不需要找左边了</span></span><br><span class="line">        <span class="keyword">while</span> (r + <span class="number">1</span> &lt; chars.length &amp;&amp; chars[r + <span class="number">1</span>] == chars[i]) r++;</span><br><span class="line">        i = r;  <span class="comment">//优化1，跳过中间部分，直接定位到同字母的最后一个</span></span><br><span class="line">        <span class="keyword">while</span> (l - <span class="number">1</span> &gt;= <span class="number">0</span> &amp;&amp; r + <span class="number">1</span> &lt; chars.length)&#123;</span><br><span class="line">            <span class="keyword">if</span> (chars[l - <span class="number">1</span>] != chars[r + <span class="number">1</span>])&#123;</span><br><span class="line">                <span class="keyword">break</span>;</span><br><span class="line">            &#125;</span><br><span class="line">            l--;</span><br><span class="line">            r++;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">if</span> ((r - l) &gt; (idx[<span class="number">1</span>] - idx[<span class="number">0</span>]))&#123;</span><br><span class="line">            idx[<span class="number">0</span>] = l;</span><br><span class="line">            idx[<span class="number">1</span>] = r;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> s.substring(idx[<span class="number">0</span>], idx[<span class="number">1</span>] + <span class="number">1</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><img src="images/loading.gif" data-original="https://s3.ax1x.com/2020/11/19/DKZHmD.png" alt=""></p>
+<br>
+
+<p>后记，准备将原来的一些题目重做一下，有一些题目真的是感觉得出一定是高频题，比如链表反转，最长回文，最长不重复，最大子数组…接下来会重做这些题目</p>
+<br>
+
+<blockquote>
+<p>参考</p>
+<p>评论区<a href="https://leetcode-cn.com/u/tang-zhu-7/">糖丶7</a>的方法</p>
+</blockquote>
+<br>
+
+<p>其他字符串类型的题目可以<a href="https://wjw.today/algorithms/algorithms-list-navigator/#6-字符串">点击这里</a></p>
+
+        </div>
+        
+        
+        
+    </div>
+</div>
+
+
+
+
+
+
+
+
+    
+<div class="card">
+    
+    <div class="card-image">
+        <a href="/Others/%E6%9C%80%E7%9F%AD%E4%BD%9C%E4%B8%9A%E4%BC%98%E5%85%88%E7%AE%97%E6%B3%95(SJF)/" class="image is-7by1">
+            <img class="thumbnail" src="images/loading.gif" data-original="https://source.acexy.cn/view/XOb1CgW" alt="最短作业优先算法(SJF)">
+        </a>
+    </div>
+    
+    <div class="card-content article ">
+        
+        <div class="level article-meta is-size-7 is-uppercase is-mobile is-overflow-x-auto">
+            <div class="level-left">
+                <time class="level-item has-text-grey" datetime="2020-07-28T13:54:43.000Z">2020-07-28</time>
+                
+                <div class="level-item">
+                <a class="has-link-grey -link" href="/categories/Others/">Others</a>
+                </div>
+                
+                
+                <span class="level-item has-text-grey">
+                    
+                    
+                    5 分钟 读完 (大约 720 个字)
+                </span>
+                
+                
+            </div>
+        </div>
+        
+        <h1 class="title is-size-3 is-size-4-mobile has-text-weight-normal">
+            
+                <a class="has-link-black-ter" href="/Others/%E6%9C%80%E7%9F%AD%E4%BD%9C%E4%B8%9A%E4%BC%98%E5%85%88%E7%AE%97%E6%B3%95(SJF)/">最短作业优先算法(SJF)</a>
+            
+        </h1>
+        <div class="content">
+            <p>就是CPU选择先运行耗时短的任务，比如任务A需要3s，任务B需要5s，那么程序选择先运行A</p>
+<br>
+
+<p>5个程序ABCDE同时提交给CPU执行（虽然式同时提交，但是有先后，假装A比B快那么一点点的一点点的一点点好了）</p>
+        </div>
+        
+        
+        <div class="level is-mobile">
+            <div class="level-start">
+                <div class="level-item">
+                <a class="button is-size-7 is-light" href="/Others/%E6%9C%80%E7%9F%AD%E4%BD%9C%E4%B8%9A%E4%BC%98%E5%85%88%E7%AE%97%E6%B3%95(SJF)/#more">阅读更多</a>
+                </div>
+            </div>
+        </div>
+        
+        
+    </div>
+</div>
+
+
+
+
+
+
+
+
+    
+<div class="card">
+    
+    <div class="card-image">
+        <a href="/designpattern/%E7%AE%80%E5%8D%95%E5%B7%A5%E5%8E%82%E6%A8%A1%E5%BC%8F/" class="image is-7by1">
+            <img class="thumbnail" src="images/loading.gif" data-original="https://source.acexy.cn/view/XOb1Do2" alt="简单工厂模式">
+        </a>
+    </div>
+    
+    <div class="card-content article ">
+        
+        <div class="level article-meta is-size-7 is-uppercase is-mobile is-overflow-x-auto">
+            <div class="level-left">
+                <time class="level-item has-text-grey" datetime="2020-07-27T08:49:51.000Z">2020-07-27</time>
+                
+                <div class="level-item">
+                <a class="has-link-grey -link" href="/categories/designpattern/">设计模式</a>
+                </div>
+                
+                
+                <span class="level-item has-text-grey">
+                    
+                    
+                    8 分钟 读完 (大约 1266 个字)
+                </span>
+                
+                
+            </div>
+        </div>
+        
+        <h1 class="title is-size-3 is-size-4-mobile has-text-weight-normal">
+            
+                <a class="has-link-black-ter" href="/designpattern/%E7%AE%80%E5%8D%95%E5%B7%A5%E5%8E%82%E6%A8%A1%E5%BC%8F/">简单工厂模式</a>
+            
+        </h1>
+        <div class="content">
+            <h1 id="1-介绍和应用场景"><a href="#1-介绍和应用场景" class="headerlink" title="1. 介绍和应用场景"></a>1. 介绍和应用场景</h1><p>工厂模式：创建对象时不会对客户端暴露创建逻辑（new），而是通过使用一个共同的接口来指向新创建的对象。</p>
+<p>生活中的例子：您需要一辆汽车，可以直接从工厂里面提货，而不用去管这辆汽车是怎么做出来的，以及这个汽车里面的具体实现</p>
+        </div>
+        
+        
+        <div class="level is-mobile">
+            <div class="level-start">
+                <div class="level-item">
+                <a class="button is-size-7 is-light" href="/designpattern/%E7%AE%80%E5%8D%95%E5%B7%A5%E5%8E%82%E6%A8%A1%E5%BC%8F/#more">阅读更多</a>
+                </div>
+            </div>
+        </div>
+        
+        
+    </div>
+</div>
+
+
+
+
+
+
+
+
+    
+<div class="card">
+    
+    <div class="card-image">
+        <a href="/Others/%E9%98%BF%E9%87%8C%E7%9F%AD%E4%BF%A1/" class="image is-7by1">
+            <img class="thumbnail" src="images/loading.gif" data-original="https://source.acexy.cn/view/XOY2GHQ" alt="阿里短信">
+        </a>
+    </div>
+    
+    <div class="card-content article ">
+        
+        <div class="level article-meta is-size-7 is-uppercase is-mobile is-overflow-x-auto">
+            <div class="level-left">
+                <time class="level-item has-text-grey" datetime="2020-07-24T09:39:45.000Z">2020-07-24</time>
+                
+                <div class="level-item">
+                <a class="has-link-grey -link" href="/categories/Others/">Others</a>
+                </div>
+                
+                
+                <span class="level-item has-text-grey">
+                    
+                    
+                    4 分钟 读完 (大约 545 个字)
+                </span>
+                
+                
+            </div>
+        </div>
+        
+        <h1 class="title is-size-3 is-size-4-mobile has-text-weight-normal">
+            
+                <a class="has-link-black-ter" href="/Others/%E9%98%BF%E9%87%8C%E7%9F%AD%E4%BF%A1/">阿里短信</a>
+            
+        </h1>
+        <div class="content">
+            <p>注册的时候或者什么时候，可以使用短信验证码，记录一下阿里短信的使用</p>
+<h1 id="1-登录阿里云后先给自己的账户充值"><a href="#1-登录阿里云后先给自己的账户充值" class="headerlink" title="1. 登录阿里云后先给自己的账户充值"></a>1. 登录阿里云后先给自己的账户充值</h1><p>阔气的大手一挥，充他个2块钱</p>
+        </div>
+        
+        
+        <div class="level is-mobile">
+            <div class="level-start">
+                <div class="level-item">
+                <a class="button is-size-7 is-light" href="/Others/%E9%98%BF%E9%87%8C%E7%9F%AD%E4%BF%A1/#more">阅读更多</a>
+                </div>
+            </div>
+        </div>
+        
+        
+    </div>
+</div>
+
+
+
+
+
+
+
+
+    
+<div class="card">
+    
+    <div class="card-image">
+        <a href="/SpringCloud/JWT+RSA%E9%9D%9E%E5%AF%B9%E7%A7%B0%E5%8A%A0%E5%AF%86%E5%AE%9E%E7%8E%B0%E6%97%A0%E7%8A%B6%E6%80%81%E7%99%BB%E5%BD%95/" class="image is-7by1">
+            <img class="thumbnail" src="images/loading.gif" data-original="https://wx2.sbimg.cn/2020/07/30/P7eY2.md.jpg" alt="JWT+RSA非对称加密实现无状态登录">
+        </a>
+    </div>
+    
+    <div class="card-content article ">
+        
+        <div class="level article-meta is-size-7 is-uppercase is-mobile is-overflow-x-auto">
+            <div class="level-left">
+                <time class="level-item has-text-grey" datetime="2020-07-24T09:34:21.000Z">2020-07-24</time>
+                
+                <div class="level-item">
+                <a class="has-link-grey -link" href="/categories/SpringCloud/">SpringCloud</a>
+                </div>
+                
+                
+                <span class="level-item has-text-grey">
+                    
+                    
+                    18 分钟 读完 (大约 2636 个字)
+                </span>
+                
+                
+            </div>
+        </div>
+        
+        <h1 class="title is-size-3 is-size-4-mobile has-text-weight-normal">
+            
+                <a class="has-link-black-ter" href="/SpringCloud/JWT+RSA%E9%9D%9E%E5%AF%B9%E7%A7%B0%E5%8A%A0%E5%AF%86%E5%AE%9E%E7%8E%B0%E6%97%A0%E7%8A%B6%E6%80%81%E7%99%BB%E5%BD%95/">JWT+RSA非对称加密实现无状态登录</a>
+            
+        </h1>
+        <div class="content">
+            <h1 id="1-问题"><a href="#1-问题" class="headerlink" title="1. 问题"></a>1. 问题</h1><p>以前我们的登录都是将当前登录的用户信息放在session中，但是session是保存在服务器的，在分布式环境下服务器不只有一台，那就容易找不到登录的用户信息，所以应该是保存在客户端也就是cookie中的，但是存在cookie中有个问题，就是要进行一些操作时需要获取当前登录的用户信息，那么要将cookie中的user发送过去，这一来二去老是携带着明文的用户名和密码，就很不安全，会被人用一些技术手段拦截，那么就获取了你的账号密码信息。</p>
+        </div>
+        
+        
+        <div class="level is-mobile">
+            <div class="level-start">
+                <div class="level-item">
+                <a class="button is-size-7 is-light" href="/SpringCloud/JWT+RSA%E9%9D%9E%E5%AF%B9%E7%A7%B0%E5%8A%A0%E5%AF%86%E5%AE%9E%E7%8E%B0%E6%97%A0%E7%8A%B6%E6%80%81%E7%99%BB%E5%BD%95/#more">阅读更多</a>
+                </div>
+            </div>
+        </div>
+        
+        
+    </div>
+</div>
+
+
+
+
+
+
+
+
+    
+<div class="card">
+    
+    <div class="card-image">
+        <a href="/SpringCloud/ribbon%E5%92%8Chytrix%E8%B6%85%E6%97%B6%E8%B8%A9%E5%9D%91%E8%AE%B0%E5%BD%95/" class="image is-7by1">
+            <img class="thumbnail" src="images/loading.gif" data-original="https://wx2.sbimg.cn/2020/07/30/P71Ml.md.jpg" alt="ribbon和hytrix超时踩坑记录">
+        </a>
+    </div>
+    
+    <div class="card-content article ">
+        
+        <div class="level article-meta is-size-7 is-uppercase is-mobile is-overflow-x-auto">
+            <div class="level-left">
+                <time class="level-item has-text-grey" datetime="2020-07-18T15:06:18.000Z">2020-07-18</time>
+                
+                <div class="level-item">
+                <a class="has-link-grey -link" href="/categories/SpringCloud/">SpringCloud</a>
+                </div>
+                
+                
+                <span class="level-item has-text-grey">
+                    
+                    
+                    5 分钟 读完 (大约 701 个字)
+                </span>
+                
+                
+            </div>
+        </div>
+        
+        <h1 class="title is-size-3 is-size-4-mobile has-text-weight-normal">
+            
+                <a class="has-link-black-ter" href="/SpringCloud/ribbon%E5%92%8Chytrix%E8%B6%85%E6%97%B6%E8%B8%A9%E5%9D%91%E8%AE%B0%E5%BD%95/">ribbon和hytrix超时踩坑记录</a>
+            
+        </h1>
+        <div class="content">
+            <p>在学习商城项目时，接触到了搜索，完了以后我看着这搜索时灵时不灵根本没办法实际使用，看着控制台报着zuul和hytrix的错误和警告，陷入了深思…</p>
+<p>主要是涉及以下几个错误和警告</p>
+<ol>
+<li>ribbon超时时间设置太短，报如下错误</li>
+</ol>
+        </div>
+        
+        
+        <div class="level is-mobile">
+            <div class="level-start">
+                <div class="level-item">
+                <a class="button is-size-7 is-light" href="/SpringCloud/ribbon%E5%92%8Chytrix%E8%B6%85%E6%97%B6%E8%B8%A9%E5%9D%91%E8%AE%B0%E5%BD%95/#more">阅读更多</a>
+                </div>
+            </div>
+        </div>
+        
+        
+    </div>
+</div>
+
+
+
+
+
+
+
+
+    
+<div class="card">
+    
+    <div class="card-image">
+        <a href="/Spring/fastDFS%E7%9A%84%E5%AE%89%E8%A3%85%E5%92%8Cspringboot%E5%AE%8C%E6%88%90%E6%96%87%E4%BB%B6%E4%B8%8A%E4%BC%A0/" class="image is-7by1">
+            <img class="thumbnail" src="images/loading.gif" data-original="https://source.acexy.cn/view/XOb1Alr" alt="fastDFS的安装和springboot完成文件上传">
+        </a>
+    </div>
+    
+    <div class="card-content article ">
+        
+        <div class="level article-meta is-size-7 is-uppercase is-mobile is-overflow-x-auto">
+            <div class="level-left">
+                <time class="level-item has-text-grey" datetime="2020-07-14T08:25:17.000Z">2020-07-14</time>
+                
+                <div class="level-item">
+                <a class="has-link-grey -link" href="/categories/Spring/">Spring</a>
+                </div>
+                
+                
+                <span class="level-item has-text-grey">
+                    
+                    
+                    16 分钟 读完 (大约 2438 个字)
+                </span>
+                
+                
+            </div>
+        </div>
+        
+        <h1 class="title is-size-3 is-size-4-mobile has-text-weight-normal">
+            
+                <a class="has-link-black-ter" href="/Spring/fastDFS%E7%9A%84%E5%AE%89%E8%A3%85%E5%92%8Cspringboot%E5%AE%8C%E6%88%90%E6%96%87%E4%BB%B6%E4%B8%8A%E4%BC%A0/">fastDFS的安装和springboot完成文件上传</a>
+            
+        </h1>
+        <div class="content">
+            <h1 id="1-安装fastDFS"><a href="#1-安装fastDFS" class="headerlink" title="1. 安装fastDFS"></a>1. 安装fastDFS</h1><ol>
+<li>安装libevent</li>
+</ol>
+<p>ubuntu下</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo apt-get install libevent-dev</span><br></pre></td></tr></table></figure>
+        </div>
+        
+        
+        <div class="level is-mobile">
+            <div class="level-start">
+                <div class="level-item">
+                <a class="button is-size-7 is-light" href="/Spring/fastDFS%E7%9A%84%E5%AE%89%E8%A3%85%E5%92%8Cspringboot%E5%AE%8C%E6%88%90%E6%96%87%E4%BB%B6%E4%B8%8A%E4%BC%A0/#more">阅读更多</a>
+                </div>
+            </div>
+        </div>
+        
+        
+    </div>
+</div>
+
+
+
+
+
+
+
+
+    
+<div class="card">
+    
+    <div class="card-image">
+        <a href="/algorithms/%E6%A0%B9%E6%8D%AE%E4%B8%A4%E5%BA%8F%E9%81%8D%E5%8E%86%E6%8E%A8%E5%87%BA%E7%AC%AC%E4%B8%89%E5%BA%8F%E4%BB%A5%E5%8F%8A%E6%9E%84%E5%BB%BA%E6%A0%91/" class="image is-7by1">
+            <img class="thumbnail" src="images/loading.gif" data-original="https://wx1.sbimg.cn/2020/07/30/P77wm.md.jpg" alt="根据两序遍历推出第三序以及构建树">
+        </a>
+    </div>
+    
+    <div class="card-content article ">
+        
+        <div class="level article-meta is-size-7 is-uppercase is-mobile is-overflow-x-auto">
+            <div class="level-left">
+                <time class="level-item has-text-grey" datetime="2020-07-11T10:22:36.000Z">2020-07-11</time>
+                
+                <div class="level-item">
+                <a class="has-link-grey -link" href="/categories/algorithms/">数据结构和算法</a>
+                </div>
+                
+                
+                <span class="level-item has-text-grey">
+                    
+                    
+                    18 分钟 读完 (大约 2628 个字)
+                </span>
+                
+                
+            </div>
+        </div>
+        
+        <h1 class="title is-size-3 is-size-4-mobile has-text-weight-normal">
+            
+                <a class="has-link-black-ter" href="/algorithms/%E6%A0%B9%E6%8D%AE%E4%B8%A4%E5%BA%8F%E9%81%8D%E5%8E%86%E6%8E%A8%E5%87%BA%E7%AC%AC%E4%B8%89%E5%BA%8F%E4%BB%A5%E5%8F%8A%E6%9E%84%E5%BB%BA%E6%A0%91/">根据两序遍历推出第三序以及构建树</a>
+            
+        </h1>
+        <div class="content">
+            <blockquote>
+<p>前言：太久了都快忘了，最近做了一下笔试题遇到这题，发现经常考这种题，先把技巧记录下来，有了技巧后简直不要太轻松</p>
+</blockquote>
+<h1 id="1-树的三种遍历"><a href="#1-树的三种遍历" class="headerlink" title="1. 树的三种遍历"></a>1. 树的三种遍历</h1><ul>
+<li>前序遍历（根左右）</li>
+<li>中序遍历（左根右）</li>
+<li>后序遍历（左右根）</li>
+</ul>
+        </div>
+        
+        
+        <div class="level is-mobile">
+            <div class="level-start">
+                <div class="level-item">
+                <a class="button is-size-7 is-light" href="/algorithms/%E6%A0%B9%E6%8D%AE%E4%B8%A4%E5%BA%8F%E9%81%8D%E5%8E%86%E6%8E%A8%E5%87%BA%E7%AC%AC%E4%B8%89%E5%BA%8F%E4%BB%A5%E5%8F%8A%E6%9E%84%E5%BB%BA%E6%A0%91/#more">阅读更多</a>
+                </div>
+            </div>
+        </div>
+        
+        
+    </div>
+</div>
+
+
+
+
+
+
+
+
+    
+<div class="card">
+    
+    <div class="card-image">
+        <a href="/algorithms/traverse-and-visualize-binary-tree-with-java/" class="image is-7by1">
+            <img class="thumbnail" src="images/loading.gif" data-original="https://wx2.sbimg.cn/2020/07/30/P7tV8.md.jpg" alt="Java实现树的遍历及二叉树可视化">
+        </a>
+    </div>
+    
+    <div class="card-content article ">
+        
+        <div class="level article-meta is-size-7 is-uppercase is-mobile is-overflow-x-auto">
+            <div class="level-left">
+                <time class="level-item has-text-grey" datetime="2020-07-11T09:47:25.000Z">2020-07-11</time>
+                
+                <div class="level-item">
+                <a class="has-link-grey -link" href="/categories/algorithms/">数据结构和算法</a>
+                </div>
+                
+                
+                <span class="level-item has-text-grey">
+                    
+                    
+                    12 分钟 读完 (大约 1797 个字)
+                </span>
+                
+                
+            </div>
+        </div>
+        
+        <h1 class="title is-size-3 is-size-4-mobile has-text-weight-normal">
+            
+                <a class="has-link-black-ter" href="/algorithms/traverse-and-visualize-binary-tree-with-java/">Java实现树的遍历及二叉树可视化</a>
+            
+        </h1>
+        <div class="content">
+            <h1 id="1-树的遍历说明"><a href="#1-树的遍历说明" class="headerlink" title="1. 树的遍历说明"></a>1. 树的遍历说明</h1><ul>
+<li>前序遍历（根左右）</li>
+</ul>
+<p><img src="images/loading.gif" data-original="https://s1.ax1x.com/2020/07/11/UMHHSI.png" alt=""></p>
+        </div>
+        
+        
+        <div class="level is-mobile">
+            <div class="level-start">
+                <div class="level-item">
+                <a class="button is-size-7 is-light" href="/algorithms/traverse-and-visualize-binary-tree-with-java/#more">阅读更多</a>
+                </div>
+            </div>
+        </div>
+        
+        
+    </div>
+</div>
+
+
+
+
+
+
+
+
+    
+<div class="card">
+    
+    <div class="card-image">
         <a href="/Others/java%E4%B8%BB%E5%8A%A8%E5%8F%91%E9%80%81http%E8%AF%B7%E6%B1%82/" class="image is-7by1">
             <img class="thumbnail" src="images/loading.gif" data-original="https://wx1.sbimg.cn/2020/07/30/P7qc1.md.jpg" alt="java主动发送http请求">
         </a>
@@ -190,574 +773,6 @@
 
 
 
-    
-<div class="card">
-    
-    <div class="card-image">
-        <a href="/Mysql/linux%E4%B8%8Bmysql%E7%9A%84%E5%AE%89%E8%A3%85/" class="image is-7by1">
-            <img class="thumbnail" src="images/loading.gif" data-original="https://wx2.sbimg.cn/2020/07/30/P7z9J.md.jpg" alt="linux下mysql的安装">
-        </a>
-    </div>
-    
-    <div class="card-content article ">
-        
-        <div class="level article-meta is-size-7 is-uppercase is-mobile is-overflow-x-auto">
-            <div class="level-left">
-                <time class="level-item has-text-grey" datetime="2020-06-27T15:25:18.000Z">2020-06-27</time>
-                
-                <div class="level-item">
-                <a class="has-link-grey -link" href="/categories/Mysql/">Mysql</a>
-                </div>
-                
-                
-                <span class="level-item has-text-grey">
-                    
-                    
-                    2 分钟 读完 (大约 359 个字)
-                </span>
-                
-                
-            </div>
-        </div>
-        
-        <h1 class="title is-size-3 is-size-4-mobile has-text-weight-normal">
-            
-                <a class="has-link-black-ter" href="/Mysql/linux%E4%B8%8Bmysql%E7%9A%84%E5%AE%89%E8%A3%85/">linux下mysql的安装</a>
-            
-        </h1>
-        <div class="content">
-            <p>网上一大堆乱七八糟的，特别复杂，还自己下载，自己编译，又自己写配置文件。我跟你说：没必要！几个命令就搞定了</p>
-<p>跟着这个节奏来</p>
-<ol>
-<li>添加仓库</li>
-</ol>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">wget -i -c https://dev.mysql.com/get/mysql80-community-release-el7-3.noarch.rpm</span><br></pre></td></tr></table></figure>
-        </div>
-        
-        
-        <div class="level is-mobile">
-            <div class="level-start">
-                <div class="level-item">
-                <a class="button is-size-7 is-light" href="/Mysql/linux%E4%B8%8Bmysql%E7%9A%84%E5%AE%89%E8%A3%85/#more">阅读更多</a>
-                </div>
-            </div>
-        </div>
-        
-        
-    </div>
-</div>
-
-
-
-
-
-
-
-
-    
-<div class="card">
-    
-    <div class="card-image">
-        <a href="/SpringCloud/SpringCloud%E7%AC%94%E8%AE%B0/" class="image is-7by1">
-            <img class="thumbnail" src="images/loading.gif" data-original="https://wx1.sbimg.cn/2020/07/30/P7jno.md.jpg" alt="SpringCloud笔记">
-        </a>
-    </div>
-    
-    <div class="card-content article ">
-        
-        <div class="level article-meta is-size-7 is-uppercase is-mobile is-overflow-x-auto">
-            <div class="level-left">
-                <time class="level-item has-text-grey" datetime="2020-06-27T15:11:15.000Z">2020-06-27</time>
-                
-                <div class="level-item">
-                <a class="has-link-grey -link" href="/categories/SpringCloud/">SpringCloud</a>
-                </div>
-                
-                
-                <span class="level-item has-text-grey">
-                    
-                    
-                    1 小时 读完 (大约 8179 个字)
-                </span>
-                
-                
-            </div>
-        </div>
-        
-        <h1 class="title is-size-3 is-size-4-mobile has-text-weight-normal">
-            
-                <a class="has-link-black-ter" href="/SpringCloud/SpringCloud%E7%AC%94%E8%AE%B0/">SpringCloud笔记</a>
-            
-        </h1>
-        <div class="content">
-            <h1 id="1-分布式概述"><a href="#1-分布式概述" class="headerlink" title="1. 分布式概述"></a>1. 分布式概述</h1><p>回顾我们以前的项目，从大一到大三，架构慢慢的演变，从一开始堆在一起（乱成一团），到分成多个包，三层架构（水平拆分），到前后端分离成两个项目，后面后台部分分成多个模块小组开发（垂直拆分）等等</p>
-<p>传统架构–&gt;水平拆分–&gt;垂直拆分（最早的分布式）–&gt;soa(dubbo)–&gt;微服务(springCloud)</p>
-<p>接下来我们要接触到一些分布式，解决一些高并发情况</p>
-        </div>
-        
-        
-        <div class="level is-mobile">
-            <div class="level-start">
-                <div class="level-item">
-                <a class="button is-size-7 is-light" href="/SpringCloud/SpringCloud%E7%AC%94%E8%AE%B0/#more">阅读更多</a>
-                </div>
-            </div>
-        </div>
-        
-        
-    </div>
-</div>
-
-
-
-
-
-
-
-
-    
-<div class="card">
-    
-    <div class="card-image">
-        <a href="/Others/maven%E7%AC%94%E8%AE%B0/" class="image is-7by1">
-            <img class="thumbnail" src="images/loading.gif" data-original="https://wx2.sbimg.cn/2020/07/30/P7gtK.md.jpg" alt="maven笔记">
-        </a>
-    </div>
-    
-    <div class="card-content article ">
-        
-        <div class="level article-meta is-size-7 is-uppercase is-mobile is-overflow-x-auto">
-            <div class="level-left">
-                <time class="level-item has-text-grey" datetime="2020-04-02T12:32:21.000Z">2020-04-02</time>
-                
-                <div class="level-item">
-                <a class="has-link-grey -link" href="/categories/Others/">Others</a>
-                </div>
-                
-                
-                <span class="level-item has-text-grey">
-                    
-                    
-                    13 分钟 读完 (大约 1879 个字)
-                </span>
-                
-                
-            </div>
-        </div>
-        
-        <h1 class="title is-size-3 is-size-4-mobile has-text-weight-normal">
-            
-                <a class="has-link-black-ter" href="/Others/maven%E7%AC%94%E8%AE%B0/">maven笔记</a>
-            
-        </h1>
-        <div class="content">
-            <h1 id="1-maven概念"><a href="#1-maven概念" class="headerlink" title="1. maven概念"></a>1. maven概念</h1><p>maven是一个项目管理工具，能帮助项目规范的构建（规定了项目的结构和方便的打包）以及方便的管理lib下的jar包</p>
-<p>如果所有的jar包都放进目录下，那么项目占用空间就会变得很大，通常来说资源文件（图片）&gt; lib(jar) &gt; java代码，很多时候jar包远远大于了java文件（毕竟只是文本），而maven通过本地的一个仓库专门存放jar包，然后不同的项目都从本地仓库中拿jar包，而项目中只需要给出jar包的坐标，就比较合理。</p>
-        </div>
-        
-        
-        <div class="level is-mobile">
-            <div class="level-start">
-                <div class="level-item">
-                <a class="button is-size-7 is-light" href="/Others/maven%E7%AC%94%E8%AE%B0/#more">阅读更多</a>
-                </div>
-            </div>
-        </div>
-        
-        
-    </div>
-</div>
-
-
-
-
-
-
-
-
-    
-<div class="card">
-    
-    <div class="card-image">
-        <a href="/Spring/Spring%E5%85%A5%E9%97%A8%E7%AC%94%E8%AE%B02/" class="image is-7by1">
-            <img class="thumbnail" src="images/loading.gif" data-original="https://wx1.sbimg.cn/2020/07/30/P7J2T.md.jpg" alt="Spring入门笔记2">
-        </a>
-    </div>
-    
-    <div class="card-content article ">
-        
-        <div class="level article-meta is-size-7 is-uppercase is-mobile is-overflow-x-auto">
-            <div class="level-left">
-                <time class="level-item has-text-grey" datetime="2020-03-20T07:56:18.000Z">2020-03-20</time>
-                
-                <div class="level-item">
-                <a class="has-link-grey -link" href="/categories/Spring/">Spring</a>
-                </div>
-                
-                
-                <span class="level-item has-text-grey">
-                    
-                    
-                    28 分钟 读完 (大约 4144 个字)
-                </span>
-                
-                
-            </div>
-        </div>
-        
-        <h1 class="title is-size-3 is-size-4-mobile has-text-weight-normal">
-            
-                <a class="has-link-black-ter" href="/Spring/Spring%E5%85%A5%E9%97%A8%E7%AC%94%E8%AE%B02/">Spring入门笔记2</a>
-            
-        </h1>
-        <div class="content">
-            <h1 id="1-Spring整合junit"><a href="#1-Spring整合junit" class="headerlink" title="1. Spring整合junit"></a>1. Spring整合junit</h1><p><strong>注意：spring5.x必须对应junit4.12及以上版本，否则报init初始化错误</strong></p>
-<p>就是为了避免重复代码</p>
-<p><img src="images/loading.gif" data-original="https://s1.ax1x.com/2020/03/22/84eo5D.png" alt="这些写一次就好了.png"></p>
-        </div>
-        
-        
-        <div class="level is-mobile">
-            <div class="level-start">
-                <div class="level-item">
-                <a class="button is-size-7 is-light" href="/Spring/Spring%E5%85%A5%E9%97%A8%E7%AC%94%E8%AE%B02/#more">阅读更多</a>
-                </div>
-            </div>
-        </div>
-        
-        
-    </div>
-</div>
-
-
-
-
-
-
-
-
-    
-<div class="card">
-    
-    <div class="card-image">
-        <a href="/Spring/Spring%E5%85%A5%E9%97%A8%E7%AC%94%E8%AE%B01/" class="image is-7by1">
-            <img class="thumbnail" src="images/loading.gif" data-original="https://wx1.sbimg.cn/2020/07/30/P7hlG.md.jpg" alt="Spring入门笔记1">
-        </a>
-    </div>
-    
-    <div class="card-content article ">
-        
-        <div class="level article-meta is-size-7 is-uppercase is-mobile is-overflow-x-auto">
-            <div class="level-left">
-                <time class="level-item has-text-grey" datetime="2020-03-18T05:01:04.000Z">2020-03-18</time>
-                
-                <div class="level-item">
-                <a class="has-link-grey -link" href="/categories/Spring/">Spring</a>
-                </div>
-                
-                
-                <span class="level-item has-text-grey">
-                    
-                    
-                    24 分钟 读完 (大约 3622 个字)
-                </span>
-                
-                
-            </div>
-        </div>
-        
-        <h1 class="title is-size-3 is-size-4-mobile has-text-weight-normal">
-            
-                <a class="has-link-black-ter" href="/Spring/Spring%E5%85%A5%E9%97%A8%E7%AC%94%E8%AE%B01/">Spring入门笔记1</a>
-            
-        </h1>
-        <div class="content">
-            <h1 id="1-程序耦合度-spring的作用-ioc的原理"><a href="#1-程序耦合度-spring的作用-ioc的原理" class="headerlink" title="1. 程序耦合度/spring的作用/ioc的原理"></a>1. 程序耦合度/spring的作用/ioc的原理</h1><p>以前的程序存在两点不足：</p>
-<ol>
-<li>诸如一些配置信息写在了类中，编译后改不了了，比如数据库的连接信息，如果是写在类中，以后想换数据库就只能动手改源码。解决办法就是通过读取xml或者properties的方式，编译后xml也还在，以后想修改数据库就可以只改变xml的内容。</li>
-</ol>
-        </div>
-        
-        
-        <div class="level is-mobile">
-            <div class="level-start">
-                <div class="level-item">
-                <a class="button is-size-7 is-light" href="/Spring/Spring%E5%85%A5%E9%97%A8%E7%AC%94%E8%AE%B01/#more">阅读更多</a>
-                </div>
-            </div>
-        </div>
-        
-        
-    </div>
-</div>
-
-
-
-
-
-
-
-
-    
-<div class="card">
-    
-    <div class="card-image">
-        <a href="/Spring/SpringMVC%E5%85%A5%E9%97%A8%E7%AC%94%E8%AE%B02/" class="image is-7by1">
-            <img class="thumbnail" src="images/loading.gif" data-original="https://wx1.sbimg.cn/2020/07/30/P7d6I.md.jpg" alt="SpringMVC入门笔记2">
-        </a>
-    </div>
-    
-    <div class="card-content article ">
-        
-        <div class="level article-meta is-size-7 is-uppercase is-mobile is-overflow-x-auto">
-            <div class="level-left">
-                <time class="level-item has-text-grey" datetime="2020-03-13T18:20:39.000Z">2020-03-14</time>
-                
-                <div class="level-item">
-                <a class="has-link-grey -link" href="/categories/Spring/">Spring</a>
-                </div>
-                
-                
-                <span class="level-item has-text-grey">
-                    
-                    
-                    12 分钟 读完 (大约 1750 个字)
-                </span>
-                
-                
-            </div>
-        </div>
-        
-        <h1 class="title is-size-3 is-size-4-mobile has-text-weight-normal">
-            
-                <a class="has-link-black-ter" href="/Spring/SpringMVC%E5%85%A5%E9%97%A8%E7%AC%94%E8%AE%B02/">SpringMVC入门笔记2</a>
-            
-        </h1>
-        <div class="content">
-            <h1 id="1-SpringMVC的文件上传"><a href="#1-SpringMVC的文件上传" class="headerlink" title="1. SpringMVC的文件上传"></a>1. SpringMVC的文件上传</h1><h2 id="1-1-文件上传的必要前提"><a href="#1-1-文件上传的必要前提" class="headerlink" title="1.1 文件上传的必要前提"></a>1.1 文件上传的必要前提</h2><ul>
-<li><p>form表单的enctype取值必须是：muitipart/form-data（默认值是：application/x-www-form-urlencoded），enctype：是表单请求正文的类型</p>
-</li>
-<li><p>必须是POST请求</p>
-</li>
-<li><p>html中通过<code>&lt;input type=&quot;file&quot; /&gt;</code> 来提交</p>
-</li>
-<li><p>commons-fileupload两个库</p>
-</li>
-</ul>
-        </div>
-        
-        
-        <div class="level is-mobile">
-            <div class="level-start">
-                <div class="level-item">
-                <a class="button is-size-7 is-light" href="/Spring/SpringMVC%E5%85%A5%E9%97%A8%E7%AC%94%E8%AE%B02/#more">阅读更多</a>
-                </div>
-            </div>
-        </div>
-        
-        
-    </div>
-</div>
-
-
-
-
-
-
-
-
-    
-<div class="card">
-    
-    <div class="card-image">
-        <a href="/Spring/SpringMVC%E6%8E%A5%E6%94%B6%E5%89%8D%E7%AB%AF%E5%8F%82%E6%95%B0%E4%B8%BAnull%E7%9A%84%E6%8E%A2%E7%B4%A2/" class="image is-7by1">
-            <img class="thumbnail" src="images/loading.gif" data-original="https://wx1.sbimg.cn/2020/07/30/P7LLw.md.jpg" alt="SpringMVC接收前端参数为null的探索">
-        </a>
-    </div>
-    
-    <div class="card-content article ">
-        
-        <div class="level article-meta is-size-7 is-uppercase is-mobile is-overflow-x-auto">
-            <div class="level-left">
-                <time class="level-item has-text-grey" datetime="2020-03-09T07:46:13.000Z">2020-03-09</time>
-                
-                <div class="level-item">
-                <a class="has-link-grey -link" href="/categories/Spring/">Spring</a>&nbsp;/&nbsp;<a class="has-link-grey -link" href="/categories/frontend/">前端</a>
-                </div>
-                
-                
-                <span class="level-item has-text-grey">
-                    
-                    
-                    8 分钟 读完 (大约 1170 个字)
-                </span>
-                
-                
-            </div>
-        </div>
-        
-        <h1 class="title is-size-3 is-size-4-mobile has-text-weight-normal">
-            
-                <a class="has-link-black-ter" href="/Spring/SpringMVC%E6%8E%A5%E6%94%B6%E5%89%8D%E7%AB%AF%E5%8F%82%E6%95%B0%E4%B8%BAnull%E7%9A%84%E6%8E%A2%E7%B4%A2/">SpringMVC接收前端参数为null的探索</a>
-            
-        </h1>
-        <div class="content">
-            <p>在使用SpringMVC时接收前端参数有时后会<strong>无法封装，获得null值，报415错误</strong>的问题，原因就是有时候我们搞不懂json对象、json字符串、参数字符串之间的区别。</p>
-<ul>
-<li><p>提交方式：form/url，ajax</p>
-</li>
-<li><p>请求方式：get，post</p>
-</li>
-<li><p>接收方式：一个个参数接收，封装实体类(Bean类型)</p>
-</li>
-</ul>
-<p>文章将会排列组合= =，举例说明各种搭配如何成功接收数据。</p>
-        </div>
-        
-        
-        <div class="level is-mobile">
-            <div class="level-start">
-                <div class="level-item">
-                <a class="button is-size-7 is-light" href="/Spring/SpringMVC%E6%8E%A5%E6%94%B6%E5%89%8D%E7%AB%AF%E5%8F%82%E6%95%B0%E4%B8%BAnull%E7%9A%84%E6%8E%A2%E7%B4%A2/#more">阅读更多</a>
-                </div>
-            </div>
-        </div>
-        
-        
-    </div>
-</div>
-
-
-
-
-
-
-
-
-    
-<div class="card">
-    
-    <div class="card-image">
-        <a href="/Spring/SpringMVC%E5%85%A5%E9%97%A8%E7%AC%94%E8%AE%B01/" class="image is-7by1">
-            <img class="thumbnail" src="images/loading.gif" data-original="https://wx1.sbimg.cn/2020/07/29/P76Lk.md.jpg" alt="SpringMVC入门笔记1">
-        </a>
-    </div>
-    
-    <div class="card-content article ">
-        
-        <div class="level article-meta is-size-7 is-uppercase is-mobile is-overflow-x-auto">
-            <div class="level-left">
-                <time class="level-item has-text-grey" datetime="2020-03-07T12:44:45.000Z">2020-03-07</time>
-                
-                <div class="level-item">
-                <a class="has-link-grey -link" href="/categories/Spring/">Spring</a>
-                </div>
-                
-                
-                <span class="level-item has-text-grey">
-                    
-                    
-                    16 分钟 读完 (大约 2461 个字)
-                </span>
-                
-                
-            </div>
-        </div>
-        
-        <h1 class="title is-size-3 is-size-4-mobile has-text-weight-normal">
-            
-                <a class="has-link-black-ter" href="/Spring/SpringMVC%E5%85%A5%E9%97%A8%E7%AC%94%E8%AE%B01/">SpringMVC入门笔记1</a>
-            
-        </h1>
-        <div class="content">
-            <blockquote>
-<p>先讲一些自己的理解和概念性的东西，可以跳过直接看第3部分</p>
-</blockquote>
-<h1 id="1-SpringMVC的作用"><a href="#1-SpringMVC的作用" class="headerlink" title="1. SpringMVC的作用"></a>1. SpringMVC的作用</h1><p>SpringMVC实际上就是代替了原来Servlet中的作用，为什么使用SpringMVC，其实我们内心也很清楚，原来写Servlet的时候要么是继承了Servlet接口复写5个生命周期方法（init service … destory），要么继承HttpServlet接口复写doGet和doPost方法，非常繁琐。或者高级一点的进行servlet抽取，通过方法名代表访问路径，其实这就相当于springmvc的简易模型。</p>
-<p>而SpringMVC就是完成了*<em>“一个普通类也可以处理http请求” *</em>这么一个功能。</p>
-        </div>
-        
-        
-        <div class="level is-mobile">
-            <div class="level-start">
-                <div class="level-item">
-                <a class="button is-size-7 is-light" href="/Spring/SpringMVC%E5%85%A5%E9%97%A8%E7%AC%94%E8%AE%B01/#more">阅读更多</a>
-                </div>
-            </div>
-        </div>
-        
-        
-    </div>
-</div>
-
-
-
-
-
-
-
-
-    
-<div class="card">
-    
-    <div class="card-image">
-        <a href="/Others/markdown%E4%BD%BF%E7%94%A8/" class="image is-7by1">
-            <img class="thumbnail" src="images/loading.gif" data-original="https://wx2.sbimg.cn/2020/07/29/P79in.md.jpg" alt="markdown使用">
-        </a>
-    </div>
-    
-    <div class="card-content article ">
-        
-        <div class="level article-meta is-size-7 is-uppercase is-mobile is-overflow-x-auto">
-            <div class="level-left">
-                <time class="level-item has-text-grey" datetime="2020-03-06T15:48:31.000Z">2020-03-06</time>
-                
-                <div class="level-item">
-                <a class="has-link-grey -link" href="/categories/Others/">Others</a>
-                </div>
-                
-                
-                <span class="level-item has-text-grey">
-                    
-                    
-                    2 分钟 读完 (大约 281 个字)
-                </span>
-                
-                
-            </div>
-        </div>
-        
-        <h1 class="title is-size-3 is-size-4-mobile has-text-weight-normal">
-            
-                <a class="has-link-black-ter" href="/Others/markdown%E4%BD%BF%E7%94%A8/">markdown使用</a>
-            
-        </h1>
-        <div class="content">
-            <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"># 一级标题（注意符号后面有空格）</span><br><span class="line">## 二级标题</span><br><span class="line">...</span><br></pre></td></tr></table></figure>
-
-<h1 id="一级标题"><a href="#一级标题" class="headerlink" title="一级标题"></a>一级标题</h1><h2 id="二级标题"><a href="#二级标题" class="headerlink" title="二级标题"></a>二级标题</h2>
-        </div>
-        
-        
-        <div class="level is-mobile">
-            <div class="level-start">
-                <div class="level-item">
-                <a class="button is-size-7 is-light" href="/Others/markdown%E4%BD%BF%E7%94%A8/#more">阅读更多</a>
-                </div>
-            </div>
-        </div>
-        
-        
-    </div>
-</div>
-
-
-
-
-
-
-
-
 
     
 <div class="card card-transparent">
@@ -765,7 +780,7 @@
         <div class="pagination-previous">
             <a class="is-flex-grow has-text-black-ter" href="/page/7/">上一页</a>
         </div>
-        <div class="pagination-next is-invisible is-hidden-mobile">
+        <div class="pagination-next">
             <a class="is-flex-grow has-text-black-ter" href="/page/9/">下一页</a>
         </div>
         <ul class="pagination-list is-hidden-mobile">
@@ -777,6 +792,8 @@
             <li><a class="pagination-link has-text-black-ter" href="/page/7/">7</a></li>
             
             <li><a class="pagination-link is-current" href="/page/8/">8</a></li>
+            
+            <li><a class="pagination-link has-text-black-ter" href="/page/9/">9</a></li>
             
         </ul>
     </nav>
@@ -822,7 +839,7 @@
                     </p>
                     <a href="/archives">
                         <p class="title has-text-weight-normal">
-                            80
+                            89
                         </p>
                     </a>
                 </div>
@@ -846,7 +863,7 @@
                     </p>
                     <a href="/tags">
                         <p class="title has-text-weight-normal">
-                            26
+                            25
                         </p>
                     </a>
                 </div>
@@ -941,7 +958,7 @@
                 <span class="level-item">数据结构和算法</span>
             </span>
             <span class="level-end">
-                <span class="level-item tag">45</span>
+                <span class="level-item tag">54</span>
             </span>
         </a></li><li>
         <a class="level is-marginless" href="/categories/deeplearning/">
@@ -986,7 +1003,7 @@
         <h3 class="menu-label">
             标签云
         </h3>
-        <a href="/tags/DL-ML/" style="font-size: 10px;">DL/ML</a> <a href="/tags/http/" style="font-size: 10px;">http</a> <a href="/tags/lintcode/" style="font-size: 10px;">lintcode</a> <a href="/tags/markdown/" style="font-size: 10px;">markdown</a> <a href="/tags/mysql/" style="font-size: 11.67px;">mysql</a> <a href="/tags/spring/" style="font-size: 11.67px;">spring</a> <a href="/tags/springcloud/" style="font-size: 10px;">springcloud</a> <a href="/tags/%E4%B8%BA%E4%BB%80%E4%B9%88%E6%88%91%E7%9A%84%E5%8D%9A%E5%AE%A2%E6%8F%90%E7%A4%BA%E4%B8%8D%E5%AE%89%E5%85%A8/" style="font-size: 10px;">为什么我的博客提示不安全</a> <a href="/tags/%E4%BA%8C%E5%88%86%E6%9F%A5%E6%89%BE/" style="font-size: 10px;">二分查找</a> <a href="/tags/%E5%89%91%E6%8C%87offer/" style="font-size: 10px;">剑指offer</a> <a href="/tags/%E5%8A%9B%E6%89%A3/" style="font-size: 20px;">力扣</a> <a href="/tags/%E5%8A%A0%E5%AF%86/" style="font-size: 10px;">加密</a> <a href="/tags/%E5%8A%A8%E6%80%81%E8%A7%84%E5%88%92/" style="font-size: 13.33px;">动态规划</a> <a href="/tags/%E5%8D%95%E8%B0%83%E6%A0%88/" style="font-size: 15px;">单调栈</a> <a href="/tags/%E5%9B%9E%E6%BA%AF/" style="font-size: 16.67px;">回溯</a> <a href="/tags/%E5%AD%97%E7%AC%A6%E4%B8%B2/" style="font-size: 10px;">字符串</a> <a href="/tags/%E5%AD%A6%E4%B9%A0%E8%AE%B0%E5%BD%95/" style="font-size: 10px;">学习记录</a> <a href="/tags/%E5%BC%80%E5%8F%91/" style="font-size: 18.33px;">开发</a> <a href="/tags/%E6%8E%92%E5%BA%8F/" style="font-size: 10px;">排序</a> <a href="/tags/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/" style="font-size: 13.33px;">数据结构</a> <a href="/tags/%E6%A0%88/" style="font-size: 10px;">栈</a> <a href="/tags/%E6%A0%91/" style="font-size: 15px;">树</a> <a href="/tags/%E7%AC%94%E8%AF%95/" style="font-size: 10px;">笔试</a> <a href="/tags/%E7%AC%94%E8%AF%95%E9%9D%A2%E8%AF%95/" style="font-size: 13.33px;">笔试面试</a> <a href="/tags/%E7%AE%97%E6%B3%95/" style="font-size: 10px;">算法</a> <a href="/tags/%E9%80%92%E5%BD%92/" style="font-size: 10px;">递归</a>
+        <a href="/tags/DL-ML/" style="font-size: 10px;">DL/ML</a> <a href="/tags/http/" style="font-size: 10px;">http</a> <a href="/tags/lintcode/" style="font-size: 10px;">lintcode</a> <a href="/tags/markdown/" style="font-size: 10px;">markdown</a> <a href="/tags/mysql/" style="font-size: 11.67px;">mysql</a> <a href="/tags/spring/" style="font-size: 11.67px;">spring</a> <a href="/tags/springcloud/" style="font-size: 10px;">springcloud</a> <a href="/tags/%E4%BA%8C%E5%88%86%E6%9F%A5%E6%89%BE/" style="font-size: 10px;">二分查找</a> <a href="/tags/%E5%89%91%E6%8C%87offer/" style="font-size: 10px;">剑指offer</a> <a href="/tags/%E5%8A%9B%E6%89%A3/" style="font-size: 20px;">力扣</a> <a href="/tags/%E5%8A%A0%E5%AF%86/" style="font-size: 10px;">加密</a> <a href="/tags/%E5%8A%A8%E6%80%81%E8%A7%84%E5%88%92/" style="font-size: 13.33px;">动态规划</a> <a href="/tags/%E5%8D%95%E8%B0%83%E6%A0%88/" style="font-size: 15px;">单调栈</a> <a href="/tags/%E5%9B%9E%E6%BA%AF/" style="font-size: 16.67px;">回溯</a> <a href="/tags/%E5%AD%97%E7%AC%A6%E4%B8%B2/" style="font-size: 10px;">字符串</a> <a href="/tags/%E5%AD%A6%E4%B9%A0%E8%AE%B0%E5%BD%95/" style="font-size: 10px;">学习记录</a> <a href="/tags/%E5%BC%80%E5%8F%91/" style="font-size: 18.33px;">开发</a> <a href="/tags/%E6%8E%92%E5%BA%8F/" style="font-size: 10px;">排序</a> <a href="/tags/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/" style="font-size: 13.33px;">数据结构</a> <a href="/tags/%E6%A0%88/" style="font-size: 10px;">栈</a> <a href="/tags/%E6%A0%91/" style="font-size: 15px;">树</a> <a href="/tags/%E7%AC%94%E8%AF%95/" style="font-size: 10px;">笔试</a> <a href="/tags/%E7%AC%94%E8%AF%95%E9%9D%A2%E8%AF%95/" style="font-size: 13.33px;">笔试面试</a> <a href="/tags/%E7%AE%97%E6%B3%95/" style="font-size: 10px;">算法</a> <a href="/tags/%E9%80%92%E5%BD%92/" style="font-size: 10px;">递归</a>
     </div>
 </div>
     
@@ -1011,7 +1028,7 @@
             
             <div class="media-content">
                 <div class="content">
-                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2020-12-09T15:59:59.000Z">2020-12-09</time></div>
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2020-12-10T15:59:59.000Z">2020-12-10</time></div>
                     <a href="/algorithms/algorithms-list-navigator/" class="title has-link-black-ter is-size-6 has-text-weight-normal">数据结构与算法不迷路导航</a>
                     <p class="is-size-7 is-uppercase">
                         <a class="has-link-grey -link" href="/categories/algorithms/">数据结构和算法</a>
@@ -1022,16 +1039,16 @@
         
         <article class="media">
             
-            <a href="/algorithms/3sum/" class="media-left">
+            <a href="/algorithms/path-sum-ii/" class="media-left">
                 <p class="image is-64x64">
-                    <img class="thumbnail" src="images/loading.gif" data-original="https://b1.sbimg.org/file/chevereto-jia/2020/12/09/QQZN2.md.jpg" alt="15-三数之和">
+                    <img class="thumbnail" src="images/loading.gif" data-original="https://source.acexy.cn/view/XZNaicA" alt="113-路径总和II">
                 </p>
             </a>
             
             <div class="media-content">
                 <div class="content">
-                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2020-12-09T09:08:49.000Z">2020-12-09</time></div>
-                    <a href="/algorithms/3sum/" class="title has-link-black-ter is-size-6 has-text-weight-normal">15-三数之和</a>
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2020-12-10T15:44:27.000Z">2020-12-10</time></div>
+                    <a href="/algorithms/path-sum-ii/" class="title has-link-black-ter is-size-6 has-text-weight-normal">113-路径总和II</a>
                     <p class="is-size-7 is-uppercase">
                         <a class="has-link-grey -link" href="/categories/algorithms/">数据结构和算法</a>
                     </p>
@@ -1041,16 +1058,16 @@
         
         <article class="media">
             
-            <a href="/algorithms/longest-substring-without-repeating-characters/" class="media-left">
+            <a href="/algorithms/sum-of-left-leaves/" class="media-left">
                 <p class="image is-64x64">
-                    <img class="thumbnail" src="images/loading.gif" data-original="https://source.acexy.cn/view/XZGzr5k" alt="3-无重复的最长字串">
+                    <img class="thumbnail" src="images/loading.gif" data-original="https://b1.sbimg.org/file/chevereto-jia/2020/12/10/QAwL6.md.png" alt="404-左叶子之和">
                 </p>
             </a>
             
             <div class="media-content">
                 <div class="content">
-                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2020-12-09T08:52:06.000Z">2020-12-09</time></div>
-                    <a href="/algorithms/longest-substring-without-repeating-characters/" class="title has-link-black-ter is-size-6 has-text-weight-normal">3-无重复的最长字串</a>
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2020-12-10T11:48:52.000Z">2020-12-10</time></div>
+                    <a href="/algorithms/sum-of-left-leaves/" class="title has-link-black-ter is-size-6 has-text-weight-normal">404-左叶子之和</a>
                     <p class="is-size-7 is-uppercase">
                         <a class="has-link-grey -link" href="/categories/algorithms/">数据结构和算法</a>
                     </p>
@@ -1060,18 +1077,18 @@
         
         <article class="media">
             
-            <a href="/Others/why-my-blog-tips-unsafe/" class="media-left">
+            <a href="/algorithms/single-number/" class="media-left">
                 <p class="image is-64x64">
-                    <img class="thumbnail" src="images/loading.gif" data-original="https://b1.sbimg.org/file/chevereto-jia/2020/12/09/QQRfN.md.jpg" alt="为什么我的博客提示不安全">
+                    <img class="thumbnail" src="images/loading.gif" data-original="https://b1.sbimg.org/file/chevereto-jia/2020/12/10/QAhMm.md.jpg" alt="136-137-260-只出现一次的数字">
                 </p>
             </a>
             
             <div class="media-content">
                 <div class="content">
-                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2020-12-09T05:26:37.000Z">2020-12-09</time></div>
-                    <a href="/Others/why-my-blog-tips-unsafe/" class="title has-link-black-ter is-size-6 has-text-weight-normal">为什么我的博客提示不安全</a>
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2020-12-10T08:25:13.000Z">2020-12-10</time></div>
+                    <a href="/algorithms/single-number/" class="title has-link-black-ter is-size-6 has-text-weight-normal">136-137-260-只出现一次的数字</a>
                     <p class="is-size-7 is-uppercase">
-                        <a class="has-link-grey -link" href="/categories/Others/">Others</a>
+                        <a class="has-link-grey -link" href="/categories/algorithms/">数据结构和算法</a>
                     </p>
                 </div>
             </div>
@@ -1079,16 +1096,16 @@
         
         <article class="media">
             
-            <a href="/algorithms/654-maximum-binary-tree/" class="media-left">
+            <a href="/algorithms/spiral-matrix/" class="media-left">
                 <p class="image is-64x64">
-                    <img class="thumbnail" src="images/loading.gif" data-original="https://source.acexy.cn/view/XY6wtUA" alt="654-最大二叉树">
+                    <img class="thumbnail" src="images/loading.gif" data-original="https://b1.sbimg.org/file/chevereto-jia/2020/12/10/QAcJ8.md.jpg" alt="54-螺旋矩阵">
                 </p>
             </a>
             
             <div class="media-content">
                 <div class="content">
-                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2020-12-06T15:13:36.000Z">2020-12-06</time></div>
-                    <a href="/algorithms/654-maximum-binary-tree/" class="title has-link-black-ter is-size-6 has-text-weight-normal">654-最大二叉树</a>
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2020-12-10T05:08:21.000Z">2020-12-10</time></div>
+                    <a href="/algorithms/spiral-matrix/" class="title has-link-black-ter is-size-6 has-text-weight-normal">54-螺旋矩阵</a>
                     <p class="is-size-7 is-uppercase">
                         <a class="has-link-grey -link" href="/categories/algorithms/">数据结构和算法</a>
                     </p>
@@ -1128,7 +1145,7 @@
             
             <div class="media-content">
                 <div class="content">
-                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2020-12-09T15:59:59.000Z">2020-12-09</time></div>
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2020-12-10T15:59:59.000Z">2020-12-10</time></div>
                     <a href="/algorithms/algorithms-list-navigator/" class="title has-link-black-ter is-size-6 has-text-weight-normal">数据结构与算法不迷路导航</a>
                     <p class="is-size-7 is-uppercase">
                         <a class="has-link-grey -link" href="/categories/algorithms/">数据结构和算法</a>
@@ -1139,16 +1156,16 @@
         
         <article class="media">
             
-            <a href="/algorithms/3sum/" class="media-left">
+            <a href="/algorithms/path-sum-ii/" class="media-left">
                 <p class="image is-64x64">
-                    <img class="thumbnail" src="images/loading.gif" data-original="https://b1.sbimg.org/file/chevereto-jia/2020/12/09/QQZN2.md.jpg" alt="15-三数之和">
+                    <img class="thumbnail" src="images/loading.gif" data-original="https://source.acexy.cn/view/XZNaicA" alt="113-路径总和II">
                 </p>
             </a>
             
             <div class="media-content">
                 <div class="content">
-                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2020-12-09T09:08:49.000Z">2020-12-09</time></div>
-                    <a href="/algorithms/3sum/" class="title has-link-black-ter is-size-6 has-text-weight-normal">15-三数之和</a>
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2020-12-10T15:44:27.000Z">2020-12-10</time></div>
+                    <a href="/algorithms/path-sum-ii/" class="title has-link-black-ter is-size-6 has-text-weight-normal">113-路径总和II</a>
                     <p class="is-size-7 is-uppercase">
                         <a class="has-link-grey -link" href="/categories/algorithms/">数据结构和算法</a>
                     </p>
@@ -1158,16 +1175,16 @@
         
         <article class="media">
             
-            <a href="/algorithms/longest-substring-without-repeating-characters/" class="media-left">
+            <a href="/algorithms/sum-of-left-leaves/" class="media-left">
                 <p class="image is-64x64">
-                    <img class="thumbnail" src="images/loading.gif" data-original="https://source.acexy.cn/view/XZGzr5k" alt="3-无重复的最长字串">
+                    <img class="thumbnail" src="images/loading.gif" data-original="https://b1.sbimg.org/file/chevereto-jia/2020/12/10/QAwL6.md.png" alt="404-左叶子之和">
                 </p>
             </a>
             
             <div class="media-content">
                 <div class="content">
-                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2020-12-09T08:52:06.000Z">2020-12-09</time></div>
-                    <a href="/algorithms/longest-substring-without-repeating-characters/" class="title has-link-black-ter is-size-6 has-text-weight-normal">3-无重复的最长字串</a>
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2020-12-10T11:48:52.000Z">2020-12-10</time></div>
+                    <a href="/algorithms/sum-of-left-leaves/" class="title has-link-black-ter is-size-6 has-text-weight-normal">404-左叶子之和</a>
                     <p class="is-size-7 is-uppercase">
                         <a class="has-link-grey -link" href="/categories/algorithms/">数据结构和算法</a>
                     </p>
@@ -1177,18 +1194,18 @@
         
         <article class="media">
             
-            <a href="/Others/why-my-blog-tips-unsafe/" class="media-left">
+            <a href="/algorithms/single-number/" class="media-left">
                 <p class="image is-64x64">
-                    <img class="thumbnail" src="images/loading.gif" data-original="https://b1.sbimg.org/file/chevereto-jia/2020/12/09/QQRfN.md.jpg" alt="为什么我的博客提示不安全">
+                    <img class="thumbnail" src="images/loading.gif" data-original="https://b1.sbimg.org/file/chevereto-jia/2020/12/10/QAhMm.md.jpg" alt="136-137-260-只出现一次的数字">
                 </p>
             </a>
             
             <div class="media-content">
                 <div class="content">
-                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2020-12-09T05:26:37.000Z">2020-12-09</time></div>
-                    <a href="/Others/why-my-blog-tips-unsafe/" class="title has-link-black-ter is-size-6 has-text-weight-normal">为什么我的博客提示不安全</a>
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2020-12-10T08:25:13.000Z">2020-12-10</time></div>
+                    <a href="/algorithms/single-number/" class="title has-link-black-ter is-size-6 has-text-weight-normal">136-137-260-只出现一次的数字</a>
                     <p class="is-size-7 is-uppercase">
-                        <a class="has-link-grey -link" href="/categories/Others/">Others</a>
+                        <a class="has-link-grey -link" href="/categories/algorithms/">数据结构和算法</a>
                     </p>
                 </div>
             </div>
@@ -1196,16 +1213,16 @@
         
         <article class="media">
             
-            <a href="/algorithms/654-maximum-binary-tree/" class="media-left">
+            <a href="/algorithms/spiral-matrix/" class="media-left">
                 <p class="image is-64x64">
-                    <img class="thumbnail" src="images/loading.gif" data-original="https://source.acexy.cn/view/XY6wtUA" alt="654-最大二叉树">
+                    <img class="thumbnail" src="images/loading.gif" data-original="https://b1.sbimg.org/file/chevereto-jia/2020/12/10/QAcJ8.md.jpg" alt="54-螺旋矩阵">
                 </p>
             </a>
             
             <div class="media-content">
                 <div class="content">
-                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2020-12-06T15:13:36.000Z">2020-12-06</time></div>
-                    <a href="/algorithms/654-maximum-binary-tree/" class="title has-link-black-ter is-size-6 has-text-weight-normal">654-最大二叉树</a>
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2020-12-10T05:08:21.000Z">2020-12-10</time></div>
+                    <a href="/algorithms/spiral-matrix/" class="title has-link-black-ter is-size-6 has-text-weight-normal">54-螺旋矩阵</a>
                     <p class="is-size-7 is-uppercase">
                         <a class="has-link-grey -link" href="/categories/algorithms/">数据结构和算法</a>
                     </p>
