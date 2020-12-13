@@ -19,7 +19,7 @@
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="https://b1.sbimg.org/file/chevereto-jia/2020/11/24/Q01F6.md.jpg">
 <meta property="article:published_time" content="2020-11-24T08:46:37.000Z">
-<meta property="article:modified_time" content="2020-12-07T03:14:26.257Z">
+<meta property="article:modified_time" content="2020-12-13T11:11:06.676Z">
 <meta property="article:author" content="wjw">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:image" content="https://b1.sbimg.org/file/chevereto-jia/2020/11/24/Q01F6.md.jpg">
@@ -156,7 +156,7 @@
                 <span class="level-item has-text-grey">
                     
                     
-                    19 分钟 读完 (大约 2860 个字)
+                    19 分钟 读完 (大约 2905 个字)
                 </span>
                 
                 
@@ -261,10 +261,10 @@
 <p>ps:MP是multi processor的意思，就是说多核的时候才lock，否则只执行cmpxchg，当然现在的cpu都是多核</p>
 <br>
 
-<h1 id="附录"><a href="#附录" class="headerlink" title="附录"></a>附录</h1><h2 id="Java对象组成"><a href="#Java对象组成" class="headerlink" title="Java对象组成"></a>Java对象组成</h2><p>markword</p>
-<p>klass pointer</p>
+<h1 id="附录"><a href="#附录" class="headerlink" title="附录"></a>附录</h1><h2 id="Java对象组成"><a href="#Java对象组成" class="headerlink" title="Java对象组成"></a>Java对象组成</h2><p>markword：存储对象的HashCode,分代年龄和锁标志位信息</p>
+<p>klass pointer：</p>
 <p>instance data</p>
-<p>padding</p>
+<p>padding：因为一定要是8kb的倍数，所以会扩展一些没有意义的内容</p>
 <p>我们可以通过jol工具查看</p>
 <figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">&lt;dependency&gt;</span><br><span class="line">    &lt;groupId&gt;org.openjdk.jol&lt;/groupId&gt;</span><br><span class="line">    &lt;artifactId&gt;jol-core&lt;/artifactId&gt;</span><br><span class="line">    &lt;version&gt;0.9&lt;/version&gt;</span><br><span class="line">&lt;/dependency&gt;</span><br></pre></td></tr></table></figure>
 

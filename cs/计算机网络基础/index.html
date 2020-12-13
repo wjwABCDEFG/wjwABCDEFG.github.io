@@ -19,7 +19,7 @@
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="https://source.acexy.cn/view/XW2ersS">
 <meta property="article:published_time" content="2020-11-13T06:16:28.000Z">
-<meta property="article:modified_time" content="2020-12-09T06:21:16.916Z">
+<meta property="article:modified_time" content="2020-12-13T10:40:46.990Z">
 <meta property="article:author" content="wjw">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:image" content="https://source.acexy.cn/view/XW2ersS">
@@ -156,7 +156,7 @@
                 <span class="level-item has-text-grey">
                     
                     
-                    32 分钟 读完 (大约 4837 个字)
+                    1 小时 读完 (大约 9042 个字)
                 </span>
                 
                 
@@ -180,8 +180,8 @@
 <h1 id="1-TCP-IP-5层模型😀"><a href="#1-TCP-IP-5层模型😀" class="headerlink" title="1. TCP/IP 5层模型😀"></a>1. TCP/IP 5层模型😀</h1><p><img src="images/loading.gif" data-original="https://s3.ax1x.com/2020/11/13/Dp9o6A.png" alt="网上一张充满水印的图"></p>
 <p><strong>物理层</strong>：负责转换比特流(101001010)和高低电平。中继器、集线器、RJ45接口</p>
 <p><strong>数据链路层</strong>：负责网络间数据传送。路由器、以太网、MAC、网桥、交换机、VLAN</p>
-<p><strong>网络层</strong>：主机对主机。IP、ARP、RARP、RIP等协议</p>
-<p><strong>传输层</strong>：端口对端口。TCP、UDP、SSL等协议</p>
+<p><strong>网络层</strong>：主机对主机。IP、ARP、RARP、ICMP、IGMP、RIP等协议</p>
+<p><strong>传输层</strong>：端口对端口(说白了就是程序对程序)。TCP、UDP、SSL等协议</p>
 <p><strong>应用层</strong>：应用和展示。HTTP、SSH、FTP、DNS、DHCP、RPC</p>
 <br>
 
@@ -237,7 +237,7 @@
 <p>IEEE802委员会将局域网的数据链路层拆成两个子层</p>
 <p>逻辑链路控制 LLC (Logical Link Control)子层</p>
 <p>媒体接入控制 MAC (Medium Access Control)子层</p>
-<p>nLLC子层的作用已经消失</p>
+<p>LLC子层的作用已经消失</p>
 </blockquote>
 <p><strong>MAC地址</strong>又称为<strong>硬件地址</strong>或<strong>物理地址</strong>。 固化在计算机的网卡的ROM中,实际上是适配器（网卡）的标识符</p>
 <p>MAC地址6个字节,48位。前三个字节(即高位 24 位)是组织唯一标识符，有注册机构RA向生产网卡的厂家分配。后三个字节(即低位 24 位)是扩展标识符，一个地址块可以生成2^24个不同的地址</p>
@@ -267,12 +267,198 @@
 <br>
 
 <hr>
-<h1 id="4-网络层"><a href="#4-网络层" class="headerlink" title="4. 网络层"></a>4. 网络层</h1><p>//TODO</p>
+<h1 id="4-网络层😀"><a href="#4-网络层😀" class="headerlink" title="4. 网络层😀"></a>4. 网络层😀</h1><p>网络层负责的是主机到主机之间的通信以及IP数据包的路径选择</p>
+<p><img src="images/loading.gif" data-original="https://s3.ax1x.com/2020/12/13/re1LdA.png" alt=""></p>
+<p>链路层是两个节点之间，网络层是多个节点可能构成不同的通路，负责选择路径</p>
+<p>网络层提供<strong>无连接的，尽最大努力交付的，不可靠的</strong>传输服务</p>
+<p>这一层最主要的是IP(Internet Protocol)协议，与之配套的</p>
+<p>地址解析协议 ARP(Address Resolution Protocol)<br>逆地址解析协议 RARP(Reverse Address Resolution Protocol)<br>网际控制报文协议 ICMP(Internet Control Message Protocol)<br>网际组管理协议 IGMP (Internet Group Management Protocol)</p>
+<br>
+
+<h2 id="IP地址和编址方法😀"><a href="#IP地址和编址方法😀" class="headerlink" title="IP地址和编址方法😀"></a>IP地址和编址方法😀</h2><p>全世界范围是唯一的32位的标识符，现在由“因特网名字与号码指派公司”ICANN进行分配。</p>
+<p><strong>两个特点</strong></p>
+<ol>
+<li><p>ICANN只分配网络号，主机号可以自行编址。</p>
+</li>
+<li><p>路由器路由表仅根据目的主机所连接的网络号来转发分组，而不考虑目的主机号（下面讲arp的时候会用到，记住它）</p>
+</li>
+</ol>
+<p>编址方法经历了3个阶段：分类的IP地址、子网的划分、构造超网。三个阶段是因为ip地址不够用了，原来的方法要么太多要么太少太浪费了！</p>
+<h3 id="分类的IP地址😀"><a href="#分类的IP地址😀" class="headerlink" title="分类的IP地址😀"></a>分类的IP地址😀</h3><p>网络号 + 主机号   net-id + host-id</p>
+<p><strong>注：判断是否是同一个网络，就看net-id是否一样</strong></p>
+<p>分成了这几类</p>
+<p><img src="images/loading.gif" data-original="https://s3.ax1x.com/2020/12/13/re85uD.png" alt=""></p>
+<p>常表示成<strong>点分十进制记法</strong>，也就是每8个转换成十进制，我们常见的192.168.1.1就是这么来的</p>
+<p>有一些ip比较特殊（网络号全0,主机号全0），所以实际上可用的网络号和主机号为</p>
+<p><img src="images/loading.gif" data-original="https://s3.ax1x.com/2020/12/13/reaWoF.png" alt=""></p>
+<p>说明：</p>
+<p><strong>A类：</strong></p>
+<p>网络位全0为00000000表示本网络，全1为01111111用于软件环回测试(也就是127开头的比如127.0.0.1)，因此要-2</p>
+<p>所以第一个可用的网络号为00000001，最后一个为01111110</p>
+<p>主机数2^24 - 2，全0和全1的主机号有特殊的作用</p>
+<p><strong>B类：</strong></p>
+<p>网络位全100000000 00000000不指派，因此要-1（B、C类不需要软件环回测试）</p>
+<p>所以第一个可用的网络号为100000000 00000001即128.1.0.0，最后一个为10111111 11111111即191.255.0.0</p>
+<p>主机数2^24 - 2，全0和全1的主机号有特殊的作用</p>
+<p><strong>C类：</strong></p>
+<p>网络位全110000000 00000000 00000000不指派，因此要-1</p>
+<p>所以第一个可用的网络号为110000000 00000000 00000001即192.0.1.0，最后一个为11011111 11111111 11111111即223.255.255.0</p>
+<p>主机数2^8 - 2，全0和全1的主机号有特殊的作用</p>
+<p>特殊作用究竟是指什么呢？这里有一张表</p>
+<p><img src="images/loading.gif" data-original="https://s3.ax1x.com/2020/12/13/re0A2j.png" alt=""></p>
+<br>
+
+<h3 id="划分子网和子网掩码😀"><a href="#划分子网和子网掩码😀" class="headerlink" title="划分子网和子网掩码😀"></a>划分子网和子网掩码😀</h3><p>分类的IP地址有不合理的地方，比如我编址的时候有300台机子，C类网络不够，B类又太浪费。</p>
+<p>引入了子网掩码的概念：子网掩码说白了就是11100000…000这样的标志位，和ip地址一样也是32位，1代表网络位，0代表主机位。如何得到网络号呢？用ip和子网掩码相与，由于&amp;运算的性质，会使得网络号留下，主机号全变为0，。</p>
+<p>比如192.168.10.1,子网掩码是255.255.255.0，那么二进制来看，192.168.10都能&amp;1被保留下来，而最后的.1&amp;0，得到0，那么就得到了网络号192.168.10.0</p>
+<p>这样一来，可以任意的划分网络位了，7位，10位，12位……</p>
+<p>因特网规定：所有的网络都必须使用子网掩码，在路由器的路由表中也必须有子网掩码字段</p>
+<p>如果一个网络不划分子网，则该网络使用默认的子网掩码</p>
+<p><img src="images/loading.gif" data-original="https://s3.ax1x.com/2020/12/13/recu6g.png" alt=""></p>
+<p>注：划分子网属于单位内部的事情，对外仍然表现为一个网络</p>
+<p>ABC3个企业都是300人，申请了3个B类子网，现在可以成立一个联盟，申请一个B类网络，划分给3个企业</p>
+<br>
+
+<h3 id="无分类编址CIDR😀"><a href="#无分类编址CIDR😀" class="headerlink" title="无分类编址CIDR😀"></a>无分类编址CIDR😀</h3><p>划分子网在一定程度上缓解了因特网在发展中遇到的困难。然而因特网仍然面临三个必须尽早解决的问题：B类地址在1992年已分配了近一半，眼看就要全部分配完毕！因特网主干网上的路由表中的项目数急剧增长。整个 IPv4 的地址空间最终将全部耗尽</p>
+<br>
+
+<p>CIDR 消除了传统的 A 类、B 类和 C 类地址以及划分子网的概念，将IP地址分为两部分：前面部分是网络前缀，用于指明网络，后面部分指明主机。即网络前缀 + host-id</p>
+<p><strong>斜线记法</strong>：如128.14.35.7/20表示前面20位是网络前缀，后面的12位是主机号</p>
+<p>假设一个企业有800台主机，2^9&lt;800&lt;2^10，32-10=22，现在可以申请一个网络前缀为22的地址块了</p>
+<p><strong>最长前缀匹配</strong>：如果路由表两条路由都可以匹配，优先选哦前缀最大的，也就是22和25要选25</p>
+<p>如果</p>
+<br>
+
+<h3 id="构造超网（路由聚合）😀"><a href="#构造超网（路由聚合）😀" class="headerlink" title="构造超网（路由聚合）😀"></a>构造超网（路由聚合）😀</h3><p>构成超网，也称为路由聚合，目的在于减少路由表的路由条目</p>
+<p><img src="images/loading.gif" data-original="https://s3.ax1x.com/2020/12/13/reRH9x.png" alt=""></p>
+<p>化成二进制一看就明白了，不解释</p>
+<br>
+
+<h3 id="编址题😀"><a href="#编址题😀" class="headerlink" title="编址题😀"></a>编址题😀</h3><p>先编网络，根据题目对应的编址方法（分类/子网/超网）合理的划分对应的网络，怎么才算合理？要看主机数量，比如下面这题，如果题目制定采用分类的IP地址进行编址，发现同一网络主机数量最多为4台，加上路由器的接口也才5个主机号，那么肯定采用C类</p>
+<p>如果题目允许自由发挥，那么我随便编，比如222.1.x（当然每个点8位最大也是225你不能555.555.1.0），那么LAN1为222.1.1.0，LAN2为222.1.2.0以此类推</p>
+<p><strong>路由器之间</strong>：每个接口要属于不同的网络，所以才有图中的222.1.4.0，222.1.5.0，222.1.6.0</p>
+<p>看一看就会了，采用其他编址方式大体也是一样的，主要是以路由器为划分的网络号不同</p>
+<p><img src="images/loading.gif" data-original="https://s3.ax1x.com/2020/12/13/reBpl9.png" alt=""></p>
+<br>
+
+<h2 id="分组转发和路由表🤪"><a href="#分组转发和路由表🤪" class="headerlink" title="分组转发和路由表🤪"></a>分组转发和路由表🤪</h2><h3 id="路由表🤪"><a href="#路由表🤪" class="headerlink" title="路由表🤪"></a>路由表🤪</h3><p>讲清楚了IP地址，下面我们来看网络中的IP数据包是如何转发的</p>
+<p>IP数据报（也称为网络层的分组）是由路由器转发的，路由器转发分组的依据是路由表，路由表最主要的两个信息：目的网络地址，下一跳地址[或转发接口]</p>
+<ul>
+<li>目的网络地址：要到达的目的主机的网络号</li>
+<li>下一跳地址（<strong>遥远网络</strong>）：路由器为了能将分组送达目的网络，下一步应将分组交付给哪个IP地址的接口</li>
+<li>转发接口（<strong>相邻网络</strong>）：路由器将分组从自己的哪个接口转发</li>
+</ul>
+<p>路由表可以通过以下命令查看</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">route -n</span><br></pre></td></tr></table></figure>
+
+<p><img src="images/loading.gif" data-original="https://s3.ax1x.com/2020/12/12/rVIR3t.png" alt=""></p>
+<p>要找的ip与子网掩码相与，能匹配的就是下一跳。一般子网掩码为0.0.0.0都是在最后一条，接口enp6s0代表的是路由器，前面的是局域网，当然图中没有局域网，局域网匹配到的话直接走交换机的接口</p>
+<p>抽象一点的图可以帮助理解：</p>
+<p><img src="images/loading.gif" data-original="https://s3.ax1x.com/2020/12/13/rerrz4.png" alt=""></p>
+<p>路由表中的每一条记录称为一条路由，路由的类型主要有三种：</p>
+<ul>
+<li>网络路由：如果记录的是主机号，路由表过于庞大，所以记录的是一个网络</li>
+<li>特定主机路由：有时就像指定路由到某一个主机，或者网络管理人员为了更方便地控制网络和测试网络，可以是一个特定的目的主机的IP地址</li>
+<li>默认路由：0.0.0.0，能与所有网络匹配，其实就是现在的路由表中没有，得从因特网找地址</li>
+</ul>
+<p><img src="images/loading.gif" data-original="https://s3.ax1x.com/2020/12/13/res8k6.png" alt=""></p>
+<p>下面是一张带特定主机路由的路由表，自己试试写下一跳看掌握没有</p>
+<p><img src="images/loading.gif" data-original="https://s3.ax1x.com/2020/12/13/re6kGT.png" alt=""></p>
+<br>
+
+<h3 id="分组转发算法😀"><a href="#分组转发算法😀" class="headerlink" title="分组转发算法😀"></a>分组转发算法😀</h3><ol>
+<li>从数据报的首部提取目的地址D, 和<strong>子网掩码相与</strong>提取出目的网络地址为N</li>
+<li>N为<strong>本网络</strong>则直接通过arp协议转发到目的主机(arp协议下面会讲)，否则执行3</li>
+<li>若网络 N 与此路由器直接相连，则把数据报<strong>直接交付</strong>目的网络，随后经arp协议交给目的主机，否则间接交付，执行4</li>
+<li>若路由表中有目的地址为 D 的<strong>特定主机路由</strong>，则把数据报传送给路由表中所指明的下一跳路由器，否则执行5</li>
+<li>对路由表中的每一行的子网掩码和 D 逐位相“与”看是否有到达网络 N 的路由，则把数据报传送给路由表指明的<strong>下一跳路由器</strong>，否则执行6</li>
+<li>走<strong>默认路由</strong>0.0.0.0，从internet上找</li>
+<li>找不到，分组转发出错</li>
+</ol>
+<br>
+
+<h2 id="ARP协议😀"><a href="#ARP协议😀" class="headerlink" title="ARP协议😀"></a>ARP协议😀</h2><p>地址解析协议ARP：就是将同一个局域网内IP地址转换为MAC地址</p>
+<p>还记得数据链路层说的“主机A/路由器发送帧给主机D时查找和建立交换表的过程吗”（不记得的可以点击目录中的“交换机”那节），主机A怎么知道要发送给主机D呢？通过IP地址？ip地址是个虚拟的东西，必须要映射成物理地址（MAC地址才可以知道是哪台主机）</p>
+<p>或者看前面说的ip分组转发，转发到目的网络了，如何给目的主机呢？ip是不行的，必须要物理地址</p>
+<p>arp协议相当于网络层和数据链路层中间的一个东西</p>
+<p>每一个主机、路由器都设有一个 ARP高速缓存(ARP cache)，里面有所在的局域网上的各主机和路由器的 IP 地址到硬件地址的映射表</p>
+<p><img src="images/loading.gif" data-original="https://s3.ax1x.com/2020/12/13/reh2gP.png" alt=""></p>
+<p>可以通过arp -a命令来看arp映射表</p>
+<p><img src="images/loading.gif" data-original="https://s3.ax1x.com/2020/12/13/rehVts.png" alt=""></p>
+<p>太少了效果不是很好，其实就是ip和mac</p>
+<p>1.　当主机A（或路由器）欲向本局域网上的某个主机B（或路由器）发送IP数据报时，就先在自己的 ARP 高速缓存中查看有无主机B的IP地址</p>
+<p>2.　如有，则将其对应的硬件地址写入MAC帧，然后通过局域网将该MAC帧发往主机B</p>
+<p>3.　如果没有，则进行ARP广播，得到主机B的硬件地址，写入MAC帧，再发送</p>
+<p>如何验证呢？</p>
+<p>还是通过抓包</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">tcpdump -nn -i enp6s0 -p 80 or arp</span><br></pre></td></tr></table></figure>
+
+<p>另一个窗口</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">arp -d 本机ip &amp;&amp; curl www.baidu.com</span><br></pre></td></tr></table></figure>
+
+<p>如果没有建立过映射，那么在三次握手之前会发arp包</p>
+<p><img src="images/loading.gif" data-original="https://s3.ax1x.com/2020/12/13/reoxQ1.png" alt=""></p>
 <br>
 
 <hr>
 <h1 id="5-传输层😀"><a href="#5-传输层😀" class="headerlink" title="5. 传输层😀"></a>5. 传输层😀</h1><p>提供端到端的逻辑通信，也就是端口或者说进程之间</p>
 <p><img src="images/loading.gif" data-original="https://s3.ax1x.com/2020/11/13/DpDxXT.png" alt=""></p>
+<h2 id="Socket😭"><a href="#Socket😭" class="headerlink" title="Socket😭"></a>Socket😭</h2><p>我们说网络编程学过socket，它到底是什么？他是<strong>网络中进程通信的一种方式</strong>。起源于Unix/Linux基本哲学之一就是“一切皆文件”，理解为一种特殊的文件，<strong>用“打开open –&gt; 读写write/read –&gt; 关闭close”模式来完成网络间的进程通信</strong>。Socket不是什么模型啊层啊，只<strong>是一个接口</strong>，接口无非就是类似协议/标准/规范嘛，TCP/UDP连接就可以用它来实现建立</p>
+<p>我们能看到吗？能！文件嘛怎么不能看到呢！我们首先要抛开java的socket封装，咱们用ubuntu看看这个socket“文件”</p>
+<p>和百度进行socket连接</p>
+<p><code>exec 8&lt;&gt; /dev/tcp/www.baidu.com/80</code></p>
+<p>使用的是tcp方式（别问为什么tcp这个目录就可以建立tcp连接，还是那句话，一切皆文件）</p>
+<p>8是什么？8就是这个socket文件</p>
+<p>&lt;&gt;是输入输出流</p>
+<p>翻译过来就是：用一个称为8的文件代表了这个socket连接</p>
+<p>建立了tcp连接后可以发送http请求根目录</p>
+<p><code>echo -e &quot;GET / HTTP/1.0\n&quot; 1&gt;&amp; 8</code></p>
+<p>echo是输出， -e是解析\n转移字符串，1是输入流，&gt;是重定向，也就是本来echo是输出在控制台上的，用了&gt;就被输入到了这个叫8的文件中去</p>
+<p>既然发送了请求，打开看一下这个8响应了什么？</p>
+<p><code>cat 0&lt;&amp; 8</code></p>
+<p><img src="images/loading.gif" data-original="https://s3.ax1x.com/2020/12/11/rAYB9K.png" alt=""></p>
+<p>这不就是我们熟悉的http响应头和html嘛，这不就是所谓的tcp后发送了http嘛</p>
+<p>从目录中看看这个8，也就是这个socket文件</p>
+<p>$$代表当前进程的意思，/proc里面一个进程就是一个文件夹，别问我为什么文件夹可以代表进程，问就是linux一切皆文件</p>
+<p><img src="images/loading.gif" data-original="https://s3.ax1x.com/2020/12/11/rAaarD.png" alt=""></p>
+<p>总之，我想说的就是socket是确实存在的，让你能真实的感受到这个socket像一个管道一样能输入输出进行进程间的通信，在linux下表现为一个文件，其他系统有其他系统的表现方式</p>
+<br>
+
+<h3 id="套接字究竟是什么😭"><a href="#套接字究竟是什么😭" class="headerlink" title="套接字究竟是什么😭"></a>套接字究竟是什么😭</h3><p>我们常把socket翻译成套接字，套接字是什么？为什么要这么翻译？所谓套接字，就是</p>
+<p>src: port -&gt; dest: port</p>
+<p>你想，网络中主机和端口千千万，将某两个对应起来，这不就“套接”上了嘛，所以叫套接字</p>
+<p>我们通过netstat命令可以查看，这个命令使用来查看网络状态的</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">netstat -natp</span><br></pre></td></tr></table></figure>
+
+<p><img src="images/loading.gif" data-original="https://s3.ax1x.com/2020/12/11/rAKx39.png" alt=""></p>
+<p>参数t代表只看tcp的，n代表不解析名称（否则local那里显示的是wjw）p代表显示pid（就是最后一列），a自然是代表全部</p>
+<blockquote>
+<p>参考：简书yongfutian</p>
+<p>链接：<a href="https://www.jianshu.com/p/066d99da7cbd">https://www.jianshu.com/p/066d99da7cbd</a></p>
+</blockquote>
+<br>
+
+<h3 id="三大要素🤪"><a href="#三大要素🤪" class="headerlink" title="三大要素🤪"></a>三大要素🤪</h3><p>与其说是socket三个参数，不如说是网络进程通信的三大要素</p>
+<p>（ip地址，协议，端口）</p>
+<p>协议就是tcp和udp，当然实际上参数为以下两个</p>
+<ul>
+<li><p>SOCK_STREAM：表示面向连接的数据传输方式，也就是建立tcp连接</p>
+</li>
+<li><p>SOCK_DGRAM：表示无连接的数据传输方式，即udp</p>
+</li>
+</ul>
+<p>端口，服务端需要监听一个端口（不能冲突），客户端的端口是随机的（0～65535）</p>
+<p><strong>这里有一道面试题：两个服务端ipA:80，ipB:80，问客户端ipC最多可以建立多少个tcp/udp连接？</strong>或者说socket连接</p>
+<p>要想弄明白这个问题，首先是看服务端，两个不一样的ip，肯定没有关系，比如ipA是阿里的服务器，ipB是腾讯的服务器，都能用80端口对吧，不影响，这个好理解。问题在于客户端呢？我们说不考虑任何系统和其他应用进程的情况下，最多是65536个，那么ipC:3000访问ipA:80后还可以访问ipB:80吗？</p>
+<p>答案是<strong>可以</strong>，我们说socket是采用套接字，也就是src: port -&gt; dest: port，那么ipC:3000 -&gt; ipA:80和ipC:3000 -&gt; ipB:80自然不是一个东西(其实就是上面netstat那张图的最后一列PID)</p>
+<br>
+
+<p><strong>题目2：客户端多个连接，服务端消耗多少个端口号？</strong>这个问题比较简单，答案就是监听的那一个，不管多少个连接进来，linux表现为fork那个文件8，java表现为开启一个线程完成请求。但是端口代表进程，一直就一个</p>
+<br>
+
+<p><strong>能不能多个socket对应一个进程呢？</strong>能！这个就叫做多路复用比如epoll，这里就不展开了，埋个坑以后有机会填</p>
+<br>
+
 <h2 id="UDP😀"><a href="#UDP😀" class="headerlink" title="UDP😀"></a>UDP😀</h2><p>用户数据报协议 UDP (User Datagram Protocol)</p>
 <h3 id="特点😀"><a href="#特点😀" class="headerlink" title="特点😀"></a>特点😀</h3><ul>
 <li><p>面向数据报（无连接）</p>
@@ -306,7 +492,7 @@
 <h3 id="三次握手😀"><a href="#三次握手😀" class="headerlink" title="三次握手😀"></a>三次握手😀</h3><ol>
 <li>第一次握手：Client将标志位SYN置为1，随机产生一个值seq=J，并将该数据包发送给Server，Client进入<strong>SYN_SENT状态</strong>，等待Server确认。</li>
 <li>第二次握手：Server收到数据包后由标志位SYN=1知道Client请求建立连接，Server将标志位SYN和ACK都置为1，ack=J+1(这是值而不是标志位)，随机产生一个值seq=K，并将该数据包发送给Client以确认连接请求，Server进入<strong>SYN_RCVD</strong>状态。</li>
-<li>第三次握手：Client收到确认后，检查ack是否为J+1，ACK标志位是否为1，如果正确则将标志位ACK置为1，ack=K+1，并将该数据包发送给Server，Server检查ack是否为K+1，ACK是否为1，如果正确则连接建立成功，Client和Server进入<strong>ESTABLISHED状态</strong>，完成三次握手，随后Client与Server之间可以开始传输数据了。</li>
+<li>第三次握手：Client收到确认后，检查ack是否为J+1，ACK标志位是否为1，如果正确则将标志位ACK置为1，并将该数据包发送给Server，Server检查ACK是否为1，如果正确则连接建立成功，Client和Server进入<strong>ESTABLISHED状态</strong>，完成三次握手，随后Client与Server之间可以开始传输数据了。</li>
 </ol>
 <h3 id="四次挥手😀"><a href="#四次挥手😀" class="headerlink" title="四次挥手😀"></a>四次挥手😀</h3><ol>
 <li>第一次挥手，客户端设置seq和 ACK ,向服务器发送一个 FIN(终结)报文段。此时，客户端进入<strong>FIN_WAIT_1</strong>状态，表示客户端没有数据要发送给服务端了。</li>
@@ -320,13 +506,19 @@
 </blockquote>
 <p><strong>一张充满水印的图道清了一切…</strong></p>
 <p><img src="images/loading.gif" data-original="https://s3.ax1x.com/2020/11/13/Dpcyi4.png" alt=""></p>
+<br>
+
+
+
+<br>
+
 <hr>
-<h1 id="6-应用层"><a href="#6-应用层" class="headerlink" title="6. 应用层"></a>6. 应用层</h1><h2 id="HTTP"><a href="#HTTP" class="headerlink" title="HTTP"></a>HTTP</h2><h3 id="常见的HTTP请求动词"><a href="#常见的HTTP请求动词" class="headerlink" title="常见的HTTP请求动词"></a>常见的HTTP请求动词</h3><blockquote>
+<h1 id="6-应用层😀"><a href="#6-应用层😀" class="headerlink" title="6. 应用层😀"></a>6. 应用层😀</h1><h2 id="HTTP😀"><a href="#HTTP😀" class="headerlink" title="HTTP😀"></a>HTTP😀</h2><h3 id="常见的HTTP请求动词😀"><a href="#常见的HTTP请求动词😀" class="headerlink" title="常见的HTTP请求动词😀"></a>常见的HTTP请求动词😀</h3><blockquote>
 <p>GET: 从服务器获取资源<br>POST: 在服务器新建资源<br>PUT: 在服务器更新资源<br>DELETE: 在服务器删除资源<br>HEAD: 获取资源的元数据<br>OPTIONAL: 查询对指定的资源支持的方法</p>
 </blockquote>
 <br>
 
-<h3 id="HTTP状态码表"><a href="#HTTP状态码表" class="headerlink" title="HTTP状态码表"></a>HTTP状态码表</h3><table>
+<h3 id="HTTP状态码表😀"><a href="#HTTP状态码表😀" class="headerlink" title="HTTP状态码表😀"></a>HTTP状态码表😀</h3><table>
 <thead>
 <tr>
 <th align="left">状态码</th>
@@ -587,7 +779,7 @@
 </tbody></table>
 <br>
 
-<h3 id="HTTP和HTTPS的区别"><a href="#HTTP和HTTPS的区别" class="headerlink" title="HTTP和HTTPS的区别"></a>HTTP和HTTPS的区别</h3><h1 id="HTTP-HTTPS的区别"><a href="#HTTP-HTTPS的区别" class="headerlink" title="HTTP/HTTPS的区别"></a>HTTP/HTTPS的区别</h1><p>HTTPS（Hyper Text Transfer Protocol over SecureSocket Layer）是身披SSL外壳的HTTP，与HTTP明文协议对比，HTTPS具备两大网络安全功能：加密以及身份验证。 </p>
+<h3 id="HTTP和HTTPS的区别🤪"><a href="#HTTP和HTTPS的区别🤪" class="headerlink" title="HTTP和HTTPS的区别🤪"></a>HTTP和HTTPS的区别🤪</h3><p>HTTPS（Hyper Text Transfer Protocol over SecureSocket Layer）是身披SSL外壳的HTTP，与HTTP明文协议对比，HTTPS具备两大网络安全功能：加密以及身份验证。 </p>
 <ul>
 <li>加密：HTTPS传输协议可对客户端与服务器之间的传输数据进行加密，防止第三方的窃取、篡改、窥视等中间人攻击（中间人攻击可以看大佬的讲解<a href="https://www.zhihu.com/question/304030251）。">https://www.zhihu.com/question/304030251）。</a></li>
 <li>身份验证：客户端用户可通过HTTPS背后的SSL证书对服务器进行身份验证，辨别真假网站，避免掉入钓鱼网站的陷阱。</li>
@@ -952,99 +1144,159 @@
         <!-- <span class="has-mr-6">3.4</span> -->
         <span>VLAN😀</span>
         </a></li></ul></li><li>
-        <a class="is-flex" href="#4-网络层">
+        <a class="is-flex" href="#4-网络层😀">
         <!-- 目录是否自动编号 -->
         <!-- <span class="has-mr-6">4</span> -->
-        <span>4. 网络层</span>
+        <span>4. 网络层😀</span>
+        </a><ul class="menu-list"><li>
+        <a class="is-flex" href="#IP地址和编址方法😀">
+        <!-- 目录是否自动编号 -->
+        <!-- <span class="has-mr-6">4.1</span> -->
+        <span>IP地址和编址方法😀</span>
+        </a><ul class="menu-list"><li>
+        <a class="is-flex" href="#分类的IP地址😀">
+        <!-- 目录是否自动编号 -->
+        <!-- <span class="has-mr-6">4.1.1</span> -->
+        <span>分类的IP地址😀</span>
         </a></li><li>
+        <a class="is-flex" href="#划分子网和子网掩码😀">
+        <!-- 目录是否自动编号 -->
+        <!-- <span class="has-mr-6">4.1.2</span> -->
+        <span>划分子网和子网掩码😀</span>
+        </a></li><li>
+        <a class="is-flex" href="#无分类编址CIDR😀">
+        <!-- 目录是否自动编号 -->
+        <!-- <span class="has-mr-6">4.1.3</span> -->
+        <span>无分类编址CIDR😀</span>
+        </a></li><li>
+        <a class="is-flex" href="#构造超网（路由聚合）😀">
+        <!-- 目录是否自动编号 -->
+        <!-- <span class="has-mr-6">4.1.4</span> -->
+        <span>构造超网（路由聚合）😀</span>
+        </a></li><li>
+        <a class="is-flex" href="#编址题😀">
+        <!-- 目录是否自动编号 -->
+        <!-- <span class="has-mr-6">4.1.5</span> -->
+        <span>编址题😀</span>
+        </a></li></ul></li><li>
+        <a class="is-flex" href="#分组转发和路由表🤪">
+        <!-- 目录是否自动编号 -->
+        <!-- <span class="has-mr-6">4.2</span> -->
+        <span>分组转发和路由表🤪</span>
+        </a><ul class="menu-list"><li>
+        <a class="is-flex" href="#路由表🤪">
+        <!-- 目录是否自动编号 -->
+        <!-- <span class="has-mr-6">4.2.1</span> -->
+        <span>路由表🤪</span>
+        </a></li><li>
+        <a class="is-flex" href="#分组转发算法😀">
+        <!-- 目录是否自动编号 -->
+        <!-- <span class="has-mr-6">4.2.2</span> -->
+        <span>分组转发算法😀</span>
+        </a></li></ul></li><li>
+        <a class="is-flex" href="#ARP协议😀">
+        <!-- 目录是否自动编号 -->
+        <!-- <span class="has-mr-6">4.3</span> -->
+        <span>ARP协议😀</span>
+        </a></li></ul></li><li>
         <a class="is-flex" href="#5-传输层😀">
         <!-- 目录是否自动编号 -->
         <!-- <span class="has-mr-6">5</span> -->
         <span>5. 传输层😀</span>
         </a><ul class="menu-list"><li>
-        <a class="is-flex" href="#UDP😀">
+        <a class="is-flex" href="#Socket😭">
         <!-- 目录是否自动编号 -->
         <!-- <span class="has-mr-6">5.1</span> -->
+        <span>Socket😭</span>
+        </a><ul class="menu-list"><li>
+        <a class="is-flex" href="#套接字究竟是什么😭">
+        <!-- 目录是否自动编号 -->
+        <!-- <span class="has-mr-6">5.1.1</span> -->
+        <span>套接字究竟是什么😭</span>
+        </a></li><li>
+        <a class="is-flex" href="#三大要素🤪">
+        <!-- 目录是否自动编号 -->
+        <!-- <span class="has-mr-6">5.1.2</span> -->
+        <span>三大要素🤪</span>
+        </a></li></ul></li><li>
+        <a class="is-flex" href="#UDP😀">
+        <!-- 目录是否自动编号 -->
+        <!-- <span class="has-mr-6">5.2</span> -->
         <span>UDP😀</span>
         </a><ul class="menu-list"><li>
         <a class="is-flex" href="#特点😀">
         <!-- 目录是否自动编号 -->
-        <!-- <span class="has-mr-6">5.1.1</span> -->
+        <!-- <span class="has-mr-6">5.2.1</span> -->
         <span>特点😀</span>
         </a></li><li>
         <a class="is-flex" href="#首部格式😀">
         <!-- 目录是否自动编号 -->
-        <!-- <span class="has-mr-6">5.1.2</span> -->
+        <!-- <span class="has-mr-6">5.2.2</span> -->
         <span>首部格式😀</span>
         </a></li><li>
         <a class="is-flex" href="#计算检验和😭">
         <!-- 目录是否自动编号 -->
-        <!-- <span class="has-mr-6">5.1.3</span> -->
+        <!-- <span class="has-mr-6">5.2.3</span> -->
         <span>计算检验和😭</span>
         </a></li><li>
         <a class="is-flex" href="#停止等待协议ARQ">
         <!-- 目录是否自动编号 -->
-        <!-- <span class="has-mr-6">5.1.4</span> -->
+        <!-- <span class="has-mr-6">5.2.4</span> -->
         <span>停止等待协议ARQ</span>
         </a></li></ul></li><li>
         <a class="is-flex" href="#TCP😀">
         <!-- 目录是否自动编号 -->
-        <!-- <span class="has-mr-6">5.2</span> -->
+        <!-- <span class="has-mr-6">5.3</span> -->
         <span>TCP😀</span>
         </a><ul class="menu-list"><li>
         <a class="is-flex" href="#特点😀-1">
         <!-- 目录是否自动编号 -->
-        <!-- <span class="has-mr-6">5.2.1</span> -->
+        <!-- <span class="has-mr-6">5.3.1</span> -->
         <span>特点😀</span>
         </a></li><li>
         <a class="is-flex" href="#首部格式😀-1">
         <!-- 目录是否自动编号 -->
-        <!-- <span class="has-mr-6">5.2.2</span> -->
+        <!-- <span class="has-mr-6">5.3.2</span> -->
         <span>首部格式😀</span>
         </a></li><li>
         <a class="is-flex" href="#三次握手😀">
         <!-- 目录是否自动编号 -->
-        <!-- <span class="has-mr-6">5.2.3</span> -->
+        <!-- <span class="has-mr-6">5.3.3</span> -->
         <span>三次握手😀</span>
         </a></li><li>
         <a class="is-flex" href="#四次挥手😀">
         <!-- 目录是否自动编号 -->
-        <!-- <span class="has-mr-6">5.2.4</span> -->
+        <!-- <span class="has-mr-6">5.3.4</span> -->
         <span>四次挥手😀</span>
         </a></li></ul></li></ul></li><li>
-        <a class="is-flex" href="#6-应用层">
+        <a class="is-flex" href="#6-应用层😀">
         <!-- 目录是否自动编号 -->
         <!-- <span class="has-mr-6">6</span> -->
-        <span>6. 应用层</span>
+        <span>6. 应用层😀</span>
         </a><ul class="menu-list"><li>
-        <a class="is-flex" href="#HTTP">
+        <a class="is-flex" href="#HTTP😀">
         <!-- 目录是否自动编号 -->
         <!-- <span class="has-mr-6">6.1</span> -->
-        <span>HTTP</span>
+        <span>HTTP😀</span>
         </a><ul class="menu-list"><li>
-        <a class="is-flex" href="#常见的HTTP请求动词">
+        <a class="is-flex" href="#常见的HTTP请求动词😀">
         <!-- 目录是否自动编号 -->
         <!-- <span class="has-mr-6">6.1.1</span> -->
-        <span>常见的HTTP请求动词</span>
+        <span>常见的HTTP请求动词😀</span>
         </a></li><li>
-        <a class="is-flex" href="#HTTP状态码表">
+        <a class="is-flex" href="#HTTP状态码表😀">
         <!-- 目录是否自动编号 -->
         <!-- <span class="has-mr-6">6.1.2</span> -->
-        <span>HTTP状态码表</span>
+        <span>HTTP状态码表😀</span>
         </a></li><li>
-        <a class="is-flex" href="#HTTP和HTTPS的区别">
+        <a class="is-flex" href="#HTTP和HTTPS的区别🤪">
         <!-- 目录是否自动编号 -->
         <!-- <span class="has-mr-6">6.1.3</span> -->
-        <span>HTTP和HTTPS的区别</span>
-        </a></li></ul></li></ul></li><li>
-        <a class="is-flex" href="#HTTP-HTTPS的区别">
-        <!-- 目录是否自动编号 -->
-        <!-- <span class="has-mr-6">7</span> -->
-        <span>HTTP/HTTPS的区别</span>
-        </a><ul class="menu-list"><li>
+        <span>HTTP和HTTPS的区别🤪</span>
+        </a></li></ul></li><li>
         <a class="is-flex" href="#输入网址敲下回车后发生了什么😀">
         <!-- 目录是否自动编号 -->
-        <!-- <span class="has-mr-6">7.1</span> -->
+        <!-- <span class="has-mr-6">6.2</span> -->
         <span>输入网址敲下回车后发生了什么😀</span>
         </a></li></ul></li></ul>
             </div>
@@ -1246,99 +1498,159 @@
         <!-- <span class="has-mr-6">3.4</span> -->
         <span>VLAN😀</span>
         </a></li></ul></li><li>
-        <a class="is-flex" href="#4-网络层">
+        <a class="is-flex" href="#4-网络层😀">
         <!-- 目录是否自动编号 -->
         <!-- <span class="has-mr-6">4</span> -->
-        <span>4. 网络层</span>
+        <span>4. 网络层😀</span>
+        </a><ul class="menu-list"><li>
+        <a class="is-flex" href="#IP地址和编址方法😀">
+        <!-- 目录是否自动编号 -->
+        <!-- <span class="has-mr-6">4.1</span> -->
+        <span>IP地址和编址方法😀</span>
+        </a><ul class="menu-list"><li>
+        <a class="is-flex" href="#分类的IP地址😀">
+        <!-- 目录是否自动编号 -->
+        <!-- <span class="has-mr-6">4.1.1</span> -->
+        <span>分类的IP地址😀</span>
         </a></li><li>
+        <a class="is-flex" href="#划分子网和子网掩码😀">
+        <!-- 目录是否自动编号 -->
+        <!-- <span class="has-mr-6">4.1.2</span> -->
+        <span>划分子网和子网掩码😀</span>
+        </a></li><li>
+        <a class="is-flex" href="#无分类编址CIDR😀">
+        <!-- 目录是否自动编号 -->
+        <!-- <span class="has-mr-6">4.1.3</span> -->
+        <span>无分类编址CIDR😀</span>
+        </a></li><li>
+        <a class="is-flex" href="#构造超网（路由聚合）😀">
+        <!-- 目录是否自动编号 -->
+        <!-- <span class="has-mr-6">4.1.4</span> -->
+        <span>构造超网（路由聚合）😀</span>
+        </a></li><li>
+        <a class="is-flex" href="#编址题😀">
+        <!-- 目录是否自动编号 -->
+        <!-- <span class="has-mr-6">4.1.5</span> -->
+        <span>编址题😀</span>
+        </a></li></ul></li><li>
+        <a class="is-flex" href="#分组转发和路由表🤪">
+        <!-- 目录是否自动编号 -->
+        <!-- <span class="has-mr-6">4.2</span> -->
+        <span>分组转发和路由表🤪</span>
+        </a><ul class="menu-list"><li>
+        <a class="is-flex" href="#路由表🤪">
+        <!-- 目录是否自动编号 -->
+        <!-- <span class="has-mr-6">4.2.1</span> -->
+        <span>路由表🤪</span>
+        </a></li><li>
+        <a class="is-flex" href="#分组转发算法😀">
+        <!-- 目录是否自动编号 -->
+        <!-- <span class="has-mr-6">4.2.2</span> -->
+        <span>分组转发算法😀</span>
+        </a></li></ul></li><li>
+        <a class="is-flex" href="#ARP协议😀">
+        <!-- 目录是否自动编号 -->
+        <!-- <span class="has-mr-6">4.3</span> -->
+        <span>ARP协议😀</span>
+        </a></li></ul></li><li>
         <a class="is-flex" href="#5-传输层😀">
         <!-- 目录是否自动编号 -->
         <!-- <span class="has-mr-6">5</span> -->
         <span>5. 传输层😀</span>
         </a><ul class="menu-list"><li>
-        <a class="is-flex" href="#UDP😀">
+        <a class="is-flex" href="#Socket😭">
         <!-- 目录是否自动编号 -->
         <!-- <span class="has-mr-6">5.1</span> -->
+        <span>Socket😭</span>
+        </a><ul class="menu-list"><li>
+        <a class="is-flex" href="#套接字究竟是什么😭">
+        <!-- 目录是否自动编号 -->
+        <!-- <span class="has-mr-6">5.1.1</span> -->
+        <span>套接字究竟是什么😭</span>
+        </a></li><li>
+        <a class="is-flex" href="#三大要素🤪">
+        <!-- 目录是否自动编号 -->
+        <!-- <span class="has-mr-6">5.1.2</span> -->
+        <span>三大要素🤪</span>
+        </a></li></ul></li><li>
+        <a class="is-flex" href="#UDP😀">
+        <!-- 目录是否自动编号 -->
+        <!-- <span class="has-mr-6">5.2</span> -->
         <span>UDP😀</span>
         </a><ul class="menu-list"><li>
         <a class="is-flex" href="#特点😀">
         <!-- 目录是否自动编号 -->
-        <!-- <span class="has-mr-6">5.1.1</span> -->
+        <!-- <span class="has-mr-6">5.2.1</span> -->
         <span>特点😀</span>
         </a></li><li>
         <a class="is-flex" href="#首部格式😀">
         <!-- 目录是否自动编号 -->
-        <!-- <span class="has-mr-6">5.1.2</span> -->
+        <!-- <span class="has-mr-6">5.2.2</span> -->
         <span>首部格式😀</span>
         </a></li><li>
         <a class="is-flex" href="#计算检验和😭">
         <!-- 目录是否自动编号 -->
-        <!-- <span class="has-mr-6">5.1.3</span> -->
+        <!-- <span class="has-mr-6">5.2.3</span> -->
         <span>计算检验和😭</span>
         </a></li><li>
         <a class="is-flex" href="#停止等待协议ARQ">
         <!-- 目录是否自动编号 -->
-        <!-- <span class="has-mr-6">5.1.4</span> -->
+        <!-- <span class="has-mr-6">5.2.4</span> -->
         <span>停止等待协议ARQ</span>
         </a></li></ul></li><li>
         <a class="is-flex" href="#TCP😀">
         <!-- 目录是否自动编号 -->
-        <!-- <span class="has-mr-6">5.2</span> -->
+        <!-- <span class="has-mr-6">5.3</span> -->
         <span>TCP😀</span>
         </a><ul class="menu-list"><li>
         <a class="is-flex" href="#特点😀-1">
         <!-- 目录是否自动编号 -->
-        <!-- <span class="has-mr-6">5.2.1</span> -->
+        <!-- <span class="has-mr-6">5.3.1</span> -->
         <span>特点😀</span>
         </a></li><li>
         <a class="is-flex" href="#首部格式😀-1">
         <!-- 目录是否自动编号 -->
-        <!-- <span class="has-mr-6">5.2.2</span> -->
+        <!-- <span class="has-mr-6">5.3.2</span> -->
         <span>首部格式😀</span>
         </a></li><li>
         <a class="is-flex" href="#三次握手😀">
         <!-- 目录是否自动编号 -->
-        <!-- <span class="has-mr-6">5.2.3</span> -->
+        <!-- <span class="has-mr-6">5.3.3</span> -->
         <span>三次握手😀</span>
         </a></li><li>
         <a class="is-flex" href="#四次挥手😀">
         <!-- 目录是否自动编号 -->
-        <!-- <span class="has-mr-6">5.2.4</span> -->
+        <!-- <span class="has-mr-6">5.3.4</span> -->
         <span>四次挥手😀</span>
         </a></li></ul></li></ul></li><li>
-        <a class="is-flex" href="#6-应用层">
+        <a class="is-flex" href="#6-应用层😀">
         <!-- 目录是否自动编号 -->
         <!-- <span class="has-mr-6">6</span> -->
-        <span>6. 应用层</span>
+        <span>6. 应用层😀</span>
         </a><ul class="menu-list"><li>
-        <a class="is-flex" href="#HTTP">
+        <a class="is-flex" href="#HTTP😀">
         <!-- 目录是否自动编号 -->
         <!-- <span class="has-mr-6">6.1</span> -->
-        <span>HTTP</span>
+        <span>HTTP😀</span>
         </a><ul class="menu-list"><li>
-        <a class="is-flex" href="#常见的HTTP请求动词">
+        <a class="is-flex" href="#常见的HTTP请求动词😀">
         <!-- 目录是否自动编号 -->
         <!-- <span class="has-mr-6">6.1.1</span> -->
-        <span>常见的HTTP请求动词</span>
+        <span>常见的HTTP请求动词😀</span>
         </a></li><li>
-        <a class="is-flex" href="#HTTP状态码表">
+        <a class="is-flex" href="#HTTP状态码表😀">
         <!-- 目录是否自动编号 -->
         <!-- <span class="has-mr-6">6.1.2</span> -->
-        <span>HTTP状态码表</span>
+        <span>HTTP状态码表😀</span>
         </a></li><li>
-        <a class="is-flex" href="#HTTP和HTTPS的区别">
+        <a class="is-flex" href="#HTTP和HTTPS的区别🤪">
         <!-- 目录是否自动编号 -->
         <!-- <span class="has-mr-6">6.1.3</span> -->
-        <span>HTTP和HTTPS的区别</span>
-        </a></li></ul></li></ul></li><li>
-        <a class="is-flex" href="#HTTP-HTTPS的区别">
-        <!-- 目录是否自动编号 -->
-        <!-- <span class="has-mr-6">7</span> -->
-        <span>HTTP/HTTPS的区别</span>
-        </a><ul class="menu-list"><li>
+        <span>HTTP和HTTPS的区别🤪</span>
+        </a></li></ul></li><li>
         <a class="is-flex" href="#输入网址敲下回车后发生了什么😀">
         <!-- 目录是否自动编号 -->
-        <!-- <span class="has-mr-6">7.1</span> -->
+        <!-- <span class="has-mr-6">6.2</span> -->
         <span>输入网址敲下回车后发生了什么😀</span>
         </a></li></ul></li></ul>
             </div>
