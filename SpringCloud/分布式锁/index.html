@@ -7,23 +7,22 @@
 
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
 
-<title>24-两两交换链表中的节点 - 小温 blog</title>
+<title>分布式锁 - 小温 blog</title>
 
 
-    <meta name="description" content="力扣24  https:&#x2F;&#x2F;leetcode-cn.com&#x2F;problems&#x2F;swap-nodes-in-pairs&#x2F;">
+    <meta name="description" content="1. 前言网上看到一个网友的评论：现在本科应届毕业生都要求会分布式了吗？ 真的太卷了！！！学不动了 听这个概念也很久了，而且其实我对分布式的学习也没那么深入…可是面试又要问，害！">
 <meta property="og:type" content="article">
-<meta property="og:title" content="24-两两交换链表中的节点">
-<meta property="og:url" content="https://wjw.today/algorithms/swap-nodes-in-pairs/index.html">
+<meta property="og:title" content="分布式锁">
+<meta property="og:url" content="https://wjw.today/SpringCloud/%E5%88%86%E5%B8%83%E5%BC%8F%E9%94%81/index.html">
 <meta property="og:site_name" content="小温 blog">
-<meta property="og:description" content="力扣24  https:&#x2F;&#x2F;leetcode-cn.com&#x2F;problems&#x2F;swap-nodes-in-pairs&#x2F;">
+<meta property="og:description" content="1. 前言网上看到一个网友的评论：现在本科应届毕业生都要求会分布式了吗？ 真的太卷了！！！学不动了 听这个概念也很久了，而且其实我对分布式的学习也没那么深入…可是面试又要问，害！">
 <meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="https://source.acexy.cn/view/XYIjGqZ">
-<meta property="article:published_time" content="2020-11-27T06:35:42.000Z">
-<meta property="article:modified_time" content="2020-12-09T09:28:50.356Z">
+<meta property="og:image" content="https://b1.sbimg.org/file/chevereto-jia/2020/12/20/QJkv1.md.png">
+<meta property="article:published_time" content="2020-12-20T07:38:34.000Z">
+<meta property="article:modified_time" content="2020-12-20T09:58:09.015Z">
 <meta property="article:author" content="wjw">
-<meta property="article:tag" content="力扣">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="https://source.acexy.cn/view/XYIjGqZ">
+<meta name="twitter:image" content="https://b1.sbimg.org/file/chevereto-jia/2020/12/20/QJkv1.md.png">
 
 
 
@@ -81,7 +80,7 @@
         <div class="navbar-brand is-flex-center">
             <a class="navbar-item navbar-logo" href="/">
             
-                <img src="images/loading.gif" data-original="https://s1.ax1x.com/2020/07/20/UfKyGQ.md.png" alt="24-两两交换链表中的节点" height="28">
+                <img src="images/loading.gif" data-original="https://s1.ax1x.com/2020/07/20/UfKyGQ.md.png" alt="分布式锁" height="28">
             
             </a>
         </div>
@@ -139,7 +138,7 @@
     
     <div class="card-image">
         <span  class="image is-7by1">
-            <img class="thumbnail" src="images/loading.gif" data-original="https://source.acexy.cn/view/XYIjGqZ" alt="24-两两交换链表中的节点">
+            <img class="thumbnail" src="images/loading.gif" data-original="https://b1.sbimg.org/file/chevereto-jia/2020/12/20/QJkv1.md.png" alt="分布式锁">
         </span>
     </div>
     
@@ -147,17 +146,17 @@
         
         <div class="level article-meta is-size-7 is-uppercase is-mobile is-overflow-x-auto">
             <div class="level-left">
-                <time class="level-item has-text-grey" datetime="2020-11-27T06:35:42.000Z">2020-11-27</time>
+                <time class="level-item has-text-grey" datetime="2020-12-20T07:38:34.000Z">2020-12-20</time>
                 
                 <div class="level-item">
-                <a class="has-link-grey -link" href="/categories/algorithms/">数据结构和算法</a>
+                <a class="has-link-grey -link" href="/categories/SpringCloud/">SpringCloud</a>
                 </div>
                 
                 
                 <span class="level-item has-text-grey">
                     
                     
-                    2 分钟 读完 (大约 341 个字)
+                    10 分钟 读完 (大约 1564 个字)
                 </span>
                 
                 
@@ -171,43 +170,111 @@
         
         <h1 class="title is-size-3 is-size-4-mobile has-text-weight-normal">
             
-                24-两两交换链表中的节点
+                分布式锁
             
         </h1>
         <div class="content">
-            <p>力扣24</p>
-<blockquote>
-<p><a href="https://leetcode-cn.com/problems/swap-nodes-in-pairs/">https://leetcode-cn.com/problems/swap-nodes-in-pairs/</a></p>
-</blockquote>
+            <h1 id="1-前言"><a href="#1-前言" class="headerlink" title="1. 前言"></a>1. 前言</h1><p>网上看到一个网友的评论：现在本科应届毕业生都要求会分布式了吗？</p>
+<p>真的太卷了！！！学不动了</p>
+<p>听这个概念也很久了，而且其实我对分布式的学习也没那么深入…可是面试又要问，害！</p>
 <a id="more"></a>
 
-<p><img src="images/loading.gif" data-original="https://s3.ax1x.com/2020/11/27/DDTSdU.png" alt=""></p>
-<p>链表题还是做太少了呀</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> ListNode <span class="title">swapPairs</span><span class="params">(ListNode head)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">if</span> (head == <span class="keyword">null</span> || head.next == <span class="keyword">null</span>) <span class="keyword">return</span> head;</span><br><span class="line">    ListNode post = head, pre = post, temp = <span class="keyword">null</span>;</span><br><span class="line">    head = head.next;</span><br><span class="line">    <span class="keyword">while</span> (pre != <span class="keyword">null</span> &amp;&amp; pre.next != <span class="keyword">null</span>)&#123;</span><br><span class="line">        <span class="comment">//交换</span></span><br><span class="line">        pre = post.next.next;</span><br><span class="line">        post.next.next = post;</span><br><span class="line">        <span class="comment">//两段连接</span></span><br><span class="line">        <span class="keyword">if</span> (temp != <span class="keyword">null</span>) temp.next = post.next;</span><br><span class="line">        <span class="comment">//移动到下一个位置</span></span><br><span class="line">        temp = post;</span><br><span class="line">        post = pre;</span><br><span class="line">    &#125;</span><br><span class="line">    temp.next = pre;</span><br><span class="line">    <span class="keyword">return</span> head;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>像temp这种要延迟一轮的，可以把初始值设为null，然后while循环中if (temp != null)，可以达到延迟一轮的效果</p>
 <br>
 
-<p>或者是while的周期安排得更好一点，比如下面大佬写的</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> ListNode <span class="title">swapPairs2</span><span class="params">(ListNode head)</span> </span>&#123;</span><br><span class="line">    ListNode pre = <span class="keyword">new</span> ListNode(<span class="number">0</span>);</span><br><span class="line">    pre.next = head;</span><br><span class="line">    ListNode temp = pre;</span><br><span class="line">    <span class="keyword">while</span>(temp.next != <span class="keyword">null</span> &amp;&amp; temp.next.next != <span class="keyword">null</span>) &#123;</span><br><span class="line">        ListNode start = temp.next;</span><br><span class="line">        ListNode end = temp.next.next;</span><br><span class="line">        temp.next = end;</span><br><span class="line">        start.next = end.next;  <span class="comment">//这步先，就很妙，不需要方法1那样保留上一个</span></span><br><span class="line">        end.next = start;</span><br><span class="line">        temp = start;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> pre.next;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>周期就安排的很好</p>
-<p>temp-&gt;start-&gt;end，start和end是要交换的，temp永远在他们后面一个，方便对start这个节点操作</p>
-<p>而上面我写的周期为</p>
-<p>断裂的两个节点 post-&gt;b-&gt;pre，要交换的是post和b，这时候就要用temp将断裂的连上post，比较憨</p>
+<p>先说说这个东西吧，本来单体应用情况下，我们经常说线程安全，于是出现了锁和同步的一系列操作(synchronized啊，Lock啊，JUC啊之类的)，数据库方面也出现了事务的隔离性。现在问题是分布式场景，集群环境，实际上开了多个进程，那么java的这些并发相关api就无能为力了，只能借助一些第三方的工具，所有的服务器都通过这个第三方来获取锁。</p>
+<p>这就叫分布式锁，目的是为了保证在分布式部署的应用集群中，同一个方法在同一时间只能被一台机器上的一个线程执行</p>
+<p><strong>目前分布式锁的三种主流实现方式</strong></p>
+<p>基于数据库</p>
+<p>基于redis</p>
+<p>基于zookeeper</p>
 <br>
 
-<p>其他链表类型的题目<a href="https://wjw.today/algorithms/algorithms-list-navigator/#9-链表">点击这里</a></p>
+<p>目的：</p>
+<ul>
+<li><p>可以保证在分布式集群下<strong>线程安全</strong>，同一个方法在同一时间只能被一台机器上的一个线程执行。</p>
+</li>
+<li><p>这把锁要是一把<strong>可重入</strong>锁（避免死锁：同一个线程同一次事务访问同一行两次，拿不到锁）</p>
+</li>
+<li><p>有高可用的获取锁和释放锁功能（<strong>加锁失败</strong>能重加，<strong>解锁失败</strong>能让锁过期）</p>
+</li>
+<li><p>获取锁和释放锁的性能要好</p>
+</li>
+</ul>
+<hr>
+<h1 id="2-基于数据库的分布式锁"><a href="#2-基于数据库的分布式锁" class="headerlink" title="2. 基于数据库的分布式锁"></a>2. 基于数据库的分布式锁</h1><h2 id="2-1-基于表（乐观锁）"><a href="#2-1-基于表（乐观锁）" class="headerlink" title="2.1 基于表（乐观锁）"></a>2.1 基于表（乐观锁）</h2><p><strong>实现：</strong></p>
+<p>就是记录一张lock表，加锁：添加一条记录，有当前线程名和锁定的方法名。解锁：删除这条记录。</p>
+<p><strong>注意事项：</strong></p>
+<ul>
+<li>针对线程安全问题：锁定的方法名这一个字段当然要unique，否则失去意义（只能一个线程执行一个方法）</li>
+<li>针对可重入问题：请求锁时除了要判断该方法是否已经存在以外，还要判断是否就是本线程，是则直接return true</li>
+</ul>
+<p><strong>好处和问题：</strong></p>
+<ul>
+<li><p>数据库挂掉：需要多个数据库备份和同步</p>
+</li>
+<li><p>针对加锁失败：insert插入失败，没有获得锁，就直接回滚事务不能后续，解决办法是while循环一直请求到成功才return</p>
+</li>
+<li><p>针对解锁失败：delete解锁可能失败，没有失效时间，导致记录一直在数据库中，之恶能定时任务清理该表</p>
+</li>
+</ul>
+<br>
 
-        </div>
-        
-        <div class="level is-size-7 is-uppercase">
-            <div class="level-start">
-                <div class="level-item">
-                    <span class="is-size-6 has-text-grey has-mr-7">#</span>
-                    <a class="has-link-grey -link" href="/tags/%E5%8A%9B%E6%89%A3/" rel="tag">力扣</a>
-                </div>
-            </div>
+<h2 id="2-2-基于排他锁（悲观锁）"><a href="#2-2-基于排他锁（悲观锁）" class="headerlink" title="2.2 基于排他锁（悲观锁）"></a>2.2 基于排他锁（悲观锁）</h2><p><strong>实现：</strong></p>
+<p>表和上面一样，加锁：connection.setAutoCommit(false);开启事务但不提交，加锁语句为select * from lock where method_name = xx for update。解锁：connection.commit();</p>
+<p><strong>注意事项：</strong></p>
+<ul>
+<li>针对线程安全问题：for update是mysql的innodb一种行锁排他锁实现，因此一定要引擎支持行锁，且必须加唯一索引才会走行锁，否则锁表</li>
+<li>针对可重入问题：同上</li>
+</ul>
+<p><strong>好处和问题：</strong></p>
+<ul>
+<li>不存在加锁失败问题：因为for update失败会阻塞直到成功</li>
+<li>不存在解锁失败问题：因为锁并不是插入的数据，而是事务，出错了会回滚，数据库会把锁释放掉</li>
+<li>性能问题：有时候sql优化器优化了，表太小时不走索引，导致锁表，影响其他方法的进行</li>
+<li>性能问题：事务长时间不提交的性能问题，同时占用连接池</li>
+</ul>
+<br>
+
+<h2 id="2-3-总结"><a href="#2-3-总结" class="headerlink" title="2.3 总结"></a>2.3 总结</h2><p>容易理解，性能有问题，考虑的多了写起来越来越复杂。不推荐</p>
+<br>
+
+<hr>
+<h1 id="2-基于redis的分布式锁"><a href="#2-基于redis的分布式锁" class="headerlink" title="2. 基于redis的分布式锁"></a>2. 基于redis的分布式锁</h1><p><strong>实现：</strong></p>
+<p>这个最简单，就是一条记录key: 方法名 value: 当前线程</p>
+<p><strong>注意事项</strong></p>
+<ul>
+<li><p>针对加锁失败问题：要while循环，同上</p>
+</li>
+<li><p>针对解锁失败问题：要记得设置过期时间</p>
+</li>
+<li><p>针对可重入问题：同上，判断是否本身</p>
+</li>
+</ul>
+<p><strong>问题：</strong></p>
+<ul>
+<li>解锁失败可以通过过期时间来完成：但是过期时间设置多少呢？少了可能事务没完成就过期了，线程不安全。多了的话虽然安全，但是如果真的解锁失败，要白等很久</li>
+</ul>
+<p><strong>总结：</strong></p>
+<p>redis可以简单的部署集群，而且支持过期时间，解决了可用性的问题，而且性能也好，问题就在于过期时间的设置</p>
+<br>
+
+<hr>
+<h1 id="3-基于zookeeper的分布式锁"><a href="#3-基于zookeeper的分布式锁" class="headerlink" title="3. 基于zookeeper的分布式锁"></a>3. 基于zookeeper的分布式锁</h1><p><strong>实现：</strong></p>
+<p>虽然我没用过zookeeper，但是这个点还是看过，基于临时有序节点，加锁：添加有序节点，解锁：删除有序节点。可以直接使用zookeeper第三方库<a href="https://curator.apache.org/">Curator</a>客户端，这个客户端中封装了一个可重入的锁服务。</p>
+<p><strong>总结：</strong></p>
+<p>针对线程安全问题：没问题，zookeeper本身就是为了一致性</p>
+<p>针对可重入问题：没问题，创建节点的时候，把当前客户端的主机信息和线程信息直接写入到节点中，下次想要获取锁的时候和当前最小的节点中的数据比对一下就可以了。如果不一样就再创建一个临时的顺序节点，参与排队。</p>
+<p>针对加锁失败：没问题，本身就是阻塞的，客户端可以检查自己创建的节点是不是当前所有节点中序号最小的，如果是，那么自己就获取到锁</p>
+<p>针对解锁失败：没问题，临时节点在session断开时自动删除</p>
+<br>
+
+<blockquote>
+<p>本文参考：</p>
+<p><a href="https://www.cnblogs.com/austinspark-jessylu/p/8043726.html">https://www.cnblogs.com/austinspark-jessylu/p/8043726.html</a></p>
+<p>redis部分的实现参考：</p>
+<p><a href="https://www.cnblogs.com/barrywxx/p/11644803.html">https://www.cnblogs.com/barrywxx/p/11644803.html</a></p>
+</blockquote>
+
         </div>
         
         
@@ -222,17 +289,10 @@
 <div class="card card-transparent">
     <div class="level post-navigation is-flex-wrap is-mobile">
         
-        <div class="level-start">
-            <a class="level level-item has-link-grey  article-nav-prev" href="/algorithms/rotate-list/">
-                <i class="level-item fas fa-chevron-left"></i>
-                <span class="level-item">61-旋转链表</span>
-            </a>
-        </div>
-        
         
         <div class="level-end">
-            <a class="level level-item has-link-grey  article-nav-next" href="/algorithms/maximum-subarray/">
-                <span class="level-item">53-最大子序和</span>
+            <a class="level level-item has-link-grey  article-nav-next" href="/algorithms/algorithms-list-navigator/">
+                <span class="level-item">数据结构与算法不迷路导航</span>
                 <i class="level-item fas fa-chevron-right"></i>
             </a>
         </div>
@@ -455,6 +515,52 @@
         
             
 
+    <div class="card widget" id="toc">
+        <div class="card-content">
+            <div class="menu">
+                <h3 class="menu-label">
+                    目录
+                </h3>
+                <ul class="menu-list"><li>
+        <a class="is-flex" href="#1-前言">
+        <!-- 目录是否自动编号 -->
+        <!-- <span class="has-mr-6">1</span> -->
+        <span>1. 前言</span>
+        </a></li><li>
+        <a class="is-flex" href="#2-基于数据库的分布式锁">
+        <!-- 目录是否自动编号 -->
+        <!-- <span class="has-mr-6">2</span> -->
+        <span>2. 基于数据库的分布式锁</span>
+        </a><ul class="menu-list"><li>
+        <a class="is-flex" href="#2-1-基于表（乐观锁）">
+        <!-- 目录是否自动编号 -->
+        <!-- <span class="has-mr-6">2.1</span> -->
+        <span>2.1 基于表（乐观锁）</span>
+        </a></li><li>
+        <a class="is-flex" href="#2-2-基于排他锁（悲观锁）">
+        <!-- 目录是否自动编号 -->
+        <!-- <span class="has-mr-6">2.2</span> -->
+        <span>2.2 基于排他锁（悲观锁）</span>
+        </a></li><li>
+        <a class="is-flex" href="#2-3-总结">
+        <!-- 目录是否自动编号 -->
+        <!-- <span class="has-mr-6">2.3</span> -->
+        <span>2.3 总结</span>
+        </a></li></ul></li><li>
+        <a class="is-flex" href="#2-基于redis的分布式锁">
+        <!-- 目录是否自动编号 -->
+        <!-- <span class="has-mr-6">3</span> -->
+        <span>2. 基于redis的分布式锁</span>
+        </a></li><li>
+        <a class="is-flex" href="#3-基于zookeeper的分布式锁">
+        <!-- 目录是否自动编号 -->
+        <!-- <span class="has-mr-6">4</span> -->
+        <span>3. 基于zookeeper的分布式锁</span>
+        </a></li></ul>
+            </div>
+        </div>
+    </div>
+
         
             <div class="card widget">
     <div class="card-content">
@@ -573,6 +679,52 @@
     
         
 
+    <div class="card widget" id="toc">
+        <div class="card-content">
+            <div class="menu">
+                <h3 class="menu-label">
+                    目录
+                </h3>
+                <ul class="menu-list"><li>
+        <a class="is-flex" href="#1-前言">
+        <!-- 目录是否自动编号 -->
+        <!-- <span class="has-mr-6">1</span> -->
+        <span>1. 前言</span>
+        </a></li><li>
+        <a class="is-flex" href="#2-基于数据库的分布式锁">
+        <!-- 目录是否自动编号 -->
+        <!-- <span class="has-mr-6">2</span> -->
+        <span>2. 基于数据库的分布式锁</span>
+        </a><ul class="menu-list"><li>
+        <a class="is-flex" href="#2-1-基于表（乐观锁）">
+        <!-- 目录是否自动编号 -->
+        <!-- <span class="has-mr-6">2.1</span> -->
+        <span>2.1 基于表（乐观锁）</span>
+        </a></li><li>
+        <a class="is-flex" href="#2-2-基于排他锁（悲观锁）">
+        <!-- 目录是否自动编号 -->
+        <!-- <span class="has-mr-6">2.2</span> -->
+        <span>2.2 基于排他锁（悲观锁）</span>
+        </a></li><li>
+        <a class="is-flex" href="#2-3-总结">
+        <!-- 目录是否自动编号 -->
+        <!-- <span class="has-mr-6">2.3</span> -->
+        <span>2.3 总结</span>
+        </a></li></ul></li><li>
+        <a class="is-flex" href="#2-基于redis的分布式锁">
+        <!-- 目录是否自动编号 -->
+        <!-- <span class="has-mr-6">3</span> -->
+        <span>2. 基于redis的分布式锁</span>
+        </a></li><li>
+        <a class="is-flex" href="#3-基于zookeeper的分布式锁">
+        <!-- 目录是否自动编号 -->
+        <!-- <span class="has-mr-6">4</span> -->
+        <span>3. 基于zookeeper的分布式锁</span>
+        </a></li></ul>
+            </div>
+        </div>
+    </div>
+
     
         <div class="card widget">
     <div class="card-content">
@@ -690,7 +842,7 @@
             <div class="level-start has-text-centered-mobile">
                 <a class="footer-logo is-block has-mb-6" href="/">
                 
-                    <img src="images/loading.gif" data-original="https://s1.ax1x.com/2020/07/20/UfKyGQ.md.png" alt="24-两两交换链表中的节点" height="28">
+                    <img src="images/loading.gif" data-original="https://s1.ax1x.com/2020/07/20/UfKyGQ.md.png" alt="分布式锁" height="28">
                 
                 </a>
                 <p class="is-size-7">

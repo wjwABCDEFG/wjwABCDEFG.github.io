@@ -19,7 +19,7 @@
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="https://source.acexy.cn/view/XULWDpi">
 <meta property="article:published_time" content="2020-10-09T01:23:26.000Z">
-<meta property="article:modified_time" content="2020-12-11T05:59:47.706Z">
+<meta property="article:modified_time" content="2020-12-20T07:49:13.310Z">
 <meta property="article:author" content="wjw">
 <meta property="article:tag" content="开发">
 <meta name="twitter:card" content="summary">
@@ -157,7 +157,7 @@
                 <span class="level-item has-text-grey">
                     
                     
-                    34 分钟 读完 (大约 5032 个字)
+                    35 分钟 读完 (大约 5303 个字)
                 </span>
                 
                 
@@ -321,7 +321,17 @@
 
 <hr>
 <h1 id="5-缓存雪崩，穿透，击穿"><a href="#5-缓存雪崩，穿透，击穿" class="headerlink" title="5. 缓存雪崩，穿透，击穿"></a>5. 缓存雪崩，穿透，击穿</h1><p><strong>缓存雪崩</strong>：是说redis大量内容同时过期，因此db突然之间多了很多请求。解决方法就是随机过期时间</p>
+<br>
+
 <p><strong>缓存穿透</strong>：查询id=-1，第一次查db，查不到就不放进redis，第二次查一定不会在redis中，又去查db，如此往复…恶意发送大量查询请求，导致一直查db，就是缓存穿透。解决办法就是把-1: null存进redis，或者限制同一个key在一段时间的请求次数，或者是使用过滤器过滤掉</p>
+<p>布隆过滤器：就是一个很长的bit数组，通过一级或者多级不同的hash函数之后将key转换成多个位的1，然后在bit数组上看是该key否存在，然后每次添加入redis时也会将这个key的hash位置为1。需要注意的地方有两个</p>
+<ol>
+<li>这里既然是Hash函数，那就存在一个问题，不存在的key也有可能经过hash函数之后对应位全为1，被误判为key存在，不过没关系。<strong>hash判断存在，key不一定存在。hash判断不存在，key一定不存在</strong></li>
+<li>bit数组里面的位只能添加为1不能修改回0，因为改为0可能会影响多个key。所以要判断好这个数组的长度，否则经过多次置1后数组全为1，过滤器就失去了过滤意义，可以重新扩容。</li>
+</ol>
+<p>因为这些问题，后面还有其他的过滤器比如布谷鸟过滤器</p>
+<br>
+
 <p><strong>缓存击穿</strong>：跟缓存雪崩类似，是因为过期导致的，但是不是大量内容，而是说对同一个key发出大量的请求（比如秒杀），突然过期了，导致查db。这种场景解决办法就是查db的时候加锁，过期–&gt;加锁查db–&gt;db压力小–&gt;重新放进redis–&gt;查redis</p>
 <br>
 
@@ -490,7 +500,7 @@
                     </p>
                     <a href="/archives">
                         <p class="title has-text-weight-normal">
-                            89
+                            90
                         </p>
                     </a>
                 </div>
@@ -577,7 +587,7 @@
                 <span class="level-item">SpringCloud</span>
             </span>
             <span class="level-end">
-                <span class="level-item tag">3</span>
+                <span class="level-item tag">4</span>
             </span>
         </a></li><li>
         <a class="level is-marginless" href="/categories/util/">
@@ -803,6 +813,25 @@
         
         <article class="media">
             
+            <a href="/SpringCloud/%E5%88%86%E5%B8%83%E5%BC%8F%E9%94%81/" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="images/loading.gif" data-original="https://b1.sbimg.org/file/chevereto-jia/2020/12/20/QJkv1.md.png" alt="分布式锁">
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2020-12-20T07:38:34.000Z">2020-12-20</time></div>
+                    <a href="/SpringCloud/%E5%88%86%E5%B8%83%E5%BC%8F%E9%94%81/" class="title has-link-black-ter is-size-6 has-text-weight-normal">分布式锁</a>
+                    <p class="is-size-7 is-uppercase">
+                        <a class="has-link-grey -link" href="/categories/SpringCloud/">SpringCloud</a>
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+        <article class="media">
+            
             <a href="/algorithms/algorithms-list-navigator/" class="media-left">
                 <p class="image is-64x64">
                     <img class="thumbnail" src="images/loading.gif" data-original="https://source.acexy.cn/view/XX9GIuI" alt="数据结构与算法不迷路导航">
@@ -870,25 +899,6 @@
                 <div class="content">
                     <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2020-12-10T08:25:13.000Z">2020-12-10</time></div>
                     <a href="/algorithms/single-number/" class="title has-link-black-ter is-size-6 has-text-weight-normal">136-137-260-只出现一次的数字</a>
-                    <p class="is-size-7 is-uppercase">
-                        <a class="has-link-grey -link" href="/categories/algorithms/">数据结构和算法</a>
-                    </p>
-                </div>
-            </div>
-        </article>
-        
-        <article class="media">
-            
-            <a href="/algorithms/spiral-matrix/" class="media-left">
-                <p class="image is-64x64">
-                    <img class="thumbnail" src="images/loading.gif" data-original="https://b1.sbimg.org/file/chevereto-jia/2020/12/10/QAcJ8.md.jpg" alt="54-螺旋矩阵">
-                </p>
-            </a>
-            
-            <div class="media-content">
-                <div class="content">
-                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2020-12-10T05:08:21.000Z">2020-12-10</time></div>
-                    <a href="/algorithms/spiral-matrix/" class="title has-link-black-ter is-size-6 has-text-weight-normal">54-螺旋矩阵</a>
                     <p class="is-size-7 is-uppercase">
                         <a class="has-link-grey -link" href="/categories/algorithms/">数据结构和算法</a>
                     </p>
@@ -1052,6 +1062,25 @@
         
         <article class="media">
             
+            <a href="/SpringCloud/%E5%88%86%E5%B8%83%E5%BC%8F%E9%94%81/" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="images/loading.gif" data-original="https://b1.sbimg.org/file/chevereto-jia/2020/12/20/QJkv1.md.png" alt="分布式锁">
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2020-12-20T07:38:34.000Z">2020-12-20</time></div>
+                    <a href="/SpringCloud/%E5%88%86%E5%B8%83%E5%BC%8F%E9%94%81/" class="title has-link-black-ter is-size-6 has-text-weight-normal">分布式锁</a>
+                    <p class="is-size-7 is-uppercase">
+                        <a class="has-link-grey -link" href="/categories/SpringCloud/">SpringCloud</a>
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+        <article class="media">
+            
             <a href="/algorithms/algorithms-list-navigator/" class="media-left">
                 <p class="image is-64x64">
                     <img class="thumbnail" src="images/loading.gif" data-original="https://source.acexy.cn/view/XX9GIuI" alt="数据结构与算法不迷路导航">
@@ -1119,25 +1148,6 @@
                 <div class="content">
                     <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2020-12-10T08:25:13.000Z">2020-12-10</time></div>
                     <a href="/algorithms/single-number/" class="title has-link-black-ter is-size-6 has-text-weight-normal">136-137-260-只出现一次的数字</a>
-                    <p class="is-size-7 is-uppercase">
-                        <a class="has-link-grey -link" href="/categories/algorithms/">数据结构和算法</a>
-                    </p>
-                </div>
-            </div>
-        </article>
-        
-        <article class="media">
-            
-            <a href="/algorithms/spiral-matrix/" class="media-left">
-                <p class="image is-64x64">
-                    <img class="thumbnail" src="images/loading.gif" data-original="https://b1.sbimg.org/file/chevereto-jia/2020/12/10/QAcJ8.md.jpg" alt="54-螺旋矩阵">
-                </p>
-            </a>
-            
-            <div class="media-content">
-                <div class="content">
-                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2020-12-10T05:08:21.000Z">2020-12-10</time></div>
-                    <a href="/algorithms/spiral-matrix/" class="title has-link-black-ter is-size-6 has-text-weight-normal">54-螺旋矩阵</a>
                     <p class="is-size-7 is-uppercase">
                         <a class="has-link-grey -link" href="/categories/algorithms/">数据结构和算法</a>
                     </p>
