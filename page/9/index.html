@@ -130,6 +130,157 @@
 <div class="card">
     
     <div class="card-image">
+        <a href="/algorithms/best-time-to-buy-and-sell-stock/" class="image is-7by1">
+            <img class="thumbnail" src="images/loading.gif" data-original="https://source.acexy.cn/view/XOb3T9n" alt="121-买卖股票的最佳时机">
+        </a>
+    </div>
+    
+    <div class="card-content article ">
+        
+        <div class="level article-meta is-size-7 is-uppercase is-mobile is-overflow-x-auto">
+            <div class="level-left">
+                <time class="level-item has-text-grey" datetime="2020-07-29T19:33:54.000Z">2020-07-30</time>
+                
+                <div class="level-item">
+                <a class="has-link-grey -link" href="/categories/algorithms/">数据结构和算法</a>
+                </div>
+                
+                
+                <span class="level-item has-text-grey">
+                    
+                    
+                    4 分钟 读完 (大约 548 个字)
+                </span>
+                
+                
+            </div>
+        </div>
+        
+        <h1 class="title is-size-3 is-size-4-mobile has-text-weight-normal">
+            
+                <a class="has-link-black-ter" href="/algorithms/best-time-to-buy-and-sell-stock/">121-买卖股票的最佳时机</a>
+            
+        </h1>
+        <div class="content">
+            <blockquote>
+<p>力扣第121题 剑指offer第63题 <a href="https://leetcode-cn.com/problems/best-time-to-buy-and-sell-stock/">https://leetcode-cn.com/problems/best-time-to-buy-and-sell-stock/</a></p>
+</blockquote>
+<p>给定一个数组，它的第 i 个元素是一支给定股票第 i 天的价格。</p>
+<p>如果你最多只允许完成一笔交易（即买入和卖出一支股票一次），设计一个算法来计算你所能获取的最大利润。</p>
+        </div>
+        
+        
+        <div class="level is-mobile">
+            <div class="level-start">
+                <div class="level-item">
+                <a class="button is-size-7 is-light" href="/algorithms/best-time-to-buy-and-sell-stock/#more">阅读更多</a>
+                </div>
+            </div>
+        </div>
+        
+        
+    </div>
+</div>
+
+
+
+
+
+
+
+
+    
+<div class="card">
+    
+    <div class="card-image">
+        <a href="/algorithms/longest-palindromic-substring/" class="image is-7by1">
+            <img class="thumbnail" src="images/loading.gif" data-original="https://source.acexy.cn/view/XOb1+A1" alt="5-最长回文子串">
+        </a>
+    </div>
+    
+    <div class="card-content article ">
+        
+        <div class="level article-meta is-size-7 is-uppercase is-mobile is-overflow-x-auto">
+            <div class="level-left">
+                <time class="level-item has-text-grey" datetime="2020-07-29T14:59:51.000Z">2020-07-29</time>
+                
+                <div class="level-item">
+                <a class="has-link-grey -link" href="/categories/algorithms/">数据结构和算法</a>
+                </div>
+                
+                
+                <span class="level-item has-text-grey">
+                    
+                    
+                    4 分钟 读完 (大约 644 个字)
+                </span>
+                
+                
+            </div>
+        </div>
+        
+        <h1 class="title is-size-3 is-size-4-mobile has-text-weight-normal">
+            
+                <a class="has-link-black-ter" href="/algorithms/longest-palindromic-substring/">5-最长回文子串</a>
+            
+        </h1>
+        <div class="content">
+            <p>力扣5</p>
+<blockquote>
+<p><a href="https://leetcode-cn.com/problems/longest-palindromic-substring/">https://leetcode-cn.com/problems/longest-palindromic-substring/</a></p>
+</blockquote>
+<p><img src="images/loading.gif" data-original="https://s3.ax1x.com/2020/11/19/DKFWBd.png" alt=""></p>
+<br>
+
+<h2 id="思路"><a href="#思路" class="headerlink" title="思路"></a>思路</h2><p>很有意思很高频的一道题，我的思路历程是这样的：</p>
+<p>确定左右然后对区间判断？  <em>不对—&gt;应该是以i为中间往两边扩散</em></p>
+<p>“aba”和”abba”好像不一样啊？  <em>只是l和r初始值不能是等于i，而是相同字母的左右边界，这样两种情况就一样了</em></p>
+<p>想明白了这两点</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> String <span class="title">longestPalindrome</span><span class="params">(String s)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">if</span> (s == <span class="keyword">null</span> || s.length() == <span class="number">0</span>) <span class="keyword">return</span> <span class="string">""</span>;</span><br><span class="line">    <span class="keyword">char</span>[] chars = s.toCharArray();</span><br><span class="line">    <span class="keyword">int</span>[] idx = <span class="keyword">new</span> <span class="keyword">int</span>[<span class="number">2</span>];	<span class="comment">//用来存最长的结果的左右下标，不要每次都substring，这样太慢</span></span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; chars.length; i++) &#123;</span><br><span class="line">        <span class="keyword">int</span> l = i, r = i;    <span class="comment">//从中间向两边找</span></span><br><span class="line">        <span class="comment">//l和r初始值应该是相同字母的左右边界</span></span><br><span class="line">        <span class="keyword">while</span> (l - <span class="number">1</span> &gt;= <span class="number">0</span> &amp;&amp; chars[l - <span class="number">1</span>] == chars[i]) l--;</span><br><span class="line">        <span class="keyword">while</span> (r + <span class="number">1</span> &lt; chars.length &amp;&amp; chars[r + <span class="number">1</span>] == chars[i]) r++;</span><br><span class="line">        <span class="keyword">while</span> (l - <span class="number">1</span> &gt;= <span class="number">0</span> &amp;&amp; r + <span class="number">1</span> &lt; chars.length)&#123;</span><br><span class="line">            <span class="keyword">if</span> (chars[l - <span class="number">1</span>] != chars[r + <span class="number">1</span>])&#123;</span><br><span class="line">                <span class="keyword">break</span>;</span><br><span class="line">            &#125;</span><br><span class="line">            l--;	<span class="comment">//左右扩散</span></span><br><span class="line">            r++;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">if</span> ((r - l) &gt; (idx[<span class="number">1</span>] - idx[<span class="number">0</span>]))&#123;</span><br><span class="line">            idx[<span class="number">0</span>] = l;</span><br><span class="line">            idx[<span class="number">1</span>] = r;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> s.substring(idx[<span class="number">0</span>], idx[<span class="number">1</span>] + <span class="number">1</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><img src="images/loading.gif" data-original="https://s3.ax1x.com/2020/11/19/DKVjMT.png" alt=""></p>
+<br>
+
+<h2 id="优化"><a href="#优化" class="headerlink" title="优化"></a>优化</h2><p>[a]代表当前遍历到了哪里</p>
+<p>对于b[b]bbb和 bb[b]bb我们可以发现其实定位l和r的初始值后是一样的，所以我们可以跳过这几种，具体有以下两点要做</p>
+<ol>
+<li>定位完r后，直接让i = r，跳过中间的所有b（[b]bbbb—&gt;bbbb[b]）</li>
+<li>这样操作后实际上没有i在中间的情况（b[b]bbb），因为我们实际上只找了最左边那次，所以可以不用再定位l，只需要定位r</li>
+</ol>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> String <span class="title">longestPalindrome</span><span class="params">(String s)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">if</span> (s == <span class="keyword">null</span> || s.length() == <span class="number">0</span>) <span class="keyword">return</span> <span class="string">""</span>;</span><br><span class="line">    <span class="keyword">char</span>[] chars = s.toCharArray();</span><br><span class="line">    <span class="keyword">int</span>[] idx = <span class="keyword">new</span> <span class="keyword">int</span>[<span class="number">2</span>];</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; chars.length; i++) &#123;</span><br><span class="line">        <span class="keyword">int</span> l = i, r = i;</span><br><span class="line">        <span class="comment">//while (l - 1 &gt;= 0 &amp;&amp; chars[l - 1] == chars[i]) l--;   //优化2，实际上不需要找左边了</span></span><br><span class="line">        <span class="keyword">while</span> (r + <span class="number">1</span> &lt; chars.length &amp;&amp; chars[r + <span class="number">1</span>] == chars[i]) r++;</span><br><span class="line">        i = r;  <span class="comment">//优化1，跳过中间部分，直接定位到同字母的最后一个</span></span><br><span class="line">        <span class="keyword">while</span> (l - <span class="number">1</span> &gt;= <span class="number">0</span> &amp;&amp; r + <span class="number">1</span> &lt; chars.length)&#123;</span><br><span class="line">            <span class="keyword">if</span> (chars[l - <span class="number">1</span>] != chars[r + <span class="number">1</span>])&#123;</span><br><span class="line">                <span class="keyword">break</span>;</span><br><span class="line">            &#125;</span><br><span class="line">            l--;</span><br><span class="line">            r++;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">if</span> ((r - l) &gt; (idx[<span class="number">1</span>] - idx[<span class="number">0</span>]))&#123;</span><br><span class="line">            idx[<span class="number">0</span>] = l;</span><br><span class="line">            idx[<span class="number">1</span>] = r;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> s.substring(idx[<span class="number">0</span>], idx[<span class="number">1</span>] + <span class="number">1</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><img src="images/loading.gif" data-original="https://s3.ax1x.com/2020/11/19/DKZHmD.png" alt=""></p>
+<br>
+
+<p>后记，准备将原来的一些题目重做一下，有一些题目真的是感觉得出一定是高频题，比如链表反转，最长回文，最长不重复，最大子数组…接下来会重做这些题目</p>
+<br>
+
+<blockquote>
+<p>参考</p>
+<p>评论区<a href="https://leetcode-cn.com/u/tang-zhu-7/">糖丶7</a>的方法</p>
+</blockquote>
+<br>
+
+<p>其他字符串类型的题目可以<a href="https://wjw.today/algorithms/algorithms-list-navigator/#7-字符串">点击这里</a></p>
+
+        </div>
+        
+        
+        
+    </div>
+</div>
+
+
+
+
+
+
+
+
+    
+<div class="card">
+    
+    <div class="card-image">
         <a href="/Others/%E6%9C%80%E7%9F%AD%E4%BD%9C%E4%B8%9A%E4%BC%98%E5%85%88%E7%AE%97%E6%B3%95(SJF)/" class="image is-7by1">
             <img class="thumbnail" src="images/loading.gif" data-original="https://source.acexy.cn/view/XOb1CgW" alt="最短作业优先算法(SJF)">
         </a>
@@ -621,134 +772,6 @@
 
 
 
-    
-<div class="card">
-    
-    <div class="card-image">
-        <a href="/Others/java%E4%B8%BB%E5%8A%A8%E5%8F%91%E9%80%81http%E8%AF%B7%E6%B1%82/" class="image is-7by1">
-            <img class="thumbnail" src="images/loading.gif" data-original="https://wx1.sbimg.cn/2020/07/30/P7qc1.md.jpg" alt="java主动发送http请求">
-        </a>
-    </div>
-    
-    <div class="card-content article ">
-        
-        <div class="level article-meta is-size-7 is-uppercase is-mobile is-overflow-x-auto">
-            <div class="level-left">
-                <time class="level-item has-text-grey" datetime="2020-06-27T15:36:34.000Z">2020-06-27</time>
-                
-                <div class="level-item">
-                <a class="has-link-grey -link" href="/categories/Others/">Others</a>
-                </div>
-                
-                
-                <span class="level-item has-text-grey">
-                    
-                    
-                    3 分钟 读完 (大约 387 个字)
-                </span>
-                
-                
-            </div>
-        </div>
-        
-        <h1 class="title is-size-3 is-size-4-mobile has-text-weight-normal">
-            
-                <a class="has-link-black-ter" href="/Others/java%E4%B8%BB%E5%8A%A8%E5%8F%91%E9%80%81http%E8%AF%B7%E6%B1%82/">java主动发送http请求</a>
-            
-        </h1>
-        <div class="content">
-            <p>原来都是浏览器发送http请求，java接收。java这边也是可以主动发送http请求的。有三种方式</p>
-<ul>
-<li>HttpClient</li>
-<li>OKHttp</li>
-<li>RestTemplate</li>
-</ul>
-        </div>
-        
-        
-        <div class="level is-mobile">
-            <div class="level-start">
-                <div class="level-item">
-                <a class="button is-size-7 is-light" href="/Others/java%E4%B8%BB%E5%8A%A8%E5%8F%91%E9%80%81http%E8%AF%B7%E6%B1%82/#more">阅读更多</a>
-                </div>
-            </div>
-        </div>
-        
-        
-    </div>
-</div>
-
-
-
-
-
-
-
-
-    
-<div class="card">
-    
-    <div class="card-image">
-        <a href="/Mysql/linux%E4%B8%8Bmysql%E7%9A%84%E5%AE%89%E8%A3%85/" class="image is-7by1">
-            <img class="thumbnail" src="images/loading.gif" data-original="https://wx2.sbimg.cn/2020/07/30/P7z9J.md.jpg" alt="linux下mysql的安装">
-        </a>
-    </div>
-    
-    <div class="card-content article ">
-        
-        <div class="level article-meta is-size-7 is-uppercase is-mobile is-overflow-x-auto">
-            <div class="level-left">
-                <time class="level-item has-text-grey" datetime="2020-06-27T15:25:18.000Z">2020-06-27</time>
-                
-                <div class="level-item">
-                <a class="has-link-grey -link" href="/categories/Mysql/">Mysql</a>
-                </div>
-                
-                
-                <span class="level-item has-text-grey">
-                    
-                    
-                    2 分钟 读完 (大约 359 个字)
-                </span>
-                
-                
-            </div>
-        </div>
-        
-        <h1 class="title is-size-3 is-size-4-mobile has-text-weight-normal">
-            
-                <a class="has-link-black-ter" href="/Mysql/linux%E4%B8%8Bmysql%E7%9A%84%E5%AE%89%E8%A3%85/">linux下mysql的安装</a>
-            
-        </h1>
-        <div class="content">
-            <p>网上一大堆乱七八糟的，特别复杂，还自己下载，自己编译，又自己写配置文件。我跟你说：没必要！几个命令就搞定了</p>
-<p>跟着这个节奏来</p>
-<ol>
-<li>添加仓库</li>
-</ol>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">wget -i -c https://dev.mysql.com/get/mysql80-community-release-el7-3.noarch.rpm</span><br></pre></td></tr></table></figure>
-        </div>
-        
-        
-        <div class="level is-mobile">
-            <div class="level-start">
-                <div class="level-item">
-                <a class="button is-size-7 is-light" href="/Mysql/linux%E4%B8%8Bmysql%E7%9A%84%E5%AE%89%E8%A3%85/#more">阅读更多</a>
-                </div>
-            </div>
-        </div>
-        
-        
-    </div>
-</div>
-
-
-
-
-
-
-
-
 
     
 <div class="card card-transparent">
@@ -815,7 +838,7 @@
                     </p>
                     <a href="/archives">
                         <p class="title has-text-weight-normal">
-                            98
+                            100
                         </p>
                     </a>
                 </div>
@@ -958,7 +981,7 @@
                 <span class="level-item">生活随笔</span>
             </span>
             <span class="level-end">
-                <span class="level-item tag">4</span>
+                <span class="level-item tag">6</span>
             </span>
         </a></li><li>
         <a class="level is-marginless" href="/categories/cs/">
@@ -1004,6 +1027,44 @@
         
         <article class="media">
             
+            <a href="/life/%E4%B8%BA%E6%AF%95%E4%B8%9A%E5%81%9A%E5%87%86%E5%A4%87/" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="images/loading.gif" data-original="https://z3.ax1x.com/2021/04/01/cVlcoF.md.jpg" alt="为毕业做准备">
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2021-03-31T13:13:32.000Z">2021-03-31</time></div>
+                    <a href="/life/%E4%B8%BA%E6%AF%95%E4%B8%9A%E5%81%9A%E5%87%86%E5%A4%87/" class="title has-link-black-ter is-size-6 has-text-weight-normal">为毕业做准备</a>
+                    <p class="is-size-7 is-uppercase">
+                        <a class="has-link-grey -link" href="/categories/life/">生活随笔</a>
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+        <article class="media">
+            
+            <a href="/life/mhxy-experience/" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="images/loading.gif" data-original="https://z3.ax1x.com/2021/04/01/cVMuwD.md.png" alt="梦幻西游游戏体验">
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2021-03-31T08:29:35.000Z">2021-03-31</time></div>
+                    <a href="/life/mhxy-experience/" class="title has-link-black-ter is-size-6 has-text-weight-normal">梦幻西游游戏体验</a>
+                    <p class="is-size-7 is-uppercase">
+                        <a class="has-link-grey -link" href="/categories/life/">生活随笔</a>
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+        <article class="media">
+            
             <a href="/games/3DMath-Primerfor-Graphics-and-Game-Development-note/" class="media-left">
                 <p class="image is-64x64">
                     <img class="thumbnail" src="images/loading.gif" data-original="https://source.acexy.cn/view/XgMS4U2" alt="3D数学基础图形与游戏研发笔记">
@@ -1054,44 +1115,6 @@
                     <a href="/algorithms/sliding-window-median/" class="title has-link-black-ter is-size-6 has-text-weight-normal">480-滑动窗口中位数</a>
                     <p class="is-size-7 is-uppercase">
                         <a class="has-link-grey -link" href="/categories/algorithms/">数据结构和算法</a>
-                    </p>
-                </div>
-            </div>
-        </article>
-        
-        <article class="media">
-            
-            <a href="/algorithms/longest-repeating-character-replacement/" class="media-left">
-                <p class="image is-64x64">
-                    <img class="thumbnail" src="images/loading.gif" data-original="https://source.acexy.cn/view/Xd2fvdy" alt="424-替换后的最长重复字符">
-                </p>
-            </a>
-            
-            <div class="media-content">
-                <div class="content">
-                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2021-02-05T12:54:39.000Z">2021-02-05</time></div>
-                    <a href="/algorithms/longest-repeating-character-replacement/" class="title has-link-black-ter is-size-6 has-text-weight-normal">424-替换后的最长重复字符</a>
-                    <p class="is-size-7 is-uppercase">
-                        <a class="has-link-grey -link" href="/categories/algorithms/">数据结构和算法</a>
-                    </p>
-                </div>
-            </div>
-        </article>
-        
-        <article class="media">
-            
-            <a href="/life/%E7%BB%93%E6%9D%9F%E7%A7%8B%E6%8B%9B%EF%BC%8C%E4%B8%80%E7%82%B9%E6%84%9F%E6%83%B3/" class="media-left">
-                <p class="image is-64x64">
-                    <img class="thumbnail" src="images/loading.gif" data-original="https://source.acexy.cn/view/Xb7m9vH" alt="结束秋招，一点感想">
-                </p>
-            </a>
-            
-            <div class="media-content">
-                <div class="content">
-                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2021-01-13T11:37:46.000Z">2021-01-13</time></div>
-                    <a href="/life/%E7%BB%93%E6%9D%9F%E7%A7%8B%E6%8B%9B%EF%BC%8C%E4%B8%80%E7%82%B9%E6%84%9F%E6%83%B3/" class="title has-link-black-ter is-size-6 has-text-weight-normal">结束秋招，一点感想</a>
-                    <p class="is-size-7 is-uppercase">
-                        <a class="has-link-grey -link" href="/categories/life/">生活随笔</a>
                     </p>
                 </div>
             </div>
@@ -1121,6 +1144,44 @@
         
         <article class="media">
             
+            <a href="/life/%E4%B8%BA%E6%AF%95%E4%B8%9A%E5%81%9A%E5%87%86%E5%A4%87/" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="images/loading.gif" data-original="https://z3.ax1x.com/2021/04/01/cVlcoF.md.jpg" alt="为毕业做准备">
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2021-03-31T13:13:32.000Z">2021-03-31</time></div>
+                    <a href="/life/%E4%B8%BA%E6%AF%95%E4%B8%9A%E5%81%9A%E5%87%86%E5%A4%87/" class="title has-link-black-ter is-size-6 has-text-weight-normal">为毕业做准备</a>
+                    <p class="is-size-7 is-uppercase">
+                        <a class="has-link-grey -link" href="/categories/life/">生活随笔</a>
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+        <article class="media">
+            
+            <a href="/life/mhxy-experience/" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="images/loading.gif" data-original="https://z3.ax1x.com/2021/04/01/cVMuwD.md.png" alt="梦幻西游游戏体验">
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2021-03-31T08:29:35.000Z">2021-03-31</time></div>
+                    <a href="/life/mhxy-experience/" class="title has-link-black-ter is-size-6 has-text-weight-normal">梦幻西游游戏体验</a>
+                    <p class="is-size-7 is-uppercase">
+                        <a class="has-link-grey -link" href="/categories/life/">生活随笔</a>
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+        <article class="media">
+            
             <a href="/games/3DMath-Primerfor-Graphics-and-Game-Development-note/" class="media-left">
                 <p class="image is-64x64">
                     <img class="thumbnail" src="images/loading.gif" data-original="https://source.acexy.cn/view/XgMS4U2" alt="3D数学基础图形与游戏研发笔记">
@@ -1171,44 +1232,6 @@
                     <a href="/algorithms/sliding-window-median/" class="title has-link-black-ter is-size-6 has-text-weight-normal">480-滑动窗口中位数</a>
                     <p class="is-size-7 is-uppercase">
                         <a class="has-link-grey -link" href="/categories/algorithms/">数据结构和算法</a>
-                    </p>
-                </div>
-            </div>
-        </article>
-        
-        <article class="media">
-            
-            <a href="/algorithms/longest-repeating-character-replacement/" class="media-left">
-                <p class="image is-64x64">
-                    <img class="thumbnail" src="images/loading.gif" data-original="https://source.acexy.cn/view/Xd2fvdy" alt="424-替换后的最长重复字符">
-                </p>
-            </a>
-            
-            <div class="media-content">
-                <div class="content">
-                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2021-02-05T12:54:39.000Z">2021-02-05</time></div>
-                    <a href="/algorithms/longest-repeating-character-replacement/" class="title has-link-black-ter is-size-6 has-text-weight-normal">424-替换后的最长重复字符</a>
-                    <p class="is-size-7 is-uppercase">
-                        <a class="has-link-grey -link" href="/categories/algorithms/">数据结构和算法</a>
-                    </p>
-                </div>
-            </div>
-        </article>
-        
-        <article class="media">
-            
-            <a href="/life/%E7%BB%93%E6%9D%9F%E7%A7%8B%E6%8B%9B%EF%BC%8C%E4%B8%80%E7%82%B9%E6%84%9F%E6%83%B3/" class="media-left">
-                <p class="image is-64x64">
-                    <img class="thumbnail" src="images/loading.gif" data-original="https://source.acexy.cn/view/Xb7m9vH" alt="结束秋招，一点感想">
-                </p>
-            </a>
-            
-            <div class="media-content">
-                <div class="content">
-                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2021-01-13T11:37:46.000Z">2021-01-13</time></div>
-                    <a href="/life/%E7%BB%93%E6%9D%9F%E7%A7%8B%E6%8B%9B%EF%BC%8C%E4%B8%80%E7%82%B9%E6%84%9F%E6%83%B3/" class="title has-link-black-ter is-size-6 has-text-weight-normal">结束秋招，一点感想</a>
-                    <p class="is-size-7 is-uppercase">
-                        <a class="has-link-grey -link" href="/categories/life/">生活随笔</a>
                     </p>
                 </div>
             </div>

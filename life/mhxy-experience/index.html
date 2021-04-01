@@ -7,24 +7,22 @@
 
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
 
-<title>784-字母大小写全排列 - 小温 blog</title>
+<title>梦幻西游游戏体验 - 小温 blog</title>
 
 
-    <meta name="description" content="力扣784  https:&#x2F;&#x2F;leetcode-cn.com&#x2F;problems&#x2F;letter-case-permutation&#x2F;  本题和1219 黄金矿工类似，属于枚举型回溯">
+    <meta name="description" content="作为一款MMO，这个游戏在社交方面还是做的非常好的">
 <meta property="og:type" content="article">
-<meta property="og:title" content="784-字母大小写全排列">
-<meta property="og:url" content="https://wjw.today/algorithms/letter-case-permutation/index.html">
+<meta property="og:title" content="梦幻西游游戏体验">
+<meta property="og:url" content="https://wjw.today/life/mhxy-experience/index.html">
 <meta property="og:site_name" content="小温 blog">
-<meta property="og:description" content="力扣784  https:&#x2F;&#x2F;leetcode-cn.com&#x2F;problems&#x2F;letter-case-permutation&#x2F;  本题和1219 黄金矿工类似，属于枚举型回溯">
+<meta property="og:description" content="作为一款MMO，这个游戏在社交方面还是做的非常好的">
 <meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="https://source.acexy.cn/view/XUk+jKh">
-<meta property="article:published_time" content="2020-10-14T02:15:20.000Z">
-<meta property="article:modified_time" content="2020-12-09T09:28:50.355Z">
+<meta property="og:image" content="https://z3.ax1x.com/2021/04/01/cVMuwD.md.png">
+<meta property="article:published_time" content="2021-03-31T08:29:35.000Z">
+<meta property="article:modified_time" content="2021-04-01T08:57:51.552Z">
 <meta property="article:author" content="wjw">
-<meta property="article:tag" content="力扣">
-<meta property="article:tag" content="回溯">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="https://source.acexy.cn/view/XUk+jKh">
+<meta name="twitter:image" content="https://z3.ax1x.com/2021/04/01/cVMuwD.md.png">
 
 
 
@@ -82,7 +80,7 @@
         <div class="navbar-brand is-flex-center">
             <a class="navbar-item navbar-logo" href="/">
             
-                <img src="images/loading.gif" data-original="/images/logo.png" alt="784-字母大小写全排列" height="28">
+                <img src="images/loading.gif" data-original="/images/logo.png" alt="梦幻西游游戏体验" height="28">
             
             </a>
         </div>
@@ -140,7 +138,7 @@
     
     <div class="card-image">
         <span  class="image is-7by1">
-            <img class="thumbnail" src="images/loading.gif" data-original="https://source.acexy.cn/view/XUk+jKh" alt="784-字母大小写全排列">
+            <img class="thumbnail" src="images/loading.gif" data-original="https://z3.ax1x.com/2021/04/01/cVMuwD.md.png" alt="梦幻西游游戏体验">
         </span>
     </div>
     
@@ -148,17 +146,17 @@
         
         <div class="level article-meta is-size-7 is-uppercase is-mobile is-overflow-x-auto">
             <div class="level-left">
-                <time class="level-item has-text-grey" datetime="2020-10-14T02:15:20.000Z">2020-10-14</time>
+                <time class="level-item has-text-grey" datetime="2021-03-31T08:29:35.000Z">2021-03-31</time>
                 
                 <div class="level-item">
-                <a class="has-link-grey -link" href="/categories/algorithms/">数据结构和算法</a>
+                <a class="has-link-grey -link" href="/categories/life/">生活随笔</a>
                 </div>
                 
                 
                 <span class="level-item has-text-grey">
                     
                     
-                    2 分钟 读完 (大约 279 个字)
+                    9 分钟 读完 (大约 1322 个字)
                 </span>
                 
                 
@@ -172,34 +170,44 @@
         
         <h1 class="title is-size-3 is-size-4-mobile has-text-weight-normal">
             
-                784-字母大小写全排列
+                梦幻西游游戏体验
             
         </h1>
         <div class="content">
-            <p>力扣784</p>
-<blockquote>
-<p><a href="https://leetcode-cn.com/problems/letter-case-permutation/">https://leetcode-cn.com/problems/letter-case-permutation/</a></p>
-</blockquote>
-<p>本题和1219 黄金矿工类似，属于枚举型回溯</p>
+            <p>作为一款MMO，这个游戏在社交方面还是做的非常好的</p>
 <a id="more"></a>
 
-<p><img src="images/loading.gif" data-original="https://s1.ax1x.com/2020/10/14/04X9Ag.png" alt=""></p>
-<p>枚举：当数字时进行一次选择、递归、撤销，当字母时进行两次（一次大写一次小写）选择、递归、撤销</p>
-<p>这题有说仅由数字和字母组成，所以直接判断数字比较简单，else为字母</p>
-<p>总体比较简单，直接贴核心代码</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> List&lt;String&gt; <span class="title">letterCasePermutation</span><span class="params">(String S)</span> </span>&#123;</span><br><span class="line">    backtrace(S, <span class="number">0</span>, <span class="keyword">new</span> StringBuilder());</span><br><span class="line">    <span class="keyword">return</span> res;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">private</span> List&lt;String&gt; res = <span class="keyword">new</span> ArrayList&lt;&gt;();</span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">backtrace</span><span class="params">(String s, <span class="keyword">int</span> index, StringBuilder path)</span></span>&#123;</span><br><span class="line">    <span class="comment">//结束条件：path.length == s.length</span></span><br><span class="line">    <span class="keyword">if</span> (path.length() == s.length())&#123;</span><br><span class="line">        res.add(path.toString());</span><br><span class="line">        <span class="keyword">return</span> ;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">//开始枚举回溯</span></span><br><span class="line">    <span class="keyword">if</span> (Character.isDigit(s.charAt(index)))&#123;    <span class="comment">//数字</span></span><br><span class="line">        path.append(s.charAt(index));           <span class="comment">//选择</span></span><br><span class="line">        backtrace(s, index + <span class="number">1</span>, path);    		<span class="comment">//递归</span></span><br><span class="line">        path.deleteCharAt(path.length() - <span class="number">1</span>);   <span class="comment">//撤销</span></span><br><span class="line">    &#125;<span class="keyword">else</span> &#123;     <span class="comment">//字母</span></span><br><span class="line">        <span class="comment">//大写</span></span><br><span class="line">        path.append(String.valueOf(s.charAt(index)).toUpperCase()); <span class="comment">//选择</span></span><br><span class="line">        backtrace(s, index + <span class="number">1</span>, path);    		<span class="comment">//递归</span></span><br><span class="line">        path.deleteCharAt(path.length() - <span class="number">1</span>);   <span class="comment">//撤销</span></span><br><span class="line">        <span class="comment">//小写</span></span><br><span class="line">        path.append(String.valueOf(s.charAt(index)).toLowerCase()); <span class="comment">//选择</span></span><br><span class="line">        backtrace(s, index + <span class="number">1</span>, path);    		<span class="comment">//递归</span></span><br><span class="line">        path.deleteCharAt(path.length() - <span class="number">1</span>);   <span class="comment">//撤销</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="阿米"><a href="#阿米" class="headerlink" title="阿米"></a>阿米</h2><p>有个小姐姐id叫阿米呀，是在一次抓鬼中认识的。那会是我玩这个游戏的第3天，觉得这游戏挺无聊的，但是作业要求要达到65级，于是就每天挂机做日常，想着反正到65级就可以了，阿米的出现为我的游戏体验增加了乐趣。</p>
+<p>“原来组队的人不带我玩了，一个人玩挺无聊的，我打算卸载了，想到跟你还比较熟，卸载之前跟你说一声”，阿米发来这么一条消息。</p>
+<p>嗯？？当时我就觉得不行，我离65级还有那么遥远，不能我一个人觉得无聊。“别呀，先别卸载，咱俩可以一起玩啊，陪我到65级一起卸载”，为了挽留这个对游戏失望的小姐姐，我又说了一些“今年毕业啊，我也今年毕业”这类拉近关系的话。阿米不知道的是，我玩这个游戏并不是喜欢玩游戏，只是网易新人项目的其中一项作业要求。</p>
+<p>后来的一些日子里，就是跟阿米每天的挂机聊天，等级也很快就上去了（这游戏说是养成，我感觉还是速成）。阿米是个很有意思的人，现实中也是个非常优秀的小姐姐，和她聊了一段时间才知道，她说的毕业是硕士毕业，还是出国留学的海归，本科就是211。好家伙，这是继网易新人群的名校大佬，讨论作业的上交硕士之后第三次震惊。这网易游戏不仅研发都是大佬，连玩家都是硕士起步了吗？</p>
+<img src="images/loading.gif" data-original="https://z3.ax1x.com/2021/04/01/cVpeUS.png" alt="瑟瑟发抖" style="zoom:80%;" />
 
-<p>其他回溯系列题目可以<a href="https://wjw.today/algorithms/algorithms-list-navigator/#1-回溯">点击这里</a></p>
+<p>3月结束要交游戏体验报告了，阿米的一句话让整篇报告活了起来，事情是这样的，梦幻西游的屏蔽词非常严格，会被“爱生活爱梦幻西游代替”。阿米跟我聊了一些关于工作实习的事情，但由于过多屏蔽词被禁言了，</p>
+<p><img src="images/loading.gif" data-original="https://z3.ax1x.com/2021/04/01/cV9vfe.png" alt=""></p>
+<p>为了安慰阿米，我说了一句“研发辣鸡，是研发的问题”，没想到阿米也跟了句</p>
+<p><img src="images/loading.gif" data-original="https://z3.ax1x.com/2021/04/01/cVilJU.png" alt=""></p>
+<p>我打上马赛克，这游戏体验报告我愿称之为绝活！</p>
+<p>当然，说到阿米的这句“靠你们这一代新生..”，我想大概阿米也多多少少能猜出来我的工作了吧，毕竟这正常人守着个无聊的游戏非要到65级，加上阿米过人的聪慧，猜个八九不离十也很正常。</p>
+<br>
 
-        </div>
-        
-        <div class="level is-size-7 is-uppercase">
-            <div class="level-start">
-                <div class="level-item">
-                    <span class="is-size-6 has-text-grey has-mr-7">#</span>
-                    <a class="has-link-grey -link" href="/tags/%E5%8A%9B%E6%89%A3/" rel="tag">力扣</a>, <a class="has-link-grey -link" href="/tags/%E5%9B%9E%E6%BA%AF/" rel="tag">回溯</a>
-                </div>
-            </div>
+<h2 id="星辰"><a href="#星辰" class="headerlink" title="星辰"></a>星辰</h2><p>星辰兄是我在游戏里认识的第一个好友，是个资深老玩家，同时是个肝帝</p>
+<p><img src="images/loading.gif" data-original="https://z3.ax1x.com/2021/04/01/cVAlJf.png" alt="梦幻精灵个人专属版"></p>
+<p>星辰兄是个神奇的人物，我和他是送结之交，每天互送同心结。据他所说，他是上班时间偷偷玩的游戏，跟我吐槽吐槽老板和工作什么的…</p>
+<p><img src="images/loading.gif" data-original="https://z3.ax1x.com/2021/04/01/cVEPmj.png" alt=""></p>
+<p>我有一晚凌晨睡不着登录游戏，他居然还在线，大哥可能喝多了，跟我掏心掏肺说了很多，最后还说要找我喝酒，可是他连我人在哪都不知道…</p>
+<p><img src="images/loading.gif" data-original="https://z3.ax1x.com/2021/04/01/cVVeUI.png" alt=""></p>
+<p>后来还邀请我当他们帮派的护法，感觉这个游戏里的玩家颇有一种江湖义气。当然最后我没答应，因为那会已经快65级了，总不能当了护法就把帮派给抛弃了吧。</p>
+<br>
+
+<h2 id="魔王寨"><a href="#魔王寨" class="headerlink" title="魔王寨"></a>魔王寨</h2><p>魔王寨是个神奇的门派，里面都是人才，门派频道很热闹，从不聊游戏，聊的是人生、情感、未来、婚姻、pk唱歌甚至开车…每当我看门派频道都仿佛觉得自己玩的不是游戏，是人情世故。</p>
+<p><img src="images/loading.gif" data-original="https://z3.ax1x.com/2021/04/01/cVeS1K.png" alt="开车图，内容自行脑补"></p>
+<p>总之不推荐纯洁的小姐姐玩这个门派…</p>
+<br>
+
+<h2 id="神秘符号"><a href="#神秘符号" class="headerlink" title="神秘符号"></a>神秘符号</h2><p>这个游戏里有一个非常神奇的现象，很多人名字后面会加一个特殊符号<img src="images/loading.gif" data-original="https://z3.ax1x.com/2021/04/01/cVnjts.png" alt="">，似乎成为了这个游戏默认的传统。后来我通过好友了解到带这个符号的玩家说明有固定队伍，有组织有纪律，仿佛一颗心有了自己的归属。</p>
+<p>其他的关于游戏攻略比如抓鬼如何搭配双倍收益最高，前尘旧梦牛头的巧妙运用等等就不说了，全靠老玩家给的攻略。作为一款MMO，虽然挂机和回合制的机制挺无聊，但是社交方面还是做的非常好的。</p>
+
         </div>
         
         
@@ -215,16 +223,16 @@
     <div class="level post-navigation is-flex-wrap is-mobile">
         
         <div class="level-start">
-            <a class="level level-item has-link-grey  article-nav-prev" href="/algorithms/multiply-strings/">
+            <a class="level level-item has-link-grey  article-nav-prev" href="/life/%E4%B8%BA%E6%AF%95%E4%B8%9A%E5%81%9A%E5%87%86%E5%A4%87/">
                 <i class="level-item fas fa-chevron-left"></i>
-                <span class="level-item">43-字符串相乘</span>
+                <span class="level-item">为毕业做准备</span>
             </a>
         </div>
         
         
         <div class="level-end">
-            <a class="level level-item has-link-grey  article-nav-next" href="/algorithms/%E8%AE%A1%E7%AE%97%E5%B9%B3%E6%96%B9%E6%A0%B9-%E7%89%9B%E9%A1%BF%E8%BF%AD%E4%BB%A3%E6%B3%95/">
-                <span class="level-item">计算平方根-牛顿迭代法</span>
+            <a class="level level-item has-link-grey  article-nav-next" href="/games/3DMath-Primerfor-Graphics-and-Game-Development-note/">
+                <span class="level-item">3D数学基础图形与游戏研发笔记</span>
                 <i class="level-item fas fa-chevron-right"></i>
             </a>
         </div>
@@ -455,6 +463,37 @@
         
             
 
+    <div class="card widget" id="toc">
+        <div class="card-content">
+            <div class="menu">
+                <h3 class="menu-label">
+                    目录
+                </h3>
+                <ul class="menu-list"><li>
+        <a class="is-flex" href="#阿米">
+        <!-- 目录是否自动编号 -->
+        <!-- <span class="has-mr-6">1</span> -->
+        <span>阿米</span>
+        </a></li><li>
+        <a class="is-flex" href="#星辰">
+        <!-- 目录是否自动编号 -->
+        <!-- <span class="has-mr-6">2</span> -->
+        <span>星辰</span>
+        </a></li><li>
+        <a class="is-flex" href="#魔王寨">
+        <!-- 目录是否自动编号 -->
+        <!-- <span class="has-mr-6">3</span> -->
+        <span>魔王寨</span>
+        </a></li><li>
+        <a class="is-flex" href="#神秘符号">
+        <!-- 目录是否自动编号 -->
+        <!-- <span class="has-mr-6">4</span> -->
+        <span>神秘符号</span>
+        </a></li></ul>
+            </div>
+        </div>
+    </div>
+
         
             <div class="card widget">
     <div class="card-content">
@@ -573,6 +612,37 @@
     
         
 
+    <div class="card widget" id="toc">
+        <div class="card-content">
+            <div class="menu">
+                <h3 class="menu-label">
+                    目录
+                </h3>
+                <ul class="menu-list"><li>
+        <a class="is-flex" href="#阿米">
+        <!-- 目录是否自动编号 -->
+        <!-- <span class="has-mr-6">1</span> -->
+        <span>阿米</span>
+        </a></li><li>
+        <a class="is-flex" href="#星辰">
+        <!-- 目录是否自动编号 -->
+        <!-- <span class="has-mr-6">2</span> -->
+        <span>星辰</span>
+        </a></li><li>
+        <a class="is-flex" href="#魔王寨">
+        <!-- 目录是否自动编号 -->
+        <!-- <span class="has-mr-6">3</span> -->
+        <span>魔王寨</span>
+        </a></li><li>
+        <a class="is-flex" href="#神秘符号">
+        <!-- 目录是否自动编号 -->
+        <!-- <span class="has-mr-6">4</span> -->
+        <span>神秘符号</span>
+        </a></li></ul>
+            </div>
+        </div>
+    </div>
+
     
         <div class="card widget">
     <div class="card-content">
@@ -690,7 +760,7 @@
             <div class="level-start has-text-centered-mobile">
                 <a class="footer-logo is-block has-mb-6" href="/">
                 
-                    <img src="images/loading.gif" data-original="/images/logo.png" alt="784-字母大小写全排列" height="28">
+                    <img src="images/loading.gif" data-original="/images/logo.png" alt="梦幻西游游戏体验" height="28">
                 
                 </a>
                 <p class="is-size-7">
