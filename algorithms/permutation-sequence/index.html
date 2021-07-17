@@ -17,14 +17,14 @@
 <meta property="og:site_name" content="小温 blog">
 <meta property="og:description" content="力扣60  https:&#x2F;&#x2F;leetcode-cn.com&#x2F;problems&#x2F;permutation-sequence&#x2F;  这题虽然是一道回溯题，但如果只是仅仅简单的回溯一下，会超时，经过剪枝和优化可以到13%。此题可以数学优化，还是有点挑战性的。再说了，我相信很多人和我一样看到题目第一个想到的肯定是先计算出开头数字，但是写起来还是回溯…">
 <meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="https://wx1.sbimg.cn/2020/09/18/GDRSO.md.jpg">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/wjwABCDEFG/blog_img/img/20210717210923.jpg">
 <meta property="article:published_time" content="2020-09-19T08:36:06.000Z">
-<meta property="article:modified_time" content="2020-12-09T09:28:50.356Z">
+<meta property="article:modified_time" content="2021-07-17T13:09:33.048Z">
 <meta property="article:author" content="wjw">
 <meta property="article:tag" content="力扣">
 <meta property="article:tag" content="回溯">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="https://wx1.sbimg.cn/2020/09/18/GDRSO.md.jpg">
+<meta name="twitter:image" content="https://cdn.jsdelivr.net/gh/wjwABCDEFG/blog_img/img/20210717210923.jpg">
 
 
 
@@ -82,7 +82,7 @@
         <div class="navbar-brand is-flex-center">
             <a class="navbar-item navbar-logo" href="/">
             
-                <img src="images/loading.gif" data-original="/images/logo.png" alt="60-第k个排列" height="28">
+                <img src="images/loading.gif" data-original="https://cdn.jsdelivr.net/gh/wjwABCDEFG/blog_img/img/20210717231246.png" alt="60-第k个排列" height="28">
             
             </a>
         </div>
@@ -140,7 +140,7 @@
     
     <div class="card-image">
         <span  class="image is-7by1">
-            <img class="thumbnail" src="images/loading.gif" data-original="https://wx1.sbimg.cn/2020/09/18/GDRSO.md.jpg" alt="60-第k个排列">
+            <img class="thumbnail" src="images/loading.gif" data-original="https://cdn.jsdelivr.net/gh/wjwABCDEFG/blog_img/img/20210717210923.jpg" alt="60-第k个排列">
         </span>
     </div>
     
@@ -158,7 +158,7 @@
                 <span class="level-item has-text-grey">
                     
                     
-                    11 分钟 读完 (大约 1664 个字)
+                    11 分钟 读完 (大约 1681 个字)
                 </span>
                 
                 
@@ -183,19 +183,19 @@
 <p>这题虽然是一道回溯题，但如果只是仅仅简单的回溯一下，会超时，经过剪枝和优化可以到13%。此题可以数学优化，还是有点挑战性的。再说了，我相信很多人和我一样看到题目第一个想到的肯定是先计算出开头数字，但是写起来还是回溯…</p>
 <a id="more"></a>
 
-<p><img src="images/loading.gif" data-original="https://s1.ax1x.com/2020/09/19/wI8oJ1.png" alt=""></p>
+<p><img src="images/loading.gif" data-original="https://cdn.jsdelivr.net/gh/wjwABCDEFG/blog_img/img/20210717210819.png" alt=""></p>
 <br>
 
 <h1 id="1-暴力回溯-剪枝"><a href="#1-暴力回溯-剪枝" class="headerlink" title="1. 暴力回溯+剪枝"></a>1. 暴力回溯+剪枝</h1><p>先来看看最low的<strong>回溯</strong>，这份提交是会超时的，而且还做了<strong>剪枝</strong>（到k个后面的就不继续了）</p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> String <span class="title">getPermutation</span><span class="params">(<span class="keyword">int</span> n, <span class="keyword">int</span> k)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">int</span>[] nums = <span class="keyword">new</span> <span class="keyword">int</span>[n];</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; n; i++) &#123;</span><br><span class="line">            nums[i] = i + <span class="number">1</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        backtrace(nums, <span class="keyword">new</span> StringBuilder(), k);</span><br><span class="line">        <span class="keyword">return</span> res.get(res.size() - <span class="number">1</span>);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">private</span> List&lt;String&gt; res = <span class="keyword">new</span> ArrayList&lt;&gt;();</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">boolean</span> max = <span class="keyword">false</span>;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">backtrace</span><span class="params">(<span class="keyword">int</span>[] nums, StringBuilder track, <span class="keyword">int</span> k)</span> </span>&#123;</span><br><span class="line">        <span class="comment">//结束条件</span></span><br><span class="line">        <span class="keyword">if</span> (track.length() == nums.length) &#123;</span><br><span class="line">            res.add(track.toString());</span><br><span class="line">            <span class="keyword">if</span> (res.size() == k) max = <span class="keyword">true</span>;</span><br><span class="line">            <span class="keyword">return</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; nums.length; i++) &#123;</span><br><span class="line">            <span class="comment">//剪枝</span></span><br><span class="line">            <span class="keyword">if</span> (max) <span class="keyword">return</span> ;</span><br><span class="line">            <span class="keyword">if</span> (track.indexOf(String.valueOf(nums[i])) != -<span class="number">1</span>) <span class="keyword">continue</span>;</span><br><span class="line">            <span class="comment">//做选择</span></span><br><span class="line">            track.append(nums[i]);</span><br><span class="line">            <span class="comment">//递归</span></span><br><span class="line">            backtrace(nums, track, k);</span><br><span class="line">            <span class="comment">//撤销</span></span><br><span class="line">            track.deleteCharAt(track.length() - <span class="number">1</span>);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
-<p><img src="images/loading.gif" data-original="https://s1.ax1x.com/2020/09/19/wIu5ge.png" alt=""></p>
+<p><img src="images/loading.gif" data-original="https://cdn.jsdelivr.net/gh/wjwABCDEFG/blog_img/img/20210717210826.png" alt=""></p>
 <br>
 
 <h1 id="2-提前结束条件优化"><a href="#2-提前结束条件优化" class="headerlink" title="2. 提前结束条件优化"></a>2. 提前结束条件优化</h1><p>可以看到，剪枝也超时，分析一下，可以看出track.indexOf这句可能会影响性能，我们修改为<strong>标记数组</strong>，查找的时候O(1)，并且做了空间上的优化</p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> String <span class="title">getPermutation</span><span class="params">(<span class="keyword">int</span> n, <span class="keyword">int</span> k)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">int</span>[] nums = <span class="keyword">new</span> <span class="keyword">int</span>[n];</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; n; i++) &#123;</span><br><span class="line">            nums[i] = i + <span class="number">1</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        backtrace2(nums, <span class="keyword">new</span> <span class="keyword">boolean</span>[n], <span class="keyword">new</span> StringBuilder(), k);</span><br><span class="line">        <span class="keyword">return</span> res;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">private</span> String res = <span class="string">""</span>;    <span class="comment">//优化一下空间，结果只存一个</span></span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">int</span> num = <span class="number">0</span>;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">backtrace2</span><span class="params">(<span class="keyword">int</span>[] nums, <span class="keyword">boolean</span>[] flag, StringBuilder track, <span class="keyword">int</span> k)</span></span>&#123;</span><br><span class="line">        <span class="comment">//结束条件</span></span><br><span class="line">        <span class="keyword">if</span> (track.length() == nums.length)&#123;</span><br><span class="line">            res = track.toString();</span><br><span class="line">            num++;</span><br><span class="line">            <span class="keyword">return</span> ;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; nums.length; i++) &#123;</span><br><span class="line">            <span class="comment">//剪枝</span></span><br><span class="line">            <span class="keyword">if</span> (k == num) <span class="keyword">return</span> ;</span><br><span class="line">            <span class="keyword">if</span> (flag[i]) <span class="keyword">continue</span>;</span><br><span class="line">            <span class="comment">//做选择</span></span><br><span class="line">            track.append(nums[i]);</span><br><span class="line">            flag[i] = <span class="keyword">true</span>;</span><br><span class="line">            <span class="comment">//递归</span></span><br><span class="line">            backtrace2(nums, flag, track, k);</span><br><span class="line">            <span class="comment">//撤销</span></span><br><span class="line">            track.deleteCharAt(track.length() - <span class="number">1</span>);</span><br><span class="line">            flag[i] = <span class="keyword">false</span>;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
-<p><img src="images/loading.gif" data-original="https://s1.ax1x.com/2020/09/19/wIlQVs.png" alt=""></p>
+<p><img src="images/loading.gif" data-original="https://cdn.jsdelivr.net/gh/wjwABCDEFG/blog_img/img/20210717210832.png" alt=""></p>
 <br>
 
 <h1 id="3-数学优化"><a href="#3-数学优化" class="headerlink" title="3. 数学优化"></a>3. 数学优化</h1><p>事实上写起来并不难，而且我相信大多数人第一眼看到题目想到的应该是这个，不过写的还是回溯（因为笔试需要时间，一般不敢冒险，选择了自己熟悉的方法…）</p>
@@ -230,7 +230,7 @@
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> String <span class="title">getPermutation</span><span class="params">(<span class="keyword">int</span> n, <span class="keyword">int</span> k)</span> </span>&#123;</span><br><span class="line">    <span class="comment">//生成排列数列表 paiLie[0] = 0! paiLie[1] = 1!  由排列公式可得n! = n * (n - 1)!</span></span><br><span class="line">    <span class="keyword">int</span>[] paiLie = <span class="keyword">new</span> <span class="keyword">int</span>[n + <span class="number">1</span>];</span><br><span class="line">    List&lt;Integer&gt; nums = <span class="keyword">new</span> LinkedList&lt;&gt;();    <span class="comment">//选择列表，第一轮为1234</span></span><br><span class="line">    paiLie[<span class="number">0</span>] = <span class="number">1</span>;</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">1</span>; i &lt;= n; i++) &#123;</span><br><span class="line">        paiLie[i] = paiLie[i - <span class="number">1</span>] * i;</span><br><span class="line">        nums.add(i);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="string">""</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
 <p>打个断点看看效果</p>
-<p><img src="images/loading.gif" data-original="https://s1.ax1x.com/2020/09/20/woJMJs.png" alt=""></p>
+<p><img src="images/loading.gif" data-original="https://cdn.jsdelivr.net/gh/wjwABCDEFG/blog_img/img/20210717210839.png" alt=""></p>
 <p>完美（笑）</p>
 <br>
 
@@ -239,7 +239,7 @@
 <li>总跳过数：之前说了第一位需要变成a1，那么前面有<strong>(n - 1)! * (a1 - 1)</strong>，(n - 1)!也就是开头为1的这一组会有多少条，起名onceSkip，对应的代码就是<code>onceSkip = paiLie[(nums.size() - 1)]</code>没错吧，至于a1 - 1，也就是跳过了多少组，起名index，也就是<code>index = k / onceSkip</code></li>
 </ol>
 <p>打个断点看看：res已经将第一位2加进来了</p>
-<p><img src="images/loading.gif" data-original="https://s1.ax1x.com/2020/09/20/woJH0S.png" alt=""></p>
+<p><img src="images/loading.gif" data-original="https://cdn.jsdelivr.net/gh/wjwABCDEFG/blog_img/img/20210717210852.png" alt=""></p>
 <p>需要注意的是题目给的k是现实的k，但是我们k计算相关的是nums.get(index)，用的是下标，因此一开始做了一次k - 1，自己试下就知道了。</p>
 <br>
 
@@ -247,10 +247,10 @@
 <li>本轮结束第一位已加入res，开始确定第二位，子问题，进入前修改一下选择列表nums：去除已加入的2，修改k：k代表的是剩余几条数据，因此要减去已经跳过的index * onceSkip</li>
 </ol>
 <p>看代码</p>
-<p><img src="images/loading.gif" data-original="https://s1.ax1x.com/2020/09/20/woYP7F.png" alt=""></p>
+<p><img src="images/loading.gif" data-original="https://cdn.jsdelivr.net/gh/wjwABCDEFG/blog_img/img/20210717210859.png" alt=""></p>
 <p>就完成了，代码其实非常简单，就是计算别搞错了。</p>
 <p>力扣2ms，官方的代码1ms，但是思路一样的</p>
-<p><img src="images/loading.gif" data-original="https://s1.ax1x.com/2020/09/20/woYZ11.png" alt=""></p>
+<p><img src="images/loading.gif" data-original="https://cdn.jsdelivr.net/gh/wjwABCDEFG/blog_img/img/20210717210906.png" alt=""></p>
 <br>
 
 <p>其他回溯系列题目可以<a href="https://wjw.today/https://wjw.today/algorithms/algorithms-list-navigator/#1-回溯">点击这里</a></p>
@@ -313,7 +313,7 @@
                 <div>
                     
                     <figure class="image is-128x128 has-mb-6">
-                        <img class="is-rounded" src="images/loading.gif" data-original="https://s1.ax1x.com/2020/07/20/Ufuf4e.th.jpg" alt="wjwABCDEFG">
+                        <img class="is-rounded" src="images/loading.gif" data-original="https://cdn.jsdelivr.net/gh/wjwABCDEFG/blog_img/img/20210717231547.jpeg" alt="wjwABCDEFG">
                     </figure>
                     
                     <p class="is-size-4 is-block">
@@ -338,7 +338,7 @@
                     </p>
                     <a href="/archives">
                         <p class="title has-text-weight-normal">
-                            102
+                            101
                         </p>
                     </a>
                 </div>
@@ -350,7 +350,7 @@
                     </p>
                     <a href="/categories">
                         <p class="title has-text-weight-normal">
-                            15
+                            14
                         </p>
                     </a>
                 </div>
@@ -439,14 +439,6 @@
         <a class="level is-marginless" href="/categories/redis/">
             <span class="level-start">
                 <span class="level-item">redis</span>
-            </span>
-            <span class="level-end">
-                <span class="level-item tag">1</span>
-            </span>
-        </a></li><li>
-        <a class="level is-marginless" href="/categories/spring/">
-            <span class="level-start">
-                <span class="level-item">spring</span>
             </span>
             <span class="level-end">
                 <span class="level-item tag">1</span>
@@ -572,28 +564,9 @@
         
         <article class="media">
             
-            <a href="/spring/%E6%8C%81%E7%BB%AD%E6%9B%B4%E6%96%B0-%E8%AE%B0%E5%BD%95%E6%88%91%E7%9A%84%E6%AF%95%E8%AE%BE/" class="media-left">
-                <p class="image is-64x64">
-                    <img class="thumbnail" src="images/loading.gif" data-original="/images/thumbnail.svg" alt="持续更新-记录我的毕设">
-                </p>
-            </a>
-            
-            <div class="media-content">
-                <div class="content">
-                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2021-04-01T15:06:25.000Z">2021-04-01</time></div>
-                    <a href="/spring/%E6%8C%81%E7%BB%AD%E6%9B%B4%E6%96%B0-%E8%AE%B0%E5%BD%95%E6%88%91%E7%9A%84%E6%AF%95%E8%AE%BE/" class="title has-link-black-ter is-size-6 has-text-weight-normal">持续更新-记录我的毕设</a>
-                    <p class="is-size-7 is-uppercase">
-                        <a class="has-link-grey -link" href="/categories/spring/">spring</a>
-                    </p>
-                </div>
-            </div>
-        </article>
-        
-        <article class="media">
-            
             <a href="/life/%E4%B8%BA%E6%AF%95%E4%B8%9A%E5%81%9A%E5%87%86%E5%A4%87/" class="media-left">
                 <p class="image is-64x64">
-                    <img class="thumbnail" src="images/loading.gif" data-original="https://z3.ax1x.com/2021/04/01/cVlcoF.md.jpg" alt="为毕业做准备">
+                    <img class="thumbnail" src="images/loading.gif" data-original="https://cdn.jsdelivr.net/gh/wjwABCDEFG/blog_img/img/20210717225951.jpeg" alt="为毕业做准备">
                 </p>
             </a>
             
@@ -612,7 +585,7 @@
             
             <a href="/life/mhxy-experience/" class="media-left">
                 <p class="image is-64x64">
-                    <img class="thumbnail" src="images/loading.gif" data-original="https://z3.ax1x.com/2021/04/01/cVMuwD.md.png" alt="梦幻西游游戏体验">
+                    <img class="thumbnail" src="images/loading.gif" data-original="https://cdn.jsdelivr.net/gh/wjwABCDEFG/blog_img/img/20210717223725.png" alt="梦幻西游游戏体验">
                 </p>
             </a>
             
@@ -631,7 +604,7 @@
             
             <a href="/games/3DMath-Primerfor-Graphics-and-Game-Development-note/" class="media-left">
                 <p class="image is-64x64">
-                    <img class="thumbnail" src="images/loading.gif" data-original="https://source.acexy.cn/view/XgMS4U2" alt="3D数学基础图形与游戏研发笔记">
+                    <img class="thumbnail" src="images/loading.gif" data-original="https://cdn.jsdelivr.net/gh/wjwABCDEFG/blog_img/img/20210717223435.jpeg" alt="3D数学基础图形与游戏研发笔记">
                 </p>
             </a>
             
@@ -650,7 +623,26 @@
             
             <a href="/algorithms/get-equal-substrings-within-budget/" class="media-left">
                 <p class="image is-64x64">
-                    <img class="thumbnail" src="images/loading.gif" data-original="https://source.acexy.cn/view/Xd2g803" alt="1208-尽可能使字符串相等">
+                    <img class="thumbnail" src="images/loading.gif" data-original="https://cdn.jsdelivr.net/gh/wjwABCDEFG/blog_img/img/20210717223615.jpg" alt="1011-在D天内送达包裹的能力">
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2021-02-05T16:00:24.000Z">2021-02-06</time></div>
+                    <a href="/algorithms/get-equal-substrings-within-budget/" class="title has-link-black-ter is-size-6 has-text-weight-normal">1011-在D天内送达包裹的能力</a>
+                    <p class="is-size-7 is-uppercase">
+                        <a class="has-link-grey -link" href="/categories/algorithms/">数据结构和算法</a>
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+        <article class="media">
+            
+            <a href="/algorithms/get-equal-substrings-within-budget/" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="images/loading.gif" data-original="https://cdn.jsdelivr.net/gh/wjwABCDEFG/blog_img/img/20210717223234.jpg" alt="1208-尽可能使字符串相等">
                 </p>
             </a>
             
@@ -726,28 +718,9 @@
         
         <article class="media">
             
-            <a href="/spring/%E6%8C%81%E7%BB%AD%E6%9B%B4%E6%96%B0-%E8%AE%B0%E5%BD%95%E6%88%91%E7%9A%84%E6%AF%95%E8%AE%BE/" class="media-left">
-                <p class="image is-64x64">
-                    <img class="thumbnail" src="images/loading.gif" data-original="/images/thumbnail.svg" alt="持续更新-记录我的毕设">
-                </p>
-            </a>
-            
-            <div class="media-content">
-                <div class="content">
-                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2021-04-01T15:06:25.000Z">2021-04-01</time></div>
-                    <a href="/spring/%E6%8C%81%E7%BB%AD%E6%9B%B4%E6%96%B0-%E8%AE%B0%E5%BD%95%E6%88%91%E7%9A%84%E6%AF%95%E8%AE%BE/" class="title has-link-black-ter is-size-6 has-text-weight-normal">持续更新-记录我的毕设</a>
-                    <p class="is-size-7 is-uppercase">
-                        <a class="has-link-grey -link" href="/categories/spring/">spring</a>
-                    </p>
-                </div>
-            </div>
-        </article>
-        
-        <article class="media">
-            
             <a href="/life/%E4%B8%BA%E6%AF%95%E4%B8%9A%E5%81%9A%E5%87%86%E5%A4%87/" class="media-left">
                 <p class="image is-64x64">
-                    <img class="thumbnail" src="images/loading.gif" data-original="https://z3.ax1x.com/2021/04/01/cVlcoF.md.jpg" alt="为毕业做准备">
+                    <img class="thumbnail" src="images/loading.gif" data-original="https://cdn.jsdelivr.net/gh/wjwABCDEFG/blog_img/img/20210717225951.jpeg" alt="为毕业做准备">
                 </p>
             </a>
             
@@ -766,7 +739,7 @@
             
             <a href="/life/mhxy-experience/" class="media-left">
                 <p class="image is-64x64">
-                    <img class="thumbnail" src="images/loading.gif" data-original="https://z3.ax1x.com/2021/04/01/cVMuwD.md.png" alt="梦幻西游游戏体验">
+                    <img class="thumbnail" src="images/loading.gif" data-original="https://cdn.jsdelivr.net/gh/wjwABCDEFG/blog_img/img/20210717223725.png" alt="梦幻西游游戏体验">
                 </p>
             </a>
             
@@ -785,7 +758,7 @@
             
             <a href="/games/3DMath-Primerfor-Graphics-and-Game-Development-note/" class="media-left">
                 <p class="image is-64x64">
-                    <img class="thumbnail" src="images/loading.gif" data-original="https://source.acexy.cn/view/XgMS4U2" alt="3D数学基础图形与游戏研发笔记">
+                    <img class="thumbnail" src="images/loading.gif" data-original="https://cdn.jsdelivr.net/gh/wjwABCDEFG/blog_img/img/20210717223435.jpeg" alt="3D数学基础图形与游戏研发笔记">
                 </p>
             </a>
             
@@ -804,7 +777,26 @@
             
             <a href="/algorithms/get-equal-substrings-within-budget/" class="media-left">
                 <p class="image is-64x64">
-                    <img class="thumbnail" src="images/loading.gif" data-original="https://source.acexy.cn/view/Xd2g803" alt="1208-尽可能使字符串相等">
+                    <img class="thumbnail" src="images/loading.gif" data-original="https://cdn.jsdelivr.net/gh/wjwABCDEFG/blog_img/img/20210717223615.jpg" alt="1011-在D天内送达包裹的能力">
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2021-02-05T16:00:24.000Z">2021-02-06</time></div>
+                    <a href="/algorithms/get-equal-substrings-within-budget/" class="title has-link-black-ter is-size-6 has-text-weight-normal">1011-在D天内送达包裹的能力</a>
+                    <p class="is-size-7 is-uppercase">
+                        <a class="has-link-grey -link" href="/categories/algorithms/">数据结构和算法</a>
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+        <article class="media">
+            
+            <a href="/algorithms/get-equal-substrings-within-budget/" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="images/loading.gif" data-original="https://cdn.jsdelivr.net/gh/wjwABCDEFG/blog_img/img/20210717223234.jpg" alt="1208-尽可能使字符串相等">
                 </p>
             </a>
             
@@ -834,7 +826,7 @@
             <div class="level-start has-text-centered-mobile">
                 <a class="footer-logo is-block has-mb-6" href="/">
                 
-                    <img src="images/loading.gif" data-original="/images/logo.png" alt="60-第k个排列" height="28">
+                    <img src="images/loading.gif" data-original="https://cdn.jsdelivr.net/gh/wjwABCDEFG/blog_img/img/20210717231246.png" alt="60-第k个排列" height="28">
                 
                 </a>
                 <p class="is-size-7">

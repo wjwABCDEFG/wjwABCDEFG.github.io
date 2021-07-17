@@ -17,13 +17,13 @@
 <meta property="og:site_name" content="小温 blog">
 <meta property="og:description" content="力扣43 字符串相乘  https:&#x2F;&#x2F;leetcode-cn.com&#x2F;problems&#x2F;multiply-strings&#x2F;">
 <meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="https://source.acexy.cn/view/XUH5Nog">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/wjwABCDEFG/blog_img/img/20210717213638.jpg">
 <meta property="article:published_time" content="2020-10-17T16:56:38.000Z">
-<meta property="article:modified_time" content="2021-02-06T08:10:35.318Z">
+<meta property="article:modified_time" content="2021-07-17T13:36:58.798Z">
 <meta property="article:author" content="wjw">
 <meta property="article:tag" content="力扣">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="https://source.acexy.cn/view/XUH5Nog">
+<meta name="twitter:image" content="https://cdn.jsdelivr.net/gh/wjwABCDEFG/blog_img/img/20210717213638.jpg">
 
 
 
@@ -81,7 +81,7 @@
         <div class="navbar-brand is-flex-center">
             <a class="navbar-item navbar-logo" href="/">
             
-                <img src="images/loading.gif" data-original="/images/logo.png" alt="43-字符串相乘" height="28">
+                <img src="images/loading.gif" data-original="https://cdn.jsdelivr.net/gh/wjwABCDEFG/blog_img/img/20210717231246.png" alt="43-字符串相乘" height="28">
             
             </a>
         </div>
@@ -139,7 +139,7 @@
     
     <div class="card-image">
         <span  class="image is-7by1">
-            <img class="thumbnail" src="images/loading.gif" data-original="https://source.acexy.cn/view/XUH5Nog" alt="43-字符串相乘">
+            <img class="thumbnail" src="images/loading.gif" data-original="https://cdn.jsdelivr.net/gh/wjwABCDEFG/blog_img/img/20210717213638.jpg" alt="43-字符串相乘">
         </span>
     </div>
     
@@ -157,7 +157,7 @@
                 <span class="level-item has-text-grey">
                     
                     
-                    2 分钟 读完 (大约 361 个字)
+                    2 分钟 读完 (大约 367 个字)
                 </span>
                 
                 
@@ -181,12 +181,12 @@
 </blockquote>
 <a id="more"></a>
 
-<p><img src="images/loading.gif" data-original="https://s1.ax1x.com/2020/10/18/0OsQE9.png" alt=""></p>
+<p><img src="images/loading.gif" data-original="https://cdn.jsdelivr.net/gh/wjwABCDEFG/blog_img/img/20210717213528.png" alt=""></p>
 <br>
 
 <p>思路：此题和大数相加有些类似，这种通过字符串模拟手算加法乘法的，仍然采用这种<strong>从高位到低位，进位和基数分开</strong>的方式，更加简洁方便</p>
 <p>过程如下</p>
-<p><img src="images/loading.gif" data-original="https://s1.ax1x.com/2020/10/18/0OsG36.png" alt=""></p>
+<p><img src="images/loading.gif" data-original="https://cdn.jsdelivr.net/gh/wjwABCDEFG/blog_img/img/20210717213516.png" alt=""></p>
 <p>代码如下</p>
 <p>要注意基数数组和进位数组的长度，如上图最左边的8，也就是有可能首位进位，因此长度是len(num1 + num2)而不是len(num1 + num2 - 1)</p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> String <span class="title">multiply</span><span class="params">(String num1, String num2)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">int</span>[] jiShu = <span class="keyword">new</span> <span class="keyword">int</span>[num1.length() + num2.length()];   <span class="comment">//基数数组</span></span><br><span class="line">    <span class="keyword">int</span>[] jinWei = <span class="keyword">new</span> <span class="keyword">int</span>[num1.length() + num2.length()];  <span class="comment">//进位数组</span></span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; num1.length(); i++) &#123;</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> j = <span class="number">0</span>; j &lt; num2.length(); j++) &#123;</span><br><span class="line">            <span class="keyword">int</span> bit1 = num1.charAt(i) - <span class="string">'0'</span>;</span><br><span class="line">            <span class="keyword">int</span> bit2 = num2.charAt(j) - <span class="string">'0'</span>;</span><br><span class="line">            <span class="keyword">int</span> add = bit1 * bit2 + jiShu[i + j + <span class="number">1</span>];</span><br><span class="line">            jiShu[i + j + <span class="number">1</span>] = add % <span class="number">10</span>;                <span class="comment">//关键步骤</span></span><br><span class="line">            jinWei[i + j] = add / <span class="number">10</span> + jinWei[i + j];   <span class="comment">//关键步骤</span></span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">//将基数和进位从低位向高位相加得出最终结果</span></span><br><span class="line">    <span class="keyword">int</span>[] res = <span class="keyword">new</span> <span class="keyword">int</span>[jinWei.length];</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i = jinWei.length - <span class="number">1</span>; i &gt;= <span class="number">0</span>; i--) &#123;</span><br><span class="line">        <span class="keyword">int</span> num = jiShu[i] + jinWei[i] + res[i];</span><br><span class="line">        res[i] = num % <span class="number">10</span>;</span><br><span class="line">        <span class="keyword">if</span> (i - <span class="number">1</span> &lt; <span class="number">0</span>) <span class="keyword">break</span>;</span><br><span class="line">        res[i - <span class="number">1</span>] += num / <span class="number">10</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">//转换成字符串，注意开头为0和全0情况</span></span><br><span class="line">    StringBuilder sb = <span class="keyword">new</span> StringBuilder();</span><br><span class="line">    <span class="keyword">boolean</span> flag = <span class="keyword">false</span>;   <span class="comment">//遇到开头不为0时才能插入</span></span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; res.length; i++) &#123;</span><br><span class="line">        <span class="keyword">if</span> (res[i] != <span class="number">0</span>) flag = <span class="keyword">true</span>;</span><br><span class="line">        <span class="keyword">if</span> (flag) sb.append(res[i]);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="string">""</span>.equals(sb.toString()) ? <span class="string">"0"</span> : sb.toString();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
@@ -253,7 +253,7 @@
                 <div>
                     
                     <figure class="image is-128x128 has-mb-6">
-                        <img class="is-rounded" src="images/loading.gif" data-original="https://s1.ax1x.com/2020/07/20/Ufuf4e.th.jpg" alt="wjwABCDEFG">
+                        <img class="is-rounded" src="images/loading.gif" data-original="https://cdn.jsdelivr.net/gh/wjwABCDEFG/blog_img/img/20210717231547.jpeg" alt="wjwABCDEFG">
                     </figure>
                     
                     <p class="is-size-4 is-block">
@@ -278,7 +278,7 @@
                     </p>
                     <a href="/archives">
                         <p class="title has-text-weight-normal">
-                            102
+                            101
                         </p>
                     </a>
                 </div>
@@ -290,7 +290,7 @@
                     </p>
                     <a href="/categories">
                         <p class="title has-text-weight-normal">
-                            15
+                            14
                         </p>
                     </a>
                 </div>
@@ -384,14 +384,6 @@
                 <span class="level-item tag">1</span>
             </span>
         </a></li><li>
-        <a class="level is-marginless" href="/categories/spring/">
-            <span class="level-start">
-                <span class="level-item">spring</span>
-            </span>
-            <span class="level-end">
-                <span class="level-item tag">1</span>
-            </span>
-        </a></li><li>
         <a class="level is-marginless" href="/categories/frontend/">
             <span class="level-start">
                 <span class="level-item">前端</span>
@@ -476,28 +468,9 @@
         
         <article class="media">
             
-            <a href="/spring/%E6%8C%81%E7%BB%AD%E6%9B%B4%E6%96%B0-%E8%AE%B0%E5%BD%95%E6%88%91%E7%9A%84%E6%AF%95%E8%AE%BE/" class="media-left">
-                <p class="image is-64x64">
-                    <img class="thumbnail" src="images/loading.gif" data-original="/images/thumbnail.svg" alt="持续更新-记录我的毕设">
-                </p>
-            </a>
-            
-            <div class="media-content">
-                <div class="content">
-                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2021-04-01T15:06:25.000Z">2021-04-01</time></div>
-                    <a href="/spring/%E6%8C%81%E7%BB%AD%E6%9B%B4%E6%96%B0-%E8%AE%B0%E5%BD%95%E6%88%91%E7%9A%84%E6%AF%95%E8%AE%BE/" class="title has-link-black-ter is-size-6 has-text-weight-normal">持续更新-记录我的毕设</a>
-                    <p class="is-size-7 is-uppercase">
-                        <a class="has-link-grey -link" href="/categories/spring/">spring</a>
-                    </p>
-                </div>
-            </div>
-        </article>
-        
-        <article class="media">
-            
             <a href="/life/%E4%B8%BA%E6%AF%95%E4%B8%9A%E5%81%9A%E5%87%86%E5%A4%87/" class="media-left">
                 <p class="image is-64x64">
-                    <img class="thumbnail" src="images/loading.gif" data-original="https://z3.ax1x.com/2021/04/01/cVlcoF.md.jpg" alt="为毕业做准备">
+                    <img class="thumbnail" src="images/loading.gif" data-original="https://cdn.jsdelivr.net/gh/wjwABCDEFG/blog_img/img/20210717225951.jpeg" alt="为毕业做准备">
                 </p>
             </a>
             
@@ -516,7 +489,7 @@
             
             <a href="/life/mhxy-experience/" class="media-left">
                 <p class="image is-64x64">
-                    <img class="thumbnail" src="images/loading.gif" data-original="https://z3.ax1x.com/2021/04/01/cVMuwD.md.png" alt="梦幻西游游戏体验">
+                    <img class="thumbnail" src="images/loading.gif" data-original="https://cdn.jsdelivr.net/gh/wjwABCDEFG/blog_img/img/20210717223725.png" alt="梦幻西游游戏体验">
                 </p>
             </a>
             
@@ -535,7 +508,7 @@
             
             <a href="/games/3DMath-Primerfor-Graphics-and-Game-Development-note/" class="media-left">
                 <p class="image is-64x64">
-                    <img class="thumbnail" src="images/loading.gif" data-original="https://source.acexy.cn/view/XgMS4U2" alt="3D数学基础图形与游戏研发笔记">
+                    <img class="thumbnail" src="images/loading.gif" data-original="https://cdn.jsdelivr.net/gh/wjwABCDEFG/blog_img/img/20210717223435.jpeg" alt="3D数学基础图形与游戏研发笔记">
                 </p>
             </a>
             
@@ -554,7 +527,26 @@
             
             <a href="/algorithms/get-equal-substrings-within-budget/" class="media-left">
                 <p class="image is-64x64">
-                    <img class="thumbnail" src="images/loading.gif" data-original="https://source.acexy.cn/view/Xd2g803" alt="1208-尽可能使字符串相等">
+                    <img class="thumbnail" src="images/loading.gif" data-original="https://cdn.jsdelivr.net/gh/wjwABCDEFG/blog_img/img/20210717223615.jpg" alt="1011-在D天内送达包裹的能力">
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2021-02-05T16:00:24.000Z">2021-02-06</time></div>
+                    <a href="/algorithms/get-equal-substrings-within-budget/" class="title has-link-black-ter is-size-6 has-text-weight-normal">1011-在D天内送达包裹的能力</a>
+                    <p class="is-size-7 is-uppercase">
+                        <a class="has-link-grey -link" href="/categories/algorithms/">数据结构和算法</a>
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+        <article class="media">
+            
+            <a href="/algorithms/get-equal-substrings-within-budget/" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="images/loading.gif" data-original="https://cdn.jsdelivr.net/gh/wjwABCDEFG/blog_img/img/20210717223234.jpg" alt="1208-尽可能使字符串相等">
                 </p>
             </a>
             
@@ -594,28 +586,9 @@
         
         <article class="media">
             
-            <a href="/spring/%E6%8C%81%E7%BB%AD%E6%9B%B4%E6%96%B0-%E8%AE%B0%E5%BD%95%E6%88%91%E7%9A%84%E6%AF%95%E8%AE%BE/" class="media-left">
-                <p class="image is-64x64">
-                    <img class="thumbnail" src="images/loading.gif" data-original="/images/thumbnail.svg" alt="持续更新-记录我的毕设">
-                </p>
-            </a>
-            
-            <div class="media-content">
-                <div class="content">
-                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2021-04-01T15:06:25.000Z">2021-04-01</time></div>
-                    <a href="/spring/%E6%8C%81%E7%BB%AD%E6%9B%B4%E6%96%B0-%E8%AE%B0%E5%BD%95%E6%88%91%E7%9A%84%E6%AF%95%E8%AE%BE/" class="title has-link-black-ter is-size-6 has-text-weight-normal">持续更新-记录我的毕设</a>
-                    <p class="is-size-7 is-uppercase">
-                        <a class="has-link-grey -link" href="/categories/spring/">spring</a>
-                    </p>
-                </div>
-            </div>
-        </article>
-        
-        <article class="media">
-            
             <a href="/life/%E4%B8%BA%E6%AF%95%E4%B8%9A%E5%81%9A%E5%87%86%E5%A4%87/" class="media-left">
                 <p class="image is-64x64">
-                    <img class="thumbnail" src="images/loading.gif" data-original="https://z3.ax1x.com/2021/04/01/cVlcoF.md.jpg" alt="为毕业做准备">
+                    <img class="thumbnail" src="images/loading.gif" data-original="https://cdn.jsdelivr.net/gh/wjwABCDEFG/blog_img/img/20210717225951.jpeg" alt="为毕业做准备">
                 </p>
             </a>
             
@@ -634,7 +607,7 @@
             
             <a href="/life/mhxy-experience/" class="media-left">
                 <p class="image is-64x64">
-                    <img class="thumbnail" src="images/loading.gif" data-original="https://z3.ax1x.com/2021/04/01/cVMuwD.md.png" alt="梦幻西游游戏体验">
+                    <img class="thumbnail" src="images/loading.gif" data-original="https://cdn.jsdelivr.net/gh/wjwABCDEFG/blog_img/img/20210717223725.png" alt="梦幻西游游戏体验">
                 </p>
             </a>
             
@@ -653,7 +626,7 @@
             
             <a href="/games/3DMath-Primerfor-Graphics-and-Game-Development-note/" class="media-left">
                 <p class="image is-64x64">
-                    <img class="thumbnail" src="images/loading.gif" data-original="https://source.acexy.cn/view/XgMS4U2" alt="3D数学基础图形与游戏研发笔记">
+                    <img class="thumbnail" src="images/loading.gif" data-original="https://cdn.jsdelivr.net/gh/wjwABCDEFG/blog_img/img/20210717223435.jpeg" alt="3D数学基础图形与游戏研发笔记">
                 </p>
             </a>
             
@@ -672,7 +645,26 @@
             
             <a href="/algorithms/get-equal-substrings-within-budget/" class="media-left">
                 <p class="image is-64x64">
-                    <img class="thumbnail" src="images/loading.gif" data-original="https://source.acexy.cn/view/Xd2g803" alt="1208-尽可能使字符串相等">
+                    <img class="thumbnail" src="images/loading.gif" data-original="https://cdn.jsdelivr.net/gh/wjwABCDEFG/blog_img/img/20210717223615.jpg" alt="1011-在D天内送达包裹的能力">
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2021-02-05T16:00:24.000Z">2021-02-06</time></div>
+                    <a href="/algorithms/get-equal-substrings-within-budget/" class="title has-link-black-ter is-size-6 has-text-weight-normal">1011-在D天内送达包裹的能力</a>
+                    <p class="is-size-7 is-uppercase">
+                        <a class="has-link-grey -link" href="/categories/algorithms/">数据结构和算法</a>
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+        <article class="media">
+            
+            <a href="/algorithms/get-equal-substrings-within-budget/" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="images/loading.gif" data-original="https://cdn.jsdelivr.net/gh/wjwABCDEFG/blog_img/img/20210717223234.jpg" alt="1208-尽可能使字符串相等">
                 </p>
             </a>
             
@@ -702,7 +694,7 @@
             <div class="level-start has-text-centered-mobile">
                 <a class="footer-logo is-block has-mb-6" href="/">
                 
-                    <img src="images/loading.gif" data-original="/images/logo.png" alt="43-字符串相乘" height="28">
+                    <img src="images/loading.gif" data-original="https://cdn.jsdelivr.net/gh/wjwABCDEFG/blog_img/img/20210717231246.png" alt="43-字符串相乘" height="28">
                 
                 </a>
                 <p class="is-size-7">

@@ -17,12 +17,12 @@
 <meta property="og:site_name" content="小温 blog">
 <meta property="og:description" content="1. 如何定位垃圾垃圾就是没有引用的对象，那么如何确定是否还存在引用呢  引用计数(ReferenceCount)：存在循环引用问题 根可达算法(RootSearching)：从跟开始寻找(线程栈变量，静态变量，常量池，JNI指针)，找不到的就算垃圾">
 <meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="https://b1.sbimg.org/file/chevereto-jia/2020/12/20/QJ242.md.jpg">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/wjwABCDEFG/blog_img/img/20210717222410.jpg">
 <meta property="article:published_time" content="2020-12-20T10:00:34.000Z">
-<meta property="article:modified_time" content="2020-12-20T10:03:45.092Z">
+<meta property="article:modified_time" content="2021-07-17T14:27:33.209Z">
 <meta property="article:author" content="wjw">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="https://b1.sbimg.org/file/chevereto-jia/2020/12/20/QJ242.md.jpg">
+<meta name="twitter:image" content="https://cdn.jsdelivr.net/gh/wjwABCDEFG/blog_img/img/20210717222410.jpg">
 
 
 
@@ -80,7 +80,7 @@
         <div class="navbar-brand is-flex-center">
             <a class="navbar-item navbar-logo" href="/">
             
-                <img src="images/loading.gif" data-original="/images/logo.png" alt="GC" height="28">
+                <img src="images/loading.gif" data-original="https://cdn.jsdelivr.net/gh/wjwABCDEFG/blog_img/img/20210717231246.png" alt="GC" height="28">
             
             </a>
         </div>
@@ -138,7 +138,7 @@
     
     <div class="card-image">
         <span  class="image is-7by1">
-            <img class="thumbnail" src="images/loading.gif" data-original="https://b1.sbimg.org/file/chevereto-jia/2020/12/20/QJ242.md.jpg" alt="GC">
+            <img class="thumbnail" src="images/loading.gif" data-original="https://cdn.jsdelivr.net/gh/wjwABCDEFG/blog_img/img/20210717222410.jpg" alt="GC">
         </span>
     </div>
     
@@ -156,7 +156,7 @@
                 <span class="level-item has-text-grey">
                     
                     
-                    24 分钟 读完 (大约 3541 个字)
+                    24 分钟 读完 (大约 3561 个字)
                 </span>
                 
                 
@@ -196,7 +196,7 @@
 
 <hr>
 <h1 id="3-JVM中的垃圾回收器"><a href="#3-JVM中的垃圾回收器" class="headerlink" title="3. JVM中的垃圾回收器"></a>3. JVM中的垃圾回收器</h1><p>10种如下，JVM回收内存通常是组合使用，不同的<strong>垃圾回收器</strong>采用不同的策略</p>
-<p><img src="images/loading.gif" data-original="https://s3.ax1x.com/2020/12/01/Dfb9mT.png" alt=""></p>
+<p><img src="images/loading.gif" data-original="https://cdn.jsdelivr.net/gh/wjwABCDEFG/blog_img/img/20210717222428.png" alt=""></p>
 <p>左边6个分代模型中，下面的是老年代，上面的是年轻代，一般是如图所示搭配（但也可以混杂搭配，看其他虚线）</p>
 <p>1.8默认是PS+PO（新生代Parallel Scavenge，老年代Parallel Old），但是可以用分区模型G1（推荐，有些公司运维有JVM调优经验的话说不定会用这个）</p>
 <p>下面介绍一下各个组合</p>
@@ -205,15 +205,15 @@
 <p>STW：Stop The World，如字面意思，马上！！停止！！！</p>
 </blockquote>
 <p>为什么有时候机器会突然卡顿一下，就是因为STW了</p>
-<p><img src="images/loading.gif" data-original="https://s3.ax1x.com/2020/12/01/DfbDhj.png" alt=""></p>
+<p><img src="images/loading.gif" data-original="https://cdn.jsdelivr.net/gh/wjwABCDEFG/blog_img/img/20210717222440.png" alt=""></p>
 <h2 id="3-2-分代模型-Parallel系列"><a href="#3-2-分代模型-Parallel系列" class="headerlink" title="3.2 分代模型-Parallel系列"></a>3.2 分代模型-Parallel系列</h2><p>随着内存越来越大，Serial有点慢，于是出现了Parallel</p>
 <p>和Serial差不多也是STW，不过Parallel嘛，垃圾回收线程是多个且并行的 </p>
-<p><img src="images/loading.gif" data-original="https://s3.ax1x.com/2020/12/01/DfqrVO.png" alt=""></p>
+<p><img src="images/loading.gif" data-original="https://cdn.jsdelivr.net/gh/wjwABCDEFG/blog_img/img/20210717222450.png" alt=""></p>
 <h2 id="3-3-分代模型-CMS系列"><a href="#3-3-分代模型-CMS系列" class="headerlink" title="3.3 分代模型-CMS系列"></a>3.3 分代模型-CMS系列</h2><p>还是随着内存的越来越大，Parallel很慢，<strong>原因：线程数和效率不是线性提升的，因为线程需要上下文切换ContextSwitch，到达一定数量后，线程多反而耗费了大量时间在此</strong></p>
 <p>CMS：concurrent mark sweep</p>
 <p>Parnew和Parallel Scavenge基本一样，只是为了配合CMS而产生的</p>
 <p>CMS过程如下：</p>
-<p><img src="images/loading.gif" data-original="https://s3.ax1x.com/2020/12/01/DfLtw8.png" alt=""></p>
+<p><img src="images/loading.gif" data-original="https://cdn.jsdelivr.net/gh/wjwABCDEFG/blog_img/img/20210717222501.png" alt=""></p>
 <p>初始标记也是STW，但是只GCRoot扫描根（前面说的根可达算法可还记得？），很少所以时间可以接受</p>
 <p>重新标记也是STW，这里有个bug，后面讲</p>
 <h3 id="CMS三色标记法和错标问题"><a href="#CMS三色标记法和错标问题" class="headerlink" title="CMS三色标记法和错标问题"></a>CMS三色标记法和错标问题</h3><p>并发标记存在问题，就是错标</p>
@@ -225,7 +225,7 @@
 <p>灰色：对象标记，成员还未标记</p>
 <p>白色：没有遍历到的字段</p>
 <p>标记是怎么标记的呢？CMS标记采用三色标记法，<strong>重新标记阶段扫描就是扫描灰色的对象</strong>。说回情况2，如果第一次标记后黑色的对象有个指针域指向了某个白色对象，再次标记的时候不会再扫描黑色对象，此时就产生了错标</p>
-<p><img src="images/loading.gif" data-original="https://s3.ax1x.com/2020/12/01/DhyHEV.png" alt=""></p>
+<p><img src="images/loading.gif" data-original="https://cdn.jsdelivr.net/gh/wjwABCDEFG/blog_img/img/20210717222534.png" alt=""></p>
 <h3 id="解决办法"><a href="#解决办法" class="headerlink" title="解决办法"></a>解决办法</h3><ul>
 <li><strong>CMS解决办法</strong>：incremental update：简单的说就是A引用变了的时候重新将A置为灰色，这样就可以重新扫描到了</li>
 </ul>
@@ -235,7 +235,7 @@
 <li><strong>G1解决办法</strong>：SATB</li>
 </ul>
 <h2 id="3-4-JVM的堆内存模型"><a href="#3-4-JVM的堆内存模型" class="headerlink" title="3.4 JVM的堆内存模型"></a>3.4 JVM的堆内存模型</h2><p>JVM堆的具体内存分区如下，图中的数字是大小比例</p>
-<p><img src="images/loading.gif" data-original="https://s3.ax1x.com/2020/11/25/DdE0VH.png" alt=""></p>
+<p><img src="images/loading.gif" data-original="https://cdn.jsdelivr.net/gh/wjwABCDEFG/blog_img/img/20210717222549.png" alt=""></p>
 <p>可以看到新生代用的拷贝算法，但不是一般的拷贝，是eden:survivor1:survivor2=8:1:1，第一次gc从eden到s1，然后在s1和s2之间来回跳，到达一定的次数后进入老年代（这个次数默认15，CMS默认6，可以通过-XX:MaxTenuringThreshold配置）</p>
 <br>
 
@@ -265,7 +265,7 @@
 </li>
 </ol>
 <hr>
-<h1 id="附录"><a href="#附录" class="headerlink" title="附录"></a>附录</h1><h2 id="1-对象分配过程"><a href="#1-对象分配过程" class="headerlink" title="1. 对象分配过程"></a>1. 对象分配过程</h2><p><img src="images/loading.gif" data-original="https://s3.ax1x.com/2020/12/01/Df7oa4.png" alt=""></p>
+<h1 id="附录"><a href="#附录" class="headerlink" title="附录"></a>附录</h1><h2 id="1-对象分配过程"><a href="#1-对象分配过程" class="headerlink" title="1. 对象分配过程"></a>1. 对象分配过程</h2><p><img src="images/loading.gif" data-original="https://cdn.jsdelivr.net/gh/wjwABCDEFG/blog_img/img/20210717222726.png" alt=""></p>
 <ol>
 <li>一些基本类型的变量是有机会分配在栈上的比如局部变量，怎么判定是否能分配在栈上？如果逃逸分析没有逃逸，标量替换可以替换，则分配在栈上</li>
 </ol>
@@ -309,7 +309,7 @@
 <li>help：帮助文档</li>
 <li>dashboard：仪表盘模拟图形界面，很强，可以监控CPU和内存，相当于top，看图</li>
 </ul>
-<p><img src="images/loading.gif" data-original="https://s3.ax1x.com/2020/12/05/DO2MBq.png" alt="dashboard展示效果"></p>
+<p><img src="images/loading.gif" data-original="https://cdn.jsdelivr.net/gh/wjwABCDEFG/blog_img/img/20210717222618.png" alt="dashboard展示效果"></p>
 <ul>
 <li><p>jvm：相当于jinfo，显示了jvm相关信息，垃圾回收器等</p>
 </li>
@@ -420,7 +420,7 @@
                 <div>
                     
                     <figure class="image is-128x128 has-mb-6">
-                        <img class="is-rounded" src="images/loading.gif" data-original="https://s1.ax1x.com/2020/07/20/Ufuf4e.th.jpg" alt="wjwABCDEFG">
+                        <img class="is-rounded" src="images/loading.gif" data-original="https://cdn.jsdelivr.net/gh/wjwABCDEFG/blog_img/img/20210717231547.jpeg" alt="wjwABCDEFG">
                     </figure>
                     
                     <p class="is-size-4 is-block">
@@ -445,7 +445,7 @@
                     </p>
                     <a href="/archives">
                         <p class="title has-text-weight-normal">
-                            102
+                            101
                         </p>
                     </a>
                 </div>
@@ -457,7 +457,7 @@
                     </p>
                     <a href="/categories">
                         <p class="title has-text-weight-normal">
-                            15
+                            14
                         </p>
                     </a>
                 </div>
@@ -546,14 +546,6 @@
         <a class="level is-marginless" href="/categories/redis/">
             <span class="level-start">
                 <span class="level-item">redis</span>
-            </span>
-            <span class="level-end">
-                <span class="level-item tag">1</span>
-            </span>
-        </a></li><li>
-        <a class="level is-marginless" href="/categories/spring/">
-            <span class="level-start">
-                <span class="level-item">spring</span>
             </span>
             <span class="level-end">
                 <span class="level-item tag">1</span>
@@ -734,28 +726,9 @@
         
         <article class="media">
             
-            <a href="/spring/%E6%8C%81%E7%BB%AD%E6%9B%B4%E6%96%B0-%E8%AE%B0%E5%BD%95%E6%88%91%E7%9A%84%E6%AF%95%E8%AE%BE/" class="media-left">
-                <p class="image is-64x64">
-                    <img class="thumbnail" src="images/loading.gif" data-original="/images/thumbnail.svg" alt="持续更新-记录我的毕设">
-                </p>
-            </a>
-            
-            <div class="media-content">
-                <div class="content">
-                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2021-04-01T15:06:25.000Z">2021-04-01</time></div>
-                    <a href="/spring/%E6%8C%81%E7%BB%AD%E6%9B%B4%E6%96%B0-%E8%AE%B0%E5%BD%95%E6%88%91%E7%9A%84%E6%AF%95%E8%AE%BE/" class="title has-link-black-ter is-size-6 has-text-weight-normal">持续更新-记录我的毕设</a>
-                    <p class="is-size-7 is-uppercase">
-                        <a class="has-link-grey -link" href="/categories/spring/">spring</a>
-                    </p>
-                </div>
-            </div>
-        </article>
-        
-        <article class="media">
-            
             <a href="/life/%E4%B8%BA%E6%AF%95%E4%B8%9A%E5%81%9A%E5%87%86%E5%A4%87/" class="media-left">
                 <p class="image is-64x64">
-                    <img class="thumbnail" src="images/loading.gif" data-original="https://z3.ax1x.com/2021/04/01/cVlcoF.md.jpg" alt="为毕业做准备">
+                    <img class="thumbnail" src="images/loading.gif" data-original="https://cdn.jsdelivr.net/gh/wjwABCDEFG/blog_img/img/20210717225951.jpeg" alt="为毕业做准备">
                 </p>
             </a>
             
@@ -774,7 +747,7 @@
             
             <a href="/life/mhxy-experience/" class="media-left">
                 <p class="image is-64x64">
-                    <img class="thumbnail" src="images/loading.gif" data-original="https://z3.ax1x.com/2021/04/01/cVMuwD.md.png" alt="梦幻西游游戏体验">
+                    <img class="thumbnail" src="images/loading.gif" data-original="https://cdn.jsdelivr.net/gh/wjwABCDEFG/blog_img/img/20210717223725.png" alt="梦幻西游游戏体验">
                 </p>
             </a>
             
@@ -793,7 +766,7 @@
             
             <a href="/games/3DMath-Primerfor-Graphics-and-Game-Development-note/" class="media-left">
                 <p class="image is-64x64">
-                    <img class="thumbnail" src="images/loading.gif" data-original="https://source.acexy.cn/view/XgMS4U2" alt="3D数学基础图形与游戏研发笔记">
+                    <img class="thumbnail" src="images/loading.gif" data-original="https://cdn.jsdelivr.net/gh/wjwABCDEFG/blog_img/img/20210717223435.jpeg" alt="3D数学基础图形与游戏研发笔记">
                 </p>
             </a>
             
@@ -812,7 +785,26 @@
             
             <a href="/algorithms/get-equal-substrings-within-budget/" class="media-left">
                 <p class="image is-64x64">
-                    <img class="thumbnail" src="images/loading.gif" data-original="https://source.acexy.cn/view/Xd2g803" alt="1208-尽可能使字符串相等">
+                    <img class="thumbnail" src="images/loading.gif" data-original="https://cdn.jsdelivr.net/gh/wjwABCDEFG/blog_img/img/20210717223615.jpg" alt="1011-在D天内送达包裹的能力">
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2021-02-05T16:00:24.000Z">2021-02-06</time></div>
+                    <a href="/algorithms/get-equal-substrings-within-budget/" class="title has-link-black-ter is-size-6 has-text-weight-normal">1011-在D天内送达包裹的能力</a>
+                    <p class="is-size-7 is-uppercase">
+                        <a class="has-link-grey -link" href="/categories/algorithms/">数据结构和算法</a>
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+        <article class="media">
+            
+            <a href="/algorithms/get-equal-substrings-within-budget/" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="images/loading.gif" data-original="https://cdn.jsdelivr.net/gh/wjwABCDEFG/blog_img/img/20210717223234.jpg" alt="1208-尽可能使字符串相等">
                 </p>
             </a>
             
@@ -943,28 +935,9 @@
         
         <article class="media">
             
-            <a href="/spring/%E6%8C%81%E7%BB%AD%E6%9B%B4%E6%96%B0-%E8%AE%B0%E5%BD%95%E6%88%91%E7%9A%84%E6%AF%95%E8%AE%BE/" class="media-left">
-                <p class="image is-64x64">
-                    <img class="thumbnail" src="images/loading.gif" data-original="/images/thumbnail.svg" alt="持续更新-记录我的毕设">
-                </p>
-            </a>
-            
-            <div class="media-content">
-                <div class="content">
-                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2021-04-01T15:06:25.000Z">2021-04-01</time></div>
-                    <a href="/spring/%E6%8C%81%E7%BB%AD%E6%9B%B4%E6%96%B0-%E8%AE%B0%E5%BD%95%E6%88%91%E7%9A%84%E6%AF%95%E8%AE%BE/" class="title has-link-black-ter is-size-6 has-text-weight-normal">持续更新-记录我的毕设</a>
-                    <p class="is-size-7 is-uppercase">
-                        <a class="has-link-grey -link" href="/categories/spring/">spring</a>
-                    </p>
-                </div>
-            </div>
-        </article>
-        
-        <article class="media">
-            
             <a href="/life/%E4%B8%BA%E6%AF%95%E4%B8%9A%E5%81%9A%E5%87%86%E5%A4%87/" class="media-left">
                 <p class="image is-64x64">
-                    <img class="thumbnail" src="images/loading.gif" data-original="https://z3.ax1x.com/2021/04/01/cVlcoF.md.jpg" alt="为毕业做准备">
+                    <img class="thumbnail" src="images/loading.gif" data-original="https://cdn.jsdelivr.net/gh/wjwABCDEFG/blog_img/img/20210717225951.jpeg" alt="为毕业做准备">
                 </p>
             </a>
             
@@ -983,7 +956,7 @@
             
             <a href="/life/mhxy-experience/" class="media-left">
                 <p class="image is-64x64">
-                    <img class="thumbnail" src="images/loading.gif" data-original="https://z3.ax1x.com/2021/04/01/cVMuwD.md.png" alt="梦幻西游游戏体验">
+                    <img class="thumbnail" src="images/loading.gif" data-original="https://cdn.jsdelivr.net/gh/wjwABCDEFG/blog_img/img/20210717223725.png" alt="梦幻西游游戏体验">
                 </p>
             </a>
             
@@ -1002,7 +975,7 @@
             
             <a href="/games/3DMath-Primerfor-Graphics-and-Game-Development-note/" class="media-left">
                 <p class="image is-64x64">
-                    <img class="thumbnail" src="images/loading.gif" data-original="https://source.acexy.cn/view/XgMS4U2" alt="3D数学基础图形与游戏研发笔记">
+                    <img class="thumbnail" src="images/loading.gif" data-original="https://cdn.jsdelivr.net/gh/wjwABCDEFG/blog_img/img/20210717223435.jpeg" alt="3D数学基础图形与游戏研发笔记">
                 </p>
             </a>
             
@@ -1021,7 +994,26 @@
             
             <a href="/algorithms/get-equal-substrings-within-budget/" class="media-left">
                 <p class="image is-64x64">
-                    <img class="thumbnail" src="images/loading.gif" data-original="https://source.acexy.cn/view/Xd2g803" alt="1208-尽可能使字符串相等">
+                    <img class="thumbnail" src="images/loading.gif" data-original="https://cdn.jsdelivr.net/gh/wjwABCDEFG/blog_img/img/20210717223615.jpg" alt="1011-在D天内送达包裹的能力">
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2021-02-05T16:00:24.000Z">2021-02-06</time></div>
+                    <a href="/algorithms/get-equal-substrings-within-budget/" class="title has-link-black-ter is-size-6 has-text-weight-normal">1011-在D天内送达包裹的能力</a>
+                    <p class="is-size-7 is-uppercase">
+                        <a class="has-link-grey -link" href="/categories/algorithms/">数据结构和算法</a>
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+        <article class="media">
+            
+            <a href="/algorithms/get-equal-substrings-within-budget/" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="images/loading.gif" data-original="https://cdn.jsdelivr.net/gh/wjwABCDEFG/blog_img/img/20210717223234.jpg" alt="1208-尽可能使字符串相等">
                 </p>
             </a>
             
@@ -1051,7 +1043,7 @@
             <div class="level-start has-text-centered-mobile">
                 <a class="footer-logo is-block has-mb-6" href="/">
                 
-                    <img src="images/loading.gif" data-original="/images/logo.png" alt="GC" height="28">
+                    <img src="images/loading.gif" data-original="https://cdn.jsdelivr.net/gh/wjwABCDEFG/blog_img/img/20210717231246.png" alt="GC" height="28">
                 
                 </a>
                 <p class="is-size-7">

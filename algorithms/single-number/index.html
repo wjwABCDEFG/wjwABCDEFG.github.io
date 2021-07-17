@@ -17,12 +17,12 @@
 <meta property="og:site_name" content="小温 blog">
 <meta property="og:description" content="136-只出现一次的数字 https:&#x2F;&#x2F;leetcode-cn.com&#x2F;problems&#x2F;single-number&#x2F; 137-只出现一次的数字II https:&#x2F;&#x2F;leetcode-cn.com&#x2F;problems&#x2F;single-number-ii&#x2F;">
 <meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="https://b1.sbimg.org/file/chevereto-jia/2020/12/10/QAhMm.md.jpg">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/wjwABCDEFG/blog_img/img/20210717222036.jpg">
 <meta property="article:published_time" content="2020-12-10T08:25:13.000Z">
-<meta property="article:modified_time" content="2020-12-10T11:17:28.421Z">
+<meta property="article:modified_time" content="2021-07-17T14:21:10.788Z">
 <meta property="article:author" content="wjw">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="https://b1.sbimg.org/file/chevereto-jia/2020/12/10/QAhMm.md.jpg">
+<meta name="twitter:image" content="https://cdn.jsdelivr.net/gh/wjwABCDEFG/blog_img/img/20210717222036.jpg">
 
 
 
@@ -80,7 +80,7 @@
         <div class="navbar-brand is-flex-center">
             <a class="navbar-item navbar-logo" href="/">
             
-                <img src="images/loading.gif" data-original="/images/logo.png" alt="136-137-260-只出现一次的数字" height="28">
+                <img src="images/loading.gif" data-original="https://cdn.jsdelivr.net/gh/wjwABCDEFG/blog_img/img/20210717231246.png" alt="136-137-260-只出现一次的数字" height="28">
             
             </a>
         </div>
@@ -138,7 +138,7 @@
     
     <div class="card-image">
         <span  class="image is-7by1">
-            <img class="thumbnail" src="images/loading.gif" data-original="https://b1.sbimg.org/file/chevereto-jia/2020/12/10/QAhMm.md.jpg" alt="136-137-260-只出现一次的数字">
+            <img class="thumbnail" src="images/loading.gif" data-original="https://cdn.jsdelivr.net/gh/wjwABCDEFG/blog_img/img/20210717222036.jpg" alt="136-137-260-只出现一次的数字">
         </span>
     </div>
     
@@ -156,7 +156,7 @@
                 <span class="level-item has-text-grey">
                     
                     
-                    6 分钟 读完 (大约 851 个字)
+                    6 分钟 读完 (大约 862 个字)
                 </span>
                 
                 
@@ -194,7 +194,7 @@
 <br>
 
 <p>跳过137，先看260题，相比136题它从一个数变成了两个数，难度大了很多</p>
-<p><img src="images/loading.gif" data-original="https://s3.ax1x.com/2020/12/10/rFiepD.png" alt=""></p>
+<p><img src="images/loading.gif" data-original="https://cdn.jsdelivr.net/gh/wjwABCDEFG/blog_img/img/20210717222050.png" alt=""></p>
 <p>思路：</p>
 <p>我们假设只出现一次的两个数为a, b，按照136题的思路，遍历异或，得到的结果应该是res = a ^ b</p>
 <p>res中二进制为1的位就是a和b二进制不一样的位，不管哪个1，我们可以将这个位为1的所有数和这个位为0的所有数分开，那么就可以得到两组数</p>
@@ -215,12 +215,12 @@
 <p><a href="https://leetcode-cn.com/problems/single-number-ii/solution/luo-ji-dian-lu-jiao-du-xiang-xi-fen-xi-gai-ti-si-l/">https://leetcode-cn.com/problems/single-number-ii/solution/luo-ji-dian-lu-jiao-du-xiang-xi-fen-xi-gai-ti-si-l/</a></p>
 </blockquote>
 <p>简单解释就是3种状态需要两位，所以从00，01，10，11四个中任选3个，比如00，01，10，那么需要画真值表使其满足00-&gt;01, 01-&gt;10, 10-&gt;00</p>
-<p><img src="images/loading.gif" data-original="https://s3.ax1x.com/2020/12/10/rFNAsJ.png" alt=""></p>
+<p><img src="images/loading.gif" data-original="https://cdn.jsdelivr.net/gh/wjwABCDEFG/blog_img/img/20210717222055.png" alt=""></p>
 <p>Z是什么，Z为1代表这个数出现了，那么</p>
 <p>一开始为00，Z第一次出现00-&gt;01，第二次出现01-&gt;10，第三次出现10-&gt;00</p>
 <p>那么就可以写表达式了，根据数电的知识，写x_new只看x_new为1的</p>
-<p><img src="images/loading.gif" data-original="https://s3.ax1x.com/2020/12/10/rFNDyQ.png" alt=""></p>
-<p><img src="images/loading.gif" data-original="https://s3.ax1x.com/2020/12/10/rFN6wn.png" alt=""></p>
+<p><img src="images/loading.gif" data-original="https://cdn.jsdelivr.net/gh/wjwABCDEFG/blog_img/img/20210717222101.png" alt=""></p>
+<p><img src="images/loading.gif" data-original="https://cdn.jsdelivr.net/gh/wjwABCDEFG/blog_img/img/20210717222105.png" alt=""></p>
 <p>事实上，<strong>我认为</strong>到这一步就够了，化简什么的一时半会写不出来，那么我们就以这个为例，写的时候要注意，不要直接变x而是用x_new存起来，否则计算y_new时改变了x的值。当然，python可以a, b = b, a另说</p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">singleNumber</span><span class="params">(<span class="keyword">int</span>[] nums)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">int</span> x = <span class="number">0</span>, y = <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> z : nums) &#123;</span><br><span class="line">        <span class="keyword">int</span> x_new = (x &amp; ~y &amp; ~z) | (~x &amp; y &amp; z);</span><br><span class="line">        <span class="keyword">int</span> y_new = (~x &amp; ~y &amp; z) | (~x &amp; y &amp; ~z);</span><br><span class="line">        x = x_new; y = y_new;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> y;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
@@ -278,7 +278,7 @@
                 <div>
                     
                     <figure class="image is-128x128 has-mb-6">
-                        <img class="is-rounded" src="images/loading.gif" data-original="https://s1.ax1x.com/2020/07/20/Ufuf4e.th.jpg" alt="wjwABCDEFG">
+                        <img class="is-rounded" src="images/loading.gif" data-original="https://cdn.jsdelivr.net/gh/wjwABCDEFG/blog_img/img/20210717231547.jpeg" alt="wjwABCDEFG">
                     </figure>
                     
                     <p class="is-size-4 is-block">
@@ -303,7 +303,7 @@
                     </p>
                     <a href="/archives">
                         <p class="title has-text-weight-normal">
-                            102
+                            101
                         </p>
                     </a>
                 </div>
@@ -315,7 +315,7 @@
                     </p>
                     <a href="/categories">
                         <p class="title has-text-weight-normal">
-                            15
+                            14
                         </p>
                     </a>
                 </div>
@@ -409,14 +409,6 @@
                 <span class="level-item tag">1</span>
             </span>
         </a></li><li>
-        <a class="level is-marginless" href="/categories/spring/">
-            <span class="level-start">
-                <span class="level-item">spring</span>
-            </span>
-            <span class="level-end">
-                <span class="level-item tag">1</span>
-            </span>
-        </a></li><li>
         <a class="level is-marginless" href="/categories/frontend/">
             <span class="level-start">
                 <span class="level-item">前端</span>
@@ -501,28 +493,9 @@
         
         <article class="media">
             
-            <a href="/spring/%E6%8C%81%E7%BB%AD%E6%9B%B4%E6%96%B0-%E8%AE%B0%E5%BD%95%E6%88%91%E7%9A%84%E6%AF%95%E8%AE%BE/" class="media-left">
-                <p class="image is-64x64">
-                    <img class="thumbnail" src="images/loading.gif" data-original="/images/thumbnail.svg" alt="持续更新-记录我的毕设">
-                </p>
-            </a>
-            
-            <div class="media-content">
-                <div class="content">
-                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2021-04-01T15:06:25.000Z">2021-04-01</time></div>
-                    <a href="/spring/%E6%8C%81%E7%BB%AD%E6%9B%B4%E6%96%B0-%E8%AE%B0%E5%BD%95%E6%88%91%E7%9A%84%E6%AF%95%E8%AE%BE/" class="title has-link-black-ter is-size-6 has-text-weight-normal">持续更新-记录我的毕设</a>
-                    <p class="is-size-7 is-uppercase">
-                        <a class="has-link-grey -link" href="/categories/spring/">spring</a>
-                    </p>
-                </div>
-            </div>
-        </article>
-        
-        <article class="media">
-            
             <a href="/life/%E4%B8%BA%E6%AF%95%E4%B8%9A%E5%81%9A%E5%87%86%E5%A4%87/" class="media-left">
                 <p class="image is-64x64">
-                    <img class="thumbnail" src="images/loading.gif" data-original="https://z3.ax1x.com/2021/04/01/cVlcoF.md.jpg" alt="为毕业做准备">
+                    <img class="thumbnail" src="images/loading.gif" data-original="https://cdn.jsdelivr.net/gh/wjwABCDEFG/blog_img/img/20210717225951.jpeg" alt="为毕业做准备">
                 </p>
             </a>
             
@@ -541,7 +514,7 @@
             
             <a href="/life/mhxy-experience/" class="media-left">
                 <p class="image is-64x64">
-                    <img class="thumbnail" src="images/loading.gif" data-original="https://z3.ax1x.com/2021/04/01/cVMuwD.md.png" alt="梦幻西游游戏体验">
+                    <img class="thumbnail" src="images/loading.gif" data-original="https://cdn.jsdelivr.net/gh/wjwABCDEFG/blog_img/img/20210717223725.png" alt="梦幻西游游戏体验">
                 </p>
             </a>
             
@@ -560,7 +533,7 @@
             
             <a href="/games/3DMath-Primerfor-Graphics-and-Game-Development-note/" class="media-left">
                 <p class="image is-64x64">
-                    <img class="thumbnail" src="images/loading.gif" data-original="https://source.acexy.cn/view/XgMS4U2" alt="3D数学基础图形与游戏研发笔记">
+                    <img class="thumbnail" src="images/loading.gif" data-original="https://cdn.jsdelivr.net/gh/wjwABCDEFG/blog_img/img/20210717223435.jpeg" alt="3D数学基础图形与游戏研发笔记">
                 </p>
             </a>
             
@@ -579,7 +552,26 @@
             
             <a href="/algorithms/get-equal-substrings-within-budget/" class="media-left">
                 <p class="image is-64x64">
-                    <img class="thumbnail" src="images/loading.gif" data-original="https://source.acexy.cn/view/Xd2g803" alt="1208-尽可能使字符串相等">
+                    <img class="thumbnail" src="images/loading.gif" data-original="https://cdn.jsdelivr.net/gh/wjwABCDEFG/blog_img/img/20210717223615.jpg" alt="1011-在D天内送达包裹的能力">
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2021-02-05T16:00:24.000Z">2021-02-06</time></div>
+                    <a href="/algorithms/get-equal-substrings-within-budget/" class="title has-link-black-ter is-size-6 has-text-weight-normal">1011-在D天内送达包裹的能力</a>
+                    <p class="is-size-7 is-uppercase">
+                        <a class="has-link-grey -link" href="/categories/algorithms/">数据结构和算法</a>
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+        <article class="media">
+            
+            <a href="/algorithms/get-equal-substrings-within-budget/" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="images/loading.gif" data-original="https://cdn.jsdelivr.net/gh/wjwABCDEFG/blog_img/img/20210717223234.jpg" alt="1208-尽可能使字符串相等">
                 </p>
             </a>
             
@@ -619,28 +611,9 @@
         
         <article class="media">
             
-            <a href="/spring/%E6%8C%81%E7%BB%AD%E6%9B%B4%E6%96%B0-%E8%AE%B0%E5%BD%95%E6%88%91%E7%9A%84%E6%AF%95%E8%AE%BE/" class="media-left">
-                <p class="image is-64x64">
-                    <img class="thumbnail" src="images/loading.gif" data-original="/images/thumbnail.svg" alt="持续更新-记录我的毕设">
-                </p>
-            </a>
-            
-            <div class="media-content">
-                <div class="content">
-                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2021-04-01T15:06:25.000Z">2021-04-01</time></div>
-                    <a href="/spring/%E6%8C%81%E7%BB%AD%E6%9B%B4%E6%96%B0-%E8%AE%B0%E5%BD%95%E6%88%91%E7%9A%84%E6%AF%95%E8%AE%BE/" class="title has-link-black-ter is-size-6 has-text-weight-normal">持续更新-记录我的毕设</a>
-                    <p class="is-size-7 is-uppercase">
-                        <a class="has-link-grey -link" href="/categories/spring/">spring</a>
-                    </p>
-                </div>
-            </div>
-        </article>
-        
-        <article class="media">
-            
             <a href="/life/%E4%B8%BA%E6%AF%95%E4%B8%9A%E5%81%9A%E5%87%86%E5%A4%87/" class="media-left">
                 <p class="image is-64x64">
-                    <img class="thumbnail" src="images/loading.gif" data-original="https://z3.ax1x.com/2021/04/01/cVlcoF.md.jpg" alt="为毕业做准备">
+                    <img class="thumbnail" src="images/loading.gif" data-original="https://cdn.jsdelivr.net/gh/wjwABCDEFG/blog_img/img/20210717225951.jpeg" alt="为毕业做准备">
                 </p>
             </a>
             
@@ -659,7 +632,7 @@
             
             <a href="/life/mhxy-experience/" class="media-left">
                 <p class="image is-64x64">
-                    <img class="thumbnail" src="images/loading.gif" data-original="https://z3.ax1x.com/2021/04/01/cVMuwD.md.png" alt="梦幻西游游戏体验">
+                    <img class="thumbnail" src="images/loading.gif" data-original="https://cdn.jsdelivr.net/gh/wjwABCDEFG/blog_img/img/20210717223725.png" alt="梦幻西游游戏体验">
                 </p>
             </a>
             
@@ -678,7 +651,7 @@
             
             <a href="/games/3DMath-Primerfor-Graphics-and-Game-Development-note/" class="media-left">
                 <p class="image is-64x64">
-                    <img class="thumbnail" src="images/loading.gif" data-original="https://source.acexy.cn/view/XgMS4U2" alt="3D数学基础图形与游戏研发笔记">
+                    <img class="thumbnail" src="images/loading.gif" data-original="https://cdn.jsdelivr.net/gh/wjwABCDEFG/blog_img/img/20210717223435.jpeg" alt="3D数学基础图形与游戏研发笔记">
                 </p>
             </a>
             
@@ -697,7 +670,26 @@
             
             <a href="/algorithms/get-equal-substrings-within-budget/" class="media-left">
                 <p class="image is-64x64">
-                    <img class="thumbnail" src="images/loading.gif" data-original="https://source.acexy.cn/view/Xd2g803" alt="1208-尽可能使字符串相等">
+                    <img class="thumbnail" src="images/loading.gif" data-original="https://cdn.jsdelivr.net/gh/wjwABCDEFG/blog_img/img/20210717223615.jpg" alt="1011-在D天内送达包裹的能力">
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2021-02-05T16:00:24.000Z">2021-02-06</time></div>
+                    <a href="/algorithms/get-equal-substrings-within-budget/" class="title has-link-black-ter is-size-6 has-text-weight-normal">1011-在D天内送达包裹的能力</a>
+                    <p class="is-size-7 is-uppercase">
+                        <a class="has-link-grey -link" href="/categories/algorithms/">数据结构和算法</a>
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+        <article class="media">
+            
+            <a href="/algorithms/get-equal-substrings-within-budget/" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="images/loading.gif" data-original="https://cdn.jsdelivr.net/gh/wjwABCDEFG/blog_img/img/20210717223234.jpg" alt="1208-尽可能使字符串相等">
                 </p>
             </a>
             
@@ -727,7 +719,7 @@
             <div class="level-start has-text-centered-mobile">
                 <a class="footer-logo is-block has-mb-6" href="/">
                 
-                    <img src="images/loading.gif" data-original="/images/logo.png" alt="136-137-260-只出现一次的数字" height="28">
+                    <img src="images/loading.gif" data-original="https://cdn.jsdelivr.net/gh/wjwABCDEFG/blog_img/img/20210717231246.png" alt="136-137-260-只出现一次的数字" height="28">
                 
                 </a>
                 <p class="is-size-7">

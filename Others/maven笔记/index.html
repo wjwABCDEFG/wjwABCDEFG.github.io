@@ -17,13 +17,13 @@
 <meta property="og:site_name" content="小温 blog">
 <meta property="og:description" content="1. maven概念maven是一个项目管理工具，能帮助项目规范的构建（规定了项目的结构和方便的打包）以及方便的管理lib下的jar包 如果所有的jar包都放进目录下，那么项目占用空间就会变得很大，通常来说资源文件（图片）&gt; lib(jar) &gt; java代码，很多时候jar包远远大于了java文件（毕竟只是文本），而maven通过本地的一个仓库专门存放jar包，然后不同的项目都从本地">
 <meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="https://wx2.sbimg.cn/2020/07/30/P7gtK.md.jpg">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/wjwABCDEFG/blog_img/img/20210717190537.jpeg">
 <meta property="article:published_time" content="2020-04-02T12:32:21.000Z">
-<meta property="article:modified_time" content="2020-12-07T02:48:04.070Z">
+<meta property="article:modified_time" content="2021-07-17T11:10:46.008Z">
 <meta property="article:author" content="wjw">
 <meta property="article:tag" content="开发">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="https://wx2.sbimg.cn/2020/07/30/P7gtK.md.jpg">
+<meta name="twitter:image" content="https://cdn.jsdelivr.net/gh/wjwABCDEFG/blog_img/img/20210717190537.jpeg">
 
 
 
@@ -81,7 +81,7 @@
         <div class="navbar-brand is-flex-center">
             <a class="navbar-item navbar-logo" href="/">
             
-                <img src="images/loading.gif" data-original="/images/logo.png" alt="maven笔记" height="28">
+                <img src="images/loading.gif" data-original="https://cdn.jsdelivr.net/gh/wjwABCDEFG/blog_img/img/20210717231246.png" alt="maven笔记" height="28">
             
             </a>
         </div>
@@ -139,7 +139,7 @@
     
     <div class="card-image">
         <span  class="image is-7by1">
-            <img class="thumbnail" src="images/loading.gif" data-original="https://wx2.sbimg.cn/2020/07/30/P7gtK.md.jpg" alt="maven笔记">
+            <img class="thumbnail" src="images/loading.gif" data-original="https://cdn.jsdelivr.net/gh/wjwABCDEFG/blog_img/img/20210717190537.jpeg" alt="maven笔记">
         </span>
     </div>
     
@@ -157,7 +157,7 @@
                 <span class="level-item has-text-grey">
                     
                     
-                    13 分钟 读完 (大约 1879 个字)
+                    13 分钟 读完 (大约 1892 个字)
                 </span>
                 
                 
@@ -198,35 +198,35 @@
 </ul>
 <p>设置下面这个选项后，会先从本地找jar，再到中央仓库找jar</p>
 <p><code>-DarchetypeCatalog=internal</code></p>
-<p><img src="images/loading.gif" data-original="https://s1.ax1x.com/2020/04/01/G1XxhQ.png" alt="这里添加"></p>
+<p><img src="images/loading.gif" data-original="https://cdn.jsdelivr.net/gh/wjwABCDEFG/blog_img/img/20210717190603.png" alt="这里添加"></p>
 <blockquote>
 <p> <a href="https://www.cnblogs.com/del88/p/6286887.html">https://www.cnblogs.com/del88/p/6286887.html</a></p>
 </blockquote>
 <p>或者创建项目的时候</p>
-<p><img src="images/loading.gif" data-original="https://s1.ax1x.com/2020/04/01/G1jucR.png" alt=""></p>
+<p><img src="images/loading.gif" data-original="https://cdn.jsdelivr.net/gh/wjwABCDEFG/blog_img/img/20210717190636.png" alt=""></p>
 <h1 id="4-关于scope"><a href="#4-关于scope" class="headerlink" title="4. 关于scope"></a>4. 关于scope</h1><p>比如servlet,由于maven自带servlet，但是写代码的时候我们必须要javax的servlet，否则会报错，因此我们写代码时用javax.servlet，编译时用maven的servlet，所以我们要指定范围</p>
 <p><code>&lt;scope&gt;provided&lt;/scope&gt;</code>代表写代码时生效</p>
-<p><img src="images/loading.gif" data-original="https://s1.ax1x.com/2020/04/01/G1jg3j.png" alt=""></p>
+<p><img src="images/loading.gif" data-original="https://cdn.jsdelivr.net/gh/wjwABCDEFG/blog_img/img/20210717190657.png" alt=""></p>
 <h1 id="5-maven换源"><a href="#5-maven换源" class="headerlink" title="5. maven换源"></a>5. maven换源</h1><p>在maven安装目录/conf/settings.xml文件下</p>
 <p><code>&lt;mirrors&gt;</code>标签下添加如下代码</p>
 <p>阿里巴巴源（建议不要整那些花里胡哨的源）</p>
 <figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">mirror</span>&gt;</span> </span><br><span class="line">	<span class="tag">&lt;<span class="name">id</span>&gt;</span>nexus-aliyun<span class="tag">&lt;/<span class="name">id</span>&gt;</span> </span><br><span class="line">	<span class="tag">&lt;<span class="name">mirrorOf</span>&gt;</span>*<span class="tag">&lt;/<span class="name">mirrorOf</span>&gt;</span> </span><br><span class="line">	<span class="tag">&lt;<span class="name">name</span>&gt;</span>Nexus aliyun<span class="tag">&lt;/<span class="name">name</span>&gt;</span> </span><br><span class="line">	<span class="tag">&lt;<span class="name">url</span>&gt;</span>http://maven.aliyun.com/nexus/content/groups/public<span class="tag">&lt;/<span class="name">url</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">mirror</span>&gt;</span></span><br></pre></td></tr></table></figure>
 
 <p>效果如下：（大概140-160行这里，可能有点不同）</p>
-<p><img src="images/loading.gif" data-original="https://s1.ax1x.com/2020/04/01/G1z8EV.png" alt=""></p>
+<p><img src="images/loading.gif" data-original="https://cdn.jsdelivr.net/gh/wjwABCDEFG/blog_img/img/20210717190728.png" alt=""></p>
 <h1 id="6-maven依赖报红线的终极解决办法"><a href="#6-maven依赖报红线的终极解决办法" class="headerlink" title="6. maven依赖报红线的终极解决办法"></a>6. maven依赖报红线的终极解决办法</h1><p>这几个按钮依次点几下，就会重新下载了，然后找到报错的那几个dependency剪切再粘贴一遍，包好！！！！</p>
-<p><img src="images/loading.gif" data-original="https://s1.ax1x.com/2020/04/01/G1veVf.png" alt="这几个按钮"></p>
+<p><img src="images/loading.gif" data-original="https://cdn.jsdelivr.net/gh/wjwABCDEFG/blog_img/img/20210717191000.png" alt="这几个按钮"></p>
 <h1 id="7-maven父子工程"><a href="#7-maven父子工程" class="headerlink" title="7. maven父子工程"></a>7. maven父子工程</h1><p>除了maven的包管理（可以在不同的工程下重复使用包），还有maven对代码也实现了可重用，主要体现在同一个项目通常有卖家版买家版，管理员版和普通用户版等等不同的角色版本，这些版本都是针对同一个项目，所以dao层的代码（如findAll, findById）之类的都是查询同样的东西，因此这部分代码可以单独抽离成子工程。</p>
 <h2 id="7-1-父子工程使用步骤"><a href="#7-1-父子工程使用步骤" class="headerlink" title="7.1 父子工程使用步骤"></a>7.1 父子工程使用步骤</h2><ol>
 <li>父工程</li>
 </ol>
 <p>其实只需要一个pom.xml，所以new project也好new module也行。然后删掉src目录。作用就是只管理坐标</p>
-<p><img src="images/loading.gif" data-original="https://s1.ax1x.com/2020/04/01/G39fKJ.png" alt=""></p>
+<p><img src="images/loading.gif" data-original="https://cdn.jsdelivr.net/gh/wjwABCDEFG/blog_img/img/20210717191004.png" alt=""></p>
 <ol start="2">
 <li>创建子模块</li>
 </ol>
 <p>比如我们这里创建dao层，因为不跟页面打交道，所以我们不需要webapp骨架，直接对着父工程new module（注意不是对着idea左上角file-&gt;new）</p>
-<p><img src="images/loading.gif" data-original="https://s1.ax1x.com/2020/04/01/G3P7cD.png" alt=""></p>
+<p><img src="images/loading.gif" data-original="https://cdn.jsdelivr.net/gh/wjwABCDEFG/blog_img/img/20210717191009.png" alt=""></p>
 <p>这样一个子模块就创建好了，子模块在自己的pom.xml中添加&lt;parent&gt;标签就可以用父模块的依赖。</p>
 <figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">parent</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>com.wjw.ssm<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>ssm<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">version</span>&gt;</span>1.0-SNAPSHOT<span class="tag">&lt;/<span class="name">version</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;/<span class="name">parent</span>&gt;</span></span><br></pre></td></tr></table></figure>
 
@@ -278,7 +278,7 @@
 <h2 id="7-2-错误解决"><a href="#7-2-错误解决" class="headerlink" title="7.2 错误解决"></a>7.2 错误解决</h2><ol>
 <li>无法在web.xml或使用此应用程序部署的jar文件中解析绝对uri：<a href="http://java.sun.com/jsp/jstl/core">http://java.sun.com/jsp/jstl/core</a></li>
 </ol>
-<p><img src="images/loading.gif" data-original="https://s1.ax1x.com/2020/04/02/GGp0hV.png" alt=""></p>
+<p><img src="images/loading.gif" data-original="https://cdn.jsdelivr.net/gh/wjwABCDEFG/blog_img/img/20210717191024.png" alt=""></p>
 <p>参考这篇博客</p>
 <blockquote>
 <p><a href="https://blog.csdn.net/weixin_42634260/article/details/89931226?depth_1-utm_source=distribute.pc_relevant.none-task&amp;utm_source=distribute.pc_relevant.none-task">https://blog.csdn.net/weixin_42634260/article/details/89931226?depth_1-utm_source=distribute.pc_relevant.none-task&amp;utm_source=distribute.pc_relevant.none-task</a></p>
@@ -350,7 +350,7 @@
                 <div>
                     
                     <figure class="image is-128x128 has-mb-6">
-                        <img class="is-rounded" src="images/loading.gif" data-original="https://s1.ax1x.com/2020/07/20/Ufuf4e.th.jpg" alt="wjwABCDEFG">
+                        <img class="is-rounded" src="images/loading.gif" data-original="https://cdn.jsdelivr.net/gh/wjwABCDEFG/blog_img/img/20210717231547.jpeg" alt="wjwABCDEFG">
                     </figure>
                     
                     <p class="is-size-4 is-block">
@@ -375,7 +375,7 @@
                     </p>
                     <a href="/archives">
                         <p class="title has-text-weight-normal">
-                            102
+                            101
                         </p>
                     </a>
                 </div>
@@ -387,7 +387,7 @@
                     </p>
                     <a href="/categories">
                         <p class="title has-text-weight-normal">
-                            15
+                            14
                         </p>
                     </a>
                 </div>
@@ -476,14 +476,6 @@
         <a class="level is-marginless" href="/categories/redis/">
             <span class="level-start">
                 <span class="level-item">redis</span>
-            </span>
-            <span class="level-end">
-                <span class="level-item tag">1</span>
-            </span>
-        </a></li><li>
-        <a class="level is-marginless" href="/categories/spring/">
-            <span class="level-start">
-                <span class="level-item">spring</span>
             </span>
             <span class="level-end">
                 <span class="level-item tag">1</span>
@@ -634,28 +626,9 @@
         
         <article class="media">
             
-            <a href="/spring/%E6%8C%81%E7%BB%AD%E6%9B%B4%E6%96%B0-%E8%AE%B0%E5%BD%95%E6%88%91%E7%9A%84%E6%AF%95%E8%AE%BE/" class="media-left">
-                <p class="image is-64x64">
-                    <img class="thumbnail" src="images/loading.gif" data-original="/images/thumbnail.svg" alt="持续更新-记录我的毕设">
-                </p>
-            </a>
-            
-            <div class="media-content">
-                <div class="content">
-                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2021-04-01T15:06:25.000Z">2021-04-01</time></div>
-                    <a href="/spring/%E6%8C%81%E7%BB%AD%E6%9B%B4%E6%96%B0-%E8%AE%B0%E5%BD%95%E6%88%91%E7%9A%84%E6%AF%95%E8%AE%BE/" class="title has-link-black-ter is-size-6 has-text-weight-normal">持续更新-记录我的毕设</a>
-                    <p class="is-size-7 is-uppercase">
-                        <a class="has-link-grey -link" href="/categories/spring/">spring</a>
-                    </p>
-                </div>
-            </div>
-        </article>
-        
-        <article class="media">
-            
             <a href="/life/%E4%B8%BA%E6%AF%95%E4%B8%9A%E5%81%9A%E5%87%86%E5%A4%87/" class="media-left">
                 <p class="image is-64x64">
-                    <img class="thumbnail" src="images/loading.gif" data-original="https://z3.ax1x.com/2021/04/01/cVlcoF.md.jpg" alt="为毕业做准备">
+                    <img class="thumbnail" src="images/loading.gif" data-original="https://cdn.jsdelivr.net/gh/wjwABCDEFG/blog_img/img/20210717225951.jpeg" alt="为毕业做准备">
                 </p>
             </a>
             
@@ -674,7 +647,7 @@
             
             <a href="/life/mhxy-experience/" class="media-left">
                 <p class="image is-64x64">
-                    <img class="thumbnail" src="images/loading.gif" data-original="https://z3.ax1x.com/2021/04/01/cVMuwD.md.png" alt="梦幻西游游戏体验">
+                    <img class="thumbnail" src="images/loading.gif" data-original="https://cdn.jsdelivr.net/gh/wjwABCDEFG/blog_img/img/20210717223725.png" alt="梦幻西游游戏体验">
                 </p>
             </a>
             
@@ -693,7 +666,7 @@
             
             <a href="/games/3DMath-Primerfor-Graphics-and-Game-Development-note/" class="media-left">
                 <p class="image is-64x64">
-                    <img class="thumbnail" src="images/loading.gif" data-original="https://source.acexy.cn/view/XgMS4U2" alt="3D数学基础图形与游戏研发笔记">
+                    <img class="thumbnail" src="images/loading.gif" data-original="https://cdn.jsdelivr.net/gh/wjwABCDEFG/blog_img/img/20210717223435.jpeg" alt="3D数学基础图形与游戏研发笔记">
                 </p>
             </a>
             
@@ -712,7 +685,26 @@
             
             <a href="/algorithms/get-equal-substrings-within-budget/" class="media-left">
                 <p class="image is-64x64">
-                    <img class="thumbnail" src="images/loading.gif" data-original="https://source.acexy.cn/view/Xd2g803" alt="1208-尽可能使字符串相等">
+                    <img class="thumbnail" src="images/loading.gif" data-original="https://cdn.jsdelivr.net/gh/wjwABCDEFG/blog_img/img/20210717223615.jpg" alt="1011-在D天内送达包裹的能力">
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2021-02-05T16:00:24.000Z">2021-02-06</time></div>
+                    <a href="/algorithms/get-equal-substrings-within-budget/" class="title has-link-black-ter is-size-6 has-text-weight-normal">1011-在D天内送达包裹的能力</a>
+                    <p class="is-size-7 is-uppercase">
+                        <a class="has-link-grey -link" href="/categories/algorithms/">数据结构和算法</a>
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+        <article class="media">
+            
+            <a href="/algorithms/get-equal-substrings-within-budget/" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="images/loading.gif" data-original="https://cdn.jsdelivr.net/gh/wjwABCDEFG/blog_img/img/20210717223234.jpg" alt="1208-尽可能使字符串相等">
                 </p>
             </a>
             
@@ -813,28 +805,9 @@
         
         <article class="media">
             
-            <a href="/spring/%E6%8C%81%E7%BB%AD%E6%9B%B4%E6%96%B0-%E8%AE%B0%E5%BD%95%E6%88%91%E7%9A%84%E6%AF%95%E8%AE%BE/" class="media-left">
-                <p class="image is-64x64">
-                    <img class="thumbnail" src="images/loading.gif" data-original="/images/thumbnail.svg" alt="持续更新-记录我的毕设">
-                </p>
-            </a>
-            
-            <div class="media-content">
-                <div class="content">
-                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2021-04-01T15:06:25.000Z">2021-04-01</time></div>
-                    <a href="/spring/%E6%8C%81%E7%BB%AD%E6%9B%B4%E6%96%B0-%E8%AE%B0%E5%BD%95%E6%88%91%E7%9A%84%E6%AF%95%E8%AE%BE/" class="title has-link-black-ter is-size-6 has-text-weight-normal">持续更新-记录我的毕设</a>
-                    <p class="is-size-7 is-uppercase">
-                        <a class="has-link-grey -link" href="/categories/spring/">spring</a>
-                    </p>
-                </div>
-            </div>
-        </article>
-        
-        <article class="media">
-            
             <a href="/life/%E4%B8%BA%E6%AF%95%E4%B8%9A%E5%81%9A%E5%87%86%E5%A4%87/" class="media-left">
                 <p class="image is-64x64">
-                    <img class="thumbnail" src="images/loading.gif" data-original="https://z3.ax1x.com/2021/04/01/cVlcoF.md.jpg" alt="为毕业做准备">
+                    <img class="thumbnail" src="images/loading.gif" data-original="https://cdn.jsdelivr.net/gh/wjwABCDEFG/blog_img/img/20210717225951.jpeg" alt="为毕业做准备">
                 </p>
             </a>
             
@@ -853,7 +826,7 @@
             
             <a href="/life/mhxy-experience/" class="media-left">
                 <p class="image is-64x64">
-                    <img class="thumbnail" src="images/loading.gif" data-original="https://z3.ax1x.com/2021/04/01/cVMuwD.md.png" alt="梦幻西游游戏体验">
+                    <img class="thumbnail" src="images/loading.gif" data-original="https://cdn.jsdelivr.net/gh/wjwABCDEFG/blog_img/img/20210717223725.png" alt="梦幻西游游戏体验">
                 </p>
             </a>
             
@@ -872,7 +845,7 @@
             
             <a href="/games/3DMath-Primerfor-Graphics-and-Game-Development-note/" class="media-left">
                 <p class="image is-64x64">
-                    <img class="thumbnail" src="images/loading.gif" data-original="https://source.acexy.cn/view/XgMS4U2" alt="3D数学基础图形与游戏研发笔记">
+                    <img class="thumbnail" src="images/loading.gif" data-original="https://cdn.jsdelivr.net/gh/wjwABCDEFG/blog_img/img/20210717223435.jpeg" alt="3D数学基础图形与游戏研发笔记">
                 </p>
             </a>
             
@@ -891,7 +864,26 @@
             
             <a href="/algorithms/get-equal-substrings-within-budget/" class="media-left">
                 <p class="image is-64x64">
-                    <img class="thumbnail" src="images/loading.gif" data-original="https://source.acexy.cn/view/Xd2g803" alt="1208-尽可能使字符串相等">
+                    <img class="thumbnail" src="images/loading.gif" data-original="https://cdn.jsdelivr.net/gh/wjwABCDEFG/blog_img/img/20210717223615.jpg" alt="1011-在D天内送达包裹的能力">
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2021-02-05T16:00:24.000Z">2021-02-06</time></div>
+                    <a href="/algorithms/get-equal-substrings-within-budget/" class="title has-link-black-ter is-size-6 has-text-weight-normal">1011-在D天内送达包裹的能力</a>
+                    <p class="is-size-7 is-uppercase">
+                        <a class="has-link-grey -link" href="/categories/algorithms/">数据结构和算法</a>
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+        <article class="media">
+            
+            <a href="/algorithms/get-equal-substrings-within-budget/" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="images/loading.gif" data-original="https://cdn.jsdelivr.net/gh/wjwABCDEFG/blog_img/img/20210717223234.jpg" alt="1208-尽可能使字符串相等">
                 </p>
             </a>
             
@@ -921,7 +913,7 @@
             <div class="level-start has-text-centered-mobile">
                 <a class="footer-logo is-block has-mb-6" href="/">
                 
-                    <img src="images/loading.gif" data-original="/images/logo.png" alt="maven笔记" height="28">
+                    <img src="images/loading.gif" data-original="https://cdn.jsdelivr.net/gh/wjwABCDEFG/blog_img/img/20210717231246.png" alt="maven笔记" height="28">
                 
                 </a>
                 <p class="is-size-7">

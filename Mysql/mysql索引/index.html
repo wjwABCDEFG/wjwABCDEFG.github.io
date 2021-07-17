@@ -17,13 +17,13 @@
 <meta property="og:site_name" content="小温 blog">
 <meta property="og:description" content="1. 为什么是B+树1.1 哈希索引哈希胜在查找单条数据快，只需要计算哈希函数就可以定位到索引数组下标，继而得到值，ps：索引存储的不是直接的数据库中的值，而是地址，通过索引找到地址然后就可以取数据库中地址对应的值了。">
 <meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="https://source.acexy.cn/view/XUH5MDz">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/wjwABCDEFG/blog_img/img/20210717212019.jpg">
 <meta property="article:published_time" content="2020-10-08T10:51:35.000Z">
-<meta property="article:modified_time" content="2020-12-07T02:47:41.296Z">
+<meta property="article:modified_time" content="2021-07-17T13:24:27.211Z">
 <meta property="article:author" content="wjw">
 <meta property="article:tag" content="mysql">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="https://source.acexy.cn/view/XUH5MDz">
+<meta name="twitter:image" content="https://cdn.jsdelivr.net/gh/wjwABCDEFG/blog_img/img/20210717212019.jpg">
 
 
 
@@ -81,7 +81,7 @@
         <div class="navbar-brand is-flex-center">
             <a class="navbar-item navbar-logo" href="/">
             
-                <img src="images/loading.gif" data-original="/images/logo.png" alt="mysql索引" height="28">
+                <img src="images/loading.gif" data-original="https://cdn.jsdelivr.net/gh/wjwABCDEFG/blog_img/img/20210717231246.png" alt="mysql索引" height="28">
             
             </a>
         </div>
@@ -139,7 +139,7 @@
     
     <div class="card-image">
         <span  class="image is-7by1">
-            <img class="thumbnail" src="images/loading.gif" data-original="https://source.acexy.cn/view/XUH5MDz" alt="mysql索引">
+            <img class="thumbnail" src="images/loading.gif" data-original="https://cdn.jsdelivr.net/gh/wjwABCDEFG/blog_img/img/20210717212019.jpg" alt="mysql索引">
         </span>
     </div>
     
@@ -157,7 +157,7 @@
                 <span class="level-item has-text-grey">
                     
                     
-                    23 分钟 读完 (大约 3443 个字)
+                    23 分钟 读完 (大约 3506 个字)
                 </span>
                 
                 
@@ -178,7 +178,7 @@
             <h1 id="1-为什么是B-树"><a href="#1-为什么是B-树" class="headerlink" title="1. 为什么是B+树"></a>1. 为什么是B+树</h1><h2 id="1-1-哈希索引"><a href="#1-1-哈希索引" class="headerlink" title="1.1 哈希索引"></a>1.1 哈希索引</h2><p>哈希胜在查找单条数据快，只需要计算哈希函数就可以定位到索引数组下标，继而得到值，ps：索引存储的不是直接的数据库中的值，而是地址，通过索引找到地址然后就可以取数据库中地址对应的值了。</p>
 <a id="more"></a>
 
-<p><img src="images/loading.gif" data-original="https://s1.ax1x.com/2020/10/06/0UcKVH.png" alt=""></p>
+<p><img src="images/loading.gif" data-original="https://cdn.jsdelivr.net/gh/wjwABCDEFG/blog_img/img/20210717212032.png" alt=""></p>
 <p>但是如果使用哈希表做索引，是无序的（30 % 29 = 1会在2的前面），但是数据库经常需要范围查询，大于小于，排序等操作，因此哈希索引不合适</p>
 <br>
 
@@ -187,15 +187,15 @@
 <li>树越高查询速度越慢</li>
 <li>中间的某个id比如0005去到了叶子节点，那么要查找id大于0005的就需要回旋查找0006</li>
 </ol>
-<p><img src="images/loading.gif" data-original="https://s1.ax1x.com/2020/10/06/0Ug40g.png" alt=""></p>
+<p><img src="images/loading.gif" data-original="https://cdn.jsdelivr.net/gh/wjwABCDEFG/blog_img/img/20210717212042.png" alt=""></p>
 <br>
 
 <h2 id="1-3-B树"><a href="#1-3-B树" class="headerlink" title="1.3 B树"></a>1.3 B树</h2><p>一个节点可以存多个值，解决了AVL树高度过高的问题，但是回旋查找的问题依然存在</p>
-<p><img src="images/loading.gif" data-original="https://s1.ax1x.com/2020/10/06/0Ug7hn.png" alt=""></p>
+<p><img src="images/loading.gif" data-original="https://cdn.jsdelivr.net/gh/wjwABCDEFG/blog_img/img/20210717212103.png" alt=""></p>
 <br>
 
 <h2 id="1-4-B-树"><a href="#1-4-B-树" class="headerlink" title="1.4 B+树"></a>1.4 B+树</h2><p>B+树就是为了解决回旋查找的问题，每个根节点出现过的元素都会在叶子节点出现一次（非叶子节点只存key，叶子节点还存了地址，用于在数据库中查找），最底下的叶子节点层直接指向了下一个节点，这样查询大于某个id的时候就可以先通过树找到对应的节点，然后通过链表一直往后查询要找的数据</p>
-<p><img src="images/loading.gif" data-original="https://s1.ax1x.com/2020/10/06/0U2ruT.png" alt=""></p>
+<p><img src="images/loading.gif" data-original="https://cdn.jsdelivr.net/gh/wjwABCDEFG/blog_img/img/20210717212111.png" alt=""></p>
 <p>最后贴上这个数据结构可视化网站，好像是旧金山大学的网站</p>
 <figure class="highlight http"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="attribute">https://www.cs.usfca.edu/~galles/visualization/Algorithms.html</span></span><br></pre></td></tr></table></figure>
 
@@ -232,19 +232,19 @@
 <br>
 
 <p>环境：1000条数据，表结构如下</p>
-<p><img src="images/loading.gif" data-original="https://s1.ax1x.com/2020/10/07/0dI7Os.png" alt=""></p>
+<p><img src="images/loading.gif" data-original="https://cdn.jsdelivr.net/gh/wjwABCDEFG/blog_img/img/20210717212127.png" alt=""></p>
 <h2 id="2-1-无索引效果"><a href="#2-1-无索引效果" class="headerlink" title="2.1 无索引效果"></a>2.1 无索引效果</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">SELECT SQL_NO_CACHE * FROM &#96;test_user&#96; WHERE phone &#x3D; &quot;13542831871&quot; AND lan_id &#x3D; 702 AND region_id &#x3D; 94</span><br></pre></td></tr></table></figure>
 
 <p>加上SQL_NO_CACHE指定不使用缓存，查询更接近真实值，当然我觉得还是有缓存的，第一次5s，第二次开始稳定在3.7s左右</p>
-<p><img src="images/loading.gif" data-original="https://s1.ax1x.com/2020/10/07/0douXd.png" alt=""></p>
+<p><img src="images/loading.gif" data-original="https://cdn.jsdelivr.net/gh/wjwABCDEFG/blog_img/img/20210717212136.png" alt=""></p>
 <p>解释执行，可以看到type为all，也就是没有使用索引，扫描了全表</p>
-<p><img src="images/loading.gif" data-original="https://s1.ax1x.com/2020/10/07/0doOud.png" alt=""></p>
+<p><img src="images/loading.gif" data-original="https://cdn.jsdelivr.net/gh/wjwABCDEFG/blog_img/img/20210717212143.png" alt=""></p>
 <br>
 
 <h2 id="2-2-有索引效果"><a href="#2-2-有索引效果" class="headerlink" title="2.2 有索引效果"></a>2.2 有索引效果</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ALTER TABLE &#96;test_user&#96; ADD INDEX idx_phone_lan_region(phone, lan_id, region_id)</span><br></pre></td></tr></table></figure>
 
 <p>随后再解释查询，第一次执行1.3s，随后稳定在0.03s，可以看到提升还是很大的</p>
-<p><img src="images/loading.gif" data-original="https://s1.ax1x.com/2020/10/07/0dTqiV.png" alt=""></p>
+<p><img src="images/loading.gif" data-original="https://cdn.jsdelivr.net/gh/wjwABCDEFG/blog_img/img/20210717212151.png" alt=""></p>
 <p>可以看到type为ref，代表使用了索引，key说明最终使用的索引名称，ref为const表示三个字段都用到了索引，rows为1表示共扫描1条。这就是最好的状态了，能用的索引都用上了，精准定位！</p>
 <br>
 
@@ -283,16 +283,16 @@
 
 <h2 id="3-2-计算字段后面的字段"><a href="#3-2-计算字段后面的字段" class="headerlink" title="3.2 计算字段后面的字段"></a>3.2 计算字段后面的字段</h2><p>计算字段：+、-、*、/、!=、&lt;、&gt;、is null、is not null、or</p>
 <p>先来看这个range，说明索引列+&gt;是可以用到range级别的索引的</p>
-<p><img src="images/loading.gif" data-original="https://s1.ax1x.com/2020/10/08/0wE9iV.png" alt=""></p>
+<p><img src="images/loading.gif" data-original="https://cdn.jsdelivr.net/gh/wjwABCDEFG/blog_img/img/20210717212203.png" alt=""></p>
 <p>接着把这个&gt;后面的region_id字段去掉</p>
-<p><img src="images/loading.gif" data-original="https://s1.ax1x.com/2020/10/08/0wECGT.png" alt=""></p>
+<p><img src="images/loading.gif" data-original="https://cdn.jsdelivr.net/gh/wjwABCDEFG/blog_img/img/20210717212208.png" alt=""></p>
 <p>这就说明实际上复合索引的最后一列region_id是没有被用到的，只用到了前两列。</p>
 <p>另外就是id + 1 = 1000改成id = 1000 - 1才能走索引</p>
 <br>
 
 <h2 id="3-3-类型转换"><a href="#3-3-类型转换" class="headerlink" title="3.3 类型转换"></a>3.3 类型转换</h2><p>id = “1”本来是数字，虽然也能查，但是索引失效（5.7之前不失效）</p>
 <p>都会显示如下</p>
-<p><img src="images/loading.gif" data-original="https://s1.ax1x.com/2020/10/08/0wkCT0.png" alt=""></p>
+<p><img src="images/loading.gif" data-original="https://cdn.jsdelivr.net/gh/wjwABCDEFG/blog_img/img/20210717212218.png" alt=""></p>
 <p>也就是看到查询phone字段说明可能会用到索引，但实际上用不到</p>
 <br>
 
@@ -300,11 +300,11 @@
 <br>
 
 <h2 id="3-5-like的失效和优化"><a href="#3-5-like的失效和优化" class="headerlink" title="3.5 like的失效和优化"></a>3.5 like的失效和优化</h2><p>like左边有%是用不到索引的</p>
-<p><img src="images/loading.gif" data-original="https://s1.ax1x.com/2020/10/08/00eSNn.png" alt=""></p>
+<p><img src="images/loading.gif" data-original="https://cdn.jsdelivr.net/gh/wjwABCDEFG/blog_img/img/20210717212228.png" alt=""></p>
 <p>只有右边有%可以用range级别的索引</p>
-<p><img src="images/loading.gif" data-original="https://s1.ax1x.com/2020/10/08/00eFjU.png" alt=""></p>
+<p><img src="images/loading.gif" data-original="https://cdn.jsdelivr.net/gh/wjwABCDEFG/blog_img/img/20210717212233.png" alt=""></p>
 <p>由于模糊搜索业务场景通常需要两边%，这时候如果只搜索这个字段，我们可以使用覆盖索引（前面介绍的index）优化，也就是select phone而不是select *，可以看到也是有索引的</p>
-<p><img src="images/loading.gif" data-original="https://s1.ax1x.com/2020/10/08/00e0v8.png" alt=""></p>
+<p><img src="images/loading.gif" data-original="https://cdn.jsdelivr.net/gh/wjwABCDEFG/blog_img/img/20210717212239.png" alt=""></p>
 <p>如果需要全部字段，根据本次的phone结果再搜索一次=，总体会比全表扫描快</p>
 <p>另一种优化方案是建立一个反向列，很不错的思路，可以参考这篇文章</p>
 <blockquote>
@@ -322,16 +322,16 @@
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ALTER TABLE &#96;test_user&#96; ADD INDEX idx_create_time(create_time)</span><br></pre></td></tr></table></figure>
 
 <p>查询时间5s+</p>
-<p><img src="images/loading.gif" data-original="https://s1.ax1x.com/2020/10/08/00MSSI.png" alt=""></p>
+<p><img src="images/loading.gif" data-original="https://cdn.jsdelivr.net/gh/wjwABCDEFG/blog_img/img/20210717212251.png" alt=""></p>
 <p>解释查询，可以看到type为all，另外要看extra列，using filesort说明使用了<strong>文件内排序</strong>：意思是它在内存中开辟了一个空间，将数据复制到内存里面，进行排序再返回，这是很恐怖的一件事情，浪费了大量的内存</p>
-<p><img src="images/loading.gif" data-original="https://s1.ax1x.com/2020/10/08/00MCOf.png" alt=""></p>
+<p><img src="images/loading.gif" data-original="https://cdn.jsdelivr.net/gh/wjwABCDEFG/blog_img/img/20210717212323.png" alt=""></p>
 <p>优化方案：使用覆盖索引select create_time</p>
-<p><img src="images/loading.gif" data-original="https://s1.ax1x.com/2020/10/08/00Qlvt.png" alt=""></p>
+<p><img src="images/loading.gif" data-original="https://cdn.jsdelivr.net/gh/wjwABCDEFG/blog_img/img/20210717212331.png" alt=""></p>
 <p>时间如下</p>
-<p><img src="images/loading.gif" data-original="https://s1.ax1x.com/2020/10/08/00QoqK.png" alt=""></p>
+<p><img src="images/loading.gif" data-original="https://cdn.jsdelivr.net/gh/wjwABCDEFG/blog_img/img/20210717212336.png" alt=""></p>
 <p>覆盖索引虽然速度提升明显，但是只查一列很难满足业务场景，如果结果为一条，那么还好，可以根据这一条再查一遍=，但是如果有多条，使用in不一定能带来很大的提升，时间和解释如下图</p>
-<p><img src="images/loading.gif" data-original="https://s1.ax1x.com/2020/10/08/00lhFg.png" alt=""></p>
-<p><img src="images/loading.gif" data-original="https://s1.ax1x.com/2020/10/08/00l4YQ.png" alt=""></p>
+<p><img src="images/loading.gif" data-original="https://cdn.jsdelivr.net/gh/wjwABCDEFG/blog_img/img/20210717212342.png" alt=""></p>
+<p><img src="images/loading.gif" data-original="https://cdn.jsdelivr.net/gh/wjwABCDEFG/blog_img/img/20210717212349.png" alt=""></p>
 <p>因此，不如读取到java中进行排序来的快</p>
 <br>
 
@@ -340,11 +340,11 @@
 <p>phone, lan_id</p>
 <p>phone</p>
 <p>我们试一下查询条件只有第一个和第三个</p>
-<p><img src="images/loading.gif" data-original="https://s1.ax1x.com/2020/10/07/0dHVhV.png" alt=""></p>
+<p><img src="images/loading.gif" data-original="https://cdn.jsdelivr.net/gh/wjwABCDEFG/blog_img/img/20210717212401.png" alt=""></p>
 <p>可以从type和key中看出，依然使用了这个复合索引，但是从ref看到破坏了最左匹配法则情况下，只有第一个字段phone使用了索引。时间的话由于结果都只有1条数据，所以相似，参考意义不大。</p>
 <p>可以简单的想象成几座连续的桥，只有过了第一座桥才能过第二座桥。当然知其然也要知其所以然，要知道究竟为什么还是得自己心里有B树( •̀ ω •́ )</p>
 <p>联合索引的树节点是这样的，data里面存了一个元组（三个就是三元组）</p>
-<p><img src="images/loading.gif" data-original="https://s1.ax1x.com/2020/10/08/0wipcj.png" alt=""></p>
+<p><img src="images/loading.gif" data-original="https://cdn.jsdelivr.net/gh/wjwABCDEFG/blog_img/img/20210717212408.png" alt=""></p>
 <p>因为在建树和查找的过程中需要比较大小（中文也支持），是按照索引的顺序来的：先比较第一个，第一个相同再比较第二个…以此类推，因此只有在前面的字段有序（能找到）的情况下后一个字段才有序（能找到），比如上图只有在字段a为1的情况下b才是有序的，总体看b是没有序的。因此这就是为什么出现最佳左前缀法则的根本原因。</p>
 <br>
 
@@ -362,11 +362,11 @@
 
 <h2 id="3-9-唯一索引和普通索引的选择"><a href="#3-9-唯一索引和普通索引的选择" class="headerlink" title="3.9 唯一索引和普通索引的选择"></a>3.9 唯一索引和普通索引的选择</h2><p>这里涉及到一个概念就是change buffer：</p>
 <p>MySQL查询的时候会将数据页加载进内存中，更新的话就可以直接更新内存中的数据，而不是直接刷写硬盘（这是最耗时的）。如果没查询，那么内存中没有数据，更新操作缓存在change buffer中，下次查询的时候再将数据页读入内存，然后执行change buffer中与这个页有关的操作，这个过程叫做merge。</p>
-<p><img src="images/loading.gif" data-original="https://s1.ax1x.com/2020/11/05/B2QCi8.png" alt="change buffer"></p>
+<p><img src="images/loading.gif" data-original="https://cdn.jsdelivr.net/gh/wjwABCDEFG/blog_img/img/20210717212416.png" alt="change buffer"></p>
 <p>唯一索引的劣势：需要进行唯一性检查，那么会读取数据页到内存，无法使用change buffer</p>
 <p>唯一索引的优势：因为是唯一的，查询的时候找到即可，不需要往右继续查是否相同</p>
 <p>综上所述</p>
-<p><img src="images/loading.gif" data-original="https://s1.ax1x.com/2020/11/05/B23aF0.png" alt="选择"></p>
+<p><img src="images/loading.gif" data-original="https://cdn.jsdelivr.net/gh/wjwABCDEFG/blog_img/img/20210717212421.png" alt="选择"></p>
 <br>
 
 <h2 id="3-10-索引下推"><a href="#3-10-索引下推" class="headerlink" title="3.10 索引下推"></a>3.10 索引下推</h2><p>5.6之后mysql自带的优化，看下面这个语句，假设建立了索引(name, size)</p>
@@ -441,7 +441,7 @@
                 <div>
                     
                     <figure class="image is-128x128 has-mb-6">
-                        <img class="is-rounded" src="images/loading.gif" data-original="https://s1.ax1x.com/2020/07/20/Ufuf4e.th.jpg" alt="wjwABCDEFG">
+                        <img class="is-rounded" src="images/loading.gif" data-original="https://cdn.jsdelivr.net/gh/wjwABCDEFG/blog_img/img/20210717231547.jpeg" alt="wjwABCDEFG">
                     </figure>
                     
                     <p class="is-size-4 is-block">
@@ -466,7 +466,7 @@
                     </p>
                     <a href="/archives">
                         <p class="title has-text-weight-normal">
-                            102
+                            101
                         </p>
                     </a>
                 </div>
@@ -478,7 +478,7 @@
                     </p>
                     <a href="/categories">
                         <p class="title has-text-weight-normal">
-                            15
+                            14
                         </p>
                     </a>
                 </div>
@@ -567,14 +567,6 @@
         <a class="level is-marginless" href="/categories/redis/">
             <span class="level-start">
                 <span class="level-item">redis</span>
-            </span>
-            <span class="level-end">
-                <span class="level-item tag">1</span>
-            </span>
-        </a></li><li>
-        <a class="level is-marginless" href="/categories/spring/">
-            <span class="level-start">
-                <span class="level-item">spring</span>
             </span>
             <span class="level-end">
                 <span class="level-item tag">1</span>
@@ -775,28 +767,9 @@
         
         <article class="media">
             
-            <a href="/spring/%E6%8C%81%E7%BB%AD%E6%9B%B4%E6%96%B0-%E8%AE%B0%E5%BD%95%E6%88%91%E7%9A%84%E6%AF%95%E8%AE%BE/" class="media-left">
-                <p class="image is-64x64">
-                    <img class="thumbnail" src="images/loading.gif" data-original="/images/thumbnail.svg" alt="持续更新-记录我的毕设">
-                </p>
-            </a>
-            
-            <div class="media-content">
-                <div class="content">
-                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2021-04-01T15:06:25.000Z">2021-04-01</time></div>
-                    <a href="/spring/%E6%8C%81%E7%BB%AD%E6%9B%B4%E6%96%B0-%E8%AE%B0%E5%BD%95%E6%88%91%E7%9A%84%E6%AF%95%E8%AE%BE/" class="title has-link-black-ter is-size-6 has-text-weight-normal">持续更新-记录我的毕设</a>
-                    <p class="is-size-7 is-uppercase">
-                        <a class="has-link-grey -link" href="/categories/spring/">spring</a>
-                    </p>
-                </div>
-            </div>
-        </article>
-        
-        <article class="media">
-            
             <a href="/life/%E4%B8%BA%E6%AF%95%E4%B8%9A%E5%81%9A%E5%87%86%E5%A4%87/" class="media-left">
                 <p class="image is-64x64">
-                    <img class="thumbnail" src="images/loading.gif" data-original="https://z3.ax1x.com/2021/04/01/cVlcoF.md.jpg" alt="为毕业做准备">
+                    <img class="thumbnail" src="images/loading.gif" data-original="https://cdn.jsdelivr.net/gh/wjwABCDEFG/blog_img/img/20210717225951.jpeg" alt="为毕业做准备">
                 </p>
             </a>
             
@@ -815,7 +788,7 @@
             
             <a href="/life/mhxy-experience/" class="media-left">
                 <p class="image is-64x64">
-                    <img class="thumbnail" src="images/loading.gif" data-original="https://z3.ax1x.com/2021/04/01/cVMuwD.md.png" alt="梦幻西游游戏体验">
+                    <img class="thumbnail" src="images/loading.gif" data-original="https://cdn.jsdelivr.net/gh/wjwABCDEFG/blog_img/img/20210717223725.png" alt="梦幻西游游戏体验">
                 </p>
             </a>
             
@@ -834,7 +807,7 @@
             
             <a href="/games/3DMath-Primerfor-Graphics-and-Game-Development-note/" class="media-left">
                 <p class="image is-64x64">
-                    <img class="thumbnail" src="images/loading.gif" data-original="https://source.acexy.cn/view/XgMS4U2" alt="3D数学基础图形与游戏研发笔记">
+                    <img class="thumbnail" src="images/loading.gif" data-original="https://cdn.jsdelivr.net/gh/wjwABCDEFG/blog_img/img/20210717223435.jpeg" alt="3D数学基础图形与游戏研发笔记">
                 </p>
             </a>
             
@@ -853,7 +826,26 @@
             
             <a href="/algorithms/get-equal-substrings-within-budget/" class="media-left">
                 <p class="image is-64x64">
-                    <img class="thumbnail" src="images/loading.gif" data-original="https://source.acexy.cn/view/Xd2g803" alt="1208-尽可能使字符串相等">
+                    <img class="thumbnail" src="images/loading.gif" data-original="https://cdn.jsdelivr.net/gh/wjwABCDEFG/blog_img/img/20210717223615.jpg" alt="1011-在D天内送达包裹的能力">
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2021-02-05T16:00:24.000Z">2021-02-06</time></div>
+                    <a href="/algorithms/get-equal-substrings-within-budget/" class="title has-link-black-ter is-size-6 has-text-weight-normal">1011-在D天内送达包裹的能力</a>
+                    <p class="is-size-7 is-uppercase">
+                        <a class="has-link-grey -link" href="/categories/algorithms/">数据结构和算法</a>
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+        <article class="media">
+            
+            <a href="/algorithms/get-equal-substrings-within-budget/" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="images/loading.gif" data-original="https://cdn.jsdelivr.net/gh/wjwABCDEFG/blog_img/img/20210717223234.jpg" alt="1208-尽可能使字符串相等">
                 </p>
             </a>
             
@@ -1004,28 +996,9 @@
         
         <article class="media">
             
-            <a href="/spring/%E6%8C%81%E7%BB%AD%E6%9B%B4%E6%96%B0-%E8%AE%B0%E5%BD%95%E6%88%91%E7%9A%84%E6%AF%95%E8%AE%BE/" class="media-left">
-                <p class="image is-64x64">
-                    <img class="thumbnail" src="images/loading.gif" data-original="/images/thumbnail.svg" alt="持续更新-记录我的毕设">
-                </p>
-            </a>
-            
-            <div class="media-content">
-                <div class="content">
-                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2021-04-01T15:06:25.000Z">2021-04-01</time></div>
-                    <a href="/spring/%E6%8C%81%E7%BB%AD%E6%9B%B4%E6%96%B0-%E8%AE%B0%E5%BD%95%E6%88%91%E7%9A%84%E6%AF%95%E8%AE%BE/" class="title has-link-black-ter is-size-6 has-text-weight-normal">持续更新-记录我的毕设</a>
-                    <p class="is-size-7 is-uppercase">
-                        <a class="has-link-grey -link" href="/categories/spring/">spring</a>
-                    </p>
-                </div>
-            </div>
-        </article>
-        
-        <article class="media">
-            
             <a href="/life/%E4%B8%BA%E6%AF%95%E4%B8%9A%E5%81%9A%E5%87%86%E5%A4%87/" class="media-left">
                 <p class="image is-64x64">
-                    <img class="thumbnail" src="images/loading.gif" data-original="https://z3.ax1x.com/2021/04/01/cVlcoF.md.jpg" alt="为毕业做准备">
+                    <img class="thumbnail" src="images/loading.gif" data-original="https://cdn.jsdelivr.net/gh/wjwABCDEFG/blog_img/img/20210717225951.jpeg" alt="为毕业做准备">
                 </p>
             </a>
             
@@ -1044,7 +1017,7 @@
             
             <a href="/life/mhxy-experience/" class="media-left">
                 <p class="image is-64x64">
-                    <img class="thumbnail" src="images/loading.gif" data-original="https://z3.ax1x.com/2021/04/01/cVMuwD.md.png" alt="梦幻西游游戏体验">
+                    <img class="thumbnail" src="images/loading.gif" data-original="https://cdn.jsdelivr.net/gh/wjwABCDEFG/blog_img/img/20210717223725.png" alt="梦幻西游游戏体验">
                 </p>
             </a>
             
@@ -1063,7 +1036,7 @@
             
             <a href="/games/3DMath-Primerfor-Graphics-and-Game-Development-note/" class="media-left">
                 <p class="image is-64x64">
-                    <img class="thumbnail" src="images/loading.gif" data-original="https://source.acexy.cn/view/XgMS4U2" alt="3D数学基础图形与游戏研发笔记">
+                    <img class="thumbnail" src="images/loading.gif" data-original="https://cdn.jsdelivr.net/gh/wjwABCDEFG/blog_img/img/20210717223435.jpeg" alt="3D数学基础图形与游戏研发笔记">
                 </p>
             </a>
             
@@ -1082,7 +1055,26 @@
             
             <a href="/algorithms/get-equal-substrings-within-budget/" class="media-left">
                 <p class="image is-64x64">
-                    <img class="thumbnail" src="images/loading.gif" data-original="https://source.acexy.cn/view/Xd2g803" alt="1208-尽可能使字符串相等">
+                    <img class="thumbnail" src="images/loading.gif" data-original="https://cdn.jsdelivr.net/gh/wjwABCDEFG/blog_img/img/20210717223615.jpg" alt="1011-在D天内送达包裹的能力">
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2021-02-05T16:00:24.000Z">2021-02-06</time></div>
+                    <a href="/algorithms/get-equal-substrings-within-budget/" class="title has-link-black-ter is-size-6 has-text-weight-normal">1011-在D天内送达包裹的能力</a>
+                    <p class="is-size-7 is-uppercase">
+                        <a class="has-link-grey -link" href="/categories/algorithms/">数据结构和算法</a>
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+        <article class="media">
+            
+            <a href="/algorithms/get-equal-substrings-within-budget/" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="images/loading.gif" data-original="https://cdn.jsdelivr.net/gh/wjwABCDEFG/blog_img/img/20210717223234.jpg" alt="1208-尽可能使字符串相等">
                 </p>
             </a>
             
@@ -1112,7 +1104,7 @@
             <div class="level-start has-text-centered-mobile">
                 <a class="footer-logo is-block has-mb-6" href="/">
                 
-                    <img src="images/loading.gif" data-original="/images/logo.png" alt="mysql索引" height="28">
+                    <img src="images/loading.gif" data-original="https://cdn.jsdelivr.net/gh/wjwABCDEFG/blog_img/img/20210717231246.png" alt="mysql索引" height="28">
                 
                 </a>
                 <p class="is-size-7">

@@ -17,13 +17,13 @@
 <meta property="og:site_name" content="小温 blog">
 <meta property="og:description" content="这是我2019-09-24在知乎上面写的文章，原文跳转点这里，今天面试java不知道为什么面试官感兴趣被提起，提起于是搬运到博客上，纯python实现，除numpy外无第三方库  前段时间数学建模我和我的小伙伴们划了个水，几个没有建模经验的小伙伴临时抱佛脚最后通了个宵，在此感谢我的队友们。抱佛脚的时候笔者对决策树起了兴趣（可惜没有用上），之前看过一点点理论相关的知识，但是没有自己实现过，这几天空">
 <meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="https://source.acexy.cn/view/XSeyLyr">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/wjwABCDEFG/blog_img/img/20210717205605.jpg">
 <meta property="article:published_time" content="2020-09-17T16:46:25.000Z">
-<meta property="article:modified_time" content="2020-12-07T03:14:47.679Z">
+<meta property="article:modified_time" content="2021-07-17T12:58:33.946Z">
 <meta property="article:author" content="wjw">
 <meta property="article:tag" content="DL&#x2F;ML">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="https://source.acexy.cn/view/XSeyLyr">
+<meta name="twitter:image" content="https://cdn.jsdelivr.net/gh/wjwABCDEFG/blog_img/img/20210717205605.jpg">
 
 
 
@@ -81,7 +81,7 @@
         <div class="navbar-brand is-flex-center">
             <a class="navbar-item navbar-logo" href="/">
             
-                <img src="images/loading.gif" data-original="/images/logo.png" alt="手把手从0实现一颗决策树" height="28">
+                <img src="images/loading.gif" data-original="https://cdn.jsdelivr.net/gh/wjwABCDEFG/blog_img/img/20210717231246.png" alt="手把手从0实现一颗决策树" height="28">
             
             </a>
         </div>
@@ -139,7 +139,7 @@
     
     <div class="card-image">
         <span  class="image is-7by1">
-            <img class="thumbnail" src="images/loading.gif" data-original="https://source.acexy.cn/view/XSeyLyr" alt="手把手从0实现一颗决策树">
+            <img class="thumbnail" src="images/loading.gif" data-original="https://cdn.jsdelivr.net/gh/wjwABCDEFG/blog_img/img/20210717205605.jpg" alt="手把手从0实现一颗决策树">
         </span>
     </div>
     
@@ -157,7 +157,7 @@
                 <span class="level-item has-text-grey">
                     
                     
-                    25 分钟 读完 (大约 3704 个字)
+                    24 分钟 读完 (大约 3649 个字)
                 </span>
                 
                 
@@ -186,16 +186,16 @@
 <p>现想象一个女孩的母亲要给这个女孩介绍男朋友，于是有了下面的对话：<br>女儿：多大年纪了？<br>母亲：26。<br>女儿：长的帅不帅？<br>母亲：挺帅的。<br>女儿：收入高不？<br>母亲：不算很高，中等情况。<br>女儿：是公务员不？<br>母亲：是，在税务局上班呢。<br>女儿：那好，我去见见。<br>这个女孩的决策过程就是典型的分类树决策。<br>（声明：此决策树纯属为了写文章而YY的产物，没有任何根据，也不代表任何女孩的择偶倾向，请各位女同胞莫质问我^_^）<br>例子取自<a href="https://link.zhihu.com/?target=https%3A//blog.csdn.net/mn_kw/article/details/79913786">https://blog.csdn.net/mn_kw/article/details/79913786</a></p>
 </blockquote>
 <p>假设现在有这么一张表，统计了一些人的择偶标准，称为训练样本</p>
-<p><img src="images/loading.gif" data-original="https://pic3.zhimg.com/80/v2-6be178cce7b631cf189a2fee1474ccf9_720w.jpg" alt="img"></p>
+<p><img src="images/loading.gif" data-original="https://cdn.jsdelivr.net/gh/wjwABCDEFG/blog_img/img/20210717205630.jpeg" alt="img"></p>
 <p>我们将要对其构建类似如下的判断分支结构，这就叫决策树。之后再有一组样本，我们就可以根据这棵树来判定嫁不嫁啦！</p>
-<p><img src="images/loading.gif" data-original="https://pic2.zhimg.com/80/v2-5befbdfe757628c05e4134b334d88b90_720w.jpg" alt="img"></p>
+<p><img src="images/loading.gif" data-original="https://cdn.jsdelivr.net/gh/wjwABCDEFG/blog_img/img/20210717205636.jpeg" alt="img"></p>
 <p>看到这里你肯定会有个疑问：为什么先判断高不高？难道真是传说中的一高遮百丑吗？</p>
-<p><img src="images/loading.gif" data-original="https://pic2.zhimg.com/80/v2-6213d8f45875717bc0e70020a7a91664_720w.jpg" alt="img"></p>
+<p><img src="images/loading.gif" data-original="https://cdn.jsdelivr.net/gh/wjwABCDEFG/blog_img/img/20210717205645.jpeg" alt="img"></p>
 <p>当然不是，我们可是有依据的！这个依据就叫做信息增益（Gain），公式如下，就是两个函数相减而已，看不懂也没关系，下面有例子说明。</p>
-<p><img src="images/loading.gif" data-original="https://pic4.zhimg.com/80/v2-d37e35ed4faf58e4949915ca347f4108_720w.jpg" alt="img">)H(x)叫香农熵，H(D|x)叫条件熵&lt;br&gt;就两个函数相减而已</p>
+<p><img src="images/loading.gif" data-original="https://cdn.jsdelivr.net/gh/wjwABCDEFG/blog_img/img/20210717205649.jpeg" alt="img">)H(x)叫香农熵，H(D|x)叫条件熵&lt;br&gt;就两个函数相减而已</p>
 <p>其中H(x)和H(Y|X)长下面这样</p>
-<p><img src="images/loading.gif" data-original="https://pic4.zhimg.com/80/v2-faf63c3d8398bbe9404b2b20ab338430_720w.jpg" alt="img">)p(x)是概率，比如矮占身高的</p>
-<p><img src="images/loading.gif" data-original="https://pic1.zhimg.com/80/v2-6cfc0af13122d31c5da09b5810095466_720w.jpg" alt="img">里面的H</p>
+<p><img src="images/loading.gif" data-original="https://cdn.jsdelivr.net/gh/wjwABCDEFG/blog_img/img/20210717205653.jpeg" alt="img">)p(x)是概率，比如矮占身高的</p>
+<p><img src="images/loading.gif" data-original="https://cdn.jsdelivr.net/gh/wjwABCDEFG/blog_img/img/20210717205657.jpeg" alt="img">里面的H</p>
 <blockquote>
 <p>如本例中:<br>一开始嫁的个数为6个，占1/2，那么信息熵H(X)为-1/2log1/2-1/2log1/2 = -log1/2=1<br>现在假如我知道了一个男生的身高信息。<br>身高有三个可能的取值{矮，中，高}<br>矮包括{1,2,3,5,6,11,12}，嫁的个数为1个，不嫁的个数为6个<br>中包括{8,9} ，嫁的个数为2个，不嫁的个数为0个<br>高包括{4,7,10}，嫁的个数为3个，不嫁的个数为0个<br>先回忆一下条件熵的公式如下：<br>我们先求出公式对应的:<br>H(Y|X = 矮) = -1/7log1/7-6/7log6/7=0.592<br>H(Y|X=中) = -1log1-0 = 0<br>H(Y|X=高） = -1log1-0=0<br>p(X = 矮) = 7/12,p(X =中) = 2/12,p(X=高) = 3/12<br>则可以得出条件熵为：<br>7/12<em>0.592+2/12</em>0+3/12*0 = 0.345<br>那么我们知道信息熵与条件熵相减就是我们的信息增益，为<br>1-0.345=0.655<br>所以我们可以得出我们在知道了身高这个信息之后，信息增益是0.655</p>
 <p>结论<br>我们可以知道，本来如果我对一个男生什么都不知道的话，作为他的女朋友决定是否嫁给他的不确定性有1.0这么大。<br>当我们知道男朋友的身高信息后，不确定度减少了0.655.也就是说，身高这个特征对于我们广大女生同学来说，决定嫁不嫁给自己的男朋友是很重要的。<br>至少我们知道了身高特征后，我们原来没有底的心里（1.0）已经明朗一半多了，减少0.655了（大于原来的一半了）。<br>那么这就类似于非诚勿扰节目里面的桥段了，请问女嘉宾，你只能知道男生的一个特征。请问你想知道哪个特征。<br>假如其它特征我也全算了，信息增益是身高这个特征最大。那么我就可以说，孟非哥哥，我想知道男嘉宾的一个特征是身高特征。因为它在这些特征中，对于我挑夫君是最重要的，信息增益是最大的，知道了这个特征，嫁与不嫁的不确定度减少的是最多的。<br>取自<a href="https://link.zhihu.com/?target=https%3A//blog.csdn.net/mn_kw/article/details/79913786">https://blog.csdn.net/mn_kw/article/details/79913786</a></p>
@@ -203,7 +203,7 @@
 <br>
 
 <h2 id="二-代码实现"><a href="#二-代码实现" class="headerlink" title="二.代码实现"></a>二.代码实现</h2><p>1.咱们先来构建我们的数据，我用的是python3(day1)</p>
-<p><img src="images/loading.gif" data-original="https://pic4.zhimg.com/80/v2-44491f2bd3c32a69cd24fdee33ef13db_720w.jpg" alt="img"></p>
+<p><img src="images/loading.gif" data-original="https://cdn.jsdelivr.net/gh/wjwABCDEFG/blog_img/img/20210717205707.jpeg" alt="img"></p>
 <p>表头</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">datas_header &#x3D; [&#39;是否帅&#39;, &#39;脾气是否好&#39;, &#39;是否高&#39;, &#39;是否上进&#39;, &#39;结果&#39;]</span><br></pre></td></tr></table></figure>
 
@@ -214,38 +214,38 @@
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">labels &#x3D; np.array([&#39;不嫁&#39;, &#39;不嫁&#39;, &#39;嫁&#39;, &#39;嫁&#39;, &#39;不嫁&#39;, &#39;不嫁&#39;, &#39;嫁&#39;, &#39;嫁&#39;, &#39;嫁&#39;, &#39;嫁&#39;, &#39;不嫁&#39;, &#39;不嫁&#39;])</span><br></pre></td></tr></table></figure>
 
 <p>2.明确代码流程，自顶向下设计，自底向上实现</p>
-<p><img src="images/loading.gif" data-original="https://picb.zhimg.com/80/v2-41a2aa789ee29fee402f1243ef994ebb_720w.jpg" alt="img"></p>
+<p><img src="images/loading.gif" data-original="https://cdn.jsdelivr.net/gh/wjwABCDEFG/blog_img/img/20210717205717.jpeg" alt="img"></p>
 <p>3.实现香农熵</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line">def get_shannon_entropy(labels: np.ndarray) -&gt; float:</span><br><span class="line">    &quot;&quot;&quot;</span><br><span class="line">    计算香农熵</span><br><span class="line">    即H(X)&#x3D;−∑(i&#x3D;1,n)pi * log2pi</span><br><span class="line">    :param labels: shape &#x3D; (n, )，n个标签</span><br><span class="line">    :return: float香农熵值</span><br><span class="line">    &quot;&quot;&quot;</span><br><span class="line">    num_labels &#x3D; len(labels)</span><br><span class="line">    labels_dic &#x3D; &#123;&#125;     # 考虑到labels不一定是数字，我们用字典来装</span><br><span class="line">    shannon_entropy &#x3D; 0</span><br><span class="line">    for label in labels:        # 统计各label个数，本例中最后labels_dic格式为&#123;&quot;嫁&quot;:6, &quot;不嫁&quot;:6&#125;</span><br><span class="line">        if label not in labels_dic.keys():</span><br><span class="line">            labels_dic[label] &#x3D; 0</span><br><span class="line">        labels_dic[label] +&#x3D; 1</span><br><span class="line"></span><br><span class="line">    for i in labels_dic.keys():</span><br><span class="line">        prob &#x3D; labels_dic[i] &#x2F; num_labels</span><br><span class="line">        shannon_entropy +&#x3D; - prob * np.log2(prob)</span><br><span class="line"></span><br><span class="line">    return shannon_entropy</span><br></pre></td></tr></table></figure>
 
-<p><img src="images/loading.gif" data-original="https://pic3.zhimg.com/80/v2-9841139af0c7060d702dafa48ab16104_720w.jpg" alt="img"></p>
+<p><img src="images/loading.gif" data-original="https://cdn.jsdelivr.net/gh/wjwABCDEFG/blog_img/img/20210717205741.jpeg" alt="img"></p>
 <p>4.实现条件熵(day2)</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line">def get_conditional_entropy(datas: np.ndarray, labels: np.ndarray) -&gt; float:</span><br><span class="line">    &quot;&quot;&quot;</span><br><span class="line">    接下来的条件熵</span><br><span class="line">    即H(Y|X)&#x3D;∑(i&#x3D;1,n)piH(Y|X&#x3D;xi)     H就是上面的香农熵呀！ Y就是嫁不嫁呀！ X就是当前的特征呀！</span><br><span class="line">    本例中其中一个特征举例：高中矮，则表现为</span><br><span class="line">    H(Y|X) &#x3D; p矮 * H(嫁|X &#x3D; 矮) + p中 * H(嫁|X &#x3D; 中) + p高 * H(嫁|X &#x3D; 高)</span><br><span class="line">    :param datas:某个特征下所有人的取值，例如[&#39;矮&#39;, &#39;矮&#39;, &#39;矮&#39;, &#39;高&#39;, &#39;矮&#39;, &#39;矮&#39;, &#39;高&#39;, &#39;中&#39;, &#39;中&#39;, &#39;高&#39;, &#39;矮&#39;, &#39;矮&#39;]</span><br><span class="line">    :param labels:该特征下嫁或不嫁的结果，例如[&#39;不嫁&#39;, &#39;不嫁&#39;, &#39;嫁&#39;, &#39;嫁&#39;, &#39;不嫁&#39;, &#39;不嫁&#39;, &#39;嫁&#39;, &#39;嫁&#39;, &#39;嫁&#39;, &#39;嫁&#39;, &#39;不嫁&#39;, &#39;不嫁&#39;]</span><br><span class="line">    :return:</span><br><span class="line">    &quot;&quot;&quot;</span><br><span class="line">    num_data &#x3D; len(datas)</span><br><span class="line">    conditional_entropy &#x3D; 0</span><br><span class="line">    num_class &#x3D; &#123;&#125;    # 先得知道身高特征分成了几类（高中矮3类）,每类占多少</span><br><span class="line">    for class_val in datas:     # for循环完后结果为num_class &#x3D; &#123;&quot;矮&quot;: 7, &quot;中&quot;: 2, &quot;高&quot;: 3&#125;</span><br><span class="line">        if class_val not in num_class.keys():</span><br><span class="line">            num_class[class_val] &#x3D; 0</span><br><span class="line">        num_class[class_val] +&#x3D; 1</span><br><span class="line"></span><br><span class="line">    for i in num_class.keys():</span><br><span class="line">        prob &#x3D; num_class[i] &#x2F; num_data</span><br><span class="line">        index &#x3D; np.argwhere(datas &#x3D;&#x3D; i).squeeze()  # 以下两句获得datas中&#39;矮&#39;的下标并找出每个&#39;矮&#39;对应的labels值</span><br><span class="line">        # print(index.shape)</span><br><span class="line">        if index.shape !&#x3D; ():          # 这里如果不这么处理会出问题，就是index只有一个数的情况,index &#x3D; 2，type显示ndarray没有问题，shape却显示()而不是(1,)</span><br><span class="line">            i_labels &#x3D; labels[index]    # 造成这句的结果居然是i_labels &#x3D; &#39;no&#39; 而不是[&#39;no&#39;],于是在后面遍历的时候变成了&#39;n&#39;和&#39;o&#39;，这不是我们想要的</span><br><span class="line">        else:</span><br><span class="line">            i_labels &#x3D; list([])               # 通过先限定i_labels的类型，使用append的方式添加，这时候i_labels就会是想要的[&#39;no&#39;],后面遍历的时候就是遍历数组中的这一个元素</span><br><span class="line">            i_labels.append(labels[index])</span><br><span class="line">        conditional_entropy +&#x3D; prob * get_shannon_entropy(i_labels)</span><br><span class="line">    return conditional_entropy</span><br></pre></td></tr></table></figure>
 
-<p><img src="images/loading.gif" data-original="https://pic3.zhimg.com/80/v2-a585847ebbd678b9ffff3632bfd8f216_720w.png" alt="img"></p>
+<p><img src="images/loading.gif" data-original="https://cdn.jsdelivr.net/gh/wjwABCDEFG/blog_img/img/20210717205746.png" alt="img"></p>
 <p>5.获得最佳信息增益gain值和对应特征</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">def get_best_gain(datas: np.ndarray, labels: np.ndarray) -&gt; (float, float):</span><br><span class="line">    &quot;&quot;&quot;</span><br><span class="line">    计算信息增益，并找出最佳的信息增益值，作为当前最佳的划分依据</span><br><span class="line">    即g(D,X)&#x3D;H(D)−H(D|X)     H就是香农熵呀！ H(D|X)就是信息熵呀！</span><br><span class="line">    best_gain &#x3D; max(g(D,X))</span><br><span class="line">    :param datas: shape(n, m) n条数据，m种特征</span><br><span class="line">    :param labels: shape &#x3D; (n, )，n个标签</span><br><span class="line">    :return:返回最佳特征和对应的gain值</span><br><span class="line">    &quot;&quot;&quot;</span><br><span class="line">    best_gain &#x3D; 0</span><br><span class="line">    best_feature &#x3D; -1</span><br><span class="line">    (num_data, num_feature) &#x3D; datas.shape</span><br><span class="line">    for feature in range(num_feature):    #遍历每个特征，找出到底谁的信息增益值最大</span><br><span class="line">        current_data &#x3D; datas[:, feature]</span><br><span class="line">        gain &#x3D; get_shannon_entropy(labels) - get_conditional_entropy(current_data, labels)     # 公式</span><br><span class="line">        if gain &gt; best_gain:</span><br><span class="line">            best_gain &#x3D; gain</span><br><span class="line">            best_feature &#x3D; feature</span><br><span class="line">    return best_feature, best_gain</span><br></pre></td></tr></table></figure>
 
-<p><img src="images/loading.gif" data-original="https://pic4.zhimg.com/80/v2-9f81375f56ddd49c73c0fcb8329db8fb_720w.jpg" alt="img"></p>
+<p><img src="images/loading.gif" data-original="https://cdn.jsdelivr.net/gh/wjwABCDEFG/blog_img/img/20210717205754.jpeg" alt="img"></p>
 <p>6.建树(day3)</p>
 <p>由于要建树，树型结构就需要建立起来，本来也打算存在数据结构中，但是就在这时候看到了csdn上一篇博客里的树是这样用字典来保存</p>
-<p><img src="images/loading.gif" data-original="https://pic1.zhimg.com/80/v2-5dacb063f27c025090e292407e4af852_720w.png" alt="img">博客地址<a href="https://blog.csdn.net/hongbin_xu/article/details/78516114">https://blog.csdn.net/hongbin_xu/article/details/78516114</a></p>
+<p><img src="images/loading.gif" data-original="https://cdn.jsdelivr.net/gh/wjwABCDEFG/blog_img/img/20210717205758.png" alt="img">博客地址<a href="https://blog.csdn.net/hongbin_xu/article/details/78516114">https://blog.csdn.net/hongbin_xu/article/details/78516114</a></p>
 <p>我的天！！！惊到我了，学！用字典建树</p>
 <iframe frameborder="0" allowfullscreen="" src="https://www.zhihu.com/video/1159917336533549056?autoplay=false&amp;useMSE=" style="display: block; width: 688px; height: 387px;"></iframe>
 
 <p>输入数据变化过程</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br></pre></td><td class="code"><pre><span class="line">def create_tree(datas_header: list, datas: np.ndarray, labels: np.ndarray) -&gt; dict:</span><br><span class="line">    &quot;&quot;&quot;</span><br><span class="line">    get_best_gain()是给一组datas,labels计算一次最佳划分特征</span><br><span class="line">    要构建一棵决策树，那必须要在划分完剩下的数据集继续划分(递归过程)，直到以下情况出现：</span><br><span class="line">    1.剩下全部结果都是相同的，那么直接作为结果。</span><br><span class="line">      如在本例中，假如最佳分组为帅或者不帅，帅对应的labels全部为嫁，则不用继续讨论后面的分组。同理，如果不帅中既有嫁和不嫁，那么需要继续递归</span><br><span class="line">    2.遍历完了所有特征，但是还是无法得到唯一标签，则少数服从多数。</span><br><span class="line">      假如在本例中，遍历到最后一组特征：是否上进，但上进的组里还是有嫁或者不嫁两种标签，且较多为嫁，那就让她嫁</span><br><span class="line">    :param datas_header:</span><br><span class="line">    :param datas:</span><br><span class="line">    :param labels:</span><br><span class="line">    :return:</span><br><span class="line">    &quot;&quot;&quot;</span><br><span class="line">    # 结束条件1</span><br><span class="line">    if list(labels).count(labels[0]) &#x3D;&#x3D; len(labels):</span><br><span class="line">        return labels[0]</span><br><span class="line">    # 结束条件2</span><br><span class="line">    if len(datas) &#x3D;&#x3D; 0 and len(set(labels)) &gt; 1:</span><br><span class="line">        result_num &#x3D; &#123;&#125;</span><br><span class="line">        for result in labels:</span><br><span class="line">            if result not in result_num.keys():</span><br><span class="line">                result_num[result] &#x3D; 0</span><br><span class="line">            result_num[result] +&#x3D; 1</span><br><span class="line">        more &#x3D; -1</span><br><span class="line">        decide &#x3D; &#39;&#39;</span><br><span class="line">        for result, num in result_num.items():</span><br><span class="line">            if num &gt; more:</span><br><span class="line">                more &#x3D; num</span><br><span class="line">                decide &#x3D; result</span><br><span class="line">        return decide</span><br><span class="line"></span><br><span class="line">    cur_best_feature_num, _ &#x3D; get_best_gain(datas, labels)</span><br><span class="line">    cur_best_feature_name &#x3D; datas_header[cur_best_feature_num]</span><br><span class="line"></span><br><span class="line">    # 首先知道该特征下有什么值      本例中class_val &#x3D; &#123;&#39;帅&#39;， &#39;不帅&#39;&#125;</span><br><span class="line">    class_val &#x3D; set([data[cur_best_feature_num] for data in datas])</span><br><span class="line">    trees &#x3D; &#123;cur_best_feature_name: &#123;&#125;&#125;</span><br><span class="line">    for val in class_val:   # 逐一找出每个特征值的数据      本例中表现为含&#39;帅&#39;&#x2F;&#39;不帅&#39;的数据</span><br><span class="line">        new_datas &#x3D; [datas[i] for i in range(len(datas)) if datas[i, cur_best_feature_num] &#x3D;&#x3D; val]    # 用列表生成式，读作:遍历datas每行，找到每行的&#39;是否帅&#39;特征下值为&#39;帅&#39;的行，返回该行</span><br><span class="line">        new_labels &#x3D; [labels[i] for i in range(len(datas)) if datas[i, cur_best_feature_num] &#x3D;&#x3D; val]</span><br><span class="line"></span><br><span class="line">        new_datas &#x3D; np.delete(new_datas, cur_best_feature_num, axis&#x3D;1)     # 删除最佳列，准备进入下一个划分依据，即删掉</span><br><span class="line">        new_datas_header &#x3D; np.delete(datas_header, cur_best_feature_num)</span><br><span class="line">        # 递归:去掉该行该列再丢进</span><br><span class="line">        trees[cur_best_feature_name][val] &#x3D; create_tree(list(new_datas_header), new_datas, np.array(new_labels))</span><br><span class="line">    return trees</span><br></pre></td></tr></table></figure>
 
-<p><img src="images/loading.gif" data-original="https://pic4.zhimg.com/80/v2-2649279000dd3cc412d6228e890fb1fb_720w.png" alt="img"></p>
+<p><img src="images/loading.gif" data-original="https://cdn.jsdelivr.net/gh/wjwABCDEFG/blog_img/img/20210717205810.png" alt="img"></p>
 <p>7.预测，树建完了，预测时我们就要递归遍历字典(day4)</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">def predict_result(trees_model: dict, input_data: np, datas_header: list) -&gt; str:</span><br><span class="line">    &quot;&quot;&quot;</span><br><span class="line">    1.找字典中的第一个划分特征      本例中是&#39;是否高&#39;</span><br><span class="line">    2.在datas_header中找到高是第几个特征       本例中是第2个特征</span><br><span class="line">    3.在input_data中找到这个特征对应的值        比如要预测的数据中是否高（第二个特征）取值为矮</span><br><span class="line">    4.找到字典中的&#39;矮&#39;的值，如果为str(嫁不嫁)，则直接返回结果，如果是字典，则进行下一个节点预测（递归）</span><br><span class="line">    :param trees_model:</span><br><span class="line">    :param input_data:</span><br><span class="line">    :param datas_header:</span><br><span class="line">    :return:</span><br><span class="line">    &quot;&quot;&quot;</span><br><span class="line">    cur_judge &#x3D; list(trees_model.keys())[0]     # &#39;是否高&#39;</span><br><span class="line">    num_feature &#x3D; datas_header.index(cur_judge)     # 本例中是第2个特征</span><br><span class="line">    cur_val &#x3D; input_data[num_feature]       # 比如要预测的数据中是否高（第二个特征）取值为矮</span><br><span class="line">    cur_tree &#x3D; trees_model[cur_judge]</span><br><span class="line">    # print(type(cur_tree[cur_val]))</span><br><span class="line">    if type(cur_tree[cur_val]) &#x3D;&#x3D; np.str_:</span><br><span class="line">        return cur_tree[cur_val]</span><br><span class="line">    return predict_result(cur_tree[cur_val], input_data, datas_header)</span><br></pre></td></tr></table></figure>
 
-<p><img src="images/loading.gif" data-original="https://pic3.zhimg.com/80/v2-759cc263a29b9eaa1be3155462b17dd3_720w.jpg" alt="img"></p>
+<p><img src="images/loading.gif" data-original="https://cdn.jsdelivr.net/gh/wjwABCDEFG/blog_img/img/20210717205817.jpeg" alt="img"></p>
 <p>8.保存和读取模型文件</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"># 保存和读取函数</span><br><span class="line">def store_tree(input_tree, filename):</span><br><span class="line">    import pickle</span><br><span class="line">    with open(filename, &#39;wb&#39;) as f:</span><br><span class="line">        pickle.dump(input_tree, f)</span><br><span class="line">        f.close()</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">def restore_tree(filename):</span><br><span class="line">    import pickle</span><br><span class="line">    with open(filename, &#39;rb&#39;) as f:</span><br><span class="line">        return pickle.load(f)</span><br></pre></td></tr></table></figure>
 
 <p>通过这棵树，我们就知道，<strong>帅与否并不是影响你勾搭小姐姐主要的因素</strong>，这给了作者足够的自信，好了，我去勾搭小姐姐啦！</p>
-<p><img src="images/loading.gif" data-original="https://pic2.zhimg.com/80/v2-35021d8c7da2fcc2f6791f31962c4aaf_720w.png" alt="img"></p>
+<p><img src="images/loading.gif" data-original="https://cdn.jsdelivr.net/gh/wjwABCDEFG/blog_img/img/20210717205822.png" alt="img"></p>
 <p>代码已上传github，地址为<a href="https://link.zhihu.com/?target=https%3A//github.com/wjwABCDEFG/wjw-DecisionTree">https://github.com/wjwABCDEFG/wjw-DecisionTree</a></p>
 <p>百度网盘地址为<a href="https://link.zhihu.com/?target=https%3A//pan.baidu.com/s/18O1OpU1hPfHdoAh_qVF1-Q">https://pan.baidu.com/s/18O1OpU1hPfHdoAh_qVF1-Q</a>提取码7qdv</p>
 <p>零零散散耗时4天，写文章又需要琢磨，感觉说的还不是很清楚，有不懂的可以交流，打算以后有空就实现一些简单的机器学习模型，代码菜鸟，风格不太好，多多包涵，如有错误，欢迎指正。</p>
@@ -308,7 +308,7 @@
                 <div>
                     
                     <figure class="image is-128x128 has-mb-6">
-                        <img class="is-rounded" src="images/loading.gif" data-original="https://s1.ax1x.com/2020/07/20/Ufuf4e.th.jpg" alt="wjwABCDEFG">
+                        <img class="is-rounded" src="images/loading.gif" data-original="https://cdn.jsdelivr.net/gh/wjwABCDEFG/blog_img/img/20210717231547.jpeg" alt="wjwABCDEFG">
                     </figure>
                     
                     <p class="is-size-4 is-block">
@@ -333,7 +333,7 @@
                     </p>
                     <a href="/archives">
                         <p class="title has-text-weight-normal">
-                            102
+                            101
                         </p>
                     </a>
                 </div>
@@ -345,7 +345,7 @@
                     </p>
                     <a href="/categories">
                         <p class="title has-text-weight-normal">
-                            15
+                            14
                         </p>
                     </a>
                 </div>
@@ -434,14 +434,6 @@
         <a class="level is-marginless" href="/categories/redis/">
             <span class="level-start">
                 <span class="level-item">redis</span>
-            </span>
-            <span class="level-end">
-                <span class="level-item tag">1</span>
-            </span>
-        </a></li><li>
-        <a class="level is-marginless" href="/categories/spring/">
-            <span class="level-start">
-                <span class="level-item">spring</span>
             </span>
             <span class="level-end">
                 <span class="level-item tag">1</span>
@@ -552,28 +544,9 @@
         
         <article class="media">
             
-            <a href="/spring/%E6%8C%81%E7%BB%AD%E6%9B%B4%E6%96%B0-%E8%AE%B0%E5%BD%95%E6%88%91%E7%9A%84%E6%AF%95%E8%AE%BE/" class="media-left">
-                <p class="image is-64x64">
-                    <img class="thumbnail" src="images/loading.gif" data-original="/images/thumbnail.svg" alt="持续更新-记录我的毕设">
-                </p>
-            </a>
-            
-            <div class="media-content">
-                <div class="content">
-                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2021-04-01T15:06:25.000Z">2021-04-01</time></div>
-                    <a href="/spring/%E6%8C%81%E7%BB%AD%E6%9B%B4%E6%96%B0-%E8%AE%B0%E5%BD%95%E6%88%91%E7%9A%84%E6%AF%95%E8%AE%BE/" class="title has-link-black-ter is-size-6 has-text-weight-normal">持续更新-记录我的毕设</a>
-                    <p class="is-size-7 is-uppercase">
-                        <a class="has-link-grey -link" href="/categories/spring/">spring</a>
-                    </p>
-                </div>
-            </div>
-        </article>
-        
-        <article class="media">
-            
             <a href="/life/%E4%B8%BA%E6%AF%95%E4%B8%9A%E5%81%9A%E5%87%86%E5%A4%87/" class="media-left">
                 <p class="image is-64x64">
-                    <img class="thumbnail" src="images/loading.gif" data-original="https://z3.ax1x.com/2021/04/01/cVlcoF.md.jpg" alt="为毕业做准备">
+                    <img class="thumbnail" src="images/loading.gif" data-original="https://cdn.jsdelivr.net/gh/wjwABCDEFG/blog_img/img/20210717225951.jpeg" alt="为毕业做准备">
                 </p>
             </a>
             
@@ -592,7 +565,7 @@
             
             <a href="/life/mhxy-experience/" class="media-left">
                 <p class="image is-64x64">
-                    <img class="thumbnail" src="images/loading.gif" data-original="https://z3.ax1x.com/2021/04/01/cVMuwD.md.png" alt="梦幻西游游戏体验">
+                    <img class="thumbnail" src="images/loading.gif" data-original="https://cdn.jsdelivr.net/gh/wjwABCDEFG/blog_img/img/20210717223725.png" alt="梦幻西游游戏体验">
                 </p>
             </a>
             
@@ -611,7 +584,7 @@
             
             <a href="/games/3DMath-Primerfor-Graphics-and-Game-Development-note/" class="media-left">
                 <p class="image is-64x64">
-                    <img class="thumbnail" src="images/loading.gif" data-original="https://source.acexy.cn/view/XgMS4U2" alt="3D数学基础图形与游戏研发笔记">
+                    <img class="thumbnail" src="images/loading.gif" data-original="https://cdn.jsdelivr.net/gh/wjwABCDEFG/blog_img/img/20210717223435.jpeg" alt="3D数学基础图形与游戏研发笔记">
                 </p>
             </a>
             
@@ -630,7 +603,26 @@
             
             <a href="/algorithms/get-equal-substrings-within-budget/" class="media-left">
                 <p class="image is-64x64">
-                    <img class="thumbnail" src="images/loading.gif" data-original="https://source.acexy.cn/view/Xd2g803" alt="1208-尽可能使字符串相等">
+                    <img class="thumbnail" src="images/loading.gif" data-original="https://cdn.jsdelivr.net/gh/wjwABCDEFG/blog_img/img/20210717223615.jpg" alt="1011-在D天内送达包裹的能力">
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2021-02-05T16:00:24.000Z">2021-02-06</time></div>
+                    <a href="/algorithms/get-equal-substrings-within-budget/" class="title has-link-black-ter is-size-6 has-text-weight-normal">1011-在D天内送达包裹的能力</a>
+                    <p class="is-size-7 is-uppercase">
+                        <a class="has-link-grey -link" href="/categories/algorithms/">数据结构和算法</a>
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+        <article class="media">
+            
+            <a href="/algorithms/get-equal-substrings-within-budget/" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="images/loading.gif" data-original="https://cdn.jsdelivr.net/gh/wjwABCDEFG/blog_img/img/20210717223234.jpg" alt="1208-尽可能使字符串相等">
                 </p>
             </a>
             
@@ -691,28 +683,9 @@
         
         <article class="media">
             
-            <a href="/spring/%E6%8C%81%E7%BB%AD%E6%9B%B4%E6%96%B0-%E8%AE%B0%E5%BD%95%E6%88%91%E7%9A%84%E6%AF%95%E8%AE%BE/" class="media-left">
-                <p class="image is-64x64">
-                    <img class="thumbnail" src="images/loading.gif" data-original="/images/thumbnail.svg" alt="持续更新-记录我的毕设">
-                </p>
-            </a>
-            
-            <div class="media-content">
-                <div class="content">
-                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2021-04-01T15:06:25.000Z">2021-04-01</time></div>
-                    <a href="/spring/%E6%8C%81%E7%BB%AD%E6%9B%B4%E6%96%B0-%E8%AE%B0%E5%BD%95%E6%88%91%E7%9A%84%E6%AF%95%E8%AE%BE/" class="title has-link-black-ter is-size-6 has-text-weight-normal">持续更新-记录我的毕设</a>
-                    <p class="is-size-7 is-uppercase">
-                        <a class="has-link-grey -link" href="/categories/spring/">spring</a>
-                    </p>
-                </div>
-            </div>
-        </article>
-        
-        <article class="media">
-            
             <a href="/life/%E4%B8%BA%E6%AF%95%E4%B8%9A%E5%81%9A%E5%87%86%E5%A4%87/" class="media-left">
                 <p class="image is-64x64">
-                    <img class="thumbnail" src="images/loading.gif" data-original="https://z3.ax1x.com/2021/04/01/cVlcoF.md.jpg" alt="为毕业做准备">
+                    <img class="thumbnail" src="images/loading.gif" data-original="https://cdn.jsdelivr.net/gh/wjwABCDEFG/blog_img/img/20210717225951.jpeg" alt="为毕业做准备">
                 </p>
             </a>
             
@@ -731,7 +704,7 @@
             
             <a href="/life/mhxy-experience/" class="media-left">
                 <p class="image is-64x64">
-                    <img class="thumbnail" src="images/loading.gif" data-original="https://z3.ax1x.com/2021/04/01/cVMuwD.md.png" alt="梦幻西游游戏体验">
+                    <img class="thumbnail" src="images/loading.gif" data-original="https://cdn.jsdelivr.net/gh/wjwABCDEFG/blog_img/img/20210717223725.png" alt="梦幻西游游戏体验">
                 </p>
             </a>
             
@@ -750,7 +723,7 @@
             
             <a href="/games/3DMath-Primerfor-Graphics-and-Game-Development-note/" class="media-left">
                 <p class="image is-64x64">
-                    <img class="thumbnail" src="images/loading.gif" data-original="https://source.acexy.cn/view/XgMS4U2" alt="3D数学基础图形与游戏研发笔记">
+                    <img class="thumbnail" src="images/loading.gif" data-original="https://cdn.jsdelivr.net/gh/wjwABCDEFG/blog_img/img/20210717223435.jpeg" alt="3D数学基础图形与游戏研发笔记">
                 </p>
             </a>
             
@@ -769,7 +742,26 @@
             
             <a href="/algorithms/get-equal-substrings-within-budget/" class="media-left">
                 <p class="image is-64x64">
-                    <img class="thumbnail" src="images/loading.gif" data-original="https://source.acexy.cn/view/Xd2g803" alt="1208-尽可能使字符串相等">
+                    <img class="thumbnail" src="images/loading.gif" data-original="https://cdn.jsdelivr.net/gh/wjwABCDEFG/blog_img/img/20210717223615.jpg" alt="1011-在D天内送达包裹的能力">
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2021-02-05T16:00:24.000Z">2021-02-06</time></div>
+                    <a href="/algorithms/get-equal-substrings-within-budget/" class="title has-link-black-ter is-size-6 has-text-weight-normal">1011-在D天内送达包裹的能力</a>
+                    <p class="is-size-7 is-uppercase">
+                        <a class="has-link-grey -link" href="/categories/algorithms/">数据结构和算法</a>
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+        <article class="media">
+            
+            <a href="/algorithms/get-equal-substrings-within-budget/" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="images/loading.gif" data-original="https://cdn.jsdelivr.net/gh/wjwABCDEFG/blog_img/img/20210717223234.jpg" alt="1208-尽可能使字符串相等">
                 </p>
             </a>
             
@@ -799,7 +791,7 @@
             <div class="level-start has-text-centered-mobile">
                 <a class="footer-logo is-block has-mb-6" href="/">
                 
-                    <img src="images/loading.gif" data-original="/images/logo.png" alt="手把手从0实现一颗决策树" height="28">
+                    <img src="images/loading.gif" data-original="https://cdn.jsdelivr.net/gh/wjwABCDEFG/blog_img/img/20210717231246.png" alt="手把手从0实现一颗决策树" height="28">
                 
                 </a>
                 <p class="is-size-7">

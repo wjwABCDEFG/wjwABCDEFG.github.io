@@ -17,12 +17,12 @@
 <meta property="og:site_name" content="小温 blog">
 <meta property="og:description" content="引言本文将介绍synchronized，cas等概念">
 <meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="https://b1.sbimg.org/file/chevereto-jia/2020/11/24/Q01F6.md.jpg">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/wjwABCDEFG/blog_img/img/20210717215850.jpg">
 <meta property="article:published_time" content="2020-11-24T08:46:37.000Z">
-<meta property="article:modified_time" content="2020-12-20T16:50:07.665Z">
+<meta property="article:modified_time" content="2021-07-17T14:00:31.357Z">
 <meta property="article:author" content="wjw">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="https://b1.sbimg.org/file/chevereto-jia/2020/11/24/Q01F6.md.jpg">
+<meta name="twitter:image" content="https://cdn.jsdelivr.net/gh/wjwABCDEFG/blog_img/img/20210717215850.jpg">
 
 
 
@@ -80,7 +80,7 @@
         <div class="navbar-brand is-flex-center">
             <a class="navbar-item navbar-logo" href="/">
             
-                <img src="images/loading.gif" data-original="/images/logo.png" alt="锁和同步" height="28">
+                <img src="images/loading.gif" data-original="https://cdn.jsdelivr.net/gh/wjwABCDEFG/blog_img/img/20210717231246.png" alt="锁和同步" height="28">
             
             </a>
         </div>
@@ -138,7 +138,7 @@
     
     <div class="card-image">
         <span  class="image is-7by1">
-            <img class="thumbnail" src="images/loading.gif" data-original="https://b1.sbimg.org/file/chevereto-jia/2020/11/24/Q01F6.md.jpg" alt="锁和同步">
+            <img class="thumbnail" src="images/loading.gif" data-original="https://cdn.jsdelivr.net/gh/wjwABCDEFG/blog_img/img/20210717215850.jpg" alt="锁和同步">
         </span>
     </div>
     
@@ -156,7 +156,7 @@
                 <span class="level-item has-text-grey">
                     
                     
-                    20 分钟 读完 (大约 2947 个字)
+                    20 分钟 读完 (大约 2975 个字)
                 </span>
                 
                 
@@ -198,14 +198,14 @@
 
 <p>在多线程下每调用一次fun，锁对象o其实都new了，不是同一个，所以是起不到同步作用的，可以跑跑看，这里设置的线程数和量都比较大，不然不明显</p>
 <p>一个是最终的结果其实是不对的</p>
-<p><img src="images/loading.gif" data-original="https://s3.ax1x.com/2020/11/21/D1YViR.png" alt=""></p>
+<p><img src="images/loading.gif" data-original="https://cdn.jsdelivr.net/gh/wjwABCDEFG/blog_img/img/20210717215903.png" alt=""></p>
 <p>还有一个是过程可以看到其实线程之间很多时候是穿插执行的</p>
-<p><img src="images/loading.gif" data-original="https://s3.ax1x.com/2020/11/21/D1YYWt.png" alt=""></p>
+<p><img src="images/loading.gif" data-original="https://cdn.jsdelivr.net/gh/wjwABCDEFG/blog_img/img/20210717215909.png" alt=""></p>
 <p>所以正确的写法应当将锁对象o放在类中，通常将锁对象用final修饰(加不加都行，只是说一般都会加)，或者在main里面传过去，不管怎样，只要保证同一把锁就行</p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">TestSynchronized</span></span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">final</span> Object o = <span class="keyword">new</span> Object();    <span class="comment">//将锁对象放在类上</span></span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">int</span> num = <span class="number">0</span>;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">fun</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">synchronized</span>(o)&#123;</span><br><span class="line">            <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; <span class="number">1000</span>; i++) &#123;</span><br><span class="line">                System.out.println(Thread.currentThread().getName() + <span class="string">" : "</span> + num++);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
 <p>结果如下图，可以看到结果是对的，且线程之间都是间隔的，这才是真正做到了同步</p>
-<p><img src="images/loading.gif" data-original="https://s3.ax1x.com/2020/11/21/D1tIu8.png" alt=""></p>
+<p><img src="images/loading.gif" data-original="https://cdn.jsdelivr.net/gh/wjwABCDEFG/blog_img/img/20210717215915.png" alt=""></p>
 <p>再比如同时有一个synchronized静态方法，和synchronized方法，也是不同的锁，并没有锁住整个类这个说法，只是将这个类的class对象作为了锁对象！！！</p>
 <blockquote>
 <p>参考</p>
@@ -253,9 +253,9 @@
 
 <h2 id="2-3-CAS修改值的原子性"><a href="#2-3-CAS修改值的原子性" class="headerlink" title="2.3 CAS修改值的原子性"></a>2.3 CAS修改值的原子性</h2><p>也就是判断完还是原来的值以后，要写回，这一步要保证是原子性。比如两个线程都是将0进行++，如果这里没有保证原子性，也就是没有任何同步手段，可能两个线程判断完原值0然后++，结果为1而不是2。那这一步是如何保证原子性的呢</p>
 <p>我们下载open jdk的源码，可以找到刚刚那个native的名字相同的对应cpp文件unsafe.cpp，找到对应方法Unsafe_CompareAndSwapInt()</p>
-<p><img src="images/loading.gif" data-original="https://s3.ax1x.com/2020/11/22/D8NhGj.png" alt=""></p>
+<p><img src="images/loading.gif" data-original="https://cdn.jsdelivr.net/gh/wjwABCDEFG/blog_img/img/20210717215925.png" alt=""></p>
 <p>继续跟进Atomic::cmpchg()</p>
-<p><img src="images/loading.gif" data-original="https://s3.ax1x.com/2020/11/22/D8NvW9.png" alt=""></p>
+<p><img src="images/loading.gif" data-original="https://cdn.jsdelivr.net/gh/wjwABCDEFG/blog_img/img/20210717215933.png" alt=""></p>
 <p>有个__asm__汇编指令，LOCK_IF_MP，继续跟进会发现最终实现为<code>lock cmpxchg</code>指令。</p>
 <p>在硬件层面，lock指令能锁定信号北桥，也就是<strong>锁总线</strong>，几乎所有cpu都支持lock指令</p>
 <p>ps:MP是multi processor的意思，就是说多核的时候才lock，否则只执行cmpxchg，当然现在的cpu都是多核</p>
@@ -272,23 +272,23 @@
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">Object o = <span class="keyword">new</span> Object();</span><br><span class="line">System.out.println(ClassLayout.parseInstance(o).toPrintable());</span><br></pre></td></tr></table></figure>
 
 <p>结果如下</p>
-<p><img src="images/loading.gif" data-original="https://s3.ax1x.com/2020/11/19/DuNeW8.png" alt="为了避免关键字所以名字是klass pointer，图片里面写错了"></p>
+<p><img src="images/loading.gif" data-original="https://cdn.jsdelivr.net/gh/wjwABCDEFG/blog_img/img/20210717215939.png" alt="为了避免关键字所以名字是klass pointer，图片里面写错了"></p>
 <p>当我们加上synchronized</p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">synchronized</span> (o)&#123;</span><br><span class="line">  System.out.println(ClassLayout.parseInstance(o).toPrintable());</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
-<p><img src="images/loading.gif" data-original="https://s3.ax1x.com/2020/11/19/DuDlgP.png" alt=""></p>
+<p><img src="images/loading.gif" data-original="https://cdn.jsdelivr.net/gh/wjwABCDEFG/blog_img/img/20210717215944.png" alt=""></p>
 <p>其实就是锁信息，这个对象被作为锁使用，也就是所说的偏向锁的原理</p>
 <br>
 
 <h2 id="缓存行Cache-Line"><a href="#缓存行Cache-Line" class="headerlink" title="缓存行Cache Line"></a>缓存行Cache Line</h2><p>计算机cpu和主存之间读取数据速度差距太大，所以采用了三级缓存（三层是工业实践的结果），读取进缓存的时候是每次读取“一块”，<strong>这个块实际上就是一个缓存行</strong>，现在是64字节（工业实践的结果）</p>
 <p><strong>缓存一致性</strong>，有了缓存行的概念之后，要明白一个问题，就是如下图，当两个数据在同一个缓存行的时候，如果cpu1（或者某个核或者某个线程）修改了x，会通知其他cpu/核/线程，来回通知是会降低效率的</p>
-<p><img src="images/loading.gif" data-original="https://s3.ax1x.com/2020/11/22/DGN5cR.png" alt=""></p>
+<p><img src="images/loading.gif" data-original="https://cdn.jsdelivr.net/gh/wjwABCDEFG/blog_img/img/20210717215954.png" alt=""></p>
 <p>其实这不是很概念很虚的东西，我们可以通过两个有趣的程序来对比感受到缓存行是真实存在的</p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> 缓存行示例1<span class="title">_</span>同一行 </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">long</span> COUNT = <span class="number">1_0000_0000L</span>;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">static</span> <span class="class"><span class="keyword">class</span> <span class="title">T</span></span>&#123;</span><br><span class="line">        <span class="keyword">public</span> <span class="keyword">volatile</span> <span class="keyword">long</span> x = <span class="number">0L</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> T[] arr = <span class="keyword">new</span> T[<span class="number">2</span>];</span><br><span class="line"></span><br><span class="line">    <span class="keyword">static</span> &#123;</span><br><span class="line">        arr[<span class="number">0</span>] = <span class="keyword">new</span> T();</span><br><span class="line">        arr[<span class="number">1</span>] = <span class="keyword">new</span> T();</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> <span class="keyword">throws</span> InterruptedException </span>&#123;</span><br><span class="line">        CountDownLatch latch = <span class="keyword">new</span> CountDownLatch(<span class="number">2</span>);</span><br><span class="line"></span><br><span class="line">        Thread t1 = <span class="keyword">new</span> Thread(()-&gt;&#123;</span><br><span class="line">            <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; COUNT; i++) &#123;</span><br><span class="line">                arr[<span class="number">0</span>].x = i;</span><br><span class="line">            &#125;</span><br><span class="line">            latch.countDown();</span><br><span class="line">        &#125;);</span><br><span class="line"></span><br><span class="line">        Thread t2 = <span class="keyword">new</span> Thread(()-&gt;&#123;</span><br><span class="line">            <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; COUNT; i++) &#123;</span><br><span class="line">                arr[<span class="number">1</span>].x = i;</span><br><span class="line">            &#125;</span><br><span class="line">            latch.countDown();</span><br><span class="line">        &#125;);</span><br><span class="line"></span><br><span class="line">        <span class="keyword">final</span> <span class="keyword">long</span> start = System.nanoTime();</span><br><span class="line">        t1.start();</span><br><span class="line">        t2.start();</span><br><span class="line">        latch.await();</span><br><span class="line">        System.out.println((System.nanoTime() - start) / <span class="number">100_0000</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
 <p>这段程序非常非常简单，抛开计时等不重要的代码，说到底不过是两个线程对一个T[]数组操作，T其实只有个long成员，也就是说，线程1改变T[0]的值，线程2改变T[1]的值。</p>
 <p>结果如下</p>
-<p><img src="images/loading.gif" data-original="https://s3.ax1x.com/2020/11/22/DGBSTx.png" alt=""></p>
+<p><img src="images/loading.gif" data-original="https://cdn.jsdelivr.net/gh/wjwABCDEFG/blog_img/img/20210717220004.png" alt=""></p>
 <p>要明白，数组是申请了连续的内存，一个long占4个字节，那么这个arr包含两个long也就是连续的16个字节。</p>
 <p>那么根据前面说的，将内存中的数据读取一个缓存行64字节进入cache，也就是说arr[0]和arr[1]都在同一个缓存行中，线程1线程2都将它们保存进自己的cache。线程1/线程2分别修改arr[0]/arr[1]的时候，需要通知对方，情况也就完全和前面那张示例图一样了。</p>
 <p>第二个程序只需要将class T的声明改成如下，其他完全一样</p>
@@ -297,11 +297,11 @@
 <p>这样一来，x前面有7个long，后面有7个long，算上x，8*8=64个字节，也就是说arr[0]中的x和arr[1]的任何一个元素都不会在同一个缓存行</p>
 <p>此时修改的时候不需要通知对方，因为对方的缓存行中没有保存自己修改的数据</p>
 <p>执行结果如下：</p>
-<p><img src="images/loading.gif" data-original="https://s3.ax1x.com/2020/11/23/DGs43T.png" alt=""></p>
+<p><img src="images/loading.gif" data-original="https://cdn.jsdelivr.net/gh/wjwABCDEFG/blog_img/img/20210717220012.png" alt=""></p>
 <p>可以看到确实快了不少</p>
 <p>你可能会问，真的有人这样写代码吗？</p>
 <p>你好，有的。有个单机版最快MQ叫disruptor，里面的RingBuffer类的父类就有如下代码</p>
-<p><img src="images/loading.gif" data-original="https://s3.ax1x.com/2020/11/23/DGyk5t.png" alt=""></p>
+<p><img src="images/loading.gif" data-original="https://cdn.jsdelivr.net/gh/wjwABCDEFG/blog_img/img/20210717220017.png" alt=""></p>
 <blockquote>
 <p>讲个题外：MESI只是因特尔的缓存一致性协议，不要一讲到缓存一致性协议就是MESI</p>
 </blockquote>
@@ -310,7 +310,7 @@
 <h2 id="主存和内存不是同一个东西"><a href="#主存和内存不是同一个东西" class="headerlink" title="主存和内存不是同一个东西"></a>主存和内存不是同一个东西</h2><p>计组一些基础概念，学的时候就很疑惑，比如主存是不是我们说的内存条啊什么的，学很久了怕自己忘记，先记下来</p>
 <p>内存是个很宽泛的概念，不同的书定义也不同，但是一般认为<strong>内存是包括cache和主存的</strong></p>
 <p>知乎上看见一张不错的图：</p>
-<p><img src="images/loading.gif" data-original="https://s3.ax1x.com/2020/11/22/DGUXZV.png" alt=""></p>
+<p><img src="images/loading.gif" data-original="https://cdn.jsdelivr.net/gh/wjwABCDEFG/blog_img/img/20210717220027.png" alt=""></p>
 <blockquote>
 <p>参考</p>
 <p>知乎：乔乔-缩头者的回答<a href="https://www.zhihu.com/question/28445273">https://www.zhihu.com/question/28445273</a></p>
@@ -365,7 +365,7 @@
                 <div>
                     
                     <figure class="image is-128x128 has-mb-6">
-                        <img class="is-rounded" src="images/loading.gif" data-original="https://s1.ax1x.com/2020/07/20/Ufuf4e.th.jpg" alt="wjwABCDEFG">
+                        <img class="is-rounded" src="images/loading.gif" data-original="https://cdn.jsdelivr.net/gh/wjwABCDEFG/blog_img/img/20210717231547.jpeg" alt="wjwABCDEFG">
                     </figure>
                     
                     <p class="is-size-4 is-block">
@@ -390,7 +390,7 @@
                     </p>
                     <a href="/archives">
                         <p class="title has-text-weight-normal">
-                            102
+                            101
                         </p>
                     </a>
                 </div>
@@ -402,7 +402,7 @@
                     </p>
                     <a href="/categories">
                         <p class="title has-text-weight-normal">
-                            15
+                            14
                         </p>
                     </a>
                 </div>
@@ -491,14 +491,6 @@
         <a class="level is-marginless" href="/categories/redis/">
             <span class="level-start">
                 <span class="level-item">redis</span>
-            </span>
-            <span class="level-end">
-                <span class="level-item tag">1</span>
-            </span>
-        </a></li><li>
-        <a class="level is-marginless" href="/categories/spring/">
-            <span class="level-start">
-                <span class="level-item">spring</span>
             </span>
             <span class="level-end">
                 <span class="level-item tag">1</span>
@@ -674,28 +666,9 @@
         
         <article class="media">
             
-            <a href="/spring/%E6%8C%81%E7%BB%AD%E6%9B%B4%E6%96%B0-%E8%AE%B0%E5%BD%95%E6%88%91%E7%9A%84%E6%AF%95%E8%AE%BE/" class="media-left">
-                <p class="image is-64x64">
-                    <img class="thumbnail" src="images/loading.gif" data-original="/images/thumbnail.svg" alt="持续更新-记录我的毕设">
-                </p>
-            </a>
-            
-            <div class="media-content">
-                <div class="content">
-                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2021-04-01T15:06:25.000Z">2021-04-01</time></div>
-                    <a href="/spring/%E6%8C%81%E7%BB%AD%E6%9B%B4%E6%96%B0-%E8%AE%B0%E5%BD%95%E6%88%91%E7%9A%84%E6%AF%95%E8%AE%BE/" class="title has-link-black-ter is-size-6 has-text-weight-normal">持续更新-记录我的毕设</a>
-                    <p class="is-size-7 is-uppercase">
-                        <a class="has-link-grey -link" href="/categories/spring/">spring</a>
-                    </p>
-                </div>
-            </div>
-        </article>
-        
-        <article class="media">
-            
             <a href="/life/%E4%B8%BA%E6%AF%95%E4%B8%9A%E5%81%9A%E5%87%86%E5%A4%87/" class="media-left">
                 <p class="image is-64x64">
-                    <img class="thumbnail" src="images/loading.gif" data-original="https://z3.ax1x.com/2021/04/01/cVlcoF.md.jpg" alt="为毕业做准备">
+                    <img class="thumbnail" src="images/loading.gif" data-original="https://cdn.jsdelivr.net/gh/wjwABCDEFG/blog_img/img/20210717225951.jpeg" alt="为毕业做准备">
                 </p>
             </a>
             
@@ -714,7 +687,7 @@
             
             <a href="/life/mhxy-experience/" class="media-left">
                 <p class="image is-64x64">
-                    <img class="thumbnail" src="images/loading.gif" data-original="https://z3.ax1x.com/2021/04/01/cVMuwD.md.png" alt="梦幻西游游戏体验">
+                    <img class="thumbnail" src="images/loading.gif" data-original="https://cdn.jsdelivr.net/gh/wjwABCDEFG/blog_img/img/20210717223725.png" alt="梦幻西游游戏体验">
                 </p>
             </a>
             
@@ -733,7 +706,7 @@
             
             <a href="/games/3DMath-Primerfor-Graphics-and-Game-Development-note/" class="media-left">
                 <p class="image is-64x64">
-                    <img class="thumbnail" src="images/loading.gif" data-original="https://source.acexy.cn/view/XgMS4U2" alt="3D数学基础图形与游戏研发笔记">
+                    <img class="thumbnail" src="images/loading.gif" data-original="https://cdn.jsdelivr.net/gh/wjwABCDEFG/blog_img/img/20210717223435.jpeg" alt="3D数学基础图形与游戏研发笔记">
                 </p>
             </a>
             
@@ -752,7 +725,26 @@
             
             <a href="/algorithms/get-equal-substrings-within-budget/" class="media-left">
                 <p class="image is-64x64">
-                    <img class="thumbnail" src="images/loading.gif" data-original="https://source.acexy.cn/view/Xd2g803" alt="1208-尽可能使字符串相等">
+                    <img class="thumbnail" src="images/loading.gif" data-original="https://cdn.jsdelivr.net/gh/wjwABCDEFG/blog_img/img/20210717223615.jpg" alt="1011-在D天内送达包裹的能力">
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2021-02-05T16:00:24.000Z">2021-02-06</time></div>
+                    <a href="/algorithms/get-equal-substrings-within-budget/" class="title has-link-black-ter is-size-6 has-text-weight-normal">1011-在D天内送达包裹的能力</a>
+                    <p class="is-size-7 is-uppercase">
+                        <a class="has-link-grey -link" href="/categories/algorithms/">数据结构和算法</a>
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+        <article class="media">
+            
+            <a href="/algorithms/get-equal-substrings-within-budget/" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="images/loading.gif" data-original="https://cdn.jsdelivr.net/gh/wjwABCDEFG/blog_img/img/20210717223234.jpg" alt="1208-尽可能使字符串相等">
                 </p>
             </a>
             
@@ -878,28 +870,9 @@
         
         <article class="media">
             
-            <a href="/spring/%E6%8C%81%E7%BB%AD%E6%9B%B4%E6%96%B0-%E8%AE%B0%E5%BD%95%E6%88%91%E7%9A%84%E6%AF%95%E8%AE%BE/" class="media-left">
-                <p class="image is-64x64">
-                    <img class="thumbnail" src="images/loading.gif" data-original="/images/thumbnail.svg" alt="持续更新-记录我的毕设">
-                </p>
-            </a>
-            
-            <div class="media-content">
-                <div class="content">
-                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2021-04-01T15:06:25.000Z">2021-04-01</time></div>
-                    <a href="/spring/%E6%8C%81%E7%BB%AD%E6%9B%B4%E6%96%B0-%E8%AE%B0%E5%BD%95%E6%88%91%E7%9A%84%E6%AF%95%E8%AE%BE/" class="title has-link-black-ter is-size-6 has-text-weight-normal">持续更新-记录我的毕设</a>
-                    <p class="is-size-7 is-uppercase">
-                        <a class="has-link-grey -link" href="/categories/spring/">spring</a>
-                    </p>
-                </div>
-            </div>
-        </article>
-        
-        <article class="media">
-            
             <a href="/life/%E4%B8%BA%E6%AF%95%E4%B8%9A%E5%81%9A%E5%87%86%E5%A4%87/" class="media-left">
                 <p class="image is-64x64">
-                    <img class="thumbnail" src="images/loading.gif" data-original="https://z3.ax1x.com/2021/04/01/cVlcoF.md.jpg" alt="为毕业做准备">
+                    <img class="thumbnail" src="images/loading.gif" data-original="https://cdn.jsdelivr.net/gh/wjwABCDEFG/blog_img/img/20210717225951.jpeg" alt="为毕业做准备">
                 </p>
             </a>
             
@@ -918,7 +891,7 @@
             
             <a href="/life/mhxy-experience/" class="media-left">
                 <p class="image is-64x64">
-                    <img class="thumbnail" src="images/loading.gif" data-original="https://z3.ax1x.com/2021/04/01/cVMuwD.md.png" alt="梦幻西游游戏体验">
+                    <img class="thumbnail" src="images/loading.gif" data-original="https://cdn.jsdelivr.net/gh/wjwABCDEFG/blog_img/img/20210717223725.png" alt="梦幻西游游戏体验">
                 </p>
             </a>
             
@@ -937,7 +910,7 @@
             
             <a href="/games/3DMath-Primerfor-Graphics-and-Game-Development-note/" class="media-left">
                 <p class="image is-64x64">
-                    <img class="thumbnail" src="images/loading.gif" data-original="https://source.acexy.cn/view/XgMS4U2" alt="3D数学基础图形与游戏研发笔记">
+                    <img class="thumbnail" src="images/loading.gif" data-original="https://cdn.jsdelivr.net/gh/wjwABCDEFG/blog_img/img/20210717223435.jpeg" alt="3D数学基础图形与游戏研发笔记">
                 </p>
             </a>
             
@@ -956,7 +929,26 @@
             
             <a href="/algorithms/get-equal-substrings-within-budget/" class="media-left">
                 <p class="image is-64x64">
-                    <img class="thumbnail" src="images/loading.gif" data-original="https://source.acexy.cn/view/Xd2g803" alt="1208-尽可能使字符串相等">
+                    <img class="thumbnail" src="images/loading.gif" data-original="https://cdn.jsdelivr.net/gh/wjwABCDEFG/blog_img/img/20210717223615.jpg" alt="1011-在D天内送达包裹的能力">
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2021-02-05T16:00:24.000Z">2021-02-06</time></div>
+                    <a href="/algorithms/get-equal-substrings-within-budget/" class="title has-link-black-ter is-size-6 has-text-weight-normal">1011-在D天内送达包裹的能力</a>
+                    <p class="is-size-7 is-uppercase">
+                        <a class="has-link-grey -link" href="/categories/algorithms/">数据结构和算法</a>
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+        <article class="media">
+            
+            <a href="/algorithms/get-equal-substrings-within-budget/" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="images/loading.gif" data-original="https://cdn.jsdelivr.net/gh/wjwABCDEFG/blog_img/img/20210717223234.jpg" alt="1208-尽可能使字符串相等">
                 </p>
             </a>
             
@@ -986,7 +978,7 @@
             <div class="level-start has-text-centered-mobile">
                 <a class="footer-logo is-block has-mb-6" href="/">
                 
-                    <img src="images/loading.gif" data-original="/images/logo.png" alt="锁和同步" height="28">
+                    <img src="images/loading.gif" data-original="https://cdn.jsdelivr.net/gh/wjwABCDEFG/blog_img/img/20210717231246.png" alt="锁和同步" height="28">
                 
                 </a>
                 <p class="is-size-7">

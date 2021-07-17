@@ -17,13 +17,13 @@
 <meta property="og:site_name" content="小温 blog">
 <meta property="og:description" content="1. 问题以前我们的登录都是将当前登录的用户信息放在session中，但是session是保存在服务器的，在分布式环境下服务器不只有一台，那就容易找不到登录的用户信息，所以应该是保存在客户端也就是cookie中的，但是存在cookie中有个问题，就是要进行一些操作时需要获取当前登录的用户信息，那么要将cookie中的user发送过去，这一来二去老是携带着明文的用户名和密码，就很不安全，会被人用一些">
 <meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="https://wx2.sbimg.cn/2020/07/30/P7eY2.md.jpg">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/wjwABCDEFG/blog_img/img/20210717195637.jpg">
 <meta property="article:published_time" content="2020-07-24T09:34:21.000Z">
-<meta property="article:modified_time" content="2020-12-07T02:48:34.184Z">
+<meta property="article:modified_time" content="2021-07-17T12:02:14.640Z">
 <meta property="article:author" content="wjw">
 <meta property="article:tag" content="加密">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="https://wx2.sbimg.cn/2020/07/30/P7eY2.md.jpg">
+<meta name="twitter:image" content="https://cdn.jsdelivr.net/gh/wjwABCDEFG/blog_img/img/20210717195637.jpg">
 
 
 
@@ -81,7 +81,7 @@
         <div class="navbar-brand is-flex-center">
             <a class="navbar-item navbar-logo" href="/">
             
-                <img src="images/loading.gif" data-original="/images/logo.png" alt="JWT+RSA非对称加密实现无状态登录" height="28">
+                <img src="images/loading.gif" data-original="https://cdn.jsdelivr.net/gh/wjwABCDEFG/blog_img/img/20210717231246.png" alt="JWT+RSA非对称加密实现无状态登录" height="28">
             
             </a>
         </div>
@@ -139,7 +139,7 @@
     
     <div class="card-image">
         <span  class="image is-7by1">
-            <img class="thumbnail" src="images/loading.gif" data-original="https://wx2.sbimg.cn/2020/07/30/P7eY2.md.jpg" alt="JWT+RSA非对称加密实现无状态登录">
+            <img class="thumbnail" src="images/loading.gif" data-original="https://cdn.jsdelivr.net/gh/wjwABCDEFG/blog_img/img/20210717195637.jpg" alt="JWT+RSA非对称加密实现无状态登录">
         </span>
     </div>
     
@@ -157,7 +157,7 @@
                 <span class="level-item has-text-grey">
                     
                     
-                    18 分钟 读完 (大约 2636 个字)
+                    18 分钟 读完 (大约 2687 个字)
                 </span>
                 
                 
@@ -184,12 +184,13 @@
 <h1 id="1-RSA非对称加密技术"><a href="#1-RSA非对称加密技术" class="headerlink" title="1. RSA非对称加密技术"></a>1. RSA非对称加密技术</h1><p>看大佬的讲解</p>
 <p><a href="https://www.zhihu.com/question/304030251">https://www.zhihu.com/question/304030251</a></p>
 <p>当然，后面还涉及到一些更深入的东西（中间人攻击，CA认证中心等），有时间再补笔记(●’◡’●)计网的笔记先埋个坑慢慢填</p>
+<p>追更：计网的笔记<a href="https://wjw.today/cs/network/">点击这里</a></p>
 <br>
 
 <h1 id="2-JWT"><a href="#2-JWT" class="headerlink" title="2. JWT"></a>2. JWT</h1><p>是token的一种，全称是Json Web Token， 是JSON风格轻量级的授权和身份认证规范。格式是这样的（头部：我是JWT格式的token，载荷：用户信息，签名：头部和载荷合在一起再加密）</p>
-<p><img src="images/loading.gif" data-original="https://s1.ax1x.com/2020/07/20/U4VPED.png" alt=""></p>
+<p><img src="images/loading.gif" data-original="https://cdn.jsdelivr.net/gh/wjwABCDEFG/blog_img/img/20210717195654.png" alt=""></p>
 <p>我们来看一下登录的流程</p>
-<p><img src="images/loading.gif" data-original="https://s1.ax1x.com/2020/07/20/U4FTBD.png" alt=""></p>
+<p><img src="images/loading.gif" data-original="https://cdn.jsdelivr.net/gh/wjwABCDEFG/blog_img/img/20210717195917.png" alt=""></p>
 <ul>
 <li>我们首先利用RSA生成公钥和私钥。私钥保存在授权中心，公钥保存在Zuul和各个信任的微服务</li>
 <li>用户请求登录</li>
@@ -204,7 +205,7 @@
 <h1 id="3-具体实现及登录功能细节"><a href="#3-具体实现及登录功能细节" class="headerlink" title="3. 具体实现及登录功能细节"></a>3. 具体实现及登录功能细节</h1><h2 id="3-1-加密生成jwt部分实现"><a href="#3-1-加密生成jwt部分实现" class="headerlink" title="3.1 加密生成jwt部分实现"></a>3.1 加密生成jwt部分实现</h2><ol>
 <li>创建载荷对象，也就是jwt中的载荷部分，无需包含密码和盐（使用了rsa以后，只要公钥能解析不出错就说明认证成功了）</li>
 </ol>
-<p><img src="images/loading.gif" data-original="https://s1.ax1x.com/2020/07/20/U5PIpt.png" alt=""></p>
+<p><img src="images/loading.gif" data-original="https://cdn.jsdelivr.net/gh/wjwABCDEFG/blog_img/img/20210717200006.png" alt=""></p>
 <ol start="2">
 <li>会用到的依赖</li>
 </ol>
@@ -213,7 +214,7 @@
 <ol start="3">
 <li>四个工具类</li>
 </ol>
-<p><img src="images/loading.gif" data-original="https://s1.ax1x.com/2020/07/20/U4EAXV.png" alt=""></p>
+<p><img src="images/loading.gif" data-original="https://cdn.jsdelivr.net/gh/wjwABCDEFG/blog_img/img/20210717200015.png" alt=""></p>
 <ul>
 <li>RsaUtils：生成rsa密钥（一个公钥一个私钥）方法，读取公钥密钥方法</li>
 <li>JwtUtils：将用户信息使用私钥加密成jwt格式的token方法，使用公钥解析token获得用户信息方法</li>
@@ -229,8 +230,8 @@
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">JwtTest</span> </span>&#123;</span><br><span class="line">	<span class="comment">//rsa公钥私钥位置</span></span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">final</span> String pubKeyPath = <span class="string">"C:\\Users\\wjw\\.leyoursa\\rsa.pub"</span>;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">final</span> String priKeyPath = <span class="string">"C:\\Users\\wjw\\.leyoursa\\rsa.pri"</span>;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">private</span> PublicKey publicKey;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">private</span> PrivateKey privateKey;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Test</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">testRsa</span><span class="params">()</span> <span class="keyword">throws</span> Exception </span>&#123;</span><br><span class="line">        RsaUtils.generateKey(pubKeyPath, priKeyPath, <span class="string">"234"</span>);    <span class="comment">//生成rsa密钥，最后一个是盐，随便给，越复杂越好</span></span><br><span class="line">    &#125;</span><br><span class="line">	</span><br><span class="line">    <span class="comment">//第一次执行时没有文件所以注释掉，执行完上面那个函数后放开before注释</span></span><br><span class="line">    <span class="comment">//@Before</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">testGetRsa</span><span class="params">()</span> <span class="keyword">throws</span> Exception </span>&#123;</span><br><span class="line">        <span class="keyword">this</span>.publicKey = RsaUtils.getPublicKey(pubKeyPath);</span><br><span class="line">        <span class="keyword">this</span>.privateKey = RsaUtils.getPrivateKey(priKeyPath);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Test</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">testGenerateToken</span><span class="params">()</span> <span class="keyword">throws</span> Exception </span>&#123;</span><br><span class="line">        <span class="comment">// 用私钥加密user信息生成token</span></span><br><span class="line">        String token = JwtUtils.generateToken(<span class="keyword">new</span> UserInfo(<span class="number">20L</span>, <span class="string">"jack"</span>), privateKey, <span class="number">5</span>);</span><br><span class="line">        System.out.println(<span class="string">"token = "</span> + token);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Test</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">testParseToken</span><span class="params">()</span> <span class="keyword">throws</span> Exception </span>&#123;</span><br><span class="line">        <span class="comment">//使用公钥解密token</span></span><br><span class="line">        <span class="comment">//改成上面那个函数生成的token试试解密</span></span><br><span class="line">        String token = <span class="string">"eyJhbGciOiJSUzI1NiJ9.eyJpZCI6MjAsInVzZXJuYW1lIjoiamFjayIsImV4cCI6MTU5NTIzMzI4OX0.IhrxQJ9vmdME2EaOiGl-IEI6JybKDo6y7UlCp0pBWwfusUHbY3xjMFnGnnRvQ2keOU7AFetBhMPw03T4pUbUil8tmzc38mk5etYs0kxkoa2_qmeu80qqQUBVvfexYmZkvo3nOjz66IFfX716CWgZ-9Ew8zAib1o0TFkJ4RnjV5w"</span>;</span><br><span class="line"></span><br><span class="line">        <span class="comment">// 解析token</span></span><br><span class="line">        UserInfo user = JwtUtils.getInfoFromToken(token, publicKey);</span><br><span class="line">        System.out.println(<span class="string">"id: "</span> + user.getId());</span><br><span class="line">        System.out.println(<span class="string">"userName: "</span> + user.getUsername());</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
 <p>加密解密测试效果：</p>
-<p><img src="images/loading.gif" data-original="https://s1.ax1x.com/2020/07/20/U5npcj.png" alt=""></p>
-<p><img src="images/loading.gif" data-original="https://s1.ax1x.com/2020/07/20/U5nMuR.png" alt=""></p>
+<p><img src="images/loading.gif" data-original="https://cdn.jsdelivr.net/gh/wjwABCDEFG/blog_img/img/20210717200031.png" alt=""></p>
+<p><img src="images/loading.gif" data-original="https://cdn.jsdelivr.net/gh/wjwABCDEFG/blog_img/img/20210717200036.png" alt=""></p>
 <br>
 
 <h2 id="3-2-cookie部分实现"><a href="#3-2-cookie部分实现" class="headerlink" title="3.2 cookie部分实现"></a>3.2 cookie部分实现</h2><p>加密这部分测试成功之后我们注意到登录功能还需要保存到cookie中</p>
@@ -242,35 +243,35 @@
 <p>其实登录就比较简单，controller service那些，跟着之前流程来就行</p>
 <p>不过测试用例写死了不优雅，可以使用yml+配置类读取（当然你可以暴力）</p>
 <p>yml</p>
-<p><img src="images/loading.gif" data-original="https://s1.ax1x.com/2020/07/21/U5KikV.png" alt=""></p>
+<p><img src="images/loading.gif" data-original="https://cdn.jsdelivr.net/gh/wjwABCDEFG/blog_img/img/20210717200045.png" alt=""></p>
 <p>配置类</p>
-<p><img src="images/loading.gif" data-original="https://s1.ax1x.com/2020/07/21/U5KqBR.png" alt=""></p>
+<p><img src="images/loading.gif" data-original="https://cdn.jsdelivr.net/gh/wjwABCDEFG/blog_img/img/20210717200051.png" alt=""></p>
 <p>给出代码，省略篇幅，包自己引入一下，getter/setter自己创建一下</p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@ConfigurationProperties</span>(prefix = <span class="string">"leyou.jwt"</span>)</span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">JwtProperties</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">private</span> String secret; <span class="comment">// 密钥</span></span><br><span class="line"></span><br><span class="line">    <span class="keyword">private</span> String pubKeyPath;<span class="comment">// 公钥</span></span><br><span class="line"></span><br><span class="line">    <span class="keyword">private</span> String priKeyPath;<span class="comment">// 私钥</span></span><br><span class="line"></span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">int</span> expire;<span class="comment">// token过期时间</span></span><br><span class="line"></span><br><span class="line">    <span class="keyword">private</span> String cookieName;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">private</span> PublicKey publicKey; <span class="comment">// 公钥</span></span><br><span class="line"></span><br><span class="line">    <span class="keyword">private</span> PrivateKey privateKey; <span class="comment">// 私钥</span></span><br><span class="line"></span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">final</span> Logger logger = LoggerFactory.getLogger(JwtProperties<span class="class">.<span class="keyword">class</span>)</span>;</span><br><span class="line"></span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@PostContruct</span>：在构造方法执行之后执行该方法</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="meta">@PostConstruct</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">init</span><span class="params">()</span></span>&#123;</span><br><span class="line">        <span class="keyword">try</span> &#123;</span><br><span class="line">            File pubKey = <span class="keyword">new</span> File(pubKeyPath);</span><br><span class="line">            File priKey = <span class="keyword">new</span> File(priKeyPath);</span><br><span class="line">            <span class="keyword">if</span> (!pubKey.exists() || !priKey.exists()) &#123;</span><br><span class="line">                <span class="comment">// 生成公钥和私钥</span></span><br><span class="line">                RsaUtils.generateKey(pubKeyPath, priKeyPath, secret);</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="comment">// 获取公钥和私钥</span></span><br><span class="line">            <span class="keyword">this</span>.publicKey = RsaUtils.getPublicKey(pubKeyPath);</span><br><span class="line">            <span class="keyword">this</span>.privateKey = RsaUtils.getPrivateKey(priKeyPath);</span><br><span class="line">        &#125; <span class="keyword">catch</span> (Exception e) &#123;</span><br><span class="line">            logger.error(<span class="string">"初始化公钥和私钥失败！"</span>, e);</span><br><span class="line">            <span class="keyword">throw</span> <span class="keyword">new</span> RuntimeException();</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="comment">//get,set自己生成一下</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
 <p>后面的没什么好说了，代码太简单，有手就行，我贴图分析吧</p>
 <p>controller</p>
-<p><img src="images/loading.gif" data-original="https://s1.ax1x.com/2020/07/21/U5MUv4.png" alt=""></p>
+<p><img src="images/loading.gif" data-original="https://cdn.jsdelivr.net/gh/wjwABCDEFG/blog_img/img/20210717200058.png" alt=""></p>
 <p>service</p>
-<p><img src="images/loading.gif" data-original="https://s1.ax1x.com/2020/07/21/U5QaJf.png" alt=""></p>
+<p><img src="images/loading.gif" data-original="https://cdn.jsdelivr.net/gh/wjwABCDEFG/blog_img/img/20210717200107.png" alt=""></p>
 <br>
 
 <h2 id="3-4-cookie细节的处理"><a href="#3-4-cookie细节的处理" class="headerlink" title="3.4 cookie细节的处理"></a>3.4 cookie细节的处理</h2><p>cookie是保存在本地的，那么通过localhost访问就没什么问题，但是<strong>通过域名访问</strong>就有问题</p>
 <p>以下是对比图</p>
-<p><img src="images/loading.gif" data-original="https://s1.ax1x.com/2020/07/21/U5QIOJ.png" alt="localhonst访问"></p>
-<p><img src="images/loading.gif" data-original="https://s1.ax1x.com/2020/07/21/U5Qx6e.png" alt="域名访问"></p>
+<p><img src="images/loading.gif" data-original="https://cdn.jsdelivr.net/gh/wjwABCDEFG/blog_img/img/20210717200114.png" alt="localhonst访问"></p>
+<p><img src="images/loading.gif" data-original="https://cdn.jsdelivr.net/gh/wjwABCDEFG/blog_img/img/20210717200120.png" alt="域名访问"></p>
 <p>先解决方法再分析原因：</p>
 <p>nginx配置文件的网关部分添加proxy_set_header Host $host;</p>
-<p><img src="images/loading.gif" data-original="https://s1.ax1x.com/2020/07/21/U5Q6wn.png" alt=""></p>
+<p><img src="images/loading.gif" data-original="https://cdn.jsdelivr.net/gh/wjwABCDEFG/blog_img/img/20210717200126.png" alt=""></p>
 <p>zuul的yml</p>
-<p><img src="images/loading.gif" data-original="https://s1.ax1x.com/2020/07/21/U5MxZn.png" alt=""></p>
+<p><img src="images/loading.gif" data-original="https://cdn.jsdelivr.net/gh/wjwABCDEFG/blog_img/img/20210717200132.png" alt=""></p>
 <p>原因：我们通过调试可以看到cookie的domainName是计算机名称而不是leyou.com</p>
-<p><img src="images/loading.gif" data-original="https://s1.ax1x.com/2020/07/21/U5lI9f.png" alt=""></p>
+<p><img src="images/loading.gif" data-original="https://cdn.jsdelivr.net/gh/wjwABCDEFG/blog_img/img/20210717200140.png" alt=""></p>
 <p>这个计算机名是哪来的呢，因为zuul到登录微服务是通过eureka注册中心的</p>
-<p><img src="images/loading.gif" data-original="https://s1.ax1x.com/2020/07/21/U53SII.png" alt=""></p>
+<p><img src="images/loading.gif" data-original="https://cdn.jsdelivr.net/gh/wjwABCDEFG/blog_img/img/20210717200147.png" alt=""></p>
 <p>访问流程是nginx=&gt;zuul=&gt;登录微服务，因此我们要让计算机名带着访问路径一起走才对，所以才有了上面的设置，解决后的效果</p>
-<p><img src="images/loading.gif" data-original="https://s1.ax1x.com/2020/07/21/U53dW6.png" alt=""></p>
-<p><img src="images/loading.gif" data-original="https://s1.ax1x.com/2020/07/21/U53UF1.png" alt=""></p>
+<p><img src="images/loading.gif" data-original="https://cdn.jsdelivr.net/gh/wjwABCDEFG/blog_img/img/20210717200151.png" alt=""></p>
+<p><img src="images/loading.gif" data-original="https://cdn.jsdelivr.net/gh/wjwABCDEFG/blog_img/img/20210717200159.png" alt=""></p>
 <br>
 
 <h2 id="3-5-token过期处理的思路"><a href="#3-5-token过期处理的思路" class="headerlink" title="3.5 token过期处理的思路"></a>3.5 token过期处理的思路</h2><p>token和cookie都有过期时间，如果用户在一段时间内没有操作那么过期了就需要重新登录，没有问题。但是如果一直在操作（比如选购商品选了很久，最后下单的时候发现cookie过期了，拿不到用户登录信息，就很尴尬）。</p>
@@ -296,7 +297,7 @@
 <br>
 
 <h2 id="3-7-最终效果"><a href="#3-7-最终效果" class="headerlink" title="3.7 最终效果"></a>3.7 最终效果</h2><p>看看页面上，cookie有了，value是jwt，域名也对了，注册和登录也不拦截了，腰不酸腿不痛了</p>
-<p><img src="images/loading.gif" data-original="https://s1.ax1x.com/2020/07/21/U58Z6O.png" alt=""></p>
+<p><img src="images/loading.gif" data-original="https://cdn.jsdelivr.net/gh/wjwABCDEFG/blog_img/img/20210717200209.png" alt=""></p>
 <p>嗯！是主流登录的实现效果~</p>
 
         </div>
@@ -323,7 +324,7 @@
     <div class="level post-navigation is-flex-wrap is-mobile">
         
         <div class="level-start">
-            <a class="level level-item has-link-grey  article-nav-prev" href="/Others/%E9%98%BF%E9%87%8C%E7%9F%AD%E4%BF%A1/">
+            <a class="level level-item has-link-grey  article-nav-prev" href="/Others/ali-mail/">
                 <i class="level-item fas fa-chevron-left"></i>
                 <span class="level-item">阿里短信</span>
             </a>
@@ -357,7 +358,7 @@
                 <div>
                     
                     <figure class="image is-128x128 has-mb-6">
-                        <img class="is-rounded" src="images/loading.gif" data-original="https://s1.ax1x.com/2020/07/20/Ufuf4e.th.jpg" alt="wjwABCDEFG">
+                        <img class="is-rounded" src="images/loading.gif" data-original="https://cdn.jsdelivr.net/gh/wjwABCDEFG/blog_img/img/20210717231547.jpeg" alt="wjwABCDEFG">
                     </figure>
                     
                     <p class="is-size-4 is-block">
@@ -382,7 +383,7 @@
                     </p>
                     <a href="/archives">
                         <p class="title has-text-weight-normal">
-                            102
+                            101
                         </p>
                     </a>
                 </div>
@@ -394,7 +395,7 @@
                     </p>
                     <a href="/categories">
                         <p class="title has-text-weight-normal">
-                            15
+                            14
                         </p>
                     </a>
                 </div>
@@ -483,14 +484,6 @@
         <a class="level is-marginless" href="/categories/redis/">
             <span class="level-start">
                 <span class="level-item">redis</span>
-            </span>
-            <span class="level-end">
-                <span class="level-item tag">1</span>
-            </span>
-        </a></li><li>
-        <a class="level is-marginless" href="/categories/spring/">
-            <span class="level-start">
-                <span class="level-item">spring</span>
             </span>
             <span class="level-end">
                 <span class="level-item tag">1</span>
@@ -646,28 +639,9 @@
         
         <article class="media">
             
-            <a href="/spring/%E6%8C%81%E7%BB%AD%E6%9B%B4%E6%96%B0-%E8%AE%B0%E5%BD%95%E6%88%91%E7%9A%84%E6%AF%95%E8%AE%BE/" class="media-left">
-                <p class="image is-64x64">
-                    <img class="thumbnail" src="images/loading.gif" data-original="/images/thumbnail.svg" alt="持续更新-记录我的毕设">
-                </p>
-            </a>
-            
-            <div class="media-content">
-                <div class="content">
-                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2021-04-01T15:06:25.000Z">2021-04-01</time></div>
-                    <a href="/spring/%E6%8C%81%E7%BB%AD%E6%9B%B4%E6%96%B0-%E8%AE%B0%E5%BD%95%E6%88%91%E7%9A%84%E6%AF%95%E8%AE%BE/" class="title has-link-black-ter is-size-6 has-text-weight-normal">持续更新-记录我的毕设</a>
-                    <p class="is-size-7 is-uppercase">
-                        <a class="has-link-grey -link" href="/categories/spring/">spring</a>
-                    </p>
-                </div>
-            </div>
-        </article>
-        
-        <article class="media">
-            
             <a href="/life/%E4%B8%BA%E6%AF%95%E4%B8%9A%E5%81%9A%E5%87%86%E5%A4%87/" class="media-left">
                 <p class="image is-64x64">
-                    <img class="thumbnail" src="images/loading.gif" data-original="https://z3.ax1x.com/2021/04/01/cVlcoF.md.jpg" alt="为毕业做准备">
+                    <img class="thumbnail" src="images/loading.gif" data-original="https://cdn.jsdelivr.net/gh/wjwABCDEFG/blog_img/img/20210717225951.jpeg" alt="为毕业做准备">
                 </p>
             </a>
             
@@ -686,7 +660,7 @@
             
             <a href="/life/mhxy-experience/" class="media-left">
                 <p class="image is-64x64">
-                    <img class="thumbnail" src="images/loading.gif" data-original="https://z3.ax1x.com/2021/04/01/cVMuwD.md.png" alt="梦幻西游游戏体验">
+                    <img class="thumbnail" src="images/loading.gif" data-original="https://cdn.jsdelivr.net/gh/wjwABCDEFG/blog_img/img/20210717223725.png" alt="梦幻西游游戏体验">
                 </p>
             </a>
             
@@ -705,7 +679,7 @@
             
             <a href="/games/3DMath-Primerfor-Graphics-and-Game-Development-note/" class="media-left">
                 <p class="image is-64x64">
-                    <img class="thumbnail" src="images/loading.gif" data-original="https://source.acexy.cn/view/XgMS4U2" alt="3D数学基础图形与游戏研发笔记">
+                    <img class="thumbnail" src="images/loading.gif" data-original="https://cdn.jsdelivr.net/gh/wjwABCDEFG/blog_img/img/20210717223435.jpeg" alt="3D数学基础图形与游戏研发笔记">
                 </p>
             </a>
             
@@ -724,7 +698,26 @@
             
             <a href="/algorithms/get-equal-substrings-within-budget/" class="media-left">
                 <p class="image is-64x64">
-                    <img class="thumbnail" src="images/loading.gif" data-original="https://source.acexy.cn/view/Xd2g803" alt="1208-尽可能使字符串相等">
+                    <img class="thumbnail" src="images/loading.gif" data-original="https://cdn.jsdelivr.net/gh/wjwABCDEFG/blog_img/img/20210717223615.jpg" alt="1011-在D天内送达包裹的能力">
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2021-02-05T16:00:24.000Z">2021-02-06</time></div>
+                    <a href="/algorithms/get-equal-substrings-within-budget/" class="title has-link-black-ter is-size-6 has-text-weight-normal">1011-在D天内送达包裹的能力</a>
+                    <p class="is-size-7 is-uppercase">
+                        <a class="has-link-grey -link" href="/categories/algorithms/">数据结构和算法</a>
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+        <article class="media">
+            
+            <a href="/algorithms/get-equal-substrings-within-budget/" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="images/loading.gif" data-original="https://cdn.jsdelivr.net/gh/wjwABCDEFG/blog_img/img/20210717223234.jpg" alt="1208-尽可能使字符串相等">
                 </p>
             </a>
             
@@ -830,28 +823,9 @@
         
         <article class="media">
             
-            <a href="/spring/%E6%8C%81%E7%BB%AD%E6%9B%B4%E6%96%B0-%E8%AE%B0%E5%BD%95%E6%88%91%E7%9A%84%E6%AF%95%E8%AE%BE/" class="media-left">
-                <p class="image is-64x64">
-                    <img class="thumbnail" src="images/loading.gif" data-original="/images/thumbnail.svg" alt="持续更新-记录我的毕设">
-                </p>
-            </a>
-            
-            <div class="media-content">
-                <div class="content">
-                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2021-04-01T15:06:25.000Z">2021-04-01</time></div>
-                    <a href="/spring/%E6%8C%81%E7%BB%AD%E6%9B%B4%E6%96%B0-%E8%AE%B0%E5%BD%95%E6%88%91%E7%9A%84%E6%AF%95%E8%AE%BE/" class="title has-link-black-ter is-size-6 has-text-weight-normal">持续更新-记录我的毕设</a>
-                    <p class="is-size-7 is-uppercase">
-                        <a class="has-link-grey -link" href="/categories/spring/">spring</a>
-                    </p>
-                </div>
-            </div>
-        </article>
-        
-        <article class="media">
-            
             <a href="/life/%E4%B8%BA%E6%AF%95%E4%B8%9A%E5%81%9A%E5%87%86%E5%A4%87/" class="media-left">
                 <p class="image is-64x64">
-                    <img class="thumbnail" src="images/loading.gif" data-original="https://z3.ax1x.com/2021/04/01/cVlcoF.md.jpg" alt="为毕业做准备">
+                    <img class="thumbnail" src="images/loading.gif" data-original="https://cdn.jsdelivr.net/gh/wjwABCDEFG/blog_img/img/20210717225951.jpeg" alt="为毕业做准备">
                 </p>
             </a>
             
@@ -870,7 +844,7 @@
             
             <a href="/life/mhxy-experience/" class="media-left">
                 <p class="image is-64x64">
-                    <img class="thumbnail" src="images/loading.gif" data-original="https://z3.ax1x.com/2021/04/01/cVMuwD.md.png" alt="梦幻西游游戏体验">
+                    <img class="thumbnail" src="images/loading.gif" data-original="https://cdn.jsdelivr.net/gh/wjwABCDEFG/blog_img/img/20210717223725.png" alt="梦幻西游游戏体验">
                 </p>
             </a>
             
@@ -889,7 +863,7 @@
             
             <a href="/games/3DMath-Primerfor-Graphics-and-Game-Development-note/" class="media-left">
                 <p class="image is-64x64">
-                    <img class="thumbnail" src="images/loading.gif" data-original="https://source.acexy.cn/view/XgMS4U2" alt="3D数学基础图形与游戏研发笔记">
+                    <img class="thumbnail" src="images/loading.gif" data-original="https://cdn.jsdelivr.net/gh/wjwABCDEFG/blog_img/img/20210717223435.jpeg" alt="3D数学基础图形与游戏研发笔记">
                 </p>
             </a>
             
@@ -908,7 +882,26 @@
             
             <a href="/algorithms/get-equal-substrings-within-budget/" class="media-left">
                 <p class="image is-64x64">
-                    <img class="thumbnail" src="images/loading.gif" data-original="https://source.acexy.cn/view/Xd2g803" alt="1208-尽可能使字符串相等">
+                    <img class="thumbnail" src="images/loading.gif" data-original="https://cdn.jsdelivr.net/gh/wjwABCDEFG/blog_img/img/20210717223615.jpg" alt="1011-在D天内送达包裹的能力">
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2021-02-05T16:00:24.000Z">2021-02-06</time></div>
+                    <a href="/algorithms/get-equal-substrings-within-budget/" class="title has-link-black-ter is-size-6 has-text-weight-normal">1011-在D天内送达包裹的能力</a>
+                    <p class="is-size-7 is-uppercase">
+                        <a class="has-link-grey -link" href="/categories/algorithms/">数据结构和算法</a>
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+        <article class="media">
+            
+            <a href="/algorithms/get-equal-substrings-within-budget/" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="images/loading.gif" data-original="https://cdn.jsdelivr.net/gh/wjwABCDEFG/blog_img/img/20210717223234.jpg" alt="1208-尽可能使字符串相等">
                 </p>
             </a>
             
@@ -938,7 +931,7 @@
             <div class="level-start has-text-centered-mobile">
                 <a class="footer-logo is-block has-mb-6" href="/">
                 
-                    <img src="images/loading.gif" data-original="/images/logo.png" alt="JWT+RSA非对称加密实现无状态登录" height="28">
+                    <img src="images/loading.gif" data-original="https://cdn.jsdelivr.net/gh/wjwABCDEFG/blog_img/img/20210717231246.png" alt="JWT+RSA非对称加密实现无状态登录" height="28">
                 
                 </a>
                 <p class="is-size-7">

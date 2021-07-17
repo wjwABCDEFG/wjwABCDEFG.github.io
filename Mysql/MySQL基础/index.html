@@ -17,13 +17,13 @@
 <meta property="og:site_name" content="小温 blog">
 <meta property="og:description" content="1. MySQL基本架构">
 <meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="https://source.acexy.cn/view/XWXapQ2">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/wjwABCDEFG/blog_img/img/20210717213825.jpg">
 <meta property="article:published_time" content="2020-11-04T11:22:43.000Z">
-<meta property="article:modified_time" content="2020-12-09T09:28:50.356Z">
+<meta property="article:modified_time" content="2021-07-17T13:40:59.065Z">
 <meta property="article:author" content="wjw">
 <meta property="article:tag" content="笔试面试">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="https://source.acexy.cn/view/XWXapQ2">
+<meta name="twitter:image" content="https://cdn.jsdelivr.net/gh/wjwABCDEFG/blog_img/img/20210717213825.jpg">
 
 
 
@@ -81,7 +81,7 @@
         <div class="navbar-brand is-flex-center">
             <a class="navbar-item navbar-logo" href="/">
             
-                <img src="images/loading.gif" data-original="/images/logo.png" alt="MySQL基础" height="28">
+                <img src="images/loading.gif" data-original="https://cdn.jsdelivr.net/gh/wjwABCDEFG/blog_img/img/20210717231246.png" alt="MySQL基础" height="28">
             
             </a>
         </div>
@@ -139,7 +139,7 @@
     
     <div class="card-image">
         <span  class="image is-7by1">
-            <img class="thumbnail" src="images/loading.gif" data-original="https://source.acexy.cn/view/XWXapQ2" alt="MySQL基础">
+            <img class="thumbnail" src="images/loading.gif" data-original="https://cdn.jsdelivr.net/gh/wjwABCDEFG/blog_img/img/20210717213825.jpg" alt="MySQL基础">
         </span>
     </div>
     
@@ -157,7 +157,7 @@
                 <span class="level-item has-text-grey">
                     
                     
-                    21 分钟 读完 (大约 3113 个字)
+                    21 分钟 读完 (大约 3143 个字)
                 </span>
                 
                 
@@ -177,11 +177,11 @@
         <div class="content">
             <h1 id="1-MySQL基本架构"><a href="#1-MySQL基本架构" class="headerlink" title="1. MySQL基本架构"></a>1. MySQL基本架构</h1><a id="more"></a>
 
-<p><img src="images/loading.gif" data-original="https://s1.ax1x.com/2020/11/04/BgMnW4.png" alt="流程"></p>
+<p><img src="images/loading.gif" data-original="https://cdn.jsdelivr.net/gh/wjwABCDEFG/blog_img/img/20210717213840.png" alt="流程"></p>
 <h2 id="连接器"><a href="#连接器" class="headerlink" title="连接器"></a><strong>连接器</strong></h2><p>客户端每发起一个连接请求，首先经过连接器，建立<strong>tcp连接</strong>，<strong>校验账号密码</strong>。连接器会维护<strong>连接列表</strong>processlist 可以通过<code>show processlist</code>查看，其中刚开启的线程处于<strong>sleep状态</strong></p>
-<p><img src="images/loading.gif" data-original="https://s1.ax1x.com/2020/11/04/BgQl9g.png" alt="BgQl9g.png"></p>
+<p><img src="images/loading.gif" data-original="https://cdn.jsdelivr.net/gh/wjwABCDEFG/blog_img/img/20210717213847.png" alt="BgQl9g.png"></p>
 <p>Time代表已Sleep的时间，如果<strong>超过了wait_timeout需要重连，默认8小时</strong>，可以通过<code>show variables like &#39;%timeout%&#39;</code>命令查看</p>
-<p><img src="images/loading.gif" data-original="https://s1.ax1x.com/2020/11/04/Bg1NfU.png" alt="Bg1NfU.png"></p>
+<p><img src="images/loading.gif" data-original="https://cdn.jsdelivr.net/gh/wjwABCDEFG/blog_img/img/20210717213852.png" alt="Bg1NfU.png"></p>
 <p>为了防止断线重连，可以采用如下方法：</p>
 <ul>
 <li><strong>长连接</strong>：由于连接在内存中，容易造成<strong>OOM异常，mysql重启，jvm会Full GC</strong></li>
@@ -226,8 +226,8 @@
 <li>自动崩溃恢复</li>
 </ul>
 <p>InnoDB页结构，16kb</p>
-<p><img src="images/loading.gif" data-original="https://s1.ax1x.com/2020/11/05/B2TUfA.png" alt="页结构"></p>
-<p><img src="images/loading.gif" data-original="https://s1.ax1x.com/2020/11/05/B2HhZT.png" alt=""></p>
+<p><img src="images/loading.gif" data-original="https://cdn.jsdelivr.net/gh/wjwABCDEFG/blog_img/img/20210717213931.png" alt="页结构"></p>
+<p><img src="images/loading.gif" data-original="https://cdn.jsdelivr.net/gh/wjwABCDEFG/blog_img/img/20210717213942.png" alt=""></p>
 <p>索引B+树中⼀个节点为⼀⻚或⻚的倍数最为合适，如果读取1.2页也要读取2页</p>
 <br>
 
@@ -283,10 +283,10 @@
 <p>解释：</p>
 <p>更新语句–&gt;写redo log–&gt;更新内存数据–&gt;空闲/按策略将redo log写入磁盘，这种先写日志再写磁盘的技术称为WAL(Write Ahead logging)</p>
 <p>redo log大小是固定的，循环写。write pos走在前面，表示当前写入redo log的位置。checkpoint表示同步到磁盘的位置。如下图</p>
-<p><img src="images/loading.gif" data-original="https://s1.ax1x.com/2020/11/05/B2WuKe.png" alt=""></p>
+<p><img src="images/loading.gif" data-original="https://cdn.jsdelivr.net/gh/wjwABCDEFG/blog_img/img/20210717213950.png" alt=""></p>
 <p>有一条update语句执行，redo log从write pos开始往右写，到头后循环到最左边继续，当碰到check point说明redo log满了，会立即同步到磁盘。</p>
 <p>同样的，如果空闲了也会同步到磁盘，checkpoint也会往右移，当碰到write pos说明redo log空了。</p>
-<p><img src="images/loading.gif" data-original="https://s1.ax1x.com/2020/11/05/B2IREQ.png" alt="redo log刷写硬盘过程"></p>
+<p><img src="images/loading.gif" data-original="https://cdn.jsdelivr.net/gh/wjwABCDEFG/blog_img/img/20210717213956.png" alt="redo log刷写硬盘过程"></p>
 <h2 id="3-2-undo-log"><a href="#3-2-undo-log" class="headerlink" title="3.2 undo log"></a>3.2 undo log</h2><p>内容：记录事务开始前的值</p>
 <p>作用：用于回滚，同时可以提供多版本并发控制下的读（MVCC），也即非锁定读</p>
 <p>层级：innoDB层面</p>
@@ -321,15 +321,15 @@
 <h3 id="并发问题"><a href="#并发问题" class="headerlink" title="并发问题"></a>并发问题</h3><ul>
 <li><strong>脏读（dirty read）</strong> ：如果⼀个事务读到了另⼀个未提交事务修改过的数据。</li>
 </ul>
-<p><img src="images/loading.gif" data-original="https://s1.ax1x.com/2020/11/05/B2qQ4e.png" alt=""></p>
+<p><img src="images/loading.gif" data-original="https://cdn.jsdelivr.net/gh/wjwABCDEFG/blog_img/img/20210717214008.png" alt=""></p>
 <ul>
 <li><strong>不可重复读（non-repeatable read）</strong>：如果⼀个事务只能读到另⼀个已经提交的事务修改过的数据，并且其他事务每对该数据进⾏⼀次修改并提交后，该事务都能查询得到最新值。</li>
 </ul>
-<p><img src="images/loading.gif" data-original="https://s1.ax1x.com/2020/11/05/BRp6Kg.png" alt=""></p>
+<p><img src="images/loading.gif" data-original="https://cdn.jsdelivr.net/gh/wjwABCDEFG/blog_img/img/20210717214020.png" alt=""></p>
 <ul>
 <li><strong>幻读（phantom read）</strong>：如果⼀个事务先根据某些条件查询出⼀些记录，之后另⼀个事务⼜向表中插⼊了符合这些条件的记录，原先的事务再次按照该条件查询时，能把另⼀个事务插⼊的记录也读出来。</li>
 </ul>
-<p><img src="images/loading.gif" data-original="https://s1.ax1x.com/2020/11/05/BRpHr4.png" alt="幻读"></p>
+<p><img src="images/loading.gif" data-original="https://cdn.jsdelivr.net/gh/wjwABCDEFG/blog_img/img/20210717214030.png" alt="幻读"></p>
 <p>ps：不可重复读和幻读有点像，主要区别在于不可重复读是两次查询某一条数据的修改，幻读是查询整张表出现的新增。也就是新增那行原来不存在所以锁不住，控制的手段也会不一样。</p>
 <h3 id="对应解决"><a href="#对应解决" class="headerlink" title="对应解决"></a>对应解决</h3><ul>
 <li><p>读未提交：啥都不能解决</p>
@@ -345,12 +345,12 @@
 
 <h2 id="MVCC"><a href="#MVCC" class="headerlink" title="MVCC"></a>MVCC</h2><p><strong>读提交</strong>和<strong>可重复读</strong>为什么可以读取另一个事务开始前的数据呢？这里就要提到MVCC（Multi-Version Concurrency Control ，多版本并发控制），在事务在启动的时候就“拍了个快照”，这个快照被称为<strong>一致性视图</strong>。</p>
 <p>那快照是怎么实现的呢？当然不需要完全复制一张表，而是使用了undo log中一个叫<strong>版本链</strong>的东西，事实上每一行数据都有隐藏的trx_id记录了每一个版本，还有一个roll_pointer指针域指向旧版本，形成一个undo log链表</p>
-<p><img src="images/loading.gif" data-original="https://s1.ax1x.com/2020/11/05/BRFoDS.png" alt="undo log"></p>
+<p><img src="images/loading.gif" data-original="https://cdn.jsdelivr.net/gh/wjwABCDEFG/blog_img/img/20210717214039.png" alt="undo log"></p>
 <p>MVCC就是根据某一个版本生成对应的一致性视图</p>
 <p><strong>如果是读提交，则在每个SQL执行前生成</strong></p>
-<p><img src="images/loading.gif" data-original="https://s1.ax1x.com/2020/11/05/BRFjg0.png" alt="读提交生成视图时间"></p>
+<p><img src="images/loading.gif" data-original="https://cdn.jsdelivr.net/gh/wjwABCDEFG/blog_img/img/20210717214047.png" alt="读提交生成视图时间"></p>
 <p><strong>如果是可重复读，则只在第一次查询的时候生成一次</strong></p>
-<p><img src="images/loading.gif" data-original="https://s1.ax1x.com/2020/11/05/BRkYKf.png" alt="可重复读生成视图时间"></p>
+<p><img src="images/loading.gif" data-original="https://cdn.jsdelivr.net/gh/wjwABCDEFG/blog_img/img/20210717214054.png" alt="可重复读生成视图时间"></p>
 <br>
 
 <h1 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h1><p>本文参考</p>
@@ -418,7 +418,7 @@
                 <div>
                     
                     <figure class="image is-128x128 has-mb-6">
-                        <img class="is-rounded" src="images/loading.gif" data-original="https://s1.ax1x.com/2020/07/20/Ufuf4e.th.jpg" alt="wjwABCDEFG">
+                        <img class="is-rounded" src="images/loading.gif" data-original="https://cdn.jsdelivr.net/gh/wjwABCDEFG/blog_img/img/20210717231547.jpeg" alt="wjwABCDEFG">
                     </figure>
                     
                     <p class="is-size-4 is-block">
@@ -443,7 +443,7 @@
                     </p>
                     <a href="/archives">
                         <p class="title has-text-weight-normal">
-                            102
+                            101
                         </p>
                     </a>
                 </div>
@@ -455,7 +455,7 @@
                     </p>
                     <a href="/categories">
                         <p class="title has-text-weight-normal">
-                            15
+                            14
                         </p>
                     </a>
                 </div>
@@ -544,14 +544,6 @@
         <a class="level is-marginless" href="/categories/redis/">
             <span class="level-start">
                 <span class="level-item">redis</span>
-            </span>
-            <span class="level-end">
-                <span class="level-item tag">1</span>
-            </span>
-        </a></li><li>
-        <a class="level is-marginless" href="/categories/spring/">
-            <span class="level-start">
-                <span class="level-item">spring</span>
             </span>
             <span class="level-end">
                 <span class="level-item tag">1</span>
@@ -752,28 +744,9 @@
         
         <article class="media">
             
-            <a href="/spring/%E6%8C%81%E7%BB%AD%E6%9B%B4%E6%96%B0-%E8%AE%B0%E5%BD%95%E6%88%91%E7%9A%84%E6%AF%95%E8%AE%BE/" class="media-left">
-                <p class="image is-64x64">
-                    <img class="thumbnail" src="images/loading.gif" data-original="/images/thumbnail.svg" alt="持续更新-记录我的毕设">
-                </p>
-            </a>
-            
-            <div class="media-content">
-                <div class="content">
-                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2021-04-01T15:06:25.000Z">2021-04-01</time></div>
-                    <a href="/spring/%E6%8C%81%E7%BB%AD%E6%9B%B4%E6%96%B0-%E8%AE%B0%E5%BD%95%E6%88%91%E7%9A%84%E6%AF%95%E8%AE%BE/" class="title has-link-black-ter is-size-6 has-text-weight-normal">持续更新-记录我的毕设</a>
-                    <p class="is-size-7 is-uppercase">
-                        <a class="has-link-grey -link" href="/categories/spring/">spring</a>
-                    </p>
-                </div>
-            </div>
-        </article>
-        
-        <article class="media">
-            
             <a href="/life/%E4%B8%BA%E6%AF%95%E4%B8%9A%E5%81%9A%E5%87%86%E5%A4%87/" class="media-left">
                 <p class="image is-64x64">
-                    <img class="thumbnail" src="images/loading.gif" data-original="https://z3.ax1x.com/2021/04/01/cVlcoF.md.jpg" alt="为毕业做准备">
+                    <img class="thumbnail" src="images/loading.gif" data-original="https://cdn.jsdelivr.net/gh/wjwABCDEFG/blog_img/img/20210717225951.jpeg" alt="为毕业做准备">
                 </p>
             </a>
             
@@ -792,7 +765,7 @@
             
             <a href="/life/mhxy-experience/" class="media-left">
                 <p class="image is-64x64">
-                    <img class="thumbnail" src="images/loading.gif" data-original="https://z3.ax1x.com/2021/04/01/cVMuwD.md.png" alt="梦幻西游游戏体验">
+                    <img class="thumbnail" src="images/loading.gif" data-original="https://cdn.jsdelivr.net/gh/wjwABCDEFG/blog_img/img/20210717223725.png" alt="梦幻西游游戏体验">
                 </p>
             </a>
             
@@ -811,7 +784,7 @@
             
             <a href="/games/3DMath-Primerfor-Graphics-and-Game-Development-note/" class="media-left">
                 <p class="image is-64x64">
-                    <img class="thumbnail" src="images/loading.gif" data-original="https://source.acexy.cn/view/XgMS4U2" alt="3D数学基础图形与游戏研发笔记">
+                    <img class="thumbnail" src="images/loading.gif" data-original="https://cdn.jsdelivr.net/gh/wjwABCDEFG/blog_img/img/20210717223435.jpeg" alt="3D数学基础图形与游戏研发笔记">
                 </p>
             </a>
             
@@ -830,7 +803,26 @@
             
             <a href="/algorithms/get-equal-substrings-within-budget/" class="media-left">
                 <p class="image is-64x64">
-                    <img class="thumbnail" src="images/loading.gif" data-original="https://source.acexy.cn/view/Xd2g803" alt="1208-尽可能使字符串相等">
+                    <img class="thumbnail" src="images/loading.gif" data-original="https://cdn.jsdelivr.net/gh/wjwABCDEFG/blog_img/img/20210717223615.jpg" alt="1011-在D天内送达包裹的能力">
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2021-02-05T16:00:24.000Z">2021-02-06</time></div>
+                    <a href="/algorithms/get-equal-substrings-within-budget/" class="title has-link-black-ter is-size-6 has-text-weight-normal">1011-在D天内送达包裹的能力</a>
+                    <p class="is-size-7 is-uppercase">
+                        <a class="has-link-grey -link" href="/categories/algorithms/">数据结构和算法</a>
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+        <article class="media">
+            
+            <a href="/algorithms/get-equal-substrings-within-budget/" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="images/loading.gif" data-original="https://cdn.jsdelivr.net/gh/wjwABCDEFG/blog_img/img/20210717223234.jpg" alt="1208-尽可能使字符串相等">
                 </p>
             </a>
             
@@ -981,28 +973,9 @@
         
         <article class="media">
             
-            <a href="/spring/%E6%8C%81%E7%BB%AD%E6%9B%B4%E6%96%B0-%E8%AE%B0%E5%BD%95%E6%88%91%E7%9A%84%E6%AF%95%E8%AE%BE/" class="media-left">
-                <p class="image is-64x64">
-                    <img class="thumbnail" src="images/loading.gif" data-original="/images/thumbnail.svg" alt="持续更新-记录我的毕设">
-                </p>
-            </a>
-            
-            <div class="media-content">
-                <div class="content">
-                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2021-04-01T15:06:25.000Z">2021-04-01</time></div>
-                    <a href="/spring/%E6%8C%81%E7%BB%AD%E6%9B%B4%E6%96%B0-%E8%AE%B0%E5%BD%95%E6%88%91%E7%9A%84%E6%AF%95%E8%AE%BE/" class="title has-link-black-ter is-size-6 has-text-weight-normal">持续更新-记录我的毕设</a>
-                    <p class="is-size-7 is-uppercase">
-                        <a class="has-link-grey -link" href="/categories/spring/">spring</a>
-                    </p>
-                </div>
-            </div>
-        </article>
-        
-        <article class="media">
-            
             <a href="/life/%E4%B8%BA%E6%AF%95%E4%B8%9A%E5%81%9A%E5%87%86%E5%A4%87/" class="media-left">
                 <p class="image is-64x64">
-                    <img class="thumbnail" src="images/loading.gif" data-original="https://z3.ax1x.com/2021/04/01/cVlcoF.md.jpg" alt="为毕业做准备">
+                    <img class="thumbnail" src="images/loading.gif" data-original="https://cdn.jsdelivr.net/gh/wjwABCDEFG/blog_img/img/20210717225951.jpeg" alt="为毕业做准备">
                 </p>
             </a>
             
@@ -1021,7 +994,7 @@
             
             <a href="/life/mhxy-experience/" class="media-left">
                 <p class="image is-64x64">
-                    <img class="thumbnail" src="images/loading.gif" data-original="https://z3.ax1x.com/2021/04/01/cVMuwD.md.png" alt="梦幻西游游戏体验">
+                    <img class="thumbnail" src="images/loading.gif" data-original="https://cdn.jsdelivr.net/gh/wjwABCDEFG/blog_img/img/20210717223725.png" alt="梦幻西游游戏体验">
                 </p>
             </a>
             
@@ -1040,7 +1013,7 @@
             
             <a href="/games/3DMath-Primerfor-Graphics-and-Game-Development-note/" class="media-left">
                 <p class="image is-64x64">
-                    <img class="thumbnail" src="images/loading.gif" data-original="https://source.acexy.cn/view/XgMS4U2" alt="3D数学基础图形与游戏研发笔记">
+                    <img class="thumbnail" src="images/loading.gif" data-original="https://cdn.jsdelivr.net/gh/wjwABCDEFG/blog_img/img/20210717223435.jpeg" alt="3D数学基础图形与游戏研发笔记">
                 </p>
             </a>
             
@@ -1059,7 +1032,26 @@
             
             <a href="/algorithms/get-equal-substrings-within-budget/" class="media-left">
                 <p class="image is-64x64">
-                    <img class="thumbnail" src="images/loading.gif" data-original="https://source.acexy.cn/view/Xd2g803" alt="1208-尽可能使字符串相等">
+                    <img class="thumbnail" src="images/loading.gif" data-original="https://cdn.jsdelivr.net/gh/wjwABCDEFG/blog_img/img/20210717223615.jpg" alt="1011-在D天内送达包裹的能力">
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2021-02-05T16:00:24.000Z">2021-02-06</time></div>
+                    <a href="/algorithms/get-equal-substrings-within-budget/" class="title has-link-black-ter is-size-6 has-text-weight-normal">1011-在D天内送达包裹的能力</a>
+                    <p class="is-size-7 is-uppercase">
+                        <a class="has-link-grey -link" href="/categories/algorithms/">数据结构和算法</a>
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+        <article class="media">
+            
+            <a href="/algorithms/get-equal-substrings-within-budget/" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="images/loading.gif" data-original="https://cdn.jsdelivr.net/gh/wjwABCDEFG/blog_img/img/20210717223234.jpg" alt="1208-尽可能使字符串相等">
                 </p>
             </a>
             
@@ -1089,7 +1081,7 @@
             <div class="level-start has-text-centered-mobile">
                 <a class="footer-logo is-block has-mb-6" href="/">
                 
-                    <img src="images/loading.gif" data-original="/images/logo.png" alt="MySQL基础" height="28">
+                    <img src="images/loading.gif" data-original="https://cdn.jsdelivr.net/gh/wjwABCDEFG/blog_img/img/20210717231246.png" alt="MySQL基础" height="28">
                 
                 </a>
                 <p class="is-size-7">

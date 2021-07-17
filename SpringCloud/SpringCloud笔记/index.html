@@ -17,13 +17,13 @@
 <meta property="og:site_name" content="小温 blog">
 <meta property="og:description" content="1. 分布式概述回顾我们以前的项目，从大一到大三，架构慢慢的演变，从一开始堆在一起（乱成一团），到分成多个包，三层架构（水平拆分），到前后端分离成两个项目，后面后台部分分成多个模块小组开发（垂直拆分）等等 传统架构–&gt;水平拆分–&gt;垂直拆分（最早的分布式）–&gt;soa(dubbo)–&gt;微服务(springCloud) 接下来我们要接触到一些分布式，解决一些高并发情况">
 <meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="https://wx1.sbimg.cn/2020/07/30/P7jno.md.jpg">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/wjwABCDEFG/blog_img/img/20210717191941.jpg">
 <meta property="article:published_time" content="2020-06-27T15:11:15.000Z">
-<meta property="article:modified_time" content="2020-12-07T02:46:22.550Z">
+<meta property="article:modified_time" content="2021-07-17T11:30:52.531Z">
 <meta property="article:author" content="wjw">
 <meta property="article:tag" content="开发">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="https://wx1.sbimg.cn/2020/07/30/P7jno.md.jpg">
+<meta name="twitter:image" content="https://cdn.jsdelivr.net/gh/wjwABCDEFG/blog_img/img/20210717191941.jpg">
 
 
 
@@ -81,7 +81,7 @@
         <div class="navbar-brand is-flex-center">
             <a class="navbar-item navbar-logo" href="/">
             
-                <img src="images/loading.gif" data-original="/images/logo.png" alt="SpringCloud笔记" height="28">
+                <img src="images/loading.gif" data-original="https://cdn.jsdelivr.net/gh/wjwABCDEFG/blog_img/img/20210717231246.png" alt="SpringCloud笔记" height="28">
             
             </a>
         </div>
@@ -139,7 +139,7 @@
     
     <div class="card-image">
         <span  class="image is-7by1">
-            <img class="thumbnail" src="images/loading.gif" data-original="https://wx1.sbimg.cn/2020/07/30/P7jno.md.jpg" alt="SpringCloud笔记">
+            <img class="thumbnail" src="images/loading.gif" data-original="https://cdn.jsdelivr.net/gh/wjwABCDEFG/blog_img/img/20210717191941.jpg" alt="SpringCloud笔记">
         </span>
     </div>
     
@@ -157,7 +157,7 @@
                 <span class="level-item has-text-grey">
                     
                     
-                    1 小时 读完 (大约 8179 个字)
+                    1 小时 读完 (大约 8324 个字)
                 </span>
                 
                 
@@ -181,7 +181,7 @@
 <a id="more"></a>
 
 <p>早期简单的分布式，就是启动多个相同的后台模块（比如启动多个用户管理模块，多个赛事管理模块）作为“服务”，然后前端发送请求时不是直接到服务，而是到一个分发中心模块，这个分发中心就平均分配请求到相同服务（这就是负载均衡），从而减轻其中一个服务的并发压力。</p>
-<p><img src="images/loading.gif" data-original="https://s1.ax1x.com/2020/06/24/NwMsDH.png" alt="NwMsDH.png"></p>
+<p><img src="images/loading.gif" data-original="https://cdn.jsdelivr.net/gh/wjwABCDEFG/blog_img/img/20210717191958.png" alt="NwMsDH.png"></p>
 <p>随着服务越来越多，目前主流的两个分布式服务架构：以dubbo为代表的采用RPC协议方式的SOA架构和以springcloud为代表的采用HTTP协议方式的微服务架构</p>
 <blockquote>
 <ul>
@@ -195,7 +195,7 @@
 <h2 id="1-1-流动计算架构（SOA）"><a href="#1-1-流动计算架构（SOA）" class="headerlink" title="1.1 流动计算架构（SOA）"></a>1.1 流动计算架构（SOA）</h2><p>SOA ：面向服务的架构</p>
 <p><em>代表就是dubbo（微服务和soa都是解决大量的服务的问题，界限其实并没有那么明显，soa也通常被视为微服务的一种方式，所以也有人说dubbo是微服务框架。另外由于采用了rpc协议，也有人说dubbo是rpc框架，我认为只是角度不同，都可以）</em></p>
 <p>当服务越来越多，容量的评估，小服务资源的浪费等问题逐渐显现，此时需增加一个调度中心基于访问压力实时管理集群容量，提高集群利用率。此时，用于提高机器利用率的资源调度和治理中心(SOA)是关键</p>
-<p><img src="images/loading.gif" data-original="https://s1.ax1x.com/2020/06/24/NwlYfx.png" alt="NwlYfx.png"></p>
+<p><img src="images/loading.gif" data-original="https://cdn.jsdelivr.net/gh/wjwABCDEFG/blog_img/img/20210717192004.png" alt="NwlYfx.png"></p>
 <p>以前出现了什么问题？</p>
 <ul>
 <li>服务越来越多，需要管理每个服务的地址</li>
@@ -231,7 +231,7 @@
 </li>
 </ul>
 <p>微服务结构图：</p>
-<p><img src="images/loading.gif" data-original="https://s1.ax1x.com/2020/06/24/Nwlg9P.png" alt="Nwlg9P.png"></p>
+<p><img src="images/loading.gif" data-original="https://cdn.jsdelivr.net/gh/wjwABCDEFG/blog_img/img/20210717192010.png" alt="Nwlg9P.png"></p>
 <p>代表是springcloud，springcloud不是一个东西，是集成，把世界上最好的框架拿过来，多个组件集成到自己的项目中（官网的说法叫做分布式解决方案，多好听），有下面这几个组件，集成后实现了：配置管理，服务发现，智能路由，负载均衡，熔断器，控制总线，集群状态等等功能。</p>
 <ul>
 <li>Eureka：服务治理组件，包含服务注册中心，服务注册与发现机制的实现。（服务治理，服务注册/发现） </li>
@@ -240,7 +240,7 @@
 <li>Feign：服务调用，给予Ribbon和Hystrix的声明式服务调用组件 （声明式服务调用） </li>
 <li>Hystrix：容错管理组件，实现断路器模式，帮助服务依赖中出现的延迟和为故障提供强大的容错能力。(熔断、断路器，容错) </li>
 </ul>
-<p><img src="images/loading.gif" data-original="https://s1.ax1x.com/2020/06/24/NwJgOK.png" alt="NwJgOK.png"></p>
+<p><img src="images/loading.gif" data-original="https://cdn.jsdelivr.net/gh/wjwABCDEFG/blog_img/img/20210717192019.png" alt="NwJgOK.png"></p>
 <br>
 
 <h2 id="1-3-选择"><a href="#1-3-选择" class="headerlink" title="1.3 选择"></a>1.3 选择</h2><p>如果你们公司全部采用Java技术栈，那么使用Dubbo作为微服务架构是一个不错的选择。</p>
@@ -251,25 +251,25 @@
 <ol>
 <li>先用spring initializr创建一个springboot工程，作为服务提供者，也就是接触分布式之前的所谓“后台”，就不多做说明了。</li>
 </ol>
-<p><img src="images/loading.gif" data-original="https://s1.ax1x.com/2020/06/24/NwtrKx.png" alt="NwtrKx.png"></p>
+<p><img src="images/loading.gif" data-original="https://cdn.jsdelivr.net/gh/wjwABCDEFG/blog_img/img/20210717192056.png" alt="NwtrKx.png"></p>
 <ol start="2">
 <li>再创建一个模块作为服务消费者（也用spring initializr，但是只需要web，也就是mvc部分，不需要mysql,jdbc,mybatis那些），也就是上面说的分发中心，前端发送的http请求先到这个分发中心，分发中心经过负载均衡（后面会讲到负载均衡）再主动发送http请求给各个服务提供者。</li>
 </ol>
 <p>这个我也不多说了，直接建立就好</p>
-<p><img src="images/loading.gif" data-original="https://s1.ax1x.com/2020/06/24/Nwtvzn.png" alt="Nwtvzn.png"></p>
+<p><img src="images/loading.gif" data-original="https://cdn.jsdelivr.net/gh/wjwABCDEFG/blog_img/img/20210717192106.png" alt="Nwtvzn.png"></p>
 <p>消费者的引导类注入RestTemplate</p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@SpringBootApplication</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">FangspcloudServiceConsumerApplication</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Bean</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> RestTemplate <span class="title">restTemplate</span><span class="params">()</span></span>&#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">new</span> RestTemplate();</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">        SpringApplication.run(FangspcloudServiceConsumerApplication<span class="class">.<span class="keyword">class</span>, <span class="title">args</span>)</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
 <p>那么这个消费者的controller很简单，只需要主动发送http请求到提供者（也就是以前的controller）的服务接口就行</p>
-<p><img src="images/loading.gif" data-original="https://s1.ax1x.com/2020/06/24/NwaNa8.png" alt="NwaNa8.png"></p>
+<p><img src="images/loading.gif" data-original="https://cdn.jsdelivr.net/gh/wjwABCDEFG/blog_img/img/20210717192113.png" alt="NwaNa8.png"></p>
 <p>启动，访问的时候就是访问消费者的接口</p>
-<p><img src="images/loading.gif" data-original="C:%5CUsers%5Cwjw%5CAppData%5CRoaming%5CTypora%5Ctypora-user-images%5Cimage-20200624220522089.png" alt="image-20200624220522089"></p>
+<p><img src="images/loading.gif" data-original="https://cdn.jsdelivr.net/gh/wjwABCDEFG/blog_img/img/20210717192117.png" alt="image-20200624220522089"></p>
 <p>好，那么准备工作就做好了，其实到这一步，我们的工作和以前并无二异，只是</p>
 <p><em>以前：浏览器请求–&gt;后台</em></p>
 <p><em>现在：浏览器请求–&gt;后台1–&gt;后台2</em></p>
 <p>我们起这么个名字，方便讲解：浏览器请求–&gt;服务消费者–&gt;服务提供者</p>
 <p>我们说过了，模块化会有很多个服务提供者（这个我们之前小组开发做过了，模块化开发比如用户模块和赛事模块对吧），分布式呢，还会出现很多个相同的提供者，比如多个用户模块（比如多台服务器，就可以减轻压力），这个也简单，只要改个端口号然后在idea的配置中复制一份多次启动就可以了</p>
-<p><img src="images/loading.gif" data-original="https://s1.ax1x.com/2020/06/24/NwwJN8.png" alt="NwwJN8.png"></p>
+<p><img src="images/loading.gif" data-original="https://cdn.jsdelivr.net/gh/wjwABCDEFG/blog_img/img/20210717192127.png" alt="NwwJN8.png"></p>
 <p>这就是分布式的前提。</p>
 <br>
 
@@ -289,9 +289,9 @@
 <h2 id="3-2-eureka使用步骤"><a href="#3-2-eureka使用步骤" class="headerlink" title="3.2 eureka使用步骤"></a>3.2 eureka使用步骤</h2><ol>
 <li>为eureka搭建一个模块（服务注册中心），仍然用spring提供的初始化工具，不过这次勾选rureka Server</li>
 </ol>
-<p><img src="images/loading.gif" data-original="https://s1.ax1x.com/2020/06/24/NwBbXd.png" alt="NwBbXd.png"></p>
+<p><img src="images/loading.gif" data-original="https://cdn.jsdelivr.net/gh/wjwABCDEFG/blog_img/img/20210717192134.png" alt="NwBbXd.png"></p>
 <p>结构如下</p>
-<p><img src="images/loading.gif" data-original="https://s1.ax1x.com/2020/06/24/NwrcZR.png" alt="NwrcZR.png"></p>
+<p><img src="images/loading.gif" data-original="https://cdn.jsdelivr.net/gh/wjwABCDEFG/blog_img/img/20210717192142.png" alt="NwrcZR.png"></p>
 <ol>
 <li>确认依赖，一般都是没问题的</li>
 </ol>
@@ -331,11 +331,11 @@
 <ul>
 <li>提供者和消费者引导类都要加上注解</li>
 </ul>
-<p><img src="images/loading.gif" data-original="https://s1.ax1x.com/2020/06/24/Nws61S.png" alt="Nws61S.png"></p>
+<p><img src="images/loading.gif" data-original="https://cdn.jsdelivr.net/gh/wjwABCDEFG/blog_img/img/20210717192217.png" alt="Nws61S.png"></p>
 <ol start="5">
 <li>这样就配置好啦，依次启动eureka服务端和服务提供者消费者，然后可以访问<a href="http://localhost:10086看eureka的管理台了">http://localhost:10086看eureka的管理台了</a></li>
 </ol>
-<p><img src="images/loading.gif" data-original="https://s1.ax1x.com/2020/06/24/NwcgXD.png" alt="NwcgXD.png"></p>
+<p><img src="images/loading.gif" data-original="https://cdn.jsdelivr.net/gh/wjwABCDEFG/blog_img/img/20210717192222.png" alt="NwcgXD.png"></p>
 <p>这样就可以统一用eureka管理已注册的服务了</p>
 <br>
 
@@ -363,24 +363,24 @@
 <br>
 
 <h1 id="4-Ribbon"><a href="#4-Ribbon" class="headerlink" title="4. Ribbon"></a>4. Ribbon</h1><h2 id="4-1-ribbon概述"><a href="#4-1-ribbon概述" class="headerlink" title="4.1 ribbon概述"></a>4.1 ribbon概述</h2><p>前面说了ribbon可以帮助我们自动完成消息平均分发，是的就这么简单。要看复杂的概念也有，如下</p>
-<p><img src="images/loading.gif" data-original="https://s1.ax1x.com/2020/06/24/NwfjfA.png" alt="NwfjfA.png"></p>
+<p><img src="images/loading.gif" data-original="https://cdn.jsdelivr.net/gh/wjwABCDEFG/blog_img/img/20210717192249.png" alt="NwfjfA.png"></p>
 <h2 id="4-2-ribbon使用步骤"><a href="#4-2-ribbon使用步骤" class="headerlink" title="4.2 ribbon使用步骤"></a>4.2 ribbon使用步骤</h2><p>ribbon是在消费者中使用</p>
 <ol>
 <li>不需要引入依赖，因为ribbon通常不会单独使用，所以在引入eureka的时候自动就引入了ribbon</li>
 </ol>
-<p><img src="images/loading.gif" data-original="https://s1.ax1x.com/2020/06/24/NdyZIx.png" alt="NdyZIx.png"></p>
+<p><img src="images/loading.gif" data-original="https://cdn.jsdelivr.net/gh/wjwABCDEFG/blog_img/img/20210717192255.png" alt="NdyZIx.png"></p>
 <ol start="2">
 <li>前面说了我们可以对同一个服务提供者修改一下端口号然后再次启动，这样就有了多个提供者，且服务名一样，只是端口号不一样，可能说的不够细，咱们再细一点，配图</li>
 </ol>
-<p><img src="images/loading.gif" data-original="https://s1.ax1x.com/2020/06/24/NdWsw4.png" alt="NdWsw4.png"></p>
-<p><img src="images/loading.gif" data-original="https://s1.ax1x.com/2020/06/24/NdfS0g.png" alt="idea右上方的启动项中直接复制"></p>
-<p><img src="images/loading.gif" data-original="https://s1.ax1x.com/2020/06/24/NdhCDO.png" alt="dashboard面板（service面板）中就多一个启动项了"></p>
+<p><img src="images/loading.gif" data-original="https://cdn.jsdelivr.net/gh/wjwABCDEFG/blog_img/img/20210717192303.png" alt="NdWsw4.png"></p>
+<p><img src="images/loading.gif" data-original="https://cdn.jsdelivr.net/gh/wjwABCDEFG/blog_img/img/20210717192311.png" alt="idea右上方的启动项中直接复制"></p>
+<p><img src="images/loading.gif" data-original="https://cdn.jsdelivr.net/gh/wjwABCDEFG/blog_img/img/20210717192349.png" alt="dashboard面板（service面板）中就多一个启动项了"></p>
 <ol start="3">
 <li>服务消费者的引导类中，对restTemplate方法使用@LoadBalanced注解开启负载均衡</li>
 </ol>
-<p><img src="images/loading.gif" data-original="https://s1.ax1x.com/2020/06/24/Ndg1L4.png" alt="Ndg1L4.png"></p>
+<p><img src="images/loading.gif" data-original="https://cdn.jsdelivr.net/gh/wjwABCDEFG/blog_img/img/20210717192358.png" alt="Ndg1L4.png"></p>
 <p>4.消费者的restTemplate.getForObject方法里面通过 服务名 调用提供者的接口，因为此时有多个服务名相同的服务，所以就可以自动负载均衡啦！！！！</p>
-<p><img src="images/loading.gif" data-original="C:%5CUsers%5Cwjw%5CAppData%5CRoaming%5CTypora%5Ctypora-user-images%5Cimage-20200624171541633.png" alt="image-20200624171541633"></p>
+<p><img src="images/loading.gif" data-original="https://cdn.jsdelivr.net/gh/wjwABCDEFG/blog_img/img/20210717192402.png" alt="image-20200624171541633"></p>
 <ol start="5">
 <li>测试</li>
 </ol>
@@ -388,37 +388,37 @@
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@SpringBootTest</span></span><br><span class="line"><span class="meta">@RunWith</span>(SpringRunner<span class="class">.<span class="keyword">class</span>)</span></span><br><span class="line"><span class="class"><span class="title">public</span> <span class="title">class</span> <span class="title">RibbonLoadBalanceTest</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Autowired</span></span><br><span class="line">    <span class="keyword">private</span> RibbonLoadBalancerClient client;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Test</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">test</span><span class="params">()</span></span>&#123;</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; <span class="number">50</span>; i++) &#123;</span><br><span class="line">            ServiceInstance instance = <span class="keyword">this</span>.client.choose(<span class="string">"service-provider"</span>);</span><br><span class="line">            System.out.println(instance.getHost() + <span class="string">":"</span> + instance.getPort());</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
 <p>RibbonLoadBalanceClient有一个choose方法，可以获取负载均衡得到的实例</p>
-<p><img src="images/loading.gif" data-original="https://s1.ax1x.com/2020/06/24/NdIGPH.png" alt="NdIGPH.png"></p>
+<p><img src="images/loading.gif" data-original="https://cdn.jsdelivr.net/gh/wjwABCDEFG/blog_img/img/20210717192410.png" alt="NdIGPH.png"></p>
 <p>可以看到ribbon默认使用了轮询的方式</p>
 <h2 id="4-3-源码跟踪"><a href="#4-3-源码跟踪" class="headerlink" title="4.3 源码跟踪"></a>4.3 源码跟踪</h2><p>为什么我们只输入了service名称就可以访问了呢？之前还要获取ip和端口。</p>
 <p>显然有人帮我们根据service名称，获取到了服务实例的ip和端口。它就是<code>LoadBalancerInterceptor</code></p>
 <p>在如下代码打断点：</p>
-<p><img src="images/loading.gif" data-original="https://s1.ax1x.com/2020/06/24/NwFIRs.png" alt="NwFIRs.png"></p>
+<p><img src="images/loading.gif" data-original="https://cdn.jsdelivr.net/gh/wjwABCDEFG/blog_img/img/20210717192417.png" alt="NwFIRs.png"></p>
 <p>一路源码跟踪：RestTemplate.getForObject –&gt; RestTemplate.execute –&gt; RestTemplate.doExecute：</p>
-<p><img src="images/loading.gif" data-original="https://s1.ax1x.com/2020/06/24/NwkuQI.png" alt="NwkuQI.png"></p>
+<p><img src="images/loading.gif" data-original="https://cdn.jsdelivr.net/gh/wjwABCDEFG/blog_img/img/20210717192425.png" alt="NwkuQI.png"></p>
 <p>点击进入AbstractClientHttpRequest.execute –&gt; AbstractBufferingClientHttpRequest.executeInternal –&gt; InterceptingClientHttpRequest.executeInternal –&gt; InterceptingClientHttpRequest.execute:</p>
-<p><img src="images/loading.gif" data-original="https://s1.ax1x.com/2020/06/24/NwkYWj.png" alt="NwkYWj.png"></p>
+<p><img src="images/loading.gif" data-original="https://cdn.jsdelivr.net/gh/wjwABCDEFG/blog_img/img/20210717192431.png" alt="NwkYWj.png"></p>
 <p>继续跟入：LoadBalancerInterceptor.intercept方法</p>
-<p><img src="images/loading.gif" data-original="https://s1.ax1x.com/2020/06/24/NwkNSs.png" alt="NwkNSs.png"></p>
+<p><img src="images/loading.gif" data-original="https://cdn.jsdelivr.net/gh/wjwABCDEFG/blog_img/img/20210717192440.png" alt="NwkNSs.png"></p>
 <p>继续跟入execute方法：发现获取了8082端口的服务</p>
-<p><img src="images/loading.gif" data-original="https://s1.ax1x.com/2020/06/24/NwkokD.png" alt="NwkokD.png"></p>
+<p><img src="images/loading.gif" data-original="https://cdn.jsdelivr.net/gh/wjwABCDEFG/blog_img/img/20210717192448.png" alt="NwkokD.png"></p>
 <p>再跟下一次，发现获取的是8081：</p>
-<p><img src="images/loading.gif" data-original="https://s1.ax1x.com/2020/06/24/NwkOXt.png" alt="NwkOXt.png"></p>
+<p><img src="images/loading.gif" data-original="https://cdn.jsdelivr.net/gh/wjwABCDEFG/blog_img/img/20210717192458.png" alt="NwkOXt.png"></p>
 <p><em>这就是负载均衡读取到不同端口的大致过程</em></p>
 <br>
 
 <p>上面提到了负载均衡器和负载均衡算法，也就是默认的是轮询方式。如果我们想自定义负载均衡策略，可以继续深入可以图中负载均衡算法那个类ILoadBalancer，可以看到是一个接口，继承了BaseLoadBalancer</p>
-<p><img src="images/loading.gif" data-original="https://s1.ax1x.com/2020/06/24/NwEtrq.png" alt="NwEtrq.png"></p>
+<p><img src="images/loading.gif" data-original="https://cdn.jsdelivr.net/gh/wjwABCDEFG/blog_img/img/20210717192506.png" alt="NwEtrq.png"></p>
 <p>我们看看这个rule是谁：</p>
-<p> <img src="images/loading.gif" data-original="https://s1.ax1x.com/2020/06/24/NwEWdK.png" alt="NwEWdK.png"></p>
+<p> <img src="images/loading.gif" data-original="https://cdn.jsdelivr.net/gh/wjwABCDEFG/blog_img/img/20210717192515.png" alt="NwEWdK.png"></p>
 <p>这里的rule默认值是一个<code>RoundRobinRule</code>，看类的介绍：</p>
-<p> <img src="images/loading.gif" data-original="https://s1.ax1x.com/2020/06/24/NwE5Je.png" alt="NwE5Je.png"></p>
+<p> <img src="images/loading.gif" data-original="https://cdn.jsdelivr.net/gh/wjwABCDEFG/blog_img/img/20210717192522.png" alt="NwE5Je.png"></p>
 <p>这不就是轮询的意思嘛。</p>
 <p>我们注意到，这个类其实是实现了接口IRule的，查看一下：</p>
-<p><img src="images/loading.gif" data-original="https://s1.ax1x.com/2020/06/24/NwEXo8.png" alt="NwEXo8.png"></p>
+<p><img src="images/loading.gif" data-original="https://cdn.jsdelivr.net/gh/wjwABCDEFG/blog_img/img/20210717192526.png" alt="NwEXo8.png"></p>
 <p>定义负载均衡的规则接口。</p>
 <p>它有以下实现：</p>
-<p><img src="images/loading.gif" data-original="https://s1.ax1x.com/2020/06/24/NwVgpQ.png" alt="NwVgpQ.png"></p>
+<p><img src="images/loading.gif" data-original="https://cdn.jsdelivr.net/gh/wjwABCDEFG/blog_img/img/20210717192535.png" alt="NwVgpQ.png"></p>
 <p><strong>通过上面源码的分析，我们也可以试图猜测一下默认轮询的工作方式，记录一个count，消费方每次count++，然后%n个提供方，为几就分配到第几个提供方。当然源码内部非常复杂且实现时要考虑很多因素没有这么简单，不过错了也没关系，咱们就看过的这几段大胆的猜测就行。</strong></p>
 <br>
 
@@ -426,7 +426,7 @@
 <figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">service-provider: # 服务提供方的服务名</span><br><span class="line">  ribbon:</span><br><span class="line">    NFLoadBalancerRuleClassName: com.netflix.loadbalancer.RandomRule</span><br></pre></td></tr></table></figure>
 
 <p>service-provider顶格写，这里不会有提示，甚至提示没有这项配置，没关系，大胆写，这时候再跑测试用例，可以看到是随机的了</p>
-<p><img src="images/loading.gif" data-original="C:%5CUsers%5Cwjw%5CAppData%5CRoaming%5CTypora%5Ctypora-user-images%5Cimage-20200624201741329.png" alt="image-20200624201741329"></p>
+<p><img src="images/loading.gif" data-original="https://cdn.jsdelivr.net/gh/wjwABCDEFG/blog_img/img/20210717192542.png" alt="image-20200624201741329"></p>
 <p>ribbon做了处理，无论是哪种方式，分配给各个提供方的数量大体上是一样的</p>
 <br>
 
@@ -468,31 +468,31 @@
 <ol start="3">
 <li>引导类加注解@EnableCircuitBreaker</li>
 </ol>
-<p><img src="images/loading.gif" data-original="https://s1.ax1x.com/2020/06/24/Nw7S6s.png" alt="Nw7S6s.png"></p>
+<p><img src="images/loading.gif" data-original="https://cdn.jsdelivr.net/gh/wjwABCDEFG/blog_img/img/20210717192602.png" alt="Nw7S6s.png"></p>
 <ol start="4">
 <li>controller方法上方添加注解，自定义熔断方法，修改了返回值为String方便测试</li>
 </ol>
-<p><img src="images/loading.gif" data-original="https://s1.ax1x.com/2020/06/24/Nw7Y1H.png" alt="Nw7Y1H.png"></p>
+<p><img src="images/loading.gif" data-original="https://cdn.jsdelivr.net/gh/wjwABCDEFG/blog_img/img/20210717192609.png" alt="Nw7Y1H.png"></p>
 <ol start="5">
 <li>测试，我们可以把提供者关掉来模拟服务器出现问题</li>
 </ol>
-<p><img src="images/loading.gif" data-original="https://s1.ax1x.com/2020/06/24/Nw7WBq.png" alt="Nw7WBq.png"></p>
+<p><img src="images/loading.gif" data-original="https://cdn.jsdelivr.net/gh/wjwABCDEFG/blog_img/img/20210717192631.png" alt="Nw7WBq.png"></p>
 <p>访问，我们可以看到错误提示</p>
-<p><img src="images/loading.gif" data-original="https://s1.ax1x.com/2020/06/24/Nw74EV.png" alt="Nw74EV.png"></p>
+<p><img src="images/loading.gif" data-original="https://cdn.jsdelivr.net/gh/wjwABCDEFG/blog_img/img/20210717192638.png" alt="Nw74EV.png"></p>
 <p>这就是我们有时浏览网页的报错提示（不是那种返回500时指定的，这种通常是并发量巨大，比如广东海洋大学的抢课系统！！那种）</p>
 <ol start="6">
 <li>也可以在类上方添加全局熔断方法@DefaultProperties(defaultFallback = “全局熔断方法名”)</li>
 </ol>
-<p><img src="images/loading.gif" data-original="https://s1.ax1x.com/2020/06/24/Nwbb01.png" alt="Nwbb01.png"></p>
+<p><img src="images/loading.gif" data-original="https://cdn.jsdelivr.net/gh/wjwABCDEFG/blog_img/img/20210717192646.png" alt="Nwbb01.png"></p>
 <p>这个不多说了，看看就懂了，要注意的是<strong>方法上还是要加@HystrixCommand注解的</strong>，只是不指定的话默认使用全局的熔断函数，而且全局熔断方法的参数要为空，返回值要和被熔断方法一致（不是String的话自己写序列化就行，一般都是json字符串的，问题不大）</p>
 <br>
 
 <h2 id="5-3熔断机制测试"><a href="#5-3熔断机制测试" class="headerlink" title="5.3熔断机制测试"></a>5.3熔断机制测试</h2><p>咱们主动抛出异常</p>
-<p><img src="images/loading.gif" data-original="https://s1.ax1x.com/2020/06/25/NwOTXQ.png" alt="NwOTXQ.png"></p>
+<p><img src="images/loading.gif" data-original="https://cdn.jsdelivr.net/gh/wjwABCDEFG/blog_img/img/20210717192656.png" alt="NwOTXQ.png"></p>
 <p>在服务中心，提供者和消费者都正常的情况下，我们快速的访问<a href="http://localhost/consumer/user?id=1至少20次，触发了熔断机制，于是访问id=2时也会提示服务器正忙">http://localhost/consumer/user?id=1至少20次，触发了熔断机制，于是访问id=2时也会提示服务器正忙</a></p>
-<p><img src="images/loading.gif" data-original="https://s1.ax1x.com/2020/06/25/Nwvjht.png" alt="Nwvjht.png"></p>
+<p><img src="images/loading.gif" data-original="https://cdn.jsdelivr.net/gh/wjwABCDEFG/blog_img/img/20210717192702.png" alt="Nwvjht.png"></p>
 <p>5s后，再次访问id=2，恢复正常</p>
-<p><img src="images/loading.gif" data-original="https://s1.ax1x.com/2020/06/25/Nwvb0H.png" alt="Nwvb0H.png"></p>
+<p><img src="images/loading.gif" data-original="https://cdn.jsdelivr.net/gh/wjwABCDEFG/blog_img/img/20210717192708.png" alt="Nwvb0H.png"></p>
 <br>
 
 <h1 id="6-Feign"><a href="#6-Feign" class="headerlink" title="6. Feign"></a>6. Feign</h1><h2 id="6-1-feign概述"><a href="#6-1-feign概述" class="headerlink" title="6.1 feign概述"></a>6.1 feign概述</h2><p>先看我们原来的http请求，他完成了消费者到提供者的消息传递</p>
@@ -508,12 +508,12 @@
 <ol start="2">
 <li>引导类注解@EnableFeignClients，且不再需要RestTemplate发送http请求</li>
 </ol>
-<p><img src="images/loading.gif" data-original="https://s1.ax1x.com/2020/06/25/NwxRKS.png" alt="NwxRKS.png"></p>
+<p><img src="images/loading.gif" data-original="https://cdn.jsdelivr.net/gh/wjwABCDEFG/blog_img/img/20210717192732.png" alt="NwxRKS.png"></p>
 <ol start="3">
 <li>定义一个接口，接口上方的@FeignClient(“service-provider”)是服务提供者的服务名，方法对应提供者的controller接口方法（复制过来去掉方法体）</li>
 </ol>
 <p><strong>要注意提供者类上方还有一个@RequestMapping(“user”)，这里不要也写成全局，而是在每一个方法的路径中定义</strong></p>
-<p><img src="images/loading.gif" data-original="https://s1.ax1x.com/2020/06/25/NwzlM8.png" alt="NwzlM8.png"></p>
+<p><img src="images/loading.gif" data-original="https://cdn.jsdelivr.net/gh/wjwABCDEFG/blog_img/img/20210717192807.png" alt="NwzlM8.png"></p>
 <ol start="4">
 <li>controller改动也是比较大的，首先就是Feign继承了Ribbon和Hystrix，所以我们不需要按照以前的方式写callback函数了，可以看到跟以前的controller差不多了（@Controller+String类型也是可以的，返回值多加了个.toString()而已），比较优雅</li>
 </ol>
@@ -532,17 +532,17 @@
 </ol>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Component</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">UserClientFallback</span> <span class="keyword">implements</span> <span class="title">UserClient</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> User <span class="title">queryUserById</span><span class="params">(Long id)</span> </span>&#123;</span><br><span class="line">        User user = <span class="keyword">new</span> User();</span><br><span class="line">        user.setUserName(<span class="string">"服务器正忙，请稍后再试"</span>);</span><br><span class="line">        <span class="keyword">return</span> user;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
-<p><img src="images/loading.gif" data-original="https://s1.ax1x.com/2020/06/25/N0SUTH.png" alt="N0SUTH.png"></p>
+<p><img src="images/loading.gif" data-original="https://cdn.jsdelivr.net/gh/wjwABCDEFG/blog_img/img/20210717192815.png" alt="N0SUTH.png"></p>
 <ol start="3">
 <li>接口加上fallback类</li>
 </ol>
 <p>要注意由于不是只有一个参数了，所以前面的value=要加上了</p>
-<p><img src="images/loading.gif" data-original="https://s1.ax1x.com/2020/06/25/N0S0fI.png" alt="N0S0fI.png"></p>
+<p><img src="images/loading.gif" data-original="https://cdn.jsdelivr.net/gh/wjwABCDEFG/blog_img/img/20210717192821.png" alt="N0S0fI.png"></p>
 <ol start="4">
 <li>关掉提供者后测试结果如下</li>
 </ol>
 <p>可以看到实现了熔断机制</p>
-<p><img src="images/loading.gif" data-original="https://s1.ax1x.com/2020/06/25/N0SDpt.png" alt="N0SDpt.png"></p>
+<p><img src="images/loading.gif" data-original="https://cdn.jsdelivr.net/gh/wjwABCDEFG/blog_img/img/20210717192827.png" alt="N0SDpt.png"></p>
 <h2 id="6-4-添加ribbon支持"><a href="#6-4-添加ribbon支持" class="headerlink" title="6.4 添加ribbon支持"></a>6.4 添加ribbon支持</h2><p>是的，集成后默认开启，无需配置！</p>
 <br>
 
@@ -552,9 +552,9 @@
 <h2 id="7-2-zuul使用步骤"><a href="#7-2-zuul使用步骤" class="headerlink" title="7.2 zuul使用步骤"></a>7.2 zuul使用步骤</h2><ol>
 <li>使用初始化工具创建模块，zuul组件在spring cloud routing下</li>
 </ol>
-<p><img src="images/loading.gif" data-original="https://s1.ax1x.com/2020/06/26/Nro7RO.png" alt="Nro7RO.png"></p>
+<p><img src="images/loading.gif" data-original="https://cdn.jsdelivr.net/gh/wjwABCDEFG/blog_img/img/20210717192836.png" alt="Nro7RO.png"></p>
 <p>目录和前面的eureka那些同级就行 没有特殊要求</p>
-<p><img src="images/loading.gif" data-original="https://s1.ax1x.com/2020/06/26/NrHkan.png" alt="NrHkan.png"></p>
+<p><img src="images/loading.gif" data-original="https://cdn.jsdelivr.net/gh/wjwABCDEFG/blog_img/img/20210717192843.png" alt="NrHkan.png"></p>
 <ol>
 <li>yml</li>
 </ol>
@@ -563,12 +563,12 @@
 <ol start="3">
 <li>引导类上方加上@EnableZuulProxy注解</li>
 </ol>
-<p><img src="images/loading.gif" data-original="https://s1.ax1x.com/2020/06/26/NrLeRP.png" alt="NrLeRP.png"></p>
+<p><img src="images/loading.gif" data-original="https://cdn.jsdelivr.net/gh/wjwABCDEFG/blog_img/img/20210717192851.png" alt="NrLeRP.png"></p>
 <ol start="4">
 <li>这时候我们访问<a href="http://localhost:10010/service-consumer/consumer/user?id=1和访问http://localhost:80/consumer/user?id=1结果是一样的">http://localhost:10010/service-consumer/consumer/user?id=1和访问http://localhost:80/consumer/user?id=1结果是一样的</a></li>
 </ol>
 <p><strong>也就是说localhost:10010/service-consumer会重定向到localhost:80</strong></p>
-<p><img src="images/loading.gif" data-original="https://s1.ax1x.com/2020/06/26/Nsk38O.png" alt="Nsk38O.png"></p>
+<p><img src="images/loading.gif" data-original="https://cdn.jsdelivr.net/gh/wjwABCDEFG/blog_img/img/20210717192857.png" alt="Nsk38O.png"></p>
 <br>
 
 <h2 id="7-3-搭配eureka食用"><a href="#7-3-搭配eureka食用" class="headerlink" title="7.3 搭配eureka食用"></a>7.3 搭配eureka食用</h2><p>yml中写死路径就很low，我们从eureka动态的获取服务列表</p>
@@ -586,18 +586,18 @@
 <ol start="3">
 <li>引导类</li>
 </ol>
-<p><img src="images/loading.gif" data-original="https://s1.ax1x.com/2020/06/26/NskOd1.png" alt="NskOd1.png"></p>
+<p><img src="images/loading.gif" data-original="https://cdn.jsdelivr.net/gh/wjwABCDEFG/blog_img/img/20210717192906.png" alt="NskOd1.png"></p>
 <ol start="4">
 <li>yml改成服务名</li>
 </ol>
-<p><img src="images/loading.gif" data-original="C:%5CUsers%5Cwjw%5CAppData%5CRoaming%5CTypora%5Ctypora-user-images%5Cimage-20200626174306180.png" alt="image-20200626174306180"></p>
+<p><img src="images/loading.gif" data-original="https://cdn.jsdelivr.net/gh/wjwABCDEFG/blog_img/img/20210717192913.png" alt="image-20200626174306180"></p>
 <p>启动</p>
-<p><img src="images/loading.gif" data-original="https://s1.ax1x.com/2020/06/26/Nsn0mD.png" alt="Nsn0mD.png"></p>
+<p><img src="images/loading.gif" data-original="https://cdn.jsdelivr.net/gh/wjwABCDEFG/blog_img/img/20210717192922.png" alt="Nsn0mD.png"></p>
 <h3 id="简洁写法"><a href="#简洁写法" class="headerlink" title="简洁写法"></a>简洁写法</h3><p>当我们想让服务名和路径不一致时可以用上面的写法，也可以像下面这样简写，那么路径名默认就是服务名<strong>通常用这种</strong></p>
 <figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">zuul:</span></span><br><span class="line">  <span class="attr">routes:</span></span><br><span class="line">    <span class="attr">service-consumer:</span> <span class="string">/service-consumer/**</span></span><br></pre></td></tr></table></figure>
 
 <h3 id="最简洁写法"><a href="#最简洁写法" class="headerlink" title="最简洁写法"></a>最简洁写法</h3><p>不写！</p>
-<p><img src="images/loading.gif" data-original="https://s1.ax1x.com/2020/06/26/NsuSAJ.png" alt="NsuSAJ.png"></p>
+<p><img src="images/loading.gif" data-original="https://cdn.jsdelivr.net/gh/wjwABCDEFG/blog_img/img/20210717192928.png" alt="NsuSAJ.png"></p>
 <p>是的，依然可以通过服务名访问，并且所有服务都默认可以通过zuul端口+服务名访问</p>
 <p><img src="images/loading.gif" data-original="https://s1.ax1x.com/2020/06/26/NsudCn.png" alt="NsudCn.png"></p>
 <p><img src="images/loading.gif" data-original="https://s1.ax1x.com/2020/06/26/Nsuhgx.png" alt="Nsuhgx.png"></p>
@@ -605,19 +605,19 @@
 <figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">zuul:</span></span><br><span class="line">  <span class="attr">routes:</span></span><br><span class="line">    <span class="attr">service-provider:</span> <span class="string">/user/**</span></span><br><span class="line">    <span class="attr">service-consumer:</span> <span class="string">/consumer/**</span></span><br><span class="line">  <span class="attr">prefix:</span> <span class="string">/api</span></span><br></pre></td></tr></table></figure>
 
 <p>这样浏览器访问时需要在端口后加上api，以后有api的就说明是通过zuul的了</p>
-<p><img src="images/loading.gif" data-original="https://s1.ax1x.com/2020/06/26/NsJjRe.png" alt="NsJjRe.png"></p>
+<p><img src="images/loading.gif" data-original="https://cdn.jsdelivr.net/gh/wjwABCDEFG/blog_img/img/20210717192956.png" alt="NsJjRe.png"></p>
 <p>因为配了映射名，我们也可以通过映射名访问</p>
-<p><img src="images/loading.gif" data-original="https://s1.ax1x.com/2020/06/26/NsY3JU.png" alt="NsY3JU.png"></p>
+<p><img src="images/loading.gif" data-original="https://cdn.jsdelivr.net/gh/wjwABCDEFG/blog_img/img/20210717193006.png" alt="NsY3JU.png"></p>
 <p>可以看到有两次user，第一次是yml中的映射，第二次才是provider中的controller类上方的@RequestMapping(“user”)全局路径，这也就是为什么很多人controller不带全局路径的原因，他们更习惯用zuul来完成每个模块的全局路径</p>
 <br>
 
 <h2 id="7-5-zuul过滤器"><a href="#7-5-zuul过滤器" class="headerlink" title="7.5 zuul过滤器"></a>7.5 zuul过滤器</h2><p>和传统过滤器差不多，继承ZuulFilter然后复写run方法处理过滤操作</p>
-<p><img src="images/loading.gif" data-original="https://s1.ax1x.com/2020/06/26/Nsv98s.png" alt="Nsv98s.png"></p>
+<p><img src="images/loading.gif" data-original="https://cdn.jsdelivr.net/gh/wjwABCDEFG/blog_img/img/20210717193017.png" alt="Nsv98s.png"></p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Component</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">LoginFilter</span> <span class="keyword">extends</span> <span class="title">ZuulFilter</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * 过滤器类型：pre route error post</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> String <span class="title">filterType</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="string">"pre"</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * 执行顺序，返回值越小，优先级越高</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">filterOrder</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="number">10</span>;  <span class="comment">//随便写，写10是怕有小于10的</span></span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * 是否执行run方法</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">boolean</span> <span class="title">shouldFilter</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">true</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * 编写过滤器的业务逻辑</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> Object <span class="title">run</span><span class="params">()</span> <span class="keyword">throws</span> ZuulException </span>&#123;</span><br><span class="line">        <span class="comment">//初始化zuul的context上下文对象</span></span><br><span class="line">        RequestContext context = RequestContext.getCurrentContext();</span><br><span class="line">        <span class="comment">//1.获取request然后获取参数</span></span><br><span class="line">        HttpServletRequest request = context.getRequest();</span><br><span class="line">        String token = request.getParameter(<span class="string">"token"</span>);</span><br><span class="line">        <span class="keyword">if</span> (StringUtils.isBlank(token))&#123;</span><br><span class="line">            <span class="comment">//拦截，不转发请求</span></span><br><span class="line">            context.setSendZuulResponse(<span class="keyword">false</span>);</span><br><span class="line">            <span class="comment">//响应状态码，401身份未验证</span></span><br><span class="line">            context.setResponseStatusCode(HttpStatus.SC_UNAUTHORIZED);</span><br><span class="line">            <span class="comment">//设置相应过滤器</span></span><br><span class="line">            context.setResponseBody(<span class="string">"request error!"</span>);</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="comment">//返回值为null代表什么都不做</span></span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">null</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
 <p>比如我们这里run方法是判断请求中是否带有参数token</p>
-<p><img src="images/loading.gif" data-original="https://s1.ax1x.com/2020/06/26/NsvuG9.png" alt="NsvuG9.png"></p>
-<p><img src="images/loading.gif" data-original="https://s1.ax1x.com/2020/06/26/NsvlKx.png" alt="NsvlKx.png"></p>
+<p><img src="images/loading.gif" data-original="https://cdn.jsdelivr.net/gh/wjwABCDEFG/blog_img/img/20210717193024.png" alt="NsvuG9.png"></p>
+<p><img src="images/loading.gif" data-original="https://cdn.jsdelivr.net/gh/wjwABCDEFG/blog_img/img/20210717193031.png" alt="NsvlKx.png"></p>
 <p>正常流程：</p>
 <ul>
 <li>请求到达首先会经过pre类型过滤器，而后到达route类型，进行路由，请求就到达真正的服务提供者，执行请求，返回结果后，会到达post过滤器。而后返回响应。</li>
@@ -638,9 +638,9 @@
 <br>
 
 <h1 id="附录"><a href="#附录" class="headerlink" title="附录"></a>附录</h1><h2 id="1-SpringCloudApplication注解"><a href="#1-SpringCloudApplication注解" class="headerlink" title="1. @SpringCloudApplication注解"></a>1. @SpringCloudApplication注解</h2><p>引导类上的注解越来越多</p>
-<p><img src="images/loading.gif" data-original="https://s1.ax1x.com/2020/06/24/NwH0M9.png" alt="NwH0M9.png"></p>
+<p><img src="images/loading.gif" data-original="https://cdn.jsdelivr.net/gh/wjwABCDEFG/blog_img/img/20210717193042.png" alt="NwH0M9.png"></p>
 <p>在微服务中，经常会引入上面的三个注解，于是Spring就提供了一个组合注解@SpringCloudApplication</p>
-<p><img src="images/loading.gif" data-original="https://s1.ax1x.com/2020/06/24/NwHTdP.png" alt="NwHTdP.png"></p>
+<p><img src="images/loading.gif" data-original="https://cdn.jsdelivr.net/gh/wjwABCDEFG/blog_img/img/20210717193046.png" alt="NwHTdP.png"></p>
 <p>所以在引导类上写这个注解就可以了！</p>
 
         </div>
@@ -701,7 +701,7 @@
                 <div>
                     
                     <figure class="image is-128x128 has-mb-6">
-                        <img class="is-rounded" src="images/loading.gif" data-original="https://s1.ax1x.com/2020/07/20/Ufuf4e.th.jpg" alt="wjwABCDEFG">
+                        <img class="is-rounded" src="images/loading.gif" data-original="https://cdn.jsdelivr.net/gh/wjwABCDEFG/blog_img/img/20210717231547.jpeg" alt="wjwABCDEFG">
                     </figure>
                     
                     <p class="is-size-4 is-block">
@@ -726,7 +726,7 @@
                     </p>
                     <a href="/archives">
                         <p class="title has-text-weight-normal">
-                            102
+                            101
                         </p>
                     </a>
                 </div>
@@ -738,7 +738,7 @@
                     </p>
                     <a href="/categories">
                         <p class="title has-text-weight-normal">
-                            15
+                            14
                         </p>
                     </a>
                 </div>
@@ -827,14 +827,6 @@
         <a class="level is-marginless" href="/categories/redis/">
             <span class="level-start">
                 <span class="level-item">redis</span>
-            </span>
-            <span class="level-end">
-                <span class="level-item tag">1</span>
-            </span>
-        </a></li><li>
-        <a class="level is-marginless" href="/categories/spring/">
-            <span class="level-start">
-                <span class="level-item">spring</span>
             </span>
             <span class="level-end">
                 <span class="level-item tag">1</span>
@@ -1115,28 +1107,9 @@
         
         <article class="media">
             
-            <a href="/spring/%E6%8C%81%E7%BB%AD%E6%9B%B4%E6%96%B0-%E8%AE%B0%E5%BD%95%E6%88%91%E7%9A%84%E6%AF%95%E8%AE%BE/" class="media-left">
-                <p class="image is-64x64">
-                    <img class="thumbnail" src="images/loading.gif" data-original="/images/thumbnail.svg" alt="持续更新-记录我的毕设">
-                </p>
-            </a>
-            
-            <div class="media-content">
-                <div class="content">
-                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2021-04-01T15:06:25.000Z">2021-04-01</time></div>
-                    <a href="/spring/%E6%8C%81%E7%BB%AD%E6%9B%B4%E6%96%B0-%E8%AE%B0%E5%BD%95%E6%88%91%E7%9A%84%E6%AF%95%E8%AE%BE/" class="title has-link-black-ter is-size-6 has-text-weight-normal">持续更新-记录我的毕设</a>
-                    <p class="is-size-7 is-uppercase">
-                        <a class="has-link-grey -link" href="/categories/spring/">spring</a>
-                    </p>
-                </div>
-            </div>
-        </article>
-        
-        <article class="media">
-            
             <a href="/life/%E4%B8%BA%E6%AF%95%E4%B8%9A%E5%81%9A%E5%87%86%E5%A4%87/" class="media-left">
                 <p class="image is-64x64">
-                    <img class="thumbnail" src="images/loading.gif" data-original="https://z3.ax1x.com/2021/04/01/cVlcoF.md.jpg" alt="为毕业做准备">
+                    <img class="thumbnail" src="images/loading.gif" data-original="https://cdn.jsdelivr.net/gh/wjwABCDEFG/blog_img/img/20210717225951.jpeg" alt="为毕业做准备">
                 </p>
             </a>
             
@@ -1155,7 +1128,7 @@
             
             <a href="/life/mhxy-experience/" class="media-left">
                 <p class="image is-64x64">
-                    <img class="thumbnail" src="images/loading.gif" data-original="https://z3.ax1x.com/2021/04/01/cVMuwD.md.png" alt="梦幻西游游戏体验">
+                    <img class="thumbnail" src="images/loading.gif" data-original="https://cdn.jsdelivr.net/gh/wjwABCDEFG/blog_img/img/20210717223725.png" alt="梦幻西游游戏体验">
                 </p>
             </a>
             
@@ -1174,7 +1147,7 @@
             
             <a href="/games/3DMath-Primerfor-Graphics-and-Game-Development-note/" class="media-left">
                 <p class="image is-64x64">
-                    <img class="thumbnail" src="images/loading.gif" data-original="https://source.acexy.cn/view/XgMS4U2" alt="3D数学基础图形与游戏研发笔记">
+                    <img class="thumbnail" src="images/loading.gif" data-original="https://cdn.jsdelivr.net/gh/wjwABCDEFG/blog_img/img/20210717223435.jpeg" alt="3D数学基础图形与游戏研发笔记">
                 </p>
             </a>
             
@@ -1193,7 +1166,26 @@
             
             <a href="/algorithms/get-equal-substrings-within-budget/" class="media-left">
                 <p class="image is-64x64">
-                    <img class="thumbnail" src="images/loading.gif" data-original="https://source.acexy.cn/view/Xd2g803" alt="1208-尽可能使字符串相等">
+                    <img class="thumbnail" src="images/loading.gif" data-original="https://cdn.jsdelivr.net/gh/wjwABCDEFG/blog_img/img/20210717223615.jpg" alt="1011-在D天内送达包裹的能力">
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2021-02-05T16:00:24.000Z">2021-02-06</time></div>
+                    <a href="/algorithms/get-equal-substrings-within-budget/" class="title has-link-black-ter is-size-6 has-text-weight-normal">1011-在D天内送达包裹的能力</a>
+                    <p class="is-size-7 is-uppercase">
+                        <a class="has-link-grey -link" href="/categories/algorithms/">数据结构和算法</a>
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+        <article class="media">
+            
+            <a href="/algorithms/get-equal-substrings-within-budget/" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="images/loading.gif" data-original="https://cdn.jsdelivr.net/gh/wjwABCDEFG/blog_img/img/20210717223234.jpg" alt="1208-尽可能使字符串相等">
                 </p>
             </a>
             
@@ -1424,28 +1416,9 @@
         
         <article class="media">
             
-            <a href="/spring/%E6%8C%81%E7%BB%AD%E6%9B%B4%E6%96%B0-%E8%AE%B0%E5%BD%95%E6%88%91%E7%9A%84%E6%AF%95%E8%AE%BE/" class="media-left">
-                <p class="image is-64x64">
-                    <img class="thumbnail" src="images/loading.gif" data-original="/images/thumbnail.svg" alt="持续更新-记录我的毕设">
-                </p>
-            </a>
-            
-            <div class="media-content">
-                <div class="content">
-                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2021-04-01T15:06:25.000Z">2021-04-01</time></div>
-                    <a href="/spring/%E6%8C%81%E7%BB%AD%E6%9B%B4%E6%96%B0-%E8%AE%B0%E5%BD%95%E6%88%91%E7%9A%84%E6%AF%95%E8%AE%BE/" class="title has-link-black-ter is-size-6 has-text-weight-normal">持续更新-记录我的毕设</a>
-                    <p class="is-size-7 is-uppercase">
-                        <a class="has-link-grey -link" href="/categories/spring/">spring</a>
-                    </p>
-                </div>
-            </div>
-        </article>
-        
-        <article class="media">
-            
             <a href="/life/%E4%B8%BA%E6%AF%95%E4%B8%9A%E5%81%9A%E5%87%86%E5%A4%87/" class="media-left">
                 <p class="image is-64x64">
-                    <img class="thumbnail" src="images/loading.gif" data-original="https://z3.ax1x.com/2021/04/01/cVlcoF.md.jpg" alt="为毕业做准备">
+                    <img class="thumbnail" src="images/loading.gif" data-original="https://cdn.jsdelivr.net/gh/wjwABCDEFG/blog_img/img/20210717225951.jpeg" alt="为毕业做准备">
                 </p>
             </a>
             
@@ -1464,7 +1437,7 @@
             
             <a href="/life/mhxy-experience/" class="media-left">
                 <p class="image is-64x64">
-                    <img class="thumbnail" src="images/loading.gif" data-original="https://z3.ax1x.com/2021/04/01/cVMuwD.md.png" alt="梦幻西游游戏体验">
+                    <img class="thumbnail" src="images/loading.gif" data-original="https://cdn.jsdelivr.net/gh/wjwABCDEFG/blog_img/img/20210717223725.png" alt="梦幻西游游戏体验">
                 </p>
             </a>
             
@@ -1483,7 +1456,7 @@
             
             <a href="/games/3DMath-Primerfor-Graphics-and-Game-Development-note/" class="media-left">
                 <p class="image is-64x64">
-                    <img class="thumbnail" src="images/loading.gif" data-original="https://source.acexy.cn/view/XgMS4U2" alt="3D数学基础图形与游戏研发笔记">
+                    <img class="thumbnail" src="images/loading.gif" data-original="https://cdn.jsdelivr.net/gh/wjwABCDEFG/blog_img/img/20210717223435.jpeg" alt="3D数学基础图形与游戏研发笔记">
                 </p>
             </a>
             
@@ -1502,7 +1475,26 @@
             
             <a href="/algorithms/get-equal-substrings-within-budget/" class="media-left">
                 <p class="image is-64x64">
-                    <img class="thumbnail" src="images/loading.gif" data-original="https://source.acexy.cn/view/Xd2g803" alt="1208-尽可能使字符串相等">
+                    <img class="thumbnail" src="images/loading.gif" data-original="https://cdn.jsdelivr.net/gh/wjwABCDEFG/blog_img/img/20210717223615.jpg" alt="1011-在D天内送达包裹的能力">
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2021-02-05T16:00:24.000Z">2021-02-06</time></div>
+                    <a href="/algorithms/get-equal-substrings-within-budget/" class="title has-link-black-ter is-size-6 has-text-weight-normal">1011-在D天内送达包裹的能力</a>
+                    <p class="is-size-7 is-uppercase">
+                        <a class="has-link-grey -link" href="/categories/algorithms/">数据结构和算法</a>
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+        <article class="media">
+            
+            <a href="/algorithms/get-equal-substrings-within-budget/" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="images/loading.gif" data-original="https://cdn.jsdelivr.net/gh/wjwABCDEFG/blog_img/img/20210717223234.jpg" alt="1208-尽可能使字符串相等">
                 </p>
             </a>
             
@@ -1532,7 +1524,7 @@
             <div class="level-start has-text-centered-mobile">
                 <a class="footer-logo is-block has-mb-6" href="/">
                 
-                    <img src="images/loading.gif" data-original="/images/logo.png" alt="SpringCloud笔记" height="28">
+                    <img src="images/loading.gif" data-original="https://cdn.jsdelivr.net/gh/wjwABCDEFG/blog_img/img/20210717231246.png" alt="SpringCloud笔记" height="28">
                 
                 </a>
                 <p class="is-size-7">
