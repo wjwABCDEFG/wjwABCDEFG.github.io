@@ -7,22 +7,22 @@
 
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
 
-<title>volatile - 小温 blog</title>
+<title>线程和线程池 - 小温 blog</title>
 
 
-    <meta name="description" content="1. 线程之间可见性1.1 问题引出Volatile到底是用来干嘛的，来看一段程序">
+    <meta name="description" content="1. 线程和进程的区别进程：资源分配的基本单位，是程序（硬盘上的QQ.exe）的一个实例，比如双击QQ.exe，程序启动，进入内存 线程：程序执行的基本单位，是一个任务，比如软件管家可以同时清理垃圾和扫描病毒">
 <meta property="og:type" content="article">
-<meta property="og:title" content="volatile">
-<meta property="og:url" content="https://wjw.today/Java/volatile/index.html">
+<meta property="og:title" content="线程和线程池">
+<meta property="og:url" content="https://wjw.today/Java%E5%9F%BA%E7%A1%80/%E7%BA%BF%E7%A8%8B%E5%92%8C%E7%BA%BF%E7%A8%8B%E6%B1%A0/index.html">
 <meta property="og:site_name" content="小温 blog">
-<meta property="og:description" content="1. 线程之间可见性1.1 问题引出Volatile到底是用来干嘛的，来看一段程序">
+<meta property="og:description" content="1. 线程和进程的区别进程：资源分配的基本单位，是程序（硬盘上的QQ.exe）的一个实例，比如双击QQ.exe，程序启动，进入内存 线程：程序执行的基本单位，是一个任务，比如软件管家可以同时清理垃圾和扫描病毒">
 <meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="https://cdn.jsdelivr.net/gh/wjwABCDEFG/blog_img/img/20210717220651.png">
-<meta property="article:published_time" content="2020-12-02T02:15:12.000Z">
-<meta property="article:modified_time" content="2021-07-17T14:07:40.890Z">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/wjwABCDEFG/blog_img/img/20210717220808.jpeg">
+<meta property="article:published_time" content="2020-12-02T07:44:10.000Z">
+<meta property="article:modified_time" content="2021-07-17T14:08:35.928Z">
 <meta property="article:author" content="wjw">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="https://cdn.jsdelivr.net/gh/wjwABCDEFG/blog_img/img/20210717220651.png">
+<meta name="twitter:image" content="https://cdn.jsdelivr.net/gh/wjwABCDEFG/blog_img/img/20210717220808.jpeg">
 
 
 
@@ -80,7 +80,7 @@
         <div class="navbar-brand is-flex-center">
             <a class="navbar-item navbar-logo" href="/">
             
-                <img src="images/loading.gif" data-original="https://cdn.jsdelivr.net/gh/wjwABCDEFG/blog_img/img/20210717231246.png" alt="volatile" height="28">
+                <img src="images/loading.gif" data-original="https://cdn.jsdelivr.net/gh/wjwABCDEFG/blog_img/img/20210717231246.png" alt="线程和线程池" height="28">
             
             </a>
         </div>
@@ -138,7 +138,7 @@
     
     <div class="card-image">
         <span  class="image is-7by1">
-            <img class="thumbnail" src="images/loading.gif" data-original="https://cdn.jsdelivr.net/gh/wjwABCDEFG/blog_img/img/20210717220651.png" alt="volatile">
+            <img class="thumbnail" src="images/loading.gif" data-original="https://cdn.jsdelivr.net/gh/wjwABCDEFG/blog_img/img/20210717220808.jpeg" alt="线程和线程池">
         </span>
     </div>
     
@@ -146,17 +146,17 @@
         
         <div class="level article-meta is-size-7 is-uppercase is-mobile is-overflow-x-auto">
             <div class="level-left">
-                <time class="level-item has-text-grey" datetime="2020-12-02T02:15:12.000Z">2020-12-02</time>
+                <time class="level-item has-text-grey" datetime="2020-12-02T07:44:10.000Z">2020-12-02</time>
                 
                 <div class="level-item">
-                <a class="has-link-grey -link" href="/categories/Java/">Java基础</a>
+                <a class="has-link-grey -link" href="/categories/Java%E5%9F%BA%E7%A1%80/">Java基础</a>
                 </div>
                 
                 
                 <span class="level-item has-text-grey">
                     
                     
-                    11 分钟 读完 (大约 1640 个字)
+                    18 分钟 读完 (大约 2680 个字)
                 </span>
                 
                 
@@ -170,91 +170,115 @@
         
         <h1 class="title is-size-3 is-size-4-mobile has-text-weight-normal">
             
-                volatile
+                线程和线程池
             
         </h1>
         <div class="content">
-            <h1 id="1-线程之间可见性"><a href="#1-线程之间可见性" class="headerlink" title="1. 线程之间可见性"></a>1. 线程之间可见性</h1><h2 id="1-1-问题引出"><a href="#1-1-问题引出" class="headerlink" title="1.1 问题引出"></a>1.1 问题引出</h2><p>Volatile到底是用来干嘛的，来看一段程序</p>
+            <h1 id="1-线程和进程的区别"><a href="#1-线程和进程的区别" class="headerlink" title="1. 线程和进程的区别"></a>1. 线程和进程的区别</h1><p>进程：<strong>资源分配的基本单位</strong>，是程序（硬盘上的QQ.exe）的一个实例，比如双击QQ.exe，程序启动，进入内存</p>
+<p>线程：<strong>程序执行的基本单位</strong>，是一个任务，比如软件管家可以同时清理垃圾和扫描病毒</p>
 <a id="more"></a>
 
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Volatile</span>问题引出 </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">static</span> <span class="comment">/*volatile*/</span> <span class="keyword">boolean</span> flag = <span class="keyword">false</span>;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">        A a = <span class="keyword">new</span> A();</span><br><span class="line">        a.start();</span><br><span class="line"></span><br><span class="line">        <span class="keyword">try</span> &#123;</span><br><span class="line">            Thread.sleep(<span class="number">1000</span>);</span><br><span class="line">        &#125; <span class="keyword">catch</span> (InterruptedException e) &#123;</span><br><span class="line">            e.printStackTrace();</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        flag = <span class="keyword">true</span>;</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">static</span> <span class="class"><span class="keyword">class</span> <span class="title">A</span> <span class="keyword">extends</span> <span class="title">Thread</span></span>&#123;</span><br><span class="line"></span><br><span class="line">        <span class="meta">@Override</span></span><br><span class="line">        <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">run</span><span class="params">()</span> </span>&#123;</span><br><span class="line">            <span class="keyword">while</span> (<span class="keyword">true</span>) &#123;</span><br><span class="line">                <span class="keyword">if</span> (flag)&#123;</span><br><span class="line">                    System.out.println(<span class="string">"知道主线程将flag变为true了"</span>);</span><br><span class="line">                    <span class="keyword">break</span>;</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>两个线程共同维护一个变量flag，一个睡1s后修改flag为true，另一个等待它变为true后输出一句话</p>
-<p>运行就会发现永远不能输出，因为一个线程感受不到另一个线程对它的改变，这是为什么呢？</p>
-<p>因为JMM中有规定，线程不能直接操作主存中的值，只能拷贝到自己的工作内存再进行操作</p>
-<p><img src="images/loading.gif" data-original="https://cdn.jsdelivr.net/gh/wjwABCDEFG/blog_img/img/20210717220656.png" alt=""></p>
-<p>也就是说线程改变了自己工作内存中的flag的值，并没有影响到另外一个线程的工作内存。明白了这点后，再把上面的代码volatile注释放开，这时候就能输出并结束了，这就是volatile的其中一个作用：线程间的可见性</p>
-<br>
-
-<h2 id="误区：缓存一致性协议"><a href="#误区：缓存一致性协议" class="headerlink" title="误区：缓存一致性协议"></a>误区：缓存一致性协议</h2><p><strong>其实volatile跟缓存一致性协议根本没什么关系</strong>，网上很多文章会将其和缓存一致性协议放在一起说，其实他们不是一回事</p>
-<p>再看刚才的这一句，还是注释掉了volatile，但是while循环中多了一句打印System.out.println(“随便打印一条语句”);其他地方完全一样</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Volatile</span>问题引出 </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">static</span> <span class="comment">/*volatile*/</span> <span class="keyword">boolean</span> flag = <span class="keyword">false</span>;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">        A a = <span class="keyword">new</span> A();</span><br><span class="line">        a.start();</span><br><span class="line"></span><br><span class="line">        <span class="keyword">try</span> &#123;</span><br><span class="line">            Thread.sleep(<span class="number">1000</span>);</span><br><span class="line">        &#125; <span class="keyword">catch</span> (InterruptedException e) &#123;</span><br><span class="line">            e.printStackTrace();</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        flag = <span class="keyword">true</span>;</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">static</span> <span class="class"><span class="keyword">class</span> <span class="title">A</span> <span class="keyword">extends</span> <span class="title">Thread</span></span>&#123;</span><br><span class="line"></span><br><span class="line">        <span class="meta">@Override</span></span><br><span class="line">        <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">run</span><span class="params">()</span> </span>&#123;</span><br><span class="line">            <span class="keyword">while</span> (<span class="keyword">true</span>) &#123;</span><br><span class="line">                System.out.println(<span class="string">"随便打印一条语句"</span>);</span><br><span class="line">                <span class="keyword">if</span> (flag)&#123;</span><br><span class="line">                    System.out.println(<span class="string">"知道主线程将flag变为true了"</span>);</span><br><span class="line">                    <span class="keyword">break</span>;</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>运行，看到可以经历很多次循环后还是打印了flag</p>
-<p><img src="images/loading.gif" data-original="https://cdn.jsdelivr.net/gh/wjwABCDEFG/blog_img/img/20210717220708.png" alt=""></p>
-<p>这就是因为缓存一致性，更新了主存里面的东西，比如同步锁，可以看到volatile被注释掉了还是能更新，跟volatile没有半毛钱关系</p>
+<ul>
+<li>一个进程可以有多个线程</li>
+<li>进程有自己的独立地址空间，每启动一个进程，系统就会为它分配地址空间，建立数据表来维护代码段、堆栈段和数据段。多个线程共享进程的<strong>堆</strong>和<strong>方法区</strong>资源，但每个线程有自己的<strong>程序计数器</strong>、<strong>虚拟机栈</strong>和<strong>本地方法栈</strong>，创建/切换线程的开销比进程小</li>
+<li>线程之间的通信更方便，同一进程下的线程共享全局变量、静态变量等数据，而进程之间的通信需要以通信的方式（IPC)进行(管道，信号，消息队列，共享内存，套接字等通信机制)。不过如何处理好同步与互斥是编写多线程程序的难点。</li>
+</ul>
 <br>
 
 <hr>
-<h1 id="2-禁止指令重排序"><a href="#2-禁止指令重排序" class="headerlink" title="2. 禁止指令重排序"></a>2. 禁止指令重排序</h1><h2 id="2-1-什么是指令重排序"><a href="#2-1-什么是指令重排序" class="headerlink" title="2.1 什么是指令重排序"></a>2.1 什么是指令重排序</h2><p>就是说cpu为了运行效率可能会将两条没有依赖性的指令顺序进行对调</p>
-<p>这里有一段很巧妙的程序证明指令重排序存在</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> 证明指令重排序 </span>&#123;</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">int</span> a = <span class="number">0</span>, b = <span class="number">0</span>, x = <span class="number">0</span>, y = <span class="number">0</span>;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span></span>&#123;</span><br><span class="line">        <span class="keyword">long</span> time = <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">while</span> (<span class="keyword">true</span>) &#123;</span><br><span class="line">            time++;</span><br><span class="line">            a = <span class="number">0</span>; b = <span class="number">0</span>; x = <span class="number">0</span>; y = <span class="number">0</span>;</span><br><span class="line">            Thread thread1 = <span class="keyword">new</span> Thread(() -&gt; &#123;</span><br><span class="line">                a = <span class="number">1</span>;</span><br><span class="line">                x = b;</span><br><span class="line">            &#125;);</span><br><span class="line">            Thread thread2 = <span class="keyword">new</span> Thread(() -&gt; &#123;</span><br><span class="line">                b = <span class="number">1</span>;</span><br><span class="line">                y = a;</span><br><span class="line">            &#125;);</span><br><span class="line">            thread1.start();</span><br><span class="line">            thread2.start();</span><br><span class="line">            <span class="keyword">try</span> &#123;</span><br><span class="line">                thread1.join();</span><br><span class="line">                thread2.join();</span><br><span class="line">            &#125; <span class="keyword">catch</span> (Exception e) &#123;&#125;</span><br><span class="line">            <span class="keyword">if</span> (x == <span class="number">0</span> &amp;&amp; y == <span class="number">0</span>) &#123;</span><br><span class="line">                <span class="keyword">break</span>;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        System.out.println(<span class="string">"time="</span> + time + <span class="string">",x="</span> + x + <span class="string">",y="</span> + y);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>这段程序巧妙在哪呢？看两个线程的任务逻辑，可以分析出不管哪个线程先执行，或者交叉执行，只要a = 1在x = b之前，b = 1在y = a之前，都不可能出现x = 0, y = 0的</p>
-<p>说的再简单点：</p>
-<p>如果a = 1先执行，那么y必为1</p>
-<p>如果b = 1先执行，那么x必为1</p>
-<p>如果a = 1, b = 1先执行，那么x, y都为1</p>
-<p>只有被重排序为</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//线程1</span></span><br><span class="line">x = b;</span><br><span class="line">a = <span class="number">1</span>;</span><br><span class="line"></span><br><span class="line"><span class="comment">//线程2</span></span><br><span class="line">y = a;</span><br><span class="line">b = <span class="number">1</span>;</span><br></pre></td></tr></table></figure>
-
-<p>才有可能x = 0, y = 0，明白了吗？</p>
-<p><img src="images/loading.gif" data-original="https://cdn.jsdelivr.net/gh/wjwABCDEFG/blog_img/img/20210717220713.png" alt="运行多久就看造化了"></p>
-<br>
-
-<p>我们来看下指令重排序的底层原因</p>
-<p><img src="images/loading.gif" data-original="https://cdn.jsdelivr.net/gh/wjwABCDEFG/blog_img/img/20210717220719.png" alt=""></p>
-<p>在java中Object o = new Object();产生了以上汇编指令</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">new -&gt; 生成一个初始值m&#x3D;0</span><br><span class="line">invokespecial -&gt; 赋值m&#x3D;8</span><br><span class="line">astore -&gt; 将指针t指向这个m</span><br></pre></td></tr></table></figure>
-
-<p>指令重排序，可能会调整为如下</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">new -&gt; 生成一个初始值m&#x3D;0</span><br><span class="line">astore -&gt; 将指针t指向这个m</span><br><span class="line">invokespecial -&gt; 赋值m&#x3D;8</span><br></pre></td></tr></table></figure>
-
-<p>这就有可能会造成我们拿到的指针不为null，但是此时的值还为0</p>
-<br>
-
-<h2 id="2-2-DCL单例要不要加volatile"><a href="#2-2-DCL单例要不要加volatile" class="headerlink" title="2.2 DCL单例要不要加volatile"></a>2.2 DCL单例要不要加volatile</h2><p>单例模式的一种实现：double-checked locking</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Singleton</span> </span>&#123;  </span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">volatile</span> <span class="keyword">static</span> Singleton singleton;  </span><br><span class="line">    <span class="function"><span class="keyword">private</span> <span class="title">Singleton</span> <span class="params">()</span></span>&#123;&#125;  </span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> Singleton <span class="title">getInstance</span><span class="params">()</span> </span>&#123;  </span><br><span class="line">        <span class="keyword">if</span> (singleton == <span class="keyword">null</span>) &#123;  </span><br><span class="line">            <span class="keyword">synchronized</span> (Singleton<span class="class">.<span class="keyword">class</span>) </span>&#123;  </span><br><span class="line">                <span class="keyword">if</span> (singleton == <span class="keyword">null</span>) &#123;  </span><br><span class="line">                    singleton = <span class="keyword">new</span> Singleton();  </span><br><span class="line">                &#125;</span><br><span class="line">            &#125;  </span><br><span class="line">        &#125;  </span><br><span class="line">        <span class="keyword">return</span> singleton;  </span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>这种方式高效，且实现了线程安全和懒加载</p>
+<h1 id="2-线程间通信"><a href="#2-线程间通信" class="headerlink" title="2. 线程间通信"></a>2. 线程间通信</h1><p>同一进程下的线程虽然能共享全局变量、静态变量等数据是没错，但是由于JMM的限制，一个线程改变全局变量的值，其他线程并不能感知到，因为JMM中有规定，线程不能直接操作主存中的值，只能拷贝到自己的工作内存再进行操作。也就是说大家都知道有个private int a = 5，但是线程一将其改为6后线程二不能得知。这个问题我们在<a href="https://wjw.today/Java/volatile/">volatile一文</a>中探究过。是的，volatile就是线程间通信的其中一种方式。</p>
+<p><img src="images/loading.gif" data-original="https://cdn.jsdelivr.net/gh/wjwABCDEFG/blog_img/img/20210717220801.png" alt="volatile一文中的图"></p>
 <ul>
-<li>懒加载就是说定义的时候没有直接new，而是在调用getInstance的时候new</li>
-<li>线程安全是说synchronized包裹了判空和new，</li>
-<li>高效是说锁的粒度很细，只锁住了判空和new，因为外层可能会有别的业务代码。另一方面，<strong>DCL中外面的那层判空，避免了直接的synchronized锁竞争，提高了效率</strong></li>
+<li>volatile</li>
+<li>使用Object类的wait() 和 notify() / notifyAll() 方法</li>
+<li>JUC下的一些包（CountDownLatch/ReentrantLock/LockSupport）的锁机制</li>
 </ul>
-<p>好了，简单介绍完后，来说为什么要加volatile，一定要加，因为之前说了指令重排序，可能造成指针先存在，后赋值的现象。如果线程1发生指令重排序，先astore有了指针，此时停下，第二个线程走完整个流程，判空不为空导致直接return，但是又还没有new，因此return了个半初始化状态的对象</p>
-<p>因此DCL单例一定要加volatile，禁止指令重排序</p>
 <br>
 
-<h2 id="2-3-volatile如何做到禁止指令重排序的？"><a href="#2-3-volatile如何做到禁止指令重排序的？" class="headerlink" title="2.3 volatile如何做到禁止指令重排序的？"></a>2.3 volatile如何做到禁止指令重排序的？</h2><p><strong>内存屏障</strong>，在JVM级别，内存屏障只是一个规范，就像是接口一样，交给不同的CPU实现，这个东西不同的硬件实现不一样。</p>
-<p>JVM中规定有4中屏障</p>
+<hr>
+<h1 id="3-线程的状态"><a href="#3-线程的状态" class="headerlink" title="3. 线程的状态"></a>3. 线程的状态</h1><p>网上说的很乱，到处乱传，还分什么runnable和running什么的，很多都是错的！本着不造谣不信谣不传谣的原则，我们来看一下源码就知道了</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">enum</span> State &#123;</span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * Thread state for a thread which has not yet started.</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    NEW,</span><br><span class="line"></span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * Thread state for a runnable thread.  A thread in the runnable</span></span><br><span class="line"><span class="comment">     * state is executing in the Java virtual machine but it may</span></span><br><span class="line"><span class="comment">     * be waiting for other resources from the operating system</span></span><br><span class="line"><span class="comment">     * such as processor.</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    RUNNABLE,</span><br><span class="line"></span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * Thread state for a thread blocked waiting for a monitor lock.</span></span><br><span class="line"><span class="comment">     * A thread in the blocked state is waiting for a monitor lock</span></span><br><span class="line"><span class="comment">     * to enter a synchronized block/method or</span></span><br><span class="line"><span class="comment">     * reenter a synchronized block/method after calling</span></span><br><span class="line"><span class="comment">     * &#123;<span class="doctag">@link</span> Object#wait() Object.wait&#125;.</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    BLOCKED,</span><br><span class="line"></span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * Thread state for a waiting thread.</span></span><br><span class="line"><span class="comment">     * A thread is in the waiting state due to calling one of the</span></span><br><span class="line"><span class="comment">     * following methods:</span></span><br><span class="line"><span class="comment">     * &lt;ul&gt;</span></span><br><span class="line"><span class="comment">     *   &lt;li&gt;&#123;<span class="doctag">@link</span> Object#wait() Object.wait&#125; with no timeout&lt;/li&gt;</span></span><br><span class="line"><span class="comment">     *   &lt;li&gt;&#123;<span class="doctag">@link</span> #join() Thread.join&#125; with no timeout&lt;/li&gt;</span></span><br><span class="line"><span class="comment">     *   &lt;li&gt;&#123;<span class="doctag">@link</span> LockSupport#park() LockSupport.park&#125;&lt;/li&gt;</span></span><br><span class="line"><span class="comment">     * &lt;/ul&gt;</span></span><br><span class="line"><span class="comment">     *</span></span><br><span class="line"><span class="comment">     * &lt;p&gt;A thread in the waiting state is waiting for another thread to</span></span><br><span class="line"><span class="comment">     * perform a particular action.</span></span><br><span class="line"><span class="comment">     *</span></span><br><span class="line"><span class="comment">     * For example, a thread that has called &lt;tt&gt;Object.wait()&lt;/tt&gt;</span></span><br><span class="line"><span class="comment">     * on an object is waiting for another thread to call</span></span><br><span class="line"><span class="comment">     * &lt;tt&gt;Object.notify()&lt;/tt&gt; or &lt;tt&gt;Object.notifyAll()&lt;/tt&gt; on</span></span><br><span class="line"><span class="comment">     * that object. A thread that has called &lt;tt&gt;Thread.join()&lt;/tt&gt;</span></span><br><span class="line"><span class="comment">     * is waiting for a specified thread to terminate.</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    WAITING,</span><br><span class="line"></span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * Thread state for a waiting thread with a specified waiting time.</span></span><br><span class="line"><span class="comment">     * A thread is in the timed waiting state due to calling one of</span></span><br><span class="line"><span class="comment">     * the following methods with a specified positive waiting time:</span></span><br><span class="line"><span class="comment">     * &lt;ul&gt;</span></span><br><span class="line"><span class="comment">     *   &lt;li&gt;&#123;<span class="doctag">@link</span> #sleep Thread.sleep&#125;&lt;/li&gt;</span></span><br><span class="line"><span class="comment">     *   &lt;li&gt;&#123;<span class="doctag">@link</span> Object#wait(long) Object.wait&#125; with timeout&lt;/li&gt;</span></span><br><span class="line"><span class="comment">     *   &lt;li&gt;&#123;<span class="doctag">@link</span> #join(long) Thread.join&#125; with timeout&lt;/li&gt;</span></span><br><span class="line"><span class="comment">     *   &lt;li&gt;&#123;<span class="doctag">@link</span> LockSupport#parkNanos LockSupport.parkNanos&#125;&lt;/li&gt;</span></span><br><span class="line"><span class="comment">     *   &lt;li&gt;&#123;<span class="doctag">@link</span> LockSupport#parkUntil LockSupport.parkUntil&#125;&lt;/li&gt;</span></span><br><span class="line"><span class="comment">     * &lt;/ul&gt;</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    TIMED_WAITING,</span><br><span class="line"></span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * Thread state for a terminated thread.</span></span><br><span class="line"><span class="comment">     * The thread has completed execution.</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    TERMINATED;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>6种！！没有什么Running状态！！！记好了！！</p>
+<p><img src="images/loading.gif" data-original="https://cdn.jsdelivr.net/gh/wjwABCDEFG/blog_img/img/20210717220821.jpeg" alt=""></p>
+<h2 id="wait-和sleep-的区别"><a href="#wait-和sleep-的区别" class="headerlink" title="wait()和sleep()的区别"></a>wait()和sleep()的区别</h2><p>它们都可以让<strong>线程阻塞</strong>。不同的是：</p>
+<ol>
+<li>wait方法必须在<strong>synchronized</strong>保护的代码中使用，而 sleep 方法并没有这个要求</li>
+<li>在同步代码中<strong>执行 sleep 方法时，并不会释放monitor锁，但执行wait方法时会主动释放monitor锁</strong></li>
+<li>sleep方法中会要求必须定义一个时间，时间到期后会主动恢复，而对于没有参数的wait方法而言，意味着永久等待，直到被中断或被唤醒才能恢复，它并不会主动恢复</li>
+<li><strong>wait/notify 是 Object 类的方法，而 sleep 是Thread类的方法</strong></li>
+</ol>
+<br>
+
+<hr>
+<h1 id="4-start方法到底是什么"><a href="#4-start方法到底是什么" class="headerlink" title="4. start方法到底是什么"></a>4. start方法到底是什么</h1><p>为什么要调用start而不是run</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">synchronized</span> <span class="keyword">void</span> <span class="title">start</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    <span class="keyword">if</span> (threadStatus != <span class="number">0</span>)</span><br><span class="line">        <span class="keyword">throw</span> <span class="keyword">new</span> IllegalThreadStateException();</span><br><span class="line"></span><br><span class="line">    group.add(<span class="keyword">this</span>);</span><br><span class="line"></span><br><span class="line">    <span class="keyword">boolean</span> started = <span class="keyword">false</span>;</span><br><span class="line">    <span class="keyword">try</span> &#123;</span><br><span class="line">        start0();	<span class="comment">//关键就是这个方法</span></span><br><span class="line">        started = <span class="keyword">true</span>;</span><br><span class="line">    &#125; <span class="keyword">finally</span> &#123;</span><br><span class="line">        <span class="keyword">try</span> &#123;</span><br><span class="line">            <span class="keyword">if</span> (!started) &#123;</span><br><span class="line">                group.threadStartFailed(<span class="keyword">this</span>);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125; <span class="keyword">catch</span> (Throwable ignore) &#123;</span><br><span class="line">            <span class="comment">/* do nothing. If start0 threw a Throwable then</span></span><br><span class="line"><span class="comment">              it will be passed up the call stack */</span></span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">private</span> <span class="keyword">native</span> <span class="keyword">void</span> <span class="title">start0</span><span class="params">()</span></span>;	<span class="comment">//是个本地方法，系统调用开了一个线程</span></span><br></pre></td></tr></table></figure>
+
+<br>
+
+<hr>
+<h1 id="4-线程池"><a href="#4-线程池" class="headerlink" title="4. 线程池"></a>4. 线程池</h1><ul>
+<li><strong>降低资源消耗</strong>：重复利用已创建的线程，降低线程创建和销毁造成的消耗。</li>
+<li><strong>提高响应速度</strong>：当任务到达时，任务可以不需要要等到线程创建就能立即执行。</li>
+<li><strong>提高线程的可管理性</strong>。线程是稀缺资源，如果无限制的创建，不仅会消耗系统资源，还会降低系统的稳定性，使用线程池可以进行统一的分配，调优和监控。</li>
+</ul>
+<h2 id="4-1-线程池的参数"><a href="#4-1-线程池的参数" class="headerlink" title="4.1 线程池的参数"></a>4.1 线程池的参数</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">public ThreadPoolExecutor(int corePoolSize,</span><br><span class="line">                          int maximumPoolSize,</span><br><span class="line">                          long keepAliveTime,</span><br><span class="line">                          TimeUnit unit,</span><br><span class="line">                          BlockingQueue&lt;Runnable&gt; workQueue,</span><br><span class="line">                          ThreadFactory threadFactory,</span><br><span class="line">                          RejectedExecutionHandler handler)</span><br></pre></td></tr></table></figure>
+
 <ul>
-<li>LoadLoadBarrier读读屏障</li>
-<li>LoadStoreBarrier读写屏障</li>
-<li>StoreLoadBarrier写读屏障</li>
-<li>StoreStoreBarrier写写屏障</li>
+<li><p>corePoolSize：核心线程数线。线程池中会维护一个最小的线程数量，即使这些线程处理空闲状态，他们也不会被销毁，除非设置了allowCoreThreadTimeOut。这里的最小线程数量即是corePoolSize</p>
+</li>
+<li><p>maximumPoolSize：最大线程数。<strong>一个任务被提交到线程池以后，首先会找有没有空闲存活线程，如果有则直接执行，如果没有则会缓存到工作队列（后面会介绍）中，如果工作队列满了，才会创建一个新线程，然后从工作队列的头部取出一个任务交由新线程来处理，而将刚提交的任务放入工作队列尾部。线程池不会无限制的去创建新线程，它会有一个最大线程数量的限制，这个数量即由maximunPoolSize指定</strong></p>
+</li>
+<li><p>keepAliveTime：一个线程如果处于空闲状态，并且当前的线程数量大于corePoolSize，那么在指定时间后，这个空闲线程会被销毁，这里的指定时间由keepAliveTime来设定</p>
+</li>
+<li><p>TimeUnit：时间单位</p>
+</li>
+<li><p>workQueue：当新任务来的时候会先判断当前运行的线程数量是否达到核心线程数，如果达到的话，新任务就会被存放在队列中，有四种任务队列</p>
+<p>①ArrayBlockingQueue</p>
+<p>基于数组的有界阻塞队列，按FIFO排序。新任务进来后，会放到该队列的队尾，有界的数组可以防止资源耗尽问题。当线程池中线程数量达到corePoolSize后，再有新任务进来，则会将任务放入该队列的队尾，等待被调度。如果队列已经是满的，则创建一个新线程，如果线程数量已经达到maxPoolSize，则会执行拒绝策略。</p>
+<p>②LinkedBlockingQueue</p>
+<p>基于链表的无界阻塞队列（其实最大容量为Interger.MAX），按照FIFO排序。由于该队列的近似无界性，当线程池中线程数量达到corePoolSize后，再有新任务进来，会一直存入该队列，而不会去创建新线程直到maxPoolSize，因此使用该工作队列时，参数maxPoolSize其实是不起作用的。</p>
+<p>③SynchronousQueue</p>
+<p>一个不缓存任务的阻塞队列，生产者放入一个任务必须等到消费者取出这个任务。也就是说新任务进来时，不会缓存，而是直接被调度执行该任务，如果没有可用线程，则创建新线程，如果线程数量达到maxPoolSize，则执行拒绝策略。说白了就是个假队列</p>
+<p>④PriorityBlockingQueue</p>
+<p>具有优先级的无界阻塞队列，优先级通过参数Comparator实现</p>
+</li>
+<li><p>ThreadFactory：线程工厂，创建一个新线程时使用的工厂，可以用来设定线程名、是否为daemon线程等等</p>
+</li>
+<li><p>RejectedExecutionHandler：拒绝策略</p>
+<ul>
+<li>AbortPolicy：抛出 <code>RejectedExecutionException</code>来拒绝新任务的处理。</li>
+<li>CallerRunsPolicy：调用执行自己的线程运行任务。您不会任务请求。但是这种策略会降低对于新任务提交速度，影响程序的整体性能。另外，这个策略喜欢增加队列容量。如果您的应用程序可以承受此延迟并且你不能任务丢弃任何一个任务请求的话，你可以选择这个策略。（说白了，谁管理任务的，谁就负责帮忙）</li>
+<li>DiscardPolicy：不处理新任务，直接丢弃掉。</li>
+<li>DiscardOldestPolicy：此策略将丢弃最早的未处理的任务请求。</li>
 </ul>
-<p>在volatile写之前加写写屏障，之后加写读屏障</p>
-<p>在volatile读之后加读读屏障和读写屏障</p>
-<p><img src="images/loading.gif" data-original="https://cdn.jsdelivr.net/gh/wjwABCDEFG/blog_img/img/20210717220728.png" alt=""></p>
-<p>不同的硬件厂商有自己不同的实现，其实并没有严格遵循规范（比如因特尔的sfence、ifence、mfence指令），但不管怎样都遵循两个最基本的原则：</p>
-<p>happens before：销毁必不可能在创建前</p>
-<p>as-if-serial：这个单次翻译过来就是“看起来像顺序执行”，也就是说不管你怎么重排序，单线程下执行出来的结果永远不变</p>
+</li>
+</ul>
+<p><img src="images/loading.gif" data-original="https://cdn.jsdelivr.net/gh/wjwABCDEFG/blog_img/img/20210717220832.png" alt=""></p>
 <br>
 
-<p>再看看hotspot的实现</p>
-<p><img src="images/loading.gif" data-original="https://cdn.jsdelivr.net/gh/wjwABCDEFG/blog_img/img/20210717220735.png" alt=""></p>
-<p>用的是lock，为什么？因为偷懒，没有针对不同的厂商进行不同的指令，而是汇编lock</p>
+<h2 id="4-2-常见线程池"><a href="#4-2-常见线程池" class="headerlink" title="4.2 常见线程池"></a>4.2 常见线程池</h2><h3 id="newFixedThreadPool"><a href="#newFixedThreadPool" class="headerlink" title="newFixedThreadPool"></a>newFixedThreadPool</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">&#x2F;&#x2F; core和max是一样的</span><br><span class="line">&#x2F;&#x2F; blockQueue是无界阻塞队列</span><br><span class="line">&#x2F;&#x2F; 嗯， 不好不好！！！</span><br><span class="line">public static ExecutorService newFixedThreadPool(int nThreads) &#123;</span><br><span class="line">    return new ThreadPoolExecutor(nThreads, nThreads,</span><br><span class="line">                                  0L, TimeUnit.MILLISECONDS,</span><br><span class="line">                                  new LinkedBlockingQueue&lt;Runnable&gt;());</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="newSingleThreadExecutor"><a href="#newSingleThreadExecutor" class="headerlink" title="newSingleThreadExecutor"></a>newSingleThreadExecutor</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">&#x2F;&#x2F; core和max无非都是1而已</span><br><span class="line">&#x2F;&#x2F; blockQueue是无界阻塞队列</span><br><span class="line">&#x2F;&#x2F; 嗯， 不好不好！！！</span><br><span class="line">public static ExecutorService newSingleThreadExecutor() &#123;</span><br><span class="line">    return new FinalizableDelegatedExecutorService</span><br><span class="line">        (new ThreadPoolExecutor(1, 1,</span><br><span class="line">                                0L, TimeUnit.MILLISECONDS,</span><br><span class="line">                                new LinkedBlockingQueue&lt;Runnable&gt;()));</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="newCachedThreadPool"><a href="#newCachedThreadPool" class="headerlink" title="newCachedThreadPool"></a>newCachedThreadPool</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">&#x2F;&#x2F; core 0</span><br><span class="line">&#x2F;&#x2F; max有点狠，不怕暴栈？</span><br><span class="line">&#x2F;&#x2F; 队列还是SynchronousQueue，还真怕</span><br><span class="line">public static ExecutorService newCachedThreadPool() &#123;</span><br><span class="line">    return new ThreadPoolExecutor(0, Integer.MAX_VALUE,</span><br><span class="line">                                  60L, TimeUnit.SECONDS,</span><br><span class="line">                                  new SynchronousQueue&lt;Runnable&gt;());</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>还有些别的比如<strong>newScheduledThreadPool</strong>（带定时器的线程池），就不介绍了</p>
+<p>可以看到这些都太极端了，要么core等于max，要么直接为0，队列也是无界，所以阿里巴巴的规范会提示自定义线程池</p>
+<br>
+
+<h2 id="4-3-线程池的线程数量怎么确定"><a href="#4-3-线程池的线程数量怎么确定" class="headerlink" title="4.3 线程池的线程数量怎么确定"></a>4.3 线程池的线程数量怎么确定</h2><ol>
+<li>一般来说，如果是CPU密集型应用，则线程池大小设置为N+1。</li>
+<li>一般来说，如果是IO密集型应用，则线程池大小设置为2N+1。</li>
+<li>在IO优化中，线程等待时间所占比例越高，需要越多线程，线程CPU时间所占比例越高，需要越少线程。这样的估算公式可能更适合：最佳线程数目 = （（线程等待时间+线程CPU时间）/线程CPU时间 ）* CPU数目</li>
+</ol>
+<br>
+
+<blockquote>
+<p>参考</p>
+<p>线程间通信：<a href="https://blog.csdn.net/jisuanji12306/article/details/86363390">https://blog.csdn.net/jisuanji12306/article/details/86363390</a></p>
+<p>线程的状态：<a href="https://blog.csdn.net/pange1991/article/details/53860651">https://blog.csdn.net/pange1991/article/details/53860651</a></p>
+</blockquote>
 
         </div>
         
@@ -271,16 +295,16 @@
     <div class="level post-navigation is-flex-wrap is-mobile">
         
         <div class="level-start">
-            <a class="level level-item has-link-grey  article-nav-prev" href="/Java/%E7%BA%BF%E7%A8%8B%E5%92%8C%E7%BA%BF%E7%A8%8B%E6%B1%A0/">
+            <a class="level level-item has-link-grey  article-nav-prev" href="/algorithms/654-maximum-binary-tree/">
                 <i class="level-item fas fa-chevron-left"></i>
-                <span class="level-item">线程和线程池</span>
+                <span class="level-item">654-最大二叉树</span>
             </a>
         </div>
         
         
         <div class="level-end">
-            <a class="level level-item has-link-grey  article-nav-next" href="/algorithms/rotate-list/">
-                <span class="level-item">61-旋转链表</span>
+            <a class="level level-item has-link-grey  article-nav-next" href="/Java%E5%9F%BA%E7%A1%80/volatile/">
+                <span class="level-item">volatile</span>
                 <i class="level-item fas fa-chevron-right"></i>
             </a>
         </div>
@@ -380,7 +404,7 @@
             </h3>
             <ul class="menu-list">
             <li>
-        <a class="level is-marginless" href="/categories/Java/">
+        <a class="level is-marginless" href="/categories/Java%E5%9F%BA%E7%A1%80/">
             <span class="level-start">
                 <span class="level-item">Java基础</span>
             </span>
@@ -518,40 +542,65 @@
                     目录
                 </h3>
                 <ul class="menu-list"><li>
-        <a class="is-flex" href="#1-线程之间可见性">
+        <a class="is-flex" href="#1-线程和进程的区别">
         <!-- 目录是否自动编号 -->
         <!-- <span class="has-mr-6">1</span> -->
-        <span>1. 线程之间可见性</span>
-        </a><ul class="menu-list"><li>
-        <a class="is-flex" href="#1-1-问题引出">
-        <!-- 目录是否自动编号 -->
-        <!-- <span class="has-mr-6">1.1</span> -->
-        <span>1.1 问题引出</span>
+        <span>1. 线程和进程的区别</span>
         </a></li><li>
-        <a class="is-flex" href="#误区：缓存一致性协议">
-        <!-- 目录是否自动编号 -->
-        <!-- <span class="has-mr-6">1.2</span> -->
-        <span>误区：缓存一致性协议</span>
-        </a></li></ul></li><li>
-        <a class="is-flex" href="#2-禁止指令重排序">
+        <a class="is-flex" href="#2-线程间通信">
         <!-- 目录是否自动编号 -->
         <!-- <span class="has-mr-6">2</span> -->
-        <span>2. 禁止指令重排序</span>
+        <span>2. 线程间通信</span>
+        </a></li><li>
+        <a class="is-flex" href="#3-线程的状态">
+        <!-- 目录是否自动编号 -->
+        <!-- <span class="has-mr-6">3</span> -->
+        <span>3. 线程的状态</span>
         </a><ul class="menu-list"><li>
-        <a class="is-flex" href="#2-1-什么是指令重排序">
+        <a class="is-flex" href="#wait-和sleep-的区别">
         <!-- 目录是否自动编号 -->
-        <!-- <span class="has-mr-6">2.1</span> -->
-        <span>2.1 什么是指令重排序</span>
+        <!-- <span class="has-mr-6">3.1</span> -->
+        <span>wait()和sleep()的区别</span>
+        </a></li></ul></li><li>
+        <a class="is-flex" href="#4-start方法到底是什么">
+        <!-- 目录是否自动编号 -->
+        <!-- <span class="has-mr-6">4</span> -->
+        <span>4. start方法到底是什么</span>
         </a></li><li>
-        <a class="is-flex" href="#2-2-DCL单例要不要加volatile">
+        <a class="is-flex" href="#4-线程池">
         <!-- 目录是否自动编号 -->
-        <!-- <span class="has-mr-6">2.2</span> -->
-        <span>2.2 DCL单例要不要加volatile</span>
+        <!-- <span class="has-mr-6">5</span> -->
+        <span>4. 线程池</span>
+        </a><ul class="menu-list"><li>
+        <a class="is-flex" href="#4-1-线程池的参数">
+        <!-- 目录是否自动编号 -->
+        <!-- <span class="has-mr-6">5.1</span> -->
+        <span>4.1 线程池的参数</span>
         </a></li><li>
-        <a class="is-flex" href="#2-3-volatile如何做到禁止指令重排序的？">
+        <a class="is-flex" href="#4-2-常见线程池">
         <!-- 目录是否自动编号 -->
-        <!-- <span class="has-mr-6">2.3</span> -->
-        <span>2.3 volatile如何做到禁止指令重排序的？</span>
+        <!-- <span class="has-mr-6">5.2</span> -->
+        <span>4.2 常见线程池</span>
+        </a><ul class="menu-list"><li>
+        <a class="is-flex" href="#newFixedThreadPool">
+        <!-- 目录是否自动编号 -->
+        <!-- <span class="has-mr-6">5.2.1</span> -->
+        <span>newFixedThreadPool</span>
+        </a></li><li>
+        <a class="is-flex" href="#newSingleThreadExecutor">
+        <!-- 目录是否自动编号 -->
+        <!-- <span class="has-mr-6">5.2.2</span> -->
+        <span>newSingleThreadExecutor</span>
+        </a></li><li>
+        <a class="is-flex" href="#newCachedThreadPool">
+        <!-- 目录是否自动编号 -->
+        <!-- <span class="has-mr-6">5.2.3</span> -->
+        <span>newCachedThreadPool</span>
+        </a></li></ul></li><li>
+        <a class="is-flex" href="#4-3-线程池的线程数量怎么确定">
+        <!-- 目录是否自动编号 -->
+        <!-- <span class="has-mr-6">5.3</span> -->
+        <span>4.3 线程池的线程数量怎么确定</span>
         </a></li></ul></li></ul>
             </div>
         </div>
@@ -566,16 +615,16 @@
         
         <article class="media">
             
-            <a href="/Others/node-editor.md/" class="media-left">
+            <a href="/Others/node-editor/" class="media-left">
                 <p class="image is-64x64">
-                    <img class="thumbnail" src="images/loading.gif" data-original="https://cdn.jsdelivr.net/gh/wjwABCDEFG/blog_img/img/20250401154214355.jpeg" alt="Line-It 节点编辑器.md">
+                    <img class="thumbnail" src="images/loading.gif" data-original="https://cdn.jsdelivr.net/gh/wjwABCDEFG/blog_img/img/20250401154214355.jpeg" alt="Line-It 节点编辑器">
                 </p>
             </a>
             
             <div class="media-content">
                 <div class="content">
                     <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2025-04-01T07:28:20.000Z">2025-04-01</time></div>
-                    <a href="/Others/node-editor.md/" class="title has-link-black-ter is-size-6 has-text-weight-normal">Line-It 节点编辑器.md</a>
+                    <a href="/Others/node-editor/" class="title has-link-black-ter is-size-6 has-text-weight-normal">Line-It 节点编辑器</a>
                     <p class="is-size-7 is-uppercase">
                         <a class="has-link-grey -link" href="/categories/Others/">Others</a>
                     </p>
@@ -682,40 +731,65 @@
                     目录
                 </h3>
                 <ul class="menu-list"><li>
-        <a class="is-flex" href="#1-线程之间可见性">
+        <a class="is-flex" href="#1-线程和进程的区别">
         <!-- 目录是否自动编号 -->
         <!-- <span class="has-mr-6">1</span> -->
-        <span>1. 线程之间可见性</span>
-        </a><ul class="menu-list"><li>
-        <a class="is-flex" href="#1-1-问题引出">
-        <!-- 目录是否自动编号 -->
-        <!-- <span class="has-mr-6">1.1</span> -->
-        <span>1.1 问题引出</span>
+        <span>1. 线程和进程的区别</span>
         </a></li><li>
-        <a class="is-flex" href="#误区：缓存一致性协议">
-        <!-- 目录是否自动编号 -->
-        <!-- <span class="has-mr-6">1.2</span> -->
-        <span>误区：缓存一致性协议</span>
-        </a></li></ul></li><li>
-        <a class="is-flex" href="#2-禁止指令重排序">
+        <a class="is-flex" href="#2-线程间通信">
         <!-- 目录是否自动编号 -->
         <!-- <span class="has-mr-6">2</span> -->
-        <span>2. 禁止指令重排序</span>
+        <span>2. 线程间通信</span>
+        </a></li><li>
+        <a class="is-flex" href="#3-线程的状态">
+        <!-- 目录是否自动编号 -->
+        <!-- <span class="has-mr-6">3</span> -->
+        <span>3. 线程的状态</span>
         </a><ul class="menu-list"><li>
-        <a class="is-flex" href="#2-1-什么是指令重排序">
+        <a class="is-flex" href="#wait-和sleep-的区别">
         <!-- 目录是否自动编号 -->
-        <!-- <span class="has-mr-6">2.1</span> -->
-        <span>2.1 什么是指令重排序</span>
+        <!-- <span class="has-mr-6">3.1</span> -->
+        <span>wait()和sleep()的区别</span>
+        </a></li></ul></li><li>
+        <a class="is-flex" href="#4-start方法到底是什么">
+        <!-- 目录是否自动编号 -->
+        <!-- <span class="has-mr-6">4</span> -->
+        <span>4. start方法到底是什么</span>
         </a></li><li>
-        <a class="is-flex" href="#2-2-DCL单例要不要加volatile">
+        <a class="is-flex" href="#4-线程池">
         <!-- 目录是否自动编号 -->
-        <!-- <span class="has-mr-6">2.2</span> -->
-        <span>2.2 DCL单例要不要加volatile</span>
+        <!-- <span class="has-mr-6">5</span> -->
+        <span>4. 线程池</span>
+        </a><ul class="menu-list"><li>
+        <a class="is-flex" href="#4-1-线程池的参数">
+        <!-- 目录是否自动编号 -->
+        <!-- <span class="has-mr-6">5.1</span> -->
+        <span>4.1 线程池的参数</span>
         </a></li><li>
-        <a class="is-flex" href="#2-3-volatile如何做到禁止指令重排序的？">
+        <a class="is-flex" href="#4-2-常见线程池">
         <!-- 目录是否自动编号 -->
-        <!-- <span class="has-mr-6">2.3</span> -->
-        <span>2.3 volatile如何做到禁止指令重排序的？</span>
+        <!-- <span class="has-mr-6">5.2</span> -->
+        <span>4.2 常见线程池</span>
+        </a><ul class="menu-list"><li>
+        <a class="is-flex" href="#newFixedThreadPool">
+        <!-- 目录是否自动编号 -->
+        <!-- <span class="has-mr-6">5.2.1</span> -->
+        <span>newFixedThreadPool</span>
+        </a></li><li>
+        <a class="is-flex" href="#newSingleThreadExecutor">
+        <!-- 目录是否自动编号 -->
+        <!-- <span class="has-mr-6">5.2.2</span> -->
+        <span>newSingleThreadExecutor</span>
+        </a></li><li>
+        <a class="is-flex" href="#newCachedThreadPool">
+        <!-- 目录是否自动编号 -->
+        <!-- <span class="has-mr-6">5.2.3</span> -->
+        <span>newCachedThreadPool</span>
+        </a></li></ul></li><li>
+        <a class="is-flex" href="#4-3-线程池的线程数量怎么确定">
+        <!-- 目录是否自动编号 -->
+        <!-- <span class="has-mr-6">5.3</span> -->
+        <span>4.3 线程池的线程数量怎么确定</span>
         </a></li></ul></li></ul>
             </div>
         </div>
@@ -730,16 +804,16 @@
         
         <article class="media">
             
-            <a href="/Others/node-editor.md/" class="media-left">
+            <a href="/Others/node-editor/" class="media-left">
                 <p class="image is-64x64">
-                    <img class="thumbnail" src="images/loading.gif" data-original="https://cdn.jsdelivr.net/gh/wjwABCDEFG/blog_img/img/20250401154214355.jpeg" alt="Line-It 节点编辑器.md">
+                    <img class="thumbnail" src="images/loading.gif" data-original="https://cdn.jsdelivr.net/gh/wjwABCDEFG/blog_img/img/20250401154214355.jpeg" alt="Line-It 节点编辑器">
                 </p>
             </a>
             
             <div class="media-content">
                 <div class="content">
                     <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2025-04-01T07:28:20.000Z">2025-04-01</time></div>
-                    <a href="/Others/node-editor.md/" class="title has-link-black-ter is-size-6 has-text-weight-normal">Line-It 节点编辑器.md</a>
+                    <a href="/Others/node-editor/" class="title has-link-black-ter is-size-6 has-text-weight-normal">Line-It 节点编辑器</a>
                     <p class="is-size-7 is-uppercase">
                         <a class="has-link-grey -link" href="/categories/Others/">Others</a>
                     </p>
@@ -838,7 +912,7 @@
             <div class="level-start has-text-centered-mobile">
                 <a class="footer-logo is-block has-mb-6" href="/">
                 
-                    <img src="images/loading.gif" data-original="https://cdn.jsdelivr.net/gh/wjwABCDEFG/blog_img/img/20210717231246.png" alt="volatile" height="28">
+                    <img src="images/loading.gif" data-original="https://cdn.jsdelivr.net/gh/wjwABCDEFG/blog_img/img/20210717231246.png" alt="线程和线程池" height="28">
                 
                 </a>
                 <p class="is-size-7">

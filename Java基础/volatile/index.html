@@ -7,22 +7,22 @@
 
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
 
-<title>ThreadLocal - 小温 blog</title>
+<title>volatile - 小温 blog</title>
 
 
-    <meta name="description" content="作用 多个线程之间的数据隔离 单个线程内部的简化参数（传递上下文）">
+    <meta name="description" content="1. 线程之间可见性1.1 问题引出Volatile到底是用来干嘛的，来看一段程序">
 <meta property="og:type" content="article">
-<meta property="og:title" content="ThreadLocal">
-<meta property="og:url" content="https://wjw.today/Java/ThreadLocal/index.html">
+<meta property="og:title" content="volatile">
+<meta property="og:url" content="https://wjw.today/Java%E5%9F%BA%E7%A1%80/volatile/index.html">
 <meta property="og:site_name" content="小温 blog">
-<meta property="og:description" content="作用 多个线程之间的数据隔离 单个线程内部的简化参数（传递上下文）">
+<meta property="og:description" content="1. 线程之间可见性1.1 问题引出Volatile到底是用来干嘛的，来看一段程序">
 <meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="https://cdn.jsdelivr.net/gh/wjwABCDEFG/blog_img/img/20210717214617.jpg">
-<meta property="article:published_time" content="2020-11-11T08:26:17.000Z">
-<meta property="article:modified_time" content="2021-07-17T13:46:55.380Z">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/wjwABCDEFG/blog_img/img/20210717220651.png">
+<meta property="article:published_time" content="2020-12-02T02:15:12.000Z">
+<meta property="article:modified_time" content="2021-07-17T14:07:40.890Z">
 <meta property="article:author" content="wjw">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="https://cdn.jsdelivr.net/gh/wjwABCDEFG/blog_img/img/20210717214617.jpg">
+<meta name="twitter:image" content="https://cdn.jsdelivr.net/gh/wjwABCDEFG/blog_img/img/20210717220651.png">
 
 
 
@@ -80,7 +80,7 @@
         <div class="navbar-brand is-flex-center">
             <a class="navbar-item navbar-logo" href="/">
             
-                <img src="images/loading.gif" data-original="https://cdn.jsdelivr.net/gh/wjwABCDEFG/blog_img/img/20210717231246.png" alt="ThreadLocal" height="28">
+                <img src="images/loading.gif" data-original="https://cdn.jsdelivr.net/gh/wjwABCDEFG/blog_img/img/20210717231246.png" alt="volatile" height="28">
             
             </a>
         </div>
@@ -138,7 +138,7 @@
     
     <div class="card-image">
         <span  class="image is-7by1">
-            <img class="thumbnail" src="images/loading.gif" data-original="https://cdn.jsdelivr.net/gh/wjwABCDEFG/blog_img/img/20210717214617.jpg" alt="ThreadLocal">
+            <img class="thumbnail" src="images/loading.gif" data-original="https://cdn.jsdelivr.net/gh/wjwABCDEFG/blog_img/img/20210717220651.png" alt="volatile">
         </span>
     </div>
     
@@ -146,17 +146,17 @@
         
         <div class="level article-meta is-size-7 is-uppercase is-mobile is-overflow-x-auto">
             <div class="level-left">
-                <time class="level-item has-text-grey" datetime="2020-11-11T08:26:17.000Z">2020-11-11</time>
+                <time class="level-item has-text-grey" datetime="2020-12-02T02:15:12.000Z">2020-12-02</time>
                 
                 <div class="level-item">
-                <a class="has-link-grey -link" href="/categories/Java/">Java基础</a>
+                <a class="has-link-grey -link" href="/categories/Java%E5%9F%BA%E7%A1%80/">Java基础</a>
                 </div>
                 
                 
                 <span class="level-item has-text-grey">
                     
                     
-                    12 分钟 读完 (大约 1753 个字)
+                    11 分钟 读完 (大约 1640 个字)
                 </span>
                 
                 
@@ -170,100 +170,91 @@
         
         <h1 class="title is-size-3 is-size-4-mobile has-text-weight-normal">
             
-                ThreadLocal
+                volatile
             
         </h1>
         <div class="content">
-            <h1 id="作用"><a href="#作用" class="headerlink" title="作用"></a>作用</h1><ol>
-<li>多个线程之间的数据隔离</li>
-<li>单个线程内部的简化参数（传递上下文）</li>
-</ol>
+            <h1 id="1-线程之间可见性"><a href="#1-线程之间可见性" class="headerlink" title="1. 线程之间可见性"></a>1. 线程之间可见性</h1><h2 id="1-1-问题引出"><a href="#1-1-问题引出" class="headerlink" title="1.1 问题引出"></a>1.1 问题引出</h2><p>Volatile到底是用来干嘛的，来看一段程序</p>
 <a id="more"></a>
 
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Volatile</span>问题引出 </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">static</span> <span class="comment">/*volatile*/</span> <span class="keyword">boolean</span> flag = <span class="keyword">false</span>;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">        A a = <span class="keyword">new</span> A();</span><br><span class="line">        a.start();</span><br><span class="line"></span><br><span class="line">        <span class="keyword">try</span> &#123;</span><br><span class="line">            Thread.sleep(<span class="number">1000</span>);</span><br><span class="line">        &#125; <span class="keyword">catch</span> (InterruptedException e) &#123;</span><br><span class="line">            e.printStackTrace();</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        flag = <span class="keyword">true</span>;</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">static</span> <span class="class"><span class="keyword">class</span> <span class="title">A</span> <span class="keyword">extends</span> <span class="title">Thread</span></span>&#123;</span><br><span class="line"></span><br><span class="line">        <span class="meta">@Override</span></span><br><span class="line">        <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">run</span><span class="params">()</span> </span>&#123;</span><br><span class="line">            <span class="keyword">while</span> (<span class="keyword">true</span>) &#123;</span><br><span class="line">                <span class="keyword">if</span> (flag)&#123;</span><br><span class="line">                    System.out.println(<span class="string">"知道主线程将flag变为true了"</span>);</span><br><span class="line">                    <span class="keyword">break</span>;</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>两个线程共同维护一个变量flag，一个睡1s后修改flag为true，另一个等待它变为true后输出一句话</p>
+<p>运行就会发现永远不能输出，因为一个线程感受不到另一个线程对它的改变，这是为什么呢？</p>
+<p>因为JMM中有规定，线程不能直接操作主存中的值，只能拷贝到自己的工作内存再进行操作</p>
+<p><img src="images/loading.gif" data-original="https://cdn.jsdelivr.net/gh/wjwABCDEFG/blog_img/img/20210717220656.png" alt=""></p>
+<p>也就是说线程改变了自己工作内存中的flag的值，并没有影响到另外一个线程的工作内存。明白了这点后，再把上面的代码volatile注释放开，这时候就能输出并结束了，这就是volatile的其中一个作用：线程间的可见性</p>
 <br>
 
-<h1 id="使用"><a href="#使用" class="headerlink" title="使用"></a>使用</h1><p>使用可太简单了，一个set 一个get</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">ThreadLocal&lt;String&gt; threadLocal = <span class="keyword">new</span> ThreadLocal&lt;&gt;();</span><br><span class="line">threadLocal.set(<span class="string">"张三"</span>);</span><br><span class="line">String name = threadLocal.get();</span><br></pre></td></tr></table></figure>
+<h2 id="误区：缓存一致性协议"><a href="#误区：缓存一致性协议" class="headerlink" title="误区：缓存一致性协议"></a>误区：缓存一致性协议</h2><p><strong>其实volatile跟缓存一致性协议根本没什么关系</strong>，网上很多文章会将其和缓存一致性协议放在一起说，其实他们不是一回事</p>
+<p>再看刚才的这一句，还是注释掉了volatile，但是while循环中多了一句打印System.out.println(“随便打印一条语句”);其他地方完全一样</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Volatile</span>问题引出 </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">static</span> <span class="comment">/*volatile*/</span> <span class="keyword">boolean</span> flag = <span class="keyword">false</span>;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">        A a = <span class="keyword">new</span> A();</span><br><span class="line">        a.start();</span><br><span class="line"></span><br><span class="line">        <span class="keyword">try</span> &#123;</span><br><span class="line">            Thread.sleep(<span class="number">1000</span>);</span><br><span class="line">        &#125; <span class="keyword">catch</span> (InterruptedException e) &#123;</span><br><span class="line">            e.printStackTrace();</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        flag = <span class="keyword">true</span>;</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">static</span> <span class="class"><span class="keyword">class</span> <span class="title">A</span> <span class="keyword">extends</span> <span class="title">Thread</span></span>&#123;</span><br><span class="line"></span><br><span class="line">        <span class="meta">@Override</span></span><br><span class="line">        <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">run</span><span class="params">()</span> </span>&#123;</span><br><span class="line">            <span class="keyword">while</span> (<span class="keyword">true</span>) &#123;</span><br><span class="line">                System.out.println(<span class="string">"随便打印一条语句"</span>);</span><br><span class="line">                <span class="keyword">if</span> (flag)&#123;</span><br><span class="line">                    System.out.println(<span class="string">"知道主线程将flag变为true了"</span>);</span><br><span class="line">                    <span class="keyword">break</span>;</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
+<p>运行，看到可以经历很多次循环后还是打印了flag</p>
+<p><img src="images/loading.gif" data-original="https://cdn.jsdelivr.net/gh/wjwABCDEFG/blog_img/img/20210717220708.png" alt=""></p>
+<p>这就是因为缓存一致性，更新了主存里面的东西，比如同步锁，可以看到volatile被注释掉了还是能更新，跟volatile没有半毛钱关系</p>
 <br>
 
-<h1 id="原理说明"><a href="#原理说明" class="headerlink" title="原理说明"></a>原理说明</h1><h2 id="set和get究竟是怎么回事"><a href="#set和get究竟是怎么回事" class="headerlink" title="set和get究竟是怎么回事"></a>set和get究竟是怎么回事</h2><p>set方法</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">set</span><span class="params">(T value)</span> </span>&#123;</span><br><span class="line">    Thread t = Thread.currentThread();</span><br><span class="line">    ThreadLocalMap map = getMap(t);</span><br><span class="line">    <span class="keyword">if</span> (map != <span class="keyword">null</span>)</span><br><span class="line">        map.set(<span class="keyword">this</span>, value);</span><br><span class="line">    <span class="keyword">else</span></span><br><span class="line">        createMap(t, value);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<hr>
+<h1 id="2-禁止指令重排序"><a href="#2-禁止指令重排序" class="headerlink" title="2. 禁止指令重排序"></a>2. 禁止指令重排序</h1><h2 id="2-1-什么是指令重排序"><a href="#2-1-什么是指令重排序" class="headerlink" title="2.1 什么是指令重排序"></a>2.1 什么是指令重排序</h2><p>就是说cpu为了运行效率可能会将两条没有依赖性的指令顺序进行对调</p>
+<p>这里有一段很巧妙的程序证明指令重排序存在</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> 证明指令重排序 </span>&#123;</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">int</span> a = <span class="number">0</span>, b = <span class="number">0</span>, x = <span class="number">0</span>, y = <span class="number">0</span>;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span></span>&#123;</span><br><span class="line">        <span class="keyword">long</span> time = <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">while</span> (<span class="keyword">true</span>) &#123;</span><br><span class="line">            time++;</span><br><span class="line">            a = <span class="number">0</span>; b = <span class="number">0</span>; x = <span class="number">0</span>; y = <span class="number">0</span>;</span><br><span class="line">            Thread thread1 = <span class="keyword">new</span> Thread(() -&gt; &#123;</span><br><span class="line">                a = <span class="number">1</span>;</span><br><span class="line">                x = b;</span><br><span class="line">            &#125;);</span><br><span class="line">            Thread thread2 = <span class="keyword">new</span> Thread(() -&gt; &#123;</span><br><span class="line">                b = <span class="number">1</span>;</span><br><span class="line">                y = a;</span><br><span class="line">            &#125;);</span><br><span class="line">            thread1.start();</span><br><span class="line">            thread2.start();</span><br><span class="line">            <span class="keyword">try</span> &#123;</span><br><span class="line">                thread1.join();</span><br><span class="line">                thread2.join();</span><br><span class="line">            &#125; <span class="keyword">catch</span> (Exception e) &#123;&#125;</span><br><span class="line">            <span class="keyword">if</span> (x == <span class="number">0</span> &amp;&amp; y == <span class="number">0</span>) &#123;</span><br><span class="line">                <span class="keyword">break</span>;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        System.out.println(<span class="string">"time="</span> + time + <span class="string">",x="</span> + x + <span class="string">",y="</span> + y);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
-<p>get方法</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> T <span class="title">get</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    Thread t = Thread.currentThread();</span><br><span class="line">    ThreadLocalMap map = getMap(t);</span><br><span class="line">    <span class="keyword">if</span> (map != <span class="keyword">null</span>) &#123;</span><br><span class="line">        ThreadLocalMap.Entry e = map.getEntry(<span class="keyword">this</span>);</span><br><span class="line">        <span class="keyword">if</span> (e != <span class="keyword">null</span>) &#123;</span><br><span class="line">            <span class="meta">@SuppressWarnings</span>(<span class="string">"unchecked"</span>)</span><br><span class="line">            T result = (T)e.value;</span><br><span class="line">            <span class="keyword">return</span> result;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> setInitialValue();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>这段程序巧妙在哪呢？看两个线程的任务逻辑，可以分析出不管哪个线程先执行，或者交叉执行，只要a = 1在x = b之前，b = 1在y = a之前，都不可能出现x = 0, y = 0的</p>
+<p>说的再简单点：</p>
+<p>如果a = 1先执行，那么y必为1</p>
+<p>如果b = 1先执行，那么x必为1</p>
+<p>如果a = 1, b = 1先执行，那么x, y都为1</p>
+<p>只有被重排序为</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//线程1</span></span><br><span class="line">x = b;</span><br><span class="line">a = <span class="number">1</span>;</span><br><span class="line"></span><br><span class="line"><span class="comment">//线程2</span></span><br><span class="line">y = a;</span><br><span class="line">b = <span class="number">1</span>;</span><br></pre></td></tr></table></figure>
 
-<p>由前两行可以看到根据每个currentThread获取了map，因此<strong>不同的线程获取的map自然就不同</strong>，每个线程只能操控自己的map，而对于同一个线程，不管在哪里获取的map都是同一个。</p>
-<p>而对于每个map，key为ThreadLocal这个类，value为我们set的值</p>
-<p><img src="images/loading.gif" data-original="https://cdn.jsdelivr.net/gh/wjwABCDEFG/blog_img/img/20210717214622.png" alt=""></p>
-<p>当然这只是分析，我们可以进一步看getMap源码验证上图</p>
-<p>先看getMap方法体：</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="function">ThreadLocalMap <span class="title">getMap</span><span class="params">(Thread t)</span> </span>&#123;</span><br><span class="line">	<span class="keyword">return</span> t.threadLocals;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>直接返回了Thread类的一个属性成员</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Thread</span> <span class="keyword">implements</span> <span class="title">Runnable</span> </span>&#123;</span><br><span class="line">    </span><br><span class="line">    <span class="comment">/* ThreadLocal values pertaining to this thread. This map is maintained</span></span><br><span class="line"><span class="comment">     * by the ThreadLocal class. */</span></span><br><span class="line">    ThreadLocal.ThreadLocalMap threadLocals = <span class="keyword">null</span>;</span><br><span class="line"></span><br><span class="line">    <span class="comment">/*</span></span><br><span class="line"><span class="comment">     * InheritableThreadLocal values pertaining to this thread. This map is</span></span><br><span class="line"><span class="comment">     * maintained by the InheritableThreadLocal class.</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    ThreadLocal.ThreadLocalMap inheritableThreadLocals = <span class="keyword">null</span>;</span><br><span class="line">    </span><br><span class="line">    ...</span><br></pre></td></tr></table></figure>
-
-<p>到这里就可以完全说明<strong>不同的线程获取的map自然就不同，每个线程有自己的map</strong>了</p>
+<p>才有可能x = 0, y = 0，明白了吗？</p>
+<p><img src="images/loading.gif" data-original="https://cdn.jsdelivr.net/gh/wjwABCDEFG/blog_img/img/20210717220713.png" alt="运行多久就看造化了"></p>
 <br>
 
-<h2 id="map真的是map吗"><a href="#map真的是map吗" class="headerlink" title="map真的是map吗"></a>map真的是map吗</h2><p>再看看这个map，他叫ThreadLocalMap，跟hashmap一样吗？</p>
-<p>部分源码如下：</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">static</span> <span class="class"><span class="keyword">class</span> <span class="title">ThreadLocalMap</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * The entries in this hash map extend WeakReference, using</span></span><br><span class="line"><span class="comment">     * its main ref field as the key (which is always a</span></span><br><span class="line"><span class="comment">     * ThreadLocal object).  Note that null keys (i.e. entry.get()</span></span><br><span class="line"><span class="comment">     * == null) mean that the key is no longer referenced, so the</span></span><br><span class="line"><span class="comment">     * entry can be expunged from table.  Such entries are referred to</span></span><br><span class="line"><span class="comment">     * as "stale entries" in the code that follows.</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="keyword">static</span> <span class="class"><span class="keyword">class</span> <span class="title">Entry</span> <span class="keyword">extends</span> <span class="title">WeakReference</span>&lt;<span class="title">ThreadLocal</span>&lt;?&gt;&gt; </span>&#123;</span><br><span class="line">        <span class="comment">/** The value associated with this ThreadLocal. */</span></span><br><span class="line">        Object value;</span><br><span class="line"></span><br><span class="line">        Entry(ThreadLocal&lt;?&gt; k, Object v) &#123;</span><br><span class="line">            <span class="keyword">super</span>(k);</span><br><span class="line">            value = v;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * The table, resized as necessary.</span></span><br><span class="line"><span class="comment">     * table.length MUST always be a power of two.</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="keyword">private</span> Entry[] table;</span><br><span class="line">    </span><br><span class="line">    ...</span><br></pre></td></tr></table></figure>
+<p>我们来看下指令重排序的底层原因</p>
+<p><img src="images/loading.gif" data-original="https://cdn.jsdelivr.net/gh/wjwABCDEFG/blog_img/img/20210717220719.png" alt=""></p>
+<p>在java中Object o = new Object();产生了以上汇编指令</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">new -&gt; 生成一个初始值m&#x3D;0</span><br><span class="line">invokespecial -&gt; 赋值m&#x3D;8</span><br><span class="line">astore -&gt; 将指针t指向这个m</span><br></pre></td></tr></table></figure>
 
-<p>对比hashmap分析，我贴上Hashmap的部分源码</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">HashMap</span>&lt;<span class="title">K</span>,<span class="title">V</span>&gt; <span class="keyword">extends</span> <span class="title">AbstractMap</span>&lt;<span class="title">K</span>,<span class="title">V</span>&gt;</span></span><br><span class="line"><span class="class">    <span class="keyword">implements</span> <span class="title">Map</span>&lt;<span class="title">K</span>,<span class="title">V</span>&gt;, <span class="title">Cloneable</span>, <span class="title">Serializable</span> </span>&#123;</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">static</span> <span class="class"><span class="keyword">class</span> <span class="title">Node</span>&lt;<span class="title">K</span>,<span class="title">V</span>&gt; <span class="keyword">implements</span> <span class="title">Map</span>.<span class="title">Entry</span>&lt;<span class="title">K</span>,<span class="title">V</span>&gt; </span>&#123;</span><br><span class="line">        <span class="keyword">final</span> <span class="keyword">int</span> hash;</span><br><span class="line">        <span class="keyword">final</span> K key;</span><br><span class="line">        V value;</span><br><span class="line">        Node&lt;K,V&gt; next;</span><br><span class="line">        </span><br><span class="line">        ...</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">transient</span> Node&lt;K,V&gt;[] table;</span><br><span class="line">    </span><br><span class="line">    ...</span><br></pre></td></tr></table></figure>
+<p>指令重排序，可能会调整为如下</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">new -&gt; 生成一个初始值m&#x3D;0</span><br><span class="line">astore -&gt; 将指针t指向这个m</span><br><span class="line">invokespecial -&gt; 赋值m&#x3D;8</span><br></pre></td></tr></table></figure>
 
-<p>我们都知道hashmap在树化之前是数组+链表，首先是Entry[] table，类似于hashmap“数组+链表”中的数组Node&lt;K,V&gt;[] table</p>
-<p>那链表呢？答案是<strong>没有</strong>。从上面可以看出，hashmap的有指针域Node&lt;K,V&gt; next;，但是ThreadLocalMap的Entry是一个弱引用</p>
-<p>综上所述，<strong>ThreadLocalMap其实并没有实现Map接口，只是一个Entry数组</strong></p>
+<p>这就有可能会造成我们拿到的指针不为null，但是此时的值还为0</p>
 <br>
 
-<h2 id="ThreadLocalMap如何解决hash冲突"><a href="#ThreadLocalMap如何解决hash冲突" class="headerlink" title="ThreadLocalMap如何解决hash冲突"></a>ThreadLocalMap如何解决hash冲突</h2><p>既然我们知道了ThreadLocalMap只是一个Entry数组，如果定义了多个ThreadLocal</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">ThreadLocal&lt;String&gt; threadLocal1 = <span class="keyword">new</span> ThreadLocal&lt;&gt;();</span><br><span class="line">ThreadLocal&lt;Integer&gt; threadLocal2 = <span class="keyword">new</span> ThreadLocal&lt;&gt;();</span><br></pre></td></tr></table></figure>
+<h2 id="2-2-DCL单例要不要加volatile"><a href="#2-2-DCL单例要不要加volatile" class="headerlink" title="2.2 DCL单例要不要加volatile"></a>2.2 DCL单例要不要加volatile</h2><p>单例模式的一种实现：double-checked locking</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Singleton</span> </span>&#123;  </span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">volatile</span> <span class="keyword">static</span> Singleton singleton;  </span><br><span class="line">    <span class="function"><span class="keyword">private</span> <span class="title">Singleton</span> <span class="params">()</span></span>&#123;&#125;  </span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> Singleton <span class="title">getInstance</span><span class="params">()</span> </span>&#123;  </span><br><span class="line">        <span class="keyword">if</span> (singleton == <span class="keyword">null</span>) &#123;  </span><br><span class="line">            <span class="keyword">synchronized</span> (Singleton<span class="class">.<span class="keyword">class</span>) </span>&#123;  </span><br><span class="line">                <span class="keyword">if</span> (singleton == <span class="keyword">null</span>) &#123;  </span><br><span class="line">                    singleton = <span class="keyword">new</span> Singleton();  </span><br><span class="line">                &#125;</span><br><span class="line">            &#125;  </span><br><span class="line">        &#125;  </span><br><span class="line">        <span class="keyword">return</span> singleton;  </span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
-<p>存东西的时候遇到hash冲突怎么解决呢，先说结论：hashmap遇到hash冲突后会跟在此下标对应的链表后面，而ThreadLocalMap没有链表，遇到hash冲突后计算下一个下标，直到数组在某个下标处没有值</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">private</span> <span class="keyword">void</span> <span class="title">set</span><span class="params">(ThreadLocal&lt;?&gt; key, Object value)</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    Entry[] tab = table;</span><br><span class="line">    <span class="keyword">int</span> len = tab.length;</span><br><span class="line">    <span class="keyword">int</span> i = key.threadLocalHashCode &amp; (len-<span class="number">1</span>);	<span class="comment">//1.这样计算hash值</span></span><br><span class="line"></span><br><span class="line">    <span class="keyword">for</span> (Entry e = tab[i];</span><br><span class="line">         e != <span class="keyword">null</span>;</span><br><span class="line">         e = tab[i = nextIndex(i, len)]) &#123;	<span class="comment">//4.entry不为空且key不相等，说明hash冲突，一直找下一个位置</span></span><br><span class="line">        ThreadLocal&lt;?&gt; k = e.get();</span><br><span class="line"></span><br><span class="line">        <span class="keyword">if</span> (k == key) &#123;	<span class="comment">//2.key相等，覆盖旧值</span></span><br><span class="line">            e.value = value;</span><br><span class="line">            <span class="keyword">return</span>;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">if</span> (k == <span class="keyword">null</span>) &#123;	<span class="comment">//3.当前位置是空的，就初始化⼀个Entry对象放在位置i上；</span></span><br><span class="line">            replaceStaleEntry(key, value, i);</span><br><span class="line">            <span class="keyword">return</span>;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    tab[i] = <span class="keyword">new</span> Entry(key, value);</span><br><span class="line">    <span class="keyword">int</span> sz = ++size;</span><br><span class="line">    <span class="keyword">if</span> (!cleanSomeSlots(i, sz) &amp;&amp; sz &gt;= threshold)</span><br><span class="line">        rehash();</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">//nextIndex也贴出来，真的是下一个位置！！</span></span><br><span class="line"><span class="function"><span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">int</span> <span class="title">nextIndex</span><span class="params">(<span class="keyword">int</span> i, <span class="keyword">int</span> len)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">return</span> ((i + <span class="number">1</span> &lt; len) ? i + <span class="number">1</span> : <span class="number">0</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>get时候也是一样：计算hash下标–&gt;判断key是否相等–&gt;相等直接返回，不相等看下一个位置–&gt;继续判断是否相等…</p>
+<p>这种方式高效，且实现了线程安全和懒加载</p>
+<ul>
+<li>懒加载就是说定义的时候没有直接new，而是在调用getInstance的时候new</li>
+<li>线程安全是说synchronized包裹了判空和new，</li>
+<li>高效是说锁的粒度很细，只锁住了判空和new，因为外层可能会有别的业务代码。另一方面，<strong>DCL中外面的那层判空，避免了直接的synchronized锁竞争，提高了效率</strong></li>
+</ul>
+<p>好了，简单介绍完后，来说为什么要加volatile，一定要加，因为之前说了指令重排序，可能造成指针先存在，后赋值的现象。如果线程1发生指令重排序，先astore有了指针，此时停下，第二个线程走完整个流程，判空不为空导致直接return，但是又还没有new，因此return了个半初始化状态的对象</p>
+<p>因此DCL单例一定要加volatile，禁止指令重排序</p>
 <br>
 
-<h1 id="内存泄漏问题"><a href="#内存泄漏问题" class="headerlink" title="内存泄漏问题"></a>内存泄漏问题</h1><p>key使用了弱引用，不存在内存泄漏问题，但是value存在</p>
-<p>先看结构</p>
-<p><img src="images/loading.gif" data-original="https://cdn.jsdelivr.net/gh/wjwABCDEFG/blog_img/img/20210717214631.png" alt=""></p>
-<p>当我们ThreadLocal tl = new ThreadLocal();的时候，实际上有两个引用指向了ThreadLocal，一个是tl本身是一个强引用，一个是getMap(当前线程)得到的ThreadLocalMap，它里面的Entry的key是一个弱引用，指向了ThreadLocal。</p>
-<blockquote>
-<p> 为什么这里要使用弱引用呢？</p>
-<p>如果是强引用，则tl和key都是强引用，我们一般都是操作tl，也就是tl = null，但是key依然存在强引用，于是导致无法被gc回收，存在内存泄漏问题。</p>
-<p>使用弱引用就不会内存泄漏？</p>
-<p>不是的，即使key是弱引用，但是如果key被回收变为null，value无法被访问，依然存在内存泄漏问题。解决的办法是主动调用tl.remove();</p>
-</blockquote>
-<p>对于Entry，key是弱引用，在gc时会被回收，但是<strong>value得等到该ThreadLocal/线程没有强引用时才会收</strong>，如果线程一直存在，比如<strong>线程池</strong>会复用线程，那么此时value就一直无法回收，造成内存泄露问题。</p>
-<p>解决方法也很简单，养成好习惯，主动调用remove()方法</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">ThreadLocal&lt;String&gt; localName = <span class="keyword">new</span> ThreadLocal();</span><br><span class="line"><span class="keyword">try</span> &#123;</span><br><span class="line"> localName.set(<span class="string">"张三"</span>);</span><br><span class="line"> ……</span><br><span class="line">&#125; <span class="keyword">finally</span> &#123;</span><br><span class="line"> localName.remove();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
+<h2 id="2-3-volatile如何做到禁止指令重排序的？"><a href="#2-3-volatile如何做到禁止指令重排序的？" class="headerlink" title="2.3 volatile如何做到禁止指令重排序的？"></a>2.3 volatile如何做到禁止指令重排序的？</h2><p><strong>内存屏障</strong>，在JVM级别，内存屏障只是一个规范，就像是接口一样，交给不同的CPU实现，这个东西不同的硬件实现不一样。</p>
+<p>JVM中规定有4中屏障</p>
+<ul>
+<li>LoadLoadBarrier读读屏障</li>
+<li>LoadStoreBarrier读写屏障</li>
+<li>StoreLoadBarrier写读屏障</li>
+<li>StoreStoreBarrier写写屏障</li>
+</ul>
+<p>在volatile写之前加写写屏障，之后加写读屏障</p>
+<p>在volatile读之后加读读屏障和读写屏障</p>
+<p><img src="images/loading.gif" data-original="https://cdn.jsdelivr.net/gh/wjwABCDEFG/blog_img/img/20210717220728.png" alt=""></p>
+<p>不同的硬件厂商有自己不同的实现，其实并没有严格遵循规范（比如因特尔的sfence、ifence、mfence指令），但不管怎样都遵循两个最基本的原则：</p>
+<p>happens before：销毁必不可能在创建前</p>
+<p>as-if-serial：这个单次翻译过来就是“看起来像顺序执行”，也就是说不管你怎么重排序，单线程下执行出来的结果永远不变</p>
 <br>
 
-<h1 id="线程之间传递"><a href="#线程之间传递" class="headerlink" title="线程之间传递"></a>线程之间传递</h1><p>Java中的对象都是在堆中的，是线程共享的，ThreadLocal也一样，只是通过一些手段来实现线程之间的隔离，如果要实现父子线程之间的数据共享，可以使用InheritableThreadLocal</p>
-<p>其原理是判断父组件是否有InheritableThreadLocal，有就直接赋值给子线程</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//Thread的init方法中</span></span><br><span class="line"><span class="keyword">if</span> (inheritThreadLocals &amp;&amp; parent.inheritableThreadLocals != <span class="keyword">null</span>)</span><br><span class="line">            <span class="keyword">this</span>.inheritableThreadLocals =</span><br><span class="line">                ThreadLocal.createInheritedMap(parent.inheritableThreadLocals);</span><br></pre></td></tr></table></figure>
-
-<br>
-
-<h1 id="常见场景"><a href="#常见场景" class="headerlink" title="常见场景"></a>常见场景</h1><h2 id="Spring的事务控制"><a href="#Spring的事务控制" class="headerlink" title="Spring的事务控制"></a>Spring的事务控制</h2><p>最著名的肯定是Spring的事务控制了，操作数据库最终都是dao层的JDBC，那么就需要Connection连接对象，原则上来说增删改查操作都由Connection操作。本来也没什么，但是Spring为了把事务都控制在service业务层（虽然这些什么什么层本质一样，是自己抽象出来的概念），做了两件事：</p>
-<ol>
-<li>为了保证原子性：保证单个线程中的数据库操作使用的是同⼀个数据库连接，而且为了让开发者不需要将同一个Connection对象作为参数在dao的函数里传来传去，使用时感知不到Connection对象，于是使用了ThreadLocal+AOP的方式，保证了</li>
-<li>为了保证隔离性：使用ThreadLocal，各个线程之间的事务互不影响</li>
-</ol>
-<br>
-
-<h2 id="贴一个自己使用的场景：存放登录信息"><a href="#贴一个自己使用的场景：存放登录信息" class="headerlink" title="贴一个自己使用的场景：存放登录信息"></a>贴一个自己使用的场景：存放登录信息</h2><p><img src="images/loading.gif" data-original="https://cdn.jsdelivr.net/gh/wjwABCDEFG/blog_img/img/20210717214638.png" alt=""></p>
-<br>
-
-<blockquote>
-<p>参考</p>
-<p><a href="https://www.zhihu.com/question/341005993/answer/1367225682">三太子敖丙ThreadLocal</a></p>
-<p><a href="https://space.bilibili.com/406692798?from=search&seid=2048544262806301662">bilibili马士兵弱引用</a></p>
-</blockquote>
+<p>再看看hotspot的实现</p>
+<p><img src="images/loading.gif" data-original="https://cdn.jsdelivr.net/gh/wjwABCDEFG/blog_img/img/20210717220735.png" alt=""></p>
+<p>用的是lock，为什么？因为偷懒，没有针对不同的厂商进行不同的指令，而是汇编lock</p>
 
         </div>
         
@@ -280,16 +271,16 @@
     <div class="level post-navigation is-flex-wrap is-mobile">
         
         <div class="level-start">
-            <a class="level level-item has-link-grey  article-nav-prev" href="/algorithms/count-numbers-with-unique-digits/">
+            <a class="level level-item has-link-grey  article-nav-prev" href="/Java%E5%9F%BA%E7%A1%80/%E7%BA%BF%E7%A8%8B%E5%92%8C%E7%BA%BF%E7%A8%8B%E6%B1%A0/">
                 <i class="level-item fas fa-chevron-left"></i>
-                <span class="level-item">357-计算各个位数不同的数字个数</span>
+                <span class="level-item">线程和线程池</span>
             </a>
         </div>
         
         
         <div class="level-end">
-            <a class="level level-item has-link-grey  article-nav-next" href="/Java/%E5%8F%8D%E5%B0%84%E5%92%8C%E7%B1%BB%E5%8A%A0%E8%BD%BD%E5%99%A8/">
-                <span class="level-item">反射和类加载器</span>
+            <a class="level level-item has-link-grey  article-nav-next" href="/algorithms/rotate-list/">
+                <span class="level-item">61-旋转链表</span>
                 <i class="level-item fas fa-chevron-right"></i>
             </a>
         </div>
@@ -389,7 +380,7 @@
             </h3>
             <ul class="menu-list">
             <li>
-        <a class="level is-marginless" href="/categories/Java/">
+        <a class="level is-marginless" href="/categories/Java%E5%9F%BA%E7%A1%80/">
             <span class="level-start">
                 <span class="level-item">Java基础</span>
             </span>
@@ -527,60 +518,40 @@
                     目录
                 </h3>
                 <ul class="menu-list"><li>
-        <a class="is-flex" href="#作用">
+        <a class="is-flex" href="#1-线程之间可见性">
         <!-- 目录是否自动编号 -->
         <!-- <span class="has-mr-6">1</span> -->
-        <span>作用</span>
+        <span>1. 线程之间可见性</span>
+        </a><ul class="menu-list"><li>
+        <a class="is-flex" href="#1-1-问题引出">
+        <!-- 目录是否自动编号 -->
+        <!-- <span class="has-mr-6">1.1</span> -->
+        <span>1.1 问题引出</span>
         </a></li><li>
-        <a class="is-flex" href="#使用">
+        <a class="is-flex" href="#误区：缓存一致性协议">
+        <!-- 目录是否自动编号 -->
+        <!-- <span class="has-mr-6">1.2</span> -->
+        <span>误区：缓存一致性协议</span>
+        </a></li></ul></li><li>
+        <a class="is-flex" href="#2-禁止指令重排序">
         <!-- 目录是否自动编号 -->
         <!-- <span class="has-mr-6">2</span> -->
-        <span>使用</span>
-        </a></li><li>
-        <a class="is-flex" href="#原理说明">
-        <!-- 目录是否自动编号 -->
-        <!-- <span class="has-mr-6">3</span> -->
-        <span>原理说明</span>
+        <span>2. 禁止指令重排序</span>
         </a><ul class="menu-list"><li>
-        <a class="is-flex" href="#set和get究竟是怎么回事">
+        <a class="is-flex" href="#2-1-什么是指令重排序">
         <!-- 目录是否自动编号 -->
-        <!-- <span class="has-mr-6">3.1</span> -->
-        <span>set和get究竟是怎么回事</span>
+        <!-- <span class="has-mr-6">2.1</span> -->
+        <span>2.1 什么是指令重排序</span>
         </a></li><li>
-        <a class="is-flex" href="#map真的是map吗">
+        <a class="is-flex" href="#2-2-DCL单例要不要加volatile">
         <!-- 目录是否自动编号 -->
-        <!-- <span class="has-mr-6">3.2</span> -->
-        <span>map真的是map吗</span>
+        <!-- <span class="has-mr-6">2.2</span> -->
+        <span>2.2 DCL单例要不要加volatile</span>
         </a></li><li>
-        <a class="is-flex" href="#ThreadLocalMap如何解决hash冲突">
+        <a class="is-flex" href="#2-3-volatile如何做到禁止指令重排序的？">
         <!-- 目录是否自动编号 -->
-        <!-- <span class="has-mr-6">3.3</span> -->
-        <span>ThreadLocalMap如何解决hash冲突</span>
-        </a></li></ul></li><li>
-        <a class="is-flex" href="#内存泄漏问题">
-        <!-- 目录是否自动编号 -->
-        <!-- <span class="has-mr-6">4</span> -->
-        <span>内存泄漏问题</span>
-        </a></li><li>
-        <a class="is-flex" href="#线程之间传递">
-        <!-- 目录是否自动编号 -->
-        <!-- <span class="has-mr-6">5</span> -->
-        <span>线程之间传递</span>
-        </a></li><li>
-        <a class="is-flex" href="#常见场景">
-        <!-- 目录是否自动编号 -->
-        <!-- <span class="has-mr-6">6</span> -->
-        <span>常见场景</span>
-        </a><ul class="menu-list"><li>
-        <a class="is-flex" href="#Spring的事务控制">
-        <!-- 目录是否自动编号 -->
-        <!-- <span class="has-mr-6">6.1</span> -->
-        <span>Spring的事务控制</span>
-        </a></li><li>
-        <a class="is-flex" href="#贴一个自己使用的场景：存放登录信息">
-        <!-- 目录是否自动编号 -->
-        <!-- <span class="has-mr-6">6.2</span> -->
-        <span>贴一个自己使用的场景：存放登录信息</span>
+        <!-- <span class="has-mr-6">2.3</span> -->
+        <span>2.3 volatile如何做到禁止指令重排序的？</span>
         </a></li></ul></li></ul>
             </div>
         </div>
@@ -595,16 +566,16 @@
         
         <article class="media">
             
-            <a href="/Others/node-editor.md/" class="media-left">
+            <a href="/Others/node-editor/" class="media-left">
                 <p class="image is-64x64">
-                    <img class="thumbnail" src="images/loading.gif" data-original="https://cdn.jsdelivr.net/gh/wjwABCDEFG/blog_img/img/20250401154214355.jpeg" alt="Line-It 节点编辑器.md">
+                    <img class="thumbnail" src="images/loading.gif" data-original="https://cdn.jsdelivr.net/gh/wjwABCDEFG/blog_img/img/20250401154214355.jpeg" alt="Line-It 节点编辑器">
                 </p>
             </a>
             
             <div class="media-content">
                 <div class="content">
                     <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2025-04-01T07:28:20.000Z">2025-04-01</time></div>
-                    <a href="/Others/node-editor.md/" class="title has-link-black-ter is-size-6 has-text-weight-normal">Line-It 节点编辑器.md</a>
+                    <a href="/Others/node-editor/" class="title has-link-black-ter is-size-6 has-text-weight-normal">Line-It 节点编辑器</a>
                     <p class="is-size-7 is-uppercase">
                         <a class="has-link-grey -link" href="/categories/Others/">Others</a>
                     </p>
@@ -711,60 +682,40 @@
                     目录
                 </h3>
                 <ul class="menu-list"><li>
-        <a class="is-flex" href="#作用">
+        <a class="is-flex" href="#1-线程之间可见性">
         <!-- 目录是否自动编号 -->
         <!-- <span class="has-mr-6">1</span> -->
-        <span>作用</span>
+        <span>1. 线程之间可见性</span>
+        </a><ul class="menu-list"><li>
+        <a class="is-flex" href="#1-1-问题引出">
+        <!-- 目录是否自动编号 -->
+        <!-- <span class="has-mr-6">1.1</span> -->
+        <span>1.1 问题引出</span>
         </a></li><li>
-        <a class="is-flex" href="#使用">
+        <a class="is-flex" href="#误区：缓存一致性协议">
+        <!-- 目录是否自动编号 -->
+        <!-- <span class="has-mr-6">1.2</span> -->
+        <span>误区：缓存一致性协议</span>
+        </a></li></ul></li><li>
+        <a class="is-flex" href="#2-禁止指令重排序">
         <!-- 目录是否自动编号 -->
         <!-- <span class="has-mr-6">2</span> -->
-        <span>使用</span>
-        </a></li><li>
-        <a class="is-flex" href="#原理说明">
-        <!-- 目录是否自动编号 -->
-        <!-- <span class="has-mr-6">3</span> -->
-        <span>原理说明</span>
+        <span>2. 禁止指令重排序</span>
         </a><ul class="menu-list"><li>
-        <a class="is-flex" href="#set和get究竟是怎么回事">
+        <a class="is-flex" href="#2-1-什么是指令重排序">
         <!-- 目录是否自动编号 -->
-        <!-- <span class="has-mr-6">3.1</span> -->
-        <span>set和get究竟是怎么回事</span>
+        <!-- <span class="has-mr-6">2.1</span> -->
+        <span>2.1 什么是指令重排序</span>
         </a></li><li>
-        <a class="is-flex" href="#map真的是map吗">
+        <a class="is-flex" href="#2-2-DCL单例要不要加volatile">
         <!-- 目录是否自动编号 -->
-        <!-- <span class="has-mr-6">3.2</span> -->
-        <span>map真的是map吗</span>
+        <!-- <span class="has-mr-6">2.2</span> -->
+        <span>2.2 DCL单例要不要加volatile</span>
         </a></li><li>
-        <a class="is-flex" href="#ThreadLocalMap如何解决hash冲突">
+        <a class="is-flex" href="#2-3-volatile如何做到禁止指令重排序的？">
         <!-- 目录是否自动编号 -->
-        <!-- <span class="has-mr-6">3.3</span> -->
-        <span>ThreadLocalMap如何解决hash冲突</span>
-        </a></li></ul></li><li>
-        <a class="is-flex" href="#内存泄漏问题">
-        <!-- 目录是否自动编号 -->
-        <!-- <span class="has-mr-6">4</span> -->
-        <span>内存泄漏问题</span>
-        </a></li><li>
-        <a class="is-flex" href="#线程之间传递">
-        <!-- 目录是否自动编号 -->
-        <!-- <span class="has-mr-6">5</span> -->
-        <span>线程之间传递</span>
-        </a></li><li>
-        <a class="is-flex" href="#常见场景">
-        <!-- 目录是否自动编号 -->
-        <!-- <span class="has-mr-6">6</span> -->
-        <span>常见场景</span>
-        </a><ul class="menu-list"><li>
-        <a class="is-flex" href="#Spring的事务控制">
-        <!-- 目录是否自动编号 -->
-        <!-- <span class="has-mr-6">6.1</span> -->
-        <span>Spring的事务控制</span>
-        </a></li><li>
-        <a class="is-flex" href="#贴一个自己使用的场景：存放登录信息">
-        <!-- 目录是否自动编号 -->
-        <!-- <span class="has-mr-6">6.2</span> -->
-        <span>贴一个自己使用的场景：存放登录信息</span>
+        <!-- <span class="has-mr-6">2.3</span> -->
+        <span>2.3 volatile如何做到禁止指令重排序的？</span>
         </a></li></ul></li></ul>
             </div>
         </div>
@@ -779,16 +730,16 @@
         
         <article class="media">
             
-            <a href="/Others/node-editor.md/" class="media-left">
+            <a href="/Others/node-editor/" class="media-left">
                 <p class="image is-64x64">
-                    <img class="thumbnail" src="images/loading.gif" data-original="https://cdn.jsdelivr.net/gh/wjwABCDEFG/blog_img/img/20250401154214355.jpeg" alt="Line-It 节点编辑器.md">
+                    <img class="thumbnail" src="images/loading.gif" data-original="https://cdn.jsdelivr.net/gh/wjwABCDEFG/blog_img/img/20250401154214355.jpeg" alt="Line-It 节点编辑器">
                 </p>
             </a>
             
             <div class="media-content">
                 <div class="content">
                     <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2025-04-01T07:28:20.000Z">2025-04-01</time></div>
-                    <a href="/Others/node-editor.md/" class="title has-link-black-ter is-size-6 has-text-weight-normal">Line-It 节点编辑器.md</a>
+                    <a href="/Others/node-editor/" class="title has-link-black-ter is-size-6 has-text-weight-normal">Line-It 节点编辑器</a>
                     <p class="is-size-7 is-uppercase">
                         <a class="has-link-grey -link" href="/categories/Others/">Others</a>
                     </p>
@@ -887,7 +838,7 @@
             <div class="level-start has-text-centered-mobile">
                 <a class="footer-logo is-block has-mb-6" href="/">
                 
-                    <img src="images/loading.gif" data-original="https://cdn.jsdelivr.net/gh/wjwABCDEFG/blog_img/img/20210717231246.png" alt="ThreadLocal" height="28">
+                    <img src="images/loading.gif" data-original="https://cdn.jsdelivr.net/gh/wjwABCDEFG/blog_img/img/20210717231246.png" alt="volatile" height="28">
                 
                 </a>
                 <p class="is-size-7">

@@ -7,22 +7,22 @@
 
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
 
-<title>java中的引用 - 小温 blog</title>
+<title>GC - 小温 blog</title>
 
 
-    <meta name="description" content="强引用(NormalReference)我们平时用的基本上都是强引用M m &#x3D; new M(); 只要强引用在，gc不回收该对象">
+    <meta name="description" content="1. 如何定位垃圾垃圾就是没有引用的对象，那么如何确定是否还存在引用呢  引用计数(ReferenceCount)：存在循环引用问题 根可达算法(RootSearching)：从跟开始寻找(线程栈变量，静态变量，常量池，JNI指针)，找不到的就算垃圾">
 <meta property="og:type" content="article">
-<meta property="og:title" content="java中的引用">
-<meta property="og:url" content="https://wjw.today/Java/java%E4%B8%AD%E7%9A%84%E5%BC%95%E7%94%A8/index.html">
+<meta property="og:title" content="GC">
+<meta property="og:url" content="https://wjw.today/Java%E5%9F%BA%E7%A1%80/GC/index.html">
 <meta property="og:site_name" content="小温 blog">
-<meta property="og:description" content="强引用(NormalReference)我们平时用的基本上都是强引用M m &#x3D; new M(); 只要强引用在，gc不回收该对象">
+<meta property="og:description" content="1. 如何定位垃圾垃圾就是没有引用的对象，那么如何确定是否还存在引用呢  引用计数(ReferenceCount)：存在循环引用问题 根可达算法(RootSearching)：从跟开始寻找(线程栈变量，静态变量，常量池，JNI指针)，找不到的就算垃圾">
 <meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="https://cdn.jsdelivr.net/gh/wjwABCDEFG/blog_img/img/20210717215334.jpg">
-<meta property="article:published_time" content="2020-11-19T03:02:17.000Z">
-<meta property="article:modified_time" content="2021-07-17T13:53:46.813Z">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/wjwABCDEFG/blog_img/img/20210717222410.jpg">
+<meta property="article:published_time" content="2020-12-20T10:00:34.000Z">
+<meta property="article:modified_time" content="2021-07-17T14:27:33.209Z">
 <meta property="article:author" content="wjw">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="https://cdn.jsdelivr.net/gh/wjwABCDEFG/blog_img/img/20210717215334.jpg">
+<meta name="twitter:image" content="https://cdn.jsdelivr.net/gh/wjwABCDEFG/blog_img/img/20210717222410.jpg">
 
 
 
@@ -80,7 +80,7 @@
         <div class="navbar-brand is-flex-center">
             <a class="navbar-item navbar-logo" href="/">
             
-                <img src="images/loading.gif" data-original="https://cdn.jsdelivr.net/gh/wjwABCDEFG/blog_img/img/20210717231246.png" alt="java中的引用" height="28">
+                <img src="images/loading.gif" data-original="https://cdn.jsdelivr.net/gh/wjwABCDEFG/blog_img/img/20210717231246.png" alt="GC" height="28">
             
             </a>
         </div>
@@ -138,7 +138,7 @@
     
     <div class="card-image">
         <span  class="image is-7by1">
-            <img class="thumbnail" src="images/loading.gif" data-original="https://cdn.jsdelivr.net/gh/wjwABCDEFG/blog_img/img/20210717215334.jpg" alt="java中的引用">
+            <img class="thumbnail" src="images/loading.gif" data-original="https://cdn.jsdelivr.net/gh/wjwABCDEFG/blog_img/img/20210717222410.jpg" alt="GC">
         </span>
     </div>
     
@@ -146,17 +146,17 @@
         
         <div class="level article-meta is-size-7 is-uppercase is-mobile is-overflow-x-auto">
             <div class="level-left">
-                <time class="level-item has-text-grey" datetime="2020-11-19T03:02:17.000Z">2020-11-19</time>
+                <time class="level-item has-text-grey" datetime="2020-12-20T10:00:34.000Z">2020-12-20</time>
                 
                 <div class="level-item">
-                <a class="has-link-grey -link" href="/categories/Java/">Java基础</a>
+                <a class="has-link-grey -link" href="/categories/Java%E5%9F%BA%E7%A1%80/">Java基础</a>
                 </div>
                 
                 
                 <span class="level-item has-text-grey">
                     
                     
-                    9 分钟 读完 (大约 1409 个字)
+                    24 分钟 读完 (大约 3561 个字)
                 </span>
                 
                 
@@ -170,78 +170,206 @@
         
         <h1 class="title is-size-3 is-size-4-mobile has-text-weight-normal">
             
-                java中的引用
+                GC
             
         </h1>
         <div class="content">
-            <h1 id="强引用-NormalReference"><a href="#强引用-NormalReference" class="headerlink" title="强引用(NormalReference)"></a>强引用(NormalReference)</h1><p>我们平时用的基本上都是强引用M m = new M();</p>
-<p>只要强引用在，gc不回收该对象</p>
+            <h1 id="1-如何定位垃圾"><a href="#1-如何定位垃圾" class="headerlink" title="1. 如何定位垃圾"></a>1. 如何定位垃圾</h1><p>垃圾就是没有引用的对象，那么如何确定是否还存在引用呢</p>
+<ul>
+<li>引用计数(ReferenceCount)：存在循环引用问题</li>
+<li>根可达算法(RootSearching)：从跟开始寻找(线程栈变量，静态变量，常量池，JNI指针)，找不到的就算垃圾</li>
+</ul>
 <a id="more"></a>
 
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//没事不要重写finalize方法，这里是为了演示gc时机</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">M</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">protected</span> <span class="keyword">void</span> <span class="title">finalize</span><span class="params">()</span> <span class="keyword">throws</span> Throwable </span>&#123;</span><br><span class="line">        System.out.println(<span class="string">"finalize方法被调用"</span>);</span><br><span class="line">        <span class="keyword">super</span>.finalize();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> 强引用 </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> <span class="keyword">throws</span> IOException </span>&#123;</span><br><span class="line">        M m = <span class="keyword">new</span> M();</span><br><span class="line">        </span><br><span class="line">        System.gc();</span><br><span class="line">        System.out.println(m);  <span class="comment">//存在强引用，gc不会回收</span></span><br><span class="line">        </span><br><span class="line">        m = <span class="keyword">null</span>;</span><br><span class="line">        System.gc();</span><br><span class="line">        System.out.println(m);  <span class="comment">//引用没了，gc回收</span></span><br><span class="line"></span><br><span class="line">        System.in.read();   <span class="comment">//阻塞main线程，垃圾回收线程需要时间</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>打印结果如下</p>
-<blockquote>
-<p>引用.M@14ae5a5<br>finalize方法被调用<br>null</p>
-</blockquote>
 <br>
 
-<h1 id="软引用-SoftReference"><a href="#软引用-SoftReference" class="headerlink" title="软引用(SoftReference)"></a>软引用(SoftReference)</h1><p>软引用对象会在堆内存不足时回收</p>
-<p>适合做缓存</p>
-<p>在开始实验之前，先将右上角run按钮左边的本类名的v按钮选择Edit Configurations在vm options添加-Xmx20M，表示将堆最大值设置为20M</p>
-<p><img src="images/loading.gif" data-original="https://s3.ax1x.com/2020/11/14/DCdBIs.png" alt=""></p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * 软引用对象会在堆内存不足时回收</span></span><br><span class="line"><span class="comment"> * 适合做缓存</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> 软引用 </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">        SoftReference&lt;<span class="keyword">byte</span>[]&gt; m = <span class="keyword">new</span> SoftReference&lt;&gt;(<span class="keyword">new</span> <span class="keyword">byte</span>[<span class="number">1024</span> * <span class="number">1024</span> * <span class="number">10</span>]);  <span class="comment">//定义一个占10M的数组</span></span><br><span class="line">        System.out.println(m.get());    <span class="comment">//有值</span></span><br><span class="line">        System.gc();</span><br><span class="line">        <span class="keyword">try</span> &#123;</span><br><span class="line">            Thread.sleep(<span class="number">1000</span>); <span class="comment">//睡1s保证gc完</span></span><br><span class="line">        &#125; <span class="keyword">catch</span> (InterruptedException e) &#123;</span><br><span class="line">            e.printStackTrace();</span><br><span class="line">        &#125;</span><br><span class="line">        System.out.println(m.get());    <span class="comment">//因为对内存充足，发现并没有被gc回收</span></span><br><span class="line">        <span class="keyword">byte</span>[] b = <span class="keyword">new</span> <span class="keyword">byte</span>[<span class="number">1024</span> * <span class="number">1024</span> * <span class="number">11</span>];  <span class="comment">//定义一个11M的数组，由于此时10+11大于20M，jvm自动gc回收</span></span><br><span class="line">        System.out.println(m.get());    <span class="comment">//被回收，为null</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>打印结果为</p>
-<blockquote>
-<p>[B@14ae5a5<br>[B@14ae5a5<br>null</p>
-</blockquote>
-<p>如果b的内存太大，堆内存装不下，那么会报OutOfMemoryError: Java heap space异常</p>
+<hr>
+<h1 id="2-垃圾回收算法"><a href="#2-垃圾回收算法" class="headerlink" title="2. 垃圾回收算法"></a>2. 垃圾回收算法</h1><ul>
+<li><p>标记清除(mark sweep) - 位置不连续 产生碎片 效率偏低（两遍扫描）</p>
+</li>
+<li><p>拷贝算法 (copying) - 没有碎片，浪费空间</p>
+</li>
+<li><p>标记压缩(mark compact) - 没有碎片，效率偏低（两遍扫描，指针需要调整）</p>
+</li>
+</ul>
 <br>
 
-<h1 id="弱引用-WeakReference"><a href="#弱引用-WeakReference" class="headerlink" title="弱引用(WeakReference)"></a>弱引用(WeakReference)</h1><p>弱引用是遇到gc就回收</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> 弱引用 </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">        WeakReference&lt;M&gt; m = <span class="keyword">new</span> WeakReference&lt;&gt;(<span class="keyword">new</span> M());</span><br><span class="line"></span><br><span class="line">        System.out.println(m.get());    <span class="comment">//有值</span></span><br><span class="line">        System.gc();</span><br><span class="line">        System.out.println(m.get());    <span class="comment">//不管内存是否充足，遇到gc就回收</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<h2 id="ThreadLocal中的Entry"><a href="#ThreadLocal中的Entry" class="headerlink" title="ThreadLocal中的Entry"></a>ThreadLocal中的Entry</h2><p>弱引用很经典的一个例子就是ThreadLocal中的Entry，在<a href="https://wjw.today/2020/11/11/ThreadLocal/#map真的是map吗">之前的博客</a>中有分析ThreadLocal为什么是弱引用，这里再次复习一下</p>
-<p><img src="images/loading.gif" data-original="https://cdn.jsdelivr.net/gh/wjwABCDEFG/blog_img/img/20210717215325.png" alt=""></p>
-<p>当我们ThreadLocal tl = new ThreadLocal();的时候，实际上有两个引用指向了ThreadLocal，一个是tl本身是一个强引用，一个是getMap(当前线程)得到的ThreadLocalMap，它里面的Entry的key是一个弱引用，指向了ThreadLocal。</p>
+<hr>
+<h1 id="3-JVM中的垃圾回收器"><a href="#3-JVM中的垃圾回收器" class="headerlink" title="3. JVM中的垃圾回收器"></a>3. JVM中的垃圾回收器</h1><p>10种如下，JVM回收内存通常是组合使用，不同的<strong>垃圾回收器</strong>采用不同的策略</p>
+<p><img src="images/loading.gif" data-original="https://cdn.jsdelivr.net/gh/wjwABCDEFG/blog_img/img/20210717222428.png" alt=""></p>
+<p>左边6个分代模型中，下面的是老年代，上面的是年轻代，一般是如图所示搭配（但也可以混杂搭配，看其他虚线）</p>
+<p>1.8默认是PS+PO（新生代Parallel Scavenge，老年代Parallel Old），但是可以用分区模型G1（推荐，有些公司运维有JVM调优经验的话说不定会用这个）</p>
+<p>下面介绍一下各个组合</p>
+<h2 id="3-1-分代模型-Serial系列"><a href="#3-1-分代模型-Serial系列" class="headerlink" title="3.1 分代模型-Serial系列"></a>3.1 分代模型-Serial系列</h2><p>如图解释的很清楚，当垃圾回收线程来了，工作线程STW，垃圾回收线程完了，工作线程才能继续</p>
 <blockquote>
-<p> 为什么这里要使用弱引用呢？</p>
-<p>如果是强引用，则tl和key都是强引用，我们一般都是操作tl，也就是tl = null，但是key依然存在强引用，于是导致无法被gc回收，存在内存泄漏问题。</p>
-<p>使用弱引用就不会内存泄漏？</p>
-<p>不是的，即使key是弱引用，但是如果key被回收变为null，value无法被访问，依然存在内存泄漏问题。解决的办法是主动调用tl.remove();</p>
+<p>STW：Stop The World，如字面意思，马上！！停止！！！</p>
 </blockquote>
+<p>为什么有时候机器会突然卡顿一下，就是因为STW了</p>
+<p><img src="images/loading.gif" data-original="https://cdn.jsdelivr.net/gh/wjwABCDEFG/blog_img/img/20210717222440.png" alt=""></p>
+<h2 id="3-2-分代模型-Parallel系列"><a href="#3-2-分代模型-Parallel系列" class="headerlink" title="3.2 分代模型-Parallel系列"></a>3.2 分代模型-Parallel系列</h2><p>随着内存越来越大，Serial有点慢，于是出现了Parallel</p>
+<p>和Serial差不多也是STW，不过Parallel嘛，垃圾回收线程是多个且并行的 </p>
+<p><img src="images/loading.gif" data-original="https://cdn.jsdelivr.net/gh/wjwABCDEFG/blog_img/img/20210717222450.png" alt=""></p>
+<h2 id="3-3-分代模型-CMS系列"><a href="#3-3-分代模型-CMS系列" class="headerlink" title="3.3 分代模型-CMS系列"></a>3.3 分代模型-CMS系列</h2><p>还是随着内存的越来越大，Parallel很慢，<strong>原因：线程数和效率不是线性提升的，因为线程需要上下文切换ContextSwitch，到达一定数量后，线程多反而耗费了大量时间在此</strong></p>
+<p>CMS：concurrent mark sweep</p>
+<p>Parnew和Parallel Scavenge基本一样，只是为了配合CMS而产生的</p>
+<p>CMS过程如下：</p>
+<p><img src="images/loading.gif" data-original="https://cdn.jsdelivr.net/gh/wjwABCDEFG/blog_img/img/20210717222501.png" alt=""></p>
+<p>初始标记也是STW，但是只GCRoot扫描根（前面说的根可达算法可还记得？），很少所以时间可以接受</p>
+<p>重新标记也是STW，这里有个bug，后面讲</p>
+<h3 id="CMS三色标记法和错标问题"><a href="#CMS三色标记法和错标问题" class="headerlink" title="CMS三色标记法和错标问题"></a>CMS三色标记法和错标问题</h3><p>并发标记存在问题，就是错标</p>
+<p>情况1：在标记的时候突然有个对象引用没了（成为了垃圾，称为<strong>浮动垃圾</strong>），这种就是漏标了，这种问题不大，大不了下次gc再清理就是了</p>
+<p>情况2：一个对象本来是垃圾，突然又有引用了（存在这种情况嘛？有的，缓存），这种错标就比较严重了</p>
+<p>所以存在重新标记的过程</p>
+<p><strong>三色标记法</strong></p>
+<p>黑色：对象标记，成员field也被标记</p>
+<p>灰色：对象标记，成员还未标记</p>
+<p>白色：没有遍历到的字段</p>
+<p>标记是怎么标记的呢？CMS标记采用三色标记法，<strong>重新标记阶段扫描就是扫描灰色的对象</strong>。说回情况2，如果第一次标记后黑色的对象有个指针域指向了某个白色对象，再次标记的时候不会再扫描黑色对象，此时就产生了错标</p>
+<p><img src="images/loading.gif" data-original="https://cdn.jsdelivr.net/gh/wjwABCDEFG/blog_img/img/20210717222534.png" alt=""></p>
+<h3 id="解决办法"><a href="#解决办法" class="headerlink" title="解决办法"></a>解决办法</h3><ul>
+<li><strong>CMS解决办法</strong>：incremental update：简单的说就是A引用变了的时候重新将A置为灰色，这样就可以重新扫描到了</li>
+</ul>
+<p>这种办法存在一个bug，就是说对象A有两个field，多线程的时候垃圾回收线程标记了field1不是垃圾，然后扫描field2，工作线程使得field1重新指向了一个垃圾对象D，这样本来A应该被标记为灰色，但是垃圾回收线程不知道filed1改变了，标记完field2后将A置为黑色</p>
+<p>因此才需要remark过程，但是这个过程导致CMS这个原本号称“解决STW”的算法产生了历史上最长的STW，也就是因为这样，CMS并没有作为任何一个JDK版本的默认垃圾回收器</p>
+<ul>
+<li><strong>G1解决办法</strong>：SATB</li>
+</ul>
+<h2 id="3-4-JVM的堆内存模型"><a href="#3-4-JVM的堆内存模型" class="headerlink" title="3.4 JVM的堆内存模型"></a>3.4 JVM的堆内存模型</h2><p>JVM堆的具体内存分区如下，图中的数字是大小比例</p>
+<p><img src="images/loading.gif" data-original="https://cdn.jsdelivr.net/gh/wjwABCDEFG/blog_img/img/20210717222549.png" alt=""></p>
+<p>可以看到新生代用的拷贝算法，但不是一般的拷贝，是eden:survivor1:survivor2=8:1:1，第一次gc从eden到s1，然后在s1和s2之间来回跳，到达一定的次数后进入老年代（这个次数默认15，CMS默认6，可以通过-XX:MaxTenuringThreshold配置）</p>
 <br>
 
-<h1 id="虚引用-PhantomReference"><a href="#虚引用-PhantomReference" class="headerlink" title="虚引用(PhantomReference)"></a>虚引用(PhantomReference)</h1><p>一般没人用，只有写类库的人会用</p>
-<p>无论是否被回收，都get不到值</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> 虚引用 </span>&#123;</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">final</span> ReferenceQueue&lt;M&gt; QUEUE = <span class="keyword">new</span> ReferenceQueue&lt;&gt;();	<span class="comment">//回收队列</span></span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">        PhantomReference&lt;M&gt; m = <span class="keyword">new</span> PhantomReference&lt;&gt;(<span class="keyword">new</span> M(), QUEUE);</span><br><span class="line">        System.out.println(m.get());    <span class="comment">//null</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>作用是回收前有个通知，相当于一个钩子函数，堆内存不足的时候并没有直接回收，而是放进QUEUE回收队列里，gc会不断判断队列里是否有值，有则poll，这就相当于一个通知，gc如果想，可以对poll出来的这个虚引用做一些特殊处理</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> 虚引用 </span>&#123;</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">final</span> List&lt;Object&gt; LIST = <span class="keyword">new</span> LinkedList&lt;&gt;();</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">final</span> ReferenceQueue&lt;M&gt; QUEUE = <span class="keyword">new</span> ReferenceQueue&lt;&gt;();  <span class="comment">//回收队列</span></span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">        PhantomReference&lt;M&gt; m = <span class="keyword">new</span> PhantomReference&lt;&gt;(<span class="keyword">new</span> M(), QUEUE);</span><br><span class="line">        System.out.println(m.get());    <span class="comment">//null</span></span><br><span class="line"></span><br><span class="line">        <span class="keyword">new</span> Thread(()-&gt;&#123;</span><br><span class="line">            <span class="keyword">while</span> (<span class="keyword">true</span>)&#123;</span><br><span class="line">                <span class="keyword">try</span> &#123;</span><br><span class="line">                    LIST.add(<span class="keyword">new</span> <span class="keyword">byte</span>[<span class="number">1024</span> * <span class="number">1024</span> * <span class="number">2</span>]);</span><br><span class="line">                    Thread.sleep(<span class="number">500</span>);</span><br><span class="line">                &#125; <span class="keyword">catch</span> (InterruptedException e) &#123;</span><br><span class="line">                    e.printStackTrace();</span><br><span class="line">                    Thread.currentThread().interrupt();</span><br><span class="line">                &#125;</span><br><span class="line">                System.out.println(m.get());</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;).start();</span><br><span class="line"></span><br><span class="line">        <span class="comment">//模拟简易垃圾回收线程</span></span><br><span class="line">        <span class="keyword">new</span> Thread(()-&gt;&#123;</span><br><span class="line">            <span class="keyword">while</span> (<span class="keyword">true</span>)&#123;   <span class="comment">//垃圾回收线程不断检查队列里面有没有</span></span><br><span class="line">                Reference&lt;? extends M&gt; poll = QUEUE.poll();</span><br><span class="line">                <span class="keyword">if</span> (poll != <span class="keyword">null</span>)&#123;</span><br><span class="line">                    System.out.println(<span class="string">"jvm回收虚引用对象"</span> + poll);</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;).start();</span><br><span class="line"></span><br><span class="line">        <span class="keyword">try</span> &#123;</span><br><span class="line">            Thread.sleep(<span class="number">500</span>);</span><br><span class="line">        &#125; <span class="keyword">catch</span> (InterruptedException e) &#123;</span><br><span class="line">            e.printStackTrace();</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>实际应用中，虚引用常被用于管理直接内存(堆外内存)</p>
-<p><img src="images/loading.gif" data-original="https://s3.ax1x.com/2020/11/14/DCy0Xt.png" alt="">当然，堆外内存不一定是硬件，只是举个例子，硬件通过驱动程序加载到内存中才能供操作系统调用，以前JVM无法直接控制堆外内存， 需要拷贝到JVM的堆中才能控制，这种拷贝需要系统调用，涉及用户态和内核态的转换</p>
-<h2 id="零拷贝技术"><a href="#零拷贝技术" class="headerlink" title="零拷贝技术"></a>零拷贝技术</h2><p>java的nio提出了zero-copy零拷贝技术，可以管理堆外内存</p>
-<p><img src="images/loading.gif" data-original="https://s3.ax1x.com/2020/11/14/DC2YDI.png" alt=""></p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ByteBuffer buffer = ByteBuffer.allocateDirect(<span class="number">1024</span>);</span><br></pre></td></tr></table></figure>
-
-<p>这个allocateDirect方法源码如下，可以看到是DirectByteBuffer，这个DirectByteBuffer什么时候回收的呢？我们可以看到这个类下有个Cleaner，就这个名字也才得到是用来负责回收对象的</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">DirectByteBuffer</span> <span class="keyword">extends</span> <span class="title">MappedByteBuffer</span> <span class="keyword">implements</span> <span class="title">DirectBuffer</span></span>&#123;</span><br><span class="line">    ...</span><br><span class="line">        </span><br><span class="line">	<span class="keyword">private</span> <span class="keyword">final</span> Cleaner cleaner;</span><br><span class="line"></span><br><span class="line">	<span class="function"><span class="keyword">public</span> Cleaner <span class="title">cleaner</span><span class="params">()</span> </span>&#123; <span class="keyword">return</span> cleaner; &#125;</span><br><span class="line"></span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">static</span> ByteBuffer <span class="title">allocateDirect</span><span class="params">(<span class="keyword">int</span> capacity)</span> </span>&#123;</span><br><span class="line">    	<span class="keyword">return</span> <span class="keyword">new</span> DirectByteBuffer(capacity);</span><br><span class="line">	&#125;</span><br><span class="line">    </span><br><span class="line">    ...</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>继续跟进Cleaner类</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Cleaner</span> <span class="keyword">extends</span> <span class="title">PhantomReference</span>&lt;<span class="title">Object</span>&gt; </span>&#123;</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">final</span> ReferenceQueue&lt;Object&gt; dummyQueue = <span class="keyword">new</span> ReferenceQueue();</span><br><span class="line">    ...</span><br></pre></td></tr></table></figure>
-
-<p>看源码讲究点到即止，是不是跟咱们自己写的 模拟简易垃圾回收线程 <del>一模一样</del> 有点相似？</p>
-<p>也就是说，这个cleaner就是通过虚引用对堆外内存进行跟踪。</p>
+<hr>
+<h1 id="4-JVM调优实战经验"><a href="#4-JVM调优实战经验" class="headerlink" title="4. JVM调优实战经验"></a>4. JVM调优实战经验</h1><ol>
+<li><p><strong>服务器升级加大了内存，反而更加卡顿</strong>。原因是内存越大，FGC时间越长。解决办法：PS -&gt; PN + CMS 或者 G1</p>
+</li>
+<li><p><strong>线上CPU突然100%</strong>。那么一定有线程在占用系统资源，</p>
+<ol>
+<li>找出哪个进程cpu高（top）</li>
+<li>该进程中的哪个线程cpu高（top -Hp）</li>
+<li>导出该线程的堆栈 (jstack)</li>
+<li>查找哪个方法（栈帧）消耗时间 (jstack)</li>
+<li>工作线程占比高 | 垃圾回收线程占比高</li>
+</ol>
+</li>
+<li><p>系统内存飙高，如何查找问题？（面试高频）</p>
+<ol>
+<li>导出堆内存 (jmap)</li>
+<li>分析 (jhat jvisualvm mat jprofiler … )</li>
+</ol>
+</li>
+<li><p>如何监控JVM</p>
+<ol>
+<li>jstat jvisualvm jprofiler arthas top…</li>
+</ol>
+</li>
+</ol>
+<hr>
+<h1 id="附录"><a href="#附录" class="headerlink" title="附录"></a>附录</h1><h2 id="1-对象分配过程"><a href="#1-对象分配过程" class="headerlink" title="1. 对象分配过程"></a>1. 对象分配过程</h2><p><img src="images/loading.gif" data-original="https://cdn.jsdelivr.net/gh/wjwABCDEFG/blog_img/img/20210717222726.png" alt=""></p>
+<ol>
+<li>一些基本类型的变量是有机会分配在栈上的比如局部变量，怎么判定是否能分配在栈上？如果逃逸分析没有逃逸，标量替换可以替换，则分配在栈上</li>
+</ol>
+<ul>
+<li>逃逸分析：看附录2</li>
+<li>标量替换：即一个对象可以用两个基本类型的变量来替换它，就称为可以标量替换，比如一个对象只有两个int的类型，那么我们完全可以用两个int变量代替这个类（结构体）</li>
+</ul>
+<ol start="2">
+<li>如果对象太大，直接老年代，否则会先TLAB（ThreadLocalAllocationBuffer线程本地分配缓冲区），这个细节一般不会有人问起，但是确实存在的，Eden区有一部分TLAB，线程争用后才进入Eden区的公共空间</li>
+</ol>
 <br>
 
-<blockquote>
-<p>参考</p>
-<p><a href="https://space.bilibili.com/406692798?from=search&seid=2048544262806301662">bilibili马士兵说弱引用</a></p>
-</blockquote>
+<hr>
+<h2 id="2-逃逸分析"><a href="#2-逃逸分析" class="headerlink" title="2. 逃逸分析"></a>2. 逃逸分析</h2><p>逃逸分析的基本行为就是分析<strong>对象动态作用域</strong>：当一个对<strong>象在方法中被定义后，它可能被外部方法引用，例如作为调用参数传递到其他方法中，称为方法逃逸</strong>。甚至还有可能<strong>被外部线程访问到，譬如赋值给类变量或可以在其他线程中访问的实例变量，称为线程逃逸</strong>。如果能证明<strong>一个对象不会逃逸到方法或线程之外</strong>，也就是<strong>别的方法或线程无法通过任何途径访问到这个对象</strong>，则可能为这个变量进行一些高效的优化：</p>
+<ol>
+<li>栈上分配</li>
+</ol>
+<p>Java虚拟机中，<strong>如果确定一个对象不会逃逸出方法之外，那让这个对象在栈上分配内存</strong>将会是一个很不错的主意，<strong>对象所占用的内存空间就可以随栈帧出栈而销毁</strong>。在一般应用中，不会逃逸的局部对象所占的比例很大，如果能使用栈上分配，那<strong>大量的对象就会随着方法的结束而自动销毁了</strong>，垃圾收集系统的压力将会小很多。</p>
+<ol start="2">
+<li>同步消除</li>
+</ol>
+<p><strong>线程同步本身是一个相对耗时的过程</strong>，<strong>如果逃逸分析能够确定一个变量不会逃逸出线程，无法被其他线程访问</strong>，那这个变量的<strong>读写肯定就不会有竞争</strong>，对这个变量实施的同步措施也就可以消除。</p>
+<ol start="3">
+<li>标量替换</li>
+</ol>
+<p>标量是指一<strong>个数据已经无法再分解成更小的数据来表示了</strong>，Java虚拟机的原始数据类型都不能再进一步分解，它们就可以称为标量。如果逃逸分析证明<strong>一个对象不会被外部访问</strong>，并且<strong>这个对象可以被拆散的话</strong>，那程序真正执行的时候将<strong>可能不创建这个对象</strong>，而改<strong>为直接创建它的若干个被这个方法使用的成员变量来代替</strong>。除了可以让对象的成员变量在栈上（栈上存储的数据，有很大的概率会被虚拟机分配到物理机器高速寄存器中存储）分配和读写之外，还可以为后续进一步的优化手段创建条件。</p>
+<br>
+
+<hr>
+<h2 id="3-JVM常用命令"><a href="#3-JVM常用命令" class="headerlink" title="3. JVM常用命令"></a>3. JVM常用命令</h2><h3 id="3-1-监控相关"><a href="#3-1-监控相关" class="headerlink" title="3.1 监控相关"></a>3.1 监控相关</h3><h4 id="基础命令"><a href="#基础命令" class="headerlink" title="基础命令"></a>基础命令</h4><ul>
+<li>jps：查询运行中的java进程编号和名称，相当于ps命令，但只有java相关的</li>
+<li>jinfo pid：作用不大，可以查看某个进程的jdk信息，比如jdk版本啊classpath啊encoding啊当前的vm参数啊等等</li>
+<li>jstack pid：java堆栈信息，类似于idea里面的debug控制台左边，显示了某个进程的所有线程运行了哪个方法，<strong>可以用来查死锁</strong></li>
+<li>jmap -histo pid：查看某个java进程内存分配状况</li>
+<li>jstat：可以观察到classloader，compiler，gc相关信息，实时监控资源和性能</li>
+</ul>
+<h4 id="工具（arthas）"><a href="#工具（arthas）" class="headerlink" title="工具（arthas）"></a>工具（arthas）</h4><p>上面介绍的基本命令基本上不用，因为通常都用工具，就很像git，一般都用sourcetree或者idea而不是纯命令行，因为工具更加强大，所以我们来看看</p>
+<p>gui工具：jconsole, jvisualvm这些可视化工具都很不错，而且是jdk自带的，但是只能在本地开发压测和debug用，线上服务器通常没有gui，所以用的更多的是arthas（阿里开源的工具，下载并启动jar包，<code>java -jar arthas-boot.jar</code>，在黑框上模拟图形化界面）</p>
+<p>下面介绍arthas一些命令</p>
+<ul>
+<li>help：帮助文档</li>
+<li>dashboard：仪表盘模拟图形界面，很强，可以监控CPU和内存，相当于top，看图</li>
+</ul>
+<p><img src="images/loading.gif" data-original="https://cdn.jsdelivr.net/gh/wjwABCDEFG/blog_img/img/20210717222618.png" alt="dashboard展示效果"></p>
+<ul>
+<li><p>jvm：相当于jinfo，显示了jvm相关信息，垃圾回收器等</p>
+</li>
+<li><p>thread [线程id]：相当于jstack，只列出了线程列表，要看某个线程的详情可以thread 线程id，<strong>要找死锁，直接thread -b</strong>可以看到某个死锁阻塞状况</p>
+</li>
+<li><p>heapdump：将内存占用信息导出到具体的文件夹，用于查oom，如果疯狂fgc，或者已经出现了oom，那么可以heapdump导出到具体的文件夹，然后用前面说的gui工具打开进行本地分析，相当于jmap命令</p>
+</li>
+</ul>
+<p>注意：arthas的headdump和jmap在生产环境中都不太能用，因为内存有可能很大，完整dump备份一次要很久，生产环境通常使用XX:+HeapDumpOnOutOfMemoryError，代表在oom之前自动导出</p>
+<br>
+
+<h3 id="3-2-GC常用参数"><a href="#3-2-GC常用参数" class="headerlink" title="3.2 GC常用参数"></a>3.2 GC常用参数</h3><ul>
+<li>-Xmn -Xms -Xmx -Xss<br>年轻代 最小堆 最大堆 栈空间</li>
+<li>-XX:+UseTLAB<br>使用TLAB，默认打开</li>
+<li>-XX:+PrintTLAB<br>打印TLAB的使用情况</li>
+<li>-XX:TLABSize<br>设置TLAB大小</li>
+<li>-XX:+DisableExplictGC<br>System.gc()不管用 ，FGC</li>
+<li>-XX:+PrintGC</li>
+<li>-XX:+PrintGCDetails</li>
+<li>-XX:+PrintHeapAtGC</li>
+<li>-XX:+PrintGCTimeStamps</li>
+<li>-XX:+PrintGCApplicationConcurrentTime (低)<br>打印应用程序时间</li>
+<li>-XX:+PrintGCApplicationStoppedTime （低）<br>打印暂停时长</li>
+<li>-XX:+PrintReferenceGC （重要性低）<br>记录回收了多少种不同引用类型的引用</li>
+<li>-verbose:class<br>类加载详细过程</li>
+<li>-XX:+PrintVMOptions</li>
+<li>-XX:+PrintFlagsFinal  -XX:+PrintFlagsInitial<br>必须会用</li>
+<li>-Xloggc:opt/log/gc.log</li>
+<li>-XX:MaxTenuringThreshold<br>升代年龄，最大值15</li>
+<li>锁自旋次数 -XX:PreBlockSpin 热点代码检测参数-XX:CompileThreshold 逃逸分析 标量替换 …<br>这些不建议设置</li>
+</ul>
+<h4 id="Parallel常用参数"><a href="#Parallel常用参数" class="headerlink" title="Parallel常用参数"></a>Parallel常用参数</h4><ul>
+<li>-XX:SurvivorRatio</li>
+<li>-XX:PreTenureSizeThreshold<br>大对象到底多大</li>
+<li>-XX:MaxTenuringThreshold</li>
+<li>-XX:+ParallelGCThreads<br>并行收集器的线程数，同样适用于CMS，一般设为和CPU核数相同</li>
+<li>-XX:+UseAdaptiveSizePolicy<br>自动选择各区大小比例</li>
+</ul>
+<h4 id="CMS常用参数"><a href="#CMS常用参数" class="headerlink" title="CMS常用参数"></a>CMS常用参数</h4><ul>
+<li>-XX:+UseConcMarkSweepGC</li>
+<li>-XX:ParallelCMSThreads<br>CMS线程数量</li>
+<li>-XX:CMSInitiatingOccupancyFraction<br>使用多少比例的老年代后开始CMS收集，默认是68%(近似值)，如果频繁发生SerialOld卡顿，应该调小，（频繁CMS回收）</li>
+<li>-XX:+UseCMSCompactAtFullCollection<br>在FGC时进行压缩</li>
+<li>-XX:CMSFullGCsBeforeCompaction<br>多少次FGC之后进行压缩</li>
+<li>-XX:+CMSClassUnloadingEnabled</li>
+<li>-XX:CMSInitiatingPermOccupancyFraction<br>达到什么比例时进行Perm回收</li>
+<li>GCTimeRatio<br>设置GC时间占用程序运行时间的百分比</li>
+<li>-XX:MaxGCPauseMillis<br>停顿时间，是一个建议时间，GC会尝试用各种手段达到这个时间，比如减小年轻代</li>
+</ul>
+<h4 id="G1常用参数"><a href="#G1常用参数" class="headerlink" title="G1常用参数"></a>G1常用参数</h4><ul>
+<li>-XX:+UseG1GC</li>
+<li>-XX:MaxGCPauseMillis<br>建议值，G1会尝试调整Young区的块数来达到这个值</li>
+<li>-XX:GCPauseIntervalMillis<br>？GC的间隔时间</li>
+<li>-XX:+G1HeapRegionSize<br>分区大小，建议逐渐增大该值，1 2 4 8 16 32。<br>随着size增加，垃圾的存活时间更长，GC间隔更长，但每次GC的时间也会更长<br>ZGC做了改进（动态区块大小）</li>
+<li>G1NewSizePercent<br>新生代最小比例，默认为5%</li>
+<li>G1MaxNewSizePercent<br>新生代最大比例，默认为60%</li>
+<li>GCTimeRatio<br>GC时间建议比例，G1会根据这个值调整堆空间</li>
+<li>ConcGCThreads<br>线程数量</li>
+<li>InitiatingHeapOccupancyPercent<br>启动G1的堆空间占用比例</li>
+</ul>
 
         </div>
         
@@ -258,16 +386,16 @@
     <div class="level post-navigation is-flex-wrap is-mobile">
         
         <div class="level-start">
-            <a class="level level-item has-link-grey  article-nav-prev" href="/algorithms/container-with-most-water/">
+            <a class="level level-item has-link-grey  article-nav-prev" href="/algorithms/lowest-common-ancestor-of-a-binary-tree/">
                 <i class="level-item fas fa-chevron-left"></i>
-                <span class="level-item">11-盛水最多的容器</span>
+                <span class="level-item">235/236-二叉树最近公共祖先</span>
             </a>
         </div>
         
         
         <div class="level-end">
-            <a class="level level-item has-link-grey  article-nav-next" href="/cs/network/">
-                <span class="level-item">计算机网络基础</span>
+            <a class="level level-item has-link-grey  article-nav-next" href="/SpringCloud/%E5%88%86%E5%B8%83%E5%BC%8F%E9%94%81/">
+                <span class="level-item">分布式锁</span>
                 <i class="level-item fas fa-chevron-right"></i>
             </a>
         </div>
@@ -367,7 +495,7 @@
             </h3>
             <ul class="menu-list">
             <li>
-        <a class="level is-marginless" href="/categories/Java/">
+        <a class="level is-marginless" href="/categories/Java%E5%9F%BA%E7%A1%80/">
             <span class="level-start">
                 <span class="level-item">Java基础</span>
             </span>
@@ -505,36 +633,86 @@
                     目录
                 </h3>
                 <ul class="menu-list"><li>
-        <a class="is-flex" href="#强引用-NormalReference">
+        <a class="is-flex" href="#1-如何定位垃圾">
         <!-- 目录是否自动编号 -->
         <!-- <span class="has-mr-6">1</span> -->
-        <span>强引用(NormalReference)</span>
+        <span>1. 如何定位垃圾</span>
         </a></li><li>
-        <a class="is-flex" href="#软引用-SoftReference">
+        <a class="is-flex" href="#2-垃圾回收算法">
         <!-- 目录是否自动编号 -->
         <!-- <span class="has-mr-6">2</span> -->
-        <span>软引用(SoftReference)</span>
+        <span>2. 垃圾回收算法</span>
         </a></li><li>
-        <a class="is-flex" href="#弱引用-WeakReference">
+        <a class="is-flex" href="#3-JVM中的垃圾回收器">
         <!-- 目录是否自动编号 -->
         <!-- <span class="has-mr-6">3</span> -->
-        <span>弱引用(WeakReference)</span>
+        <span>3. JVM中的垃圾回收器</span>
         </a><ul class="menu-list"><li>
-        <a class="is-flex" href="#ThreadLocal中的Entry">
+        <a class="is-flex" href="#3-1-分代模型-Serial系列">
         <!-- 目录是否自动编号 -->
         <!-- <span class="has-mr-6">3.1</span> -->
-        <span>ThreadLocal中的Entry</span>
+        <span>3.1 分代模型-Serial系列</span>
+        </a></li><li>
+        <a class="is-flex" href="#3-2-分代模型-Parallel系列">
+        <!-- 目录是否自动编号 -->
+        <!-- <span class="has-mr-6">3.2</span> -->
+        <span>3.2 分代模型-Parallel系列</span>
+        </a></li><li>
+        <a class="is-flex" href="#3-3-分代模型-CMS系列">
+        <!-- 目录是否自动编号 -->
+        <!-- <span class="has-mr-6">3.3</span> -->
+        <span>3.3 分代模型-CMS系列</span>
+        </a><ul class="menu-list"><li>
+        <a class="is-flex" href="#CMS三色标记法和错标问题">
+        <!-- 目录是否自动编号 -->
+        <!-- <span class="has-mr-6">3.3.1</span> -->
+        <span>CMS三色标记法和错标问题</span>
+        </a></li><li>
+        <a class="is-flex" href="#解决办法">
+        <!-- 目录是否自动编号 -->
+        <!-- <span class="has-mr-6">3.3.2</span> -->
+        <span>解决办法</span>
         </a></li></ul></li><li>
-        <a class="is-flex" href="#虚引用-PhantomReference">
+        <a class="is-flex" href="#3-4-JVM的堆内存模型">
+        <!-- 目录是否自动编号 -->
+        <!-- <span class="has-mr-6">3.4</span> -->
+        <span>3.4 JVM的堆内存模型</span>
+        </a></li></ul></li><li>
+        <a class="is-flex" href="#4-JVM调优实战经验">
         <!-- 目录是否自动编号 -->
         <!-- <span class="has-mr-6">4</span> -->
-        <span>虚引用(PhantomReference)</span>
-        </a><ul class="menu-list"><li>
-        <a class="is-flex" href="#零拷贝技术">
+        <span>4. JVM调优实战经验</span>
+        </a></li><li>
+        <a class="is-flex" href="#附录">
         <!-- 目录是否自动编号 -->
-        <!-- <span class="has-mr-6">4.1</span> -->
-        <span>零拷贝技术</span>
-        </a></li></ul></li></ul>
+        <!-- <span class="has-mr-6">5</span> -->
+        <span>附录</span>
+        </a><ul class="menu-list"><li>
+        <a class="is-flex" href="#1-对象分配过程">
+        <!-- 目录是否自动编号 -->
+        <!-- <span class="has-mr-6">5.1</span> -->
+        <span>1. 对象分配过程</span>
+        </a></li><li>
+        <a class="is-flex" href="#2-逃逸分析">
+        <!-- 目录是否自动编号 -->
+        <!-- <span class="has-mr-6">5.2</span> -->
+        <span>2. 逃逸分析</span>
+        </a></li><li>
+        <a class="is-flex" href="#3-JVM常用命令">
+        <!-- 目录是否自动编号 -->
+        <!-- <span class="has-mr-6">5.3</span> -->
+        <span>3. JVM常用命令</span>
+        </a><ul class="menu-list"><li>
+        <a class="is-flex" href="#3-1-监控相关">
+        <!-- 目录是否自动编号 -->
+        <!-- <span class="has-mr-6">5.3.1</span> -->
+        <span>3.1 监控相关</span>
+        </a></li><li>
+        <a class="is-flex" href="#3-2-GC常用参数">
+        <!-- 目录是否自动编号 -->
+        <!-- <span class="has-mr-6">5.3.2</span> -->
+        <span>3.2 GC常用参数</span>
+        </a></li></ul></li></ul></li></ul>
             </div>
         </div>
     </div>
@@ -548,16 +726,16 @@
         
         <article class="media">
             
-            <a href="/Others/node-editor.md/" class="media-left">
+            <a href="/Others/node-editor/" class="media-left">
                 <p class="image is-64x64">
-                    <img class="thumbnail" src="images/loading.gif" data-original="https://cdn.jsdelivr.net/gh/wjwABCDEFG/blog_img/img/20250401154214355.jpeg" alt="Line-It 节点编辑器.md">
+                    <img class="thumbnail" src="images/loading.gif" data-original="https://cdn.jsdelivr.net/gh/wjwABCDEFG/blog_img/img/20250401154214355.jpeg" alt="Line-It 节点编辑器">
                 </p>
             </a>
             
             <div class="media-content">
                 <div class="content">
                     <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2025-04-01T07:28:20.000Z">2025-04-01</time></div>
-                    <a href="/Others/node-editor.md/" class="title has-link-black-ter is-size-6 has-text-weight-normal">Line-It 节点编辑器.md</a>
+                    <a href="/Others/node-editor/" class="title has-link-black-ter is-size-6 has-text-weight-normal">Line-It 节点编辑器</a>
                     <p class="is-size-7 is-uppercase">
                         <a class="has-link-grey -link" href="/categories/Others/">Others</a>
                     </p>
@@ -664,36 +842,86 @@
                     目录
                 </h3>
                 <ul class="menu-list"><li>
-        <a class="is-flex" href="#强引用-NormalReference">
+        <a class="is-flex" href="#1-如何定位垃圾">
         <!-- 目录是否自动编号 -->
         <!-- <span class="has-mr-6">1</span> -->
-        <span>强引用(NormalReference)</span>
+        <span>1. 如何定位垃圾</span>
         </a></li><li>
-        <a class="is-flex" href="#软引用-SoftReference">
+        <a class="is-flex" href="#2-垃圾回收算法">
         <!-- 目录是否自动编号 -->
         <!-- <span class="has-mr-6">2</span> -->
-        <span>软引用(SoftReference)</span>
+        <span>2. 垃圾回收算法</span>
         </a></li><li>
-        <a class="is-flex" href="#弱引用-WeakReference">
+        <a class="is-flex" href="#3-JVM中的垃圾回收器">
         <!-- 目录是否自动编号 -->
         <!-- <span class="has-mr-6">3</span> -->
-        <span>弱引用(WeakReference)</span>
+        <span>3. JVM中的垃圾回收器</span>
         </a><ul class="menu-list"><li>
-        <a class="is-flex" href="#ThreadLocal中的Entry">
+        <a class="is-flex" href="#3-1-分代模型-Serial系列">
         <!-- 目录是否自动编号 -->
         <!-- <span class="has-mr-6">3.1</span> -->
-        <span>ThreadLocal中的Entry</span>
+        <span>3.1 分代模型-Serial系列</span>
+        </a></li><li>
+        <a class="is-flex" href="#3-2-分代模型-Parallel系列">
+        <!-- 目录是否自动编号 -->
+        <!-- <span class="has-mr-6">3.2</span> -->
+        <span>3.2 分代模型-Parallel系列</span>
+        </a></li><li>
+        <a class="is-flex" href="#3-3-分代模型-CMS系列">
+        <!-- 目录是否自动编号 -->
+        <!-- <span class="has-mr-6">3.3</span> -->
+        <span>3.3 分代模型-CMS系列</span>
+        </a><ul class="menu-list"><li>
+        <a class="is-flex" href="#CMS三色标记法和错标问题">
+        <!-- 目录是否自动编号 -->
+        <!-- <span class="has-mr-6">3.3.1</span> -->
+        <span>CMS三色标记法和错标问题</span>
+        </a></li><li>
+        <a class="is-flex" href="#解决办法">
+        <!-- 目录是否自动编号 -->
+        <!-- <span class="has-mr-6">3.3.2</span> -->
+        <span>解决办法</span>
         </a></li></ul></li><li>
-        <a class="is-flex" href="#虚引用-PhantomReference">
+        <a class="is-flex" href="#3-4-JVM的堆内存模型">
+        <!-- 目录是否自动编号 -->
+        <!-- <span class="has-mr-6">3.4</span> -->
+        <span>3.4 JVM的堆内存模型</span>
+        </a></li></ul></li><li>
+        <a class="is-flex" href="#4-JVM调优实战经验">
         <!-- 目录是否自动编号 -->
         <!-- <span class="has-mr-6">4</span> -->
-        <span>虚引用(PhantomReference)</span>
-        </a><ul class="menu-list"><li>
-        <a class="is-flex" href="#零拷贝技术">
+        <span>4. JVM调优实战经验</span>
+        </a></li><li>
+        <a class="is-flex" href="#附录">
         <!-- 目录是否自动编号 -->
-        <!-- <span class="has-mr-6">4.1</span> -->
-        <span>零拷贝技术</span>
-        </a></li></ul></li></ul>
+        <!-- <span class="has-mr-6">5</span> -->
+        <span>附录</span>
+        </a><ul class="menu-list"><li>
+        <a class="is-flex" href="#1-对象分配过程">
+        <!-- 目录是否自动编号 -->
+        <!-- <span class="has-mr-6">5.1</span> -->
+        <span>1. 对象分配过程</span>
+        </a></li><li>
+        <a class="is-flex" href="#2-逃逸分析">
+        <!-- 目录是否自动编号 -->
+        <!-- <span class="has-mr-6">5.2</span> -->
+        <span>2. 逃逸分析</span>
+        </a></li><li>
+        <a class="is-flex" href="#3-JVM常用命令">
+        <!-- 目录是否自动编号 -->
+        <!-- <span class="has-mr-6">5.3</span> -->
+        <span>3. JVM常用命令</span>
+        </a><ul class="menu-list"><li>
+        <a class="is-flex" href="#3-1-监控相关">
+        <!-- 目录是否自动编号 -->
+        <!-- <span class="has-mr-6">5.3.1</span> -->
+        <span>3.1 监控相关</span>
+        </a></li><li>
+        <a class="is-flex" href="#3-2-GC常用参数">
+        <!-- 目录是否自动编号 -->
+        <!-- <span class="has-mr-6">5.3.2</span> -->
+        <span>3.2 GC常用参数</span>
+        </a></li></ul></li></ul></li></ul>
             </div>
         </div>
     </div>
@@ -707,16 +935,16 @@
         
         <article class="media">
             
-            <a href="/Others/node-editor.md/" class="media-left">
+            <a href="/Others/node-editor/" class="media-left">
                 <p class="image is-64x64">
-                    <img class="thumbnail" src="images/loading.gif" data-original="https://cdn.jsdelivr.net/gh/wjwABCDEFG/blog_img/img/20250401154214355.jpeg" alt="Line-It 节点编辑器.md">
+                    <img class="thumbnail" src="images/loading.gif" data-original="https://cdn.jsdelivr.net/gh/wjwABCDEFG/blog_img/img/20250401154214355.jpeg" alt="Line-It 节点编辑器">
                 </p>
             </a>
             
             <div class="media-content">
                 <div class="content">
                     <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2025-04-01T07:28:20.000Z">2025-04-01</time></div>
-                    <a href="/Others/node-editor.md/" class="title has-link-black-ter is-size-6 has-text-weight-normal">Line-It 节点编辑器.md</a>
+                    <a href="/Others/node-editor/" class="title has-link-black-ter is-size-6 has-text-weight-normal">Line-It 节点编辑器</a>
                     <p class="is-size-7 is-uppercase">
                         <a class="has-link-grey -link" href="/categories/Others/">Others</a>
                     </p>
@@ -815,7 +1043,7 @@
             <div class="level-start has-text-centered-mobile">
                 <a class="footer-logo is-block has-mb-6" href="/">
                 
-                    <img src="images/loading.gif" data-original="https://cdn.jsdelivr.net/gh/wjwABCDEFG/blog_img/img/20210717231246.png" alt="java中的引用" height="28">
+                    <img src="images/loading.gif" data-original="https://cdn.jsdelivr.net/gh/wjwABCDEFG/blog_img/img/20210717231246.png" alt="GC" height="28">
                 
                 </a>
                 <p class="is-size-7">

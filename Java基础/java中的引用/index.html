@@ -7,18 +7,22 @@
 
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
 
-<title>分类: Java基础 - 小温 blog</title>
+<title>java中的引用 - 小温 blog</title>
 
 
-    <meta property="og:type" content="website">
-<meta property="og:title" content="小温 blog">
-<meta property="og:url" content="https://wjw.today/categories/Java/index.html">
+    <meta name="description" content="强引用(NormalReference)我们平时用的基本上都是强引用M m &#x3D; new M(); 只要强引用在，gc不回收该对象">
+<meta property="og:type" content="article">
+<meta property="og:title" content="java中的引用">
+<meta property="og:url" content="https://wjw.today/Java%E5%9F%BA%E7%A1%80/java%E4%B8%AD%E7%9A%84%E5%BC%95%E7%94%A8/index.html">
 <meta property="og:site_name" content="小温 blog">
+<meta property="og:description" content="强引用(NormalReference)我们平时用的基本上都是强引用M m &#x3D; new M(); 只要强引用在，gc不回收该对象">
 <meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="https://wjw.today/images/og_image.png">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/wjwABCDEFG/blog_img/img/20210717215334.jpg">
+<meta property="article:published_time" content="2020-11-19T03:02:17.000Z">
+<meta property="article:modified_time" content="2021-07-17T13:53:46.813Z">
 <meta property="article:author" content="wjw">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="https://wjw.today/images/og_image.png">
+<meta name="twitter:image" content="https://cdn.jsdelivr.net/gh/wjwABCDEFG/blog_img/img/20210717215334.jpg">
 
 
 
@@ -76,7 +80,7 @@
         <div class="navbar-brand is-flex-center">
             <a class="navbar-item navbar-logo" href="/">
             
-                <img src="images/loading.gif" data-original="https://cdn.jsdelivr.net/gh/wjwABCDEFG/blog_img/img/20210717231246.png" alt="小温 blog" height="28">
+                <img src="images/loading.gif" data-original="https://cdn.jsdelivr.net/gh/wjwABCDEFG/blog_img/img/20210717231246.png" alt="java中的引用" height="28">
             
             </a>
         </div>
@@ -112,6 +116,10 @@
                     
                 
                 
+                <a class="navbar-item is-hidden-tablet catalogue" title="目录" href="javascript:;">
+                    <i class="fas fa-list-ul"></i>
+                </a>
+                
                 
                 <a class="navbar-item search" title="搜索" href="javascript:;">
                     <i class="fas fa-search"></i>
@@ -125,266 +133,13 @@
     <section class="section">
         <div class="container">
             <div class="columns">
-                <div class="column is-8-tablet is-8-desktop is-6-widescreen has-order-2 column-main"><div class="card">
-    <div class="card-content">
-        <nav class="breadcrumb" aria-label="breadcrumbs">
-        <ul>
-            <li><a href="/categories">分类</a></li>
-            
-            <li class="is-active"><a href="#" aria-current="page">Java基础</a></li>
-        </ul>
-        </nav>
-    </div>
-</div>
-
-    
+                <div class="column is-8-tablet is-8-desktop is-6-widescreen has-order-2 column-main">
 <div class="card">
     
     <div class="card-image">
-        <a href="/Java/GC/" class="image is-7by1">
-            <img class="thumbnail" src="images/loading.gif" data-original="https://cdn.jsdelivr.net/gh/wjwABCDEFG/blog_img/img/20210717222410.jpg" alt="GC">
-        </a>
-    </div>
-    
-    <div class="card-content article ">
-        
-        <div class="level article-meta is-size-7 is-uppercase is-mobile is-overflow-x-auto">
-            <div class="level-left">
-                <time class="level-item has-text-grey" datetime="2020-12-20T10:00:34.000Z">2020-12-20</time>
-                
-                <div class="level-item">
-                <a class="has-link-grey -link" href="/categories/Java/">Java基础</a>
-                </div>
-                
-                
-                <span class="level-item has-text-grey">
-                    
-                    
-                    24 分钟 读完 (大约 3561 个字)
-                </span>
-                
-                
-            </div>
-        </div>
-        
-        <h1 class="title is-size-3 is-size-4-mobile has-text-weight-normal">
-            
-                <a class="has-link-black-ter" href="/Java/GC/">GC</a>
-            
-        </h1>
-        <div class="content">
-            <h1 id="1-如何定位垃圾"><a href="#1-如何定位垃圾" class="headerlink" title="1. 如何定位垃圾"></a>1. 如何定位垃圾</h1><p>垃圾就是没有引用的对象，那么如何确定是否还存在引用呢</p>
-<ul>
-<li>引用计数(ReferenceCount)：存在循环引用问题</li>
-<li>根可达算法(RootSearching)：从跟开始寻找(线程栈变量，静态变量，常量池，JNI指针)，找不到的就算垃圾</li>
-</ul>
-        </div>
-        
-        
-        <div class="level is-mobile">
-            <div class="level-start">
-                <div class="level-item">
-                <a class="button is-size-7 is-light" href="/Java/GC/#more">阅读更多</a>
-                </div>
-            </div>
-        </div>
-        
-        
-    </div>
-</div>
-
-
-
-
-
-
-
-
-    
-<div class="card">
-    
-    <div class="card-image">
-        <a href="/Java/%E7%BA%BF%E7%A8%8B%E5%92%8C%E7%BA%BF%E7%A8%8B%E6%B1%A0/" class="image is-7by1">
-            <img class="thumbnail" src="images/loading.gif" data-original="https://cdn.jsdelivr.net/gh/wjwABCDEFG/blog_img/img/20210717220808.jpeg" alt="线程和线程池">
-        </a>
-    </div>
-    
-    <div class="card-content article ">
-        
-        <div class="level article-meta is-size-7 is-uppercase is-mobile is-overflow-x-auto">
-            <div class="level-left">
-                <time class="level-item has-text-grey" datetime="2020-12-02T07:44:10.000Z">2020-12-02</time>
-                
-                <div class="level-item">
-                <a class="has-link-grey -link" href="/categories/Java/">Java基础</a>
-                </div>
-                
-                
-                <span class="level-item has-text-grey">
-                    
-                    
-                    18 分钟 读完 (大约 2680 个字)
-                </span>
-                
-                
-            </div>
-        </div>
-        
-        <h1 class="title is-size-3 is-size-4-mobile has-text-weight-normal">
-            
-                <a class="has-link-black-ter" href="/Java/%E7%BA%BF%E7%A8%8B%E5%92%8C%E7%BA%BF%E7%A8%8B%E6%B1%A0/">线程和线程池</a>
-            
-        </h1>
-        <div class="content">
-            <h1 id="1-线程和进程的区别"><a href="#1-线程和进程的区别" class="headerlink" title="1. 线程和进程的区别"></a>1. 线程和进程的区别</h1><p>进程：<strong>资源分配的基本单位</strong>，是程序（硬盘上的QQ.exe）的一个实例，比如双击QQ.exe，程序启动，进入内存</p>
-<p>线程：<strong>程序执行的基本单位</strong>，是一个任务，比如软件管家可以同时清理垃圾和扫描病毒</p>
-        </div>
-        
-        
-        <div class="level is-mobile">
-            <div class="level-start">
-                <div class="level-item">
-                <a class="button is-size-7 is-light" href="/Java/%E7%BA%BF%E7%A8%8B%E5%92%8C%E7%BA%BF%E7%A8%8B%E6%B1%A0/#more">阅读更多</a>
-                </div>
-            </div>
-        </div>
-        
-        
-    </div>
-</div>
-
-
-
-
-
-
-
-
-    
-<div class="card">
-    
-    <div class="card-image">
-        <a href="/Java/volatile/" class="image is-7by1">
-            <img class="thumbnail" src="images/loading.gif" data-original="https://cdn.jsdelivr.net/gh/wjwABCDEFG/blog_img/img/20210717220651.png" alt="volatile">
-        </a>
-    </div>
-    
-    <div class="card-content article ">
-        
-        <div class="level article-meta is-size-7 is-uppercase is-mobile is-overflow-x-auto">
-            <div class="level-left">
-                <time class="level-item has-text-grey" datetime="2020-12-02T02:15:12.000Z">2020-12-02</time>
-                
-                <div class="level-item">
-                <a class="has-link-grey -link" href="/categories/Java/">Java基础</a>
-                </div>
-                
-                
-                <span class="level-item has-text-grey">
-                    
-                    
-                    11 分钟 读完 (大约 1640 个字)
-                </span>
-                
-                
-            </div>
-        </div>
-        
-        <h1 class="title is-size-3 is-size-4-mobile has-text-weight-normal">
-            
-                <a class="has-link-black-ter" href="/Java/volatile/">volatile</a>
-            
-        </h1>
-        <div class="content">
-            <h1 id="1-线程之间可见性"><a href="#1-线程之间可见性" class="headerlink" title="1. 线程之间可见性"></a>1. 线程之间可见性</h1><h2 id="1-1-问题引出"><a href="#1-1-问题引出" class="headerlink" title="1.1 问题引出"></a>1.1 问题引出</h2><p>Volatile到底是用来干嘛的，来看一段程序</p>
-        </div>
-        
-        
-        <div class="level is-mobile">
-            <div class="level-start">
-                <div class="level-item">
-                <a class="button is-size-7 is-light" href="/Java/volatile/#more">阅读更多</a>
-                </div>
-            </div>
-        </div>
-        
-        
-    </div>
-</div>
-
-
-
-
-
-
-
-
-    
-<div class="card">
-    
-    <div class="card-image">
-        <a href="/Java/%E9%94%81%E5%92%8C%E5%90%8C%E6%AD%A5/" class="image is-7by1">
-            <img class="thumbnail" src="images/loading.gif" data-original="https://cdn.jsdelivr.net/gh/wjwABCDEFG/blog_img/img/20210717215850.jpg" alt="锁和同步">
-        </a>
-    </div>
-    
-    <div class="card-content article ">
-        
-        <div class="level article-meta is-size-7 is-uppercase is-mobile is-overflow-x-auto">
-            <div class="level-left">
-                <time class="level-item has-text-grey" datetime="2020-11-24T08:46:37.000Z">2020-11-24</time>
-                
-                <div class="level-item">
-                <a class="has-link-grey -link" href="/categories/Java/">Java基础</a>
-                </div>
-                
-                
-                <span class="level-item has-text-grey">
-                    
-                    
-                    20 分钟 读完 (大约 2975 个字)
-                </span>
-                
-                
-            </div>
-        </div>
-        
-        <h1 class="title is-size-3 is-size-4-mobile has-text-weight-normal">
-            
-                <a class="has-link-black-ter" href="/Java/%E9%94%81%E5%92%8C%E5%90%8C%E6%AD%A5/">锁和同步</a>
-            
-        </h1>
-        <div class="content">
-            <h1 id="引言"><a href="#引言" class="headerlink" title="引言"></a>引言</h1><p>本文将介绍synchronized，cas等概念</p>
-        </div>
-        
-        
-        <div class="level is-mobile">
-            <div class="level-start">
-                <div class="level-item">
-                <a class="button is-size-7 is-light" href="/Java/%E9%94%81%E5%92%8C%E5%90%8C%E6%AD%A5/#more">阅读更多</a>
-                </div>
-            </div>
-        </div>
-        
-        
-    </div>
-</div>
-
-
-
-
-
-
-
-
-    
-<div class="card">
-    
-    <div class="card-image">
-        <a href="/Java/java%E4%B8%AD%E7%9A%84%E5%BC%95%E7%94%A8/" class="image is-7by1">
+        <span  class="image is-7by1">
             <img class="thumbnail" src="images/loading.gif" data-original="https://cdn.jsdelivr.net/gh/wjwABCDEFG/blog_img/img/20210717215334.jpg" alt="java中的引用">
-        </a>
+        </span>
     </div>
     
     <div class="card-content article ">
@@ -394,7 +149,7 @@
                 <time class="level-item has-text-grey" datetime="2020-11-19T03:02:17.000Z">2020-11-19</time>
                 
                 <div class="level-item">
-                <a class="has-link-grey -link" href="/categories/Java/">Java基础</a>
+                <a class="has-link-grey -link" href="/categories/Java%E5%9F%BA%E7%A1%80/">Java基础</a>
                 </div>
                 
                 
@@ -405,27 +160,91 @@
                 </span>
                 
                 
+                <span class="level-item has-text-grey" id="busuanzi_container_page_pv">
+                    <i class="far fa-eye"></i>
+                    <span id="busuanzi_value_page_pv">0</span>次访问
+                </span>
+                
             </div>
         </div>
         
         <h1 class="title is-size-3 is-size-4-mobile has-text-weight-normal">
             
-                <a class="has-link-black-ter" href="/Java/java%E4%B8%AD%E7%9A%84%E5%BC%95%E7%94%A8/">java中的引用</a>
+                java中的引用
             
         </h1>
         <div class="content">
             <h1 id="强引用-NormalReference"><a href="#强引用-NormalReference" class="headerlink" title="强引用(NormalReference)"></a>强引用(NormalReference)</h1><p>我们平时用的基本上都是强引用M m = new M();</p>
 <p>只要强引用在，gc不回收该对象</p>
+<a id="more"></a>
+
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//没事不要重写finalize方法，这里是为了演示gc时机</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">M</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">protected</span> <span class="keyword">void</span> <span class="title">finalize</span><span class="params">()</span> <span class="keyword">throws</span> Throwable </span>&#123;</span><br><span class="line">        System.out.println(<span class="string">"finalize方法被调用"</span>);</span><br><span class="line">        <span class="keyword">super</span>.finalize();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> 强引用 </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> <span class="keyword">throws</span> IOException </span>&#123;</span><br><span class="line">        M m = <span class="keyword">new</span> M();</span><br><span class="line">        </span><br><span class="line">        System.gc();</span><br><span class="line">        System.out.println(m);  <span class="comment">//存在强引用，gc不会回收</span></span><br><span class="line">        </span><br><span class="line">        m = <span class="keyword">null</span>;</span><br><span class="line">        System.gc();</span><br><span class="line">        System.out.println(m);  <span class="comment">//引用没了，gc回收</span></span><br><span class="line"></span><br><span class="line">        System.in.read();   <span class="comment">//阻塞main线程，垃圾回收线程需要时间</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>打印结果如下</p>
+<blockquote>
+<p>引用.M@14ae5a5<br>finalize方法被调用<br>null</p>
+</blockquote>
+<br>
+
+<h1 id="软引用-SoftReference"><a href="#软引用-SoftReference" class="headerlink" title="软引用(SoftReference)"></a>软引用(SoftReference)</h1><p>软引用对象会在堆内存不足时回收</p>
+<p>适合做缓存</p>
+<p>在开始实验之前，先将右上角run按钮左边的本类名的v按钮选择Edit Configurations在vm options添加-Xmx20M，表示将堆最大值设置为20M</p>
+<p><img src="images/loading.gif" data-original="https://s3.ax1x.com/2020/11/14/DCdBIs.png" alt=""></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * 软引用对象会在堆内存不足时回收</span></span><br><span class="line"><span class="comment"> * 适合做缓存</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> 软引用 </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">        SoftReference&lt;<span class="keyword">byte</span>[]&gt; m = <span class="keyword">new</span> SoftReference&lt;&gt;(<span class="keyword">new</span> <span class="keyword">byte</span>[<span class="number">1024</span> * <span class="number">1024</span> * <span class="number">10</span>]);  <span class="comment">//定义一个占10M的数组</span></span><br><span class="line">        System.out.println(m.get());    <span class="comment">//有值</span></span><br><span class="line">        System.gc();</span><br><span class="line">        <span class="keyword">try</span> &#123;</span><br><span class="line">            Thread.sleep(<span class="number">1000</span>); <span class="comment">//睡1s保证gc完</span></span><br><span class="line">        &#125; <span class="keyword">catch</span> (InterruptedException e) &#123;</span><br><span class="line">            e.printStackTrace();</span><br><span class="line">        &#125;</span><br><span class="line">        System.out.println(m.get());    <span class="comment">//因为对内存充足，发现并没有被gc回收</span></span><br><span class="line">        <span class="keyword">byte</span>[] b = <span class="keyword">new</span> <span class="keyword">byte</span>[<span class="number">1024</span> * <span class="number">1024</span> * <span class="number">11</span>];  <span class="comment">//定义一个11M的数组，由于此时10+11大于20M，jvm自动gc回收</span></span><br><span class="line">        System.out.println(m.get());    <span class="comment">//被回收，为null</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>打印结果为</p>
+<blockquote>
+<p>[B@14ae5a5<br>[B@14ae5a5<br>null</p>
+</blockquote>
+<p>如果b的内存太大，堆内存装不下，那么会报OutOfMemoryError: Java heap space异常</p>
+<br>
+
+<h1 id="弱引用-WeakReference"><a href="#弱引用-WeakReference" class="headerlink" title="弱引用(WeakReference)"></a>弱引用(WeakReference)</h1><p>弱引用是遇到gc就回收</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> 弱引用 </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">        WeakReference&lt;M&gt; m = <span class="keyword">new</span> WeakReference&lt;&gt;(<span class="keyword">new</span> M());</span><br><span class="line"></span><br><span class="line">        System.out.println(m.get());    <span class="comment">//有值</span></span><br><span class="line">        System.gc();</span><br><span class="line">        System.out.println(m.get());    <span class="comment">//不管内存是否充足，遇到gc就回收</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="ThreadLocal中的Entry"><a href="#ThreadLocal中的Entry" class="headerlink" title="ThreadLocal中的Entry"></a>ThreadLocal中的Entry</h2><p>弱引用很经典的一个例子就是ThreadLocal中的Entry，在<a href="https://wjw.today/2020/11/11/ThreadLocal/#map真的是map吗">之前的博客</a>中有分析ThreadLocal为什么是弱引用，这里再次复习一下</p>
+<p><img src="images/loading.gif" data-original="https://cdn.jsdelivr.net/gh/wjwABCDEFG/blog_img/img/20210717215325.png" alt=""></p>
+<p>当我们ThreadLocal tl = new ThreadLocal();的时候，实际上有两个引用指向了ThreadLocal，一个是tl本身是一个强引用，一个是getMap(当前线程)得到的ThreadLocalMap，它里面的Entry的key是一个弱引用，指向了ThreadLocal。</p>
+<blockquote>
+<p> 为什么这里要使用弱引用呢？</p>
+<p>如果是强引用，则tl和key都是强引用，我们一般都是操作tl，也就是tl = null，但是key依然存在强引用，于是导致无法被gc回收，存在内存泄漏问题。</p>
+<p>使用弱引用就不会内存泄漏？</p>
+<p>不是的，即使key是弱引用，但是如果key被回收变为null，value无法被访问，依然存在内存泄漏问题。解决的办法是主动调用tl.remove();</p>
+</blockquote>
+<br>
+
+<h1 id="虚引用-PhantomReference"><a href="#虚引用-PhantomReference" class="headerlink" title="虚引用(PhantomReference)"></a>虚引用(PhantomReference)</h1><p>一般没人用，只有写类库的人会用</p>
+<p>无论是否被回收，都get不到值</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> 虚引用 </span>&#123;</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">final</span> ReferenceQueue&lt;M&gt; QUEUE = <span class="keyword">new</span> ReferenceQueue&lt;&gt;();	<span class="comment">//回收队列</span></span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">        PhantomReference&lt;M&gt; m = <span class="keyword">new</span> PhantomReference&lt;&gt;(<span class="keyword">new</span> M(), QUEUE);</span><br><span class="line">        System.out.println(m.get());    <span class="comment">//null</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>作用是回收前有个通知，相当于一个钩子函数，堆内存不足的时候并没有直接回收，而是放进QUEUE回收队列里，gc会不断判断队列里是否有值，有则poll，这就相当于一个通知，gc如果想，可以对poll出来的这个虚引用做一些特殊处理</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> 虚引用 </span>&#123;</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">final</span> List&lt;Object&gt; LIST = <span class="keyword">new</span> LinkedList&lt;&gt;();</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">final</span> ReferenceQueue&lt;M&gt; QUEUE = <span class="keyword">new</span> ReferenceQueue&lt;&gt;();  <span class="comment">//回收队列</span></span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">        PhantomReference&lt;M&gt; m = <span class="keyword">new</span> PhantomReference&lt;&gt;(<span class="keyword">new</span> M(), QUEUE);</span><br><span class="line">        System.out.println(m.get());    <span class="comment">//null</span></span><br><span class="line"></span><br><span class="line">        <span class="keyword">new</span> Thread(()-&gt;&#123;</span><br><span class="line">            <span class="keyword">while</span> (<span class="keyword">true</span>)&#123;</span><br><span class="line">                <span class="keyword">try</span> &#123;</span><br><span class="line">                    LIST.add(<span class="keyword">new</span> <span class="keyword">byte</span>[<span class="number">1024</span> * <span class="number">1024</span> * <span class="number">2</span>]);</span><br><span class="line">                    Thread.sleep(<span class="number">500</span>);</span><br><span class="line">                &#125; <span class="keyword">catch</span> (InterruptedException e) &#123;</span><br><span class="line">                    e.printStackTrace();</span><br><span class="line">                    Thread.currentThread().interrupt();</span><br><span class="line">                &#125;</span><br><span class="line">                System.out.println(m.get());</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;).start();</span><br><span class="line"></span><br><span class="line">        <span class="comment">//模拟简易垃圾回收线程</span></span><br><span class="line">        <span class="keyword">new</span> Thread(()-&gt;&#123;</span><br><span class="line">            <span class="keyword">while</span> (<span class="keyword">true</span>)&#123;   <span class="comment">//垃圾回收线程不断检查队列里面有没有</span></span><br><span class="line">                Reference&lt;? extends M&gt; poll = QUEUE.poll();</span><br><span class="line">                <span class="keyword">if</span> (poll != <span class="keyword">null</span>)&#123;</span><br><span class="line">                    System.out.println(<span class="string">"jvm回收虚引用对象"</span> + poll);</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;).start();</span><br><span class="line"></span><br><span class="line">        <span class="keyword">try</span> &#123;</span><br><span class="line">            Thread.sleep(<span class="number">500</span>);</span><br><span class="line">        &#125; <span class="keyword">catch</span> (InterruptedException e) &#123;</span><br><span class="line">            e.printStackTrace();</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>实际应用中，虚引用常被用于管理直接内存(堆外内存)</p>
+<p><img src="images/loading.gif" data-original="https://s3.ax1x.com/2020/11/14/DCy0Xt.png" alt="">当然，堆外内存不一定是硬件，只是举个例子，硬件通过驱动程序加载到内存中才能供操作系统调用，以前JVM无法直接控制堆外内存， 需要拷贝到JVM的堆中才能控制，这种拷贝需要系统调用，涉及用户态和内核态的转换</p>
+<h2 id="零拷贝技术"><a href="#零拷贝技术" class="headerlink" title="零拷贝技术"></a>零拷贝技术</h2><p>java的nio提出了zero-copy零拷贝技术，可以管理堆外内存</p>
+<p><img src="images/loading.gif" data-original="https://s3.ax1x.com/2020/11/14/DC2YDI.png" alt=""></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ByteBuffer buffer = ByteBuffer.allocateDirect(<span class="number">1024</span>);</span><br></pre></td></tr></table></figure>
+
+<p>这个allocateDirect方法源码如下，可以看到是DirectByteBuffer，这个DirectByteBuffer什么时候回收的呢？我们可以看到这个类下有个Cleaner，就这个名字也才得到是用来负责回收对象的</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">DirectByteBuffer</span> <span class="keyword">extends</span> <span class="title">MappedByteBuffer</span> <span class="keyword">implements</span> <span class="title">DirectBuffer</span></span>&#123;</span><br><span class="line">    ...</span><br><span class="line">        </span><br><span class="line">	<span class="keyword">private</span> <span class="keyword">final</span> Cleaner cleaner;</span><br><span class="line"></span><br><span class="line">	<span class="function"><span class="keyword">public</span> Cleaner <span class="title">cleaner</span><span class="params">()</span> </span>&#123; <span class="keyword">return</span> cleaner; &#125;</span><br><span class="line"></span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">static</span> ByteBuffer <span class="title">allocateDirect</span><span class="params">(<span class="keyword">int</span> capacity)</span> </span>&#123;</span><br><span class="line">    	<span class="keyword">return</span> <span class="keyword">new</span> DirectByteBuffer(capacity);</span><br><span class="line">	&#125;</span><br><span class="line">    </span><br><span class="line">    ...</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>继续跟进Cleaner类</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Cleaner</span> <span class="keyword">extends</span> <span class="title">PhantomReference</span>&lt;<span class="title">Object</span>&gt; </span>&#123;</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">final</span> ReferenceQueue&lt;Object&gt; dummyQueue = <span class="keyword">new</span> ReferenceQueue();</span><br><span class="line">    ...</span><br></pre></td></tr></table></figure>
+
+<p>看源码讲究点到即止，是不是跟咱们自己写的 模拟简易垃圾回收线程 <del>一模一样</del> 有点相似？</p>
+<p>也就是说，这个cleaner就是通过虚引用对堆外内存进行跟踪。</p>
+<br>
+
+<blockquote>
+<p>参考</p>
+<p><a href="https://space.bilibili.com/406692798?from=search&seid=2048544262806301662">bilibili马士兵说弱引用</a></p>
+</blockquote>
+
         </div>
         
-        
-        <div class="level is-mobile">
-            <div class="level-start">
-                <div class="level-item">
-                <a class="button is-size-7 is-light" href="/Java/java%E4%B8%AD%E7%9A%84%E5%BC%95%E7%94%A8/#more">阅读更多</a>
-                </div>
-            </div>
-        </div>
         
         
     </div>
@@ -435,132 +254,26 @@
 
 
 
-
-
-
-    
-<div class="card">
-    
-    <div class="card-image">
-        <a href="/Java/ThreadLocal/" class="image is-7by1">
-            <img class="thumbnail" src="images/loading.gif" data-original="https://cdn.jsdelivr.net/gh/wjwABCDEFG/blog_img/img/20210717214617.jpg" alt="ThreadLocal">
-        </a>
-    </div>
-    
-    <div class="card-content article ">
+<div class="card card-transparent">
+    <div class="level post-navigation is-flex-wrap is-mobile">
         
-        <div class="level article-meta is-size-7 is-uppercase is-mobile is-overflow-x-auto">
-            <div class="level-left">
-                <time class="level-item has-text-grey" datetime="2020-11-11T08:26:17.000Z">2020-11-11</time>
-                
-                <div class="level-item">
-                <a class="has-link-grey -link" href="/categories/Java/">Java基础</a>
-                </div>
-                
-                
-                <span class="level-item has-text-grey">
-                    
-                    
-                    12 分钟 读完 (大约 1753 个字)
-                </span>
-                
-                
-            </div>
-        </div>
-        
-        <h1 class="title is-size-3 is-size-4-mobile has-text-weight-normal">
-            
-                <a class="has-link-black-ter" href="/Java/ThreadLocal/">ThreadLocal</a>
-            
-        </h1>
-        <div class="content">
-            <h1 id="作用"><a href="#作用" class="headerlink" title="作用"></a>作用</h1><ol>
-<li>多个线程之间的数据隔离</li>
-<li>单个线程内部的简化参数（传递上下文）</li>
-</ol>
+        <div class="level-start">
+            <a class="level level-item has-link-grey  article-nav-prev" href="/algorithms/container-with-most-water/">
+                <i class="level-item fas fa-chevron-left"></i>
+                <span class="level-item">11-盛水最多的容器</span>
+            </a>
         </div>
         
         
-        <div class="level is-mobile">
-            <div class="level-start">
-                <div class="level-item">
-                <a class="button is-size-7 is-light" href="/Java/ThreadLocal/#more">阅读更多</a>
-                </div>
-            </div>
+        <div class="level-end">
+            <a class="level level-item has-link-grey  article-nav-next" href="/cs/network/">
+                <span class="level-item">计算机网络基础</span>
+                <i class="level-item fas fa-chevron-right"></i>
+            </a>
         </div>
-        
         
     </div>
 </div>
-
-
-
-
-
-
-
-
-    
-<div class="card">
-    
-    <div class="card-image">
-        <a href="/Java/%E5%8F%8D%E5%B0%84%E5%92%8C%E7%B1%BB%E5%8A%A0%E8%BD%BD%E5%99%A8/" class="image is-7by1">
-            <img class="thumbnail" src="images/loading.gif" data-original="https://cdn.jsdelivr.net/gh/wjwABCDEFG/blog_img/img/20210717214530.jpg" alt="反射和类加载器">
-        </a>
-    </div>
-    
-    <div class="card-content article ">
-        
-        <div class="level article-meta is-size-7 is-uppercase is-mobile is-overflow-x-auto">
-            <div class="level-left">
-                <time class="level-item has-text-grey" datetime="2020-11-09T12:49:00.000Z">2020-11-09</time>
-                
-                <div class="level-item">
-                <a class="has-link-grey -link" href="/categories/Java/">Java基础</a>
-                </div>
-                
-                
-                <span class="level-item has-text-grey">
-                    
-                    
-                    7 分钟 读完 (大约 1119 个字)
-                </span>
-                
-                
-            </div>
-        </div>
-        
-        <h1 class="title is-size-3 is-size-4-mobile has-text-weight-normal">
-            
-                <a class="has-link-black-ter" href="/Java/%E5%8F%8D%E5%B0%84%E5%92%8C%E7%B1%BB%E5%8A%A0%E8%BD%BD%E5%99%A8/">反射和类加载器</a>
-            
-        </h1>
-        <div class="content">
-            <h1 id="1-程序运行阶段"><a href="#1-程序运行阶段" class="headerlink" title="1. 程序运行阶段"></a>1. 程序运行阶段</h1><ol>
-<li>代码阶段（硬盘阶段）：比如编写一个Person.java，编译成字节码Person.class，这都是存在硬盘的，而程序运行是要在内存中的</li>
-<li>类加载器ClassLoader阶段：在第一阶段和第二阶段中间，也就是本文要讲的内容，先卖个关子，知道有这个阶段</li>
-<li>Runtime运行时阶段：也就是new Person()，那么此时已经在内存中</li>
-</ol>
-        </div>
-        
-        
-        <div class="level is-mobile">
-            <div class="level-start">
-                <div class="level-item">
-                <a class="button is-size-7 is-light" href="/Java/%E5%8F%8D%E5%B0%84%E5%92%8C%E7%B1%BB%E5%8A%A0%E8%BD%BD%E5%99%A8/#more">阅读更多</a>
-                </div>
-            </div>
-        </div>
-        
-        
-    </div>
-</div>
-
-
-
-
-
-
 
 
 </div>
@@ -654,7 +367,7 @@
             </h3>
             <ul class="menu-list">
             <li>
-        <a class="level is-marginless" href="/categories/Java/">
+        <a class="level is-marginless" href="/categories/Java%E5%9F%BA%E7%A1%80/">
             <span class="level-start">
                 <span class="level-item">Java基础</span>
             </span>
@@ -784,6 +497,48 @@
         <div class="column-right-shadow is-hidden-widescreen is-sticky">
         
             
+
+    <div class="card widget" id="toc">
+        <div class="card-content">
+            <div class="menu">
+                <h3 class="menu-label">
+                    目录
+                </h3>
+                <ul class="menu-list"><li>
+        <a class="is-flex" href="#强引用-NormalReference">
+        <!-- 目录是否自动编号 -->
+        <!-- <span class="has-mr-6">1</span> -->
+        <span>强引用(NormalReference)</span>
+        </a></li><li>
+        <a class="is-flex" href="#软引用-SoftReference">
+        <!-- 目录是否自动编号 -->
+        <!-- <span class="has-mr-6">2</span> -->
+        <span>软引用(SoftReference)</span>
+        </a></li><li>
+        <a class="is-flex" href="#弱引用-WeakReference">
+        <!-- 目录是否自动编号 -->
+        <!-- <span class="has-mr-6">3</span> -->
+        <span>弱引用(WeakReference)</span>
+        </a><ul class="menu-list"><li>
+        <a class="is-flex" href="#ThreadLocal中的Entry">
+        <!-- 目录是否自动编号 -->
+        <!-- <span class="has-mr-6">3.1</span> -->
+        <span>ThreadLocal中的Entry</span>
+        </a></li></ul></li><li>
+        <a class="is-flex" href="#虚引用-PhantomReference">
+        <!-- 目录是否自动编号 -->
+        <!-- <span class="has-mr-6">4</span> -->
+        <span>虚引用(PhantomReference)</span>
+        </a><ul class="menu-list"><li>
+        <a class="is-flex" href="#零拷贝技术">
+        <!-- 目录是否自动编号 -->
+        <!-- <span class="has-mr-6">4.1</span> -->
+        <span>零拷贝技术</span>
+        </a></li></ul></li></ul>
+            </div>
+        </div>
+    </div>
+
         
             <div class="card widget">
     <div class="card-content">
@@ -793,16 +548,16 @@
         
         <article class="media">
             
-            <a href="/Others/node-editor.md/" class="media-left">
+            <a href="/Others/node-editor/" class="media-left">
                 <p class="image is-64x64">
-                    <img class="thumbnail" src="images/loading.gif" data-original="https://cdn.jsdelivr.net/gh/wjwABCDEFG/blog_img/img/20250401154214355.jpeg" alt="Line-It 节点编辑器.md">
+                    <img class="thumbnail" src="images/loading.gif" data-original="https://cdn.jsdelivr.net/gh/wjwABCDEFG/blog_img/img/20250401154214355.jpeg" alt="Line-It 节点编辑器">
                 </p>
             </a>
             
             <div class="media-content">
                 <div class="content">
                     <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2025-04-01T07:28:20.000Z">2025-04-01</time></div>
-                    <a href="/Others/node-editor.md/" class="title has-link-black-ter is-size-6 has-text-weight-normal">Line-It 节点编辑器.md</a>
+                    <a href="/Others/node-editor/" class="title has-link-black-ter is-size-6 has-text-weight-normal">Line-It 节点编辑器</a>
                     <p class="is-size-7 is-uppercase">
                         <a class="has-link-grey -link" href="/categories/Others/">Others</a>
                     </p>
@@ -901,6 +656,48 @@
 <div class="column is-4-tablet is-4-desktop is-3-widescreen is-hidden-touch is-hidden-desktop-only has-order-3 column-right is-sticky">
     
         
+
+    <div class="card widget" id="toc">
+        <div class="card-content">
+            <div class="menu">
+                <h3 class="menu-label">
+                    目录
+                </h3>
+                <ul class="menu-list"><li>
+        <a class="is-flex" href="#强引用-NormalReference">
+        <!-- 目录是否自动编号 -->
+        <!-- <span class="has-mr-6">1</span> -->
+        <span>强引用(NormalReference)</span>
+        </a></li><li>
+        <a class="is-flex" href="#软引用-SoftReference">
+        <!-- 目录是否自动编号 -->
+        <!-- <span class="has-mr-6">2</span> -->
+        <span>软引用(SoftReference)</span>
+        </a></li><li>
+        <a class="is-flex" href="#弱引用-WeakReference">
+        <!-- 目录是否自动编号 -->
+        <!-- <span class="has-mr-6">3</span> -->
+        <span>弱引用(WeakReference)</span>
+        </a><ul class="menu-list"><li>
+        <a class="is-flex" href="#ThreadLocal中的Entry">
+        <!-- 目录是否自动编号 -->
+        <!-- <span class="has-mr-6">3.1</span> -->
+        <span>ThreadLocal中的Entry</span>
+        </a></li></ul></li><li>
+        <a class="is-flex" href="#虚引用-PhantomReference">
+        <!-- 目录是否自动编号 -->
+        <!-- <span class="has-mr-6">4</span> -->
+        <span>虚引用(PhantomReference)</span>
+        </a><ul class="menu-list"><li>
+        <a class="is-flex" href="#零拷贝技术">
+        <!-- 目录是否自动编号 -->
+        <!-- <span class="has-mr-6">4.1</span> -->
+        <span>零拷贝技术</span>
+        </a></li></ul></li></ul>
+            </div>
+        </div>
+    </div>
+
     
         <div class="card widget">
     <div class="card-content">
@@ -910,16 +707,16 @@
         
         <article class="media">
             
-            <a href="/Others/node-editor.md/" class="media-left">
+            <a href="/Others/node-editor/" class="media-left">
                 <p class="image is-64x64">
-                    <img class="thumbnail" src="images/loading.gif" data-original="https://cdn.jsdelivr.net/gh/wjwABCDEFG/blog_img/img/20250401154214355.jpeg" alt="Line-It 节点编辑器.md">
+                    <img class="thumbnail" src="images/loading.gif" data-original="https://cdn.jsdelivr.net/gh/wjwABCDEFG/blog_img/img/20250401154214355.jpeg" alt="Line-It 节点编辑器">
                 </p>
             </a>
             
             <div class="media-content">
                 <div class="content">
                     <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2025-04-01T07:28:20.000Z">2025-04-01</time></div>
-                    <a href="/Others/node-editor.md/" class="title has-link-black-ter is-size-6 has-text-weight-normal">Line-It 节点编辑器.md</a>
+                    <a href="/Others/node-editor/" class="title has-link-black-ter is-size-6 has-text-weight-normal">Line-It 节点编辑器</a>
                     <p class="is-size-7 is-uppercase">
                         <a class="has-link-grey -link" href="/categories/Others/">Others</a>
                     </p>
@@ -1018,7 +815,7 @@
             <div class="level-start has-text-centered-mobile">
                 <a class="footer-logo is-block has-mb-6" href="/">
                 
-                    <img src="images/loading.gif" data-original="https://cdn.jsdelivr.net/gh/wjwABCDEFG/blog_img/img/20210717231246.png" alt="小温 blog" height="28">
+                    <img src="images/loading.gif" data-original="https://cdn.jsdelivr.net/gh/wjwABCDEFG/blog_img/img/20210717231246.png" alt="java中的引用" height="28">
                 
                 </a>
                 <p class="is-size-7">

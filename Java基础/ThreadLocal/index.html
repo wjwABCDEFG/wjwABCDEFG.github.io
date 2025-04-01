@@ -7,22 +7,22 @@
 
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
 
-<title>线程和线程池 - 小温 blog</title>
+<title>ThreadLocal - 小温 blog</title>
 
 
-    <meta name="description" content="1. 线程和进程的区别进程：资源分配的基本单位，是程序（硬盘上的QQ.exe）的一个实例，比如双击QQ.exe，程序启动，进入内存 线程：程序执行的基本单位，是一个任务，比如软件管家可以同时清理垃圾和扫描病毒">
+    <meta name="description" content="作用 多个线程之间的数据隔离 单个线程内部的简化参数（传递上下文）">
 <meta property="og:type" content="article">
-<meta property="og:title" content="线程和线程池">
-<meta property="og:url" content="https://wjw.today/Java/%E7%BA%BF%E7%A8%8B%E5%92%8C%E7%BA%BF%E7%A8%8B%E6%B1%A0/index.html">
+<meta property="og:title" content="ThreadLocal">
+<meta property="og:url" content="https://wjw.today/Java%E5%9F%BA%E7%A1%80/ThreadLocal/index.html">
 <meta property="og:site_name" content="小温 blog">
-<meta property="og:description" content="1. 线程和进程的区别进程：资源分配的基本单位，是程序（硬盘上的QQ.exe）的一个实例，比如双击QQ.exe，程序启动，进入内存 线程：程序执行的基本单位，是一个任务，比如软件管家可以同时清理垃圾和扫描病毒">
+<meta property="og:description" content="作用 多个线程之间的数据隔离 单个线程内部的简化参数（传递上下文）">
 <meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="https://cdn.jsdelivr.net/gh/wjwABCDEFG/blog_img/img/20210717220808.jpeg">
-<meta property="article:published_time" content="2020-12-02T07:44:10.000Z">
-<meta property="article:modified_time" content="2021-07-17T14:08:35.928Z">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/wjwABCDEFG/blog_img/img/20210717214617.jpg">
+<meta property="article:published_time" content="2020-11-11T08:26:17.000Z">
+<meta property="article:modified_time" content="2021-07-17T13:46:55.380Z">
 <meta property="article:author" content="wjw">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="https://cdn.jsdelivr.net/gh/wjwABCDEFG/blog_img/img/20210717220808.jpeg">
+<meta name="twitter:image" content="https://cdn.jsdelivr.net/gh/wjwABCDEFG/blog_img/img/20210717214617.jpg">
 
 
 
@@ -80,7 +80,7 @@
         <div class="navbar-brand is-flex-center">
             <a class="navbar-item navbar-logo" href="/">
             
-                <img src="images/loading.gif" data-original="https://cdn.jsdelivr.net/gh/wjwABCDEFG/blog_img/img/20210717231246.png" alt="线程和线程池" height="28">
+                <img src="images/loading.gif" data-original="https://cdn.jsdelivr.net/gh/wjwABCDEFG/blog_img/img/20210717231246.png" alt="ThreadLocal" height="28">
             
             </a>
         </div>
@@ -138,7 +138,7 @@
     
     <div class="card-image">
         <span  class="image is-7by1">
-            <img class="thumbnail" src="images/loading.gif" data-original="https://cdn.jsdelivr.net/gh/wjwABCDEFG/blog_img/img/20210717220808.jpeg" alt="线程和线程池">
+            <img class="thumbnail" src="images/loading.gif" data-original="https://cdn.jsdelivr.net/gh/wjwABCDEFG/blog_img/img/20210717214617.jpg" alt="ThreadLocal">
         </span>
     </div>
     
@@ -146,17 +146,17 @@
         
         <div class="level article-meta is-size-7 is-uppercase is-mobile is-overflow-x-auto">
             <div class="level-left">
-                <time class="level-item has-text-grey" datetime="2020-12-02T07:44:10.000Z">2020-12-02</time>
+                <time class="level-item has-text-grey" datetime="2020-11-11T08:26:17.000Z">2020-11-11</time>
                 
                 <div class="level-item">
-                <a class="has-link-grey -link" href="/categories/Java/">Java基础</a>
+                <a class="has-link-grey -link" href="/categories/Java%E5%9F%BA%E7%A1%80/">Java基础</a>
                 </div>
                 
                 
                 <span class="level-item has-text-grey">
                     
                     
-                    18 分钟 读完 (大约 2680 个字)
+                    12 分钟 读完 (大约 1753 个字)
                 </span>
                 
                 
@@ -170,114 +170,99 @@
         
         <h1 class="title is-size-3 is-size-4-mobile has-text-weight-normal">
             
-                线程和线程池
+                ThreadLocal
             
         </h1>
         <div class="content">
-            <h1 id="1-线程和进程的区别"><a href="#1-线程和进程的区别" class="headerlink" title="1. 线程和进程的区别"></a>1. 线程和进程的区别</h1><p>进程：<strong>资源分配的基本单位</strong>，是程序（硬盘上的QQ.exe）的一个实例，比如双击QQ.exe，程序启动，进入内存</p>
-<p>线程：<strong>程序执行的基本单位</strong>，是一个任务，比如软件管家可以同时清理垃圾和扫描病毒</p>
+            <h1 id="作用"><a href="#作用" class="headerlink" title="作用"></a>作用</h1><ol>
+<li>多个线程之间的数据隔离</li>
+<li>单个线程内部的简化参数（传递上下文）</li>
+</ol>
 <a id="more"></a>
 
-<ul>
-<li>一个进程可以有多个线程</li>
-<li>进程有自己的独立地址空间，每启动一个进程，系统就会为它分配地址空间，建立数据表来维护代码段、堆栈段和数据段。多个线程共享进程的<strong>堆</strong>和<strong>方法区</strong>资源，但每个线程有自己的<strong>程序计数器</strong>、<strong>虚拟机栈</strong>和<strong>本地方法栈</strong>，创建/切换线程的开销比进程小</li>
-<li>线程之间的通信更方便，同一进程下的线程共享全局变量、静态变量等数据，而进程之间的通信需要以通信的方式（IPC)进行(管道，信号，消息队列，共享内存，套接字等通信机制)。不过如何处理好同步与互斥是编写多线程程序的难点。</li>
-</ul>
 <br>
 
-<hr>
-<h1 id="2-线程间通信"><a href="#2-线程间通信" class="headerlink" title="2. 线程间通信"></a>2. 线程间通信</h1><p>同一进程下的线程虽然能共享全局变量、静态变量等数据是没错，但是由于JMM的限制，一个线程改变全局变量的值，其他线程并不能感知到，因为JMM中有规定，线程不能直接操作主存中的值，只能拷贝到自己的工作内存再进行操作。也就是说大家都知道有个private int a = 5，但是线程一将其改为6后线程二不能得知。这个问题我们在<a href="https://wjw.today/Java/volatile/">volatile一文</a>中探究过。是的，volatile就是线程间通信的其中一种方式。</p>
-<p><img src="images/loading.gif" data-original="https://cdn.jsdelivr.net/gh/wjwABCDEFG/blog_img/img/20210717220801.png" alt="volatile一文中的图"></p>
-<ul>
-<li>volatile</li>
-<li>使用Object类的wait() 和 notify() / notifyAll() 方法</li>
-<li>JUC下的一些包（CountDownLatch/ReentrantLock/LockSupport）的锁机制</li>
-</ul>
+<h1 id="使用"><a href="#使用" class="headerlink" title="使用"></a>使用</h1><p>使用可太简单了，一个set 一个get</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">ThreadLocal&lt;String&gt; threadLocal = <span class="keyword">new</span> ThreadLocal&lt;&gt;();</span><br><span class="line">threadLocal.set(<span class="string">"张三"</span>);</span><br><span class="line">String name = threadLocal.get();</span><br></pre></td></tr></table></figure>
+
 <br>
 
-<hr>
-<h1 id="3-线程的状态"><a href="#3-线程的状态" class="headerlink" title="3. 线程的状态"></a>3. 线程的状态</h1><p>网上说的很乱，到处乱传，还分什么runnable和running什么的，很多都是错的！本着不造谣不信谣不传谣的原则，我们来看一下源码就知道了</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">enum</span> State &#123;</span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * Thread state for a thread which has not yet started.</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    NEW,</span><br><span class="line"></span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * Thread state for a runnable thread.  A thread in the runnable</span></span><br><span class="line"><span class="comment">     * state is executing in the Java virtual machine but it may</span></span><br><span class="line"><span class="comment">     * be waiting for other resources from the operating system</span></span><br><span class="line"><span class="comment">     * such as processor.</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    RUNNABLE,</span><br><span class="line"></span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * Thread state for a thread blocked waiting for a monitor lock.</span></span><br><span class="line"><span class="comment">     * A thread in the blocked state is waiting for a monitor lock</span></span><br><span class="line"><span class="comment">     * to enter a synchronized block/method or</span></span><br><span class="line"><span class="comment">     * reenter a synchronized block/method after calling</span></span><br><span class="line"><span class="comment">     * &#123;<span class="doctag">@link</span> Object#wait() Object.wait&#125;.</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    BLOCKED,</span><br><span class="line"></span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * Thread state for a waiting thread.</span></span><br><span class="line"><span class="comment">     * A thread is in the waiting state due to calling one of the</span></span><br><span class="line"><span class="comment">     * following methods:</span></span><br><span class="line"><span class="comment">     * &lt;ul&gt;</span></span><br><span class="line"><span class="comment">     *   &lt;li&gt;&#123;<span class="doctag">@link</span> Object#wait() Object.wait&#125; with no timeout&lt;/li&gt;</span></span><br><span class="line"><span class="comment">     *   &lt;li&gt;&#123;<span class="doctag">@link</span> #join() Thread.join&#125; with no timeout&lt;/li&gt;</span></span><br><span class="line"><span class="comment">     *   &lt;li&gt;&#123;<span class="doctag">@link</span> LockSupport#park() LockSupport.park&#125;&lt;/li&gt;</span></span><br><span class="line"><span class="comment">     * &lt;/ul&gt;</span></span><br><span class="line"><span class="comment">     *</span></span><br><span class="line"><span class="comment">     * &lt;p&gt;A thread in the waiting state is waiting for another thread to</span></span><br><span class="line"><span class="comment">     * perform a particular action.</span></span><br><span class="line"><span class="comment">     *</span></span><br><span class="line"><span class="comment">     * For example, a thread that has called &lt;tt&gt;Object.wait()&lt;/tt&gt;</span></span><br><span class="line"><span class="comment">     * on an object is waiting for another thread to call</span></span><br><span class="line"><span class="comment">     * &lt;tt&gt;Object.notify()&lt;/tt&gt; or &lt;tt&gt;Object.notifyAll()&lt;/tt&gt; on</span></span><br><span class="line"><span class="comment">     * that object. A thread that has called &lt;tt&gt;Thread.join()&lt;/tt&gt;</span></span><br><span class="line"><span class="comment">     * is waiting for a specified thread to terminate.</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    WAITING,</span><br><span class="line"></span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * Thread state for a waiting thread with a specified waiting time.</span></span><br><span class="line"><span class="comment">     * A thread is in the timed waiting state due to calling one of</span></span><br><span class="line"><span class="comment">     * the following methods with a specified positive waiting time:</span></span><br><span class="line"><span class="comment">     * &lt;ul&gt;</span></span><br><span class="line"><span class="comment">     *   &lt;li&gt;&#123;<span class="doctag">@link</span> #sleep Thread.sleep&#125;&lt;/li&gt;</span></span><br><span class="line"><span class="comment">     *   &lt;li&gt;&#123;<span class="doctag">@link</span> Object#wait(long) Object.wait&#125; with timeout&lt;/li&gt;</span></span><br><span class="line"><span class="comment">     *   &lt;li&gt;&#123;<span class="doctag">@link</span> #join(long) Thread.join&#125; with timeout&lt;/li&gt;</span></span><br><span class="line"><span class="comment">     *   &lt;li&gt;&#123;<span class="doctag">@link</span> LockSupport#parkNanos LockSupport.parkNanos&#125;&lt;/li&gt;</span></span><br><span class="line"><span class="comment">     *   &lt;li&gt;&#123;<span class="doctag">@link</span> LockSupport#parkUntil LockSupport.parkUntil&#125;&lt;/li&gt;</span></span><br><span class="line"><span class="comment">     * &lt;/ul&gt;</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    TIMED_WAITING,</span><br><span class="line"></span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * Thread state for a terminated thread.</span></span><br><span class="line"><span class="comment">     * The thread has completed execution.</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    TERMINATED;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h1 id="原理说明"><a href="#原理说明" class="headerlink" title="原理说明"></a>原理说明</h1><h2 id="set和get究竟是怎么回事"><a href="#set和get究竟是怎么回事" class="headerlink" title="set和get究竟是怎么回事"></a>set和get究竟是怎么回事</h2><p>set方法</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">set</span><span class="params">(T value)</span> </span>&#123;</span><br><span class="line">    Thread t = Thread.currentThread();</span><br><span class="line">    ThreadLocalMap map = getMap(t);</span><br><span class="line">    <span class="keyword">if</span> (map != <span class="keyword">null</span>)</span><br><span class="line">        map.set(<span class="keyword">this</span>, value);</span><br><span class="line">    <span class="keyword">else</span></span><br><span class="line">        createMap(t, value);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
-<p>6种！！没有什么Running状态！！！记好了！！</p>
-<p><img src="images/loading.gif" data-original="https://cdn.jsdelivr.net/gh/wjwABCDEFG/blog_img/img/20210717220821.jpeg" alt=""></p>
-<h2 id="wait-和sleep-的区别"><a href="#wait-和sleep-的区别" class="headerlink" title="wait()和sleep()的区别"></a>wait()和sleep()的区别</h2><p>它们都可以让<strong>线程阻塞</strong>。不同的是：</p>
+<p>get方法</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> T <span class="title">get</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    Thread t = Thread.currentThread();</span><br><span class="line">    ThreadLocalMap map = getMap(t);</span><br><span class="line">    <span class="keyword">if</span> (map != <span class="keyword">null</span>) &#123;</span><br><span class="line">        ThreadLocalMap.Entry e = map.getEntry(<span class="keyword">this</span>);</span><br><span class="line">        <span class="keyword">if</span> (e != <span class="keyword">null</span>) &#123;</span><br><span class="line">            <span class="meta">@SuppressWarnings</span>(<span class="string">"unchecked"</span>)</span><br><span class="line">            T result = (T)e.value;</span><br><span class="line">            <span class="keyword">return</span> result;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> setInitialValue();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>由前两行可以看到根据每个currentThread获取了map，因此<strong>不同的线程获取的map自然就不同</strong>，每个线程只能操控自己的map，而对于同一个线程，不管在哪里获取的map都是同一个。</p>
+<p>而对于每个map，key为ThreadLocal这个类，value为我们set的值</p>
+<p><img src="images/loading.gif" data-original="https://cdn.jsdelivr.net/gh/wjwABCDEFG/blog_img/img/20210717214622.png" alt=""></p>
+<p>当然这只是分析，我们可以进一步看getMap源码验证上图</p>
+<p>先看getMap方法体：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="function">ThreadLocalMap <span class="title">getMap</span><span class="params">(Thread t)</span> </span>&#123;</span><br><span class="line">	<span class="keyword">return</span> t.threadLocals;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>直接返回了Thread类的一个属性成员</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Thread</span> <span class="keyword">implements</span> <span class="title">Runnable</span> </span>&#123;</span><br><span class="line">    </span><br><span class="line">    <span class="comment">/* ThreadLocal values pertaining to this thread. This map is maintained</span></span><br><span class="line"><span class="comment">     * by the ThreadLocal class. */</span></span><br><span class="line">    ThreadLocal.ThreadLocalMap threadLocals = <span class="keyword">null</span>;</span><br><span class="line"></span><br><span class="line">    <span class="comment">/*</span></span><br><span class="line"><span class="comment">     * InheritableThreadLocal values pertaining to this thread. This map is</span></span><br><span class="line"><span class="comment">     * maintained by the InheritableThreadLocal class.</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    ThreadLocal.ThreadLocalMap inheritableThreadLocals = <span class="keyword">null</span>;</span><br><span class="line">    </span><br><span class="line">    ...</span><br></pre></td></tr></table></figure>
+
+<p>到这里就可以完全说明<strong>不同的线程获取的map自然就不同，每个线程有自己的map</strong>了</p>
+<br>
+
+<h2 id="map真的是map吗"><a href="#map真的是map吗" class="headerlink" title="map真的是map吗"></a>map真的是map吗</h2><p>再看看这个map，他叫ThreadLocalMap，跟hashmap一样吗？</p>
+<p>部分源码如下：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">static</span> <span class="class"><span class="keyword">class</span> <span class="title">ThreadLocalMap</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * The entries in this hash map extend WeakReference, using</span></span><br><span class="line"><span class="comment">     * its main ref field as the key (which is always a</span></span><br><span class="line"><span class="comment">     * ThreadLocal object).  Note that null keys (i.e. entry.get()</span></span><br><span class="line"><span class="comment">     * == null) mean that the key is no longer referenced, so the</span></span><br><span class="line"><span class="comment">     * entry can be expunged from table.  Such entries are referred to</span></span><br><span class="line"><span class="comment">     * as "stale entries" in the code that follows.</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="keyword">static</span> <span class="class"><span class="keyword">class</span> <span class="title">Entry</span> <span class="keyword">extends</span> <span class="title">WeakReference</span>&lt;<span class="title">ThreadLocal</span>&lt;?&gt;&gt; </span>&#123;</span><br><span class="line">        <span class="comment">/** The value associated with this ThreadLocal. */</span></span><br><span class="line">        Object value;</span><br><span class="line"></span><br><span class="line">        Entry(ThreadLocal&lt;?&gt; k, Object v) &#123;</span><br><span class="line">            <span class="keyword">super</span>(k);</span><br><span class="line">            value = v;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * The table, resized as necessary.</span></span><br><span class="line"><span class="comment">     * table.length MUST always be a power of two.</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="keyword">private</span> Entry[] table;</span><br><span class="line">    </span><br><span class="line">    ...</span><br></pre></td></tr></table></figure>
+
+<p>对比hashmap分析，我贴上Hashmap的部分源码</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">HashMap</span>&lt;<span class="title">K</span>,<span class="title">V</span>&gt; <span class="keyword">extends</span> <span class="title">AbstractMap</span>&lt;<span class="title">K</span>,<span class="title">V</span>&gt;</span></span><br><span class="line"><span class="class">    <span class="keyword">implements</span> <span class="title">Map</span>&lt;<span class="title">K</span>,<span class="title">V</span>&gt;, <span class="title">Cloneable</span>, <span class="title">Serializable</span> </span>&#123;</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">static</span> <span class="class"><span class="keyword">class</span> <span class="title">Node</span>&lt;<span class="title">K</span>,<span class="title">V</span>&gt; <span class="keyword">implements</span> <span class="title">Map</span>.<span class="title">Entry</span>&lt;<span class="title">K</span>,<span class="title">V</span>&gt; </span>&#123;</span><br><span class="line">        <span class="keyword">final</span> <span class="keyword">int</span> hash;</span><br><span class="line">        <span class="keyword">final</span> K key;</span><br><span class="line">        V value;</span><br><span class="line">        Node&lt;K,V&gt; next;</span><br><span class="line">        </span><br><span class="line">        ...</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">transient</span> Node&lt;K,V&gt;[] table;</span><br><span class="line">    </span><br><span class="line">    ...</span><br></pre></td></tr></table></figure>
+
+<p>我们都知道hashmap在树化之前是数组+链表，首先是Entry[] table，类似于hashmap“数组+链表”中的数组Node&lt;K,V&gt;[] table</p>
+<p>那链表呢？答案是<strong>没有</strong>。从上面可以看出，hashmap的有指针域Node&lt;K,V&gt; next;，但是ThreadLocalMap的Entry是一个弱引用</p>
+<p>综上所述，<strong>ThreadLocalMap其实并没有实现Map接口，只是一个Entry数组</strong></p>
+<br>
+
+<h2 id="ThreadLocalMap如何解决hash冲突"><a href="#ThreadLocalMap如何解决hash冲突" class="headerlink" title="ThreadLocalMap如何解决hash冲突"></a>ThreadLocalMap如何解决hash冲突</h2><p>既然我们知道了ThreadLocalMap只是一个Entry数组，如果定义了多个ThreadLocal</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">ThreadLocal&lt;String&gt; threadLocal1 = <span class="keyword">new</span> ThreadLocal&lt;&gt;();</span><br><span class="line">ThreadLocal&lt;Integer&gt; threadLocal2 = <span class="keyword">new</span> ThreadLocal&lt;&gt;();</span><br></pre></td></tr></table></figure>
+
+<p>存东西的时候遇到hash冲突怎么解决呢，先说结论：hashmap遇到hash冲突后会跟在此下标对应的链表后面，而ThreadLocalMap没有链表，遇到hash冲突后计算下一个下标，直到数组在某个下标处没有值</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">private</span> <span class="keyword">void</span> <span class="title">set</span><span class="params">(ThreadLocal&lt;?&gt; key, Object value)</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    Entry[] tab = table;</span><br><span class="line">    <span class="keyword">int</span> len = tab.length;</span><br><span class="line">    <span class="keyword">int</span> i = key.threadLocalHashCode &amp; (len-<span class="number">1</span>);	<span class="comment">//1.这样计算hash值</span></span><br><span class="line"></span><br><span class="line">    <span class="keyword">for</span> (Entry e = tab[i];</span><br><span class="line">         e != <span class="keyword">null</span>;</span><br><span class="line">         e = tab[i = nextIndex(i, len)]) &#123;	<span class="comment">//4.entry不为空且key不相等，说明hash冲突，一直找下一个位置</span></span><br><span class="line">        ThreadLocal&lt;?&gt; k = e.get();</span><br><span class="line"></span><br><span class="line">        <span class="keyword">if</span> (k == key) &#123;	<span class="comment">//2.key相等，覆盖旧值</span></span><br><span class="line">            e.value = value;</span><br><span class="line">            <span class="keyword">return</span>;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">if</span> (k == <span class="keyword">null</span>) &#123;	<span class="comment">//3.当前位置是空的，就初始化⼀个Entry对象放在位置i上；</span></span><br><span class="line">            replaceStaleEntry(key, value, i);</span><br><span class="line">            <span class="keyword">return</span>;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    tab[i] = <span class="keyword">new</span> Entry(key, value);</span><br><span class="line">    <span class="keyword">int</span> sz = ++size;</span><br><span class="line">    <span class="keyword">if</span> (!cleanSomeSlots(i, sz) &amp;&amp; sz &gt;= threshold)</span><br><span class="line">        rehash();</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">//nextIndex也贴出来，真的是下一个位置！！</span></span><br><span class="line"><span class="function"><span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">int</span> <span class="title">nextIndex</span><span class="params">(<span class="keyword">int</span> i, <span class="keyword">int</span> len)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">return</span> ((i + <span class="number">1</span> &lt; len) ? i + <span class="number">1</span> : <span class="number">0</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>get时候也是一样：计算hash下标–&gt;判断key是否相等–&gt;相等直接返回，不相等看下一个位置–&gt;继续判断是否相等…</p>
+<br>
+
+<h1 id="内存泄漏问题"><a href="#内存泄漏问题" class="headerlink" title="内存泄漏问题"></a>内存泄漏问题</h1><p>key使用了弱引用，不存在内存泄漏问题，但是value存在</p>
+<p>先看结构</p>
+<p><img src="images/loading.gif" data-original="https://cdn.jsdelivr.net/gh/wjwABCDEFG/blog_img/img/20210717214631.png" alt=""></p>
+<p>当我们ThreadLocal tl = new ThreadLocal();的时候，实际上有两个引用指向了ThreadLocal，一个是tl本身是一个强引用，一个是getMap(当前线程)得到的ThreadLocalMap，它里面的Entry的key是一个弱引用，指向了ThreadLocal。</p>
+<blockquote>
+<p> 为什么这里要使用弱引用呢？</p>
+<p>如果是强引用，则tl和key都是强引用，我们一般都是操作tl，也就是tl = null，但是key依然存在强引用，于是导致无法被gc回收，存在内存泄漏问题。</p>
+<p>使用弱引用就不会内存泄漏？</p>
+<p>不是的，即使key是弱引用，但是如果key被回收变为null，value无法被访问，依然存在内存泄漏问题。解决的办法是主动调用tl.remove();</p>
+</blockquote>
+<p>对于Entry，key是弱引用，在gc时会被回收，但是<strong>value得等到该ThreadLocal/线程没有强引用时才会收</strong>，如果线程一直存在，比如<strong>线程池</strong>会复用线程，那么此时value就一直无法回收，造成内存泄露问题。</p>
+<p>解决方法也很简单，养成好习惯，主动调用remove()方法</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">ThreadLocal&lt;String&gt; localName = <span class="keyword">new</span> ThreadLocal();</span><br><span class="line"><span class="keyword">try</span> &#123;</span><br><span class="line"> localName.set(<span class="string">"张三"</span>);</span><br><span class="line"> ……</span><br><span class="line">&#125; <span class="keyword">finally</span> &#123;</span><br><span class="line"> localName.remove();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<br>
+
+<h1 id="线程之间传递"><a href="#线程之间传递" class="headerlink" title="线程之间传递"></a>线程之间传递</h1><p>Java中的对象都是在堆中的，是线程共享的，ThreadLocal也一样，只是通过一些手段来实现线程之间的隔离，如果要实现父子线程之间的数据共享，可以使用InheritableThreadLocal</p>
+<p>其原理是判断父组件是否有InheritableThreadLocal，有就直接赋值给子线程</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//Thread的init方法中</span></span><br><span class="line"><span class="keyword">if</span> (inheritThreadLocals &amp;&amp; parent.inheritableThreadLocals != <span class="keyword">null</span>)</span><br><span class="line">            <span class="keyword">this</span>.inheritableThreadLocals =</span><br><span class="line">                ThreadLocal.createInheritedMap(parent.inheritableThreadLocals);</span><br></pre></td></tr></table></figure>
+
+<br>
+
+<h1 id="常见场景"><a href="#常见场景" class="headerlink" title="常见场景"></a>常见场景</h1><h2 id="Spring的事务控制"><a href="#Spring的事务控制" class="headerlink" title="Spring的事务控制"></a>Spring的事务控制</h2><p>最著名的肯定是Spring的事务控制了，操作数据库最终都是dao层的JDBC，那么就需要Connection连接对象，原则上来说增删改查操作都由Connection操作。本来也没什么，但是Spring为了把事务都控制在service业务层（虽然这些什么什么层本质一样，是自己抽象出来的概念），做了两件事：</p>
 <ol>
-<li>wait方法必须在<strong>synchronized</strong>保护的代码中使用，而 sleep 方法并没有这个要求</li>
-<li>在同步代码中<strong>执行 sleep 方法时，并不会释放monitor锁，但执行wait方法时会主动释放monitor锁</strong></li>
-<li>sleep方法中会要求必须定义一个时间，时间到期后会主动恢复，而对于没有参数的wait方法而言，意味着永久等待，直到被中断或被唤醒才能恢复，它并不会主动恢复</li>
-<li><strong>wait/notify 是 Object 类的方法，而 sleep 是Thread类的方法</strong></li>
+<li>为了保证原子性：保证单个线程中的数据库操作使用的是同⼀个数据库连接，而且为了让开发者不需要将同一个Connection对象作为参数在dao的函数里传来传去，使用时感知不到Connection对象，于是使用了ThreadLocal+AOP的方式，保证了</li>
+<li>为了保证隔离性：使用ThreadLocal，各个线程之间的事务互不影响</li>
 </ol>
 <br>
 
-<hr>
-<h1 id="4-start方法到底是什么"><a href="#4-start方法到底是什么" class="headerlink" title="4. start方法到底是什么"></a>4. start方法到底是什么</h1><p>为什么要调用start而不是run</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">synchronized</span> <span class="keyword">void</span> <span class="title">start</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    <span class="keyword">if</span> (threadStatus != <span class="number">0</span>)</span><br><span class="line">        <span class="keyword">throw</span> <span class="keyword">new</span> IllegalThreadStateException();</span><br><span class="line"></span><br><span class="line">    group.add(<span class="keyword">this</span>);</span><br><span class="line"></span><br><span class="line">    <span class="keyword">boolean</span> started = <span class="keyword">false</span>;</span><br><span class="line">    <span class="keyword">try</span> &#123;</span><br><span class="line">        start0();	<span class="comment">//关键就是这个方法</span></span><br><span class="line">        started = <span class="keyword">true</span>;</span><br><span class="line">    &#125; <span class="keyword">finally</span> &#123;</span><br><span class="line">        <span class="keyword">try</span> &#123;</span><br><span class="line">            <span class="keyword">if</span> (!started) &#123;</span><br><span class="line">                group.threadStartFailed(<span class="keyword">this</span>);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125; <span class="keyword">catch</span> (Throwable ignore) &#123;</span><br><span class="line">            <span class="comment">/* do nothing. If start0 threw a Throwable then</span></span><br><span class="line"><span class="comment">              it will be passed up the call stack */</span></span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">private</span> <span class="keyword">native</span> <span class="keyword">void</span> <span class="title">start0</span><span class="params">()</span></span>;	<span class="comment">//是个本地方法，系统调用开了一个线程</span></span><br></pre></td></tr></table></figure>
-
-<br>
-
-<hr>
-<h1 id="4-线程池"><a href="#4-线程池" class="headerlink" title="4. 线程池"></a>4. 线程池</h1><ul>
-<li><strong>降低资源消耗</strong>：重复利用已创建的线程，降低线程创建和销毁造成的消耗。</li>
-<li><strong>提高响应速度</strong>：当任务到达时，任务可以不需要要等到线程创建就能立即执行。</li>
-<li><strong>提高线程的可管理性</strong>。线程是稀缺资源，如果无限制的创建，不仅会消耗系统资源，还会降低系统的稳定性，使用线程池可以进行统一的分配，调优和监控。</li>
-</ul>
-<h2 id="4-1-线程池的参数"><a href="#4-1-线程池的参数" class="headerlink" title="4.1 线程池的参数"></a>4.1 线程池的参数</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">public ThreadPoolExecutor(int corePoolSize,</span><br><span class="line">                          int maximumPoolSize,</span><br><span class="line">                          long keepAliveTime,</span><br><span class="line">                          TimeUnit unit,</span><br><span class="line">                          BlockingQueue&lt;Runnable&gt; workQueue,</span><br><span class="line">                          ThreadFactory threadFactory,</span><br><span class="line">                          RejectedExecutionHandler handler)</span><br></pre></td></tr></table></figure>
-
-<ul>
-<li><p>corePoolSize：核心线程数线。线程池中会维护一个最小的线程数量，即使这些线程处理空闲状态，他们也不会被销毁，除非设置了allowCoreThreadTimeOut。这里的最小线程数量即是corePoolSize</p>
-</li>
-<li><p>maximumPoolSize：最大线程数。<strong>一个任务被提交到线程池以后，首先会找有没有空闲存活线程，如果有则直接执行，如果没有则会缓存到工作队列（后面会介绍）中，如果工作队列满了，才会创建一个新线程，然后从工作队列的头部取出一个任务交由新线程来处理，而将刚提交的任务放入工作队列尾部。线程池不会无限制的去创建新线程，它会有一个最大线程数量的限制，这个数量即由maximunPoolSize指定</strong></p>
-</li>
-<li><p>keepAliveTime：一个线程如果处于空闲状态，并且当前的线程数量大于corePoolSize，那么在指定时间后，这个空闲线程会被销毁，这里的指定时间由keepAliveTime来设定</p>
-</li>
-<li><p>TimeUnit：时间单位</p>
-</li>
-<li><p>workQueue：当新任务来的时候会先判断当前运行的线程数量是否达到核心线程数，如果达到的话，新任务就会被存放在队列中，有四种任务队列</p>
-<p>①ArrayBlockingQueue</p>
-<p>基于数组的有界阻塞队列，按FIFO排序。新任务进来后，会放到该队列的队尾，有界的数组可以防止资源耗尽问题。当线程池中线程数量达到corePoolSize后，再有新任务进来，则会将任务放入该队列的队尾，等待被调度。如果队列已经是满的，则创建一个新线程，如果线程数量已经达到maxPoolSize，则会执行拒绝策略。</p>
-<p>②LinkedBlockingQueue</p>
-<p>基于链表的无界阻塞队列（其实最大容量为Interger.MAX），按照FIFO排序。由于该队列的近似无界性，当线程池中线程数量达到corePoolSize后，再有新任务进来，会一直存入该队列，而不会去创建新线程直到maxPoolSize，因此使用该工作队列时，参数maxPoolSize其实是不起作用的。</p>
-<p>③SynchronousQueue</p>
-<p>一个不缓存任务的阻塞队列，生产者放入一个任务必须等到消费者取出这个任务。也就是说新任务进来时，不会缓存，而是直接被调度执行该任务，如果没有可用线程，则创建新线程，如果线程数量达到maxPoolSize，则执行拒绝策略。说白了就是个假队列</p>
-<p>④PriorityBlockingQueue</p>
-<p>具有优先级的无界阻塞队列，优先级通过参数Comparator实现</p>
-</li>
-<li><p>ThreadFactory：线程工厂，创建一个新线程时使用的工厂，可以用来设定线程名、是否为daemon线程等等</p>
-</li>
-<li><p>RejectedExecutionHandler：拒绝策略</p>
-<ul>
-<li>AbortPolicy：抛出 <code>RejectedExecutionException</code>来拒绝新任务的处理。</li>
-<li>CallerRunsPolicy：调用执行自己的线程运行任务。您不会任务请求。但是这种策略会降低对于新任务提交速度，影响程序的整体性能。另外，这个策略喜欢增加队列容量。如果您的应用程序可以承受此延迟并且你不能任务丢弃任何一个任务请求的话，你可以选择这个策略。（说白了，谁管理任务的，谁就负责帮忙）</li>
-<li>DiscardPolicy：不处理新任务，直接丢弃掉。</li>
-<li>DiscardOldestPolicy：此策略将丢弃最早的未处理的任务请求。</li>
-</ul>
-</li>
-</ul>
-<p><img src="images/loading.gif" data-original="https://cdn.jsdelivr.net/gh/wjwABCDEFG/blog_img/img/20210717220832.png" alt=""></p>
-<br>
-
-<h2 id="4-2-常见线程池"><a href="#4-2-常见线程池" class="headerlink" title="4.2 常见线程池"></a>4.2 常见线程池</h2><h3 id="newFixedThreadPool"><a href="#newFixedThreadPool" class="headerlink" title="newFixedThreadPool"></a>newFixedThreadPool</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">&#x2F;&#x2F; core和max是一样的</span><br><span class="line">&#x2F;&#x2F; blockQueue是无界阻塞队列</span><br><span class="line">&#x2F;&#x2F; 嗯， 不好不好！！！</span><br><span class="line">public static ExecutorService newFixedThreadPool(int nThreads) &#123;</span><br><span class="line">    return new ThreadPoolExecutor(nThreads, nThreads,</span><br><span class="line">                                  0L, TimeUnit.MILLISECONDS,</span><br><span class="line">                                  new LinkedBlockingQueue&lt;Runnable&gt;());</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<h3 id="newSingleThreadExecutor"><a href="#newSingleThreadExecutor" class="headerlink" title="newSingleThreadExecutor"></a>newSingleThreadExecutor</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">&#x2F;&#x2F; core和max无非都是1而已</span><br><span class="line">&#x2F;&#x2F; blockQueue是无界阻塞队列</span><br><span class="line">&#x2F;&#x2F; 嗯， 不好不好！！！</span><br><span class="line">public static ExecutorService newSingleThreadExecutor() &#123;</span><br><span class="line">    return new FinalizableDelegatedExecutorService</span><br><span class="line">        (new ThreadPoolExecutor(1, 1,</span><br><span class="line">                                0L, TimeUnit.MILLISECONDS,</span><br><span class="line">                                new LinkedBlockingQueue&lt;Runnable&gt;()));</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<h3 id="newCachedThreadPool"><a href="#newCachedThreadPool" class="headerlink" title="newCachedThreadPool"></a>newCachedThreadPool</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">&#x2F;&#x2F; core 0</span><br><span class="line">&#x2F;&#x2F; max有点狠，不怕暴栈？</span><br><span class="line">&#x2F;&#x2F; 队列还是SynchronousQueue，还真怕</span><br><span class="line">public static ExecutorService newCachedThreadPool() &#123;</span><br><span class="line">    return new ThreadPoolExecutor(0, Integer.MAX_VALUE,</span><br><span class="line">                                  60L, TimeUnit.SECONDS,</span><br><span class="line">                                  new SynchronousQueue&lt;Runnable&gt;());</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>还有些别的比如<strong>newScheduledThreadPool</strong>（带定时器的线程池），就不介绍了</p>
-<p>可以看到这些都太极端了，要么core等于max，要么直接为0，队列也是无界，所以阿里巴巴的规范会提示自定义线程池</p>
-<br>
-
-<h2 id="4-3-线程池的线程数量怎么确定"><a href="#4-3-线程池的线程数量怎么确定" class="headerlink" title="4.3 线程池的线程数量怎么确定"></a>4.3 线程池的线程数量怎么确定</h2><ol>
-<li>一般来说，如果是CPU密集型应用，则线程池大小设置为N+1。</li>
-<li>一般来说，如果是IO密集型应用，则线程池大小设置为2N+1。</li>
-<li>在IO优化中，线程等待时间所占比例越高，需要越多线程，线程CPU时间所占比例越高，需要越少线程。这样的估算公式可能更适合：最佳线程数目 = （（线程等待时间+线程CPU时间）/线程CPU时间 ）* CPU数目</li>
-</ol>
+<h2 id="贴一个自己使用的场景：存放登录信息"><a href="#贴一个自己使用的场景：存放登录信息" class="headerlink" title="贴一个自己使用的场景：存放登录信息"></a>贴一个自己使用的场景：存放登录信息</h2><p><img src="images/loading.gif" data-original="https://cdn.jsdelivr.net/gh/wjwABCDEFG/blog_img/img/20210717214638.png" alt=""></p>
 <br>
 
 <blockquote>
 <p>参考</p>
-<p>线程间通信：<a href="https://blog.csdn.net/jisuanji12306/article/details/86363390">https://blog.csdn.net/jisuanji12306/article/details/86363390</a></p>
-<p>线程的状态：<a href="https://blog.csdn.net/pange1991/article/details/53860651">https://blog.csdn.net/pange1991/article/details/53860651</a></p>
+<p><a href="https://www.zhihu.com/question/341005993/answer/1367225682">三太子敖丙ThreadLocal</a></p>
+<p><a href="https://space.bilibili.com/406692798?from=search&seid=2048544262806301662">bilibili马士兵弱引用</a></p>
 </blockquote>
 
         </div>
@@ -295,16 +280,16 @@
     <div class="level post-navigation is-flex-wrap is-mobile">
         
         <div class="level-start">
-            <a class="level level-item has-link-grey  article-nav-prev" href="/algorithms/654-maximum-binary-tree/">
+            <a class="level level-item has-link-grey  article-nav-prev" href="/algorithms/count-numbers-with-unique-digits/">
                 <i class="level-item fas fa-chevron-left"></i>
-                <span class="level-item">654-最大二叉树</span>
+                <span class="level-item">357-计算各个位数不同的数字个数</span>
             </a>
         </div>
         
         
         <div class="level-end">
-            <a class="level level-item has-link-grey  article-nav-next" href="/Java/volatile/">
-                <span class="level-item">volatile</span>
+            <a class="level level-item has-link-grey  article-nav-next" href="/Java%E5%9F%BA%E7%A1%80/%E5%8F%8D%E5%B0%84%E5%92%8C%E7%B1%BB%E5%8A%A0%E8%BD%BD%E5%99%A8/">
+                <span class="level-item">反射和类加载器</span>
                 <i class="level-item fas fa-chevron-right"></i>
             </a>
         </div>
@@ -404,7 +389,7 @@
             </h3>
             <ul class="menu-list">
             <li>
-        <a class="level is-marginless" href="/categories/Java/">
+        <a class="level is-marginless" href="/categories/Java%E5%9F%BA%E7%A1%80/">
             <span class="level-start">
                 <span class="level-item">Java基础</span>
             </span>
@@ -542,65 +527,60 @@
                     目录
                 </h3>
                 <ul class="menu-list"><li>
-        <a class="is-flex" href="#1-线程和进程的区别">
+        <a class="is-flex" href="#作用">
         <!-- 目录是否自动编号 -->
         <!-- <span class="has-mr-6">1</span> -->
-        <span>1. 线程和进程的区别</span>
+        <span>作用</span>
         </a></li><li>
-        <a class="is-flex" href="#2-线程间通信">
+        <a class="is-flex" href="#使用">
         <!-- 目录是否自动编号 -->
         <!-- <span class="has-mr-6">2</span> -->
-        <span>2. 线程间通信</span>
+        <span>使用</span>
         </a></li><li>
-        <a class="is-flex" href="#3-线程的状态">
+        <a class="is-flex" href="#原理说明">
         <!-- 目录是否自动编号 -->
         <!-- <span class="has-mr-6">3</span> -->
-        <span>3. 线程的状态</span>
+        <span>原理说明</span>
         </a><ul class="menu-list"><li>
-        <a class="is-flex" href="#wait-和sleep-的区别">
+        <a class="is-flex" href="#set和get究竟是怎么回事">
         <!-- 目录是否自动编号 -->
         <!-- <span class="has-mr-6">3.1</span> -->
-        <span>wait()和sleep()的区别</span>
+        <span>set和get究竟是怎么回事</span>
+        </a></li><li>
+        <a class="is-flex" href="#map真的是map吗">
+        <!-- 目录是否自动编号 -->
+        <!-- <span class="has-mr-6">3.2</span> -->
+        <span>map真的是map吗</span>
+        </a></li><li>
+        <a class="is-flex" href="#ThreadLocalMap如何解决hash冲突">
+        <!-- 目录是否自动编号 -->
+        <!-- <span class="has-mr-6">3.3</span> -->
+        <span>ThreadLocalMap如何解决hash冲突</span>
         </a></li></ul></li><li>
-        <a class="is-flex" href="#4-start方法到底是什么">
+        <a class="is-flex" href="#内存泄漏问题">
         <!-- 目录是否自动编号 -->
         <!-- <span class="has-mr-6">4</span> -->
-        <span>4. start方法到底是什么</span>
+        <span>内存泄漏问题</span>
         </a></li><li>
-        <a class="is-flex" href="#4-线程池">
+        <a class="is-flex" href="#线程之间传递">
         <!-- 目录是否自动编号 -->
         <!-- <span class="has-mr-6">5</span> -->
-        <span>4. 线程池</span>
+        <span>线程之间传递</span>
+        </a></li><li>
+        <a class="is-flex" href="#常见场景">
+        <!-- 目录是否自动编号 -->
+        <!-- <span class="has-mr-6">6</span> -->
+        <span>常见场景</span>
         </a><ul class="menu-list"><li>
-        <a class="is-flex" href="#4-1-线程池的参数">
+        <a class="is-flex" href="#Spring的事务控制">
         <!-- 目录是否自动编号 -->
-        <!-- <span class="has-mr-6">5.1</span> -->
-        <span>4.1 线程池的参数</span>
+        <!-- <span class="has-mr-6">6.1</span> -->
+        <span>Spring的事务控制</span>
         </a></li><li>
-        <a class="is-flex" href="#4-2-常见线程池">
+        <a class="is-flex" href="#贴一个自己使用的场景：存放登录信息">
         <!-- 目录是否自动编号 -->
-        <!-- <span class="has-mr-6">5.2</span> -->
-        <span>4.2 常见线程池</span>
-        </a><ul class="menu-list"><li>
-        <a class="is-flex" href="#newFixedThreadPool">
-        <!-- 目录是否自动编号 -->
-        <!-- <span class="has-mr-6">5.2.1</span> -->
-        <span>newFixedThreadPool</span>
-        </a></li><li>
-        <a class="is-flex" href="#newSingleThreadExecutor">
-        <!-- 目录是否自动编号 -->
-        <!-- <span class="has-mr-6">5.2.2</span> -->
-        <span>newSingleThreadExecutor</span>
-        </a></li><li>
-        <a class="is-flex" href="#newCachedThreadPool">
-        <!-- 目录是否自动编号 -->
-        <!-- <span class="has-mr-6">5.2.3</span> -->
-        <span>newCachedThreadPool</span>
-        </a></li></ul></li><li>
-        <a class="is-flex" href="#4-3-线程池的线程数量怎么确定">
-        <!-- 目录是否自动编号 -->
-        <!-- <span class="has-mr-6">5.3</span> -->
-        <span>4.3 线程池的线程数量怎么确定</span>
+        <!-- <span class="has-mr-6">6.2</span> -->
+        <span>贴一个自己使用的场景：存放登录信息</span>
         </a></li></ul></li></ul>
             </div>
         </div>
@@ -615,16 +595,16 @@
         
         <article class="media">
             
-            <a href="/Others/node-editor.md/" class="media-left">
+            <a href="/Others/node-editor/" class="media-left">
                 <p class="image is-64x64">
-                    <img class="thumbnail" src="images/loading.gif" data-original="https://cdn.jsdelivr.net/gh/wjwABCDEFG/blog_img/img/20250401154214355.jpeg" alt="Line-It 节点编辑器.md">
+                    <img class="thumbnail" src="images/loading.gif" data-original="https://cdn.jsdelivr.net/gh/wjwABCDEFG/blog_img/img/20250401154214355.jpeg" alt="Line-It 节点编辑器">
                 </p>
             </a>
             
             <div class="media-content">
                 <div class="content">
                     <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2025-04-01T07:28:20.000Z">2025-04-01</time></div>
-                    <a href="/Others/node-editor.md/" class="title has-link-black-ter is-size-6 has-text-weight-normal">Line-It 节点编辑器.md</a>
+                    <a href="/Others/node-editor/" class="title has-link-black-ter is-size-6 has-text-weight-normal">Line-It 节点编辑器</a>
                     <p class="is-size-7 is-uppercase">
                         <a class="has-link-grey -link" href="/categories/Others/">Others</a>
                     </p>
@@ -731,65 +711,60 @@
                     目录
                 </h3>
                 <ul class="menu-list"><li>
-        <a class="is-flex" href="#1-线程和进程的区别">
+        <a class="is-flex" href="#作用">
         <!-- 目录是否自动编号 -->
         <!-- <span class="has-mr-6">1</span> -->
-        <span>1. 线程和进程的区别</span>
+        <span>作用</span>
         </a></li><li>
-        <a class="is-flex" href="#2-线程间通信">
+        <a class="is-flex" href="#使用">
         <!-- 目录是否自动编号 -->
         <!-- <span class="has-mr-6">2</span> -->
-        <span>2. 线程间通信</span>
+        <span>使用</span>
         </a></li><li>
-        <a class="is-flex" href="#3-线程的状态">
+        <a class="is-flex" href="#原理说明">
         <!-- 目录是否自动编号 -->
         <!-- <span class="has-mr-6">3</span> -->
-        <span>3. 线程的状态</span>
+        <span>原理说明</span>
         </a><ul class="menu-list"><li>
-        <a class="is-flex" href="#wait-和sleep-的区别">
+        <a class="is-flex" href="#set和get究竟是怎么回事">
         <!-- 目录是否自动编号 -->
         <!-- <span class="has-mr-6">3.1</span> -->
-        <span>wait()和sleep()的区别</span>
+        <span>set和get究竟是怎么回事</span>
+        </a></li><li>
+        <a class="is-flex" href="#map真的是map吗">
+        <!-- 目录是否自动编号 -->
+        <!-- <span class="has-mr-6">3.2</span> -->
+        <span>map真的是map吗</span>
+        </a></li><li>
+        <a class="is-flex" href="#ThreadLocalMap如何解决hash冲突">
+        <!-- 目录是否自动编号 -->
+        <!-- <span class="has-mr-6">3.3</span> -->
+        <span>ThreadLocalMap如何解决hash冲突</span>
         </a></li></ul></li><li>
-        <a class="is-flex" href="#4-start方法到底是什么">
+        <a class="is-flex" href="#内存泄漏问题">
         <!-- 目录是否自动编号 -->
         <!-- <span class="has-mr-6">4</span> -->
-        <span>4. start方法到底是什么</span>
+        <span>内存泄漏问题</span>
         </a></li><li>
-        <a class="is-flex" href="#4-线程池">
+        <a class="is-flex" href="#线程之间传递">
         <!-- 目录是否自动编号 -->
         <!-- <span class="has-mr-6">5</span> -->
-        <span>4. 线程池</span>
+        <span>线程之间传递</span>
+        </a></li><li>
+        <a class="is-flex" href="#常见场景">
+        <!-- 目录是否自动编号 -->
+        <!-- <span class="has-mr-6">6</span> -->
+        <span>常见场景</span>
         </a><ul class="menu-list"><li>
-        <a class="is-flex" href="#4-1-线程池的参数">
+        <a class="is-flex" href="#Spring的事务控制">
         <!-- 目录是否自动编号 -->
-        <!-- <span class="has-mr-6">5.1</span> -->
-        <span>4.1 线程池的参数</span>
+        <!-- <span class="has-mr-6">6.1</span> -->
+        <span>Spring的事务控制</span>
         </a></li><li>
-        <a class="is-flex" href="#4-2-常见线程池">
+        <a class="is-flex" href="#贴一个自己使用的场景：存放登录信息">
         <!-- 目录是否自动编号 -->
-        <!-- <span class="has-mr-6">5.2</span> -->
-        <span>4.2 常见线程池</span>
-        </a><ul class="menu-list"><li>
-        <a class="is-flex" href="#newFixedThreadPool">
-        <!-- 目录是否自动编号 -->
-        <!-- <span class="has-mr-6">5.2.1</span> -->
-        <span>newFixedThreadPool</span>
-        </a></li><li>
-        <a class="is-flex" href="#newSingleThreadExecutor">
-        <!-- 目录是否自动编号 -->
-        <!-- <span class="has-mr-6">5.2.2</span> -->
-        <span>newSingleThreadExecutor</span>
-        </a></li><li>
-        <a class="is-flex" href="#newCachedThreadPool">
-        <!-- 目录是否自动编号 -->
-        <!-- <span class="has-mr-6">5.2.3</span> -->
-        <span>newCachedThreadPool</span>
-        </a></li></ul></li><li>
-        <a class="is-flex" href="#4-3-线程池的线程数量怎么确定">
-        <!-- 目录是否自动编号 -->
-        <!-- <span class="has-mr-6">5.3</span> -->
-        <span>4.3 线程池的线程数量怎么确定</span>
+        <!-- <span class="has-mr-6">6.2</span> -->
+        <span>贴一个自己使用的场景：存放登录信息</span>
         </a></li></ul></li></ul>
             </div>
         </div>
@@ -804,16 +779,16 @@
         
         <article class="media">
             
-            <a href="/Others/node-editor.md/" class="media-left">
+            <a href="/Others/node-editor/" class="media-left">
                 <p class="image is-64x64">
-                    <img class="thumbnail" src="images/loading.gif" data-original="https://cdn.jsdelivr.net/gh/wjwABCDEFG/blog_img/img/20250401154214355.jpeg" alt="Line-It 节点编辑器.md">
+                    <img class="thumbnail" src="images/loading.gif" data-original="https://cdn.jsdelivr.net/gh/wjwABCDEFG/blog_img/img/20250401154214355.jpeg" alt="Line-It 节点编辑器">
                 </p>
             </a>
             
             <div class="media-content">
                 <div class="content">
                     <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2025-04-01T07:28:20.000Z">2025-04-01</time></div>
-                    <a href="/Others/node-editor.md/" class="title has-link-black-ter is-size-6 has-text-weight-normal">Line-It 节点编辑器.md</a>
+                    <a href="/Others/node-editor/" class="title has-link-black-ter is-size-6 has-text-weight-normal">Line-It 节点编辑器</a>
                     <p class="is-size-7 is-uppercase">
                         <a class="has-link-grey -link" href="/categories/Others/">Others</a>
                     </p>
@@ -912,7 +887,7 @@
             <div class="level-start has-text-centered-mobile">
                 <a class="footer-logo is-block has-mb-6" href="/">
                 
-                    <img src="images/loading.gif" data-original="https://cdn.jsdelivr.net/gh/wjwABCDEFG/blog_img/img/20210717231246.png" alt="线程和线程池" height="28">
+                    <img src="images/loading.gif" data-original="https://cdn.jsdelivr.net/gh/wjwABCDEFG/blog_img/img/20210717231246.png" alt="ThreadLocal" height="28">
                 
                 </a>
                 <p class="is-size-7">
