@@ -1,0 +1,1396 @@
+<!DOCTYPE html>
+<html  lang="zh">
+<head>
+    <meta charset="utf-8" />
+
+<meta name="generator" content="Hexo 4.2.1" />
+
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+
+<title>Spring入门笔记2 - 小温 blog</title>
+
+
+    <meta name="description" content="1. Spring整合junit注意：spring5.x必须对应junit4.12及以上版本，否则报init初始化错误 就是为了避免重复代码">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Spring入门笔记2">
+<meta property="og:url" content="https://wjw.today/Spring/Spring%E5%85%A5%E9%97%A8%E7%AC%94%E8%AE%B02/index.html">
+<meta property="og:site_name" content="小温 blog">
+<meta property="og:description" content="1. Spring整合junit注意：spring5.x必须对应junit4.12及以上版本，否则报init初始化错误 就是为了避免重复代码">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/wjwABCDEFG/blog_img/img/20210717185817.jpeg">
+<meta property="article:published_time" content="2020-03-20T07:56:18.000Z">
+<meta property="article:modified_time" content="2021-07-17T10:58:28.007Z">
+<meta property="article:author" content="wjw">
+<meta property="article:tag" content="开发">
+<meta property="article:tag" content="spring">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://cdn.jsdelivr.net/gh/wjwABCDEFG/blog_img/img/20210717185817.jpeg">
+
+
+
+
+
+
+
+<link rel="icon" href="/images/favicon.ico">
+
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.7.2/css/bulma.css">
+<link rel="stylesheet" href="https://cdn.bootcss.com/font-awesome/5.4.1/css/all.css">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Ubuntu:400,600|Source+Code+Pro">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@9.12.0/styles/atom-one-dark.css">
+
+
+    
+    
+<style>body>.footer,body>.navbar,body>.section{opacity:0}</style>
+
+    
+    
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/lightgallery@1.6.8/dist/css/lightgallery.min.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/justifiedGallery@3.7.0/dist/css/justifiedGallery.min.css">
+
+    
+    
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/outdatedbrowser@1.1.5/outdatedbrowser/outdatedbrowser.min.css">
+
+    
+    
+    
+    
+<link rel="stylesheet" href="/css/back-to-top.css">
+
+    
+    
+    
+    
+    
+    
+    
+    <link rel="stylesheet" href="/css/progressbar.css">
+<script src="https://cdn.jsdelivr.net/npm/pace-js@1.0.2/pace.min.js"></script>
+    
+    <script async="" src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+    
+
+
+<link rel="stylesheet" href="/css/style.css">
+</head>
+<body class="is-3-column">
+    <nav class="navbar navbar-main">
+    <div class="container">
+        <div class="navbar-brand is-flex-center">
+            <a class="navbar-item navbar-logo" href="/">
+            
+                <img src="images/loading.gif" data-original="https://cdn.jsdelivr.net/gh/wjwABCDEFG/blog_img/img/20210717231246.png" alt="Spring入门笔记2" height="28">
+            
+            </a>
+        </div>
+        <div class="navbar-menu">
+            
+            <div class="navbar-start">
+                
+                <a class="navbar-item"
+                href="/">主页</a>
+                
+                <a class="navbar-item"
+                href="/archives">归档</a>
+                
+                <a class="navbar-item"
+                href="/categories">分类</a>
+                
+                <a class="navbar-item"
+                href="/tags">标签</a>
+                
+                <a class="navbar-item"
+                href="/about">关于</a>
+                
+            </div>
+            
+            <div class="navbar-end">
+                
+                    
+                    <a class="navbar-item" target="_blank" rel="noopener" title="View My GitHub" href="https://github.com/wjwABCDEFG">
+                        
+                        <i class="fab fa-github"></i>
+                        
+                    </a>
+                    
+                
+                
+                <a class="navbar-item is-hidden-tablet catalogue" title="目录" href="javascript:;">
+                    <i class="fas fa-list-ul"></i>
+                </a>
+                
+                
+                <a class="navbar-item search" title="搜索" href="javascript:;">
+                    <i class="fas fa-search"></i>
+                </a>
+                
+            </div>
+        </div>
+    </div>
+</nav>
+    
+    <section class="section">
+        <div class="container">
+            <div class="columns">
+                <div class="column is-8-tablet is-8-desktop is-6-widescreen has-order-2 column-main">
+<div class="card">
+    
+    <div class="card-image">
+        <span  class="image is-7by1">
+            <img class="thumbnail" src="images/loading.gif" data-original="https://cdn.jsdelivr.net/gh/wjwABCDEFG/blog_img/img/20210717185817.jpeg" alt="Spring入门笔记2">
+        </span>
+    </div>
+    
+    <div class="card-content article ">
+        
+        <div class="level article-meta is-size-7 is-uppercase is-mobile is-overflow-x-auto">
+            <div class="level-left">
+                <time class="level-item has-text-grey" datetime="2020-03-20T07:56:18.000Z">2020-03-20</time>
+                
+                <div class="level-item">
+                <a class="has-link-grey -link" href="/categories/Spring/">Spring</a>
+                </div>
+                
+                
+                <span class="level-item has-text-grey">
+                    
+                    
+                    28 分钟 读完 (大约 4206 个字)
+                </span>
+                
+                
+                <span class="level-item has-text-grey" id="busuanzi_container_page_pv">
+                    <i class="far fa-eye"></i>
+                    <span id="busuanzi_value_page_pv">0</span>次访问
+                </span>
+                
+            </div>
+        </div>
+        
+        <h1 class="title is-size-3 is-size-4-mobile has-text-weight-normal">
+            
+                Spring入门笔记2
+            
+        </h1>
+        <div class="content">
+            <h1 id="1-Spring整合junit"><a href="#1-Spring整合junit" class="headerlink" title="1. Spring整合junit"></a>1. Spring整合junit</h1><p><strong>注意：spring5.x必须对应junit4.12及以上版本，否则报init初始化错误</strong></p>
+<p>就是为了避免重复代码</p>
+<p><img src="images/loading.gif" data-original="https://cdn.jsdelivr.net/gh/wjwABCDEFG/blog_img/img/20210717185023.png" alt="这些写一次就好了.png"></p>
+<a id="more"></a>
+
+<p>其实可以用junit的注解@Before去做的，但是公司开发的时候开发工程师和测试工程师时两个人，测试工程师只关注service.findAll()这个接口，对于上面红色框框出的代码，可能测试工程师不懂spring，所以必须由开发工程师写，但是开发又不写@before代码块，只写这个空测试类</p>
+<p>所以可以通过注解/xml的方式在空类上面创建ioc容器</p>
+<br/>
+
+<ol>
+<li>导坐标</li>
+</ol>
+<p><img src="images/loading.gif" data-original="https://cdn.jsdelivr.net/gh/wjwABCDEFG/blog_img/img/20210717185030.png" alt=""></p>
+<br/>
+
+<ol start="2">
+<li>测试类上方加注解</li>
+</ol>
+<p><code>@RunWith(SpringJUnit4ClassRunner.class)</code></p>
+<br/>
+
+<ol start="3">
+<li>告知spring的运行器用的是注解还是xml</li>
+</ol>
+<p>@ContextConfiguration</p>
+<p>两个属性：locations：指定xml的位置，记得加上classpath:</p>
+<p>classes：指定注解类所在位置</p>
+<p><img src="images/loading.gif" data-original="https://cdn.jsdelivr.net/gh/wjwABCDEFG/blog_img/img/20210717185034.png" alt="步骤2 3示意图"></p>
+<br/>
+
+<ol start="4">
+<li>注入</li>
+</ol>
+<p><img src="images/loading.gif" data-original="https://cdn.jsdelivr.net/gh/wjwABCDEFG/blog_img/img/20210717185307.png" alt="注入"></p>
+<br/>
+
+<h1 id="2-Spring中的AOP"><a href="#2-Spring中的AOP" class="headerlink" title="2. Spring中的AOP"></a>2. Spring中的AOP</h1><h2 id="2-1-AOP的概念以及作用（了解，代码看看就行）"><a href="#2-1-AOP的概念以及作用（了解，代码看看就行）" class="headerlink" title="2.1 AOP的概念以及作用（了解，代码看看就行）"></a>2.1 AOP的概念以及作用（了解，代码看看就行）</h2><p>AOP的本质是动态代理，就是方法增强，比如原来有一个方法funA()，里面输出了一句”world”，现在通过AOP/动态代理等方式对funA()进行改造，使得可以在执行funA之前先输出一句”hello”，在执行funA之后输出”!!!!”，这就是方法增强。</p>
+<p>为什么要这么做呢？在实际开发中体现为：我们在业务层编写的时候只需要关注业务逻辑，而不用对每个方法都</p>
+<p>开启事务</p>
+<p>业务逻辑</p>
+<p>提交事务(正常)</p>
+<p>回滚事务(异常)</p>
+<p>释放连接</p>
+<p> <img src="images/loading.gif" data-original="https://cdn.jsdelivr.net/gh/wjwABCDEFG/blog_img/img/20210717185316.png" alt=""></p>
+<p>如果每个方法都要这样写就太麻烦了，因此我们通过aop来实现对业务层的方法增强，之后事务管理器负责：</p>
+<p>开启事务</p>
+<p>提交事务(正常)</p>
+<p>回滚事务(异常)</p>
+<p>释放连接</p>
+<p>而这样依赖业务层只有：</p>
+<p>业务逻辑</p>
+<br/>
+
+<p>使用AOP/动态代理后</p>
+<p><img src="images/loading.gif" data-original="https://cdn.jsdelivr.net/gh/wjwABCDEFG/blog_img/img/20210717185320.png" alt=""></p>
+<p>而事务的管理交给代理类（这里先用动态代理介绍方法增强，AOP原理相同，<strong>随便看一下代码，后期我们使用spring的事务管理器，就不用自己写代码了</strong>）</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * 用于创建Service的代理对象的工厂</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">BeanFactory</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">private</span> AccountService accountService;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">final</span> <span class="keyword">void</span> <span class="title">setAccountService</span><span class="params">(AccountService accountService)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">this</span>.accountService = accountService;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">private</span> TransactionManager txManager;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">setTxManager</span><span class="params">(TransactionManager txManager)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">this</span>.txManager = txManager;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> AccountService <span class="title">getAccountService</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> (AccountService) Proxy.newProxyInstance(accountService.getClass().getClassLoader(),</span><br><span class="line">                accountService.getClass().getInterfaces(),</span><br><span class="line">                <span class="keyword">new</span> InvocationHandler() &#123;</span><br><span class="line">                    <span class="comment">/**</span></span><br><span class="line"><span class="comment">                     * 添加事务的支持</span></span><br><span class="line"><span class="comment">                     * <span class="doctag">@param</span> proxy</span></span><br><span class="line"><span class="comment">                     * <span class="doctag">@param</span> method</span></span><br><span class="line"><span class="comment">                     * <span class="doctag">@param</span> args</span></span><br><span class="line"><span class="comment">                     * <span class="doctag">@return</span></span></span><br><span class="line"><span class="comment">                     * <span class="doctag">@throws</span> Throwable</span></span><br><span class="line"><span class="comment">                     */</span></span><br><span class="line">                    <span class="function"><span class="keyword">public</span> Object <span class="title">invoke</span><span class="params">(Object proxy, Method method, Object[] args)</span> <span class="keyword">throws</span> Throwable </span>&#123;</span><br><span class="line">                        Object returnValue = <span class="keyword">null</span>;</span><br><span class="line">                        <span class="keyword">try</span> &#123;</span><br><span class="line">                            <span class="comment">//1.开启事务</span></span><br><span class="line">                            txManager.beginTransaction();</span><br><span class="line">                            <span class="comment">//2.执行事务</span></span><br><span class="line">                            returnValue = method.invoke(accountService, args);</span><br><span class="line">                            <span class="comment">//3.提交事务</span></span><br><span class="line">                            txManager.commit();</span><br><span class="line">                            <span class="comment">//4.返回结果</span></span><br><span class="line">                            <span class="keyword">return</span> returnValue;</span><br><span class="line">                        &#125; <span class="keyword">catch</span> (Exception e) &#123;</span><br><span class="line">                            <span class="comment">//5.回滚操作</span></span><br><span class="line">                            txManager.rollback();</span><br><span class="line">                            <span class="keyword">throw</span> <span class="keyword">new</span> RuntimeException(e);</span><br><span class="line">                        &#125; <span class="keyword">finally</span> &#123;</span><br><span class="line">                            <span class="comment">//6.释放连接</span></span><br><span class="line">                            txManager.release();</span><br><span class="line">                        &#125;</span><br><span class="line">                    &#125;</span><br><span class="line">                &#125;);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<br/>
+
+<p>至于里面的txManager我们用的是自己写的事务管理器（<strong>随便看一下代码，后期我们使用spring的事务管理器，就不用自己写代码了</strong>）</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * 和事务管理相关的工具类:开启事务。提交事务，回滚事务和释放连接</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">TransactionManager</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">private</span> ConnectionUtils connectionUtils;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">setConnectionUtils</span><span class="params">(ConnectionUtils connectionUtils)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">this</span>.connectionUtils = connectionUtils;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * 开启事务</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">beginTransaction</span><span class="params">()</span></span>&#123;</span><br><span class="line">        <span class="keyword">try</span> &#123;</span><br><span class="line">            connectionUtils.getThreadConnection().setAutoCommit(<span class="keyword">false</span>);</span><br><span class="line">        &#125;<span class="keyword">catch</span> (Exception e)&#123;</span><br><span class="line">            e.printStackTrace();</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * 提交事务</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">commit</span><span class="params">()</span></span>&#123;</span><br><span class="line">        <span class="keyword">try</span> &#123;</span><br><span class="line">            connectionUtils.getThreadConnection().commit();</span><br><span class="line">        &#125;<span class="keyword">catch</span> (Exception e)&#123;</span><br><span class="line">            e.printStackTrace();</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * 回滚事务</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">rollback</span><span class="params">()</span></span>&#123;</span><br><span class="line">        <span class="keyword">try</span> &#123;</span><br><span class="line">            connectionUtils.getThreadConnection().rollback();</span><br><span class="line">        &#125;<span class="keyword">catch</span> (Exception e)&#123;</span><br><span class="line">            e.printStackTrace();</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * 释放连接</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">release</span><span class="params">()</span></span>&#123;</span><br><span class="line">        <span class="keyword">try</span> &#123;</span><br><span class="line">            connectionUtils.getThreadConnection().close();  <span class="comment">//还回连接池中</span></span><br><span class="line">            connectionUtils.removeConnection();</span><br><span class="line">        &#125;<span class="keyword">catch</span> (Exception e)&#123;</span><br><span class="line">            e.printStackTrace();</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<br/>
+
+<p>同时，为了解决事务和线程没有绑定，导致有异常不能回滚的现象，我们还编写了一个事务和线程绑定的类（<strong>随便看看就行，后期我们用spring自带的事务管理器，避免了这个问题</strong>）</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/*</span></span><br><span class="line"><span class="comment"> * 在两次dao.update之间抛出或者主动写一个错误如(int i = 1 / 0;)</span></span><br><span class="line"><span class="comment"> * 则第一个update提交了，第二个没有，导致一个账户钱减少了另一个账户前却没有增加。这不是我们想要的效果，我们想让前面的操作事务回滚。</span></span><br><span class="line"><span class="comment"> * 并不是传统意义上的事务回滚，事务回滚指的是update方法内部错误，回到没有update之前的状态。</span></span><br><span class="line"><span class="comment"> * 这里指的是包括前面3次事务已经提交并且成功，后面的事务连提交都没有。</span></span><br><span class="line"><span class="comment"> * 所以错不在事务，而在连接。</span></span><br><span class="line"><span class="comment"> * 并不是没有事务（没有事务的话save,find方法也不能提交），原因是因为dao方法获取了4次连接，每个connection都有自己的事务。</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * 在service中将connection和线程绑定，从而使一个线程中只有一个能控制事务的connection对象，要么一起发生，要么都不发生。</span></span><br><span class="line"><span class="comment"> * 事务的控制应该是在业务层而不是在持久层</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@author</span> wjw</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">ConnectionUtils</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">private</span> ThreadLocal&lt;Connection&gt; tl = <span class="keyword">new</span> ThreadLocal&lt;Connection&gt;();</span><br><span class="line"></span><br><span class="line">    <span class="keyword">private</span> DataSource dataSource;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">setDataSource</span><span class="params">(DataSource dataSource)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">this</span>.dataSource = dataSource;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> Connection <span class="title">getThreadConnection</span><span class="params">()</span></span>&#123;</span><br><span class="line">        <span class="keyword">try</span> &#123;</span><br><span class="line">            <span class="comment">//1.先从ThreadLocal上获取</span></span><br><span class="line">            Connection conn = tl.get();</span><br><span class="line">            <span class="comment">//2.判断当前线程上是否有连接</span></span><br><span class="line">            <span class="keyword">if</span> (conn == <span class="keyword">null</span>) &#123;</span><br><span class="line">                <span class="comment">//3.从数据源中获取一个连接，并且存入ThreadLocal中</span></span><br><span class="line">                conn = dataSource.getConnection();</span><br><span class="line">                tl.set(conn);</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="comment">//返回当前线程上的连接</span></span><br><span class="line">            <span class="keyword">return</span> conn;</span><br><span class="line">        &#125;<span class="keyword">catch</span> (Exception e)&#123;</span><br><span class="line">            <span class="keyword">throw</span> <span class="keyword">new</span> RuntimeException(e);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * 把连接和线程解绑</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">removeConnection</span><span class="params">()</span></span>&#123;</span><br><span class="line">        tl.remove();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<br/>
+
+<h3 id="2-1-1-动态代理的写法（了解，小插曲）"><a href="#2-1-1-动态代理的写法（了解，小插曲）" class="headerlink" title="2.1.1 动态代理的写法（了解，小插曲）"></a>2.1.1 动态代理的写法（了解，小插曲）</h3><p>有人说，哎呀 我不会写动态代理，这又是匿名内部类的又是什么Proxy</p>
+<p>我说你会你就会，你认真看啊</p>
+<p><img src="images/loading.gif" data-original="https://cdn.jsdelivr.net/gh/wjwABCDEFG/blog_img/img/20210717185331.png" alt="动态代理"></p>
+<p>其实要记的就只有</p>
+<ol>
+<li><p>你得知道动态代理是什么类下的什么方法吧：<code>Proxy.newProxyInstance()</code></p>
+</li>
+<li><p>参数列表其实是不用记的，你敲下1就会有提示，按类型填就行了，比如他会告诉你第一个参数是类加载器，你只需要记住填的是<code>“要增强的方法的类”</code>的类加载器，就不会错，第二个也是，你只要记住是<code>“要增强的方法的类”</code>原本实现的接口就行</p>
+</li>
+<li><p><code>new InvocationHandler()</code>，这个是要记住的，你敲下前几个字母就会自动补全下面的invoke方法了</p>
+</li>
+<li><p>至于里面的方法，我们方法增强是为了事务管理，所以里面才写事务的相关代码，如果方法增强是为了别的，那就视情况而定呀，不是固定代码，<code>要注意的只有method.invoke()返回值是个Object的returnValue对象</code></p>
+</li>
+</ol>
+<br/>
+
+<p><code>关于动态代理的内容，在此不做过多的展开（单独做了动态代理笔记），只是为了说明方法增强是怎么回事，如何解决事务等方法重复代码的问题，以及了解AOP其实本质就是动态代理，实现了方法增强。</code></p>
+<br/>
+
+<h2 id="2-2-spring中基于xml的AOP配置步骤"><a href="#2-2-spring中基于xml的AOP配置步骤" class="headerlink" title="2.2 spring中基于xml的AOP配置步骤"></a>2.2 spring中基于xml的AOP配置步骤</h2><ol>
+<li><p>把通知Bean也交给spring来管理</p>
+</li>
+<li><p>使用aop:config标签表明开始AOP配置</p>
+</li>
+<li><p>使用aop:aspect标签表明配置切面</p>
+</li>
+</ol>
+<ul>
+<li><p>id：是给切面提供一个标识</p>
+</li>
+<li><p>ref：指定通知类bean的id</p>
+</li>
+</ul>
+<ol start="4">
+<li>在aop:aspect标签内部使用对应标签来配置通知的类型</li>
+</ol>
+<p>我们现在的示例是想在切入点方法执行前执行printLog，所以是前置通知</p>
+<p>aop:before：表示配置前置通知</p>
+<ul>
+<li><p>method属性：指定Logger类中哪个方法是前置通知</p>
+</li>
+<li><p>pointcut属性：指定切入点的表达式，指的是对业务层中哪些方法增强</p>
+</li>
+</ul>
+<br/>
+
+<h2 id="2-3-切入点表达式的写法："><a href="#2-3-切入点表达式的写法：" class="headerlink" title="2.3 切入点表达式的写法："></a>2.3 切入点表达式的写法：</h2><p>关键字：execution(表达式)</p>
+<p>表达式：访问修饰符 返回值 包名.包名.包名…类名.方法名(参数列表)</p>
+<ul>
+<li><p>标准写法：<code>public void com.wjw.service.impl.AccountServiceImpl.saveAccount()</code></p>
+</li>
+<li><p>访问修饰符可以省略：<code>void com.wjw.service.impl.AccountServiceImpl.saveAccount()</code></p>
+</li>
+<li><p>返回值可以使用通配符*表示任意返回值：<code>* com.wjw.service.impl.AccountServiceImpl.saveAccount()</code></p>
+</li>
+<li><p>包名可以用通配符表示任意包，但是有几级包（从com开始计算），就有多少个*.：<code>* *.*.*.*.AccountServiceImpl.saveAccount()</code></p>
+<p>或者可以使用*..表示当前包及其子包：<code>* *..AccountServiceImpl.saveAccount()</code></p>
+</li>
+<li><p>类名和方法名都可以用*来实现通配：<code>* *..*.*()</code></p>
+</li>
+<li><p>参数列表可以直接写数据类型：</p>
+</li>
+</ul>
+<p>&emsp;基本类型直接写名称：<code>* *..*.*(int)</code></p>
+<p>&emsp;引用类型写包名.类名：<code>* *..*.*(java.lang.String)</code></p>
+<p>&emsp;&emsp;可以实现通配：</p>
+<p>&emsp;&emsp;&emsp;可以用*实现通配，代表有参数且任意类型：<code>* *..*.*(*)</code></p>
+<p>&emsp;&emsp;&emsp;可以用..实现通配，有无参数都可以且可以任意类型：<code>* *..*.*(..)</code></p>
+<ul>
+<li><p>全通配写法：<code>* *..*.*(..)</code></p>
+<br/>
+
+</li>
+</ul>
+<p><strong>实际开发中常用切入点表达式写法都是切入到业务层下的所有方法：</strong><code>* com.wjw.service.impl.*.*(..)</code></p>
+<br/>
+
+<h2 id="2-4-通知类型"><a href="#2-4-通知类型" class="headerlink" title="2.4 通知类型"></a>2.4 通知类型</h2><p><code>&lt;aop:before&gt;</code>前置通知，在切入点方法执行前执行</p>
+<p><code>&lt;aop:after-returning&gt;</code>后置通知，在切入点正常执行后执行</p>
+<p><code>&lt;aop:after-throwing&gt;</code>异常通知，在切入点方法执行异常后执行（相当于catch）</p>
+<p><code>&lt;aop:after&gt;</code>最终通知，无论是否正常都会执行（相当于finally）</p>
+<p><img src="images/loading.gif" data-original="https://cdn.jsdelivr.net/gh/wjwABCDEFG/blog_img/img/20210717185337.png" alt="通知标签"></p>
+<p><code>&lt;aop:around&gt;</code>环绕通知，其实环绕通知就是上面所有通知的总和，在环绕通知中，<strong>代码写在哪里就是什么通知</strong>。Spring框架为我们提供了一个接口：<strong>ProceedingJoinPoint</strong>。该接口有一个方法<strong>proceed()</strong>，此方法就相当于明确调用切入点方法。该接口可以作为环绕通知的方法<strong>参数</strong></p>
+<p><img src="images/loading.gif" data-original="https://cdn.jsdelivr.net/gh/wjwABCDEFG/blog_img/img/20210717185343.png" alt="84MKTx.png"></p>
+<p>简单地说，spring的环绕通知就是我们可以用代码的方式写所有的通知，位置就是不同的方式。（其实就是动态代理本来的写法）</p>
+<br/>
+
+<h2 id="2-5-简化重复pointcut，可以单独抽取出来"><a href="#2-5-简化重复pointcut，可以单独抽取出来" class="headerlink" title="2.5 简化重复pointcut，可以单独抽取出来"></a>2.5 简化重复pointcut，可以单独抽取出来</h2><p><code>&lt;aop:pointcut&gt;</code>标签 id是唯一标识，expression就是原来的表达式</p>
+<p>原来表达式不再用pointcut而是用point-ref，值就是<code>&lt;aop:pointcut&gt;</code>的id</p>
+<p><img src="images/loading.gif" data-original="https://cdn.jsdelivr.net/gh/wjwABCDEFG/blog_img/img/20210717185353.png" alt=""></p>
+<p>也可以将<code>&lt;aop:pointcut&gt;</code>标签配置在<code>&lt;aop:aspect&gt;</code>外面，这样所有切面可用，<strong>注意：一定要在aspect前面</strong></p>
+<p><img src="images/loading.gif" data-original="https://cdn.jsdelivr.net/gh/wjwABCDEFG/blog_img/img/20210717185400.png" alt="位置"></p>
+<br/>
+
+<h1 id="3-注解方式AOP"><a href="#3-注解方式AOP" class="headerlink" title="3. 注解方式AOP"></a>3. 注解方式AOP</h1><h2 id="要使用注解AOP，必须如下配置"><a href="#要使用注解AOP，必须如下配置" class="headerlink" title="要使用注解AOP，必须如下配置"></a>要使用注解AOP，必须如下配置</h2><p><strong>要注意，这段约束在官网是没有现成的，先搜xmlns:aop的约束复制下来，再找xmlns:context找到红框中的三段复制下来</strong></p>
+<p><code>&lt;aop:aspectj-autoproxy&gt;</code>是开启注解AOP的钥匙</p>
+<p><img src="images/loading.gif" data-original="https://cdn.jsdelivr.net/gh/wjwABCDEFG/blog_img/img/20210717185409.png" alt=""></p>
+<br/>
+
+<p>切面类有这几点</p>
+<h2 id="3-1-Aspect"><a href="#3-1-Aspect" class="headerlink" title="3.1 @Aspect"></a>3.1 @Aspect</h2><p>类上方添加，表明这是一个切面</p>
+<br/>
+
+<h2 id="3-2-Pointcut"><a href="#3-2-Pointcut" class="headerlink" title="3.2 @Pointcut"></a>3.2 @Pointcut</h2><p>和<code>&lt;aop:pointcut&gt;</code>一样，代表一个表达式，注意写法是通过空函数的形式</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">@ Pointcut(“execution(“* com.wjw.service.impl.*.*(..)”)”)</span><br><span class="line"></span><br><span class="line">public void pt1()&#123;&#125;</span><br></pre></td></tr></table></figure>
+
+<br/>
+
+<h2 id="3-3-Before-“methodName-”"><a href="#3-3-Before-“methodName-”" class="headerlink" title="3.3 @Before(“methodName()”)"></a>3.3 @Before(“methodName()”)</h2><p>注意不要少了括号，前置通知</p>
+<br/>
+
+<h2 id="3-4-AfterRuturning-“methodName-”"><a href="#3-4-AfterRuturning-“methodName-”" class="headerlink" title="3.4 @AfterRuturning(“methodName()”)"></a>3.4 @AfterRuturning(“methodName()”)</h2><p>注意不要少了括号，后置通知</p>
+<br/>
+
+<h2 id="3-5-AfterThrowing-“methodName-”"><a href="#3-5-AfterThrowing-“methodName-”" class="headerlink" title="3.5 @AfterThrowing(“methodName()”)"></a>3.5 @AfterThrowing(“methodName()”)</h2><p>注意不要少了括号，异常通知</p>
+<br/>
+
+<h2 id="3-6-After-“methodName-”"><a href="#3-6-After-“methodName-”" class="headerlink" title="3.6 @After(“methodName()”)"></a>3.6 @After(“methodName()”)</h2><p>注意不要少了括号，最终通知</p>
+<p><img src="images/loading.gif" data-original="https://cdn.jsdelivr.net/gh/wjwABCDEFG/blog_img/img/20210717185415.png" alt=""></p>
+<br/>
+
+<h2 id="注意事项："><a href="#注意事项：" class="headerlink" title="注意事项："></a>注意事项：</h2><p><strong>spring的注解方式AOP的通知顺序是：前置  最终  后置/异常</strong></p>
+<p><img src="images/loading.gif" data-original="https://cdn.jsdelivr.net/gh/wjwABCDEFG/blog_img/img/20210717185423.png" alt=""></p>
+<p>最终通知的位置不对</p>
+<p><strong>而使用环绕通知的话，因为是自己写的，所以位置和xml还有理解中的是一致的</strong></p>
+<p><img src="images/loading.gif" data-original="https://cdn.jsdelivr.net/gh/wjwABCDEFG/blog_img/img/20210717185429.png" alt=""></p>
+<br/>
+
+<h2 id="完全不用XML的方式"><a href="#完全不用XML的方式" class="headerlink" title="完全不用XML的方式"></a>完全不用XML的方式</h2><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Configuration</span></span><br><span class="line"><span class="meta">@ComponentScan</span>(basePackages=<span class="string">"com.itheima"</span>)</span><br><span class="line"><span class="meta">@EnableAspectJAutoProxy</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">SpringConfiguration</span> </span>&#123;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>就是在“完全不用XML方式实现ioc”的那个配置类上方再加上@EnableAspectJAutoProxy</p>
+<br/>
+
+<h1 id="4-Spring自带的事务管理器：声明式事务控制"><a href="#4-Spring自带的事务管理器：声明式事务控制" class="headerlink" title="4. Spring自带的事务管理器：声明式事务控制"></a>4. Spring自带的事务管理器：声明式事务控制</h1><p>还记得之前“九.1”那个案例吗(翻回去看)，我们现在使用AOP代替了动态代理，同样解决了事务重复代码的问题，对事务控制可以抽取出来了</p>
+<p>可是，之前案例中的两个类是自己写的：</p>
+<p>TransactionManager：事务控制的类（包含提交，回滚等方法），自己写太不现实，我们现在要改用Spring自带的事务管理器。</p>
+<p>ConnectionUtils：这是之前为了防止异常无法回滚的问题而写的类，现在我们通过Spring自带的事务管理器，可以避免这个问题。</p>
+<br/>
+
+<h2 id="4-1-基于XML的声明式事务控制"><a href="#4-1-基于XML的声明式事务控制" class="headerlink" title="4.1 基于XML的声明式事务控制"></a>4.1 基于XML的声明式事务控制</h2><p>使用步骤：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">spring中基于xml的声明式事务控制基本步骤</span><br><span class="line">    1.配置事务管理器</span><br><span class="line">    2.配置事务通知</span><br><span class="line">        导入事务的约束，在data access里xmlns:tx，注意这里其实是包含了aop的，事务通知离不开aop</span><br><span class="line">        使用tx:advice标签配置事务通知</span><br><span class="line">            id：唯一标识</span><br><span class="line">            transactionManager：给事务通知提供一个事务管理器引用，注意不是ref</span><br><span class="line">    3.配置AOP中的通用切入点表达式</span><br><span class="line">    4.建立事务通知和切入点表达式的对应关系</span><br><span class="line">    5.配置事务的属性，在事务的通知tx:advice内部</span><br><span class="line">        isolation：用于指定事务的隔离级别，默认值是DEFAULT,表示使用数据库默认级别</span><br><span class="line">        propagation：用于指定事务的传播行为，默认值是REQUIRED，表示一定会有事务（增删改），查询方法用SUPPORTS</span><br><span class="line">        read-only：用于指定事务是否只读，只有查询方法才能设置为true，默认为false表示读写</span><br><span class="line">        rollback-for：用于指定一个异常，当该异常产生时事务回滚，产生其他异常时事务不回滚，没有默认值 表示任何异常都回滚</span><br><span class="line">        no-rollback-for：用于指定一个异常，当该异常产生时事务不回滚，产生其他异常时事务回滚，没有默认值 表示任何异常都回滚</span><br><span class="line">        timeout：用于指定事务超时时间，默认为-1表示永不超时，秒为单位</span><br></pre></td></tr></table></figure>
+
+<p>也就是说，对于前置通知是事务的开启，后置通知是事务的提交，异常通知是事务的回滚，最终通知是连接的释放这种基本上是固定操作</p>
+<p>spring封装了一个DataSourceTransactionManager自动完成，只要是在2中的transaction-manager中引用了这个类，那么就不必关注这几个操作了</p>
+<p>更多的是关注不同方法对于事务的处理（事务的属性）比如在上一个事务未完成前下一个事务是否可以读取（find就可以其他操作则不行）</p>
+<p><img src="images/loading.gif" data-original="https://cdn.jsdelivr.net/gh/wjwABCDEFG/blog_img/img/20210717185437.png" alt=""></p>
+<p>数据源还是原来的，也给出截图</p>
+<p><img src="images/loading.gif" data-original="https://cdn.jsdelivr.net/gh/wjwABCDEFG/blog_img/img/20210717185444.png" alt=""></p>
+<br/>
+
+<h2 id="4-2-基于注解的声明式事务控制"><a href="#4-2-基于注解的声明式事务控制" class="headerlink" title="4.2 基于注解的声明式事务控制"></a>4.2 基于注解的声明式事务控制</h2><p>使用步骤</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">spring中基于注解的声明式事务控制基本步骤</span><br><span class="line">1.配置事务管理器</span><br><span class="line">2.开启spring对注解事务的支持</span><br><span class="line">3.在需要事务支持的地方使用@Transactional注解(service层实现类上方)</span><br></pre></td></tr></table></figure>
+
+<p>惊喜的发现，由于spring的事务控制是写好的，所以连aop那些@Aspect啊@Before啊都不用了，spring知道执行之后commit，在异常之后AfterThrowing，只要@Transactional后所有方法都自动添加了事务</p>
+ <br/>
+
+<p>别忘了这些细节的东西</p>
+<p><img src="images/loading.gif" data-original="https://cdn.jsdelivr.net/gh/wjwABCDEFG/blog_img/img/20210717185454.png" alt="84QYCT.png"></p>
+<p><img src="images/loading.gif" data-original="https://cdn.jsdelivr.net/gh/wjwABCDEFG/blog_img/img/20210717185500.png" alt=""></p>
+<p>所以只能自己补上（@AutoWired可以不要，用的是xml）</p>
+<p><img src="images/loading.gif" data-original="https://cdn.jsdelivr.net/gh/wjwABCDEFG/blog_img/img/20210717185507.png" alt=""></p>
+<p><img src="images/loading.gif" data-original="https://cdn.jsdelivr.net/gh/wjwABCDEFG/blog_img/img/20210717185515.png" alt=""></p>
+<br/>
+
+<h2 id="4-3-纯注解的声明式事务控制"><a href="#4-3-纯注解的声明式事务控制" class="headerlink" title="4.3 纯注解的声明式事务控制"></a>4.3 纯注解的声明式事务控制</h2><p>算了，别整这些有的没的，反正也没人用</p>
+<br/>
+
+<h1 id="附录："><a href="#附录：" class="headerlink" title="附录："></a>附录：</h1><h2 id="ioc下通过继承JdbcDaoSupport如何注入数据源"><a href="#ioc下通过继承JdbcDaoSupport如何注入数据源" class="headerlink" title="ioc下通过继承JdbcDaoSupport如何注入数据源"></a>ioc下通过继承JdbcDaoSupport如何注入数据源</h2><p><img src="images/loading.gif" data-original="https://cdn.jsdelivr.net/gh/wjwABCDEFG/blog_img/img/20210717185520.png" alt=""></p>
+<p>这是由于类中使用的是继承方式</p>
+<p><img src="images/loading.gif" data-original="https://cdn.jsdelivr.net/gh/wjwABCDEFG/blog_img/img/20210717185527.png" alt=""></p>
+<p>事实上就自动获得了所有父类的方法，而父类的class文件里我们可以看到setDataSource方法，因此我们只要根据这个set方法设置dao的注入就好了</p>
+<p><img src="images/loading.gif" data-original="https://cdn.jsdelivr.net/gh/wjwABCDEFG/blog_img/img/20210717185536.png" alt=""></p>
+
+        </div>
+        
+        <div class="level is-size-7 is-uppercase">
+            <div class="level-start">
+                <div class="level-item">
+                    <span class="is-size-6 has-text-grey has-mr-7">#</span>
+                    <a class="has-link-grey -link" href="/tags/spring/" rel="tag">spring</a>, <a class="has-link-grey -link" href="/tags/%E5%BC%80%E5%8F%91/" rel="tag">开发</a>
+                </div>
+            </div>
+        </div>
+        
+        
+        
+    </div>
+</div>
+
+
+
+
+
+<div class="card card-transparent">
+    <div class="level post-navigation is-flex-wrap is-mobile">
+        
+        <div class="level-start">
+            <a class="level level-item has-link-grey  article-nav-prev" href="/Others/maven%E7%AC%94%E8%AE%B0/">
+                <i class="level-item fas fa-chevron-left"></i>
+                <span class="level-item">maven笔记</span>
+            </a>
+        </div>
+        
+        
+        <div class="level-end">
+            <a class="level level-item has-link-grey  article-nav-next" href="/Spring/Spring%E5%85%A5%E9%97%A8%E7%AC%94%E8%AE%B01/">
+                <span class="level-item">Spring入门笔记1</span>
+                <i class="level-item fas fa-chevron-right"></i>
+            </a>
+        </div>
+        
+    </div>
+</div>
+
+
+</div>
+                
+
+
+
+
+<div class="column is-4-tablet is-4-desktop is-3-widescreen  has-order-1 column-left ">
+    
+        
+<div class="card widget">
+    <div class="card-content">
+        <nav class="level">
+            <div class="level-item has-text-centered" style="flex-shrink: 1">
+                <div>
+                    
+                    <figure class="image is-128x128 has-mb-6">
+                        <img class="is-rounded" src="images/loading.gif" data-original="https://cdn.jsdelivr.net/gh/wjwABCDEFG/blog_img/img/20210717231547.jpeg" alt="wjwABCDEFG">
+                    </figure>
+                    
+                    <p class="is-size-4 is-block">
+                        wjwABCDEFG
+                    </p>
+                    
+                    
+                    
+                    <p class="is-size-6 is-flex is-flex-center has-text-grey">
+                        <i class="fas fa-map-marker-alt has-mr-7"></i>
+                        <span>Shaoguan, China</span>
+                    </p>
+                    
+                </div>
+            </div>
+        </nav>
+        <nav class="level is-mobile">
+            <div class="level-item has-text-centered is-marginless">
+                <div>
+                    <p class="heading">
+                        文章
+                    </p>
+                    <a href="/archives">
+                        <p class="title has-text-weight-normal">
+                            103
+                        </p>
+                    </a>
+                </div>
+            </div>
+            <div class="level-item has-text-centered is-marginless">
+                <div>
+                    <p class="heading">
+                        分类
+                    </p>
+                    <a href="/categories">
+                        <p class="title has-text-weight-normal">
+                            14
+                        </p>
+                    </a>
+                </div>
+            </div>
+            <div class="level-item has-text-centered is-marginless">
+                <div>
+                    <p class="heading">
+                        标签
+                    </p>
+                    <a href="/tags">
+                        <p class="title has-text-weight-normal">
+                            26
+                        </p>
+                    </a>
+                </div>
+            </div>
+        </nav>
+        
+        <div class="level">
+            <a class="level-item button is-link is-rounded" href="https://github.com/wjwABCDEFG" target="_blank" rel="noopener">
+                关注我</a>
+        </div>
+        
+        
+        
+    </div>
+</div>
+    
+        
+<div class="card widget">
+    <div class="card-content">
+        <div class="menu">
+            <h3 class="menu-label">
+                分类
+            </h3>
+            <ul class="menu-list">
+            <li>
+        <a class="level is-marginless" href="/categories/Java/">
+            <span class="level-start">
+                <span class="level-item">Java基础</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">7</span>
+            </span>
+        </a></li><li>
+        <a class="level is-marginless" href="/categories/Mysql/">
+            <span class="level-start">
+                <span class="level-item">Mysql</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">3</span>
+            </span>
+        </a></li><li>
+        <a class="level is-marginless" href="/categories/Others/">
+            <span class="level-start">
+                <span class="level-item">Others</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">8</span>
+            </span>
+        </a></li><li>
+        <a class="level is-marginless" href="/categories/Spring/">
+            <span class="level-start">
+                <span class="level-item">Spring</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">6</span>
+            </span>
+        </a></li><li>
+        <a class="level is-marginless" href="/categories/SpringCloud/">
+            <span class="level-start">
+                <span class="level-item">SpringCloud</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">4</span>
+            </span>
+        </a></li><li>
+        <a class="level is-marginless" href="/categories/util/">
+            <span class="level-start">
+                <span class="level-item">Util工具类</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">3</span>
+            </span>
+        </a></li><li>
+        <a class="level is-marginless" href="/categories/redis/">
+            <span class="level-start">
+                <span class="level-item">redis</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">1</span>
+            </span>
+        </a></li><li>
+        <a class="level is-marginless" href="/categories/frontend/">
+            <span class="level-start">
+                <span class="level-item">前端</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">3</span>
+            </span>
+        </a></li><li>
+        <a class="level is-marginless" href="/categories/algorithms/">
+            <span class="level-start">
+                <span class="level-item">数据结构和算法</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">60</span>
+            </span>
+        </a></li><li>
+        <a class="level is-marginless" href="/categories/games/">
+            <span class="level-start">
+                <span class="level-item">游戏和引擎</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">2</span>
+            </span>
+        </a></li><li>
+        <a class="level is-marginless" href="/categories/deeplearning/">
+            <span class="level-start">
+                <span class="level-item">玄学</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">1</span>
+            </span>
+        </a></li><li>
+        <a class="level is-marginless" href="/categories/life/">
+            <span class="level-start">
+                <span class="level-item">生活随笔</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">6</span>
+            </span>
+        </a></li><li>
+        <a class="level is-marginless" href="/categories/cs/">
+            <span class="level-start">
+                <span class="level-item">计算机基础</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">1</span>
+            </span>
+        </a></li><li>
+        <a class="level is-marginless" href="/categories/designpattern/">
+            <span class="level-start">
+                <span class="level-item">设计模式</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">1</span>
+            </span>
+        </a></li>
+            </ul>
+        </div>
+    </div>
+</div>
+    
+        <div class="card widget">
+    <div class="card-content">
+        <h3 class="menu-label">
+            标签云
+        </h3>
+        <a href="/tags/DL-ML/" style="font-size: 10px;">DL/ML</a> <a href="/tags/http/" style="font-size: 10px;">http</a> <a href="/tags/lintcode/" style="font-size: 10px;">lintcode</a> <a href="/tags/markdown/" style="font-size: 10px;">markdown</a> <a href="/tags/mysql/" style="font-size: 11.67px;">mysql</a> <a href="/tags/spring/" style="font-size: 11.67px;">spring</a> <a href="/tags/springcloud/" style="font-size: 10px;">springcloud</a> <a href="/tags/%E4%BA%8C%E5%88%86%E6%9F%A5%E6%89%BE/" style="font-size: 10px;">二分查找</a> <a href="/tags/%E5%89%91%E6%8C%87offer/" style="font-size: 10px;">剑指offer</a> <a href="/tags/%E5%8A%9B%E6%89%A3/" style="font-size: 20px;">力扣</a> <a href="/tags/%E5%8A%A0%E5%AF%86/" style="font-size: 10px;">加密</a> <a href="/tags/%E5%8A%A8%E6%80%81%E8%A7%84%E5%88%92/" style="font-size: 13.33px;">动态规划</a> <a href="/tags/%E5%8D%95%E8%B0%83%E6%A0%88/" style="font-size: 15px;">单调栈</a> <a href="/tags/%E5%9B%9E%E6%BA%AF/" style="font-size: 16.67px;">回溯</a> <a href="/tags/%E5%AD%97%E7%AC%A6%E4%B8%B2/" style="font-size: 10px;">字符串</a> <a href="/tags/%E5%AD%A6%E4%B9%A0%E8%AE%B0%E5%BD%95/" style="font-size: 10px;">学习记录</a> <a href="/tags/%E5%BC%80%E5%8F%91/" style="font-size: 18.33px;">开发</a> <a href="/tags/%E6%8E%92%E5%BA%8F/" style="font-size: 10px;">排序</a> <a href="/tags/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/" style="font-size: 13.33px;">数据结构</a> <a href="/tags/%E6%A0%88/" style="font-size: 10px;">栈</a> <a href="/tags/%E6%A0%91/" style="font-size: 15px;">树</a> <a href="/tags/%E6%B8%B8%E6%88%8F%E5%92%8C%E5%BC%95%E6%93%8E/" style="font-size: 11.67px;">游戏和引擎</a> <a href="/tags/%E7%AC%94%E8%AF%95/" style="font-size: 10px;">笔试</a> <a href="/tags/%E7%AC%94%E8%AF%95%E9%9D%A2%E8%AF%95/" style="font-size: 13.33px;">笔试面试</a> <a href="/tags/%E7%AE%97%E6%B3%95/" style="font-size: 10px;">算法</a> <a href="/tags/%E9%80%92%E5%BD%92/" style="font-size: 10px;">递归</a>
+    </div>
+</div>
+    
+    
+        <div class="column-right-shadow is-hidden-widescreen is-sticky">
+        
+            
+
+    <div class="card widget" id="toc">
+        <div class="card-content">
+            <div class="menu">
+                <h3 class="menu-label">
+                    目录
+                </h3>
+                <ul class="menu-list"><li>
+        <a class="is-flex" href="#1-Spring整合junit">
+        <!-- 目录是否自动编号 -->
+        <!-- <span class="has-mr-6">1</span> -->
+        <span>1. Spring整合junit</span>
+        </a></li><li>
+        <a class="is-flex" href="#2-Spring中的AOP">
+        <!-- 目录是否自动编号 -->
+        <!-- <span class="has-mr-6">2</span> -->
+        <span>2. Spring中的AOP</span>
+        </a><ul class="menu-list"><li>
+        <a class="is-flex" href="#2-1-AOP的概念以及作用（了解，代码看看就行）">
+        <!-- 目录是否自动编号 -->
+        <!-- <span class="has-mr-6">2.1</span> -->
+        <span>2.1 AOP的概念以及作用（了解，代码看看就行）</span>
+        </a><ul class="menu-list"><li>
+        <a class="is-flex" href="#2-1-1-动态代理的写法（了解，小插曲）">
+        <!-- 目录是否自动编号 -->
+        <!-- <span class="has-mr-6">2.1.1</span> -->
+        <span>2.1.1 动态代理的写法（了解，小插曲）</span>
+        </a></li></ul></li><li>
+        <a class="is-flex" href="#2-2-spring中基于xml的AOP配置步骤">
+        <!-- 目录是否自动编号 -->
+        <!-- <span class="has-mr-6">2.2</span> -->
+        <span>2.2 spring中基于xml的AOP配置步骤</span>
+        </a></li><li>
+        <a class="is-flex" href="#2-3-切入点表达式的写法：">
+        <!-- 目录是否自动编号 -->
+        <!-- <span class="has-mr-6">2.3</span> -->
+        <span>2.3 切入点表达式的写法：</span>
+        </a></li><li>
+        <a class="is-flex" href="#2-4-通知类型">
+        <!-- 目录是否自动编号 -->
+        <!-- <span class="has-mr-6">2.4</span> -->
+        <span>2.4 通知类型</span>
+        </a></li><li>
+        <a class="is-flex" href="#2-5-简化重复pointcut，可以单独抽取出来">
+        <!-- 目录是否自动编号 -->
+        <!-- <span class="has-mr-6">2.5</span> -->
+        <span>2.5 简化重复pointcut，可以单独抽取出来</span>
+        </a></li></ul></li><li>
+        <a class="is-flex" href="#3-注解方式AOP">
+        <!-- 目录是否自动编号 -->
+        <!-- <span class="has-mr-6">3</span> -->
+        <span>3. 注解方式AOP</span>
+        </a><ul class="menu-list"><li>
+        <a class="is-flex" href="#要使用注解AOP，必须如下配置">
+        <!-- 目录是否自动编号 -->
+        <!-- <span class="has-mr-6">3.1</span> -->
+        <span>要使用注解AOP，必须如下配置</span>
+        </a></li><li>
+        <a class="is-flex" href="#3-1-Aspect">
+        <!-- 目录是否自动编号 -->
+        <!-- <span class="has-mr-6">3.2</span> -->
+        <span>3.1 @Aspect</span>
+        </a></li><li>
+        <a class="is-flex" href="#3-2-Pointcut">
+        <!-- 目录是否自动编号 -->
+        <!-- <span class="has-mr-6">3.3</span> -->
+        <span>3.2 @Pointcut</span>
+        </a></li><li>
+        <a class="is-flex" href="#3-3-Before-“methodName-”">
+        <!-- 目录是否自动编号 -->
+        <!-- <span class="has-mr-6">3.4</span> -->
+        <span>3.3 @Before(“methodName()”)</span>
+        </a></li><li>
+        <a class="is-flex" href="#3-4-AfterRuturning-“methodName-”">
+        <!-- 目录是否自动编号 -->
+        <!-- <span class="has-mr-6">3.5</span> -->
+        <span>3.4 @AfterRuturning(“methodName()”)</span>
+        </a></li><li>
+        <a class="is-flex" href="#3-5-AfterThrowing-“methodName-”">
+        <!-- 目录是否自动编号 -->
+        <!-- <span class="has-mr-6">3.6</span> -->
+        <span>3.5 @AfterThrowing(“methodName()”)</span>
+        </a></li><li>
+        <a class="is-flex" href="#3-6-After-“methodName-”">
+        <!-- 目录是否自动编号 -->
+        <!-- <span class="has-mr-6">3.7</span> -->
+        <span>3.6 @After(“methodName()”)</span>
+        </a></li><li>
+        <a class="is-flex" href="#注意事项：">
+        <!-- 目录是否自动编号 -->
+        <!-- <span class="has-mr-6">3.8</span> -->
+        <span>注意事项：</span>
+        </a></li><li>
+        <a class="is-flex" href="#完全不用XML的方式">
+        <!-- 目录是否自动编号 -->
+        <!-- <span class="has-mr-6">3.9</span> -->
+        <span>完全不用XML的方式</span>
+        </a></li></ul></li><li>
+        <a class="is-flex" href="#4-Spring自带的事务管理器：声明式事务控制">
+        <!-- 目录是否自动编号 -->
+        <!-- <span class="has-mr-6">4</span> -->
+        <span>4. Spring自带的事务管理器：声明式事务控制</span>
+        </a><ul class="menu-list"><li>
+        <a class="is-flex" href="#4-1-基于XML的声明式事务控制">
+        <!-- 目录是否自动编号 -->
+        <!-- <span class="has-mr-6">4.1</span> -->
+        <span>4.1 基于XML的声明式事务控制</span>
+        </a></li><li>
+        <a class="is-flex" href="#4-2-基于注解的声明式事务控制">
+        <!-- 目录是否自动编号 -->
+        <!-- <span class="has-mr-6">4.2</span> -->
+        <span>4.2 基于注解的声明式事务控制</span>
+        </a></li><li>
+        <a class="is-flex" href="#4-3-纯注解的声明式事务控制">
+        <!-- 目录是否自动编号 -->
+        <!-- <span class="has-mr-6">4.3</span> -->
+        <span>4.3 纯注解的声明式事务控制</span>
+        </a></li></ul></li><li>
+        <a class="is-flex" href="#附录：">
+        <!-- 目录是否自动编号 -->
+        <!-- <span class="has-mr-6">5</span> -->
+        <span>附录：</span>
+        </a><ul class="menu-list"><li>
+        <a class="is-flex" href="#ioc下通过继承JdbcDaoSupport如何注入数据源">
+        <!-- 目录是否自动编号 -->
+        <!-- <span class="has-mr-6">5.1</span> -->
+        <span>ioc下通过继承JdbcDaoSupport如何注入数据源</span>
+        </a></li></ul></li></ul>
+            </div>
+        </div>
+    </div>
+
+        
+            <div class="card widget">
+    <div class="card-content">
+        <h3 class="menu-label">
+            推荐阅读
+        </h3>
+        
+        <article class="media">
+            
+            <a href="/Others/node-editor.md/" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="images/loading.gif" data-original="https://cdn.jsdelivr.net/gh/wjwABCDEFG/blog_img/img/20250401154214355.jpeg" alt="Line-It 节点编辑器.md">
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2025-04-01T07:28:20.000Z">2025-04-01</time></div>
+                    <a href="/Others/node-editor.md/" class="title has-link-black-ter is-size-6 has-text-weight-normal">Line-It 节点编辑器.md</a>
+                    <p class="is-size-7 is-uppercase">
+                        <a class="has-link-grey -link" href="/categories/Others/">Others</a>
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+        <article class="media">
+            
+            <a href="/games/Unity3D-note/" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="images/loading.gif" data-original="https://cdn.jsdelivr.net/gh/wjwABCDEFG/blog_img/img/20210728004637.jpg" alt="Unity3D学习笔记">
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2021-07-28T12:42:07.000Z">2021-07-28</time></div>
+                    <a href="/games/Unity3D-note/" class="title has-link-black-ter is-size-6 has-text-weight-normal">Unity3D学习笔记</a>
+                    <p class="is-size-7 is-uppercase">
+                        <a class="has-link-grey -link" href="/categories/games/">游戏和引擎</a>
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+        <article class="media">
+            
+            <a href="/life/%E4%B8%BA%E6%AF%95%E4%B8%9A%E5%81%9A%E5%87%86%E5%A4%87/" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="images/loading.gif" data-original="https://cdn.jsdelivr.net/gh/wjwABCDEFG/blog_img/img/20210717225951.jpeg" alt="为毕业做准备">
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2021-03-31T13:13:32.000Z">2021-03-31</time></div>
+                    <a href="/life/%E4%B8%BA%E6%AF%95%E4%B8%9A%E5%81%9A%E5%87%86%E5%A4%87/" class="title has-link-black-ter is-size-6 has-text-weight-normal">为毕业做准备</a>
+                    <p class="is-size-7 is-uppercase">
+                        <a class="has-link-grey -link" href="/categories/life/">生活随笔</a>
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+        <article class="media">
+            
+            <a href="/life/mhxy-experience/" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="images/loading.gif" data-original="https://cdn.jsdelivr.net/gh/wjwABCDEFG/blog_img/img/20210717223725.png" alt="梦幻西游游戏体验">
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2021-03-31T08:29:35.000Z">2021-03-31</time></div>
+                    <a href="/life/mhxy-experience/" class="title has-link-black-ter is-size-6 has-text-weight-normal">梦幻西游游戏体验</a>
+                    <p class="is-size-7 is-uppercase">
+                        <a class="has-link-grey -link" href="/categories/life/">生活随笔</a>
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+        <article class="media">
+            
+            <a href="/games/3DMath-Primerfor-Graphics-and-Game-Development-note/" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="images/loading.gif" data-original="https://cdn.jsdelivr.net/gh/wjwABCDEFG/blog_img/img/20210717223435.jpeg" alt="3D数学基础图形与游戏研发笔记">
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2021-03-06T10:55:07.000Z">2021-03-06</time></div>
+                    <a href="/games/3DMath-Primerfor-Graphics-and-Game-Development-note/" class="title has-link-black-ter is-size-6 has-text-weight-normal">3D数学基础图形与游戏研发笔记</a>
+                    <p class="is-size-7 is-uppercase">
+                        <a class="has-link-grey -link" href="/categories/games/">游戏和引擎</a>
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+    </div>
+</div>
+        
+        </div>
+    
+</div>
+
+                
+
+
+
+
+<div class="column is-4-tablet is-4-desktop is-3-widescreen is-hidden-touch is-hidden-desktop-only has-order-3 column-right is-sticky">
+    
+        
+
+    <div class="card widget" id="toc">
+        <div class="card-content">
+            <div class="menu">
+                <h3 class="menu-label">
+                    目录
+                </h3>
+                <ul class="menu-list"><li>
+        <a class="is-flex" href="#1-Spring整合junit">
+        <!-- 目录是否自动编号 -->
+        <!-- <span class="has-mr-6">1</span> -->
+        <span>1. Spring整合junit</span>
+        </a></li><li>
+        <a class="is-flex" href="#2-Spring中的AOP">
+        <!-- 目录是否自动编号 -->
+        <!-- <span class="has-mr-6">2</span> -->
+        <span>2. Spring中的AOP</span>
+        </a><ul class="menu-list"><li>
+        <a class="is-flex" href="#2-1-AOP的概念以及作用（了解，代码看看就行）">
+        <!-- 目录是否自动编号 -->
+        <!-- <span class="has-mr-6">2.1</span> -->
+        <span>2.1 AOP的概念以及作用（了解，代码看看就行）</span>
+        </a><ul class="menu-list"><li>
+        <a class="is-flex" href="#2-1-1-动态代理的写法（了解，小插曲）">
+        <!-- 目录是否自动编号 -->
+        <!-- <span class="has-mr-6">2.1.1</span> -->
+        <span>2.1.1 动态代理的写法（了解，小插曲）</span>
+        </a></li></ul></li><li>
+        <a class="is-flex" href="#2-2-spring中基于xml的AOP配置步骤">
+        <!-- 目录是否自动编号 -->
+        <!-- <span class="has-mr-6">2.2</span> -->
+        <span>2.2 spring中基于xml的AOP配置步骤</span>
+        </a></li><li>
+        <a class="is-flex" href="#2-3-切入点表达式的写法：">
+        <!-- 目录是否自动编号 -->
+        <!-- <span class="has-mr-6">2.3</span> -->
+        <span>2.3 切入点表达式的写法：</span>
+        </a></li><li>
+        <a class="is-flex" href="#2-4-通知类型">
+        <!-- 目录是否自动编号 -->
+        <!-- <span class="has-mr-6">2.4</span> -->
+        <span>2.4 通知类型</span>
+        </a></li><li>
+        <a class="is-flex" href="#2-5-简化重复pointcut，可以单独抽取出来">
+        <!-- 目录是否自动编号 -->
+        <!-- <span class="has-mr-6">2.5</span> -->
+        <span>2.5 简化重复pointcut，可以单独抽取出来</span>
+        </a></li></ul></li><li>
+        <a class="is-flex" href="#3-注解方式AOP">
+        <!-- 目录是否自动编号 -->
+        <!-- <span class="has-mr-6">3</span> -->
+        <span>3. 注解方式AOP</span>
+        </a><ul class="menu-list"><li>
+        <a class="is-flex" href="#要使用注解AOP，必须如下配置">
+        <!-- 目录是否自动编号 -->
+        <!-- <span class="has-mr-6">3.1</span> -->
+        <span>要使用注解AOP，必须如下配置</span>
+        </a></li><li>
+        <a class="is-flex" href="#3-1-Aspect">
+        <!-- 目录是否自动编号 -->
+        <!-- <span class="has-mr-6">3.2</span> -->
+        <span>3.1 @Aspect</span>
+        </a></li><li>
+        <a class="is-flex" href="#3-2-Pointcut">
+        <!-- 目录是否自动编号 -->
+        <!-- <span class="has-mr-6">3.3</span> -->
+        <span>3.2 @Pointcut</span>
+        </a></li><li>
+        <a class="is-flex" href="#3-3-Before-“methodName-”">
+        <!-- 目录是否自动编号 -->
+        <!-- <span class="has-mr-6">3.4</span> -->
+        <span>3.3 @Before(“methodName()”)</span>
+        </a></li><li>
+        <a class="is-flex" href="#3-4-AfterRuturning-“methodName-”">
+        <!-- 目录是否自动编号 -->
+        <!-- <span class="has-mr-6">3.5</span> -->
+        <span>3.4 @AfterRuturning(“methodName()”)</span>
+        </a></li><li>
+        <a class="is-flex" href="#3-5-AfterThrowing-“methodName-”">
+        <!-- 目录是否自动编号 -->
+        <!-- <span class="has-mr-6">3.6</span> -->
+        <span>3.5 @AfterThrowing(“methodName()”)</span>
+        </a></li><li>
+        <a class="is-flex" href="#3-6-After-“methodName-”">
+        <!-- 目录是否自动编号 -->
+        <!-- <span class="has-mr-6">3.7</span> -->
+        <span>3.6 @After(“methodName()”)</span>
+        </a></li><li>
+        <a class="is-flex" href="#注意事项：">
+        <!-- 目录是否自动编号 -->
+        <!-- <span class="has-mr-6">3.8</span> -->
+        <span>注意事项：</span>
+        </a></li><li>
+        <a class="is-flex" href="#完全不用XML的方式">
+        <!-- 目录是否自动编号 -->
+        <!-- <span class="has-mr-6">3.9</span> -->
+        <span>完全不用XML的方式</span>
+        </a></li></ul></li><li>
+        <a class="is-flex" href="#4-Spring自带的事务管理器：声明式事务控制">
+        <!-- 目录是否自动编号 -->
+        <!-- <span class="has-mr-6">4</span> -->
+        <span>4. Spring自带的事务管理器：声明式事务控制</span>
+        </a><ul class="menu-list"><li>
+        <a class="is-flex" href="#4-1-基于XML的声明式事务控制">
+        <!-- 目录是否自动编号 -->
+        <!-- <span class="has-mr-6">4.1</span> -->
+        <span>4.1 基于XML的声明式事务控制</span>
+        </a></li><li>
+        <a class="is-flex" href="#4-2-基于注解的声明式事务控制">
+        <!-- 目录是否自动编号 -->
+        <!-- <span class="has-mr-6">4.2</span> -->
+        <span>4.2 基于注解的声明式事务控制</span>
+        </a></li><li>
+        <a class="is-flex" href="#4-3-纯注解的声明式事务控制">
+        <!-- 目录是否自动编号 -->
+        <!-- <span class="has-mr-6">4.3</span> -->
+        <span>4.3 纯注解的声明式事务控制</span>
+        </a></li></ul></li><li>
+        <a class="is-flex" href="#附录：">
+        <!-- 目录是否自动编号 -->
+        <!-- <span class="has-mr-6">5</span> -->
+        <span>附录：</span>
+        </a><ul class="menu-list"><li>
+        <a class="is-flex" href="#ioc下通过继承JdbcDaoSupport如何注入数据源">
+        <!-- 目录是否自动编号 -->
+        <!-- <span class="has-mr-6">5.1</span> -->
+        <span>ioc下通过继承JdbcDaoSupport如何注入数据源</span>
+        </a></li></ul></li></ul>
+            </div>
+        </div>
+    </div>
+
+    
+        <div class="card widget">
+    <div class="card-content">
+        <h3 class="menu-label">
+            推荐阅读
+        </h3>
+        
+        <article class="media">
+            
+            <a href="/Others/node-editor.md/" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="images/loading.gif" data-original="https://cdn.jsdelivr.net/gh/wjwABCDEFG/blog_img/img/20250401154214355.jpeg" alt="Line-It 节点编辑器.md">
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2025-04-01T07:28:20.000Z">2025-04-01</time></div>
+                    <a href="/Others/node-editor.md/" class="title has-link-black-ter is-size-6 has-text-weight-normal">Line-It 节点编辑器.md</a>
+                    <p class="is-size-7 is-uppercase">
+                        <a class="has-link-grey -link" href="/categories/Others/">Others</a>
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+        <article class="media">
+            
+            <a href="/games/Unity3D-note/" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="images/loading.gif" data-original="https://cdn.jsdelivr.net/gh/wjwABCDEFG/blog_img/img/20210728004637.jpg" alt="Unity3D学习笔记">
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2021-07-28T12:42:07.000Z">2021-07-28</time></div>
+                    <a href="/games/Unity3D-note/" class="title has-link-black-ter is-size-6 has-text-weight-normal">Unity3D学习笔记</a>
+                    <p class="is-size-7 is-uppercase">
+                        <a class="has-link-grey -link" href="/categories/games/">游戏和引擎</a>
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+        <article class="media">
+            
+            <a href="/life/%E4%B8%BA%E6%AF%95%E4%B8%9A%E5%81%9A%E5%87%86%E5%A4%87/" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="images/loading.gif" data-original="https://cdn.jsdelivr.net/gh/wjwABCDEFG/blog_img/img/20210717225951.jpeg" alt="为毕业做准备">
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2021-03-31T13:13:32.000Z">2021-03-31</time></div>
+                    <a href="/life/%E4%B8%BA%E6%AF%95%E4%B8%9A%E5%81%9A%E5%87%86%E5%A4%87/" class="title has-link-black-ter is-size-6 has-text-weight-normal">为毕业做准备</a>
+                    <p class="is-size-7 is-uppercase">
+                        <a class="has-link-grey -link" href="/categories/life/">生活随笔</a>
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+        <article class="media">
+            
+            <a href="/life/mhxy-experience/" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="images/loading.gif" data-original="https://cdn.jsdelivr.net/gh/wjwABCDEFG/blog_img/img/20210717223725.png" alt="梦幻西游游戏体验">
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2021-03-31T08:29:35.000Z">2021-03-31</time></div>
+                    <a href="/life/mhxy-experience/" class="title has-link-black-ter is-size-6 has-text-weight-normal">梦幻西游游戏体验</a>
+                    <p class="is-size-7 is-uppercase">
+                        <a class="has-link-grey -link" href="/categories/life/">生活随笔</a>
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+        <article class="media">
+            
+            <a href="/games/3DMath-Primerfor-Graphics-and-Game-Development-note/" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="images/loading.gif" data-original="https://cdn.jsdelivr.net/gh/wjwABCDEFG/blog_img/img/20210717223435.jpeg" alt="3D数学基础图形与游戏研发笔记">
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2021-03-06T10:55:07.000Z">2021-03-06</time></div>
+                    <a href="/games/3DMath-Primerfor-Graphics-and-Game-Development-note/" class="title has-link-black-ter is-size-6 has-text-weight-normal">3D数学基础图形与游戏研发笔记</a>
+                    <p class="is-size-7 is-uppercase">
+                        <a class="has-link-grey -link" href="/categories/games/">游戏和引擎</a>
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+    </div>
+</div>
+    
+    
+</div>
+
+            </div>
+        </div>
+    </section>
+    <footer class="footer">
+    <div class="container">
+        <div class="level">
+            <div class="level-start has-text-centered-mobile">
+                <a class="footer-logo is-block has-mb-6" href="/">
+                
+                    <img src="images/loading.gif" data-original="https://cdn.jsdelivr.net/gh/wjwABCDEFG/blog_img/img/20210717231246.png" alt="Spring入门笔记2" height="28">
+                
+                </a>
+                <p class="is-size-7">
+                &copy; 2025 wjw&nbsp;
+                Powered by <a href="https://hexo.io/" target="_blank" rel="noopener">Hexo</a> & <a
+                        href="https://github.com/ppoffice/hexo-theme-icarus" target="_blank" rel="noopener">Icarus</a>
+                
+                <br>
+                <!-- <span id="busuanzi_container_site_uv">
+                共<span id="busuanzi_value_site_uv">0</span>个访客
+                </span> -->
+                <span id="busuanzi_container_site_uv"> 来访 <span id="busuanzi_value_site_uv"></span>人</span>
+                <span id="busuanzi_container_site_pv">, 总访问 <span id="busuanzi_value_site_pv"></span>次</span>
+
+                <span id="timeDate">载入天数...</span><span id="times">载入时分秒...</span>
+                    <script>
+                        var now = new Date(); 
+                        function createtime() { 
+                            var grt= new Date("03/06/2020 00:00:00"); /*建站时间*/
+                            now.setTime(now.getTime()+250); 
+                            days = (now - grt ) / 1000 / 60 / 60 / 24; dnum = Math.floor(days); 
+                            hours = (now - grt ) / 1000 / 60 / 60 - (24 * dnum); hnum = Math.floor(hours); 
+                            if(String(hnum).length ==1 ){hnum = "0" + hnum;} minutes = (now - grt ) / 1000 /60 - (24 * 60 * dnum) - (60 * hnum); 
+                            mnum = Math.floor(minutes); if(String(mnum).length ==1 ){mnum = "0" + mnum;} 
+                            seconds = (now - grt ) / 1000 - (24 * 60 * 60 * dnum) - (60 * 60 * hnum) - (60 * mnum); 
+                            snum = Math.round(seconds); if(String(snum).length ==1 ){snum = "0" + snum;} 
+                            document.getElementById("timeDate").innerHTML = "本站已安全运行 "+dnum+" 天 "; 
+                            document.getElementById("times").innerHTML = hnum + " 小时 " + mnum + " 分 " + snum + " 秒"; 
+                        } 
+                    setInterval("createtime()",250);
+                    </script>
+                
+                </p>
+            </div>
+            <div class="level-end">
+            
+                <div class="field has-addons is-flex-center-mobile has-mt-5-mobile is-flex-wrap is-flex-middle">
+                
+                <p class="control">
+                    <a class="button is-white is-large" target="_blank" rel="noopener" title="Creative Commons" href="https://creativecommons.org/">
+                        
+                        <i class="fab fa-creative-commons"></i>
+                        
+                    </a>
+                </p>
+                
+                <p class="control">
+                    <a class="button is-white is-large" target="_blank" rel="noopener" title="Attribution 4.0 International" href="https://creativecommons.org/licenses/by/4.0/">
+                        
+                        <i class="fab fa-creative-commons-by"></i>
+                        
+                    </a>
+                </p>
+                
+                <p class="control">
+                    <a class="button is-white is-large" target="_blank" rel="noopener" title="Download on GitHub" href="https://github.com/ppoffice/hexo-theme-icarus">
+                        
+                        <i class="fab fa-github"></i>
+                        
+                    </a>
+                </p>
+                
+                </div>
+            
+            </div>
+        </div>
+    </div>
+</footer>
+    <script src="https://cdn.jsdelivr.net/npm/jquery@3.3.1/dist/jquery.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/moment@2.22.2/min/moment-with-locales.min.js"></script>
+<script>moment.locale("zh-CN");</script>
+
+
+<script>
+var IcarusThemeSettings = {
+    site: {
+        url: 'https://wjw.today',
+        external_link: {"enable":true,"exclude":[]}
+    },
+    article: {
+        highlight: {
+            clipboard: true,
+            fold: 'unfolded'
+        }
+    }
+};
+</script>
+
+
+<script src="https://cdn.jsdelivr.net/npm/clipboard@2.0.4/dist/clipboard.min.js" defer></script>
+
+
+
+
+
+<script src="/js/animation.js"></script>
+
+
+
+<script src="https://cdn.jsdelivr.net/npm/lightgallery@1.6.8/dist/js/lightgallery.min.js" defer></script>
+<script src="https://cdn.jsdelivr.net/npm/justifiedGallery@3.7.0/dist/js/jquery.justifiedGallery.min.js" defer></script>
+<script src="/js/gallery.js" defer></script>
+
+
+
+<div id="outdated">
+    <h6>Your browser is out-of-date!</h6>
+    <p>Update your browser to view this website correctly. <a id="btnUpdateBrowser" href="http://outdatedbrowser.com/">Update
+            my browser now </a></p>
+    <p class="last"><a href="#" id="btnCloseUpdateBrowser" title="Close">&times;</a></p>
+</div>
+<script src="https://cdn.jsdelivr.net/npm/outdatedbrowser@1.1.5/outdatedbrowser/outdatedbrowser.min.js" defer></script>
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+        outdatedBrowser({
+            bgColor: '#f25648',
+            color: '#ffffff',
+            lowerThan: 'flex'
+        });
+    });
+</script>
+
+
+<script src="https://cdn.jsdelivr.net/npm/mathjax@2.7.5/unpacked/MathJax.js?config=TeX-MML-AM_CHTML" defer></script>
+<script>
+document.addEventListener('DOMContentLoaded', function () {
+    MathJax.Hub.Config({
+        'HTML-CSS': {
+            matchFontHeight: false
+        },
+        SVG: {
+            matchFontHeight: false
+        },
+        CommonHTML: {
+            matchFontHeight: false
+        },
+        tex2jax: {
+            inlineMath: [
+                ['$','$'],
+                ['\\(','\\)']
+            ]
+        }
+    });
+});
+</script>
+
+
+<a id="back-to-top" title="回到顶端" href="javascript:;">
+    <i class="fas fa-chevron-up"></i>
+</a>
+<script src="/js/back-to-top.js" defer></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<script src="/js/main.js" defer></script>
+
+    
+    <div class="searchbox ins-search">
+    <div class="searchbox-container ins-search-container">
+        <div class="searchbox-input-wrapper">
+            <input type="text" class="searchbox-input ins-search-input" placeholder="想要查找什么..." />
+            <span class="searchbox-close ins-close ins-selectable"><i class="fa fa-times-circle"></i></span>
+        </div>
+        <div class="searchbox-result-wrapper ins-section-wrapper">
+            <div class="ins-section-container"></div>
+        </div>
+    </div>
+</div>
+<script>
+    (function (window) {
+        var INSIGHT_CONFIG = {
+            TRANSLATION: {
+                POSTS: '文章',
+                PAGES: '页面',
+                CATEGORIES: '分类',
+                TAGS: '标签',
+                UNTITLED: '(无标题)',
+            },
+            CONTENT_URL: '/content.json',
+        };
+        window.INSIGHT_CONFIG = INSIGHT_CONFIG;
+    })(window);
+</script>
+<script src="/js/insight.js" defer></script>
+<link rel="stylesheet" href="/css/search.css">
+<link rel="stylesheet" href="/css/insight.css">
+    
+
+        <style>
+            [bg-lazy] {
+                background-image: none !important;
+                background-color: #eee !important;
+            }
+        </style>
+        <script>
+            window.imageLazyLoadSetting = {
+                isSPA: false,
+                preloadRatio: 1,
+                processImages: null,
+            };
+        </script><script>window.addEventListener("load",function(){var t=/\.(gif|jpg|jpeg|tiff|png)$/i,r=/^data:image\/[a-z\d\-\.\+]+;base64,/;Array.prototype.slice.call(document.querySelectorAll("img[data-original]")).forEach(function(a){var e=a.parentNode;"A"===e.tagName&&(t.test(e.href)||r.test(e.href))&&(e.href=a.dataset.original)})});</script><script>(r=>{r.imageLazyLoadSetting.processImages=t;var a=r.imageLazyLoadSetting.isSPA,o=r.imageLazyLoadSetting.preloadRatio||1,d=i();function i(){var t=Array.prototype.slice.call(document.querySelectorAll("img[data-original]")),e=Array.prototype.slice.call(document.querySelectorAll("[bg-lazy]"));return t.concat(e)}function t(t){(a||t)&&(d=i());for(var e,n=0;n<d.length;n++)0<=(e=(e=d[n]).getBoundingClientRect()).bottom&&0<=e.left&&e.top<=(r.innerHeight*o||document.documentElement.clientHeight*o)&&(()=>{var t,e,a,o,i=d[n];e=function(){d=d.filter(function(t){return i!==t}),r.imageLazyLoadSetting.onImageLoaded&&r.imageLazyLoadSetting.onImageLoaded(i)},(t=i).dataset.loaded||(t.hasAttribute("bg-lazy")?(t.removeAttribute("bg-lazy"),e&&e()):(a=new Image,o=t.getAttribute("data-original"),a.onload=function(){t.src=o,t.removeAttribute("data-original"),t.setAttribute("data-loaded",!0),e&&e()},a.onerror=function(){t.removeAttribute("data-original"),t.setAttribute("data-loaded",!1),t.src=o},t.src!==o&&(a.src=o)))})()}function e(){clearTimeout(t.tId),t.tId=setTimeout(t,500)}t(),document.addEventListener("scroll",e),r.addEventListener("resize",e),r.addEventListener("orientationchange",e)})(this);</script></body>
+</html>

@@ -1,0 +1,1521 @@
+<!DOCTYPE html>
+<html  lang="zh">
+<head>
+    <meta charset="utf-8" />
+
+<meta name="generator" content="Hexo 4.2.1" />
+
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+
+<title>Line-It 节点编辑器.md - 小温 blog</title>
+
+
+    <meta name="description" content="在wy的时候有推广过一个工具，是使用节点编辑器工具来完成一些程序化布景，称之为程序化工作流，不过那个工具主要是针对场编和美术策划相关的场景，而本人的工作是工具和自动化测试。当时就在想自动化测试应该是符合流水线一样执行的，能不能把两样东西结合起来，通过节点编辑器来完成自动化测试相关工作流，于是现在离职后就尝试实现一下。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Line-It 节点编辑器.md">
+<meta property="og:url" content="https://wjw.today/Others/node-editor.md/index.html">
+<meta property="og:site_name" content="小温 blog">
+<meta property="og:description" content="在wy的时候有推广过一个工具，是使用节点编辑器工具来完成一些程序化布景，称之为程序化工作流，不过那个工具主要是针对场编和美术策划相关的场景，而本人的工作是工具和自动化测试。当时就在想自动化测试应该是符合流水线一样执行的，能不能把两样东西结合起来，通过节点编辑器来完成自动化测试相关工作流，于是现在离职后就尝试实现一下。">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/wjwABCDEFG/blog_img/img/20250401154214355.jpeg">
+<meta property="article:published_time" content="2025-04-01T07:28:20.000Z">
+<meta property="article:modified_time" content="2025-04-01T07:43:54.732Z">
+<meta property="article:author" content="wjw">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://cdn.jsdelivr.net/gh/wjwABCDEFG/blog_img/img/20250401154214355.jpeg">
+
+
+
+
+
+
+
+<link rel="icon" href="/images/favicon.ico">
+
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.7.2/css/bulma.css">
+<link rel="stylesheet" href="https://cdn.bootcss.com/font-awesome/5.4.1/css/all.css">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Ubuntu:400,600|Source+Code+Pro">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@9.12.0/styles/atom-one-dark.css">
+
+
+    
+    
+<style>body>.footer,body>.navbar,body>.section{opacity:0}</style>
+
+    
+    
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/lightgallery@1.6.8/dist/css/lightgallery.min.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/justifiedGallery@3.7.0/dist/css/justifiedGallery.min.css">
+
+    
+    
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/outdatedbrowser@1.1.5/outdatedbrowser/outdatedbrowser.min.css">
+
+    
+    
+    
+    
+<link rel="stylesheet" href="/css/back-to-top.css">
+
+    
+    
+    
+    
+    
+    
+    
+    <link rel="stylesheet" href="/css/progressbar.css">
+<script src="https://cdn.jsdelivr.net/npm/pace-js@1.0.2/pace.min.js"></script>
+    
+    <script async="" src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+    
+
+
+<link rel="stylesheet" href="/css/style.css">
+</head>
+<body class="is-3-column">
+    <nav class="navbar navbar-main">
+    <div class="container">
+        <div class="navbar-brand is-flex-center">
+            <a class="navbar-item navbar-logo" href="/">
+            
+                <img src="images/loading.gif" data-original="https://cdn.jsdelivr.net/gh/wjwABCDEFG/blog_img/img/20210717231246.png" alt="Line-It 节点编辑器.md" height="28">
+            
+            </a>
+        </div>
+        <div class="navbar-menu">
+            
+            <div class="navbar-start">
+                
+                <a class="navbar-item"
+                href="/">主页</a>
+                
+                <a class="navbar-item"
+                href="/archives">归档</a>
+                
+                <a class="navbar-item"
+                href="/categories">分类</a>
+                
+                <a class="navbar-item"
+                href="/tags">标签</a>
+                
+                <a class="navbar-item"
+                href="/about">关于</a>
+                
+            </div>
+            
+            <div class="navbar-end">
+                
+                    
+                    <a class="navbar-item" target="_blank" rel="noopener" title="View My GitHub" href="https://github.com/wjwABCDEFG">
+                        
+                        <i class="fab fa-github"></i>
+                        
+                    </a>
+                    
+                
+                
+                <a class="navbar-item is-hidden-tablet catalogue" title="目录" href="javascript:;">
+                    <i class="fas fa-list-ul"></i>
+                </a>
+                
+                
+                <a class="navbar-item search" title="搜索" href="javascript:;">
+                    <i class="fas fa-search"></i>
+                </a>
+                
+            </div>
+        </div>
+    </div>
+</nav>
+    
+    <section class="section">
+        <div class="container">
+            <div class="columns">
+                <div class="column is-8-tablet is-8-desktop is-6-widescreen has-order-2 column-main">
+<div class="card">
+    
+    <div class="card-image">
+        <span  class="image is-7by1">
+            <img class="thumbnail" src="images/loading.gif" data-original="https://cdn.jsdelivr.net/gh/wjwABCDEFG/blog_img/img/20250401154214355.jpeg" alt="Line-It 节点编辑器.md">
+        </span>
+    </div>
+    
+    <div class="card-content article ">
+        
+        <div class="level article-meta is-size-7 is-uppercase is-mobile is-overflow-x-auto">
+            <div class="level-left">
+                <time class="level-item has-text-grey" datetime="2025-04-01T07:28:20.000Z">2025-04-01</time>
+                
+                <div class="level-item">
+                <a class="has-link-grey -link" href="/categories/Others/">Others</a>
+                </div>
+                
+                
+                <span class="level-item has-text-grey">
+                    
+                    
+                    41 分钟 读完 (大约 6179 个字)
+                </span>
+                
+                
+                <span class="level-item has-text-grey" id="busuanzi_container_page_pv">
+                    <i class="far fa-eye"></i>
+                    <span id="busuanzi_value_page_pv">0</span>次访问
+                </span>
+                
+            </div>
+        </div>
+        
+        <h1 class="title is-size-3 is-size-4-mobile has-text-weight-normal">
+            
+                Line-It 节点编辑器.md
+            
+        </h1>
+        <div class="content">
+            <p>在wy的时候有推广过一个工具，是使用节点编辑器工具来完成一些程序化布景，称之为程序化工作流，不过那个工具主要是针对场编和美术策划相关的场景，而本人的工作是工具和自动化测试。当时就在想自动化测试应该是符合流水线一样执行的，能不能把两样东西结合起来，通过节点编辑器来完成自动化测试相关工作流，于是现在离职后就尝试实现一下。</p>
+<a id="more"></a>
+
+<p>节点编辑器已经是老东西了，网上各种实现五花八门，之前只接触过web前后端，本着学习和练手的目的，选择了客户端+qt(pyside，c++写不来)。由于本人没接触过qt，也是踩了很多坑。基于blenderfreak大佬的实现（<a href="https://gitlab.com/pavel.krupala/pyqt-node-editor）基础上进行开发，开贴记录一下，帖子里的内容并不能面面俱到，如果有不清楚的还得打开代码对着看。">https://gitlab.com/pavel.krupala/pyqt-node-editor）基础上进行开发，开贴记录一下，帖子里的内容并不能面面俱到，如果有不清楚的还得打开代码对着看。</a></p>
+<p><img src="images/loading.gif" data-original="https://cdn.jsdelivr.net/gh/wjwABCDEFG/blog_img/img/20250401153737824.png" alt="image-20250319192905051"></p>
+<h1 id="画布-图元"><a href="#画布-图元" class="headerlink" title="画布/图元"></a>画布/图元</h1><p>这种可以自由绘制画板的方式，写起来和以往的一般的控件不同，需要补充一点前置知识，基于图元绘制主要是三个类：</p>
+<p>QGraphicsScene：背景画布格子线条<br>QGraphicsView：背景画布绘制模式（抗锯齿，全量更新）、鼠标键盘事件处理（滚轮放大缩小，中键画布拖拽）<br>QGraphicsItem：绘制正方形/圆形/曲线等基本元素，用来完成node/edge/socket等设计</p>
+<ul>
+<li>格子绘制</li>
+</ul>
+<p>QGraphicsScene的drawBackground函数每次背景变动都会出发重新绘制，把当前的rect画满</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">drawBackground</span><span class="params">(self, painter, rect)</span>:</span></span><br><span class="line">    <span class="string">"""每次背景变动都会触发"""</span></span><br><span class="line">    super().drawBackground(painter, rect)</span><br><span class="line"></span><br><span class="line">    <span class="comment"># grid</span></span><br><span class="line">    left = int(math.floor(rect.left()))</span><br><span class="line">    right = int(math.ceil(rect.right()))</span><br><span class="line">    top = int(math.floor(rect.top()))</span><br><span class="line">    bottom = int(math.ceil(rect.bottom()))</span><br><span class="line"></span><br><span class="line">    first_left = left - (left % self.gridSize)</span><br><span class="line">    first_top = top - (top % self.gridSize)</span><br><span class="line"></span><br><span class="line">    <span class="comment"># compute all lines to be drawn</span></span><br><span class="line">    lines_light, lines_dark = [], []</span><br><span class="line">    <span class="keyword">for</span> x <span class="keyword">in</span> range(first_left, right, self.gridSize):</span><br><span class="line">        <span class="keyword">if</span> (x % (self.gridSize*self.gridSquares) != <span class="number">0</span>): lines_light.append(QLine(x, top, x, bottom))</span><br><span class="line">        <span class="keyword">else</span>: lines_dark.append(QLine(x, top, x, bottom))</span><br><span class="line"></span><br><span class="line">    <span class="keyword">for</span> y <span class="keyword">in</span> range(first_top, bottom, self.gridSize):</span><br><span class="line">        <span class="keyword">if</span> (y % (self.gridSize*self.gridSquares) != <span class="number">0</span>): lines_light.append(QLine(left, y, right, y))</span><br><span class="line">        <span class="keyword">else</span>: lines_dark.append(QLine(left, y, right, y))</span><br><span class="line"></span><br><span class="line">    <span class="comment"># draw the lines</span></span><br><span class="line">    painter.setPen(self._pen_light)</span><br><span class="line">    painter.drawLines(lines_light)</span><br><span class="line"></span><br><span class="line">    painter.setPen(self._pen_dark)</span><br><span class="line">    painter.drawLines(lines_dark)</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>节点图形</li>
+</ul>
+<p>元素比较简单一个矩形，左右两边的插槽（socket）构成的node</p>
+<p><img src="images/loading.gif" data-original="https://cdn.jsdelivr.net/gh/wjwABCDEFG/blog_img/img/20250401153745077.png" alt="image-20250319194025184"></p>
+<p>QGraphicsItem的paint函数中绘制节点，分为上面的title和content两个矩形，并加上了圆角，<em>这部分都是固定写法</em>，需要注意的就是content的height实际上是从[title_height, height-title_height]</p>
+<p><img src="images/loading.gif" data-original="https://cdn.jsdelivr.net/gh/wjwABCDEFG/blog_img/img/20250401153749982.png" alt="image-20250319214816012"></p>
+<p>吐槽，虽然是固定写法，但是qt这个写起来也太麻烦了</p>
+<h2 id="ui和逻辑的互操架构"><a href="#ui和逻辑的互操架构" class="headerlink" title="ui和逻辑的互操架构"></a>ui和逻辑的互操架构</h2><p>blenderfreak大佬的实现中给了一个设计图，这也是我看了几个节点编辑器后觉得这个最好的原因，总体就是这几个部分：</p>
+<p>Scene的QWidget类保存了scene的QGraphicsView对象</p>
+<p>Node的QWidget类保存了node和content的QGraphicsItem对象</p>
+<p>Edge的QWidget类保存了edge的QGraphicsItem对象</p>
+<p>Socket的QWidget类保存了socket的QGraphicsItem对象</p>
+<p>同时，又在Graph的构造中传入了Widget对象，互相保存，在下面的节点设计中展示了具体的伪代码，<strong>总之有点类似安卓的context</strong></p>
+<p><img src="images/loading.gif" data-original="https://cdn.jsdelivr.net/gh/wjwABCDEFG/blog_img/img/20250401153828679.png" alt="image-20250319215827494"></p>
+<p>ui部分就到这里，qt的很多代码看起来很繁杂，但都是固定写法，比如图元绘制的addRoundedRect/addRect/setPen/setBrush/drawPath，但归根到底都是些api的调用</p>
+<p>对于节点编辑器，后续的socket逻辑才是大头</p>
+<h1 id="节点的设计"><a href="#节点的设计" class="headerlink" title="节点的设计"></a>节点的设计</h1><h2 id="基本结构"><a href="#基本结构" class="headerlink" title="基本结构"></a>基本结构</h2><p>ui和逻辑分离，ui部分使用qt的QGraphicsItem绘制，逻辑在Node类中</p>
+<p>为了方便互操，ui对象作为Node的成员，同时构造的时候会将本对象self传入ui对象中作为成员（这个操作类似android经常会将activity的this传入fragment中， 不过安卓中形参称之为context上下文，这里没有过多专业的名词，不过本质上是一样的）</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">QDMGraphicsNode</span><span class="params">(QGraphicsItem)</span>:</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__init__</span><span class="params">(self, node: <span class="string">'Node'</span>)</span>:</span></span><br><span class="line">        super().__init__(parent)</span><br><span class="line">        self.node = node</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Node</span>:</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__init__</span><span class="params">(self)</span>:</span></span><br><span class="line">        super().__init__()</span><br><span class="line">        self.grNode = QDMGraphicsNode(self)</span><br></pre></td></tr></table></figure>
+
+
+
+<h2 id="和socket-edge关联"><a href="#和socket-edge关联" class="headerlink" title="和socket/edge关联"></a>和socket/edge关联</h2><p>socket就是node左右两边的连接点，node里面保存了inputs和outputs节点，保存了所有的socket，这是整个编辑器最复杂的地方，因为socket实际上是连接node和edge的媒介，设计时要考虑的东西很多，但我并不想在这里单独开一章，原来大佬的设计很精彩，但我这里的重点是整体的功能</p>
+<p>socket的属性包括：</p>
+<ul>
+<li>node：所在node的引用，和之前说的一样，类似context互操</li>
+<li>edges: 连接的所有edge，注意，input socket只能连接一根线，但是output socket可以连接多根线</li>
+<li>index：第几个socket，同一侧可能有多个，用于绘制时计算位置和序列化时使用</li>
+<li>position：即使在同一侧，也可以选择左上中下，右上中下几种，也是用于绘制</li>
+<li>socket_type：这部分我认为原本的设计存在不足，代码里写的<em>Constant defining type(color) of this socket</em>，也就是说只是一个color，我估计原本作者的想法应该是像unity shader或者ue蓝图一样，根据输出的值类型变化颜色，<strong>让用户知道什么output能连接什么input</strong>，不允许乱连接，但由于作者最后是做了一个计算器，所以都是int没有细化这部分</li>
+<li>is_input：通过这个来区分是输入还是输出</li>
+</ul>
+<p>edge的属性包括：</p>
+<ul>
+<li>start_socket和end_socket</li>
+<li>edge_type：贝塞尔曲线/直线</li>
+</ul>
+<p>当一个节点要找前面/后面节点的时候，实际上的链路为：node -&gt; (for)output_socket -&gt; (for)edge -&gt; end_socket -&gt; next_node</p>
+<h2 id="动态注册"><a href="#动态注册" class="headerlink" title="动态注册"></a>动态注册</h2><p>为了方便用户添加自定义节点，需要动态注册的方式。后续如使用pyinstaller打包时，也可以通过配置.spec文件跳过对nodes文件夹下的打包，以方便用户自定义和参考原有node</p>
+<ul>
+<li>通过@register_node(“DIV”)装饰器把这个class添加到字典CALC_NODES = {}中保存动态，所有需要添加的节点都可以通过这个装饰器添加进节点编辑器中，方便用户自定义和扩展节点</li>
+</ul>
+<p><img src="images/loading.gif" data-original="https://cdn.jsdelivr.net/gh/wjwABCDEFG/blog_img/img/20250401153834769.png" alt="image-20250319185643834"></p>
+<ul>
+<li>使用<code>__all__</code>注册整个包下的py文件，后续打包时可以屏蔽这个文件夹，用户便可以在这个文件夹下自由的编写自定义节点</li>
+</ul>
+<p><img src="images/loading.gif" data-original="https://cdn.jsdelivr.net/gh/wjwABCDEFG/blog_img/img/20250401153839256.png" alt="image-20241227150016692"></p>
+<h2 id="计算节点"><a href="#计算节点" class="headerlink" title="计算节点"></a>计算节点</h2><ul>
+<li>如四则运算节点，父节点CalcNode抽象出一个evalImplementation/evalOperation方法，子节点类都需要实现</li>
+</ul>
+<p><img src="images/loading.gif" data-original="https://cdn.jsdelivr.net/gh/wjwABCDEFG/blog_img/img/20250401153844102.png" alt="image-20240727165145550"></p>
+<ul>
+<li><p>数据存储：每个节点有一个value字段用于存储，当想要计算时，通过getInput(idx)方法从指定的输入端口（inputs[idx]）找到对应的上游节点拿其value，完成计算后也要将结果放置在当前节点的value中</p>
+</li>
+<li><p>向后计算：向后计算时，对着当前节点点击eval，会调用eval后，调用evalChildren遍历当前节点所有output，找到其下一层子节点并调用其eval方法，需要注意的是整个计算顺序应该是dfs</p>
+</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">evalChildren</span><span class="params">(self)</span>:</span></span><br><span class="line">    <span class="string">"""</span></span><br><span class="line"><span class="string">    使用这个完成计算，每次计算完，找到下一个节点继续计算</span></span><br><span class="line"><span class="string">    每个eval里面要实现从input端口的上一个连接节点拿数据，计算，把结果放到value中</span></span><br><span class="line"><span class="string">    """</span></span><br><span class="line">    <span class="keyword">for</span> node <span class="keyword">in</span> self.getChildrenNodes():</span><br><span class="line">        node.eval()</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>向前计算：向前计算时，比如output，对着output点击eval，往前找所有的input，并调用其eval函数，可以自动向前完成计算，其过程也是dfs</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">evalImplementation</span><span class="params">(self)</span>:</span></span><br><span class="line">    input_node = self.getInput(<span class="number">0</span>)   <span class="comment"># 如果input端口不止一个也可以遍历inputs</span></span><br><span class="line">    val = input_node.eval()</span><br><span class="line">    <span class="keyword">return</span> val</span><br></pre></td></tr></table></figure>
+
+
+
+<h1 id="序列化-反序列化"><a href="#序列化-反序列化" class="headerlink" title="序列化/反序列化"></a>序列化/反序列化</h1><p>要实现graph的持久化保存，或数据传输，甚至是redo/undo功能，都必须完成序列化和反序列化工作，通过字符串完整表达graph中的数据</p>
+<h2 id="serialize"><a href="#serialize" class="headerlink" title="serialize"></a>serialize</h2><p>需要序列化的东西包括如下几个部分：</p>
+<ul>
+<li><p>场景：id、画布的大小</p>
+</li>
+<li><p>节点（列表）：节点id、标题、位置、inputs输入点列表（id、idx、位置、类型）、outputs输出点列表（id、idx、位置、类型）、内容</p>
+</li>
+<li><p>边（列表）：边的id、起点和终点的节点id</p>
+</li>
+</ul>
+<p>因此整个序列化和反序列化过程是一个<strong>自顶向下</strong>的结构，完成如上所述的整个场景的序列化，实际上是分别对node和edge进行序列化，最终返回一个dict方便后续的json直接保存成字符串：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 场景序列化伪代码</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">serialize</span><span class="params">(self)</span>:</span></span><br><span class="line">    nodes, edges = [], []</span><br><span class="line">    <span class="keyword">for</span> node <span class="keyword">in</span> self.nodes: nodes.append(node.serialize())  <span class="comment"># node序列化</span></span><br><span class="line">    <span class="keyword">for</span> edge <span class="keyword">in</span> self.edges: edges.append(edge.serialize())  <span class="comment"># edge序列化</span></span><br><span class="line">    </span><br><span class="line">    <span class="keyword">return</span> &#123;</span><br><span class="line">        <span class="string">'id'</span>, self.id,</span><br><span class="line">        <span class="string">'scene_width'</span>, self.scene_width,</span><br><span class="line">        <span class="string">'scene_height'</span>, self.scene_height,</span><br><span class="line">        <span class="string">'nodes'</span>, nodes,</span><br><span class="line">        <span class="string">'edges'</span>, edges,</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
+
+<p>node和edge的serialize实现也是按上面我们所说的保存相应的信息到dict</p>
+<p>当然，上述伪代码写的是dict，最终的实现是<strong>OrderedDict</strong>，保证了每次保存数据key的顺序是一样的</p>
+<h2 id="deserialize"><a href="#deserialize" class="headerlink" title="deserialize"></a>deserialize</h2><p>反序列化即是根据dict信息构造出整个画布，deserialize和serialize结构类似，也是分别对node和edge进行反序列化，反序列化的过程实际上就是根据信息创建node和edge对象的过程。但是需要注意以下<strong>关键点</strong></p>
+<ul>
+<li>id的存储，按理来说，即使没有id也可以完全复刻一个长得一模一样的场景，为什么还要记录id呢？<strong>因为创建出来的node只是位置和内容相同并非原来的node（内存地址不同），而边的序列化信息又需要记录起点和终点是哪个node的哪个socket，我们没有办法在同样的内存地址中创建对象，因此这个id只能当成成员变量记录起来</strong></li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># deserialize伪代码</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">Node</span>:</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__init__</span><span class="params">(self)</span>:</span></span><br><span class="line">        self.id = id(self)</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">deserialize</span><span class="params">(self, data: dict, hashmap: dict=&#123;&#125;)</span> -&gt; bool:</span></span><br><span class="line">        <span class="keyword">if</span> restore_id: self.id = data[<span class="string">'id'</span>]</span><br><span class="line">        <span class="comment"># ...</span></span><br></pre></td></tr></table></figure>
+
+<p>这样一来，虽然新旧节点内存地址不一样，但self.id是一样的，在edge反序列化的时候就可以通过起点终点id来找到是哪个node的哪个socket了</p>
+<ul>
+<li>注意到形参这里有个hashmap，算是一个优化点，node和socket反序列化时就加入{id: obj}进hashmap，这样edge序列化的时候就可以直接通过id寻找socket了不需要遍历查找</li>
+</ul>
+<h1 id="undo-redo功能"><a href="#undo-redo功能" class="headerlink" title="undo/redo功能"></a>undo/redo功能</h1><p>这里的一个误区在于：我们首先会想到一个操作栈history_stack，把所有的操作都入栈，看起来undo就是弹出过程，redo就是栈恢复的过程。但这样做从实现的角度是非常复杂的</p>
+<p>实际上，设计应该如下：</p>
+<ul>
+<li>我们并不会用到栈stack这种存储结构，因为在多次undo后每次弹出的内容还不能抛弃，因为可能又多次redo，因此如果使用stack实现，需要用另一个栈来存储，因此我们history_stack实际上采用的是<strong>数组队列+下标指针</strong></li>
+<li>存储的不应该是操作，因为操作需要正向和反向，比如undo删除对应redo创建，由于操作非常多，这是不合理的。因此实际上history_stack是<strong>存储整个面板的serialize数据</strong>，整个过程为：“变动” -&gt; store(serialized_data) -&gt; undo/redo -&gt; restore(serialized_data)，这样undo和redo实际上都是重绘整个画布，只是在移动cur_idx指针，逻辑统一实现简单</li>
+<li>“变动”包括：节点（新建/移动/删除），边（新建/删除），选中和取消选中</li>
+<li>刚开始创建/打开节点文件的时候要记录一次</li>
+<li>当undo几次后，如果不是redo而是storeHistory插入，那么就会丢弃原本可以redo的部分，就像丫字形，视为开始新的一条岔路</li>
+</ul>
+<h1 id="剪贴板功能"><a href="#剪贴板功能" class="headerlink" title="剪贴板功能"></a>剪贴板功能</h1><p>利用QApplication.instance().clip实现，在复制(ctrl+c)和剪贴(ctrl+x)的时候序列化并存入剪贴板，粘贴(ctrl+v)的时候反序列化</p>
+<p>注意：</p>
+<ul>
+<li><p>粘贴的时候，需要给node、socket和edge添加一个新的id，否则id重复。由于序列化/反序列化所有节点都存储于一个hashmap中，会导致key重复</p>
+</li>
+<li><p>剪切（删除）节点后，如果剪贴板的边有未连接的节点，需要剔除，如果view中剩余的边有未连接的节点，也需要剔除</p>
+</li>
+</ul>
+<h1 id="MDI窗口"><a href="#MDI窗口" class="headerlink" title="MDI窗口"></a>MDI窗口</h1><p>Multiple Document Interface多文档界面，即一个窗口下通过tab分割多个子窗口，文档型工具通常不会只打开一个文件，如下所示</p>
+<p><img src="images/loading.gif" data-original="https://cdn.jsdelivr.net/gh/wjwABCDEFG/blog_img/img/20250401153850768.png" alt="image-20240531014758751"></p>
+<p>可以极大的提高生产力和便利性，据说是由微软提出的用于excel多表编辑，但不知道为什么后来的excel弃用了，多表采用多窗口</p>
+<p>mdi窗口现在有大量通用的参考，QT也有预制的实现<a href="https://doc.qt.io/qtforpython-6/examples/example_widgets_mainwindows_mdi.html#example-widgets-mainwindows-mdi">QMdiArea</a>，关键点：</p>
+<ul>
+<li>原来QMainWindow.CentralWidget = QWidget对象，现在中间添加了一层QMdiArea，变为QMainWindow.CentralWidget = QMdiArea对象，然后通过mdiArea.addSubWindow(QWidget)添加每个tab项里的QWidget对象</li>
+<li>几个api并不复杂，关键点在于每次操作里面的widget的时候，记得先通过mdiArea.activeSubWindow().widget()来获取当前的widget</li>
+<li>这也侧面说明了为什么history_stack要放在Widget而不是window中的原因，因为每个graph的history_stack是独立的，同理保存等操作也是独立的，记得先获取当前激活的窗口</li>
+</ul>
+<h1 id="Details面板"><a href="#Details面板" class="headerlink" title="Details面板"></a>Details面板</h1><p>某一个节点可能有需要配置的东西，不好直接在一个节点的content里展示，显得非常凌乱，所以在右侧加入了details面板，这样方便用户配置自己的属性</p>
+<p><img src="images/loading.gif" data-original="https://cdn.jsdelivr.net/gh/wjwABCDEFG/blog_img/img/20250401153856559.png" alt="image-20250319225153988"></p>
+<p>考虑到用户可能会自定义节点，因此在node_base中也暴露了detailsInfo:属性， 类型为List[QWidget]，自定义节点时，可以通过往该属性中不断append widget，即可在Details面板中看到需要的属性</p>
+<p>需要注意的是，这个面板里的参数如果需要保存，应该加入到序列化的value中</p>
+<h1 id="开关"><a href="#开关" class="headerlink" title="开关"></a>开关</h1><p>在自动化测试中，根据以往的经验，有几次可能要执行某一段代码，而有几次又要不执行某一段代码。因此为每个节点设计了开关，如果关闭，则此次执行跳过该节点</p>
+<h1 id="eval执行流程设计"><a href="#eval执行流程设计" class="headerlink" title="eval执行流程设计"></a>eval执行流程设计</h1><p>考虑自动化需求，重新实现了计算流程，a -&gt; b -&gt; c -&gt; d，有可能需要先执行到c出错了，此时希望不重复执行ab，而是从c开始继续执行，由于前面已经实现了前向计算和后向计算的基本操作，这里考虑如下设计方案</p>
+<p>方案一（向后执行）：</p>
+<p>将c mark dirty，会把后续的子节点都mark dirty，对着c或者b进行eval向后执行</p>
+<p><del>方案二（向前执行）：</del></p>
+<p>将c mark dirty，会把后续的子节点都mark dirty，对着d进行eval向前执行，此方案会导致一个问题，如果c出现了分叉c-&gt;d同时还有c-&gt;e，没法执行到c-&gt;e</p>
+<p>方案三（向前执行修正）：</p>
+<p>将c mark dirty，会把后续的子节点都mark dirty，对着d进行eval，不要向前执行而是改为往前找到已经ok的节点b，再从该节点开始向后执行</p>
+<p>暂时是方案二啊，我意识到有问题，后面再改</p>
+<p>方案一和方案三相比，方案三更加符合正常人的操作习惯，因为连接完节点后习惯于从最后的节点开始点击执行</p>
+<h1 id="Store节点"><a href="#Store节点" class="headerlink" title="Store节点"></a>Store节点</h1><p>在之前使用节点编辑器的时候就发现了一个问题，对于正常编写程序，<strong>逻辑本就不是像流水线一样线性的</strong>，难免存在如下代码：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">a &#x3D; 1</span><br><span class="line"></span><br><span class="line">xxx 中间一大段</span><br><span class="line"></span><br><span class="line">b &#x3D; 2</span><br><span class="line"></span><br><span class="line">xxx 中间一大段</span><br><span class="line"></span><br><span class="line">c &#x3D; a + b</span><br></pre></td></tr></table></figure>
+
+<p>如果a b c分别在不同的节点，a -&gt; b -&gt;c</p>
+<p>那么c想使用a的时候，就得把a先传给b，再把b传给c</p>
+<p>在以前工作时使用的节点编辑器中，爷爷节点的数据需要一路传下来，链路上保存的数据就越来越多，而且每次都得往下传！！（即使这个节点编辑器的数据是不在链路上而在节点中，但依然存在这个问题），虽然自动化测试更加接近流水线一点，但使用历史数据问题肯定是在所难免的，因此要解决这个设计缺陷</p>
+<p>Store节点，本质上是往一个空的global_data存东西，这里用的是模块，有点数据总线的味道~</p>
+<p>由于output socket本身就可以连接多根线，所以不用担心从哪个socket出来的问题，在LineIt中，本身output大概率就只有一个socket</p>
+<h1 id="接口类型颜色"><a href="#接口类型颜色" class="headerlink" title="接口类型颜色"></a>接口类型颜色</h1><p>也许在上一个节点value的类型转换成颜色值，下一个的getInput里面验证，不一样类型的就不允许连接</p>
+<p>TODO，暂时搁置，很多连接点其实是没有类型传输给下个节点的，不确定这种功能是否会导致操作不便，需要再仔细考量</p>
+<h1 id="动态增加ouput数量"><a href="#动态增加ouput数量" class="headerlink" title="动态增加ouput数量"></a>动态增加ouput数量</h1><p>TODO，在LineIt中，本身output大概率就只有一个socket，所以可能没多大用处，暂时搁置</p>
+<h1 id="节点列表"><a href="#节点列表" class="headerlink" title="节点列表"></a>节点列表</h1><p>既然是做自动化了，那就尝试性的把一些功能封装成节点吧</p>
+<h2 id="移动设备操作类"><a href="#移动设备操作类" class="headerlink" title="移动设备操作类"></a>移动设备操作类</h2><p>这里要注意尽量兼容多平台，主流就是android/iOS，android使用adb，iOS使用tidevice/wda，相当于做了之前airtest的一些工作，但是这样更加原生一点，也避免引入了很多不必要的东西</p>
+<table>
+<thead>
+<tr>
+<th>Nodes</th>
+<th>作用</th>
+<th>设计</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>设备列表</td>
+<td>显示通过usb连接的android和iOS设备</td>
+<td>开两个线程，分别通过adb和tidevice检测设备连接情况，然后emit到该node更新信息即可</td>
+</tr>
+<tr>
+<td>打开应用</td>
+<td>打开app</td>
+<td>/</td>
+</tr>
+<tr>
+<td>截屏</td>
+<td>截屏</td>
+<td>/</td>
+</tr>
+<tr>
+<td>性能数据</td>
+<td>监测性能数据</td>
+<td>单独开个widget对每台已连接设备展示性能数据，2s一次即可</td>
+</tr>
+<tr>
+<td>安装应用</td>
+<td>/</td>
+<td>/</td>
+</tr>
+<tr>
+<td>TODO模拟操作</td>
+<td>单机/双击/滑动？</td>
+<td>暂时不做，如果做了感觉有点像appium/airtest了？或者后面直接集成呢？</td>
+</tr>
+</tbody></table>
+<p><a href="https://blog.csdn.net/qq_27672101/article/details/143996095">https://blog.csdn.net/qq_27672101/article/details/143996095</a></p>
+<p><a href="https://zhuanlan.zhihu.com/p/3422441811">https://zhuanlan.zhihu.com/p/3422441811</a></p>
+<h2 id="文件类"><a href="#文件类" class="headerlink" title="文件类"></a>文件类</h2><table>
+<thead>
+<tr>
+<th>Nodes</th>
+<th>作用</th>
+<th>设计</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>文件列表</td>
+<td>用于配合下面的节点批量操作</td>
+<td></td>
+</tr>
+<tr>
+<td>重命名</td>
+<td>搭配文件列表进行批量重命名</td>
+<td>windows的会变成a_1.png，a_1_1.png，不用我多说了吧</td>
+</tr>
+<tr>
+<td>TODO复制</td>
+<td></td>
+<td>暂时不做，意义不大，如果后续有生成文件时再补充</td>
+</tr>
+<tr>
+<td>TODO移动</td>
+<td></td>
+<td>暂时不做，意义不大，如果后续有生成文件时再补充</td>
+</tr>
+<tr>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+</tbody></table>
+<h2 id="图像类"><a href="#图像类" class="headerlink" title="图像类"></a>图像类</h2><table>
+<thead>
+<tr>
+<th>Nodes</th>
+<th>作用</th>
+<th>设计</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>TODO，后续搞点超分辨率或者stable diffusion相关的？</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>TODO，也许针对图片后期处理这部分有得做，滤镜/对比度/高光/曝光色调这些</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+</tbody></table>
+<h2 id="工具类"><a href="#工具类" class="headerlink" title="工具类"></a>工具类</h2><table>
+<thead>
+<tr>
+<th>Nodes</th>
+<th>作用</th>
+<th>设计</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>等待</td>
+<td>sleep(s)</td>
+<td>有些时候打开应用这种操作，没有回调，就没办法知道打开没有的，sleep个几秒看看</td>
+</tr>
+<tr>
+<td>store</td>
+<td>全局存储节点</td>
+<td>用于非流水线式的变量取值</td>
+</tr>
+<tr>
+<td>python</td>
+<td>有些人就说：哎呀我就不想打开破编辑器写自定义节点，我就想简单写两行验证一下</td>
+<td>行，双击node还可以打开vscode</td>
+</tr>
+<tr>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+</tbody></table>
+<h1 id="可能存在的问题以及后续的规划"><a href="#可能存在的问题以及后续的规划" class="headerlink" title="可能存在的问题以及后续的规划"></a>可能存在的问题以及后续的规划</h1><h2 id="节点通用性问题"><a href="#节点通用性问题" class="headerlink" title="节点通用性问题"></a>节点通用性问题</h2><p>要思考封装的节点是否具有通用性，否则容易变成这一套节点只能用于这一套graph。为了避免出现这种问题，封装节点可以思考如下几点：</p>
+<ul>
+<li>该节点是否能想到第二种连接方式搭配使用，如果是，则存在合理性</li>
+<li>是否以“功能”/“操作”为单位，如果是，则存在合理性</li>
+<li>本次编写的所有节点链路是否需要合并成一个节点，如果是，则不合理</li>
+</ul>
+<p><img src="images/loading.gif" data-original="https://cdn.jsdelivr.net/gh/wjwABCDEFG/blog_img/img/20250401153904613.png" alt="image-20250324023013889"></p>
+<h2 id="避免在eval相关的函数中操作界面"><a href="#避免在eval相关的函数中操作界面" class="headerlink" title="避免在eval相关的函数中操作界面"></a>避免在eval相关的函数中操作界面</h2><p>并行化改造后，eval可能由于父节点不在同一线程，<strong>此时操作界面可能会导致界面无法更新或者无法显示的问题</strong>，并且这本来也是不好的习惯。如果要在eval中修改界面，请通过信号槽机制来修改。这点非常重要</p>
+<h2 id="并行化改造存在的问题"><a href="#并行化改造存在的问题" class="headerlink" title="并行化改造存在的问题"></a>并行化改造存在的问题</h2><p>关于并行化改造，目前还存在问题，本来应该使用多进程multiprocess操作安卓设备的，在python中，创建多进程在linux下是使用fork，而在windows中使用的是pickle进行序列化+反序列化，但是pyqt/pyside中QObject实际上是c++对象，于是无法pickle会报错</p>
+<p>这算是pyside的坑，暂时没有解决</p>
+<p><a href="https://www.zhihu.com/question/29823322/answer/849016240">pyside的坑(知乎)</a>，答主介绍了一种重写__repr__魔法方法使pickle序列化的解决方案，太深</p>
+<h2 id="for循环问题"><a href="#for循环问题" class="headerlink" title="for循环问题"></a>for循环问题</h2><p>这种情况在纯coding中肯定是存在的，而在节点编辑器中处理起来又很麻烦不优雅，目前市面上的节点编辑器也没有找到合适的方案，比如comfyui是单张图片的工作流而不是面向“批量化”处理，ShaderGraph是面对gpu的并行化操作本身没有for逻辑，UE蓝图倒是有WhileLoop/ForLoop节点，可以参考，但ue蓝图是面向程序的，参数给到了节点上，而LineIt是面向工作流的，需要重新设计</p>
+<p><img src="images/loading.gif" data-original="https://cdn.jsdelivr.net/gh/wjwABCDEFG/blog_img/img/20250401153909929.png" alt="image-20250324150541420"></p>
+<p><img src="images/loading.gif" data-original="https://cdn.jsdelivr.net/gh/wjwABCDEFG/blog_img/img/20250401153914713.png" alt="image-20250324150555401"></p>
+<p>假设有如下操作</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">for item in list:</span><br><span class="line">    doA</span><br><span class="line">    doB</span><br><span class="line">    doC</span><br></pre></td></tr></table></figure>
+
+<p>在没有for循环节点的情况下，变成了</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">&#x2F;&#x2F;node1</span><br><span class="line">for item in list:</span><br><span class="line">    doA</span><br><span class="line">    </span><br><span class="line">&#x2F;&#x2F;node2</span><br><span class="line">for item in list:</span><br><span class="line">    doB</span><br><span class="line">    </span><br><span class="line">&#x2F;&#x2F;node3</span><br><span class="line">for item in list:</span><br><span class="line">    doC</span><br></pre></td></tr></table></figure>
+
+<p>复杂度也会由O(n)变成O(3n)</p>
+<h2 id="参数节点化问题"><a href="#参数节点化问题" class="headerlink" title="参数节点化问题"></a>参数节点化问题</h2><p>后续可以做一个功能，允许把detailsInfo的参数变成输入节点，这样可能更加灵活一些</p>
+<p>暂定的设计：右键节点-&gt;暴露参数-&gt;选择detailsInfo中的参数列表-&gt;扩展input节点</p>
+<p>如果做这个的话，每个socket可能还要带一个label标签注明这个socket的作用</p>
+
+        </div>
+        
+        
+        
+    </div>
+</div>
+
+
+
+
+
+<div class="card card-transparent">
+    <div class="level post-navigation is-flex-wrap is-mobile">
+        
+        
+        <div class="level-end">
+            <a class="level level-item has-link-grey  article-nav-next" href="/games/Unity3D-note/">
+                <span class="level-item">Unity3D学习笔记</span>
+                <i class="level-item fas fa-chevron-right"></i>
+            </a>
+        </div>
+        
+    </div>
+</div>
+
+
+</div>
+                
+
+
+
+
+<div class="column is-4-tablet is-4-desktop is-3-widescreen  has-order-1 column-left ">
+    
+        
+<div class="card widget">
+    <div class="card-content">
+        <nav class="level">
+            <div class="level-item has-text-centered" style="flex-shrink: 1">
+                <div>
+                    
+                    <figure class="image is-128x128 has-mb-6">
+                        <img class="is-rounded" src="images/loading.gif" data-original="https://cdn.jsdelivr.net/gh/wjwABCDEFG/blog_img/img/20210717231547.jpeg" alt="wjwABCDEFG">
+                    </figure>
+                    
+                    <p class="is-size-4 is-block">
+                        wjwABCDEFG
+                    </p>
+                    
+                    
+                    
+                    <p class="is-size-6 is-flex is-flex-center has-text-grey">
+                        <i class="fas fa-map-marker-alt has-mr-7"></i>
+                        <span>Shaoguan, China</span>
+                    </p>
+                    
+                </div>
+            </div>
+        </nav>
+        <nav class="level is-mobile">
+            <div class="level-item has-text-centered is-marginless">
+                <div>
+                    <p class="heading">
+                        文章
+                    </p>
+                    <a href="/archives">
+                        <p class="title has-text-weight-normal">
+                            103
+                        </p>
+                    </a>
+                </div>
+            </div>
+            <div class="level-item has-text-centered is-marginless">
+                <div>
+                    <p class="heading">
+                        分类
+                    </p>
+                    <a href="/categories">
+                        <p class="title has-text-weight-normal">
+                            14
+                        </p>
+                    </a>
+                </div>
+            </div>
+            <div class="level-item has-text-centered is-marginless">
+                <div>
+                    <p class="heading">
+                        标签
+                    </p>
+                    <a href="/tags">
+                        <p class="title has-text-weight-normal">
+                            26
+                        </p>
+                    </a>
+                </div>
+            </div>
+        </nav>
+        
+        <div class="level">
+            <a class="level-item button is-link is-rounded" href="https://github.com/wjwABCDEFG" target="_blank" rel="noopener">
+                关注我</a>
+        </div>
+        
+        
+        
+    </div>
+</div>
+    
+        
+<div class="card widget">
+    <div class="card-content">
+        <div class="menu">
+            <h3 class="menu-label">
+                分类
+            </h3>
+            <ul class="menu-list">
+            <li>
+        <a class="level is-marginless" href="/categories/Java/">
+            <span class="level-start">
+                <span class="level-item">Java基础</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">7</span>
+            </span>
+        </a></li><li>
+        <a class="level is-marginless" href="/categories/Mysql/">
+            <span class="level-start">
+                <span class="level-item">Mysql</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">3</span>
+            </span>
+        </a></li><li>
+        <a class="level is-marginless" href="/categories/Others/">
+            <span class="level-start">
+                <span class="level-item">Others</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">8</span>
+            </span>
+        </a></li><li>
+        <a class="level is-marginless" href="/categories/Spring/">
+            <span class="level-start">
+                <span class="level-item">Spring</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">6</span>
+            </span>
+        </a></li><li>
+        <a class="level is-marginless" href="/categories/SpringCloud/">
+            <span class="level-start">
+                <span class="level-item">SpringCloud</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">4</span>
+            </span>
+        </a></li><li>
+        <a class="level is-marginless" href="/categories/util/">
+            <span class="level-start">
+                <span class="level-item">Util工具类</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">3</span>
+            </span>
+        </a></li><li>
+        <a class="level is-marginless" href="/categories/redis/">
+            <span class="level-start">
+                <span class="level-item">redis</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">1</span>
+            </span>
+        </a></li><li>
+        <a class="level is-marginless" href="/categories/frontend/">
+            <span class="level-start">
+                <span class="level-item">前端</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">3</span>
+            </span>
+        </a></li><li>
+        <a class="level is-marginless" href="/categories/algorithms/">
+            <span class="level-start">
+                <span class="level-item">数据结构和算法</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">60</span>
+            </span>
+        </a></li><li>
+        <a class="level is-marginless" href="/categories/games/">
+            <span class="level-start">
+                <span class="level-item">游戏和引擎</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">2</span>
+            </span>
+        </a></li><li>
+        <a class="level is-marginless" href="/categories/deeplearning/">
+            <span class="level-start">
+                <span class="level-item">玄学</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">1</span>
+            </span>
+        </a></li><li>
+        <a class="level is-marginless" href="/categories/life/">
+            <span class="level-start">
+                <span class="level-item">生活随笔</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">6</span>
+            </span>
+        </a></li><li>
+        <a class="level is-marginless" href="/categories/cs/">
+            <span class="level-start">
+                <span class="level-item">计算机基础</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">1</span>
+            </span>
+        </a></li><li>
+        <a class="level is-marginless" href="/categories/designpattern/">
+            <span class="level-start">
+                <span class="level-item">设计模式</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">1</span>
+            </span>
+        </a></li>
+            </ul>
+        </div>
+    </div>
+</div>
+    
+        <div class="card widget">
+    <div class="card-content">
+        <h3 class="menu-label">
+            标签云
+        </h3>
+        <a href="/tags/DL-ML/" style="font-size: 10px;">DL/ML</a> <a href="/tags/http/" style="font-size: 10px;">http</a> <a href="/tags/lintcode/" style="font-size: 10px;">lintcode</a> <a href="/tags/markdown/" style="font-size: 10px;">markdown</a> <a href="/tags/mysql/" style="font-size: 11.67px;">mysql</a> <a href="/tags/spring/" style="font-size: 11.67px;">spring</a> <a href="/tags/springcloud/" style="font-size: 10px;">springcloud</a> <a href="/tags/%E4%BA%8C%E5%88%86%E6%9F%A5%E6%89%BE/" style="font-size: 10px;">二分查找</a> <a href="/tags/%E5%89%91%E6%8C%87offer/" style="font-size: 10px;">剑指offer</a> <a href="/tags/%E5%8A%9B%E6%89%A3/" style="font-size: 20px;">力扣</a> <a href="/tags/%E5%8A%A0%E5%AF%86/" style="font-size: 10px;">加密</a> <a href="/tags/%E5%8A%A8%E6%80%81%E8%A7%84%E5%88%92/" style="font-size: 13.33px;">动态规划</a> <a href="/tags/%E5%8D%95%E8%B0%83%E6%A0%88/" style="font-size: 15px;">单调栈</a> <a href="/tags/%E5%9B%9E%E6%BA%AF/" style="font-size: 16.67px;">回溯</a> <a href="/tags/%E5%AD%97%E7%AC%A6%E4%B8%B2/" style="font-size: 10px;">字符串</a> <a href="/tags/%E5%AD%A6%E4%B9%A0%E8%AE%B0%E5%BD%95/" style="font-size: 10px;">学习记录</a> <a href="/tags/%E5%BC%80%E5%8F%91/" style="font-size: 18.33px;">开发</a> <a href="/tags/%E6%8E%92%E5%BA%8F/" style="font-size: 10px;">排序</a> <a href="/tags/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/" style="font-size: 13.33px;">数据结构</a> <a href="/tags/%E6%A0%88/" style="font-size: 10px;">栈</a> <a href="/tags/%E6%A0%91/" style="font-size: 15px;">树</a> <a href="/tags/%E6%B8%B8%E6%88%8F%E5%92%8C%E5%BC%95%E6%93%8E/" style="font-size: 11.67px;">游戏和引擎</a> <a href="/tags/%E7%AC%94%E8%AF%95/" style="font-size: 10px;">笔试</a> <a href="/tags/%E7%AC%94%E8%AF%95%E9%9D%A2%E8%AF%95/" style="font-size: 13.33px;">笔试面试</a> <a href="/tags/%E7%AE%97%E6%B3%95/" style="font-size: 10px;">算法</a> <a href="/tags/%E9%80%92%E5%BD%92/" style="font-size: 10px;">递归</a>
+    </div>
+</div>
+    
+    
+        <div class="column-right-shadow is-hidden-widescreen is-sticky">
+        
+            
+
+    <div class="card widget" id="toc">
+        <div class="card-content">
+            <div class="menu">
+                <h3 class="menu-label">
+                    目录
+                </h3>
+                <ul class="menu-list"><li>
+        <a class="is-flex" href="#画布-图元">
+        <!-- 目录是否自动编号 -->
+        <!-- <span class="has-mr-6">1</span> -->
+        <span>画布/图元</span>
+        </a><ul class="menu-list"><li>
+        <a class="is-flex" href="#ui和逻辑的互操架构">
+        <!-- 目录是否自动编号 -->
+        <!-- <span class="has-mr-6">1.1</span> -->
+        <span>ui和逻辑的互操架构</span>
+        </a></li></ul></li><li>
+        <a class="is-flex" href="#节点的设计">
+        <!-- 目录是否自动编号 -->
+        <!-- <span class="has-mr-6">2</span> -->
+        <span>节点的设计</span>
+        </a><ul class="menu-list"><li>
+        <a class="is-flex" href="#基本结构">
+        <!-- 目录是否自动编号 -->
+        <!-- <span class="has-mr-6">2.1</span> -->
+        <span>基本结构</span>
+        </a></li><li>
+        <a class="is-flex" href="#和socket-edge关联">
+        <!-- 目录是否自动编号 -->
+        <!-- <span class="has-mr-6">2.2</span> -->
+        <span>和socket/edge关联</span>
+        </a></li><li>
+        <a class="is-flex" href="#动态注册">
+        <!-- 目录是否自动编号 -->
+        <!-- <span class="has-mr-6">2.3</span> -->
+        <span>动态注册</span>
+        </a></li><li>
+        <a class="is-flex" href="#计算节点">
+        <!-- 目录是否自动编号 -->
+        <!-- <span class="has-mr-6">2.4</span> -->
+        <span>计算节点</span>
+        </a></li></ul></li><li>
+        <a class="is-flex" href="#序列化-反序列化">
+        <!-- 目录是否自动编号 -->
+        <!-- <span class="has-mr-6">3</span> -->
+        <span>序列化/反序列化</span>
+        </a><ul class="menu-list"><li>
+        <a class="is-flex" href="#serialize">
+        <!-- 目录是否自动编号 -->
+        <!-- <span class="has-mr-6">3.1</span> -->
+        <span>serialize</span>
+        </a></li><li>
+        <a class="is-flex" href="#deserialize">
+        <!-- 目录是否自动编号 -->
+        <!-- <span class="has-mr-6">3.2</span> -->
+        <span>deserialize</span>
+        </a></li></ul></li><li>
+        <a class="is-flex" href="#undo-redo功能">
+        <!-- 目录是否自动编号 -->
+        <!-- <span class="has-mr-6">4</span> -->
+        <span>undo/redo功能</span>
+        </a></li><li>
+        <a class="is-flex" href="#剪贴板功能">
+        <!-- 目录是否自动编号 -->
+        <!-- <span class="has-mr-6">5</span> -->
+        <span>剪贴板功能</span>
+        </a></li><li>
+        <a class="is-flex" href="#MDI窗口">
+        <!-- 目录是否自动编号 -->
+        <!-- <span class="has-mr-6">6</span> -->
+        <span>MDI窗口</span>
+        </a></li><li>
+        <a class="is-flex" href="#Details面板">
+        <!-- 目录是否自动编号 -->
+        <!-- <span class="has-mr-6">7</span> -->
+        <span>Details面板</span>
+        </a></li><li>
+        <a class="is-flex" href="#开关">
+        <!-- 目录是否自动编号 -->
+        <!-- <span class="has-mr-6">8</span> -->
+        <span>开关</span>
+        </a></li><li>
+        <a class="is-flex" href="#eval执行流程设计">
+        <!-- 目录是否自动编号 -->
+        <!-- <span class="has-mr-6">9</span> -->
+        <span>eval执行流程设计</span>
+        </a></li><li>
+        <a class="is-flex" href="#Store节点">
+        <!-- 目录是否自动编号 -->
+        <!-- <span class="has-mr-6">10</span> -->
+        <span>Store节点</span>
+        </a></li><li>
+        <a class="is-flex" href="#接口类型颜色">
+        <!-- 目录是否自动编号 -->
+        <!-- <span class="has-mr-6">11</span> -->
+        <span>接口类型颜色</span>
+        </a></li><li>
+        <a class="is-flex" href="#动态增加ouput数量">
+        <!-- 目录是否自动编号 -->
+        <!-- <span class="has-mr-6">12</span> -->
+        <span>动态增加ouput数量</span>
+        </a></li><li>
+        <a class="is-flex" href="#节点列表">
+        <!-- 目录是否自动编号 -->
+        <!-- <span class="has-mr-6">13</span> -->
+        <span>节点列表</span>
+        </a><ul class="menu-list"><li>
+        <a class="is-flex" href="#移动设备操作类">
+        <!-- 目录是否自动编号 -->
+        <!-- <span class="has-mr-6">13.1</span> -->
+        <span>移动设备操作类</span>
+        </a></li><li>
+        <a class="is-flex" href="#文件类">
+        <!-- 目录是否自动编号 -->
+        <!-- <span class="has-mr-6">13.2</span> -->
+        <span>文件类</span>
+        </a></li><li>
+        <a class="is-flex" href="#图像类">
+        <!-- 目录是否自动编号 -->
+        <!-- <span class="has-mr-6">13.3</span> -->
+        <span>图像类</span>
+        </a></li><li>
+        <a class="is-flex" href="#工具类">
+        <!-- 目录是否自动编号 -->
+        <!-- <span class="has-mr-6">13.4</span> -->
+        <span>工具类</span>
+        </a></li></ul></li><li>
+        <a class="is-flex" href="#可能存在的问题以及后续的规划">
+        <!-- 目录是否自动编号 -->
+        <!-- <span class="has-mr-6">14</span> -->
+        <span>可能存在的问题以及后续的规划</span>
+        </a><ul class="menu-list"><li>
+        <a class="is-flex" href="#节点通用性问题">
+        <!-- 目录是否自动编号 -->
+        <!-- <span class="has-mr-6">14.1</span> -->
+        <span>节点通用性问题</span>
+        </a></li><li>
+        <a class="is-flex" href="#避免在eval相关的函数中操作界面">
+        <!-- 目录是否自动编号 -->
+        <!-- <span class="has-mr-6">14.2</span> -->
+        <span>避免在eval相关的函数中操作界面</span>
+        </a></li><li>
+        <a class="is-flex" href="#并行化改造存在的问题">
+        <!-- 目录是否自动编号 -->
+        <!-- <span class="has-mr-6">14.3</span> -->
+        <span>并行化改造存在的问题</span>
+        </a></li><li>
+        <a class="is-flex" href="#for循环问题">
+        <!-- 目录是否自动编号 -->
+        <!-- <span class="has-mr-6">14.4</span> -->
+        <span>for循环问题</span>
+        </a></li><li>
+        <a class="is-flex" href="#参数节点化问题">
+        <!-- 目录是否自动编号 -->
+        <!-- <span class="has-mr-6">14.5</span> -->
+        <span>参数节点化问题</span>
+        </a></li></ul></li></ul>
+            </div>
+        </div>
+    </div>
+
+        
+            <div class="card widget">
+    <div class="card-content">
+        <h3 class="menu-label">
+            推荐阅读
+        </h3>
+        
+        <article class="media">
+            
+            <a href="/Others/node-editor.md/" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="images/loading.gif" data-original="https://cdn.jsdelivr.net/gh/wjwABCDEFG/blog_img/img/20250401154214355.jpeg" alt="Line-It 节点编辑器.md">
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2025-04-01T07:28:20.000Z">2025-04-01</time></div>
+                    <a href="/Others/node-editor.md/" class="title has-link-black-ter is-size-6 has-text-weight-normal">Line-It 节点编辑器.md</a>
+                    <p class="is-size-7 is-uppercase">
+                        <a class="has-link-grey -link" href="/categories/Others/">Others</a>
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+        <article class="media">
+            
+            <a href="/games/Unity3D-note/" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="images/loading.gif" data-original="https://cdn.jsdelivr.net/gh/wjwABCDEFG/blog_img/img/20210728004637.jpg" alt="Unity3D学习笔记">
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2021-07-28T12:42:07.000Z">2021-07-28</time></div>
+                    <a href="/games/Unity3D-note/" class="title has-link-black-ter is-size-6 has-text-weight-normal">Unity3D学习笔记</a>
+                    <p class="is-size-7 is-uppercase">
+                        <a class="has-link-grey -link" href="/categories/games/">游戏和引擎</a>
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+        <article class="media">
+            
+            <a href="/life/%E4%B8%BA%E6%AF%95%E4%B8%9A%E5%81%9A%E5%87%86%E5%A4%87/" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="images/loading.gif" data-original="https://cdn.jsdelivr.net/gh/wjwABCDEFG/blog_img/img/20210717225951.jpeg" alt="为毕业做准备">
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2021-03-31T13:13:32.000Z">2021-03-31</time></div>
+                    <a href="/life/%E4%B8%BA%E6%AF%95%E4%B8%9A%E5%81%9A%E5%87%86%E5%A4%87/" class="title has-link-black-ter is-size-6 has-text-weight-normal">为毕业做准备</a>
+                    <p class="is-size-7 is-uppercase">
+                        <a class="has-link-grey -link" href="/categories/life/">生活随笔</a>
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+        <article class="media">
+            
+            <a href="/life/mhxy-experience/" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="images/loading.gif" data-original="https://cdn.jsdelivr.net/gh/wjwABCDEFG/blog_img/img/20210717223725.png" alt="梦幻西游游戏体验">
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2021-03-31T08:29:35.000Z">2021-03-31</time></div>
+                    <a href="/life/mhxy-experience/" class="title has-link-black-ter is-size-6 has-text-weight-normal">梦幻西游游戏体验</a>
+                    <p class="is-size-7 is-uppercase">
+                        <a class="has-link-grey -link" href="/categories/life/">生活随笔</a>
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+        <article class="media">
+            
+            <a href="/games/3DMath-Primerfor-Graphics-and-Game-Development-note/" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="images/loading.gif" data-original="https://cdn.jsdelivr.net/gh/wjwABCDEFG/blog_img/img/20210717223435.jpeg" alt="3D数学基础图形与游戏研发笔记">
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2021-03-06T10:55:07.000Z">2021-03-06</time></div>
+                    <a href="/games/3DMath-Primerfor-Graphics-and-Game-Development-note/" class="title has-link-black-ter is-size-6 has-text-weight-normal">3D数学基础图形与游戏研发笔记</a>
+                    <p class="is-size-7 is-uppercase">
+                        <a class="has-link-grey -link" href="/categories/games/">游戏和引擎</a>
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+    </div>
+</div>
+        
+        </div>
+    
+</div>
+
+                
+
+
+
+
+<div class="column is-4-tablet is-4-desktop is-3-widescreen is-hidden-touch is-hidden-desktop-only has-order-3 column-right is-sticky">
+    
+        
+
+    <div class="card widget" id="toc">
+        <div class="card-content">
+            <div class="menu">
+                <h3 class="menu-label">
+                    目录
+                </h3>
+                <ul class="menu-list"><li>
+        <a class="is-flex" href="#画布-图元">
+        <!-- 目录是否自动编号 -->
+        <!-- <span class="has-mr-6">1</span> -->
+        <span>画布/图元</span>
+        </a><ul class="menu-list"><li>
+        <a class="is-flex" href="#ui和逻辑的互操架构">
+        <!-- 目录是否自动编号 -->
+        <!-- <span class="has-mr-6">1.1</span> -->
+        <span>ui和逻辑的互操架构</span>
+        </a></li></ul></li><li>
+        <a class="is-flex" href="#节点的设计">
+        <!-- 目录是否自动编号 -->
+        <!-- <span class="has-mr-6">2</span> -->
+        <span>节点的设计</span>
+        </a><ul class="menu-list"><li>
+        <a class="is-flex" href="#基本结构">
+        <!-- 目录是否自动编号 -->
+        <!-- <span class="has-mr-6">2.1</span> -->
+        <span>基本结构</span>
+        </a></li><li>
+        <a class="is-flex" href="#和socket-edge关联">
+        <!-- 目录是否自动编号 -->
+        <!-- <span class="has-mr-6">2.2</span> -->
+        <span>和socket/edge关联</span>
+        </a></li><li>
+        <a class="is-flex" href="#动态注册">
+        <!-- 目录是否自动编号 -->
+        <!-- <span class="has-mr-6">2.3</span> -->
+        <span>动态注册</span>
+        </a></li><li>
+        <a class="is-flex" href="#计算节点">
+        <!-- 目录是否自动编号 -->
+        <!-- <span class="has-mr-6">2.4</span> -->
+        <span>计算节点</span>
+        </a></li></ul></li><li>
+        <a class="is-flex" href="#序列化-反序列化">
+        <!-- 目录是否自动编号 -->
+        <!-- <span class="has-mr-6">3</span> -->
+        <span>序列化/反序列化</span>
+        </a><ul class="menu-list"><li>
+        <a class="is-flex" href="#serialize">
+        <!-- 目录是否自动编号 -->
+        <!-- <span class="has-mr-6">3.1</span> -->
+        <span>serialize</span>
+        </a></li><li>
+        <a class="is-flex" href="#deserialize">
+        <!-- 目录是否自动编号 -->
+        <!-- <span class="has-mr-6">3.2</span> -->
+        <span>deserialize</span>
+        </a></li></ul></li><li>
+        <a class="is-flex" href="#undo-redo功能">
+        <!-- 目录是否自动编号 -->
+        <!-- <span class="has-mr-6">4</span> -->
+        <span>undo/redo功能</span>
+        </a></li><li>
+        <a class="is-flex" href="#剪贴板功能">
+        <!-- 目录是否自动编号 -->
+        <!-- <span class="has-mr-6">5</span> -->
+        <span>剪贴板功能</span>
+        </a></li><li>
+        <a class="is-flex" href="#MDI窗口">
+        <!-- 目录是否自动编号 -->
+        <!-- <span class="has-mr-6">6</span> -->
+        <span>MDI窗口</span>
+        </a></li><li>
+        <a class="is-flex" href="#Details面板">
+        <!-- 目录是否自动编号 -->
+        <!-- <span class="has-mr-6">7</span> -->
+        <span>Details面板</span>
+        </a></li><li>
+        <a class="is-flex" href="#开关">
+        <!-- 目录是否自动编号 -->
+        <!-- <span class="has-mr-6">8</span> -->
+        <span>开关</span>
+        </a></li><li>
+        <a class="is-flex" href="#eval执行流程设计">
+        <!-- 目录是否自动编号 -->
+        <!-- <span class="has-mr-6">9</span> -->
+        <span>eval执行流程设计</span>
+        </a></li><li>
+        <a class="is-flex" href="#Store节点">
+        <!-- 目录是否自动编号 -->
+        <!-- <span class="has-mr-6">10</span> -->
+        <span>Store节点</span>
+        </a></li><li>
+        <a class="is-flex" href="#接口类型颜色">
+        <!-- 目录是否自动编号 -->
+        <!-- <span class="has-mr-6">11</span> -->
+        <span>接口类型颜色</span>
+        </a></li><li>
+        <a class="is-flex" href="#动态增加ouput数量">
+        <!-- 目录是否自动编号 -->
+        <!-- <span class="has-mr-6">12</span> -->
+        <span>动态增加ouput数量</span>
+        </a></li><li>
+        <a class="is-flex" href="#节点列表">
+        <!-- 目录是否自动编号 -->
+        <!-- <span class="has-mr-6">13</span> -->
+        <span>节点列表</span>
+        </a><ul class="menu-list"><li>
+        <a class="is-flex" href="#移动设备操作类">
+        <!-- 目录是否自动编号 -->
+        <!-- <span class="has-mr-6">13.1</span> -->
+        <span>移动设备操作类</span>
+        </a></li><li>
+        <a class="is-flex" href="#文件类">
+        <!-- 目录是否自动编号 -->
+        <!-- <span class="has-mr-6">13.2</span> -->
+        <span>文件类</span>
+        </a></li><li>
+        <a class="is-flex" href="#图像类">
+        <!-- 目录是否自动编号 -->
+        <!-- <span class="has-mr-6">13.3</span> -->
+        <span>图像类</span>
+        </a></li><li>
+        <a class="is-flex" href="#工具类">
+        <!-- 目录是否自动编号 -->
+        <!-- <span class="has-mr-6">13.4</span> -->
+        <span>工具类</span>
+        </a></li></ul></li><li>
+        <a class="is-flex" href="#可能存在的问题以及后续的规划">
+        <!-- 目录是否自动编号 -->
+        <!-- <span class="has-mr-6">14</span> -->
+        <span>可能存在的问题以及后续的规划</span>
+        </a><ul class="menu-list"><li>
+        <a class="is-flex" href="#节点通用性问题">
+        <!-- 目录是否自动编号 -->
+        <!-- <span class="has-mr-6">14.1</span> -->
+        <span>节点通用性问题</span>
+        </a></li><li>
+        <a class="is-flex" href="#避免在eval相关的函数中操作界面">
+        <!-- 目录是否自动编号 -->
+        <!-- <span class="has-mr-6">14.2</span> -->
+        <span>避免在eval相关的函数中操作界面</span>
+        </a></li><li>
+        <a class="is-flex" href="#并行化改造存在的问题">
+        <!-- 目录是否自动编号 -->
+        <!-- <span class="has-mr-6">14.3</span> -->
+        <span>并行化改造存在的问题</span>
+        </a></li><li>
+        <a class="is-flex" href="#for循环问题">
+        <!-- 目录是否自动编号 -->
+        <!-- <span class="has-mr-6">14.4</span> -->
+        <span>for循环问题</span>
+        </a></li><li>
+        <a class="is-flex" href="#参数节点化问题">
+        <!-- 目录是否自动编号 -->
+        <!-- <span class="has-mr-6">14.5</span> -->
+        <span>参数节点化问题</span>
+        </a></li></ul></li></ul>
+            </div>
+        </div>
+    </div>
+
+    
+        <div class="card widget">
+    <div class="card-content">
+        <h3 class="menu-label">
+            推荐阅读
+        </h3>
+        
+        <article class="media">
+            
+            <a href="/Others/node-editor.md/" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="images/loading.gif" data-original="https://cdn.jsdelivr.net/gh/wjwABCDEFG/blog_img/img/20250401154214355.jpeg" alt="Line-It 节点编辑器.md">
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2025-04-01T07:28:20.000Z">2025-04-01</time></div>
+                    <a href="/Others/node-editor.md/" class="title has-link-black-ter is-size-6 has-text-weight-normal">Line-It 节点编辑器.md</a>
+                    <p class="is-size-7 is-uppercase">
+                        <a class="has-link-grey -link" href="/categories/Others/">Others</a>
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+        <article class="media">
+            
+            <a href="/games/Unity3D-note/" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="images/loading.gif" data-original="https://cdn.jsdelivr.net/gh/wjwABCDEFG/blog_img/img/20210728004637.jpg" alt="Unity3D学习笔记">
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2021-07-28T12:42:07.000Z">2021-07-28</time></div>
+                    <a href="/games/Unity3D-note/" class="title has-link-black-ter is-size-6 has-text-weight-normal">Unity3D学习笔记</a>
+                    <p class="is-size-7 is-uppercase">
+                        <a class="has-link-grey -link" href="/categories/games/">游戏和引擎</a>
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+        <article class="media">
+            
+            <a href="/life/%E4%B8%BA%E6%AF%95%E4%B8%9A%E5%81%9A%E5%87%86%E5%A4%87/" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="images/loading.gif" data-original="https://cdn.jsdelivr.net/gh/wjwABCDEFG/blog_img/img/20210717225951.jpeg" alt="为毕业做准备">
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2021-03-31T13:13:32.000Z">2021-03-31</time></div>
+                    <a href="/life/%E4%B8%BA%E6%AF%95%E4%B8%9A%E5%81%9A%E5%87%86%E5%A4%87/" class="title has-link-black-ter is-size-6 has-text-weight-normal">为毕业做准备</a>
+                    <p class="is-size-7 is-uppercase">
+                        <a class="has-link-grey -link" href="/categories/life/">生活随笔</a>
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+        <article class="media">
+            
+            <a href="/life/mhxy-experience/" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="images/loading.gif" data-original="https://cdn.jsdelivr.net/gh/wjwABCDEFG/blog_img/img/20210717223725.png" alt="梦幻西游游戏体验">
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2021-03-31T08:29:35.000Z">2021-03-31</time></div>
+                    <a href="/life/mhxy-experience/" class="title has-link-black-ter is-size-6 has-text-weight-normal">梦幻西游游戏体验</a>
+                    <p class="is-size-7 is-uppercase">
+                        <a class="has-link-grey -link" href="/categories/life/">生活随笔</a>
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+        <article class="media">
+            
+            <a href="/games/3DMath-Primerfor-Graphics-and-Game-Development-note/" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="images/loading.gif" data-original="https://cdn.jsdelivr.net/gh/wjwABCDEFG/blog_img/img/20210717223435.jpeg" alt="3D数学基础图形与游戏研发笔记">
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2021-03-06T10:55:07.000Z">2021-03-06</time></div>
+                    <a href="/games/3DMath-Primerfor-Graphics-and-Game-Development-note/" class="title has-link-black-ter is-size-6 has-text-weight-normal">3D数学基础图形与游戏研发笔记</a>
+                    <p class="is-size-7 is-uppercase">
+                        <a class="has-link-grey -link" href="/categories/games/">游戏和引擎</a>
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+    </div>
+</div>
+    
+    
+</div>
+
+            </div>
+        </div>
+    </section>
+    <footer class="footer">
+    <div class="container">
+        <div class="level">
+            <div class="level-start has-text-centered-mobile">
+                <a class="footer-logo is-block has-mb-6" href="/">
+                
+                    <img src="images/loading.gif" data-original="https://cdn.jsdelivr.net/gh/wjwABCDEFG/blog_img/img/20210717231246.png" alt="Line-It 节点编辑器.md" height="28">
+                
+                </a>
+                <p class="is-size-7">
+                &copy; 2025 wjw&nbsp;
+                Powered by <a href="https://hexo.io/" target="_blank" rel="noopener">Hexo</a> & <a
+                        href="https://github.com/ppoffice/hexo-theme-icarus" target="_blank" rel="noopener">Icarus</a>
+                
+                <br>
+                <!-- <span id="busuanzi_container_site_uv">
+                共<span id="busuanzi_value_site_uv">0</span>个访客
+                </span> -->
+                <span id="busuanzi_container_site_uv"> 来访 <span id="busuanzi_value_site_uv"></span>人</span>
+                <span id="busuanzi_container_site_pv">, 总访问 <span id="busuanzi_value_site_pv"></span>次</span>
+
+                <span id="timeDate">载入天数...</span><span id="times">载入时分秒...</span>
+                    <script>
+                        var now = new Date(); 
+                        function createtime() { 
+                            var grt= new Date("03/06/2020 00:00:00"); /*建站时间*/
+                            now.setTime(now.getTime()+250); 
+                            days = (now - grt ) / 1000 / 60 / 60 / 24; dnum = Math.floor(days); 
+                            hours = (now - grt ) / 1000 / 60 / 60 - (24 * dnum); hnum = Math.floor(hours); 
+                            if(String(hnum).length ==1 ){hnum = "0" + hnum;} minutes = (now - grt ) / 1000 /60 - (24 * 60 * dnum) - (60 * hnum); 
+                            mnum = Math.floor(minutes); if(String(mnum).length ==1 ){mnum = "0" + mnum;} 
+                            seconds = (now - grt ) / 1000 - (24 * 60 * 60 * dnum) - (60 * 60 * hnum) - (60 * mnum); 
+                            snum = Math.round(seconds); if(String(snum).length ==1 ){snum = "0" + snum;} 
+                            document.getElementById("timeDate").innerHTML = "本站已安全运行 "+dnum+" 天 "; 
+                            document.getElementById("times").innerHTML = hnum + " 小时 " + mnum + " 分 " + snum + " 秒"; 
+                        } 
+                    setInterval("createtime()",250);
+                    </script>
+                
+                </p>
+            </div>
+            <div class="level-end">
+            
+                <div class="field has-addons is-flex-center-mobile has-mt-5-mobile is-flex-wrap is-flex-middle">
+                
+                <p class="control">
+                    <a class="button is-white is-large" target="_blank" rel="noopener" title="Creative Commons" href="https://creativecommons.org/">
+                        
+                        <i class="fab fa-creative-commons"></i>
+                        
+                    </a>
+                </p>
+                
+                <p class="control">
+                    <a class="button is-white is-large" target="_blank" rel="noopener" title="Attribution 4.0 International" href="https://creativecommons.org/licenses/by/4.0/">
+                        
+                        <i class="fab fa-creative-commons-by"></i>
+                        
+                    </a>
+                </p>
+                
+                <p class="control">
+                    <a class="button is-white is-large" target="_blank" rel="noopener" title="Download on GitHub" href="https://github.com/ppoffice/hexo-theme-icarus">
+                        
+                        <i class="fab fa-github"></i>
+                        
+                    </a>
+                </p>
+                
+                </div>
+            
+            </div>
+        </div>
+    </div>
+</footer>
+    <script src="https://cdn.jsdelivr.net/npm/jquery@3.3.1/dist/jquery.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/moment@2.22.2/min/moment-with-locales.min.js"></script>
+<script>moment.locale("zh-CN");</script>
+
+
+<script>
+var IcarusThemeSettings = {
+    site: {
+        url: 'https://wjw.today',
+        external_link: {"enable":true,"exclude":[]}
+    },
+    article: {
+        highlight: {
+            clipboard: true,
+            fold: 'unfolded'
+        }
+    }
+};
+</script>
+
+
+<script src="https://cdn.jsdelivr.net/npm/clipboard@2.0.4/dist/clipboard.min.js" defer></script>
+
+
+
+
+
+<script src="/js/animation.js"></script>
+
+
+
+<script src="https://cdn.jsdelivr.net/npm/lightgallery@1.6.8/dist/js/lightgallery.min.js" defer></script>
+<script src="https://cdn.jsdelivr.net/npm/justifiedGallery@3.7.0/dist/js/jquery.justifiedGallery.min.js" defer></script>
+<script src="/js/gallery.js" defer></script>
+
+
+
+<div id="outdated">
+    <h6>Your browser is out-of-date!</h6>
+    <p>Update your browser to view this website correctly. <a id="btnUpdateBrowser" href="http://outdatedbrowser.com/">Update
+            my browser now </a></p>
+    <p class="last"><a href="#" id="btnCloseUpdateBrowser" title="Close">&times;</a></p>
+</div>
+<script src="https://cdn.jsdelivr.net/npm/outdatedbrowser@1.1.5/outdatedbrowser/outdatedbrowser.min.js" defer></script>
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+        outdatedBrowser({
+            bgColor: '#f25648',
+            color: '#ffffff',
+            lowerThan: 'flex'
+        });
+    });
+</script>
+
+
+<script src="https://cdn.jsdelivr.net/npm/mathjax@2.7.5/unpacked/MathJax.js?config=TeX-MML-AM_CHTML" defer></script>
+<script>
+document.addEventListener('DOMContentLoaded', function () {
+    MathJax.Hub.Config({
+        'HTML-CSS': {
+            matchFontHeight: false
+        },
+        SVG: {
+            matchFontHeight: false
+        },
+        CommonHTML: {
+            matchFontHeight: false
+        },
+        tex2jax: {
+            inlineMath: [
+                ['$','$'],
+                ['\\(','\\)']
+            ]
+        }
+    });
+});
+</script>
+
+
+<a id="back-to-top" title="回到顶端" href="javascript:;">
+    <i class="fas fa-chevron-up"></i>
+</a>
+<script src="/js/back-to-top.js" defer></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<script src="/js/main.js" defer></script>
+
+    
+    <div class="searchbox ins-search">
+    <div class="searchbox-container ins-search-container">
+        <div class="searchbox-input-wrapper">
+            <input type="text" class="searchbox-input ins-search-input" placeholder="想要查找什么..." />
+            <span class="searchbox-close ins-close ins-selectable"><i class="fa fa-times-circle"></i></span>
+        </div>
+        <div class="searchbox-result-wrapper ins-section-wrapper">
+            <div class="ins-section-container"></div>
+        </div>
+    </div>
+</div>
+<script>
+    (function (window) {
+        var INSIGHT_CONFIG = {
+            TRANSLATION: {
+                POSTS: '文章',
+                PAGES: '页面',
+                CATEGORIES: '分类',
+                TAGS: '标签',
+                UNTITLED: '(无标题)',
+            },
+            CONTENT_URL: '/content.json',
+        };
+        window.INSIGHT_CONFIG = INSIGHT_CONFIG;
+    })(window);
+</script>
+<script src="/js/insight.js" defer></script>
+<link rel="stylesheet" href="/css/search.css">
+<link rel="stylesheet" href="/css/insight.css">
+    
+
+        <style>
+            [bg-lazy] {
+                background-image: none !important;
+                background-color: #eee !important;
+            }
+        </style>
+        <script>
+            window.imageLazyLoadSetting = {
+                isSPA: false,
+                preloadRatio: 1,
+                processImages: null,
+            };
+        </script><script>window.addEventListener("load",function(){var t=/\.(gif|jpg|jpeg|tiff|png)$/i,r=/^data:image\/[a-z\d\-\.\+]+;base64,/;Array.prototype.slice.call(document.querySelectorAll("img[data-original]")).forEach(function(a){var e=a.parentNode;"A"===e.tagName&&(t.test(e.href)||r.test(e.href))&&(e.href=a.dataset.original)})});</script><script>(r=>{r.imageLazyLoadSetting.processImages=t;var a=r.imageLazyLoadSetting.isSPA,o=r.imageLazyLoadSetting.preloadRatio||1,d=i();function i(){var t=Array.prototype.slice.call(document.querySelectorAll("img[data-original]")),e=Array.prototype.slice.call(document.querySelectorAll("[bg-lazy]"));return t.concat(e)}function t(t){(a||t)&&(d=i());for(var e,n=0;n<d.length;n++)0<=(e=(e=d[n]).getBoundingClientRect()).bottom&&0<=e.left&&e.top<=(r.innerHeight*o||document.documentElement.clientHeight*o)&&(()=>{var t,e,a,o,i=d[n];e=function(){d=d.filter(function(t){return i!==t}),r.imageLazyLoadSetting.onImageLoaded&&r.imageLazyLoadSetting.onImageLoaded(i)},(t=i).dataset.loaded||(t.hasAttribute("bg-lazy")?(t.removeAttribute("bg-lazy"),e&&e()):(a=new Image,o=t.getAttribute("data-original"),a.onload=function(){t.src=o,t.removeAttribute("data-original"),t.setAttribute("data-loaded",!0),e&&e()},a.onerror=function(){t.removeAttribute("data-original"),t.setAttribute("data-loaded",!1),t.src=o},t.src!==o&&(a.src=o)))})()}function e(){clearTimeout(t.tId),t.tId=setTimeout(t,500)}t(),document.addEventListener("scroll",e),r.addEventListener("resize",e),r.addEventListener("orientationchange",e)})(this);</script></body>
+</html>

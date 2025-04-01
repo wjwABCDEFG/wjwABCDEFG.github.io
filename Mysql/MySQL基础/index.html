@@ -1,0 +1,1297 @@
+<!DOCTYPE html>
+<html  lang="zh">
+<head>
+    <meta charset="utf-8" />
+
+<meta name="generator" content="Hexo 4.2.1" />
+
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+
+<title>MySQL基础 - 小温 blog</title>
+
+
+    <meta name="description" content="1. MySQL基本架构">
+<meta property="og:type" content="article">
+<meta property="og:title" content="MySQL基础">
+<meta property="og:url" content="https://wjw.today/Mysql/MySQL%E5%9F%BA%E7%A1%80/index.html">
+<meta property="og:site_name" content="小温 blog">
+<meta property="og:description" content="1. MySQL基本架构">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/wjwABCDEFG/blog_img/img/20210717213825.jpg">
+<meta property="article:published_time" content="2020-11-04T11:22:43.000Z">
+<meta property="article:modified_time" content="2021-07-17T13:40:59.065Z">
+<meta property="article:author" content="wjw">
+<meta property="article:tag" content="笔试面试">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://cdn.jsdelivr.net/gh/wjwABCDEFG/blog_img/img/20210717213825.jpg">
+
+
+
+
+
+
+
+<link rel="icon" href="/images/favicon.ico">
+
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.7.2/css/bulma.css">
+<link rel="stylesheet" href="https://cdn.bootcss.com/font-awesome/5.4.1/css/all.css">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Ubuntu:400,600|Source+Code+Pro">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@9.12.0/styles/atom-one-dark.css">
+
+
+    
+    
+<style>body>.footer,body>.navbar,body>.section{opacity:0}</style>
+
+    
+    
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/lightgallery@1.6.8/dist/css/lightgallery.min.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/justifiedGallery@3.7.0/dist/css/justifiedGallery.min.css">
+
+    
+    
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/outdatedbrowser@1.1.5/outdatedbrowser/outdatedbrowser.min.css">
+
+    
+    
+    
+    
+<link rel="stylesheet" href="/css/back-to-top.css">
+
+    
+    
+    
+    
+    
+    
+    
+    <link rel="stylesheet" href="/css/progressbar.css">
+<script src="https://cdn.jsdelivr.net/npm/pace-js@1.0.2/pace.min.js"></script>
+    
+    <script async="" src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+    
+
+
+<link rel="stylesheet" href="/css/style.css">
+</head>
+<body class="is-3-column">
+    <nav class="navbar navbar-main">
+    <div class="container">
+        <div class="navbar-brand is-flex-center">
+            <a class="navbar-item navbar-logo" href="/">
+            
+                <img src="images/loading.gif" data-original="https://cdn.jsdelivr.net/gh/wjwABCDEFG/blog_img/img/20210717231246.png" alt="MySQL基础" height="28">
+            
+            </a>
+        </div>
+        <div class="navbar-menu">
+            
+            <div class="navbar-start">
+                
+                <a class="navbar-item"
+                href="/">主页</a>
+                
+                <a class="navbar-item"
+                href="/archives">归档</a>
+                
+                <a class="navbar-item"
+                href="/categories">分类</a>
+                
+                <a class="navbar-item"
+                href="/tags">标签</a>
+                
+                <a class="navbar-item"
+                href="/about">关于</a>
+                
+            </div>
+            
+            <div class="navbar-end">
+                
+                    
+                    <a class="navbar-item" target="_blank" rel="noopener" title="View My GitHub" href="https://github.com/wjwABCDEFG">
+                        
+                        <i class="fab fa-github"></i>
+                        
+                    </a>
+                    
+                
+                
+                <a class="navbar-item is-hidden-tablet catalogue" title="目录" href="javascript:;">
+                    <i class="fas fa-list-ul"></i>
+                </a>
+                
+                
+                <a class="navbar-item search" title="搜索" href="javascript:;">
+                    <i class="fas fa-search"></i>
+                </a>
+                
+            </div>
+        </div>
+    </div>
+</nav>
+    
+    <section class="section">
+        <div class="container">
+            <div class="columns">
+                <div class="column is-8-tablet is-8-desktop is-6-widescreen has-order-2 column-main">
+<div class="card">
+    
+    <div class="card-image">
+        <span  class="image is-7by1">
+            <img class="thumbnail" src="images/loading.gif" data-original="https://cdn.jsdelivr.net/gh/wjwABCDEFG/blog_img/img/20210717213825.jpg" alt="MySQL基础">
+        </span>
+    </div>
+    
+    <div class="card-content article ">
+        
+        <div class="level article-meta is-size-7 is-uppercase is-mobile is-overflow-x-auto">
+            <div class="level-left">
+                <time class="level-item has-text-grey" datetime="2020-11-04T11:22:43.000Z">2020-11-04</time>
+                
+                <div class="level-item">
+                <a class="has-link-grey -link" href="/categories/Mysql/">Mysql</a>
+                </div>
+                
+                
+                <span class="level-item has-text-grey">
+                    
+                    
+                    21 分钟 读完 (大约 3143 个字)
+                </span>
+                
+                
+                <span class="level-item has-text-grey" id="busuanzi_container_page_pv">
+                    <i class="far fa-eye"></i>
+                    <span id="busuanzi_value_page_pv">0</span>次访问
+                </span>
+                
+            </div>
+        </div>
+        
+        <h1 class="title is-size-3 is-size-4-mobile has-text-weight-normal">
+            
+                MySQL基础
+            
+        </h1>
+        <div class="content">
+            <h1 id="1-MySQL基本架构"><a href="#1-MySQL基本架构" class="headerlink" title="1. MySQL基本架构"></a>1. MySQL基本架构</h1><a id="more"></a>
+
+<p><img src="images/loading.gif" data-original="https://cdn.jsdelivr.net/gh/wjwABCDEFG/blog_img/img/20210717213840.png" alt="流程"></p>
+<h2 id="连接器"><a href="#连接器" class="headerlink" title="连接器"></a><strong>连接器</strong></h2><p>客户端每发起一个连接请求，首先经过连接器，建立<strong>tcp连接</strong>，<strong>校验账号密码</strong>。连接器会维护<strong>连接列表</strong>processlist 可以通过<code>show processlist</code>查看，其中刚开启的线程处于<strong>sleep状态</strong></p>
+<p><img src="images/loading.gif" data-original="https://cdn.jsdelivr.net/gh/wjwABCDEFG/blog_img/img/20210717213847.png" alt="BgQl9g.png"></p>
+<p>Time代表已Sleep的时间，如果<strong>超过了wait_timeout需要重连，默认8小时</strong>，可以通过<code>show variables like &#39;%timeout%&#39;</code>命令查看</p>
+<p><img src="images/loading.gif" data-original="https://cdn.jsdelivr.net/gh/wjwABCDEFG/blog_img/img/20210717213852.png" alt="Bg1NfU.png"></p>
+<p>为了防止断线重连，可以采用如下方法：</p>
+<ul>
+<li><strong>长连接</strong>：由于连接在内存中，容易造成<strong>OOM异常，mysql重启，jvm会Full GC</strong></li>
+<li><strong>重置连接资源</strong>：通过命令mysql_reset_connection，可以在不断线的情况下重置连接资源</li>
+</ul>
+<p>ps: 要注意让spring配置连接池bean的时候设置的maxIdleTime属性（不同连接池属性名可能不一样）要小于mysql的wait_timeout</p>
+<br>
+
+<h2 id="缓存"><a href="#缓存" class="headerlink" title="缓存"></a>缓存</h2><p>k-v形式，如果命中，直接返回数据，如果未命中，走分析器，并在获取结果后缓存，以便第二次查。因为用的少（缓存都走redis了）<strong>8.0后取消了</strong>，8.0之前，<strong>explain索引分析的时候记得加上SQL_NO_CACHE关掉</strong></p>
+<br>
+
+<h2 id="分析器"><a href="#分析器" class="headerlink" title="分析器"></a>分析器</h2><p><strong>词法分析</strong>（查询还是别的操作，哪张表，哪列等），<strong>语法分析</strong>（运行时会报SQL syntax语法错误）</p>
+<br>
+
+<h2 id="优化器"><a href="#优化器" class="headerlink" title="优化器"></a>优化器</h2><p><strong>是否使用索引，使用什么索引。有时候会用错索引，使用analyze table table_name或者强制走索引force index</strong></p>
+<br>
+
+<h2 id="执行器"><a href="#执行器" class="headerlink" title="执行器"></a>执行器</h2><p>操作引擎执行SQL</p>
+<br>
+
+<h2 id="引擎"><a href="#引擎" class="headerlink" title="引擎"></a>引擎</h2><blockquote>
+<p>参考</p>
+<p><a href="https://baijiahao.baidu.com/s?id=1655327558614401593&amp;wfr=spider&amp;for=pc">https://baijiahao.baidu.com/s?id=1655327558614401593&amp;wfr=spider&amp;for=pc</a></p>
+<p><a href="https://zhuanlan.zhihu.com/p/53619907">https://zhuanlan.zhihu.com/p/53619907</a></p>
+</blockquote>
+<p>通过<code>show engines;</code>就可以查看支持的引擎，有9种，常见的有3，4种（InnoDB，MyISAM，CSV，MEMORY）</p>
+<p><img src="images/loading.gif" data-original="https://wx2.sbimg.cn/2020/08/31/6vxYU.png" alt=""></p>
+<p>查看某张表的引擎等信息可以用<code>show table status like ‘user’ \G</code></p>
+<br>
+
+<p>一张表横向对比</p>
+<p><img src="images/loading.gif" data-original="https://wx1.sbimg.cn/2020/08/31/6vJlh.jpg" alt=""></p>
+<br>
+
+<p><strong>InnoDB</strong></p>
+<ul>
+<li>MySQL默认的事务型引擎</li>
+<li>用来处理大量短期事务，短期事务大部分是正常提交的，很少回滚</li>
+<li>通过间隙锁（next-key locking）防止幻读的出现</li>
+<li>基于聚簇索引建立，与其他存储引擎有很大的区别，聚簇索引对主键查询有很高的性能，不过它的二级索引（secondary index，非主键索引）必须包含主键列。所以如果主键列很大的话，索引会很大</li>
+<li>性能高</li>
+<li>自动崩溃恢复</li>
+</ul>
+<p>InnoDB页结构，16kb</p>
+<p><img src="images/loading.gif" data-original="https://cdn.jsdelivr.net/gh/wjwABCDEFG/blog_img/img/20210717213931.png" alt="页结构"></p>
+<p><img src="images/loading.gif" data-original="https://cdn.jsdelivr.net/gh/wjwABCDEFG/blog_img/img/20210717213942.png" alt=""></p>
+<p>索引B+树中⼀个节点为⼀⻚或⻚的倍数最为合适，如果读取1.2页也要读取2页</p>
+<br>
+
+<p><strong>MyISAM</strong></p>
+<ul>
+<li><p>5.1之前，MyISAM是默认的引擎</p>
+</li>
+<li><p>适用于些只读数据，或者表空间较小</p>
+</li>
+<li><p>特性：全文索引、支持压缩、空间函数。全文索引：基于分词创建的索引，也可以支持复杂的查询。压缩：如果数据在写入后不会修改，那么这个表适合MyISAM压缩表。可以使用myisampack对MyISAM表进行打包，压缩表是不可以修改数据的，可以减少磁盘IO，提升性能，压缩表也支持索引，但是索引也是只读的</p>
+</li>
+<li><p>不支持事务和行级锁（后续版本中支持了事务），对整个表加锁，而不是行锁，读取的时候对表加共享锁，写入的时候加排他锁，但是可以同时读写。但是由于没有行锁机制，所以在海量写入的时候，会导致所有查询处于Locked状态。</p>
+</li>
+<li><p>将表存储在两个文件中：数据文件、索引文件，分别是.MYD、.MYI后缀</p>
+</li>
+<li><p>行记录数取决于磁盘空间和操作系统中的单个文件最大尺寸</p>
+</li>
+<li><p>即使是Blob，Text等等长字段，也可以基于前500字符创建索引</p>
+</li>
+<li><p>可以选择延迟更新索引键，在创建表的时候指定delay_key_write选项，在每次修改执行完成时，不会立刻将修改的索引数据写入磁盘，而是写到缓存区，只有在清理缓存区或者关闭表的时候才会将索引写入磁盘。这可以极大的提升写入性能，但是在主机崩溃时会造成索引损坏，需要执行修复操作。</p>
+</li>
+</ul>
+<br>
+
+<p><strong>CSV</strong></p>
+<ul>
+<li>CSV引擎可以将普通的CSV文件作为MySQL表来处理</li>
+<li>不支持索引</li>
+<li>CSV可以在数据库运行时拷贝或者拷出文件，可以将Excel等电子表格中的数据存储为CSV文件，然后复制到MySQL中，就能在MySQL中打开使用。</li>
+<li>同样，如果将数据写入到一个CSV引擎表，其他外部程序也可以从表的数据文件中读取CSV的数据。因此CSV可以作为数据交换机制。非常好用。</li>
+</ul>
+<br>
+
+<p><strong>Memory</strong></p>
+<ul>
+<li><p>所有的数据都保存在内存中，不需要进行磁盘I/O</p>
+</li>
+<li><p>Memory表的结构在重启以后还会保留，但数据会丢失</p>
+</li>
+<li><p>需要快速地访问数据，并且这些数据不会被修改（例如将邮编和州名映射的表）</p>
+</li>
+<li><p>比MyISAM表要快一个数量级（因为在内存中）</p>
+</li>
+</ul>
+<br>
+
+<h1 id="2-MySQL索引和SQL调优"><a href="#2-MySQL索引和SQL调优" class="headerlink" title="2. MySQL索引和SQL调优"></a>2. MySQL索引和SQL调优</h1><p>关于索引，内容比较多，另外开了一篇文章==&gt;<a href="https://wjw.today/2020/10/08/mysql索引/">mysql索引</a></p>
+<br>
+
+<h1 id="3-日志系统"><a href="#3-日志系统" class="headerlink" title="3. 日志系统"></a>3. 日志系统</h1><h2 id="3-1-redo-log"><a href="#3-1-redo-log" class="headerlink" title="3.1 redo log"></a>3.1 redo log</h2><p>内容：记录数据修改操作（事务尚未提交）</p>
+<p>作用：异常宕机或者介质故障后的数据恢复（crash safe）</p>
+<p>层级：innoDB层面</p>
+<p>解释：</p>
+<p>更新语句–&gt;写redo log–&gt;更新内存数据–&gt;空闲/按策略将redo log写入磁盘，这种先写日志再写磁盘的技术称为WAL(Write Ahead logging)</p>
+<p>redo log大小是固定的，循环写。write pos走在前面，表示当前写入redo log的位置。checkpoint表示同步到磁盘的位置。如下图</p>
+<p><img src="images/loading.gif" data-original="https://cdn.jsdelivr.net/gh/wjwABCDEFG/blog_img/img/20210717213950.png" alt=""></p>
+<p>有一条update语句执行，redo log从write pos开始往右写，到头后循环到最左边继续，当碰到check point说明redo log满了，会立即同步到磁盘。</p>
+<p>同样的，如果空闲了也会同步到磁盘，checkpoint也会往右移，当碰到write pos说明redo log空了。</p>
+<p><img src="images/loading.gif" data-original="https://cdn.jsdelivr.net/gh/wjwABCDEFG/blog_img/img/20210717213956.png" alt="redo log刷写硬盘过程"></p>
+<h2 id="3-2-undo-log"><a href="#3-2-undo-log" class="headerlink" title="3.2 undo log"></a>3.2 undo log</h2><p>内容：记录事务开始前的值</p>
+<p>作用：用于回滚，同时可以提供多版本并发控制下的读（MVCC），也即非锁定读</p>
+<p>层级：innoDB层面</p>
+<h2 id="3-3-bin-log"><a href="#3-3-bin-log" class="headerlink" title="3.3 bin log"></a>3.3 bin log</h2><p>内容：记录二进制</p>
+<p>作用：主从复制同步，时间点还原</p>
+<p>层级：MySQL Server层面</p>
+<br>
+
+<h1 id="3-事务、隔离级别和MVCC"><a href="#3-事务、隔离级别和MVCC" class="headerlink" title="3. 事务、隔离级别和MVCC"></a>3. 事务、隔离级别和MVCC</h1><h2 id="事务"><a href="#事务" class="headerlink" title="事务"></a>事务</h2><ul>
+<li><strong>原子性（Atomicity）：</strong>一个事务（transaction）中的所有操作，要么全部完成，要么全部不完成，发生错误会被回滚（Rollback）到事务开始前的状态。</li>
+<li><strong>一致性（Consistency）：</strong>在事务开始之前和事务结束以后，数据库的完整性没有被破坏。这表示写入的资料必须完全符合所有的预设规则。比如转账一边-100另一边+100，总体不变就是其中一种预设规则。</li>
+<li><strong>隔离性（Isolation）：</strong>数据库允许多个并发事务同时对其数据进行读写和修改的能力，隔离性可以防止多个事务并发执行时由于交叉执行而导致数据的不一致。事务隔离分为不同级别，包括读未提交（Read uncommitted）、读提交（read committed）、可重复读（repeatable read）和串行化（Serializable）。</li>
+<li><strong>持久性（Durability）：</strong>事务处理结束后，对数据的修改就是永久的，即便系统故障也不会丢失。</li>
+</ul>
+<br>
+
+<h2 id="隔离级别"><a href="#隔离级别" class="headerlink" title="隔离级别"></a>隔离级别</h2><h3 id="几种隔离级别"><a href="#几种隔离级别" class="headerlink" title="几种隔离级别"></a>几种隔离级别</h3><ul>
+<li><p><strong>读未提交（READ UNCOMMITTED）</strong> ：⼀个事务还没提交时，它做的变更就能被别的事务看到。</p>
+</li>
+<li><p><strong>读提交（READ COMMITTED）</strong> ：⼀个事务提交之后，它做的变更才会被其他事务看到。</p>
+</li>
+<li><p><strong>可重复读（REPEATABLE READ）</strong>：⼀个事务执⾏过程中看到的数据，总是跟这个事务在启动时看到的数据是⼀致的。当然在可重复读隔离级别下，未提交变更对其他事务也是不可见的。</p>
+</li>
+<li><p><strong>串行化（SERIALIZABLE）</strong>：对于同⼀行记录，“写”会加“写锁”，“读”会加“读锁”，当出现读写锁冲突的时候，后访问的事务必须等前⼀个事务执⾏完成，才能继续执行。</p>
+</li>
+</ul>
+<p>通过以下mysql语句更改</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">SET [GLOBAL|SESSION] TRANSACTION ISOLATION LEVEL 上面几种level;</span><br></pre></td></tr></table></figure>
+
+<br>
+
+<h3 id="并发问题"><a href="#并发问题" class="headerlink" title="并发问题"></a>并发问题</h3><ul>
+<li><strong>脏读（dirty read）</strong> ：如果⼀个事务读到了另⼀个未提交事务修改过的数据。</li>
+</ul>
+<p><img src="images/loading.gif" data-original="https://cdn.jsdelivr.net/gh/wjwABCDEFG/blog_img/img/20210717214008.png" alt=""></p>
+<ul>
+<li><strong>不可重复读（non-repeatable read）</strong>：如果⼀个事务只能读到另⼀个已经提交的事务修改过的数据，并且其他事务每对该数据进⾏⼀次修改并提交后，该事务都能查询得到最新值。</li>
+</ul>
+<p><img src="images/loading.gif" data-original="https://cdn.jsdelivr.net/gh/wjwABCDEFG/blog_img/img/20210717214020.png" alt=""></p>
+<ul>
+<li><strong>幻读（phantom read）</strong>：如果⼀个事务先根据某些条件查询出⼀些记录，之后另⼀个事务⼜向表中插⼊了符合这些条件的记录，原先的事务再次按照该条件查询时，能把另⼀个事务插⼊的记录也读出来。</li>
+</ul>
+<p><img src="images/loading.gif" data-original="https://cdn.jsdelivr.net/gh/wjwABCDEFG/blog_img/img/20210717214030.png" alt="幻读"></p>
+<p>ps：不可重复读和幻读有点像，主要区别在于不可重复读是两次查询某一条数据的修改，幻读是查询整张表出现的新增。也就是新增那行原来不存在所以锁不住，控制的手段也会不一样。</p>
+<h3 id="对应解决"><a href="#对应解决" class="headerlink" title="对应解决"></a>对应解决</h3><ul>
+<li><p>读未提交：啥都不能解决</p>
+</li>
+<li><p>读提交：解决脏读，事务A读取的是事务B开始前和提交后的数据</p>
+</li>
+<li><p>可重复读：解决脏读、不可重复读，事务A整个过程读取的都是事务B开始前的数据</p>
+</li>
+<li><p>串行化：解决脏读、不可重复读、幻读，事务A过程中事务B只能等待</p>
+</li>
+</ul>
+<br>
+
+<h2 id="MVCC"><a href="#MVCC" class="headerlink" title="MVCC"></a>MVCC</h2><p><strong>读提交</strong>和<strong>可重复读</strong>为什么可以读取另一个事务开始前的数据呢？这里就要提到MVCC（Multi-Version Concurrency Control ，多版本并发控制），在事务在启动的时候就“拍了个快照”，这个快照被称为<strong>一致性视图</strong>。</p>
+<p>那快照是怎么实现的呢？当然不需要完全复制一张表，而是使用了undo log中一个叫<strong>版本链</strong>的东西，事实上每一行数据都有隐藏的trx_id记录了每一个版本，还有一个roll_pointer指针域指向旧版本，形成一个undo log链表</p>
+<p><img src="images/loading.gif" data-original="https://cdn.jsdelivr.net/gh/wjwABCDEFG/blog_img/img/20210717214039.png" alt="undo log"></p>
+<p>MVCC就是根据某一个版本生成对应的一致性视图</p>
+<p><strong>如果是读提交，则在每个SQL执行前生成</strong></p>
+<p><img src="images/loading.gif" data-original="https://cdn.jsdelivr.net/gh/wjwABCDEFG/blog_img/img/20210717214047.png" alt="读提交生成视图时间"></p>
+<p><strong>如果是可重复读，则只在第一次查询的时候生成一次</strong></p>
+<p><img src="images/loading.gif" data-original="https://cdn.jsdelivr.net/gh/wjwABCDEFG/blog_img/img/20210717214054.png" alt="可重复读生成视图时间"></p>
+<br>
+
+<h1 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h1><p>本文参考</p>
+<blockquote>
+<p>三太子敖丙公众号MySQL系列文章</p>
+<p>CSDN博客:二十六画生的博客（<a href="https://blog.csdn.net/u010002184/article/details/88526708）">https://blog.csdn.net/u010002184/article/details/88526708）</a></p>
+<p>CSDN博客:cwjokaka（<a href="https://blog.csdn.net/u013295276/article/details/79105163）">https://blog.csdn.net/u013295276/article/details/79105163）</a></p>
+</blockquote>
+
+        </div>
+        
+        <div class="level is-size-7 is-uppercase">
+            <div class="level-start">
+                <div class="level-item">
+                    <span class="is-size-6 has-text-grey has-mr-7">#</span>
+                    <a class="has-link-grey -link" href="/tags/%E7%AC%94%E8%AF%95%E9%9D%A2%E8%AF%95/" rel="tag">笔试面试</a>
+                </div>
+            </div>
+        </div>
+        
+        
+        
+    </div>
+</div>
+
+
+
+
+
+<div class="card card-transparent">
+    <div class="level post-navigation is-flex-wrap is-mobile">
+        
+        <div class="level-start">
+            <a class="level level-item has-link-grey  article-nav-prev" href="/life/10%E6%9C%88%E4%BA%8B%E8%AE%B0/">
+                <i class="level-item fas fa-chevron-left"></i>
+                <span class="level-item">10月事记</span>
+            </a>
+        </div>
+        
+        
+        <div class="level-end">
+            <a class="level level-item has-link-grey  article-nav-next" href="/algorithms/quicksort/">
+                <span class="level-item">记一次快速排序探究</span>
+                <i class="level-item fas fa-chevron-right"></i>
+            </a>
+        </div>
+        
+    </div>
+</div>
+
+
+</div>
+                
+
+
+
+
+<div class="column is-4-tablet is-4-desktop is-3-widescreen  has-order-1 column-left ">
+    
+        
+<div class="card widget">
+    <div class="card-content">
+        <nav class="level">
+            <div class="level-item has-text-centered" style="flex-shrink: 1">
+                <div>
+                    
+                    <figure class="image is-128x128 has-mb-6">
+                        <img class="is-rounded" src="images/loading.gif" data-original="https://cdn.jsdelivr.net/gh/wjwABCDEFG/blog_img/img/20210717231547.jpeg" alt="wjwABCDEFG">
+                    </figure>
+                    
+                    <p class="is-size-4 is-block">
+                        wjwABCDEFG
+                    </p>
+                    
+                    
+                    
+                    <p class="is-size-6 is-flex is-flex-center has-text-grey">
+                        <i class="fas fa-map-marker-alt has-mr-7"></i>
+                        <span>Shaoguan, China</span>
+                    </p>
+                    
+                </div>
+            </div>
+        </nav>
+        <nav class="level is-mobile">
+            <div class="level-item has-text-centered is-marginless">
+                <div>
+                    <p class="heading">
+                        文章
+                    </p>
+                    <a href="/archives">
+                        <p class="title has-text-weight-normal">
+                            103
+                        </p>
+                    </a>
+                </div>
+            </div>
+            <div class="level-item has-text-centered is-marginless">
+                <div>
+                    <p class="heading">
+                        分类
+                    </p>
+                    <a href="/categories">
+                        <p class="title has-text-weight-normal">
+                            14
+                        </p>
+                    </a>
+                </div>
+            </div>
+            <div class="level-item has-text-centered is-marginless">
+                <div>
+                    <p class="heading">
+                        标签
+                    </p>
+                    <a href="/tags">
+                        <p class="title has-text-weight-normal">
+                            26
+                        </p>
+                    </a>
+                </div>
+            </div>
+        </nav>
+        
+        <div class="level">
+            <a class="level-item button is-link is-rounded" href="https://github.com/wjwABCDEFG" target="_blank" rel="noopener">
+                关注我</a>
+        </div>
+        
+        
+        
+    </div>
+</div>
+    
+        
+<div class="card widget">
+    <div class="card-content">
+        <div class="menu">
+            <h3 class="menu-label">
+                分类
+            </h3>
+            <ul class="menu-list">
+            <li>
+        <a class="level is-marginless" href="/categories/Java/">
+            <span class="level-start">
+                <span class="level-item">Java基础</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">7</span>
+            </span>
+        </a></li><li>
+        <a class="level is-marginless" href="/categories/Mysql/">
+            <span class="level-start">
+                <span class="level-item">Mysql</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">3</span>
+            </span>
+        </a></li><li>
+        <a class="level is-marginless" href="/categories/Others/">
+            <span class="level-start">
+                <span class="level-item">Others</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">8</span>
+            </span>
+        </a></li><li>
+        <a class="level is-marginless" href="/categories/Spring/">
+            <span class="level-start">
+                <span class="level-item">Spring</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">6</span>
+            </span>
+        </a></li><li>
+        <a class="level is-marginless" href="/categories/SpringCloud/">
+            <span class="level-start">
+                <span class="level-item">SpringCloud</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">4</span>
+            </span>
+        </a></li><li>
+        <a class="level is-marginless" href="/categories/util/">
+            <span class="level-start">
+                <span class="level-item">Util工具类</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">3</span>
+            </span>
+        </a></li><li>
+        <a class="level is-marginless" href="/categories/redis/">
+            <span class="level-start">
+                <span class="level-item">redis</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">1</span>
+            </span>
+        </a></li><li>
+        <a class="level is-marginless" href="/categories/frontend/">
+            <span class="level-start">
+                <span class="level-item">前端</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">3</span>
+            </span>
+        </a></li><li>
+        <a class="level is-marginless" href="/categories/algorithms/">
+            <span class="level-start">
+                <span class="level-item">数据结构和算法</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">60</span>
+            </span>
+        </a></li><li>
+        <a class="level is-marginless" href="/categories/games/">
+            <span class="level-start">
+                <span class="level-item">游戏和引擎</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">2</span>
+            </span>
+        </a></li><li>
+        <a class="level is-marginless" href="/categories/deeplearning/">
+            <span class="level-start">
+                <span class="level-item">玄学</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">1</span>
+            </span>
+        </a></li><li>
+        <a class="level is-marginless" href="/categories/life/">
+            <span class="level-start">
+                <span class="level-item">生活随笔</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">6</span>
+            </span>
+        </a></li><li>
+        <a class="level is-marginless" href="/categories/cs/">
+            <span class="level-start">
+                <span class="level-item">计算机基础</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">1</span>
+            </span>
+        </a></li><li>
+        <a class="level is-marginless" href="/categories/designpattern/">
+            <span class="level-start">
+                <span class="level-item">设计模式</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">1</span>
+            </span>
+        </a></li>
+            </ul>
+        </div>
+    </div>
+</div>
+    
+        <div class="card widget">
+    <div class="card-content">
+        <h3 class="menu-label">
+            标签云
+        </h3>
+        <a href="/tags/DL-ML/" style="font-size: 10px;">DL/ML</a> <a href="/tags/http/" style="font-size: 10px;">http</a> <a href="/tags/lintcode/" style="font-size: 10px;">lintcode</a> <a href="/tags/markdown/" style="font-size: 10px;">markdown</a> <a href="/tags/mysql/" style="font-size: 11.67px;">mysql</a> <a href="/tags/spring/" style="font-size: 11.67px;">spring</a> <a href="/tags/springcloud/" style="font-size: 10px;">springcloud</a> <a href="/tags/%E4%BA%8C%E5%88%86%E6%9F%A5%E6%89%BE/" style="font-size: 10px;">二分查找</a> <a href="/tags/%E5%89%91%E6%8C%87offer/" style="font-size: 10px;">剑指offer</a> <a href="/tags/%E5%8A%9B%E6%89%A3/" style="font-size: 20px;">力扣</a> <a href="/tags/%E5%8A%A0%E5%AF%86/" style="font-size: 10px;">加密</a> <a href="/tags/%E5%8A%A8%E6%80%81%E8%A7%84%E5%88%92/" style="font-size: 13.33px;">动态规划</a> <a href="/tags/%E5%8D%95%E8%B0%83%E6%A0%88/" style="font-size: 15px;">单调栈</a> <a href="/tags/%E5%9B%9E%E6%BA%AF/" style="font-size: 16.67px;">回溯</a> <a href="/tags/%E5%AD%97%E7%AC%A6%E4%B8%B2/" style="font-size: 10px;">字符串</a> <a href="/tags/%E5%AD%A6%E4%B9%A0%E8%AE%B0%E5%BD%95/" style="font-size: 10px;">学习记录</a> <a href="/tags/%E5%BC%80%E5%8F%91/" style="font-size: 18.33px;">开发</a> <a href="/tags/%E6%8E%92%E5%BA%8F/" style="font-size: 10px;">排序</a> <a href="/tags/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/" style="font-size: 13.33px;">数据结构</a> <a href="/tags/%E6%A0%88/" style="font-size: 10px;">栈</a> <a href="/tags/%E6%A0%91/" style="font-size: 15px;">树</a> <a href="/tags/%E6%B8%B8%E6%88%8F%E5%92%8C%E5%BC%95%E6%93%8E/" style="font-size: 11.67px;">游戏和引擎</a> <a href="/tags/%E7%AC%94%E8%AF%95/" style="font-size: 10px;">笔试</a> <a href="/tags/%E7%AC%94%E8%AF%95%E9%9D%A2%E8%AF%95/" style="font-size: 13.33px;">笔试面试</a> <a href="/tags/%E7%AE%97%E6%B3%95/" style="font-size: 10px;">算法</a> <a href="/tags/%E9%80%92%E5%BD%92/" style="font-size: 10px;">递归</a>
+    </div>
+</div>
+    
+    
+        <div class="column-right-shadow is-hidden-widescreen is-sticky">
+        
+            
+
+    <div class="card widget" id="toc">
+        <div class="card-content">
+            <div class="menu">
+                <h3 class="menu-label">
+                    目录
+                </h3>
+                <ul class="menu-list"><li>
+        <a class="is-flex" href="#1-MySQL基本架构">
+        <!-- 目录是否自动编号 -->
+        <!-- <span class="has-mr-6">1</span> -->
+        <span>1. MySQL基本架构</span>
+        </a><ul class="menu-list"><li>
+        <a class="is-flex" href="#连接器">
+        <!-- 目录是否自动编号 -->
+        <!-- <span class="has-mr-6">1.1</span> -->
+        <span>连接器</span>
+        </a></li><li>
+        <a class="is-flex" href="#缓存">
+        <!-- 目录是否自动编号 -->
+        <!-- <span class="has-mr-6">1.2</span> -->
+        <span>缓存</span>
+        </a></li><li>
+        <a class="is-flex" href="#分析器">
+        <!-- 目录是否自动编号 -->
+        <!-- <span class="has-mr-6">1.3</span> -->
+        <span>分析器</span>
+        </a></li><li>
+        <a class="is-flex" href="#优化器">
+        <!-- 目录是否自动编号 -->
+        <!-- <span class="has-mr-6">1.4</span> -->
+        <span>优化器</span>
+        </a></li><li>
+        <a class="is-flex" href="#执行器">
+        <!-- 目录是否自动编号 -->
+        <!-- <span class="has-mr-6">1.5</span> -->
+        <span>执行器</span>
+        </a></li><li>
+        <a class="is-flex" href="#引擎">
+        <!-- 目录是否自动编号 -->
+        <!-- <span class="has-mr-6">1.6</span> -->
+        <span>引擎</span>
+        </a></li></ul></li><li>
+        <a class="is-flex" href="#2-MySQL索引和SQL调优">
+        <!-- 目录是否自动编号 -->
+        <!-- <span class="has-mr-6">2</span> -->
+        <span>2. MySQL索引和SQL调优</span>
+        </a></li><li>
+        <a class="is-flex" href="#3-日志系统">
+        <!-- 目录是否自动编号 -->
+        <!-- <span class="has-mr-6">3</span> -->
+        <span>3. 日志系统</span>
+        </a><ul class="menu-list"><li>
+        <a class="is-flex" href="#3-1-redo-log">
+        <!-- 目录是否自动编号 -->
+        <!-- <span class="has-mr-6">3.1</span> -->
+        <span>3.1 redo log</span>
+        </a></li><li>
+        <a class="is-flex" href="#3-2-undo-log">
+        <!-- 目录是否自动编号 -->
+        <!-- <span class="has-mr-6">3.2</span> -->
+        <span>3.2 undo log</span>
+        </a></li><li>
+        <a class="is-flex" href="#3-3-bin-log">
+        <!-- 目录是否自动编号 -->
+        <!-- <span class="has-mr-6">3.3</span> -->
+        <span>3.3 bin log</span>
+        </a></li></ul></li><li>
+        <a class="is-flex" href="#3-事务、隔离级别和MVCC">
+        <!-- 目录是否自动编号 -->
+        <!-- <span class="has-mr-6">4</span> -->
+        <span>3. 事务、隔离级别和MVCC</span>
+        </a><ul class="menu-list"><li>
+        <a class="is-flex" href="#事务">
+        <!-- 目录是否自动编号 -->
+        <!-- <span class="has-mr-6">4.1</span> -->
+        <span>事务</span>
+        </a></li><li>
+        <a class="is-flex" href="#隔离级别">
+        <!-- 目录是否自动编号 -->
+        <!-- <span class="has-mr-6">4.2</span> -->
+        <span>隔离级别</span>
+        </a><ul class="menu-list"><li>
+        <a class="is-flex" href="#几种隔离级别">
+        <!-- 目录是否自动编号 -->
+        <!-- <span class="has-mr-6">4.2.1</span> -->
+        <span>几种隔离级别</span>
+        </a></li><li>
+        <a class="is-flex" href="#并发问题">
+        <!-- 目录是否自动编号 -->
+        <!-- <span class="has-mr-6">4.2.2</span> -->
+        <span>并发问题</span>
+        </a></li><li>
+        <a class="is-flex" href="#对应解决">
+        <!-- 目录是否自动编号 -->
+        <!-- <span class="has-mr-6">4.2.3</span> -->
+        <span>对应解决</span>
+        </a></li></ul></li><li>
+        <a class="is-flex" href="#MVCC">
+        <!-- 目录是否自动编号 -->
+        <!-- <span class="has-mr-6">4.3</span> -->
+        <span>MVCC</span>
+        </a></li></ul></li><li>
+        <a class="is-flex" href="#参考">
+        <!-- 目录是否自动编号 -->
+        <!-- <span class="has-mr-6">5</span> -->
+        <span>参考</span>
+        </a></li></ul>
+            </div>
+        </div>
+    </div>
+
+        
+            <div class="card widget">
+    <div class="card-content">
+        <h3 class="menu-label">
+            推荐阅读
+        </h3>
+        
+        <article class="media">
+            
+            <a href="/Others/node-editor.md/" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="images/loading.gif" data-original="https://cdn.jsdelivr.net/gh/wjwABCDEFG/blog_img/img/20250401154214355.jpeg" alt="Line-It 节点编辑器.md">
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2025-04-01T07:28:20.000Z">2025-04-01</time></div>
+                    <a href="/Others/node-editor.md/" class="title has-link-black-ter is-size-6 has-text-weight-normal">Line-It 节点编辑器.md</a>
+                    <p class="is-size-7 is-uppercase">
+                        <a class="has-link-grey -link" href="/categories/Others/">Others</a>
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+        <article class="media">
+            
+            <a href="/games/Unity3D-note/" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="images/loading.gif" data-original="https://cdn.jsdelivr.net/gh/wjwABCDEFG/blog_img/img/20210728004637.jpg" alt="Unity3D学习笔记">
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2021-07-28T12:42:07.000Z">2021-07-28</time></div>
+                    <a href="/games/Unity3D-note/" class="title has-link-black-ter is-size-6 has-text-weight-normal">Unity3D学习笔记</a>
+                    <p class="is-size-7 is-uppercase">
+                        <a class="has-link-grey -link" href="/categories/games/">游戏和引擎</a>
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+        <article class="media">
+            
+            <a href="/life/%E4%B8%BA%E6%AF%95%E4%B8%9A%E5%81%9A%E5%87%86%E5%A4%87/" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="images/loading.gif" data-original="https://cdn.jsdelivr.net/gh/wjwABCDEFG/blog_img/img/20210717225951.jpeg" alt="为毕业做准备">
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2021-03-31T13:13:32.000Z">2021-03-31</time></div>
+                    <a href="/life/%E4%B8%BA%E6%AF%95%E4%B8%9A%E5%81%9A%E5%87%86%E5%A4%87/" class="title has-link-black-ter is-size-6 has-text-weight-normal">为毕业做准备</a>
+                    <p class="is-size-7 is-uppercase">
+                        <a class="has-link-grey -link" href="/categories/life/">生活随笔</a>
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+        <article class="media">
+            
+            <a href="/life/mhxy-experience/" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="images/loading.gif" data-original="https://cdn.jsdelivr.net/gh/wjwABCDEFG/blog_img/img/20210717223725.png" alt="梦幻西游游戏体验">
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2021-03-31T08:29:35.000Z">2021-03-31</time></div>
+                    <a href="/life/mhxy-experience/" class="title has-link-black-ter is-size-6 has-text-weight-normal">梦幻西游游戏体验</a>
+                    <p class="is-size-7 is-uppercase">
+                        <a class="has-link-grey -link" href="/categories/life/">生活随笔</a>
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+        <article class="media">
+            
+            <a href="/games/3DMath-Primerfor-Graphics-and-Game-Development-note/" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="images/loading.gif" data-original="https://cdn.jsdelivr.net/gh/wjwABCDEFG/blog_img/img/20210717223435.jpeg" alt="3D数学基础图形与游戏研发笔记">
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2021-03-06T10:55:07.000Z">2021-03-06</time></div>
+                    <a href="/games/3DMath-Primerfor-Graphics-and-Game-Development-note/" class="title has-link-black-ter is-size-6 has-text-weight-normal">3D数学基础图形与游戏研发笔记</a>
+                    <p class="is-size-7 is-uppercase">
+                        <a class="has-link-grey -link" href="/categories/games/">游戏和引擎</a>
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+    </div>
+</div>
+        
+        </div>
+    
+</div>
+
+                
+
+
+
+
+<div class="column is-4-tablet is-4-desktop is-3-widescreen is-hidden-touch is-hidden-desktop-only has-order-3 column-right is-sticky">
+    
+        
+
+    <div class="card widget" id="toc">
+        <div class="card-content">
+            <div class="menu">
+                <h3 class="menu-label">
+                    目录
+                </h3>
+                <ul class="menu-list"><li>
+        <a class="is-flex" href="#1-MySQL基本架构">
+        <!-- 目录是否自动编号 -->
+        <!-- <span class="has-mr-6">1</span> -->
+        <span>1. MySQL基本架构</span>
+        </a><ul class="menu-list"><li>
+        <a class="is-flex" href="#连接器">
+        <!-- 目录是否自动编号 -->
+        <!-- <span class="has-mr-6">1.1</span> -->
+        <span>连接器</span>
+        </a></li><li>
+        <a class="is-flex" href="#缓存">
+        <!-- 目录是否自动编号 -->
+        <!-- <span class="has-mr-6">1.2</span> -->
+        <span>缓存</span>
+        </a></li><li>
+        <a class="is-flex" href="#分析器">
+        <!-- 目录是否自动编号 -->
+        <!-- <span class="has-mr-6">1.3</span> -->
+        <span>分析器</span>
+        </a></li><li>
+        <a class="is-flex" href="#优化器">
+        <!-- 目录是否自动编号 -->
+        <!-- <span class="has-mr-6">1.4</span> -->
+        <span>优化器</span>
+        </a></li><li>
+        <a class="is-flex" href="#执行器">
+        <!-- 目录是否自动编号 -->
+        <!-- <span class="has-mr-6">1.5</span> -->
+        <span>执行器</span>
+        </a></li><li>
+        <a class="is-flex" href="#引擎">
+        <!-- 目录是否自动编号 -->
+        <!-- <span class="has-mr-6">1.6</span> -->
+        <span>引擎</span>
+        </a></li></ul></li><li>
+        <a class="is-flex" href="#2-MySQL索引和SQL调优">
+        <!-- 目录是否自动编号 -->
+        <!-- <span class="has-mr-6">2</span> -->
+        <span>2. MySQL索引和SQL调优</span>
+        </a></li><li>
+        <a class="is-flex" href="#3-日志系统">
+        <!-- 目录是否自动编号 -->
+        <!-- <span class="has-mr-6">3</span> -->
+        <span>3. 日志系统</span>
+        </a><ul class="menu-list"><li>
+        <a class="is-flex" href="#3-1-redo-log">
+        <!-- 目录是否自动编号 -->
+        <!-- <span class="has-mr-6">3.1</span> -->
+        <span>3.1 redo log</span>
+        </a></li><li>
+        <a class="is-flex" href="#3-2-undo-log">
+        <!-- 目录是否自动编号 -->
+        <!-- <span class="has-mr-6">3.2</span> -->
+        <span>3.2 undo log</span>
+        </a></li><li>
+        <a class="is-flex" href="#3-3-bin-log">
+        <!-- 目录是否自动编号 -->
+        <!-- <span class="has-mr-6">3.3</span> -->
+        <span>3.3 bin log</span>
+        </a></li></ul></li><li>
+        <a class="is-flex" href="#3-事务、隔离级别和MVCC">
+        <!-- 目录是否自动编号 -->
+        <!-- <span class="has-mr-6">4</span> -->
+        <span>3. 事务、隔离级别和MVCC</span>
+        </a><ul class="menu-list"><li>
+        <a class="is-flex" href="#事务">
+        <!-- 目录是否自动编号 -->
+        <!-- <span class="has-mr-6">4.1</span> -->
+        <span>事务</span>
+        </a></li><li>
+        <a class="is-flex" href="#隔离级别">
+        <!-- 目录是否自动编号 -->
+        <!-- <span class="has-mr-6">4.2</span> -->
+        <span>隔离级别</span>
+        </a><ul class="menu-list"><li>
+        <a class="is-flex" href="#几种隔离级别">
+        <!-- 目录是否自动编号 -->
+        <!-- <span class="has-mr-6">4.2.1</span> -->
+        <span>几种隔离级别</span>
+        </a></li><li>
+        <a class="is-flex" href="#并发问题">
+        <!-- 目录是否自动编号 -->
+        <!-- <span class="has-mr-6">4.2.2</span> -->
+        <span>并发问题</span>
+        </a></li><li>
+        <a class="is-flex" href="#对应解决">
+        <!-- 目录是否自动编号 -->
+        <!-- <span class="has-mr-6">4.2.3</span> -->
+        <span>对应解决</span>
+        </a></li></ul></li><li>
+        <a class="is-flex" href="#MVCC">
+        <!-- 目录是否自动编号 -->
+        <!-- <span class="has-mr-6">4.3</span> -->
+        <span>MVCC</span>
+        </a></li></ul></li><li>
+        <a class="is-flex" href="#参考">
+        <!-- 目录是否自动编号 -->
+        <!-- <span class="has-mr-6">5</span> -->
+        <span>参考</span>
+        </a></li></ul>
+            </div>
+        </div>
+    </div>
+
+    
+        <div class="card widget">
+    <div class="card-content">
+        <h3 class="menu-label">
+            推荐阅读
+        </h3>
+        
+        <article class="media">
+            
+            <a href="/Others/node-editor.md/" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="images/loading.gif" data-original="https://cdn.jsdelivr.net/gh/wjwABCDEFG/blog_img/img/20250401154214355.jpeg" alt="Line-It 节点编辑器.md">
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2025-04-01T07:28:20.000Z">2025-04-01</time></div>
+                    <a href="/Others/node-editor.md/" class="title has-link-black-ter is-size-6 has-text-weight-normal">Line-It 节点编辑器.md</a>
+                    <p class="is-size-7 is-uppercase">
+                        <a class="has-link-grey -link" href="/categories/Others/">Others</a>
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+        <article class="media">
+            
+            <a href="/games/Unity3D-note/" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="images/loading.gif" data-original="https://cdn.jsdelivr.net/gh/wjwABCDEFG/blog_img/img/20210728004637.jpg" alt="Unity3D学习笔记">
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2021-07-28T12:42:07.000Z">2021-07-28</time></div>
+                    <a href="/games/Unity3D-note/" class="title has-link-black-ter is-size-6 has-text-weight-normal">Unity3D学习笔记</a>
+                    <p class="is-size-7 is-uppercase">
+                        <a class="has-link-grey -link" href="/categories/games/">游戏和引擎</a>
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+        <article class="media">
+            
+            <a href="/life/%E4%B8%BA%E6%AF%95%E4%B8%9A%E5%81%9A%E5%87%86%E5%A4%87/" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="images/loading.gif" data-original="https://cdn.jsdelivr.net/gh/wjwABCDEFG/blog_img/img/20210717225951.jpeg" alt="为毕业做准备">
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2021-03-31T13:13:32.000Z">2021-03-31</time></div>
+                    <a href="/life/%E4%B8%BA%E6%AF%95%E4%B8%9A%E5%81%9A%E5%87%86%E5%A4%87/" class="title has-link-black-ter is-size-6 has-text-weight-normal">为毕业做准备</a>
+                    <p class="is-size-7 is-uppercase">
+                        <a class="has-link-grey -link" href="/categories/life/">生活随笔</a>
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+        <article class="media">
+            
+            <a href="/life/mhxy-experience/" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="images/loading.gif" data-original="https://cdn.jsdelivr.net/gh/wjwABCDEFG/blog_img/img/20210717223725.png" alt="梦幻西游游戏体验">
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2021-03-31T08:29:35.000Z">2021-03-31</time></div>
+                    <a href="/life/mhxy-experience/" class="title has-link-black-ter is-size-6 has-text-weight-normal">梦幻西游游戏体验</a>
+                    <p class="is-size-7 is-uppercase">
+                        <a class="has-link-grey -link" href="/categories/life/">生活随笔</a>
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+        <article class="media">
+            
+            <a href="/games/3DMath-Primerfor-Graphics-and-Game-Development-note/" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="images/loading.gif" data-original="https://cdn.jsdelivr.net/gh/wjwABCDEFG/blog_img/img/20210717223435.jpeg" alt="3D数学基础图形与游戏研发笔记">
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2021-03-06T10:55:07.000Z">2021-03-06</time></div>
+                    <a href="/games/3DMath-Primerfor-Graphics-and-Game-Development-note/" class="title has-link-black-ter is-size-6 has-text-weight-normal">3D数学基础图形与游戏研发笔记</a>
+                    <p class="is-size-7 is-uppercase">
+                        <a class="has-link-grey -link" href="/categories/games/">游戏和引擎</a>
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+    </div>
+</div>
+    
+    
+</div>
+
+            </div>
+        </div>
+    </section>
+    <footer class="footer">
+    <div class="container">
+        <div class="level">
+            <div class="level-start has-text-centered-mobile">
+                <a class="footer-logo is-block has-mb-6" href="/">
+                
+                    <img src="images/loading.gif" data-original="https://cdn.jsdelivr.net/gh/wjwABCDEFG/blog_img/img/20210717231246.png" alt="MySQL基础" height="28">
+                
+                </a>
+                <p class="is-size-7">
+                &copy; 2025 wjw&nbsp;
+                Powered by <a href="https://hexo.io/" target="_blank" rel="noopener">Hexo</a> & <a
+                        href="https://github.com/ppoffice/hexo-theme-icarus" target="_blank" rel="noopener">Icarus</a>
+                
+                <br>
+                <!-- <span id="busuanzi_container_site_uv">
+                共<span id="busuanzi_value_site_uv">0</span>个访客
+                </span> -->
+                <span id="busuanzi_container_site_uv"> 来访 <span id="busuanzi_value_site_uv"></span>人</span>
+                <span id="busuanzi_container_site_pv">, 总访问 <span id="busuanzi_value_site_pv"></span>次</span>
+
+                <span id="timeDate">载入天数...</span><span id="times">载入时分秒...</span>
+                    <script>
+                        var now = new Date(); 
+                        function createtime() { 
+                            var grt= new Date("03/06/2020 00:00:00"); /*建站时间*/
+                            now.setTime(now.getTime()+250); 
+                            days = (now - grt ) / 1000 / 60 / 60 / 24; dnum = Math.floor(days); 
+                            hours = (now - grt ) / 1000 / 60 / 60 - (24 * dnum); hnum = Math.floor(hours); 
+                            if(String(hnum).length ==1 ){hnum = "0" + hnum;} minutes = (now - grt ) / 1000 /60 - (24 * 60 * dnum) - (60 * hnum); 
+                            mnum = Math.floor(minutes); if(String(mnum).length ==1 ){mnum = "0" + mnum;} 
+                            seconds = (now - grt ) / 1000 - (24 * 60 * 60 * dnum) - (60 * 60 * hnum) - (60 * mnum); 
+                            snum = Math.round(seconds); if(String(snum).length ==1 ){snum = "0" + snum;} 
+                            document.getElementById("timeDate").innerHTML = "本站已安全运行 "+dnum+" 天 "; 
+                            document.getElementById("times").innerHTML = hnum + " 小时 " + mnum + " 分 " + snum + " 秒"; 
+                        } 
+                    setInterval("createtime()",250);
+                    </script>
+                
+                </p>
+            </div>
+            <div class="level-end">
+            
+                <div class="field has-addons is-flex-center-mobile has-mt-5-mobile is-flex-wrap is-flex-middle">
+                
+                <p class="control">
+                    <a class="button is-white is-large" target="_blank" rel="noopener" title="Creative Commons" href="https://creativecommons.org/">
+                        
+                        <i class="fab fa-creative-commons"></i>
+                        
+                    </a>
+                </p>
+                
+                <p class="control">
+                    <a class="button is-white is-large" target="_blank" rel="noopener" title="Attribution 4.0 International" href="https://creativecommons.org/licenses/by/4.0/">
+                        
+                        <i class="fab fa-creative-commons-by"></i>
+                        
+                    </a>
+                </p>
+                
+                <p class="control">
+                    <a class="button is-white is-large" target="_blank" rel="noopener" title="Download on GitHub" href="https://github.com/ppoffice/hexo-theme-icarus">
+                        
+                        <i class="fab fa-github"></i>
+                        
+                    </a>
+                </p>
+                
+                </div>
+            
+            </div>
+        </div>
+    </div>
+</footer>
+    <script src="https://cdn.jsdelivr.net/npm/jquery@3.3.1/dist/jquery.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/moment@2.22.2/min/moment-with-locales.min.js"></script>
+<script>moment.locale("zh-CN");</script>
+
+
+<script>
+var IcarusThemeSettings = {
+    site: {
+        url: 'https://wjw.today',
+        external_link: {"enable":true,"exclude":[]}
+    },
+    article: {
+        highlight: {
+            clipboard: true,
+            fold: 'unfolded'
+        }
+    }
+};
+</script>
+
+
+<script src="https://cdn.jsdelivr.net/npm/clipboard@2.0.4/dist/clipboard.min.js" defer></script>
+
+
+
+
+
+<script src="/js/animation.js"></script>
+
+
+
+<script src="https://cdn.jsdelivr.net/npm/lightgallery@1.6.8/dist/js/lightgallery.min.js" defer></script>
+<script src="https://cdn.jsdelivr.net/npm/justifiedGallery@3.7.0/dist/js/jquery.justifiedGallery.min.js" defer></script>
+<script src="/js/gallery.js" defer></script>
+
+
+
+<div id="outdated">
+    <h6>Your browser is out-of-date!</h6>
+    <p>Update your browser to view this website correctly. <a id="btnUpdateBrowser" href="http://outdatedbrowser.com/">Update
+            my browser now </a></p>
+    <p class="last"><a href="#" id="btnCloseUpdateBrowser" title="Close">&times;</a></p>
+</div>
+<script src="https://cdn.jsdelivr.net/npm/outdatedbrowser@1.1.5/outdatedbrowser/outdatedbrowser.min.js" defer></script>
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+        outdatedBrowser({
+            bgColor: '#f25648',
+            color: '#ffffff',
+            lowerThan: 'flex'
+        });
+    });
+</script>
+
+
+<script src="https://cdn.jsdelivr.net/npm/mathjax@2.7.5/unpacked/MathJax.js?config=TeX-MML-AM_CHTML" defer></script>
+<script>
+document.addEventListener('DOMContentLoaded', function () {
+    MathJax.Hub.Config({
+        'HTML-CSS': {
+            matchFontHeight: false
+        },
+        SVG: {
+            matchFontHeight: false
+        },
+        CommonHTML: {
+            matchFontHeight: false
+        },
+        tex2jax: {
+            inlineMath: [
+                ['$','$'],
+                ['\\(','\\)']
+            ]
+        }
+    });
+});
+</script>
+
+
+<a id="back-to-top" title="回到顶端" href="javascript:;">
+    <i class="fas fa-chevron-up"></i>
+</a>
+<script src="/js/back-to-top.js" defer></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<script src="/js/main.js" defer></script>
+
+    
+    <div class="searchbox ins-search">
+    <div class="searchbox-container ins-search-container">
+        <div class="searchbox-input-wrapper">
+            <input type="text" class="searchbox-input ins-search-input" placeholder="想要查找什么..." />
+            <span class="searchbox-close ins-close ins-selectable"><i class="fa fa-times-circle"></i></span>
+        </div>
+        <div class="searchbox-result-wrapper ins-section-wrapper">
+            <div class="ins-section-container"></div>
+        </div>
+    </div>
+</div>
+<script>
+    (function (window) {
+        var INSIGHT_CONFIG = {
+            TRANSLATION: {
+                POSTS: '文章',
+                PAGES: '页面',
+                CATEGORIES: '分类',
+                TAGS: '标签',
+                UNTITLED: '(无标题)',
+            },
+            CONTENT_URL: '/content.json',
+        };
+        window.INSIGHT_CONFIG = INSIGHT_CONFIG;
+    })(window);
+</script>
+<script src="/js/insight.js" defer></script>
+<link rel="stylesheet" href="/css/search.css">
+<link rel="stylesheet" href="/css/insight.css">
+    
+
+        <style>
+            [bg-lazy] {
+                background-image: none !important;
+                background-color: #eee !important;
+            }
+        </style>
+        <script>
+            window.imageLazyLoadSetting = {
+                isSPA: false,
+                preloadRatio: 1,
+                processImages: null,
+            };
+        </script><script>window.addEventListener("load",function(){var t=/\.(gif|jpg|jpeg|tiff|png)$/i,r=/^data:image\/[a-z\d\-\.\+]+;base64,/;Array.prototype.slice.call(document.querySelectorAll("img[data-original]")).forEach(function(a){var e=a.parentNode;"A"===e.tagName&&(t.test(e.href)||r.test(e.href))&&(e.href=a.dataset.original)})});</script><script>(r=>{r.imageLazyLoadSetting.processImages=t;var a=r.imageLazyLoadSetting.isSPA,o=r.imageLazyLoadSetting.preloadRatio||1,d=i();function i(){var t=Array.prototype.slice.call(document.querySelectorAll("img[data-original]")),e=Array.prototype.slice.call(document.querySelectorAll("[bg-lazy]"));return t.concat(e)}function t(t){(a||t)&&(d=i());for(var e,n=0;n<d.length;n++)0<=(e=(e=d[n]).getBoundingClientRect()).bottom&&0<=e.left&&e.top<=(r.innerHeight*o||document.documentElement.clientHeight*o)&&(()=>{var t,e,a,o,i=d[n];e=function(){d=d.filter(function(t){return i!==t}),r.imageLazyLoadSetting.onImageLoaded&&r.imageLazyLoadSetting.onImageLoaded(i)},(t=i).dataset.loaded||(t.hasAttribute("bg-lazy")?(t.removeAttribute("bg-lazy"),e&&e()):(a=new Image,o=t.getAttribute("data-original"),a.onload=function(){t.src=o,t.removeAttribute("data-original"),t.setAttribute("data-loaded",!0),e&&e()},a.onerror=function(){t.removeAttribute("data-original"),t.setAttribute("data-loaded",!1),t.src=o},t.src!==o&&(a.src=o)))})()}function e(){clearTimeout(t.tId),t.tId=setTimeout(t,500)}t(),document.addEventListener("scroll",e),r.addEventListener("resize",e),r.addEventListener("orientationchange",e)})(this);</script></body>
+</html>

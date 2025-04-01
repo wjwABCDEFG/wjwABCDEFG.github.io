@@ -1,0 +1,1320 @@
+<!DOCTYPE html>
+<html  lang="zh">
+<head>
+    <meta charset="utf-8" />
+
+<meta name="generator" content="Hexo 4.2.1" />
+
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+
+<title>mysql索引 - 小温 blog</title>
+
+
+    <meta name="description" content="1. 为什么是B+树1.1 哈希索引哈希胜在查找单条数据快，只需要计算哈希函数就可以定位到索引数组下标，继而得到值，ps：索引存储的不是直接的数据库中的值，而是地址，通过索引找到地址然后就可以取数据库中地址对应的值了。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="mysql索引">
+<meta property="og:url" content="https://wjw.today/Mysql/mysql%E7%B4%A2%E5%BC%95/index.html">
+<meta property="og:site_name" content="小温 blog">
+<meta property="og:description" content="1. 为什么是B+树1.1 哈希索引哈希胜在查找单条数据快，只需要计算哈希函数就可以定位到索引数组下标，继而得到值，ps：索引存储的不是直接的数据库中的值，而是地址，通过索引找到地址然后就可以取数据库中地址对应的值了。">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/wjwABCDEFG/blog_img/img/20210717212019.jpg">
+<meta property="article:published_time" content="2020-10-08T10:51:35.000Z">
+<meta property="article:modified_time" content="2021-07-17T13:24:27.211Z">
+<meta property="article:author" content="wjw">
+<meta property="article:tag" content="mysql">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://cdn.jsdelivr.net/gh/wjwABCDEFG/blog_img/img/20210717212019.jpg">
+
+
+
+
+
+
+
+<link rel="icon" href="/images/favicon.ico">
+
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.7.2/css/bulma.css">
+<link rel="stylesheet" href="https://cdn.bootcss.com/font-awesome/5.4.1/css/all.css">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Ubuntu:400,600|Source+Code+Pro">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@9.12.0/styles/atom-one-dark.css">
+
+
+    
+    
+<style>body>.footer,body>.navbar,body>.section{opacity:0}</style>
+
+    
+    
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/lightgallery@1.6.8/dist/css/lightgallery.min.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/justifiedGallery@3.7.0/dist/css/justifiedGallery.min.css">
+
+    
+    
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/outdatedbrowser@1.1.5/outdatedbrowser/outdatedbrowser.min.css">
+
+    
+    
+    
+    
+<link rel="stylesheet" href="/css/back-to-top.css">
+
+    
+    
+    
+    
+    
+    
+    
+    <link rel="stylesheet" href="/css/progressbar.css">
+<script src="https://cdn.jsdelivr.net/npm/pace-js@1.0.2/pace.min.js"></script>
+    
+    <script async="" src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+    
+
+
+<link rel="stylesheet" href="/css/style.css">
+</head>
+<body class="is-3-column">
+    <nav class="navbar navbar-main">
+    <div class="container">
+        <div class="navbar-brand is-flex-center">
+            <a class="navbar-item navbar-logo" href="/">
+            
+                <img src="images/loading.gif" data-original="https://cdn.jsdelivr.net/gh/wjwABCDEFG/blog_img/img/20210717231246.png" alt="mysql索引" height="28">
+            
+            </a>
+        </div>
+        <div class="navbar-menu">
+            
+            <div class="navbar-start">
+                
+                <a class="navbar-item"
+                href="/">主页</a>
+                
+                <a class="navbar-item"
+                href="/archives">归档</a>
+                
+                <a class="navbar-item"
+                href="/categories">分类</a>
+                
+                <a class="navbar-item"
+                href="/tags">标签</a>
+                
+                <a class="navbar-item"
+                href="/about">关于</a>
+                
+            </div>
+            
+            <div class="navbar-end">
+                
+                    
+                    <a class="navbar-item" target="_blank" rel="noopener" title="View My GitHub" href="https://github.com/wjwABCDEFG">
+                        
+                        <i class="fab fa-github"></i>
+                        
+                    </a>
+                    
+                
+                
+                <a class="navbar-item is-hidden-tablet catalogue" title="目录" href="javascript:;">
+                    <i class="fas fa-list-ul"></i>
+                </a>
+                
+                
+                <a class="navbar-item search" title="搜索" href="javascript:;">
+                    <i class="fas fa-search"></i>
+                </a>
+                
+            </div>
+        </div>
+    </div>
+</nav>
+    
+    <section class="section">
+        <div class="container">
+            <div class="columns">
+                <div class="column is-8-tablet is-8-desktop is-6-widescreen has-order-2 column-main">
+<div class="card">
+    
+    <div class="card-image">
+        <span  class="image is-7by1">
+            <img class="thumbnail" src="images/loading.gif" data-original="https://cdn.jsdelivr.net/gh/wjwABCDEFG/blog_img/img/20210717212019.jpg" alt="mysql索引">
+        </span>
+    </div>
+    
+    <div class="card-content article ">
+        
+        <div class="level article-meta is-size-7 is-uppercase is-mobile is-overflow-x-auto">
+            <div class="level-left">
+                <time class="level-item has-text-grey" datetime="2020-10-08T10:51:35.000Z">2020-10-08</time>
+                
+                <div class="level-item">
+                <a class="has-link-grey -link" href="/categories/Mysql/">Mysql</a>
+                </div>
+                
+                
+                <span class="level-item has-text-grey">
+                    
+                    
+                    23 分钟 读完 (大约 3506 个字)
+                </span>
+                
+                
+                <span class="level-item has-text-grey" id="busuanzi_container_page_pv">
+                    <i class="far fa-eye"></i>
+                    <span id="busuanzi_value_page_pv">0</span>次访问
+                </span>
+                
+            </div>
+        </div>
+        
+        <h1 class="title is-size-3 is-size-4-mobile has-text-weight-normal">
+            
+                mysql索引
+            
+        </h1>
+        <div class="content">
+            <h1 id="1-为什么是B-树"><a href="#1-为什么是B-树" class="headerlink" title="1. 为什么是B+树"></a>1. 为什么是B+树</h1><h2 id="1-1-哈希索引"><a href="#1-1-哈希索引" class="headerlink" title="1.1 哈希索引"></a>1.1 哈希索引</h2><p>哈希胜在查找单条数据快，只需要计算哈希函数就可以定位到索引数组下标，继而得到值，ps：索引存储的不是直接的数据库中的值，而是地址，通过索引找到地址然后就可以取数据库中地址对应的值了。</p>
+<a id="more"></a>
+
+<p><img src="images/loading.gif" data-original="https://cdn.jsdelivr.net/gh/wjwABCDEFG/blog_img/img/20210717212032.png" alt=""></p>
+<p>但是如果使用哈希表做索引，是无序的（30 % 29 = 1会在2的前面），但是数据库经常需要范围查询，大于小于，排序等操作，因此哈希索引不合适</p>
+<br>
+
+<h2 id="1-2-AVL树"><a href="#1-2-AVL树" class="headerlink" title="1.2 AVL树"></a>1.2 AVL树</h2><p>平衡二叉树作索引，查询效率是O(logn)，但是有两个缺点</p>
+<ol>
+<li>树越高查询速度越慢</li>
+<li>中间的某个id比如0005去到了叶子节点，那么要查找id大于0005的就需要回旋查找0006</li>
+</ol>
+<p><img src="images/loading.gif" data-original="https://cdn.jsdelivr.net/gh/wjwABCDEFG/blog_img/img/20210717212042.png" alt=""></p>
+<br>
+
+<h2 id="1-3-B树"><a href="#1-3-B树" class="headerlink" title="1.3 B树"></a>1.3 B树</h2><p>一个节点可以存多个值，解决了AVL树高度过高的问题，但是回旋查找的问题依然存在</p>
+<p><img src="images/loading.gif" data-original="https://cdn.jsdelivr.net/gh/wjwABCDEFG/blog_img/img/20210717212103.png" alt=""></p>
+<br>
+
+<h2 id="1-4-B-树"><a href="#1-4-B-树" class="headerlink" title="1.4 B+树"></a>1.4 B+树</h2><p>B+树就是为了解决回旋查找的问题，每个根节点出现过的元素都会在叶子节点出现一次（非叶子节点只存key，叶子节点还存了地址，用于在数据库中查找），最底下的叶子节点层直接指向了下一个节点，这样查询大于某个id的时候就可以先通过树找到对应的节点，然后通过链表一直往后查询要找的数据</p>
+<p><img src="images/loading.gif" data-original="https://cdn.jsdelivr.net/gh/wjwABCDEFG/blog_img/img/20210717212111.png" alt=""></p>
+<p>最后贴上这个数据结构可视化网站，好像是旧金山大学的网站</p>
+<figure class="highlight http"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="attribute">https://www.cs.usfca.edu/~galles/visualization/Algorithms.html</span></span><br></pre></td></tr></table></figure>
+
+<br>
+
+<h1 id="2-explain查看索引使用情况"><a href="#2-explain查看索引使用情况" class="headerlink" title="2. explain查看索引使用情况"></a>2. explain查看索引使用情况</h1><p>只需要在select语句前面加上explain关键字即可解释查询</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">explain select * from table_name where id &gt; 9</span><br></pre></td></tr></table></figure>
+
+<p>关注几个字段</p>
+<ul>
+<li><p>type：代表了索引的级别，有以下几个级别</p>
+<ul>
+<li><strong>system</strong>：查找<strong>只有一条数据的系统表</strong>，基本不可能达到</li>
+<li><strong>const</strong>：查<strong>主键</strong>（where id = 1）因为主键是唯一的，而且mysql自带主键索引</li>
+<li><strong>eq_ref</strong>：建立了<strong>唯一索引</strong>/主键索引+要求查出来的索引列是唯一的（where 身份证号 = “123”）</li>
+<li><strong>ref</strong>：对应列建立了索引（可以是联合索引）+在索引列上查询（where name = “张三”），是一般<strong>sql优化期</strong>望达到的级别</li>
+<li><strong>range</strong>：对应列建立了索引+在索引列上范围查找（between、in、&gt;、&lt;、&gt;=等），要注意in只有在数据量大的时候才生效</li>
+<li><strong>index</strong>：也叫<strong>覆盖索引</strong>，对应列建立了索引+查询结果<strong>返回字段限定</strong>（select name比select *好的原因），要注意如果name列没有建立索引是不可以的！这种情况下实际还是遍历了所有数据，但是遍历的是索引树（内存），而不是数据库（硬盘）</li>
+<li><strong>all</strong>：没有用到索引</li>
+</ul>
+</li>
+<li><p>possible_keys：代表可能用到的索引</p>
+</li>
+<li><p>key：代表实际用到的索引</p>
+</li>
+<li><p>rows：实际扫描的行数，越小越好，说明过滤的越彻底</p>
+</li>
+<li><p>ref：索引各个字段的级别（因为有可能是复合索引但不是所有都同一个级别）</p>
+</li>
+<li><p>key_len：索引占用的空间，越小越好，因为有可能你用到了索引，但该索引可能不是最优（多了不必要的字段）</p>
+</li>
+</ul>
+<p>实战环节！</p>
+<br>
+
+<p>环境：1000条数据，表结构如下</p>
+<p><img src="images/loading.gif" data-original="https://cdn.jsdelivr.net/gh/wjwABCDEFG/blog_img/img/20210717212127.png" alt=""></p>
+<h2 id="2-1-无索引效果"><a href="#2-1-无索引效果" class="headerlink" title="2.1 无索引效果"></a>2.1 无索引效果</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">SELECT SQL_NO_CACHE * FROM &#96;test_user&#96; WHERE phone &#x3D; &quot;13542831871&quot; AND lan_id &#x3D; 702 AND region_id &#x3D; 94</span><br></pre></td></tr></table></figure>
+
+<p>加上SQL_NO_CACHE指定不使用缓存，查询更接近真实值，当然我觉得还是有缓存的，第一次5s，第二次开始稳定在3.7s左右</p>
+<p><img src="images/loading.gif" data-original="https://cdn.jsdelivr.net/gh/wjwABCDEFG/blog_img/img/20210717212136.png" alt=""></p>
+<p>解释执行，可以看到type为all，也就是没有使用索引，扫描了全表</p>
+<p><img src="images/loading.gif" data-original="https://cdn.jsdelivr.net/gh/wjwABCDEFG/blog_img/img/20210717212143.png" alt=""></p>
+<br>
+
+<h2 id="2-2-有索引效果"><a href="#2-2-有索引效果" class="headerlink" title="2.2 有索引效果"></a>2.2 有索引效果</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ALTER TABLE &#96;test_user&#96; ADD INDEX idx_phone_lan_region(phone, lan_id, region_id)</span><br></pre></td></tr></table></figure>
+
+<p>随后再解释查询，第一次执行1.3s，随后稳定在0.03s，可以看到提升还是很大的</p>
+<p><img src="images/loading.gif" data-original="https://cdn.jsdelivr.net/gh/wjwABCDEFG/blog_img/img/20210717212151.png" alt=""></p>
+<p>可以看到type为ref，代表使用了索引，key说明最终使用的索引名称，ref为const表示三个字段都用到了索引，rows为1表示共扫描1条。这就是最好的状态了，能用的索引都用上了，精准定位！</p>
+<br>
+
+<h1 id="3-SQL调优"><a href="#3-SQL调优" class="headerlink" title="3. SQL调优"></a>3. SQL调优</h1><p>整个流程是这样的</p>
+<ul>
+<li><p>使用explain查看sql执行计划并排除缓存干扰</p>
+</li>
+<li><p>analyze table和force index强制走索引</p>
+</li>
+<li><p>检查是否能优化SQL中的函数和计算</p>
+</li>
+<li><p>检查是否存在类型/编码转换导致的索引失效</p>
+</li>
+<li><p>检查like左边是否有%导致索引失效</p>
+</li>
+<li><p>order by文件内排序优化</p>
+</li>
+<li><p>检查是否能使用覆盖索引代替select *</p>
+</li>
+<li><p>检查是否能通过联合索引减少回表次数</p>
+</li>
+<li><p>检查是否能优化最左匹配法则的顺序</p>
+</li>
+<li><p>长字段使用前缀索引优化</p>
+</li>
+<li><p>普通索引和唯一索引的选择优化</p>
+</li>
+<li><p>考虑MySQL5.6以上版本带来的索引下推优化</p>
+</li>
+<li><p>防止像我这种啥也不懂的菜鸡乱加索引导致的索引失效问题(●’◡’●)</p>
+</li>
+</ul>
+<p>其实根本原因就是前面说的B+树的结构，结构决定性质，能根据B+树找到对应的节点，那么就不会失效，下面一一介绍。</p>
+<h2 id="3-1-函数"><a href="#3-1-函数" class="headerlink" title="3.1 函数"></a>3.1 函数</h2><p>如使用了count(*)、sum()、round()会导致失效，注意：计算/函数导致的失效指的是“select后”和“=前”的字段，因为=后面的函数是能用到索引的比如where lan_id = 1 + 1和where name = lower(s)</p>
+<br>
+
+<h2 id="3-2-计算字段后面的字段"><a href="#3-2-计算字段后面的字段" class="headerlink" title="3.2 计算字段后面的字段"></a>3.2 计算字段后面的字段</h2><p>计算字段：+、-、*、/、!=、&lt;、&gt;、is null、is not null、or</p>
+<p>先来看这个range，说明索引列+&gt;是可以用到range级别的索引的</p>
+<p><img src="images/loading.gif" data-original="https://cdn.jsdelivr.net/gh/wjwABCDEFG/blog_img/img/20210717212203.png" alt=""></p>
+<p>接着把这个&gt;后面的region_id字段去掉</p>
+<p><img src="images/loading.gif" data-original="https://cdn.jsdelivr.net/gh/wjwABCDEFG/blog_img/img/20210717212208.png" alt=""></p>
+<p>这就说明实际上复合索引的最后一列region_id是没有被用到的，只用到了前两列。</p>
+<p>另外就是id + 1 = 1000改成id = 1000 - 1才能走索引</p>
+<br>
+
+<h2 id="3-3-类型转换"><a href="#3-3-类型转换" class="headerlink" title="3.3 类型转换"></a>3.3 类型转换</h2><p>id = “1”本来是数字，虽然也能查，但是索引失效（5.7之前不失效）</p>
+<p>都会显示如下</p>
+<p><img src="images/loading.gif" data-original="https://cdn.jsdelivr.net/gh/wjwABCDEFG/blog_img/img/20210717212218.png" alt=""></p>
+<p>也就是看到查询phone字段说明可能会用到索引，但实际上用不到</p>
+<br>
+
+<h2 id="3-4-编码不一致"><a href="#3-4-编码不一致" class="headerlink" title="3.4 编码不一致"></a>3.4 编码不一致</h2><p>utf8mb4和utf8两张表联查时，会自动转换成utf8mb4，如果索引在utf8的表中，这样是用不到索引的，究其原因是二叉树查找也是得判断是否相等，编码不一致找不到</p>
+<br>
+
+<h2 id="3-5-like的失效和优化"><a href="#3-5-like的失效和优化" class="headerlink" title="3.5 like的失效和优化"></a>3.5 like的失效和优化</h2><p>like左边有%是用不到索引的</p>
+<p><img src="images/loading.gif" data-original="https://cdn.jsdelivr.net/gh/wjwABCDEFG/blog_img/img/20210717212228.png" alt=""></p>
+<p>只有右边有%可以用range级别的索引</p>
+<p><img src="images/loading.gif" data-original="https://cdn.jsdelivr.net/gh/wjwABCDEFG/blog_img/img/20210717212233.png" alt=""></p>
+<p>由于模糊搜索业务场景通常需要两边%，这时候如果只搜索这个字段，我们可以使用覆盖索引（前面介绍的index）优化，也就是select phone而不是select *，可以看到也是有索引的</p>
+<p><img src="images/loading.gif" data-original="https://cdn.jsdelivr.net/gh/wjwABCDEFG/blog_img/img/20210717212239.png" alt=""></p>
+<p>如果需要全部字段，根据本次的phone结果再搜索一次=，总体会比全表扫描快</p>
+<p>另一种优化方案是建立一个反向列，很不错的思路，可以参考这篇文章</p>
+<blockquote>
+<p><a href="https://blog.csdn.net/weixin_38106322/article/details/106583450">https://blog.csdn.net/weixin_38106322/article/details/106583450</a></p>
+</blockquote>
+<p>mysql5.7后可以建立虚拟列，参考这篇文章</p>
+<blockquote>
+<p><a href="https://blog.csdn.net/JiSoBeautiful/article/details/96433283">https://blog.csdn.net/JiSoBeautiful/article/details/96433283</a></p>
+</blockquote>
+<p>也可以直接上es，可以进行隔字查询，适应更多业务场景</p>
+<br>
+
+<h2 id="3-6-order-by的失效和优化"><a href="#3-6-order-by的失效和优化" class="headerlink" title="3.6 order by的失效和优化"></a>3.6 order by的失效和优化</h2><p>order by会使索引失效</p>
+<p>先对create_time列建立索引</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ALTER TABLE &#96;test_user&#96; ADD INDEX idx_create_time(create_time)</span><br></pre></td></tr></table></figure>
+
+<p>查询时间5s+</p>
+<p><img src="images/loading.gif" data-original="https://cdn.jsdelivr.net/gh/wjwABCDEFG/blog_img/img/20210717212251.png" alt=""></p>
+<p>解释查询，可以看到type为all，另外要看extra列，using filesort说明使用了<strong>文件内排序</strong>：意思是它在内存中开辟了一个空间，将数据复制到内存里面，进行排序再返回，这是很恐怖的一件事情，浪费了大量的内存</p>
+<p><img src="images/loading.gif" data-original="https://cdn.jsdelivr.net/gh/wjwABCDEFG/blog_img/img/20210717212323.png" alt=""></p>
+<p>优化方案：使用覆盖索引select create_time</p>
+<p><img src="images/loading.gif" data-original="https://cdn.jsdelivr.net/gh/wjwABCDEFG/blog_img/img/20210717212331.png" alt=""></p>
+<p>时间如下</p>
+<p><img src="images/loading.gif" data-original="https://cdn.jsdelivr.net/gh/wjwABCDEFG/blog_img/img/20210717212336.png" alt=""></p>
+<p>覆盖索引虽然速度提升明显，但是只查一列很难满足业务场景，如果结果为一条，那么还好，可以根据这一条再查一遍=，但是如果有多条，使用in不一定能带来很大的提升，时间和解释如下图</p>
+<p><img src="images/loading.gif" data-original="https://cdn.jsdelivr.net/gh/wjwABCDEFG/blog_img/img/20210717212342.png" alt=""></p>
+<p><img src="images/loading.gif" data-original="https://cdn.jsdelivr.net/gh/wjwABCDEFG/blog_img/img/20210717212349.png" alt=""></p>
+<p>因此，不如读取到java中进行排序来的快</p>
+<br>
+
+<h2 id="3-7-最左匹配法则"><a href="#3-7-最左匹配法则" class="headerlink" title="3.7 最左匹配法则"></a>3.7 最左匹配法则</h2><p><strong>最左匹配法则</strong>：我们的索引字段依次是phone, lan_id, region_id，因此能匹配的组合实际有：</p>
+<p>phone, lan_id, region_id</p>
+<p>phone, lan_id</p>
+<p>phone</p>
+<p>我们试一下查询条件只有第一个和第三个</p>
+<p><img src="images/loading.gif" data-original="https://cdn.jsdelivr.net/gh/wjwABCDEFG/blog_img/img/20210717212401.png" alt=""></p>
+<p>可以从type和key中看出，依然使用了这个复合索引，但是从ref看到破坏了最左匹配法则情况下，只有第一个字段phone使用了索引。时间的话由于结果都只有1条数据，所以相似，参考意义不大。</p>
+<p>可以简单的想象成几座连续的桥，只有过了第一座桥才能过第二座桥。当然知其然也要知其所以然，要知道究竟为什么还是得自己心里有B树( •̀ ω •́ )</p>
+<p>联合索引的树节点是这样的，data里面存了一个元组（三个就是三元组）</p>
+<p><img src="images/loading.gif" data-original="https://cdn.jsdelivr.net/gh/wjwABCDEFG/blog_img/img/20210717212408.png" alt=""></p>
+<p>因为在建树和查找的过程中需要比较大小（中文也支持），是按照索引的顺序来的：先比较第一个，第一个相同再比较第二个…以此类推，因此只有在前面的字段有序（能找到）的情况下后一个字段才有序（能找到），比如上图只有在字段a为1的情况下b才是有序的，总体看b是没有序的。因此这就是为什么出现最佳左前缀法则的根本原因。</p>
+<br>
+
+<h2 id="3-8-前缀索引"><a href="#3-8-前缀索引" class="headerlink" title="3.8 前缀索引"></a>3.8 前缀索引</h2><p>简单说就是对于长字段，比如descirption，或者短字段但想节省索引长度，可以截取字段的一部分作为索引，从而节省索引key_len。因为索引越长，占用磁盘越大，一个数据页存的索引就越少，会降低效率，举个例子：</p>
+<p>邮箱<a href="mailto:xxxx@qq.com">xxxx@qq.com</a>，我们索引可以只做xxxx</p>
+<p>网址<a href="http://www.abc.com，我们可以截取第一个.后面的来建立索引">www.abc.com，我们可以截取第一个.后面的来建立索引</a></p>
+<p>身份证前面是区号，区分度不高，可以reverse后再截取</p>
+<p>那么如何评价区分度，前缀需要截取多少位呢？参考这篇博客</p>
+<blockquote>
+<p><a href="https://blog.csdn.net/u013295276/article/details/79105163">https://blog.csdn.net/u013295276/article/details/79105163</a></p>
+</blockquote>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">-- 计算出完整字符串的选择性(比如0.3)</span><br><span class="line">SELECT COUNT(DISTINCT city)&#x2F;COUNT(*) FROM city_demo;</span><br><span class="line">-- 计算各个前缀的选择性(前34567个字符)，然后找比较接近的且前缀最短的</span><br><span class="line">SELECT </span><br><span class="line">	COUNT(DISTINCT LEFT(city,3))&#x2F;COUNT(*) pref3,</span><br><span class="line">	COUNT(DISTINCT LEFT(city,4))&#x2F;COUNT(*) pref4,</span><br><span class="line">	COUNT(DISTINCT LEFT(city,5))&#x2F;COUNT(*) pref5,</span><br><span class="line">	COUNT(DISTINCT LEFT(city,6))&#x2F;COUNT(*) pref6,</span><br><span class="line">	COUNT(DISTINCT LEFT(city,7))&#x2F;COUNT(*) pref7</span><br><span class="line">FROM city_demo;</span><br></pre></td></tr></table></figure>
+
+<br>
+
+<h2 id="3-9-唯一索引和普通索引的选择"><a href="#3-9-唯一索引和普通索引的选择" class="headerlink" title="3.9 唯一索引和普通索引的选择"></a>3.9 唯一索引和普通索引的选择</h2><p>这里涉及到一个概念就是change buffer：</p>
+<p>MySQL查询的时候会将数据页加载进内存中，更新的话就可以直接更新内存中的数据，而不是直接刷写硬盘（这是最耗时的）。如果没查询，那么内存中没有数据，更新操作缓存在change buffer中，下次查询的时候再将数据页读入内存，然后执行change buffer中与这个页有关的操作，这个过程叫做merge。</p>
+<p><img src="images/loading.gif" data-original="https://cdn.jsdelivr.net/gh/wjwABCDEFG/blog_img/img/20210717212416.png" alt="change buffer"></p>
+<p>唯一索引的劣势：需要进行唯一性检查，那么会读取数据页到内存，无法使用change buffer</p>
+<p>唯一索引的优势：因为是唯一的，查询的时候找到即可，不需要往右继续查是否相同</p>
+<p>综上所述</p>
+<p><img src="images/loading.gif" data-original="https://cdn.jsdelivr.net/gh/wjwABCDEFG/blog_img/img/20210717212421.png" alt="选择"></p>
+<br>
+
+<h2 id="3-10-索引下推"><a href="#3-10-索引下推" class="headerlink" title="3.10 索引下推"></a>3.10 索引下推</h2><p>5.6之后mysql自带的优化，看下面这个语句，假设建立了索引(name, size)</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">select * from itemcenter where name like &#39;张%&#39; and size&#x3D;22;</span><br></pre></td></tr></table></figure>
+
+<p>5.6之前，在B+树中找到10个张%，那么会将这10条数据的id进行回表找到size=22</p>
+<p>5.6之后，在B+树中找到10个张%，先判断索引中的size=22，过滤后可能剩2条，再根据id回表</p>
+<br>
+
+<h1 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h1><p>本文参考</p>
+<blockquote>
+<p>IT老哥公众号和bilibili视频（<a href="https://space.bilibili.com/526653251?from=search&amp;seid=7511781974100514678）">https://space.bilibili.com/526653251?from=search&amp;seid=7511781974100514678）</a></p>
+<p>三太子敖丙公众号MySQL系列文章</p>
+<p>SCDN博客：<a href="https://blog.csdn.net/u013295276/article/details/79105163">https://blog.csdn.net/u013295276/article/details/79105163</a></p>
+</blockquote>
+
+        </div>
+        
+        <div class="level is-size-7 is-uppercase">
+            <div class="level-start">
+                <div class="level-item">
+                    <span class="is-size-6 has-text-grey has-mr-7">#</span>
+                    <a class="has-link-grey -link" href="/tags/mysql/" rel="tag">mysql</a>
+                </div>
+            </div>
+        </div>
+        
+        
+        
+    </div>
+</div>
+
+
+
+
+
+<div class="card card-transparent">
+    <div class="level post-navigation is-flex-wrap is-mobile">
+        
+        <div class="level-start">
+            <a class="level level-item has-link-grey  article-nav-prev" href="/redis/redis%E5%9F%BA%E7%A1%80/">
+                <i class="level-item fas fa-chevron-left"></i>
+                <span class="level-item">redis基础</span>
+            </a>
+        </div>
+        
+        
+        <div class="level-end">
+            <a class="level level-item has-link-grey  article-nav-next" href="/algorithms/path-with-maximum-gold/">
+                <span class="level-item">1219 黄金矿工</span>
+                <i class="level-item fas fa-chevron-right"></i>
+            </a>
+        </div>
+        
+    </div>
+</div>
+
+
+</div>
+                
+
+
+
+
+<div class="column is-4-tablet is-4-desktop is-3-widescreen  has-order-1 column-left ">
+    
+        
+<div class="card widget">
+    <div class="card-content">
+        <nav class="level">
+            <div class="level-item has-text-centered" style="flex-shrink: 1">
+                <div>
+                    
+                    <figure class="image is-128x128 has-mb-6">
+                        <img class="is-rounded" src="images/loading.gif" data-original="https://cdn.jsdelivr.net/gh/wjwABCDEFG/blog_img/img/20210717231547.jpeg" alt="wjwABCDEFG">
+                    </figure>
+                    
+                    <p class="is-size-4 is-block">
+                        wjwABCDEFG
+                    </p>
+                    
+                    
+                    
+                    <p class="is-size-6 is-flex is-flex-center has-text-grey">
+                        <i class="fas fa-map-marker-alt has-mr-7"></i>
+                        <span>Shaoguan, China</span>
+                    </p>
+                    
+                </div>
+            </div>
+        </nav>
+        <nav class="level is-mobile">
+            <div class="level-item has-text-centered is-marginless">
+                <div>
+                    <p class="heading">
+                        文章
+                    </p>
+                    <a href="/archives">
+                        <p class="title has-text-weight-normal">
+                            103
+                        </p>
+                    </a>
+                </div>
+            </div>
+            <div class="level-item has-text-centered is-marginless">
+                <div>
+                    <p class="heading">
+                        分类
+                    </p>
+                    <a href="/categories">
+                        <p class="title has-text-weight-normal">
+                            14
+                        </p>
+                    </a>
+                </div>
+            </div>
+            <div class="level-item has-text-centered is-marginless">
+                <div>
+                    <p class="heading">
+                        标签
+                    </p>
+                    <a href="/tags">
+                        <p class="title has-text-weight-normal">
+                            26
+                        </p>
+                    </a>
+                </div>
+            </div>
+        </nav>
+        
+        <div class="level">
+            <a class="level-item button is-link is-rounded" href="https://github.com/wjwABCDEFG" target="_blank" rel="noopener">
+                关注我</a>
+        </div>
+        
+        
+        
+    </div>
+</div>
+    
+        
+<div class="card widget">
+    <div class="card-content">
+        <div class="menu">
+            <h3 class="menu-label">
+                分类
+            </h3>
+            <ul class="menu-list">
+            <li>
+        <a class="level is-marginless" href="/categories/Java/">
+            <span class="level-start">
+                <span class="level-item">Java基础</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">7</span>
+            </span>
+        </a></li><li>
+        <a class="level is-marginless" href="/categories/Mysql/">
+            <span class="level-start">
+                <span class="level-item">Mysql</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">3</span>
+            </span>
+        </a></li><li>
+        <a class="level is-marginless" href="/categories/Others/">
+            <span class="level-start">
+                <span class="level-item">Others</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">8</span>
+            </span>
+        </a></li><li>
+        <a class="level is-marginless" href="/categories/Spring/">
+            <span class="level-start">
+                <span class="level-item">Spring</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">6</span>
+            </span>
+        </a></li><li>
+        <a class="level is-marginless" href="/categories/SpringCloud/">
+            <span class="level-start">
+                <span class="level-item">SpringCloud</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">4</span>
+            </span>
+        </a></li><li>
+        <a class="level is-marginless" href="/categories/util/">
+            <span class="level-start">
+                <span class="level-item">Util工具类</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">3</span>
+            </span>
+        </a></li><li>
+        <a class="level is-marginless" href="/categories/redis/">
+            <span class="level-start">
+                <span class="level-item">redis</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">1</span>
+            </span>
+        </a></li><li>
+        <a class="level is-marginless" href="/categories/frontend/">
+            <span class="level-start">
+                <span class="level-item">前端</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">3</span>
+            </span>
+        </a></li><li>
+        <a class="level is-marginless" href="/categories/algorithms/">
+            <span class="level-start">
+                <span class="level-item">数据结构和算法</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">60</span>
+            </span>
+        </a></li><li>
+        <a class="level is-marginless" href="/categories/games/">
+            <span class="level-start">
+                <span class="level-item">游戏和引擎</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">2</span>
+            </span>
+        </a></li><li>
+        <a class="level is-marginless" href="/categories/deeplearning/">
+            <span class="level-start">
+                <span class="level-item">玄学</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">1</span>
+            </span>
+        </a></li><li>
+        <a class="level is-marginless" href="/categories/life/">
+            <span class="level-start">
+                <span class="level-item">生活随笔</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">6</span>
+            </span>
+        </a></li><li>
+        <a class="level is-marginless" href="/categories/cs/">
+            <span class="level-start">
+                <span class="level-item">计算机基础</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">1</span>
+            </span>
+        </a></li><li>
+        <a class="level is-marginless" href="/categories/designpattern/">
+            <span class="level-start">
+                <span class="level-item">设计模式</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">1</span>
+            </span>
+        </a></li>
+            </ul>
+        </div>
+    </div>
+</div>
+    
+        <div class="card widget">
+    <div class="card-content">
+        <h3 class="menu-label">
+            标签云
+        </h3>
+        <a href="/tags/DL-ML/" style="font-size: 10px;">DL/ML</a> <a href="/tags/http/" style="font-size: 10px;">http</a> <a href="/tags/lintcode/" style="font-size: 10px;">lintcode</a> <a href="/tags/markdown/" style="font-size: 10px;">markdown</a> <a href="/tags/mysql/" style="font-size: 11.67px;">mysql</a> <a href="/tags/spring/" style="font-size: 11.67px;">spring</a> <a href="/tags/springcloud/" style="font-size: 10px;">springcloud</a> <a href="/tags/%E4%BA%8C%E5%88%86%E6%9F%A5%E6%89%BE/" style="font-size: 10px;">二分查找</a> <a href="/tags/%E5%89%91%E6%8C%87offer/" style="font-size: 10px;">剑指offer</a> <a href="/tags/%E5%8A%9B%E6%89%A3/" style="font-size: 20px;">力扣</a> <a href="/tags/%E5%8A%A0%E5%AF%86/" style="font-size: 10px;">加密</a> <a href="/tags/%E5%8A%A8%E6%80%81%E8%A7%84%E5%88%92/" style="font-size: 13.33px;">动态规划</a> <a href="/tags/%E5%8D%95%E8%B0%83%E6%A0%88/" style="font-size: 15px;">单调栈</a> <a href="/tags/%E5%9B%9E%E6%BA%AF/" style="font-size: 16.67px;">回溯</a> <a href="/tags/%E5%AD%97%E7%AC%A6%E4%B8%B2/" style="font-size: 10px;">字符串</a> <a href="/tags/%E5%AD%A6%E4%B9%A0%E8%AE%B0%E5%BD%95/" style="font-size: 10px;">学习记录</a> <a href="/tags/%E5%BC%80%E5%8F%91/" style="font-size: 18.33px;">开发</a> <a href="/tags/%E6%8E%92%E5%BA%8F/" style="font-size: 10px;">排序</a> <a href="/tags/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/" style="font-size: 13.33px;">数据结构</a> <a href="/tags/%E6%A0%88/" style="font-size: 10px;">栈</a> <a href="/tags/%E6%A0%91/" style="font-size: 15px;">树</a> <a href="/tags/%E6%B8%B8%E6%88%8F%E5%92%8C%E5%BC%95%E6%93%8E/" style="font-size: 11.67px;">游戏和引擎</a> <a href="/tags/%E7%AC%94%E8%AF%95/" style="font-size: 10px;">笔试</a> <a href="/tags/%E7%AC%94%E8%AF%95%E9%9D%A2%E8%AF%95/" style="font-size: 13.33px;">笔试面试</a> <a href="/tags/%E7%AE%97%E6%B3%95/" style="font-size: 10px;">算法</a> <a href="/tags/%E9%80%92%E5%BD%92/" style="font-size: 10px;">递归</a>
+    </div>
+</div>
+    
+    
+        <div class="column-right-shadow is-hidden-widescreen is-sticky">
+        
+            
+
+    <div class="card widget" id="toc">
+        <div class="card-content">
+            <div class="menu">
+                <h3 class="menu-label">
+                    目录
+                </h3>
+                <ul class="menu-list"><li>
+        <a class="is-flex" href="#1-为什么是B-树">
+        <!-- 目录是否自动编号 -->
+        <!-- <span class="has-mr-6">1</span> -->
+        <span>1. 为什么是B+树</span>
+        </a><ul class="menu-list"><li>
+        <a class="is-flex" href="#1-1-哈希索引">
+        <!-- 目录是否自动编号 -->
+        <!-- <span class="has-mr-6">1.1</span> -->
+        <span>1.1 哈希索引</span>
+        </a></li><li>
+        <a class="is-flex" href="#1-2-AVL树">
+        <!-- 目录是否自动编号 -->
+        <!-- <span class="has-mr-6">1.2</span> -->
+        <span>1.2 AVL树</span>
+        </a></li><li>
+        <a class="is-flex" href="#1-3-B树">
+        <!-- 目录是否自动编号 -->
+        <!-- <span class="has-mr-6">1.3</span> -->
+        <span>1.3 B树</span>
+        </a></li><li>
+        <a class="is-flex" href="#1-4-B-树">
+        <!-- 目录是否自动编号 -->
+        <!-- <span class="has-mr-6">1.4</span> -->
+        <span>1.4 B+树</span>
+        </a></li></ul></li><li>
+        <a class="is-flex" href="#2-explain查看索引使用情况">
+        <!-- 目录是否自动编号 -->
+        <!-- <span class="has-mr-6">2</span> -->
+        <span>2. explain查看索引使用情况</span>
+        </a><ul class="menu-list"><li>
+        <a class="is-flex" href="#2-1-无索引效果">
+        <!-- 目录是否自动编号 -->
+        <!-- <span class="has-mr-6">2.1</span> -->
+        <span>2.1 无索引效果</span>
+        </a></li><li>
+        <a class="is-flex" href="#2-2-有索引效果">
+        <!-- 目录是否自动编号 -->
+        <!-- <span class="has-mr-6">2.2</span> -->
+        <span>2.2 有索引效果</span>
+        </a></li></ul></li><li>
+        <a class="is-flex" href="#3-SQL调优">
+        <!-- 目录是否自动编号 -->
+        <!-- <span class="has-mr-6">3</span> -->
+        <span>3. SQL调优</span>
+        </a><ul class="menu-list"><li>
+        <a class="is-flex" href="#3-1-函数">
+        <!-- 目录是否自动编号 -->
+        <!-- <span class="has-mr-6">3.1</span> -->
+        <span>3.1 函数</span>
+        </a></li><li>
+        <a class="is-flex" href="#3-2-计算字段后面的字段">
+        <!-- 目录是否自动编号 -->
+        <!-- <span class="has-mr-6">3.2</span> -->
+        <span>3.2 计算字段后面的字段</span>
+        </a></li><li>
+        <a class="is-flex" href="#3-3-类型转换">
+        <!-- 目录是否自动编号 -->
+        <!-- <span class="has-mr-6">3.3</span> -->
+        <span>3.3 类型转换</span>
+        </a></li><li>
+        <a class="is-flex" href="#3-4-编码不一致">
+        <!-- 目录是否自动编号 -->
+        <!-- <span class="has-mr-6">3.4</span> -->
+        <span>3.4 编码不一致</span>
+        </a></li><li>
+        <a class="is-flex" href="#3-5-like的失效和优化">
+        <!-- 目录是否自动编号 -->
+        <!-- <span class="has-mr-6">3.5</span> -->
+        <span>3.5 like的失效和优化</span>
+        </a></li><li>
+        <a class="is-flex" href="#3-6-order-by的失效和优化">
+        <!-- 目录是否自动编号 -->
+        <!-- <span class="has-mr-6">3.6</span> -->
+        <span>3.6 order by的失效和优化</span>
+        </a></li><li>
+        <a class="is-flex" href="#3-7-最左匹配法则">
+        <!-- 目录是否自动编号 -->
+        <!-- <span class="has-mr-6">3.7</span> -->
+        <span>3.7 最左匹配法则</span>
+        </a></li><li>
+        <a class="is-flex" href="#3-8-前缀索引">
+        <!-- 目录是否自动编号 -->
+        <!-- <span class="has-mr-6">3.8</span> -->
+        <span>3.8 前缀索引</span>
+        </a></li><li>
+        <a class="is-flex" href="#3-9-唯一索引和普通索引的选择">
+        <!-- 目录是否自动编号 -->
+        <!-- <span class="has-mr-6">3.9</span> -->
+        <span>3.9 唯一索引和普通索引的选择</span>
+        </a></li><li>
+        <a class="is-flex" href="#3-10-索引下推">
+        <!-- 目录是否自动编号 -->
+        <!-- <span class="has-mr-6">3.10</span> -->
+        <span>3.10 索引下推</span>
+        </a></li></ul></li><li>
+        <a class="is-flex" href="#参考">
+        <!-- 目录是否自动编号 -->
+        <!-- <span class="has-mr-6">4</span> -->
+        <span>参考</span>
+        </a></li></ul>
+            </div>
+        </div>
+    </div>
+
+        
+            <div class="card widget">
+    <div class="card-content">
+        <h3 class="menu-label">
+            推荐阅读
+        </h3>
+        
+        <article class="media">
+            
+            <a href="/Others/node-editor.md/" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="images/loading.gif" data-original="https://cdn.jsdelivr.net/gh/wjwABCDEFG/blog_img/img/20250401154214355.jpeg" alt="Line-It 节点编辑器.md">
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2025-04-01T07:28:20.000Z">2025-04-01</time></div>
+                    <a href="/Others/node-editor.md/" class="title has-link-black-ter is-size-6 has-text-weight-normal">Line-It 节点编辑器.md</a>
+                    <p class="is-size-7 is-uppercase">
+                        <a class="has-link-grey -link" href="/categories/Others/">Others</a>
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+        <article class="media">
+            
+            <a href="/games/Unity3D-note/" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="images/loading.gif" data-original="https://cdn.jsdelivr.net/gh/wjwABCDEFG/blog_img/img/20210728004637.jpg" alt="Unity3D学习笔记">
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2021-07-28T12:42:07.000Z">2021-07-28</time></div>
+                    <a href="/games/Unity3D-note/" class="title has-link-black-ter is-size-6 has-text-weight-normal">Unity3D学习笔记</a>
+                    <p class="is-size-7 is-uppercase">
+                        <a class="has-link-grey -link" href="/categories/games/">游戏和引擎</a>
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+        <article class="media">
+            
+            <a href="/life/%E4%B8%BA%E6%AF%95%E4%B8%9A%E5%81%9A%E5%87%86%E5%A4%87/" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="images/loading.gif" data-original="https://cdn.jsdelivr.net/gh/wjwABCDEFG/blog_img/img/20210717225951.jpeg" alt="为毕业做准备">
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2021-03-31T13:13:32.000Z">2021-03-31</time></div>
+                    <a href="/life/%E4%B8%BA%E6%AF%95%E4%B8%9A%E5%81%9A%E5%87%86%E5%A4%87/" class="title has-link-black-ter is-size-6 has-text-weight-normal">为毕业做准备</a>
+                    <p class="is-size-7 is-uppercase">
+                        <a class="has-link-grey -link" href="/categories/life/">生活随笔</a>
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+        <article class="media">
+            
+            <a href="/life/mhxy-experience/" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="images/loading.gif" data-original="https://cdn.jsdelivr.net/gh/wjwABCDEFG/blog_img/img/20210717223725.png" alt="梦幻西游游戏体验">
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2021-03-31T08:29:35.000Z">2021-03-31</time></div>
+                    <a href="/life/mhxy-experience/" class="title has-link-black-ter is-size-6 has-text-weight-normal">梦幻西游游戏体验</a>
+                    <p class="is-size-7 is-uppercase">
+                        <a class="has-link-grey -link" href="/categories/life/">生活随笔</a>
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+        <article class="media">
+            
+            <a href="/games/3DMath-Primerfor-Graphics-and-Game-Development-note/" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="images/loading.gif" data-original="https://cdn.jsdelivr.net/gh/wjwABCDEFG/blog_img/img/20210717223435.jpeg" alt="3D数学基础图形与游戏研发笔记">
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2021-03-06T10:55:07.000Z">2021-03-06</time></div>
+                    <a href="/games/3DMath-Primerfor-Graphics-and-Game-Development-note/" class="title has-link-black-ter is-size-6 has-text-weight-normal">3D数学基础图形与游戏研发笔记</a>
+                    <p class="is-size-7 is-uppercase">
+                        <a class="has-link-grey -link" href="/categories/games/">游戏和引擎</a>
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+    </div>
+</div>
+        
+        </div>
+    
+</div>
+
+                
+
+
+
+
+<div class="column is-4-tablet is-4-desktop is-3-widescreen is-hidden-touch is-hidden-desktop-only has-order-3 column-right is-sticky">
+    
+        
+
+    <div class="card widget" id="toc">
+        <div class="card-content">
+            <div class="menu">
+                <h3 class="menu-label">
+                    目录
+                </h3>
+                <ul class="menu-list"><li>
+        <a class="is-flex" href="#1-为什么是B-树">
+        <!-- 目录是否自动编号 -->
+        <!-- <span class="has-mr-6">1</span> -->
+        <span>1. 为什么是B+树</span>
+        </a><ul class="menu-list"><li>
+        <a class="is-flex" href="#1-1-哈希索引">
+        <!-- 目录是否自动编号 -->
+        <!-- <span class="has-mr-6">1.1</span> -->
+        <span>1.1 哈希索引</span>
+        </a></li><li>
+        <a class="is-flex" href="#1-2-AVL树">
+        <!-- 目录是否自动编号 -->
+        <!-- <span class="has-mr-6">1.2</span> -->
+        <span>1.2 AVL树</span>
+        </a></li><li>
+        <a class="is-flex" href="#1-3-B树">
+        <!-- 目录是否自动编号 -->
+        <!-- <span class="has-mr-6">1.3</span> -->
+        <span>1.3 B树</span>
+        </a></li><li>
+        <a class="is-flex" href="#1-4-B-树">
+        <!-- 目录是否自动编号 -->
+        <!-- <span class="has-mr-6">1.4</span> -->
+        <span>1.4 B+树</span>
+        </a></li></ul></li><li>
+        <a class="is-flex" href="#2-explain查看索引使用情况">
+        <!-- 目录是否自动编号 -->
+        <!-- <span class="has-mr-6">2</span> -->
+        <span>2. explain查看索引使用情况</span>
+        </a><ul class="menu-list"><li>
+        <a class="is-flex" href="#2-1-无索引效果">
+        <!-- 目录是否自动编号 -->
+        <!-- <span class="has-mr-6">2.1</span> -->
+        <span>2.1 无索引效果</span>
+        </a></li><li>
+        <a class="is-flex" href="#2-2-有索引效果">
+        <!-- 目录是否自动编号 -->
+        <!-- <span class="has-mr-6">2.2</span> -->
+        <span>2.2 有索引效果</span>
+        </a></li></ul></li><li>
+        <a class="is-flex" href="#3-SQL调优">
+        <!-- 目录是否自动编号 -->
+        <!-- <span class="has-mr-6">3</span> -->
+        <span>3. SQL调优</span>
+        </a><ul class="menu-list"><li>
+        <a class="is-flex" href="#3-1-函数">
+        <!-- 目录是否自动编号 -->
+        <!-- <span class="has-mr-6">3.1</span> -->
+        <span>3.1 函数</span>
+        </a></li><li>
+        <a class="is-flex" href="#3-2-计算字段后面的字段">
+        <!-- 目录是否自动编号 -->
+        <!-- <span class="has-mr-6">3.2</span> -->
+        <span>3.2 计算字段后面的字段</span>
+        </a></li><li>
+        <a class="is-flex" href="#3-3-类型转换">
+        <!-- 目录是否自动编号 -->
+        <!-- <span class="has-mr-6">3.3</span> -->
+        <span>3.3 类型转换</span>
+        </a></li><li>
+        <a class="is-flex" href="#3-4-编码不一致">
+        <!-- 目录是否自动编号 -->
+        <!-- <span class="has-mr-6">3.4</span> -->
+        <span>3.4 编码不一致</span>
+        </a></li><li>
+        <a class="is-flex" href="#3-5-like的失效和优化">
+        <!-- 目录是否自动编号 -->
+        <!-- <span class="has-mr-6">3.5</span> -->
+        <span>3.5 like的失效和优化</span>
+        </a></li><li>
+        <a class="is-flex" href="#3-6-order-by的失效和优化">
+        <!-- 目录是否自动编号 -->
+        <!-- <span class="has-mr-6">3.6</span> -->
+        <span>3.6 order by的失效和优化</span>
+        </a></li><li>
+        <a class="is-flex" href="#3-7-最左匹配法则">
+        <!-- 目录是否自动编号 -->
+        <!-- <span class="has-mr-6">3.7</span> -->
+        <span>3.7 最左匹配法则</span>
+        </a></li><li>
+        <a class="is-flex" href="#3-8-前缀索引">
+        <!-- 目录是否自动编号 -->
+        <!-- <span class="has-mr-6">3.8</span> -->
+        <span>3.8 前缀索引</span>
+        </a></li><li>
+        <a class="is-flex" href="#3-9-唯一索引和普通索引的选择">
+        <!-- 目录是否自动编号 -->
+        <!-- <span class="has-mr-6">3.9</span> -->
+        <span>3.9 唯一索引和普通索引的选择</span>
+        </a></li><li>
+        <a class="is-flex" href="#3-10-索引下推">
+        <!-- 目录是否自动编号 -->
+        <!-- <span class="has-mr-6">3.10</span> -->
+        <span>3.10 索引下推</span>
+        </a></li></ul></li><li>
+        <a class="is-flex" href="#参考">
+        <!-- 目录是否自动编号 -->
+        <!-- <span class="has-mr-6">4</span> -->
+        <span>参考</span>
+        </a></li></ul>
+            </div>
+        </div>
+    </div>
+
+    
+        <div class="card widget">
+    <div class="card-content">
+        <h3 class="menu-label">
+            推荐阅读
+        </h3>
+        
+        <article class="media">
+            
+            <a href="/Others/node-editor.md/" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="images/loading.gif" data-original="https://cdn.jsdelivr.net/gh/wjwABCDEFG/blog_img/img/20250401154214355.jpeg" alt="Line-It 节点编辑器.md">
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2025-04-01T07:28:20.000Z">2025-04-01</time></div>
+                    <a href="/Others/node-editor.md/" class="title has-link-black-ter is-size-6 has-text-weight-normal">Line-It 节点编辑器.md</a>
+                    <p class="is-size-7 is-uppercase">
+                        <a class="has-link-grey -link" href="/categories/Others/">Others</a>
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+        <article class="media">
+            
+            <a href="/games/Unity3D-note/" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="images/loading.gif" data-original="https://cdn.jsdelivr.net/gh/wjwABCDEFG/blog_img/img/20210728004637.jpg" alt="Unity3D学习笔记">
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2021-07-28T12:42:07.000Z">2021-07-28</time></div>
+                    <a href="/games/Unity3D-note/" class="title has-link-black-ter is-size-6 has-text-weight-normal">Unity3D学习笔记</a>
+                    <p class="is-size-7 is-uppercase">
+                        <a class="has-link-grey -link" href="/categories/games/">游戏和引擎</a>
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+        <article class="media">
+            
+            <a href="/life/%E4%B8%BA%E6%AF%95%E4%B8%9A%E5%81%9A%E5%87%86%E5%A4%87/" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="images/loading.gif" data-original="https://cdn.jsdelivr.net/gh/wjwABCDEFG/blog_img/img/20210717225951.jpeg" alt="为毕业做准备">
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2021-03-31T13:13:32.000Z">2021-03-31</time></div>
+                    <a href="/life/%E4%B8%BA%E6%AF%95%E4%B8%9A%E5%81%9A%E5%87%86%E5%A4%87/" class="title has-link-black-ter is-size-6 has-text-weight-normal">为毕业做准备</a>
+                    <p class="is-size-7 is-uppercase">
+                        <a class="has-link-grey -link" href="/categories/life/">生活随笔</a>
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+        <article class="media">
+            
+            <a href="/life/mhxy-experience/" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="images/loading.gif" data-original="https://cdn.jsdelivr.net/gh/wjwABCDEFG/blog_img/img/20210717223725.png" alt="梦幻西游游戏体验">
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2021-03-31T08:29:35.000Z">2021-03-31</time></div>
+                    <a href="/life/mhxy-experience/" class="title has-link-black-ter is-size-6 has-text-weight-normal">梦幻西游游戏体验</a>
+                    <p class="is-size-7 is-uppercase">
+                        <a class="has-link-grey -link" href="/categories/life/">生活随笔</a>
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+        <article class="media">
+            
+            <a href="/games/3DMath-Primerfor-Graphics-and-Game-Development-note/" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="images/loading.gif" data-original="https://cdn.jsdelivr.net/gh/wjwABCDEFG/blog_img/img/20210717223435.jpeg" alt="3D数学基础图形与游戏研发笔记">
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2021-03-06T10:55:07.000Z">2021-03-06</time></div>
+                    <a href="/games/3DMath-Primerfor-Graphics-and-Game-Development-note/" class="title has-link-black-ter is-size-6 has-text-weight-normal">3D数学基础图形与游戏研发笔记</a>
+                    <p class="is-size-7 is-uppercase">
+                        <a class="has-link-grey -link" href="/categories/games/">游戏和引擎</a>
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+    </div>
+</div>
+    
+    
+</div>
+
+            </div>
+        </div>
+    </section>
+    <footer class="footer">
+    <div class="container">
+        <div class="level">
+            <div class="level-start has-text-centered-mobile">
+                <a class="footer-logo is-block has-mb-6" href="/">
+                
+                    <img src="images/loading.gif" data-original="https://cdn.jsdelivr.net/gh/wjwABCDEFG/blog_img/img/20210717231246.png" alt="mysql索引" height="28">
+                
+                </a>
+                <p class="is-size-7">
+                &copy; 2025 wjw&nbsp;
+                Powered by <a href="https://hexo.io/" target="_blank" rel="noopener">Hexo</a> & <a
+                        href="https://github.com/ppoffice/hexo-theme-icarus" target="_blank" rel="noopener">Icarus</a>
+                
+                <br>
+                <!-- <span id="busuanzi_container_site_uv">
+                共<span id="busuanzi_value_site_uv">0</span>个访客
+                </span> -->
+                <span id="busuanzi_container_site_uv"> 来访 <span id="busuanzi_value_site_uv"></span>人</span>
+                <span id="busuanzi_container_site_pv">, 总访问 <span id="busuanzi_value_site_pv"></span>次</span>
+
+                <span id="timeDate">载入天数...</span><span id="times">载入时分秒...</span>
+                    <script>
+                        var now = new Date(); 
+                        function createtime() { 
+                            var grt= new Date("03/06/2020 00:00:00"); /*建站时间*/
+                            now.setTime(now.getTime()+250); 
+                            days = (now - grt ) / 1000 / 60 / 60 / 24; dnum = Math.floor(days); 
+                            hours = (now - grt ) / 1000 / 60 / 60 - (24 * dnum); hnum = Math.floor(hours); 
+                            if(String(hnum).length ==1 ){hnum = "0" + hnum;} minutes = (now - grt ) / 1000 /60 - (24 * 60 * dnum) - (60 * hnum); 
+                            mnum = Math.floor(minutes); if(String(mnum).length ==1 ){mnum = "0" + mnum;} 
+                            seconds = (now - grt ) / 1000 - (24 * 60 * 60 * dnum) - (60 * 60 * hnum) - (60 * mnum); 
+                            snum = Math.round(seconds); if(String(snum).length ==1 ){snum = "0" + snum;} 
+                            document.getElementById("timeDate").innerHTML = "本站已安全运行 "+dnum+" 天 "; 
+                            document.getElementById("times").innerHTML = hnum + " 小时 " + mnum + " 分 " + snum + " 秒"; 
+                        } 
+                    setInterval("createtime()",250);
+                    </script>
+                
+                </p>
+            </div>
+            <div class="level-end">
+            
+                <div class="field has-addons is-flex-center-mobile has-mt-5-mobile is-flex-wrap is-flex-middle">
+                
+                <p class="control">
+                    <a class="button is-white is-large" target="_blank" rel="noopener" title="Creative Commons" href="https://creativecommons.org/">
+                        
+                        <i class="fab fa-creative-commons"></i>
+                        
+                    </a>
+                </p>
+                
+                <p class="control">
+                    <a class="button is-white is-large" target="_blank" rel="noopener" title="Attribution 4.0 International" href="https://creativecommons.org/licenses/by/4.0/">
+                        
+                        <i class="fab fa-creative-commons-by"></i>
+                        
+                    </a>
+                </p>
+                
+                <p class="control">
+                    <a class="button is-white is-large" target="_blank" rel="noopener" title="Download on GitHub" href="https://github.com/ppoffice/hexo-theme-icarus">
+                        
+                        <i class="fab fa-github"></i>
+                        
+                    </a>
+                </p>
+                
+                </div>
+            
+            </div>
+        </div>
+    </div>
+</footer>
+    <script src="https://cdn.jsdelivr.net/npm/jquery@3.3.1/dist/jquery.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/moment@2.22.2/min/moment-with-locales.min.js"></script>
+<script>moment.locale("zh-CN");</script>
+
+
+<script>
+var IcarusThemeSettings = {
+    site: {
+        url: 'https://wjw.today',
+        external_link: {"enable":true,"exclude":[]}
+    },
+    article: {
+        highlight: {
+            clipboard: true,
+            fold: 'unfolded'
+        }
+    }
+};
+</script>
+
+
+<script src="https://cdn.jsdelivr.net/npm/clipboard@2.0.4/dist/clipboard.min.js" defer></script>
+
+
+
+
+
+<script src="/js/animation.js"></script>
+
+
+
+<script src="https://cdn.jsdelivr.net/npm/lightgallery@1.6.8/dist/js/lightgallery.min.js" defer></script>
+<script src="https://cdn.jsdelivr.net/npm/justifiedGallery@3.7.0/dist/js/jquery.justifiedGallery.min.js" defer></script>
+<script src="/js/gallery.js" defer></script>
+
+
+
+<div id="outdated">
+    <h6>Your browser is out-of-date!</h6>
+    <p>Update your browser to view this website correctly. <a id="btnUpdateBrowser" href="http://outdatedbrowser.com/">Update
+            my browser now </a></p>
+    <p class="last"><a href="#" id="btnCloseUpdateBrowser" title="Close">&times;</a></p>
+</div>
+<script src="https://cdn.jsdelivr.net/npm/outdatedbrowser@1.1.5/outdatedbrowser/outdatedbrowser.min.js" defer></script>
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+        outdatedBrowser({
+            bgColor: '#f25648',
+            color: '#ffffff',
+            lowerThan: 'flex'
+        });
+    });
+</script>
+
+
+<script src="https://cdn.jsdelivr.net/npm/mathjax@2.7.5/unpacked/MathJax.js?config=TeX-MML-AM_CHTML" defer></script>
+<script>
+document.addEventListener('DOMContentLoaded', function () {
+    MathJax.Hub.Config({
+        'HTML-CSS': {
+            matchFontHeight: false
+        },
+        SVG: {
+            matchFontHeight: false
+        },
+        CommonHTML: {
+            matchFontHeight: false
+        },
+        tex2jax: {
+            inlineMath: [
+                ['$','$'],
+                ['\\(','\\)']
+            ]
+        }
+    });
+});
+</script>
+
+
+<a id="back-to-top" title="回到顶端" href="javascript:;">
+    <i class="fas fa-chevron-up"></i>
+</a>
+<script src="/js/back-to-top.js" defer></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<script src="/js/main.js" defer></script>
+
+    
+    <div class="searchbox ins-search">
+    <div class="searchbox-container ins-search-container">
+        <div class="searchbox-input-wrapper">
+            <input type="text" class="searchbox-input ins-search-input" placeholder="想要查找什么..." />
+            <span class="searchbox-close ins-close ins-selectable"><i class="fa fa-times-circle"></i></span>
+        </div>
+        <div class="searchbox-result-wrapper ins-section-wrapper">
+            <div class="ins-section-container"></div>
+        </div>
+    </div>
+</div>
+<script>
+    (function (window) {
+        var INSIGHT_CONFIG = {
+            TRANSLATION: {
+                POSTS: '文章',
+                PAGES: '页面',
+                CATEGORIES: '分类',
+                TAGS: '标签',
+                UNTITLED: '(无标题)',
+            },
+            CONTENT_URL: '/content.json',
+        };
+        window.INSIGHT_CONFIG = INSIGHT_CONFIG;
+    })(window);
+</script>
+<script src="/js/insight.js" defer></script>
+<link rel="stylesheet" href="/css/search.css">
+<link rel="stylesheet" href="/css/insight.css">
+    
+
+        <style>
+            [bg-lazy] {
+                background-image: none !important;
+                background-color: #eee !important;
+            }
+        </style>
+        <script>
+            window.imageLazyLoadSetting = {
+                isSPA: false,
+                preloadRatio: 1,
+                processImages: null,
+            };
+        </script><script>window.addEventListener("load",function(){var t=/\.(gif|jpg|jpeg|tiff|png)$/i,r=/^data:image\/[a-z\d\-\.\+]+;base64,/;Array.prototype.slice.call(document.querySelectorAll("img[data-original]")).forEach(function(a){var e=a.parentNode;"A"===e.tagName&&(t.test(e.href)||r.test(e.href))&&(e.href=a.dataset.original)})});</script><script>(r=>{r.imageLazyLoadSetting.processImages=t;var a=r.imageLazyLoadSetting.isSPA,o=r.imageLazyLoadSetting.preloadRatio||1,d=i();function i(){var t=Array.prototype.slice.call(document.querySelectorAll("img[data-original]")),e=Array.prototype.slice.call(document.querySelectorAll("[bg-lazy]"));return t.concat(e)}function t(t){(a||t)&&(d=i());for(var e,n=0;n<d.length;n++)0<=(e=(e=d[n]).getBoundingClientRect()).bottom&&0<=e.left&&e.top<=(r.innerHeight*o||document.documentElement.clientHeight*o)&&(()=>{var t,e,a,o,i=d[n];e=function(){d=d.filter(function(t){return i!==t}),r.imageLazyLoadSetting.onImageLoaded&&r.imageLazyLoadSetting.onImageLoaded(i)},(t=i).dataset.loaded||(t.hasAttribute("bg-lazy")?(t.removeAttribute("bg-lazy"),e&&e()):(a=new Image,o=t.getAttribute("data-original"),a.onload=function(){t.src=o,t.removeAttribute("data-original"),t.setAttribute("data-loaded",!0),e&&e()},a.onerror=function(){t.removeAttribute("data-original"),t.setAttribute("data-loaded",!1),t.src=o},t.src!==o&&(a.src=o)))})()}function e(){clearTimeout(t.tId),t.tId=setTimeout(t,500)}t(),document.addEventListener("scroll",e),r.addEventListener("resize",e),r.addEventListener("orientationchange",e)})(this);</script></body>
+</html>

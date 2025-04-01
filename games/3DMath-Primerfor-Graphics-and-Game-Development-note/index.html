@@ -1,0 +1,1896 @@
+<!DOCTYPE html>
+<html  lang="zh">
+<head>
+    <meta charset="utf-8" />
+
+<meta name="generator" content="Hexo 4.2.1" />
+
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+
+<title>3D数学基础图形与游戏研发笔记 - 小温 blog</title>
+
+
+    <meta name="description" content="本文所有公式都是在右手系下的，也就是v’ &#x3D; M * v。如果换成左手系，那么根据矩阵转置公式v’(T) &#x3D; v(T) * M(T)可得，需要将矩阵M进行一次转置并将左乘改为右乘，正角度也需要从逆时针改为顺时针">
+<meta property="og:type" content="article">
+<meta property="og:title" content="3D数学基础图形与游戏研发笔记">
+<meta property="og:url" content="https://wjw.today/games/3DMath-Primerfor-Graphics-and-Game-Development-note/index.html">
+<meta property="og:site_name" content="小温 blog">
+<meta property="og:description" content="本文所有公式都是在右手系下的，也就是v’ &#x3D; M * v。如果换成左手系，那么根据矩阵转置公式v’(T) &#x3D; v(T) * M(T)可得，需要将矩阵M进行一次转置并将左乘改为右乘，正角度也需要从逆时针改为顺时针">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/wjwABCDEFG/blog_img/img/20210717223435.jpeg">
+<meta property="article:published_time" content="2021-03-06T10:55:07.000Z">
+<meta property="article:modified_time" content="2021-07-17T14:58:54.063Z">
+<meta property="article:author" content="wjw">
+<meta property="article:tag" content="游戏和引擎">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://cdn.jsdelivr.net/gh/wjwABCDEFG/blog_img/img/20210717223435.jpeg">
+
+
+
+
+
+
+
+<link rel="icon" href="/images/favicon.ico">
+
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.7.2/css/bulma.css">
+<link rel="stylesheet" href="https://cdn.bootcss.com/font-awesome/5.4.1/css/all.css">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Ubuntu:400,600|Source+Code+Pro">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@9.12.0/styles/atom-one-dark.css">
+
+
+    
+    
+<style>body>.footer,body>.navbar,body>.section{opacity:0}</style>
+
+    
+    
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/lightgallery@1.6.8/dist/css/lightgallery.min.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/justifiedGallery@3.7.0/dist/css/justifiedGallery.min.css">
+
+    
+    
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/outdatedbrowser@1.1.5/outdatedbrowser/outdatedbrowser.min.css">
+
+    
+    
+    
+    
+<link rel="stylesheet" href="/css/back-to-top.css">
+
+    
+    
+    
+    
+    
+    
+    
+    <link rel="stylesheet" href="/css/progressbar.css">
+<script src="https://cdn.jsdelivr.net/npm/pace-js@1.0.2/pace.min.js"></script>
+    
+    <script async="" src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+    
+
+
+<link rel="stylesheet" href="/css/style.css">
+</head>
+<body class="is-3-column">
+    <nav class="navbar navbar-main">
+    <div class="container">
+        <div class="navbar-brand is-flex-center">
+            <a class="navbar-item navbar-logo" href="/">
+            
+                <img src="images/loading.gif" data-original="https://cdn.jsdelivr.net/gh/wjwABCDEFG/blog_img/img/20210717231246.png" alt="3D数学基础图形与游戏研发笔记" height="28">
+            
+            </a>
+        </div>
+        <div class="navbar-menu">
+            
+            <div class="navbar-start">
+                
+                <a class="navbar-item"
+                href="/">主页</a>
+                
+                <a class="navbar-item"
+                href="/archives">归档</a>
+                
+                <a class="navbar-item"
+                href="/categories">分类</a>
+                
+                <a class="navbar-item"
+                href="/tags">标签</a>
+                
+                <a class="navbar-item"
+                href="/about">关于</a>
+                
+            </div>
+            
+            <div class="navbar-end">
+                
+                    
+                    <a class="navbar-item" target="_blank" rel="noopener" title="View My GitHub" href="https://github.com/wjwABCDEFG">
+                        
+                        <i class="fab fa-github"></i>
+                        
+                    </a>
+                    
+                
+                
+                <a class="navbar-item is-hidden-tablet catalogue" title="目录" href="javascript:;">
+                    <i class="fas fa-list-ul"></i>
+                </a>
+                
+                
+                <a class="navbar-item search" title="搜索" href="javascript:;">
+                    <i class="fas fa-search"></i>
+                </a>
+                
+            </div>
+        </div>
+    </div>
+</nav>
+    
+    <section class="section">
+        <div class="container">
+            <div class="columns">
+                <div class="column is-8-tablet is-8-desktop is-6-widescreen has-order-2 column-main">
+<div class="card">
+    
+    <div class="card-image">
+        <span  class="image is-7by1">
+            <img class="thumbnail" src="images/loading.gif" data-original="https://cdn.jsdelivr.net/gh/wjwABCDEFG/blog_img/img/20210717223435.jpeg" alt="3D数学基础图形与游戏研发笔记">
+        </span>
+    </div>
+    
+    <div class="card-content article ">
+        
+        <div class="level article-meta is-size-7 is-uppercase is-mobile is-overflow-x-auto">
+            <div class="level-left">
+                <time class="level-item has-text-grey" datetime="2021-03-06T10:55:07.000Z">2021-03-06</time>
+                
+                <div class="level-item">
+                <a class="has-link-grey -link" href="/categories/games/">游戏和引擎</a>
+                </div>
+                
+                
+                <span class="level-item has-text-grey">
+                    
+                    
+                    1 小时 读完 (大约 10441 个字)
+                </span>
+                
+                
+                <span class="level-item has-text-grey" id="busuanzi_container_page_pv">
+                    <i class="far fa-eye"></i>
+                    <span id="busuanzi_value_page_pv">0</span>次访问
+                </span>
+                
+            </div>
+        </div>
+        
+        <h1 class="title is-size-3 is-size-4-mobile has-text-weight-normal">
+            
+                3D数学基础图形与游戏研发笔记
+            
+        </h1>
+        <div class="content">
+            <blockquote>
+<p>本文所有公式都是在右手系下的，也就是v’ = M * v。如果换成左手系，那么根据矩阵转置公式v’(T) = v(T) * M(T)可得，需要将矩阵M进行一次转置并将左乘改为右乘，正角度也需要从逆时针改为顺时针</p>
+</blockquote>
+<a id="more"></a>
+
+<h1 id="1-向量"><a href="#1-向量" class="headerlink" title="1. 向量"></a>1. 向量</h1><h2 id="1-1-向量点乘"><a href="#1-1-向量点乘" class="headerlink" title="1.1 向量点乘"></a>1.1 向量点乘</h2><p>也叫点积，数量积，结果是一个数量</p>
+<p>几何形式：<strong>a</strong> · <strong>b</strong> = ||a|| * ||b|| * cosθ</p>
+<p>代数形式：</p>
+<p><img src="images/loading.gif" data-original="https://cdn.jsdelivr.net/gh/wjwABCDEFG/blog_img/img/20210717224203.png" alt="代数表示和坐标表示"></p>
+<p>图形学意义：</p>
+<ul>
+<li>可以计算一个向量在另一个向量上的投影</li>
+</ul>
+<img src="images/loading.gif" data-original="https://cdn.jsdelivr.net/gh/wjwABCDEFG/blog_img/img/20210717224123.png" style="zoom:50%;" />
+
+<ul>
+<li>通过计算夹角θ可以判断两个向量是否同向，如果点乘结果＜0，或者θ＞90°，或者cosθ＜0，那么我们说两个向量反向</li>
+</ul>
+<img src="images/loading.gif" data-original="https://cdn.jsdelivr.net/gh/wjwABCDEFG/blog_img/img/20210717224130.png" style="zoom:50%;" />
+
+<ul>
+<li>在聚光灯的效果计算中，可以根据点积来得到光照效果，如果点积越大，说明夹角越小，则物体离光照的轴线越近，光照越强</li>
+</ul>
+<h2 id="1-2-向量叉乘"><a href="#1-2-向量叉乘" class="headerlink" title="1.2 向量叉乘"></a>1.2 向量叉乘</h2><p>结果是一个向量</p>
+<p>几何形式：||<strong>a</strong> * <strong>b</strong>|| = ||a|| * ||b|| * sinθ，其模长为如下平行四边形的面积</p>
+<img src="images/loading.gif" data-original="https://cdn.jsdelivr.net/gh/wjwABCDEFG/blog_img/img/20210717224219.png" alt="几何形式" style="zoom:80%;" />
+
+<p>代数形式：</p>
+<p><img src="images/loading.gif" data-original="https://cdn.jsdelivr.net/gh/wjwABCDEFG/blog_img/img/20210717224231.png" alt="代数形式"></p>
+<p>图形学意义：</p>
+<ul>
+<li>对于两个向量，叉乘的结果实际上是两个向量组成的平面的法线方向，方向满足右手定则</li>
+<li>可以判断左右，对于a, b, c三个点，判断c点是否在线段ab的左边，只需要作向量<strong>ab</strong>, <strong>ac</strong>, 做叉积，右手定则结果为正（指向屏幕外面）则在左边</li>
+<li>进一步可以用来判断内外/前后，对于三角形abc三个顶点外加三角形内部一个d点，如果d点在三个顺时针向量<strong>ab, bc, ca</strong>的左边，则d在三角形abc内部</li>
+</ul>
+<img src="images/loading.gif" data-original="https://cdn.jsdelivr.net/gh/wjwABCDEFG/blog_img/img/20210717224243.png" alt="判断点在某条边的左右以及三角形的内外" style="zoom:50%;" />
+
+<br>
+
+<h1 id="2-矩阵"><a href="#2-矩阵" class="headerlink" title="2. 矩阵"></a>2. 矩阵</h1><p><em>矩阵相乘不满足交换律</em></p>
+<p>很多时候，我们更加习惯于将向量看成是n * 1的矩阵，而且经常会将向量和矩阵混合运算（比如将矩阵和向量做一些乘法等运算）</p>
+<h2 id="2-1-向量点乘和叉乘的矩阵形式"><a href="#2-1-向量点乘和叉乘的矩阵形式" class="headerlink" title="2.1 向量点乘和叉乘的矩阵形式"></a>2.1 向量点乘和叉乘的矩阵形式</h2><p>如上所说，不管是为了方便混合运算也好或者是为了代码实现更加统一也好，向量点乘和叉乘也可以统一写成“矩阵乘法”形式</p>
+<p><img src="images/loading.gif" data-original="https://cdn.jsdelivr.net/gh/wjwABCDEFG/blog_img/img/20210717224254.png" alt="向量点乘和叉乘的矩阵形式"></p>
+<p>叉乘的a变成的这个矩阵称为a的对偶矩阵</p>
+<br>
+
+<h1 id="3-线性变换"><a href="#3-线性变换" class="headerlink" title="3. 线性变换"></a>3. 线性变换</h1><p>使用一些矩阵左乘列向量在图形学上通常有一些特殊的意义，比如旋转，平移等变换，需要知道一些特殊的变换（以2D坐标为例）</p>
+<h2 id="3-1-缩放变换"><a href="#3-1-缩放变换" class="headerlink" title="3.1 缩放变换"></a>3.1 缩放变换</h2><p><img src="images/loading.gif" data-original="https://cdn.jsdelivr.net/gh/wjwABCDEFG/blog_img/img/20210717224316.png" alt="缩放变换矩阵"></p>
+<h2 id="3-2-镜像变换"><a href="#3-2-镜像变换" class="headerlink" title="3.2 镜像变换"></a>3.2 镜像变换</h2><p><img src="images/loading.gif" data-original="https://cdn.jsdelivr.net/gh/wjwABCDEFG/blog_img/img/20210717224335.png" alt="镜像变换矩阵"></p>
+<h2 id="3-3-切变变换"><a href="#3-3-切变变换" class="headerlink" title="3.3 切变变换"></a>3.3 切变变换</h2><p><img src="images/loading.gif" data-original="https://cdn.jsdelivr.net/gh/wjwABCDEFG/blog_img/img/20210717224510.png" alt="切变变换矩阵"></p>
+<h2 id="3-4-旋转变换"><a href="#3-4-旋转变换" class="headerlink" title="3.4 旋转变换"></a>3.4 旋转变换</h2><p><img src="images/loading.gif" data-original="https://cdn.jsdelivr.net/gh/wjwABCDEFG/blog_img/img/20210717224607.png" alt=""></p>
+<h2 id="3-5-平移变换"><a href="#3-5-平移变换" class="headerlink" title="3.5 平移变换"></a>3.5 平移变换</h2><p>平移变换稍微有点不同</p>
+<p><img src="images/loading.gif" data-original="https://cdn.jsdelivr.net/gh/wjwABCDEFG/blog_img/img/20210717224624.png" alt="平移变换矩阵"></p>
+<h2 id="3-6-使用齐次坐标巧妙统一线性变换"><a href="#3-6-使用齐次坐标巧妙统一线性变换" class="headerlink" title="3.6 使用齐次坐标巧妙统一线性变换"></a>3.6 使用齐次坐标巧妙统一线性变换</h2><p>不难发现，前面几个变换都可以写成x’ = Mx的形式，但是平移变换只能写成x’ = x + b的形式，那么我们完成上述变换可以统一写成x’ = Mx + b的形式，如下：</p>
+<p><img src="images/loading.gif" data-original="https://cdn.jsdelivr.net/gh/wjwABCDEFG/blog_img/img/20210717224640.png" alt=""></p>
+<p>后面这个项不够优雅，但是如果我们对其扩展一个维度，就可以统一写成x’ = Mx的形式了。</p>
+<p>什么意思呢？就是说对于一个二维坐标(x, y)，写成列向量的时候添加一个w维度，(x, y, 1)T，（T是转置成列向量的意思，否则编辑器不好写列向量），那么可以发现平移变换也可以写成如下x’ = Mx的形式了</p>
+<p><img src="images/loading.gif" data-original="https://cdn.jsdelivr.net/gh/wjwABCDEFG/blog_img/img/20210717224655.png" alt="平移变换的齐次坐标表示法"></p>
+<p>是不是很巧妙？这种写法称为<strong>齐次坐标</strong>，在齐次坐标表示法下，w维度为1则表示向量，w为0则表示一个点</p>
+<p>有了齐次坐标，我们就可以把以上所有3.1-3.5的变换统一写成x’ = Mx的形式了</p>
+<p><img src="images/loading.gif" data-original="https://cdn.jsdelivr.net/gh/wjwABCDEFG/blog_img/img/20210717224750.png" alt=""></p>
+<p>非常优雅（主要是方便代码实现）</p>
+<p>这里abcd是一般化写法，前面几个特殊的变换还是跟前面是一样的，自己推一下就能写出如下几个常用的了</p>
+<p><img src="images/loading.gif" data-original="https://cdn.jsdelivr.net/gh/wjwABCDEFG/blog_img/img/20210717224807.png" alt="引入齐次坐标后的缩放、旋转、平移"></p>
+<h2 id="3-7-推广到3维坐标"><a href="#3-7-推广到3维坐标" class="headerlink" title="3.7 *推广到3维坐标"></a>3.7 *推广到3维坐标</h2><p>以上，都是以2D坐标为例，3维下大致相同，其次坐标为(x, y, z, w)，线性变化一般化公式为：</p>
+<p><img src="images/loading.gif" data-original="https://cdn.jsdelivr.net/gh/wjwABCDEFG/blog_img/img/20210717224350.png" alt=""></p>
+<p>特殊的如下：</p>
+<p><img src="images/loading.gif" data-original="https://cdn.jsdelivr.net/gh/wjwABCDEFG/blog_img/img/20210717224357.png" alt="缩放、平移"></p>
+<p><img src="images/loading.gif" data-original="https://cdn.jsdelivr.net/gh/wjwABCDEFG/blog_img/img/20210717224408.png" alt="旋转"></p>
+<p>Shear：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">Hxy(s, t) &#x3D; [1 0 s</span><br><span class="line">			 0 1 t</span><br><span class="line">			 0 0 1]</span><br><span class="line">			 </span><br><span class="line">Hxz(s, t) &#x3D; [1 s 0</span><br><span class="line">			 0 1 0</span><br><span class="line">			 0 t 1]</span><br><span class="line">			 </span><br><span class="line">Hyz(s, t) &#x3D; [1 0 0</span><br><span class="line">			 s 1 0</span><br><span class="line">			 t 0 1]</span><br></pre></td></tr></table></figure>
+
+<p>Hxy(s, t)表示用z切变x、y，最终x += sz，y += tz，z不变</p>
+<h2 id="3-8-绕任意轴的旋转"><a href="#3-8-绕任意轴的旋转" class="headerlink" title="3.8 绕任意轴的旋转"></a>3.8 绕任意轴的旋转</h2><p>绕单位向量<strong>n</strong>(nx, ny, nz)逆时针旋转θ</p>
+<p><img src="images/loading.gif" data-original="https://cdn.jsdelivr.net/gh/wjwABCDEFG/blog_img/img/20210717224418.png" alt="注意是右手系下的"></p>
+<blockquote>
+<p>推导过程可以看这篇文章</p>
+<p><a href="https://zhuanlan.zhihu.com/p/56587491">https://zhuanlan.zhihu.com/p/56587491</a></p>
+</blockquote>
+<blockquote>
+<p>再次提醒：本文所有公式都是在右手系下的，如果换成左手系，那么需要将矩阵进行一次转置并将左乘改为右乘，并注意正角度需要改为顺时针</p>
+</blockquote>
+<p>这个公式比较复杂，对于计算机运算也比较慢，可以通过欧拉角和四元数进行绕任意轴的旋转比较简便，附录中有介绍</p>
+<h2 id="3-9-绕任意轴的镜像"><a href="#3-9-绕任意轴的镜像" class="headerlink" title="3.9 绕任意轴的镜像"></a>3.9 绕任意轴的镜像</h2><p>平面的单位法向量<strong>n</strong>(nx, ny, nz)</p>
+<p><img src="images/loading.gif" data-original="https://cdn.jsdelivr.net/gh/wjwABCDEFG/blog_img/img/20210717224426.png" alt=""></p>
+<br>
+
+<h1 id="4-视图变换-View"><a href="#4-视图变换-View" class="headerlink" title="4. 视图变换(View)"></a>4. 视图变换(View)</h1><p>第三章说的线性变换是对物体进行变换，也就是model，加上第四第五张介绍的view和projection，合称mvp变换</p>
+<p>用照相的例子来比喻就是：</p>
+<ul>
+<li>找一个好的地点并调整好被拍摄者的占位(model)</li>
+<li>调整相机角度(view)</li>
+<li>茄子(projection)</li>
+</ul>
+<p>所以视图变换就是：调整相机位置、确定拍摄方向、摆正相机水平角度这个过程（当然要灵活点，所谓相机就是观测者的眼睛，不一定非得是相机）</p>
+<p>怎么摆正相机呢？在数学上怎么表示呢？通常我们将相机位置设为原点构建坐标系，相机摆正为垂直向上的y方向，看向-Z方向，那么自然x的方向虽然没有意义，但是就可以使用(g * t)叉乘得出</p>
+<h1 id="5-投影变换-Projection"><a href="#5-投影变换-Projection" class="headerlink" title="5. 投影变换(Projection)"></a>5. 投影变换(Projection)</h1><p><img src="images/loading.gif" data-original="https://cdn.jsdelivr.net/gh/wjwABCDEFG/blog_img/img/20210717224833.png" alt="透视投影和正交投影"></p>
+<h2 id="5-1-正交投影-Orthographic"><a href="#5-1-正交投影-Orthographic" class="headerlink" title="5.1 正交投影(Orthographic)"></a>5.1 正交投影(Orthographic)</h2><p>正交投影比较简单，投影到某个面，就把法线方向的“深度”去掉，比如投影到xy平面，就把z值置为0即可</p>
+<img src="images/loading.gif" data-original="https://cdn.jsdelivr.net/gh/wjwABCDEFG/blog_img/img/20210717224840.png" style="zoom:80%;" />
+
+<p>当然，这个矩阵是默认了物体经过原点的，如果看了games101，发现正交投影并没有这么做，而只是将空间中的物体移动到以原点为中心，并缩放到 [-1, 1]³中，并且保留了z。那这完全不一样呀…</p>
+<p><img src="images/loading.gif" data-original="https://cdn.jsdelivr.net/gh/wjwABCDEFG/blog_img/img/20210717224847.png" alt="games101中的正交投影"></p>
+<p>通常情况下我们说投影，投影平面是屏幕（或者说是C++运行的那个窗口），如果物体在视野外没有被看到，那么想投影就必须先被相机看到，我们不移动相机，而是移动物体，于是才有了games101中的移动并缩放到 [-1, 1]³，而保留z是因为games101不仅仅是做投影，还要后面的深度遮挡绘制和光栅化，所以这里先保留了深度值。因此<strong>games101中的投影并没有真正的投影</strong>，而是将物体规整到 [-1, 1]³这个空间中，让相机能够“看到”</p>
+<p>上面这种情况才是一般情况，因为通常我们的场景被称为世界坐标（观测者在原点，可能出现正负坐标），但是我们投影完成后应该输出在屏幕（左上角为原点，只有正的二维坐标），所以games101中实际上做的是世界坐标-&gt;屏幕坐标的转换</p>
+<h2 id="5-2-透视投影-Perspective"><a href="#5-2-透视投影-Perspective" class="headerlink" title="5.2 透视投影(Perspective)"></a>5.2 透视投影(Perspective)</h2><p>上面说过了什么是透视投影，一般在透视投影时，我们需要width, height, zNear, zFar这几个参数，zNear和zFar代表了远近平面的z值，只有在这个范围内的物体才会被看到。可以认为人的眼睛就是摄像机，电脑屏幕就是近平面，视力距离就是远平面。</p>
+<p>而对于width, height，我们通常只取一个值比如height，另一个通过屏幕的宽高比获取，但是更常用的方法是连height也不直接指出，而是通过fov，称为视角的东西给出。这是因为比如我们要做一个睁眼特效，那么就可以通过不断的改变视角大小最后才达到屏幕高度（完全睁开眼）</p>
+<p><img src="images/loading.gif" data-original="https://cdn.jsdelivr.net/gh/wjwABCDEFG/blog_img/img/20210717224914.png" alt="宽高比和fov"></p>
+<p><img src="images/loading.gif" data-original="https://cdn.jsdelivr.net/gh/wjwABCDEFG/blog_img/img/20210717224920.png" alt="侧面和公式"></p>
+<hr>
+<h1 id="6-几何图元"><a href="#6-几何图元" class="headerlink" title="6. 几何图元"></a>6. 几何图元</h1><p>介绍一些图元的常用表示方式</p>
+<p><strong>直线</strong></p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Line3D</span>&#123;</span></span><br><span class="line">	Vector3 origin;	<span class="comment">//起点</span></span><br><span class="line">	Vector3 <span class="built_in">end</span>;	<span class="comment">//终点</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><strong>射线</strong></p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Ray3D</span>&#123;</span></span><br><span class="line">	Vector3 origin;	<span class="comment">//起点</span></span><br><span class="line">	Vector3 delta;	<span class="comment">//单位方向向量</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><strong>球</strong></p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Sphere</span>&#123;</span></span><br><span class="line">	Vector3 center;	<span class="comment">//求球心</span></span><br><span class="line">	<span class="keyword">float</span> radius;	<span class="comment">//半径</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><strong>AABB（轴对齐矩形边界框）</strong></p>
+<p>也就是将某个不规则物体框起来的长方体box，记录两个对角顶点的向量</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">AABB</span>&#123;</span></span><br><span class="line">	Vector3 <span class="built_in">min</span>;	<span class="comment">//xyz最小顶点</span></span><br><span class="line">	Vector3 <span class="built_in">max</span>;	<span class="comment">//xyz最大顶点</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>顶点顺序如下图</p>
+<p><img src="images/loading.gif" data-original="https://cdn.jsdelivr.net/gh/wjwABCDEFG/blog_img/img/20210717224926.png" alt="AABB顶点顺序"></p>
+<p>这个顺序的好处是当我们求某个顶点坐标时</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="function">Vector3 <span class="title">AABB::corner</span><span class="params">(<span class="keyword">int</span> i)</span></span>&#123;</span><br><span class="line">    assert(i &gt;= <span class="number">0</span>);</span><br><span class="line">    assert(i &lt;= <span class="number">7</span>);</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">return</span> Vector3((i &amp; <span class="number">1</span>) ? <span class="built_in">max</span>.x : mix.x, (i &amp; <span class="number">2</span>) ? <span class="built_in">max</span>.y : mix.y, (i &amp; <span class="number">4</span>) ? <span class="built_in">max</span>.z : mix.z);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>因为从0~7，x是小大一周期，y是小小大大一周期，z是小小小小大大大大一周期，算是一个小trick</p>
+<p>AABB对于物体旋转，物体旋转，AABB也跟着旋转，要计算的是旋转后的物体的AABB还是原来AABB的AABB</p>
+<p><img src="images/loading.gif" data-original="https://cdn.jsdelivr.net/gh/wjwABCDEFG/blog_img/img/20210717224936.png" alt="6iNoge.png"></p>
+<p>如果是前者，那么可以对旋转后的物体重新做AABB即可。如果想得到后者，需要对原AABB做旋转，然后再得出max和min的坐标，这里的计算也有个小trick，就是并不需要真正的和旋转矩阵相乘，因为我们知道旋转矩阵乘法后为</p>
+<p>x’ = m11x + m21y + m31z</p>
+<p>y’ = m12x + m22y + m32z</p>
+<p>z’ = m13z + m23y + m33z</p>
+<p>观察即可知道，想得到x’max，那么如果m11为正则取xmax，如果为-则取xmin，其他同理，因此实现时只需要对9个m不断if判断即可</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span>(m11 &gt; <span class="number">0.0f</span>)&#123;</span><br><span class="line">    <span class="built_in">min</span>.x += m11 * old.<span class="built_in">min</span>.x;</span><br><span class="line">    <span class="built_in">max</span>.x += m11 * old.<span class="built_in">max</span>.x;</span><br><span class="line">&#125;<span class="keyword">else</span>&#123;</span><br><span class="line">    <span class="built_in">min</span>.x += m11 * old.<span class="built_in">max</span>.x;</span><br><span class="line">    <span class="built_in">max</span>.x += m11 * old.<span class="built_in">min</span>.x;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">...	<span class="comment">//继续+=其他m得出x,y,z</span></span><br></pre></td></tr></table></figure>
+
+<p><strong>平面</strong></p>
+<p>按照高中数学，平面方程有一般式（三点），点法式（平面上一点+法向量），截距式</p>
+<blockquote>
+<p><a href="https://zhuanlan.zhihu.com/p/102514602">https://zhuanlan.zhihu.com/p/102514602</a></p>
+</blockquote>
+<p>对于一般式ax+by+cz+d=0，则法向量是(a,b,c)</p>
+<p>如果点p(x0, y0, z0)是平面上一点，则<strong>pn</strong>作为向量做点乘，得到d，d是原点到这个平面的距离</p>
+<p>3D中，有时候很多个点在一个近似平面上，求一个离所有点距离之和最小的“最佳”平面，做一个类似回归的计算</p>
+<p><img src="images/loading.gif" data-original="https://cdn.jsdelivr.net/gh/wjwABCDEFG/blog_img/img/20210717224945.png" alt="求一个离所有点距离之和最小的平面"></p>
+<p><strong>多边形</strong></p>
+<p>简单多边形（没有洞）描述顶点只需要依次顺时针给出坐标，但是如果是有洞的多边形，我们可以通过切缝的方式变为简单多边形</p>
+<p><img src="images/loading.gif" data-original="https://cdn.jsdelivr.net/gh/wjwABCDEFG/blog_img/img/20210717224953.png" alt="复杂多边形-&gt;简单多边形"></p>
+<br>
+
+<h1 id="7-几何检测"><a href="#7-几何检测" class="headerlink" title="7. 几何检测"></a>7. 几何检测</h1><h2 id="7-1-距离检测"><a href="#7-1-距离检测" class="headerlink" title="7.1 距离检测"></a>7.1 距离检测</h2><p>一个点到xxx的最近点</p>
+<p><strong>2D直线上的最近点</strong></p>
+<p><strong>q’</strong> = <strong>q</strong> + (d - <strong>q·n</strong>)<strong>n</strong>    其实就是从点p做该直线的垂线，和直线相交的点</p>
+<p><strong>射线上的最近点</strong></p>
+<p><strong>q’</strong> = <strong>p</strong> + (<strong>d</strong>·(<strong>q</strong> - <strong>p</strong>))<strong>d</strong>   其中p为射线起点，d为射线方向单位向量，</p>
+<p><strong>平面上的最近点</strong></p>
+<p><strong>q’</strong> = <strong>q</strong> + (d - <strong>q·n</strong>)<strong>n</strong>  和直线是一样的，因为都是垂线</p>
+<p><strong>球上的最近点</strong></p>
+<p><strong>q’</strong> = <strong>q</strong> + (||<strong>c</strong> - <strong>q</strong>|| - r) * (<strong>c</strong> - <strong>q</strong>) / ||<strong>d</strong>||   是圆心<strong>c</strong>和<strong>q</strong>减去半径那段，方向是q方向</p>
+<p><strong>AABB上的最近点</strong></p>
+<p>这个在游戏开发中比较常用，比如飞机游戏，当我们瞄准一个物体的时候，我们瞄准目标物体AABB中最近的一个点即可</p>
+<p> 方法也很简单，直接判断点(x, y, z)和目标物体所在的AABB大小，比如小于AABB的minx则取minx，大于maxx则取maxx，在中间则取目标物体的x</p>
+<h2 id="7-2-相交检测"><a href="#7-2-相交检测" class="headerlink" title="7.2 相交检测"></a>7.2 相交检测</h2><p><strong>2D中两条直线相交性检测</strong></p>
+<p><strong>3D中两条射线相交性检测</strong></p>
+<p><strong>射线和平面相交性检测</strong></p>
+<p><strong>三个平面间相交性检测</strong></p>
+<p><strong>射线和球相交性检测</strong></p>
+<p><strong>两个球/圆相交性检测</strong></p>
+<p><strong>球和平面相交性检测</strong></p>
+<p>//TODO 这里涉及到大量的公式，后序补上，都出自《图形图像编程精粹I》和《3D数学基础：图形与游戏开发》13章</p>
+<hr>
+<h1 id="8-三角形和网格"><a href="#8-三角形和网格" class="headerlink" title="8. 三角形和网格"></a>8. 三角形和网格</h1><p>三维的模型一般都会分解成无数个三角形网格以方便渲染弧面和纹理映射</p>
+<p><img src="images/loading.gif" data-original="https://cdn.jsdelivr.net/gh/wjwABCDEFG/blog_img/img/20210717225011.png" alt="纹理映射需要三角形网格"></p>
+<p>关于网格，目前的图形库（比如DirectX和opengl）大都设计成以下结构</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Vertex</span>&#123;</span>	<span class="comment">//顶点类</span></span><br><span class="line">    Vector3 p;	<span class="comment">//一个3维向量，表示一个顶点，包含xyz坐标</span></span><br><span class="line">    <span class="keyword">float</span> u, v;	<span class="comment">//u v坐标用于纹理映射</span></span><br><span class="line">    </span><br><span class="line">    <span class="comment">//其他信息</span></span><br><span class="line">    Vector3 normal;	<span class="comment">//用于Gouraud shading的顶点法向量</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Triangle</span>&#123;</span>	<span class="comment">//三角形类</span></span><br><span class="line">    Vertex vtx[<span class="number">3</span>];	<span class="comment">//一个三角形包含3个顶点</span></span><br><span class="line">    </span><br><span class="line">    <span class="comment">//其他信息</span></span><br><span class="line">    Vector3 normal;	<span class="comment">//用于Flat shading的三角形法向量</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">TriMesh</span>&#123;</span>	<span class="comment">//三角形网格类</span></span><br><span class="line">    <span class="comment">//所谓网格其实就是三角形列表</span></span><br><span class="line">    <span class="keyword">int</span> vAlloc;	<span class="comment">//分配的顶点数量，通常会比count多一些，方便扩展，类似于capcity和count</span></span><br><span class="line">    <span class="keyword">int</span> vCount;	<span class="comment">//需要的顶点数量</span></span><br><span class="line">    Vertex *vList;	<span class="comment">//保存顶点列表</span></span><br><span class="line">    </span><br><span class="line">    <span class="keyword">int</span> tAlloc;	<span class="comment">//分配的三角形数量，通常会比count多一些，方便扩展</span></span><br><span class="line">    <span class="keyword">int</span> tCount;	<span class="comment">//真正需要的三角形数量</span></span><br><span class="line">    Tringle *triList;	<span class="comment">//保存三角形列表</span></span><br><span class="line">    </span><br><span class="line">    <span class="function"><span class="keyword">int</span> <span class="title">addTri</span><span class="params">(Tringle tri)</span></span>;	<span class="comment">//增加三角形方法，返回索引</span></span><br><span class="line">    </span><br><span class="line">    <span class="comment">//其他信息</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>当然，因为最终操作的其实是网格，网格中其实有顶点了，所以也有些库的三角形类并没有Vertex vtx[3];而是只存了一个index，需要的时候再统一从网格类中根据下标获取顶点，这是标准做法</p>
+<h2 id="8-1-三角形和顶点的法向量"><a href="#8-1-三角形和顶点的法向量" class="headerlink" title="8.1 三角形和顶点的法向量"></a>8.1 三角形和顶点的法向量</h2><p>关于三角形类和网格类都会有一个属性normal，这个法向量会用于shading</p>
+<p><strong>三角形法向量的求法：</strong>三角形两个边向量做叉乘</p>
+<p>e1 = v3 - v2</p>
+<p>e2 = v1 - v3</p>
+<p>n = e1 * e2</p>
+<p><strong>顶点法向量的求法：</strong>一个顶点可能是n个三角形的公共顶点，将这n个三角形的法向量求和就是该顶点法向量的方向，再做归一化（很多地方说是相邻三角形的法向量的平均数，仔细看发现其实不是平均数，因为求和后不是/n而是/模长，也就是变成单位向量）</p>
+<p>代码实现的时候，我们并不能直接知道某个顶点会连接哪几个三角形，不可能需要算某个顶点法向量的时候去临时遍历一遍所有的三角形。所以一般都计算完三角形的法向量后，做一次求所有顶点的法向量操作：遍历所有的三角形，并将其三个顶点法向量累积，最后遍历一遍所有的顶点做归一化</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">Mesh::computerVertexNormals</span><span class="params">()</span></span>&#123;</span><br><span class="line">    <span class="keyword">int</span> i;</span><br><span class="line">    computeTriNormals();	<span class="comment">//得到所有三角形的法向量</span></span><br><span class="line">    </span><br><span class="line">    <span class="comment">//旧值清零</span></span><br><span class="line">    <span class="keyword">for</span>(i = <span class="number">0</span>; i &lt; vCount; i++)&#123;</span><br><span class="line">        vertex(i).mormal.zero();</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="comment">//将每个三角形的法向量累加到各顶点</span></span><br><span class="line">    <span class="keyword">for</span>(i = <span class="number">0</span>; i &lt; tCount; i++)&#123;</span><br><span class="line">        Tri *t = &amp;tri(i);	<span class="comment">//其实就是Tri t = triList[i]，我不是很习惯用指针</span></span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> j = <span class="number">0</span>; j &lt; <span class="number">3</span>; j++)&#123;	<span class="comment">//累计到各顶点</span></span><br><span class="line">            vertex(t-&gt;v[j].index).normal += t-&gt;normal;	<span class="comment">//其实就是vList[t.v[j].index].normal += t.normal;看不懂可以看下面的解释</span></span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="comment">//所有顶点的法向量归一化</span></span><br><span class="line">    <span class="keyword">for</span>(i = <span class="number">0</span>; i &lt; vCount; i++)&#123;</span><br><span class="line">        vertex(i).normal.normalize();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>再说一下，t-&gt;v[j]是三角形类里面有个顶点类的成员v，.index是因为前面说的优化，也就是说这个顶点类并不是真正的Vertex，而是一个内部类Ver（长得都差不多只是成员函数只有索引），vertex(index)就是get函数*vList[index]</p>
+<h2 id="8-2-网格操作"><a href="#8-2-网格操作" class="headerlink" title="8.2 网格操作"></a>8.2 网格操作</h2><p>//TODO 顶点焊接、面拆分，边坍缩，网格削减等等一系列操作，实现见书本14章</p>
+<hr>
+<h1 id="9-图形流水线-图形管道"><a href="#9-图形流水线-图形管道" class="headerlink" title="9. 图形流水线(图形管道)"></a>9. 图形流水线(图形管道)</h1><ul>
+<li>建立场景</li>
+<li>可见性检测</li>
+<li>设置渲染状态</li>
+<li>几何体生成与提交</li>
+<li>变换和光照</li>
+<li>背面剔除与裁剪</li>
+<li>投影到屏幕空间</li>
+<li>光栅化</li>
+<li>像素着色</li>
+</ul>
+<p>其实基本上就是从第一行代码到显示在屏幕上所有过程</p>
+<p>这几个的步骤不是固定的，有些步骤可以互换，所以如果用不同的图形库，也要遵守他们的流水线</p>
+<p><img src="images/loading.gif" data-original="https://cdn.jsdelivr.net/gh/wjwABCDEFG/blog_img/img/20210717225027.png" alt="d3d流水线"></p>
+<p><img src="images/loading.gif" data-original="https://cdn.jsdelivr.net/gh/wjwABCDEFG/blog_img/img/20210717225033.png" alt="opengl流水线简化图"></p>
+<p>opengl这里是简化图</p>
+<hr>
+<h1 id="10-光照和着色"><a href="#10-光照和着色" class="headerlink" title="10. 光照和着色"></a>10. 光照和着色</h1><p>这里说的光照只关注光的效果，不关注光造成的阴影，称为shading，而不关注shadow</p>
+<h2 id="10-1-光照"><a href="#10-1-光照" class="headerlink" title="10.1 光照"></a>10.1 光照</h2><p>blinn-phong反射模型简单的认为光照由三部分组成：环境光，漫反射，高光</p>
+<p><img src="images/loading.gif" data-original="https://cdn.jsdelivr.net/gh/wjwABCDEFG/blog_img/img/20210717225041.png" alt="一张经典布林冯模型图"></p>
+<p>La,Ld,Ls的具体内容是什么呢？</p>
+<h3 id="10-1-1-漫反射diffuse"><a href="#10-1-1-漫反射diffuse" class="headerlink" title="10.1.1 漫反射diffuse"></a>10.1.1 漫反射diffuse</h3><p>漫反射是说是光照在物体上然后反射到眼睛里面去</p>
+<p><img src="images/loading.gif" data-original="https://cdn.jsdelivr.net/gh/wjwABCDEFG/blog_img/img/20210717225053.png" alt="漫反射"></p>
+<p>这个公式如何理解呢？，这只是一个大胆的简化模型，但是是<strong>有一定道理的</strong>，可以看下面一步步的假设推导</p>
+<p>我们可以从I开始，假设一开始光照强度是I，那么经过反射后先视为平行光（视为，不是真的，因为这个是简易模型），那么我们会发现如下图，跟物体平面是否正对着光有关，Lambert余弦指出平面法线和光的夹角余弦值会和光的强度成正比，这确实是有道理的，如下</p>
+<p><img src="images/loading.gif" data-original="https://cdn.jsdelivr.net/gh/wjwABCDEFG/blog_img/img/20210717225117.png" alt="6MkoIf.png"></p>
+<p>那么我们就得到了I’ = I*cosθ，cosθ可以替换成两个向量的点乘，同时根据常识可得光最小为0而不会为负数，为0就全黑了，因此</p>
+<p>I’ = I * max(<strong>I·n</strong>)</p>
+<p>这是我们认为是平面光源的情况（光无限远或者其他手段），但是光其实是点光源</p>
+<p><img src="images/loading.gif" data-original="https://cdn.jsdelivr.net/gh/wjwABCDEFG/blog_img/img/20210717225127.png" alt="点光源"></p>
+<p>我们认为光往每个角度平均的向外球面传播，于是我们可以认为强度以圆的半径速率减少</p>
+<p>因此光到某个点时的强度为</p>
+<p>I’ = (I/r²) * max(<strong>I·n</strong>)</p>
+<p>是不是也有那么点道理？？</p>
+<p>最后我们认为可以控制强度因子，这个我认为你可以想象成雾天什么的，对吧，光还是那么强，只是经过云层等到达的强度就减少了，我们直接认为这个为一个常数因子。当然雾只是个比喻，有了这个因子之后可以方便我们操控光的亮面大小</p>
+<p><img src="images/loading.gif" data-original="https://cdn.jsdelivr.net/gh/wjwABCDEFG/blog_img/img/20210717225137.png" alt="常数因子的影响"></p>
+<p>再次提醒，这一切都是大胆的简化假设，如果以上三步你都认为确实存在一定的道理，那么你就得出上面漫反射部分的公式了</p>
+<h3 id="10-1-2-高光Specular"><a href="#10-1-2-高光Specular" class="headerlink" title="10.1.2 高光Specular"></a>10.1.2 高光Specular</h3><p>高光是一种镜面反射</p>
+<p>在Blinn-phong中仍然是在简单的大胆简化假设的基础上进行推导</p>
+<p>假设有一面镜子反射太阳光，我们在什么时候会感到刺眼？那就是眼睛刚好在反射角的时候，如下图：如果眼睛在黄色线上，就会感到很刺眼，偏一点点，仍然会刺眼但程度小，越远离黄色线，就越没有刺眼的感觉</p>
+<p><img src="images/loading.gif" data-original="https://cdn.jsdelivr.net/gh/wjwABCDEFG/blog_img/img/20210717225145.png" alt="高光"></p>
+<p>为了描述这个偏离的角度，这样子就比较难，这里很巧妙的引入了半程向量这种说法</p>
+<p><img src="images/loading.gif" data-original="https://cdn.jsdelivr.net/gh/wjwABCDEFG/blog_img/img/20210717225152.png" alt="引入半程向量"></p>
+<p>半程向量非常好求，<strong>I+v</strong>再归一化为单位向量即可，这个夹角α和偏离角度虽然差了2倍，但是也可以用来描述偏差嘛对吧</p>
+<p>和Ld不同的是，我们可以看到一个次数p，这个是什么意思呢？</p>
+<p>在之前漫反射的时候我们说了kd代表漫反射光面的大小，同样的这里的ks也代表高光光面的大小，但是对于高光来说，除了光面还有一个很重要的因素就是亮度，p则代表了光面的亮度，这仍然是有道理的</p>
+<p><img src="images/loading.gif" data-original="https://cdn.jsdelivr.net/gh/wjwABCDEFG/blog_img/img/20210717225203.png" alt="一张图道清了真相"></p>
+<p>公式中的其他部分和Ld差不多，就不解释了</p>
+<h3 id="10-1-3-环境光Ambient"><a href="#10-1-3-环境光Ambient" class="headerlink" title="10.1.3 环境光Ambient"></a>10.1.3 环境光Ambient</h3><p>最后是La环境光，当我们用手机夜拍的时候，没有太阳也不开闪光灯，唯一的一点光源只是转角看不到的路灯，你是否希望拍出来的东西是一片黑？？</p>
+<p>不希望吧，我们在一个很暗的环境下，我们希望物体接受到一些墙面或者任何（不光滑的平面）反射过来的那么一丢丢亮度</p>
+<p>这很难处理，我们没有办法知道四面八方有多少物体能够给我们提供光源，那么我们干脆简单的认为四面八方都能提供一样强度的一点点光</p>
+<p><img src="images/loading.gif" data-original="https://cdn.jsdelivr.net/gh/wjwABCDEFG/blog_img/img/20210717225209.png" alt="环境光"></p>
+<p>就是这么简单大胆，于是将上述三个公式Ld, La, Ls一组合，便得到了Blinn-phong模型的完整公式</p>
+<p><img src="images/loading.gif" data-original="https://cdn.jsdelivr.net/gh/wjwABCDEFG/blog_img/img/20210717225220.png" alt="完整公式"></p>
+<p>一切都是这么的妙~啊</p>
+<h2 id="10-2-着色"><a href="#10-2-着色" class="headerlink" title="10.2 着色"></a>10.2 着色</h2><p>三维物体都会表示成一堆三角形的模型，在着色时我们就可以选择对表面，还是顶点还是像素</p>
+<h3 id="10-2-1-flat-shading"><a href="#10-2-1-flat-shading" class="headerlink" title="10.2.1 flat shading"></a>10.2.1 flat shading</h3><p>对表面求法向量</p>
+<p><img src="images/loading.gif" data-original="https://cdn.jsdelivr.net/gh/wjwABCDEFG/blog_img/img/20210717225227.png" alt="Flat shading"></p>
+<h3 id="10-2-2-Gouraud-shading"><a href="#10-2-2-Gouraud-shading" class="headerlink" title="10.2.2 Gouraud shading"></a>10.2.2 Gouraud shading</h3><p>对顶点求法向量，求法面第8章也说过了，是该顶点邻接三角形的平均值</p>
+<p><img src="images/loading.gif" data-original="https://cdn.jsdelivr.net/gh/wjwABCDEFG/blog_img/img/20210717225236.png" alt="Gouraud shading"></p>
+<h3 id="10-2-3-Phong-shading"><a href="#10-2-3-Phong-shading" class="headerlink" title="10.2.3 Phong shading"></a>10.2.3 Phong shading</h3><p>对每个像素进行着色</p>
+<p><img src="images/loading.gif" data-original="https://cdn.jsdelivr.net/gh/wjwABCDEFG/blog_img/img/20210717225245.png" alt="Phong shading"></p>
+<p>诚然，对像素着色效果最好，效率也比较低，但games101中指出，并不是说我们每个时刻都需要phong shading，因为这还取决于三角形的数量，如果三角形足够细化，那么flat shading也是可以有很好的效果的，并给出了对比图</p>
+<p><img src="images/loading.gif" data-original="https://cdn.jsdelivr.net/gh/wjwABCDEFG/blog_img/img/20210717225258.png" alt="不同三角形数量下的各种shading效果"></p>
+<p>我们可以看到，当模型三角形数量足够多的时候，phong shading带来的提升效果就不明显了，白白增加了计算量</p>
+<h2 id="10-3-雾化"><a href="#10-3-雾化" class="headerlink" title="10.3 雾化"></a>10.3 雾化</h2><p>雾化就是将3D图形和雾的颜色相混合的效果，会造成物体颜色模糊效果</p>
+<p>雾化浓度和雾化距离相关，公式如下</p>
+<p><img src="images/loading.gif" data-original="https://cdn.jsdelivr.net/gh/wjwABCDEFG/blog_img/img/20210717225307.png" alt="雾化浓度"></p>
+<hr>
+<p>计算出雾的浓度后再混入颜色</p>
+<p><img src="images/loading.gif" data-original="https://cdn.jsdelivr.net/gh/wjwABCDEFG/blog_img/img/20210717225313.png" alt="颜色"></p>
+<hr>
+<h1 id="11-纹理映射"><a href="#11-纹理映射" class="headerlink" title="11. 纹理映射"></a>11. 纹理映射</h1><p><img src="images/loading.gif" data-original="https://cdn.jsdelivr.net/gh/wjwABCDEFG/blog_img/img/20210717225424.png" alt="纹理映射"></p>
+<p>不管纹理图片大小多大，我们都首先缩放到u, v范围为[0, 1]</p>
+<p>然后我们对于uv中间的小数比如0.25、0.5就用插值的方法将图贴上去</p>
+<p>//TODO纹理映射中的双线性插值，解决插值中的模糊问题</p>
+<h2 id="11-3-纹理复用"><a href="#11-3-纹理复用" class="headerlink" title="11.3 纹理复用"></a>11.3 纹理复用</h2><p>很多时候纹理贴图都是可以复用的，比如墙壁的砖块，如果墙壁很大，为每一个墙壁制作纹理贴图肯定是不合理的，所以厉害的视觉设计师会将纹理设置成这样：</p>
+<p><img src="images/loading.gif" data-original="https://cdn.jsdelivr.net/gh/wjwABCDEFG/blog_img/img/20210717225442.png" alt="可复用纹理"></p>
+<p>什么意思呢？就是说我用两张这样的图片从上下左右跟另一张拼在一起，瓷砖纹理都能无缝接合另外一张，这样的纹理就可以复用而不违和</p>
+<hr>
+<h1 id="12-双缓存"><a href="#12-双缓存" class="headerlink" title="12. 双缓存"></a>12. 双缓存</h1><p>计算机输出图形时会出现闪烁（物体运动的时候突然消失，然后出现在下一个位置），使用双缓存可以解决闪烁</p>
+<p>我们说双缓存，实际上是一个缓存…单缓存实际上是没有缓存…因为默认屏幕显示东西认为是一个缓存…闪烁的原因：原来是擦除上一帧的屏幕并重新绘制，擦除需要时间，绘制也需要时间，擦除完了我们看到原物体消失，重绘完了我们看到新位置物体出现，这就是闪烁。如果加入了缓存，可以直接将下一帧的图片存在缓冲区中，一次性输出到屏幕。</p>
+<p>注意，擦除和重绘的时间还是一样慢，但是擦除的不是屏幕，而是缓存，也就是说上一帧还在屏幕上，重新绘制到缓存后，从缓存到屏幕的拷贝是一瞬间的事情</p>
+<p><img src="images/loading.gif" data-original="https://cdn.jsdelivr.net/gh/wjwABCDEFG/blog_img/img/20210717225449.png" alt="双缓存"></p>
+<p>关于双缓存，知道出现的原因和解决的原理即可，哪怕是自己实现也就是swapBuffer，用d3d或者opengl更简单了，一两行代码</p>
+<hr>
+<h1 id="13-可见性检测"><a href="#13-可见性检测" class="headerlink" title="13 可见性检测"></a>13 可见性检测</h1><p>这里不需要自己做，DirectX能自动调用硬件进行快速的可见性检测，原理部分以后再介绍</p>
+<p>//TODO</p>
+<hr>
+<h1 id="14-抗锯齿"><a href="#14-抗锯齿" class="headerlink" title="14 抗锯齿"></a>14 抗锯齿</h1><p>所谓锯齿，就是由于屏幕像素太小造成如下不平滑的边缘</p>
+<p><img src="images/loading.gif" data-original="https://cdn.jsdelivr.net/gh/wjwABCDEFG/blog_img/img/20210717225457.png" alt="锯齿"></p>
+<p>原因是对于像素的每个格子，用格子中心的坐标(0.5, 0.5)所在的颜色代表了整个像素格子的颜色</p>
+<p><img src="images/loading.gif" data-original="https://cdn.jsdelivr.net/gh/wjwABCDEFG/blog_img/img/20210717225518.png" alt="原因是格子中心的颜色代表了整个各自的颜色"></p>
+<p>解决方法</p>
+<ul>
+<li>物理：使用分辨率更好的显示器</li>
+<li>超采样supersampling：MsAA</li>
+<li>多重采样multisampling：directx</li>
+</ul>
+<p>超采样就是将每个像素细分为四个小格子，对于每个小个子都计算颜色平均值作为当前的颜色。如果分为四个小格子就叫做MsAA4*4，可以更细的距离进行采样，缺点是分的越多计算量越大</p>
+<p>以下是games101作业2中的代码（具体逻辑不用深究，就看是不是多了4倍计算）</p>
+<p><img src="images/loading.gif" data-original="https://cdn.jsdelivr.net/gh/wjwABCDEFG/blog_img/img/20210717225527.png" alt="不带抗锯齿是这样的"></p>
+<p><img src="images/loading.gif" data-original="https://cdn.jsdelivr.net/gh/wjwABCDEFG/blog_img/img/20210717225532.png" alt="带抗锯齿"></p>
+<p>多了一层for，就是细分的格子数量，所以计算量也随之增大</p>
+<p>多重采样是directx和一些图形库的抗锯齿方法，很快，仍然会使用屏幕分辨率4倍大小的后台缓冲和深度缓冲，但是，不像超级采样那样计算每个子像素的颜色，而是只计算像素中心颜色一次，然后基于子像素的可见性（基于子像素的深度/模板测试）和范围（子像素中心在多边形之外还是之内）共享颜色信息。</p>
+<p>多重采样直接填充Directx的结构体即可</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">typedef</span> <span class="class"><span class="keyword">struct</span> <span class="title">DXGI_SAMPLE_DESC</span></span></span><br><span class="line"><span class="class">&#123;</span></span><br><span class="line">    UINT Count; 	<span class="comment">//用于指定每个像素的采样数量</span></span><br><span class="line">    UINT Quality; 	<span class="comment">//用于指定希望得到的质量级别</span></span><br><span class="line">&#125; DXGI_SAMPLE_DESC, *LPDXGI_SAMPLE_DESC;</span><br></pre></td></tr></table></figure>
+
+<p>不同硬件的质量级别表示的含义不一定相同，质量级别越高，占用的系统资源就越多，所以我们必须在质量和速度之间权衡利弊。具体的说明在后面的d3d文章中介绍，这里只做理论了解</p>
+<p><img src="images/loading.gif" data-original="https://cdn.jsdelivr.net/gh/wjwABCDEFG/blog_img/img/20210717225542.png" alt="抗锯齿效果"></p>
+<hr>
+<h1 id="附录"><a href="#附录" class="headerlink" title="附录"></a>附录</h1><h2 id="多坐标系"><a href="#多坐标系" class="headerlink" title="多坐标系"></a>多坐标系</h2><p>当我们进行三维场景设计时，我们想旋转单个物体而不能影响其他物体，就不可能去旋转世界坐标系。因此引入了物体坐标系，在世界坐标系和物体坐标系中间为了方便转换还引入了惯性坐标系，如下，世界坐标系和惯性坐标系的转换只需要平移，惯性坐标系和物体坐标系转换只需要旋转</p>
+<p><img src="images/loading.gif" data-original="https://cdn.jsdelivr.net/gh/wjwABCDEFG/blog_img/img/20210717225549.png" alt="多坐标系"></p>
+<p><strong>旋转和坐标系变换是一模一样的，只是理解角度不同</strong>，一个 active 变换也可以理解为一个坐标系转换变换，反之亦然。在某些情况下，使用多个坐标系统更符合思维习惯，我们可以让物体自身保持不变，只是从一个参考系转换到另一个参考系，由于参考系发生了改变，因此物体的坐标也会随之改变。在另一些情况中，我们不想改变参考系，而只想在同一个参考系中对物体进行变换</p>
+<p>所以旋转的作用不仅仅在某个坐标系上旋转物体，还可以用于惯性坐标系和物体坐标系之间的坐标转换，比如对于同一个“i2o转换矩阵”可以通过如下旋转公式相互转换</p>
+<p><img src="images/loading.gif" data-original="https://cdn.jsdelivr.net/gh/wjwABCDEFG/blog_img/img/20210717225558.png" alt=""></p>
+<p>其实和普通的旋转没有区别，只是说一下旋转有这种作用而已</p>
+<p>为了欧拉角的唯一性（多转360°还是同一个角度），我们通常把heading限制在-180° ~ +180°，bank限制在-180° ~ +180°，pitch限制在-90° ~ +90°</p>
+<h2 id="欧拉角"><a href="#欧拉角" class="headerlink" title="欧拉角"></a>欧拉角</h2><p>之前说过绕任意轴旋转公式复杂，计算机也需要保存9个计算复杂的变量，欧拉角对其进行了简化</p>
+<p>欧拉角是用三个角度表示方位和旋转，称为角位移：</p>
+<p>heading角（也称作yaw角）：常用于描述绕y轴（垂直轴）飞机水平偏航</p>
+<p>pitch角：常用于描述绕x轴飞机低头抬头</p>
+<p>bank角（也称作roll角）：常用于描述绕x轴飞机自身翻滚</p>
+<p><img src="images/loading.gif" data-original="https://cdn.jsdelivr.net/gh/wjwABCDEFG/blog_img/img/20210717225605.png" alt="飞机图"></p>
+<p>三个旋转角绕着三个相互垂直的坐标轴（三个轴可以是任意的），通常是笛卡尔坐标系</p>
+<p><strong>注意：欧拉角是基于物体坐标系来旋转的，而不是基于世界坐标系来旋转的，所以通常我们使用欧拉角旋转一个空间坐标下的物体时，记得做惯性系-&gt;物体系的旋转</strong></p>
+<p><strong>缺点</strong></p>
+<ul>
+<li>表达不唯一，绕某个轴旋转360°还是一样的方位</li>
+<li>插值计算复杂</li>
+<li>万向锁问题</li>
+</ul>
+<h3 id="万向锁问题"><a href="#万向锁问题" class="headerlink" title="万向锁问题"></a>万向锁问题</h3><p>很多博客用<a href="https://www.bilibili.com/video/BV1YJ41127qe">油管那个英文视频</a>举例，相信大家也看过了，简单的说，本来三个角度有自己的作用，可以控制飞机的偏航、俯仰、滚转。但是转到如下图所示的时候</p>
+<p><img src="images/loading.gif" data-original="https://cdn.jsdelivr.net/gh/wjwABCDEFG/blog_img/img/20210717225614.png" alt="万向锁"></p>
+<p>本来红绿蓝三个圈应该是两两垂直的，蓝和绿至少有一个在图中的灰色圈里（准确的说应该是绿圈）用于控制俯仰操作，但是现在没有了，那么这个箭头不能做到俯仰操作了。转动绿圈的效果和转动蓝圈的效果变成一样了，绿圈就仿佛失去了他的作用。</p>
+<h3 id="矩阵和欧拉角的转换"><a href="#矩阵和欧拉角的转换" class="headerlink" title="矩阵和欧拉角的转换"></a>矩阵和欧拉角的转换</h3><p>这里以物体坐标系转换到惯性坐标系为例，其他也一样</p>
+<p><strong>欧拉角-&gt;矩阵：</strong></p>
+<p>其实就是分别绕轴旋转再做矩阵乘法（下面这两张图是左手坐标系所以看起来跟之前的不太一样，自行转置）</p>
+<p><img src="images/loading.gif" data-original="https://cdn.jsdelivr.net/gh/wjwABCDEFG/blog_img/img/20210717225623.png" alt="左手系"></p>
+<p>矩阵乘法结果如下：</p>
+<p><img src="images/loading.gif" data-original="https://cdn.jsdelivr.net/gh/wjwABCDEFG/blog_img/img/20210717225633.png" alt="左手系"></p>
+<p>这里以物体坐标系转换到惯性坐标系为例，如果是惯性系转换成物体坐标系，则做矩阵的逆，这里是正交矩阵，所以做转置即可</p>
+<p><strong>矩阵-&gt;欧拉角：</strong></p>
+<p>其实就是通过矩阵得到h,b,p角度大小，可以从上面矩阵</p>
+<p>由m32得：p = asin(-m32)</p>
+<p>由m31和m33相除得：h = atan(m31 / m33) = atan2(m31, m33)</p>
+<p>由m12和m22相除得：b = atan(m12 / m22) = atan2(m12, m22)</p>
+<p>同理，如果是惯性-&gt;物体则转置</p>
+<h3 id="欧拉角和四元数的转换"><a href="#欧拉角和四元数的转换" class="headerlink" title="欧拉角和四元数的转换"></a>欧拉角和四元数的转换</h3><p>看四元数同章节</p>
+<br>
+
+<hr>
+<h2 id="四元数"><a href="#四元数" class="headerlink" title="四元数"></a>四元数</h2><p>四元数类比复数，是三维下的复数</p>
+<p>可以表示为[w (x y z)]，xyz通常表示成向量，所以也可以简写成[w v]</p>
+<p>[w (x y z)] = w + xi + yj + zk，其中i² + j² + k² = -1</p>
+<p><strong>四元数的一些运算</strong></p>
+<ul>
+<li><p>负号：-q = -[w v] = [-w -v]</p>
+</li>
+<li><p>单位四元数：[1 (0 0 0)]图形学表示没有角位移也就是没有旋转</p>
+</li>
+<li><p>求模：||q|| = √(w² + x² + y² + z²)，单位四元数模场为1</p>
+</li>
+<li><p>共轭：q* = [w (-x -y -z)]图形学表示为沿负方向旋转</p>
+</li>
+<li><p>逆：q^-1 = q* / ||q||</p>
+</li>
+<li><p>对数：q = [cos θ/2  (sin θ/2)<strong>n</strong>]则log q = [0 nθ/2]</p>
+</li>
+<li><p>差：d = a^-1*b，也就是d = b/a，需要注意的是所谓的差其实是除法，代表的是角位移了多少</p>
+</li>
+<li><p>点乘：q1q2 = w1w2 + x1x2 + y1y2 + z1z2</p>
+</li>
+<li><p><img src="images/loading.gif" data-original="https://cdn.jsdelivr.net/gh/wjwABCDEFG/blog_img/img/20210717225651.png" alt=""></p>
+<p><img src="images/loading.gif" data-original="https://cdn.jsdelivr.net/gh/wjwABCDEFG/blog_img/img/20210717225659.png" alt=""></p>
+<p>图形学中，将物体绕任意轴的向量<strong>n</strong>旋转，可以表示成四元数</p>
+<p>q = [cos θ/2  (sin θ/2)<strong>nx</strong>  (sin θ/2)<strong>ny</strong>  (sin θ/2)<strong>nz</strong>]</p>
+<p>把点p旋转q到点p‘</p>
+<p><img src="images/loading.gif" data-original="https://cdn.jsdelivr.net/gh/wjwABCDEFG/blog_img/img/20210717225706.png" alt="旋转"></p>
+</li>
+<li><p>幂：q^t = e^(t * log q)，几何意义：q = [cos θ/2   sin θ/2<strong>n</strong>]时表示绕<strong>n</strong>旋转θ°，则q^2表示旋转2θ°</p>
+</li>
+</ul>
+<h3 id="矩阵和四元数的转换"><a href="#矩阵和四元数的转换" class="headerlink" title="矩阵和四元数的转换"></a>矩阵和四元数的转换</h3><p>下面这个矩阵是左手系下的</p>
+<p><img src="images/loading.gif" data-original="https://cdn.jsdelivr.net/gh/wjwABCDEFG/blog_img/img/20210717225714.png" alt="左手系"></p>
+<p><img src="images/loading.gif" data-original="https://cdn.jsdelivr.net/gh/wjwABCDEFG/blog_img/img/20210717225722.png" alt="左手系"></p>
+<p>需要注意的是，不能直接取第一列的公式计算wxyz，因为开根号会丢失正负信息，而是算出wxyz最大的后，再通过对应右边的公式计算剩余三个</p>
+<p>给出其中的一个w的推导，其余类似：</p>
+<p><img src="images/loading.gif" data-original="https://cdn.jsdelivr.net/gh/wjwABCDEFG/blog_img/img/20210717225730.png" alt="简便计算w的推导"></p>
+<h3 id="欧拉角和四元数的转换-1"><a href="#欧拉角和四元数的转换-1" class="headerlink" title="欧拉角和四元数的转换"></a>欧拉角和四元数的转换</h3><p><img src="images/loading.gif" data-original="https://cdn.jsdelivr.net/gh/wjwABCDEFG/blog_img/img/20210717225741.png" alt="左手系"></p>
+<p><strong>四元数 -&gt; 欧拉角</strong></p>
+<p>先判断p角是否为90°（或者判断sinp == 1），是的话会出现万向锁，直接p = sinp*pi/2（注意不要直接写成pi/2，要累计误差）不是的话才是下面的公式</p>
+<p><img src="images/loading.gif" data-original="https://cdn.jsdelivr.net/gh/wjwABCDEFG/blog_img/img/20210717225750.png" alt="p角"></p>
+<p>下面h角和b角都是分了万向锁情况和普通情况</p>
+<p><img src="images/loading.gif" data-original="https://cdn.jsdelivr.net/gh/wjwABCDEFG/blog_img/img/20210717225759.png" alt="h角"></p>
+<p><img src="images/loading.gif" data-original="https://cdn.jsdelivr.net/gh/wjwABCDEFG/blog_img/img/20210717225809.png" alt="b角"></p>
+<h3 id="四元数插值"><a href="#四元数插值" class="headerlink" title="四元数插值"></a>四元数插值</h3><p>用过flash就知道，如果对于一个物体在t0、t10时刻的位置不同，中间的“关键帧”是通过插值计算出来的，并不需要我们为每个时刻都绘制一幅图像，这就是插值</p>
+<p><strong>球面线性插值“slerp”</strong></p>
+<p>对于四元数表示的原角度q0，新角度q1，插值函数为<img src="images/loading.gif" data-original="https://cdn.jsdelivr.net/gh/wjwABCDEFG/blog_img/img/20210717225817.png" alt="slerp函数"></p>
+<p>t的范围是[-1, 1]，其实很好理解，Δq就是做差嘛，前面说过四元数的差其实是做除法，t就是描述了一个类似于时间的东西，或者理解为中间的几分之一</p>
+<p><strong>旋转插值</strong></p>
+<p>另一种更便于计算机实现的方式是使用角度ω进行旋转插值</p>
+<p>如下图两个单位向量的位置v0v1，我们不再认为v1 = v0 + tω，而是认为v0和v1都乘一个系数后平移再做向量加法</p>
+<p><img src="images/loading.gif" data-original="https://cdn.jsdelivr.net/gh/wjwABCDEFG/blog_img/img/20210717225825.png" alt="旋转插值思路"></p>
+<p>如此，我们便只需要求出k0和k1到底是多少即可：</p>
+<p><img src="images/loading.gif" data-original="https://cdn.jsdelivr.net/gh/wjwABCDEFG/blog_img/img/20210717225837.png" alt="旋转插值求k"></p>
+<p>将k0k1代入前面的公式v1 = k0v0 + k1v1即可，这是对于两个单位向量，类比一下换成两个四元数可得</p>
+<p><img src="images/loading.gif" data-original="https://cdn.jsdelivr.net/gh/wjwABCDEFG/blog_img/img/20210717225849.png" alt="旋转插值slerp"></p>
+<p>btw：这个ω可以通过四元数的点乘求出来，因为四元数的点乘实际上跟向量的点乘差不了多少，只是多了个w，那么cosω = q0点乘q1</p>
+<p>在实现的时候，需要注意的是前面向量的点乘我们说过cos可以用来判断两个向量的同向反向，这里表现为v0转到v1是顺时针大半圈呢还是逆时针小半圈呢？虽然这里四元数正负都是同一个方位，所以我们在钝角的情况下旋转到他的反向，也就是总是挑最小的那个方向进行，所以我们在实现时最好有如下判断</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">&#x2F;&#x2F;如果为钝角，那么不旋转到他那里，而是旋转到他的反向</span><br><span class="line">if(cosOmega &lt; 0.0f)&#123;</span><br><span class="line">	q1w &#x3D; -q1w;</span><br><span class="line">	q1x &#x3D; -q1x;</span><br><span class="line">	q1y &#x3D; -q1y;</span><br><span class="line">	q1z &#x3D; -q1z;</span><br><span class="line">	cosOmega &#x3D; -cosOmega;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">&#x2F;&#x2F;如果夹角很小，为了减小计算量，直接认为走直线</span><br><span class="line">if(cosOmega &gt; 0.9999f)&#123;</span><br><span class="line">	k0 &#x3D; 1.0f - t;</span><br><span class="line">	k1 &#x3D; t;</span><br><span class="line">&#125;else&#123;</span><br><span class="line">	&#x2F;&#x2F;旋转插值公式</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<br>
+
+<p>几种方法对比</p>
+<table>
+<thead>
+<tr>
+<th>任务/性质</th>
+<th>矩阵</th>
+<th>欧拉角</th>
+<th>四元数</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>坐标系间旋转点</td>
+<td>能</td>
+<td>不能（转换成矩阵）</td>
+<td>不能（转换成矩阵）</td>
+</tr>
+<tr>
+<td>连接或增量旋转</td>
+<td>能，但比四元数慢，小心矩阵蠕变情况</td>
+<td>不能</td>
+<td>能，比矩阵快</td>
+</tr>
+<tr>
+<td>插值</td>
+<td>基本上不能</td>
+<td>能但可能遭遇万向锁</td>
+<td>Slerp提供了平滑插值</td>
+</tr>
+<tr>
+<td>易用程度</td>
+<td>难</td>
+<td>易</td>
+<td>难</td>
+</tr>
+<tr>
+<td>占用大小</td>
+<td>9个数</td>
+<td>3个数</td>
+<td>4个数</td>
+</tr>
+<tr>
+<td>是否能唯一表示给定方位</td>
+<td>是</td>
+<td>不是，同一方位有无数种表达</td>
+<td>不是，有两种方法，他们相互为负</td>
+</tr>
+<tr>
+<td>可能导致非法</td>
+<td>矩阵蠕变</td>
+<td>任意三个数都能构成合法的欧拉角</td>
+<td>可能会出现误差积累从而非法</td>
+</tr>
+</tbody></table>
+<p>没有最好的方法，根据需求，并且几种方法之间可以相互转换</p>
+
+        </div>
+        
+        <div class="level is-size-7 is-uppercase">
+            <div class="level-start">
+                <div class="level-item">
+                    <span class="is-size-6 has-text-grey has-mr-7">#</span>
+                    <a class="has-link-grey -link" href="/tags/%E6%B8%B8%E6%88%8F%E5%92%8C%E5%BC%95%E6%93%8E/" rel="tag">游戏和引擎</a>
+                </div>
+            </div>
+        </div>
+        
+        
+        
+    </div>
+</div>
+
+
+
+
+
+<div class="card card-transparent">
+    <div class="level post-navigation is-flex-wrap is-mobile">
+        
+        <div class="level-start">
+            <a class="level level-item has-link-grey  article-nav-prev" href="/life/mhxy-experience/">
+                <i class="level-item fas fa-chevron-left"></i>
+                <span class="level-item">梦幻西游游戏体验</span>
+            </a>
+        </div>
+        
+        
+        <div class="level-end">
+            <a class="level level-item has-link-grey  article-nav-next" href="/algorithms/get-equal-substrings-within-budget/">
+                <span class="level-item">1011-在D天内送达包裹的能力</span>
+                <i class="level-item fas fa-chevron-right"></i>
+            </a>
+        </div>
+        
+    </div>
+</div>
+
+
+</div>
+                
+
+
+
+
+<div class="column is-4-tablet is-4-desktop is-3-widescreen  has-order-1 column-left ">
+    
+        
+<div class="card widget">
+    <div class="card-content">
+        <nav class="level">
+            <div class="level-item has-text-centered" style="flex-shrink: 1">
+                <div>
+                    
+                    <figure class="image is-128x128 has-mb-6">
+                        <img class="is-rounded" src="images/loading.gif" data-original="https://cdn.jsdelivr.net/gh/wjwABCDEFG/blog_img/img/20210717231547.jpeg" alt="wjwABCDEFG">
+                    </figure>
+                    
+                    <p class="is-size-4 is-block">
+                        wjwABCDEFG
+                    </p>
+                    
+                    
+                    
+                    <p class="is-size-6 is-flex is-flex-center has-text-grey">
+                        <i class="fas fa-map-marker-alt has-mr-7"></i>
+                        <span>Shaoguan, China</span>
+                    </p>
+                    
+                </div>
+            </div>
+        </nav>
+        <nav class="level is-mobile">
+            <div class="level-item has-text-centered is-marginless">
+                <div>
+                    <p class="heading">
+                        文章
+                    </p>
+                    <a href="/archives">
+                        <p class="title has-text-weight-normal">
+                            103
+                        </p>
+                    </a>
+                </div>
+            </div>
+            <div class="level-item has-text-centered is-marginless">
+                <div>
+                    <p class="heading">
+                        分类
+                    </p>
+                    <a href="/categories">
+                        <p class="title has-text-weight-normal">
+                            14
+                        </p>
+                    </a>
+                </div>
+            </div>
+            <div class="level-item has-text-centered is-marginless">
+                <div>
+                    <p class="heading">
+                        标签
+                    </p>
+                    <a href="/tags">
+                        <p class="title has-text-weight-normal">
+                            26
+                        </p>
+                    </a>
+                </div>
+            </div>
+        </nav>
+        
+        <div class="level">
+            <a class="level-item button is-link is-rounded" href="https://github.com/wjwABCDEFG" target="_blank" rel="noopener">
+                关注我</a>
+        </div>
+        
+        
+        
+    </div>
+</div>
+    
+        
+<div class="card widget">
+    <div class="card-content">
+        <div class="menu">
+            <h3 class="menu-label">
+                分类
+            </h3>
+            <ul class="menu-list">
+            <li>
+        <a class="level is-marginless" href="/categories/Java/">
+            <span class="level-start">
+                <span class="level-item">Java基础</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">7</span>
+            </span>
+        </a></li><li>
+        <a class="level is-marginless" href="/categories/Mysql/">
+            <span class="level-start">
+                <span class="level-item">Mysql</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">3</span>
+            </span>
+        </a></li><li>
+        <a class="level is-marginless" href="/categories/Others/">
+            <span class="level-start">
+                <span class="level-item">Others</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">8</span>
+            </span>
+        </a></li><li>
+        <a class="level is-marginless" href="/categories/Spring/">
+            <span class="level-start">
+                <span class="level-item">Spring</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">6</span>
+            </span>
+        </a></li><li>
+        <a class="level is-marginless" href="/categories/SpringCloud/">
+            <span class="level-start">
+                <span class="level-item">SpringCloud</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">4</span>
+            </span>
+        </a></li><li>
+        <a class="level is-marginless" href="/categories/util/">
+            <span class="level-start">
+                <span class="level-item">Util工具类</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">3</span>
+            </span>
+        </a></li><li>
+        <a class="level is-marginless" href="/categories/redis/">
+            <span class="level-start">
+                <span class="level-item">redis</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">1</span>
+            </span>
+        </a></li><li>
+        <a class="level is-marginless" href="/categories/frontend/">
+            <span class="level-start">
+                <span class="level-item">前端</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">3</span>
+            </span>
+        </a></li><li>
+        <a class="level is-marginless" href="/categories/algorithms/">
+            <span class="level-start">
+                <span class="level-item">数据结构和算法</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">60</span>
+            </span>
+        </a></li><li>
+        <a class="level is-marginless" href="/categories/games/">
+            <span class="level-start">
+                <span class="level-item">游戏和引擎</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">2</span>
+            </span>
+        </a></li><li>
+        <a class="level is-marginless" href="/categories/deeplearning/">
+            <span class="level-start">
+                <span class="level-item">玄学</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">1</span>
+            </span>
+        </a></li><li>
+        <a class="level is-marginless" href="/categories/life/">
+            <span class="level-start">
+                <span class="level-item">生活随笔</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">6</span>
+            </span>
+        </a></li><li>
+        <a class="level is-marginless" href="/categories/cs/">
+            <span class="level-start">
+                <span class="level-item">计算机基础</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">1</span>
+            </span>
+        </a></li><li>
+        <a class="level is-marginless" href="/categories/designpattern/">
+            <span class="level-start">
+                <span class="level-item">设计模式</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">1</span>
+            </span>
+        </a></li>
+            </ul>
+        </div>
+    </div>
+</div>
+    
+        <div class="card widget">
+    <div class="card-content">
+        <h3 class="menu-label">
+            标签云
+        </h3>
+        <a href="/tags/DL-ML/" style="font-size: 10px;">DL/ML</a> <a href="/tags/http/" style="font-size: 10px;">http</a> <a href="/tags/lintcode/" style="font-size: 10px;">lintcode</a> <a href="/tags/markdown/" style="font-size: 10px;">markdown</a> <a href="/tags/mysql/" style="font-size: 11.67px;">mysql</a> <a href="/tags/spring/" style="font-size: 11.67px;">spring</a> <a href="/tags/springcloud/" style="font-size: 10px;">springcloud</a> <a href="/tags/%E4%BA%8C%E5%88%86%E6%9F%A5%E6%89%BE/" style="font-size: 10px;">二分查找</a> <a href="/tags/%E5%89%91%E6%8C%87offer/" style="font-size: 10px;">剑指offer</a> <a href="/tags/%E5%8A%9B%E6%89%A3/" style="font-size: 20px;">力扣</a> <a href="/tags/%E5%8A%A0%E5%AF%86/" style="font-size: 10px;">加密</a> <a href="/tags/%E5%8A%A8%E6%80%81%E8%A7%84%E5%88%92/" style="font-size: 13.33px;">动态规划</a> <a href="/tags/%E5%8D%95%E8%B0%83%E6%A0%88/" style="font-size: 15px;">单调栈</a> <a href="/tags/%E5%9B%9E%E6%BA%AF/" style="font-size: 16.67px;">回溯</a> <a href="/tags/%E5%AD%97%E7%AC%A6%E4%B8%B2/" style="font-size: 10px;">字符串</a> <a href="/tags/%E5%AD%A6%E4%B9%A0%E8%AE%B0%E5%BD%95/" style="font-size: 10px;">学习记录</a> <a href="/tags/%E5%BC%80%E5%8F%91/" style="font-size: 18.33px;">开发</a> <a href="/tags/%E6%8E%92%E5%BA%8F/" style="font-size: 10px;">排序</a> <a href="/tags/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/" style="font-size: 13.33px;">数据结构</a> <a href="/tags/%E6%A0%88/" style="font-size: 10px;">栈</a> <a href="/tags/%E6%A0%91/" style="font-size: 15px;">树</a> <a href="/tags/%E6%B8%B8%E6%88%8F%E5%92%8C%E5%BC%95%E6%93%8E/" style="font-size: 11.67px;">游戏和引擎</a> <a href="/tags/%E7%AC%94%E8%AF%95/" style="font-size: 10px;">笔试</a> <a href="/tags/%E7%AC%94%E8%AF%95%E9%9D%A2%E8%AF%95/" style="font-size: 13.33px;">笔试面试</a> <a href="/tags/%E7%AE%97%E6%B3%95/" style="font-size: 10px;">算法</a> <a href="/tags/%E9%80%92%E5%BD%92/" style="font-size: 10px;">递归</a>
+    </div>
+</div>
+    
+    
+        <div class="column-right-shadow is-hidden-widescreen is-sticky">
+        
+            
+
+    <div class="card widget" id="toc">
+        <div class="card-content">
+            <div class="menu">
+                <h3 class="menu-label">
+                    目录
+                </h3>
+                <ul class="menu-list"><li>
+        <a class="is-flex" href="#1-向量">
+        <!-- 目录是否自动编号 -->
+        <!-- <span class="has-mr-6">1</span> -->
+        <span>1. 向量</span>
+        </a><ul class="menu-list"><li>
+        <a class="is-flex" href="#1-1-向量点乘">
+        <!-- 目录是否自动编号 -->
+        <!-- <span class="has-mr-6">1.1</span> -->
+        <span>1.1 向量点乘</span>
+        </a></li><li>
+        <a class="is-flex" href="#1-2-向量叉乘">
+        <!-- 目录是否自动编号 -->
+        <!-- <span class="has-mr-6">1.2</span> -->
+        <span>1.2 向量叉乘</span>
+        </a></li></ul></li><li>
+        <a class="is-flex" href="#2-矩阵">
+        <!-- 目录是否自动编号 -->
+        <!-- <span class="has-mr-6">2</span> -->
+        <span>2. 矩阵</span>
+        </a><ul class="menu-list"><li>
+        <a class="is-flex" href="#2-1-向量点乘和叉乘的矩阵形式">
+        <!-- 目录是否自动编号 -->
+        <!-- <span class="has-mr-6">2.1</span> -->
+        <span>2.1 向量点乘和叉乘的矩阵形式</span>
+        </a></li></ul></li><li>
+        <a class="is-flex" href="#3-线性变换">
+        <!-- 目录是否自动编号 -->
+        <!-- <span class="has-mr-6">3</span> -->
+        <span>3. 线性变换</span>
+        </a><ul class="menu-list"><li>
+        <a class="is-flex" href="#3-1-缩放变换">
+        <!-- 目录是否自动编号 -->
+        <!-- <span class="has-mr-6">3.1</span> -->
+        <span>3.1 缩放变换</span>
+        </a></li><li>
+        <a class="is-flex" href="#3-2-镜像变换">
+        <!-- 目录是否自动编号 -->
+        <!-- <span class="has-mr-6">3.2</span> -->
+        <span>3.2 镜像变换</span>
+        </a></li><li>
+        <a class="is-flex" href="#3-3-切变变换">
+        <!-- 目录是否自动编号 -->
+        <!-- <span class="has-mr-6">3.3</span> -->
+        <span>3.3 切变变换</span>
+        </a></li><li>
+        <a class="is-flex" href="#3-4-旋转变换">
+        <!-- 目录是否自动编号 -->
+        <!-- <span class="has-mr-6">3.4</span> -->
+        <span>3.4 旋转变换</span>
+        </a></li><li>
+        <a class="is-flex" href="#3-5-平移变换">
+        <!-- 目录是否自动编号 -->
+        <!-- <span class="has-mr-6">3.5</span> -->
+        <span>3.5 平移变换</span>
+        </a></li><li>
+        <a class="is-flex" href="#3-6-使用齐次坐标巧妙统一线性变换">
+        <!-- 目录是否自动编号 -->
+        <!-- <span class="has-mr-6">3.6</span> -->
+        <span>3.6 使用齐次坐标巧妙统一线性变换</span>
+        </a></li><li>
+        <a class="is-flex" href="#3-7-推广到3维坐标">
+        <!-- 目录是否自动编号 -->
+        <!-- <span class="has-mr-6">3.7</span> -->
+        <span>3.7 *推广到3维坐标</span>
+        </a></li><li>
+        <a class="is-flex" href="#3-8-绕任意轴的旋转">
+        <!-- 目录是否自动编号 -->
+        <!-- <span class="has-mr-6">3.8</span> -->
+        <span>3.8 绕任意轴的旋转</span>
+        </a></li><li>
+        <a class="is-flex" href="#3-9-绕任意轴的镜像">
+        <!-- 目录是否自动编号 -->
+        <!-- <span class="has-mr-6">3.9</span> -->
+        <span>3.9 绕任意轴的镜像</span>
+        </a></li></ul></li><li>
+        <a class="is-flex" href="#4-视图变换-View">
+        <!-- 目录是否自动编号 -->
+        <!-- <span class="has-mr-6">4</span> -->
+        <span>4. 视图变换(View)</span>
+        </a></li><li>
+        <a class="is-flex" href="#5-投影变换-Projection">
+        <!-- 目录是否自动编号 -->
+        <!-- <span class="has-mr-6">5</span> -->
+        <span>5. 投影变换(Projection)</span>
+        </a><ul class="menu-list"><li>
+        <a class="is-flex" href="#5-1-正交投影-Orthographic">
+        <!-- 目录是否自动编号 -->
+        <!-- <span class="has-mr-6">5.1</span> -->
+        <span>5.1 正交投影(Orthographic)</span>
+        </a></li><li>
+        <a class="is-flex" href="#5-2-透视投影-Perspective">
+        <!-- 目录是否自动编号 -->
+        <!-- <span class="has-mr-6">5.2</span> -->
+        <span>5.2 透视投影(Perspective)</span>
+        </a></li></ul></li><li>
+        <a class="is-flex" href="#6-几何图元">
+        <!-- 目录是否自动编号 -->
+        <!-- <span class="has-mr-6">6</span> -->
+        <span>6. 几何图元</span>
+        </a></li><li>
+        <a class="is-flex" href="#7-几何检测">
+        <!-- 目录是否自动编号 -->
+        <!-- <span class="has-mr-6">7</span> -->
+        <span>7. 几何检测</span>
+        </a><ul class="menu-list"><li>
+        <a class="is-flex" href="#7-1-距离检测">
+        <!-- 目录是否自动编号 -->
+        <!-- <span class="has-mr-6">7.1</span> -->
+        <span>7.1 距离检测</span>
+        </a></li><li>
+        <a class="is-flex" href="#7-2-相交检测">
+        <!-- 目录是否自动编号 -->
+        <!-- <span class="has-mr-6">7.2</span> -->
+        <span>7.2 相交检测</span>
+        </a></li></ul></li><li>
+        <a class="is-flex" href="#8-三角形和网格">
+        <!-- 目录是否自动编号 -->
+        <!-- <span class="has-mr-6">8</span> -->
+        <span>8. 三角形和网格</span>
+        </a><ul class="menu-list"><li>
+        <a class="is-flex" href="#8-1-三角形和顶点的法向量">
+        <!-- 目录是否自动编号 -->
+        <!-- <span class="has-mr-6">8.1</span> -->
+        <span>8.1 三角形和顶点的法向量</span>
+        </a></li><li>
+        <a class="is-flex" href="#8-2-网格操作">
+        <!-- 目录是否自动编号 -->
+        <!-- <span class="has-mr-6">8.2</span> -->
+        <span>8.2 网格操作</span>
+        </a></li></ul></li><li>
+        <a class="is-flex" href="#9-图形流水线-图形管道">
+        <!-- 目录是否自动编号 -->
+        <!-- <span class="has-mr-6">9</span> -->
+        <span>9. 图形流水线(图形管道)</span>
+        </a></li><li>
+        <a class="is-flex" href="#10-光照和着色">
+        <!-- 目录是否自动编号 -->
+        <!-- <span class="has-mr-6">10</span> -->
+        <span>10. 光照和着色</span>
+        </a><ul class="menu-list"><li>
+        <a class="is-flex" href="#10-1-光照">
+        <!-- 目录是否自动编号 -->
+        <!-- <span class="has-mr-6">10.1</span> -->
+        <span>10.1 光照</span>
+        </a><ul class="menu-list"><li>
+        <a class="is-flex" href="#10-1-1-漫反射diffuse">
+        <!-- 目录是否自动编号 -->
+        <!-- <span class="has-mr-6">10.1.1</span> -->
+        <span>10.1.1 漫反射diffuse</span>
+        </a></li><li>
+        <a class="is-flex" href="#10-1-2-高光Specular">
+        <!-- 目录是否自动编号 -->
+        <!-- <span class="has-mr-6">10.1.2</span> -->
+        <span>10.1.2 高光Specular</span>
+        </a></li><li>
+        <a class="is-flex" href="#10-1-3-环境光Ambient">
+        <!-- 目录是否自动编号 -->
+        <!-- <span class="has-mr-6">10.1.3</span> -->
+        <span>10.1.3 环境光Ambient</span>
+        </a></li></ul></li><li>
+        <a class="is-flex" href="#10-2-着色">
+        <!-- 目录是否自动编号 -->
+        <!-- <span class="has-mr-6">10.2</span> -->
+        <span>10.2 着色</span>
+        </a><ul class="menu-list"><li>
+        <a class="is-flex" href="#10-2-1-flat-shading">
+        <!-- 目录是否自动编号 -->
+        <!-- <span class="has-mr-6">10.2.1</span> -->
+        <span>10.2.1 flat shading</span>
+        </a></li><li>
+        <a class="is-flex" href="#10-2-2-Gouraud-shading">
+        <!-- 目录是否自动编号 -->
+        <!-- <span class="has-mr-6">10.2.2</span> -->
+        <span>10.2.2 Gouraud shading</span>
+        </a></li><li>
+        <a class="is-flex" href="#10-2-3-Phong-shading">
+        <!-- 目录是否自动编号 -->
+        <!-- <span class="has-mr-6">10.2.3</span> -->
+        <span>10.2.3 Phong shading</span>
+        </a></li></ul></li><li>
+        <a class="is-flex" href="#10-3-雾化">
+        <!-- 目录是否自动编号 -->
+        <!-- <span class="has-mr-6">10.3</span> -->
+        <span>10.3 雾化</span>
+        </a></li></ul></li><li>
+        <a class="is-flex" href="#11-纹理映射">
+        <!-- 目录是否自动编号 -->
+        <!-- <span class="has-mr-6">11</span> -->
+        <span>11. 纹理映射</span>
+        </a><ul class="menu-list"><li>
+        <a class="is-flex" href="#11-3-纹理复用">
+        <!-- 目录是否自动编号 -->
+        <!-- <span class="has-mr-6">11.1</span> -->
+        <span>11.3 纹理复用</span>
+        </a></li></ul></li><li>
+        <a class="is-flex" href="#12-双缓存">
+        <!-- 目录是否自动编号 -->
+        <!-- <span class="has-mr-6">12</span> -->
+        <span>12. 双缓存</span>
+        </a></li><li>
+        <a class="is-flex" href="#13-可见性检测">
+        <!-- 目录是否自动编号 -->
+        <!-- <span class="has-mr-6">13</span> -->
+        <span>13 可见性检测</span>
+        </a></li><li>
+        <a class="is-flex" href="#14-抗锯齿">
+        <!-- 目录是否自动编号 -->
+        <!-- <span class="has-mr-6">14</span> -->
+        <span>14 抗锯齿</span>
+        </a></li><li>
+        <a class="is-flex" href="#附录">
+        <!-- 目录是否自动编号 -->
+        <!-- <span class="has-mr-6">15</span> -->
+        <span>附录</span>
+        </a><ul class="menu-list"><li>
+        <a class="is-flex" href="#多坐标系">
+        <!-- 目录是否自动编号 -->
+        <!-- <span class="has-mr-6">15.1</span> -->
+        <span>多坐标系</span>
+        </a></li><li>
+        <a class="is-flex" href="#欧拉角">
+        <!-- 目录是否自动编号 -->
+        <!-- <span class="has-mr-6">15.2</span> -->
+        <span>欧拉角</span>
+        </a><ul class="menu-list"><li>
+        <a class="is-flex" href="#万向锁问题">
+        <!-- 目录是否自动编号 -->
+        <!-- <span class="has-mr-6">15.2.1</span> -->
+        <span>万向锁问题</span>
+        </a></li><li>
+        <a class="is-flex" href="#矩阵和欧拉角的转换">
+        <!-- 目录是否自动编号 -->
+        <!-- <span class="has-mr-6">15.2.2</span> -->
+        <span>矩阵和欧拉角的转换</span>
+        </a></li><li>
+        <a class="is-flex" href="#欧拉角和四元数的转换">
+        <!-- 目录是否自动编号 -->
+        <!-- <span class="has-mr-6">15.2.3</span> -->
+        <span>欧拉角和四元数的转换</span>
+        </a></li></ul></li><li>
+        <a class="is-flex" href="#四元数">
+        <!-- 目录是否自动编号 -->
+        <!-- <span class="has-mr-6">15.3</span> -->
+        <span>四元数</span>
+        </a><ul class="menu-list"><li>
+        <a class="is-flex" href="#矩阵和四元数的转换">
+        <!-- 目录是否自动编号 -->
+        <!-- <span class="has-mr-6">15.3.1</span> -->
+        <span>矩阵和四元数的转换</span>
+        </a></li><li>
+        <a class="is-flex" href="#欧拉角和四元数的转换-1">
+        <!-- 目录是否自动编号 -->
+        <!-- <span class="has-mr-6">15.3.2</span> -->
+        <span>欧拉角和四元数的转换</span>
+        </a></li><li>
+        <a class="is-flex" href="#四元数插值">
+        <!-- 目录是否自动编号 -->
+        <!-- <span class="has-mr-6">15.3.3</span> -->
+        <span>四元数插值</span>
+        </a></li></ul></li></ul></li></ul>
+            </div>
+        </div>
+    </div>
+
+        
+            <div class="card widget">
+    <div class="card-content">
+        <h3 class="menu-label">
+            推荐阅读
+        </h3>
+        
+        <article class="media">
+            
+            <a href="/Others/node-editor.md/" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="images/loading.gif" data-original="https://cdn.jsdelivr.net/gh/wjwABCDEFG/blog_img/img/20250401154214355.jpeg" alt="Line-It 节点编辑器.md">
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2025-04-01T07:28:20.000Z">2025-04-01</time></div>
+                    <a href="/Others/node-editor.md/" class="title has-link-black-ter is-size-6 has-text-weight-normal">Line-It 节点编辑器.md</a>
+                    <p class="is-size-7 is-uppercase">
+                        <a class="has-link-grey -link" href="/categories/Others/">Others</a>
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+        <article class="media">
+            
+            <a href="/games/Unity3D-note/" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="images/loading.gif" data-original="https://cdn.jsdelivr.net/gh/wjwABCDEFG/blog_img/img/20210728004637.jpg" alt="Unity3D学习笔记">
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2021-07-28T12:42:07.000Z">2021-07-28</time></div>
+                    <a href="/games/Unity3D-note/" class="title has-link-black-ter is-size-6 has-text-weight-normal">Unity3D学习笔记</a>
+                    <p class="is-size-7 is-uppercase">
+                        <a class="has-link-grey -link" href="/categories/games/">游戏和引擎</a>
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+        <article class="media">
+            
+            <a href="/life/%E4%B8%BA%E6%AF%95%E4%B8%9A%E5%81%9A%E5%87%86%E5%A4%87/" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="images/loading.gif" data-original="https://cdn.jsdelivr.net/gh/wjwABCDEFG/blog_img/img/20210717225951.jpeg" alt="为毕业做准备">
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2021-03-31T13:13:32.000Z">2021-03-31</time></div>
+                    <a href="/life/%E4%B8%BA%E6%AF%95%E4%B8%9A%E5%81%9A%E5%87%86%E5%A4%87/" class="title has-link-black-ter is-size-6 has-text-weight-normal">为毕业做准备</a>
+                    <p class="is-size-7 is-uppercase">
+                        <a class="has-link-grey -link" href="/categories/life/">生活随笔</a>
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+        <article class="media">
+            
+            <a href="/life/mhxy-experience/" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="images/loading.gif" data-original="https://cdn.jsdelivr.net/gh/wjwABCDEFG/blog_img/img/20210717223725.png" alt="梦幻西游游戏体验">
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2021-03-31T08:29:35.000Z">2021-03-31</time></div>
+                    <a href="/life/mhxy-experience/" class="title has-link-black-ter is-size-6 has-text-weight-normal">梦幻西游游戏体验</a>
+                    <p class="is-size-7 is-uppercase">
+                        <a class="has-link-grey -link" href="/categories/life/">生活随笔</a>
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+        <article class="media">
+            
+            <a href="/games/3DMath-Primerfor-Graphics-and-Game-Development-note/" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="images/loading.gif" data-original="https://cdn.jsdelivr.net/gh/wjwABCDEFG/blog_img/img/20210717223435.jpeg" alt="3D数学基础图形与游戏研发笔记">
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2021-03-06T10:55:07.000Z">2021-03-06</time></div>
+                    <a href="/games/3DMath-Primerfor-Graphics-and-Game-Development-note/" class="title has-link-black-ter is-size-6 has-text-weight-normal">3D数学基础图形与游戏研发笔记</a>
+                    <p class="is-size-7 is-uppercase">
+                        <a class="has-link-grey -link" href="/categories/games/">游戏和引擎</a>
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+    </div>
+</div>
+        
+        </div>
+    
+</div>
+
+                
+
+
+
+
+<div class="column is-4-tablet is-4-desktop is-3-widescreen is-hidden-touch is-hidden-desktop-only has-order-3 column-right is-sticky">
+    
+        
+
+    <div class="card widget" id="toc">
+        <div class="card-content">
+            <div class="menu">
+                <h3 class="menu-label">
+                    目录
+                </h3>
+                <ul class="menu-list"><li>
+        <a class="is-flex" href="#1-向量">
+        <!-- 目录是否自动编号 -->
+        <!-- <span class="has-mr-6">1</span> -->
+        <span>1. 向量</span>
+        </a><ul class="menu-list"><li>
+        <a class="is-flex" href="#1-1-向量点乘">
+        <!-- 目录是否自动编号 -->
+        <!-- <span class="has-mr-6">1.1</span> -->
+        <span>1.1 向量点乘</span>
+        </a></li><li>
+        <a class="is-flex" href="#1-2-向量叉乘">
+        <!-- 目录是否自动编号 -->
+        <!-- <span class="has-mr-6">1.2</span> -->
+        <span>1.2 向量叉乘</span>
+        </a></li></ul></li><li>
+        <a class="is-flex" href="#2-矩阵">
+        <!-- 目录是否自动编号 -->
+        <!-- <span class="has-mr-6">2</span> -->
+        <span>2. 矩阵</span>
+        </a><ul class="menu-list"><li>
+        <a class="is-flex" href="#2-1-向量点乘和叉乘的矩阵形式">
+        <!-- 目录是否自动编号 -->
+        <!-- <span class="has-mr-6">2.1</span> -->
+        <span>2.1 向量点乘和叉乘的矩阵形式</span>
+        </a></li></ul></li><li>
+        <a class="is-flex" href="#3-线性变换">
+        <!-- 目录是否自动编号 -->
+        <!-- <span class="has-mr-6">3</span> -->
+        <span>3. 线性变换</span>
+        </a><ul class="menu-list"><li>
+        <a class="is-flex" href="#3-1-缩放变换">
+        <!-- 目录是否自动编号 -->
+        <!-- <span class="has-mr-6">3.1</span> -->
+        <span>3.1 缩放变换</span>
+        </a></li><li>
+        <a class="is-flex" href="#3-2-镜像变换">
+        <!-- 目录是否自动编号 -->
+        <!-- <span class="has-mr-6">3.2</span> -->
+        <span>3.2 镜像变换</span>
+        </a></li><li>
+        <a class="is-flex" href="#3-3-切变变换">
+        <!-- 目录是否自动编号 -->
+        <!-- <span class="has-mr-6">3.3</span> -->
+        <span>3.3 切变变换</span>
+        </a></li><li>
+        <a class="is-flex" href="#3-4-旋转变换">
+        <!-- 目录是否自动编号 -->
+        <!-- <span class="has-mr-6">3.4</span> -->
+        <span>3.4 旋转变换</span>
+        </a></li><li>
+        <a class="is-flex" href="#3-5-平移变换">
+        <!-- 目录是否自动编号 -->
+        <!-- <span class="has-mr-6">3.5</span> -->
+        <span>3.5 平移变换</span>
+        </a></li><li>
+        <a class="is-flex" href="#3-6-使用齐次坐标巧妙统一线性变换">
+        <!-- 目录是否自动编号 -->
+        <!-- <span class="has-mr-6">3.6</span> -->
+        <span>3.6 使用齐次坐标巧妙统一线性变换</span>
+        </a></li><li>
+        <a class="is-flex" href="#3-7-推广到3维坐标">
+        <!-- 目录是否自动编号 -->
+        <!-- <span class="has-mr-6">3.7</span> -->
+        <span>3.7 *推广到3维坐标</span>
+        </a></li><li>
+        <a class="is-flex" href="#3-8-绕任意轴的旋转">
+        <!-- 目录是否自动编号 -->
+        <!-- <span class="has-mr-6">3.8</span> -->
+        <span>3.8 绕任意轴的旋转</span>
+        </a></li><li>
+        <a class="is-flex" href="#3-9-绕任意轴的镜像">
+        <!-- 目录是否自动编号 -->
+        <!-- <span class="has-mr-6">3.9</span> -->
+        <span>3.9 绕任意轴的镜像</span>
+        </a></li></ul></li><li>
+        <a class="is-flex" href="#4-视图变换-View">
+        <!-- 目录是否自动编号 -->
+        <!-- <span class="has-mr-6">4</span> -->
+        <span>4. 视图变换(View)</span>
+        </a></li><li>
+        <a class="is-flex" href="#5-投影变换-Projection">
+        <!-- 目录是否自动编号 -->
+        <!-- <span class="has-mr-6">5</span> -->
+        <span>5. 投影变换(Projection)</span>
+        </a><ul class="menu-list"><li>
+        <a class="is-flex" href="#5-1-正交投影-Orthographic">
+        <!-- 目录是否自动编号 -->
+        <!-- <span class="has-mr-6">5.1</span> -->
+        <span>5.1 正交投影(Orthographic)</span>
+        </a></li><li>
+        <a class="is-flex" href="#5-2-透视投影-Perspective">
+        <!-- 目录是否自动编号 -->
+        <!-- <span class="has-mr-6">5.2</span> -->
+        <span>5.2 透视投影(Perspective)</span>
+        </a></li></ul></li><li>
+        <a class="is-flex" href="#6-几何图元">
+        <!-- 目录是否自动编号 -->
+        <!-- <span class="has-mr-6">6</span> -->
+        <span>6. 几何图元</span>
+        </a></li><li>
+        <a class="is-flex" href="#7-几何检测">
+        <!-- 目录是否自动编号 -->
+        <!-- <span class="has-mr-6">7</span> -->
+        <span>7. 几何检测</span>
+        </a><ul class="menu-list"><li>
+        <a class="is-flex" href="#7-1-距离检测">
+        <!-- 目录是否自动编号 -->
+        <!-- <span class="has-mr-6">7.1</span> -->
+        <span>7.1 距离检测</span>
+        </a></li><li>
+        <a class="is-flex" href="#7-2-相交检测">
+        <!-- 目录是否自动编号 -->
+        <!-- <span class="has-mr-6">7.2</span> -->
+        <span>7.2 相交检测</span>
+        </a></li></ul></li><li>
+        <a class="is-flex" href="#8-三角形和网格">
+        <!-- 目录是否自动编号 -->
+        <!-- <span class="has-mr-6">8</span> -->
+        <span>8. 三角形和网格</span>
+        </a><ul class="menu-list"><li>
+        <a class="is-flex" href="#8-1-三角形和顶点的法向量">
+        <!-- 目录是否自动编号 -->
+        <!-- <span class="has-mr-6">8.1</span> -->
+        <span>8.1 三角形和顶点的法向量</span>
+        </a></li><li>
+        <a class="is-flex" href="#8-2-网格操作">
+        <!-- 目录是否自动编号 -->
+        <!-- <span class="has-mr-6">8.2</span> -->
+        <span>8.2 网格操作</span>
+        </a></li></ul></li><li>
+        <a class="is-flex" href="#9-图形流水线-图形管道">
+        <!-- 目录是否自动编号 -->
+        <!-- <span class="has-mr-6">9</span> -->
+        <span>9. 图形流水线(图形管道)</span>
+        </a></li><li>
+        <a class="is-flex" href="#10-光照和着色">
+        <!-- 目录是否自动编号 -->
+        <!-- <span class="has-mr-6">10</span> -->
+        <span>10. 光照和着色</span>
+        </a><ul class="menu-list"><li>
+        <a class="is-flex" href="#10-1-光照">
+        <!-- 目录是否自动编号 -->
+        <!-- <span class="has-mr-6">10.1</span> -->
+        <span>10.1 光照</span>
+        </a><ul class="menu-list"><li>
+        <a class="is-flex" href="#10-1-1-漫反射diffuse">
+        <!-- 目录是否自动编号 -->
+        <!-- <span class="has-mr-6">10.1.1</span> -->
+        <span>10.1.1 漫反射diffuse</span>
+        </a></li><li>
+        <a class="is-flex" href="#10-1-2-高光Specular">
+        <!-- 目录是否自动编号 -->
+        <!-- <span class="has-mr-6">10.1.2</span> -->
+        <span>10.1.2 高光Specular</span>
+        </a></li><li>
+        <a class="is-flex" href="#10-1-3-环境光Ambient">
+        <!-- 目录是否自动编号 -->
+        <!-- <span class="has-mr-6">10.1.3</span> -->
+        <span>10.1.3 环境光Ambient</span>
+        </a></li></ul></li><li>
+        <a class="is-flex" href="#10-2-着色">
+        <!-- 目录是否自动编号 -->
+        <!-- <span class="has-mr-6">10.2</span> -->
+        <span>10.2 着色</span>
+        </a><ul class="menu-list"><li>
+        <a class="is-flex" href="#10-2-1-flat-shading">
+        <!-- 目录是否自动编号 -->
+        <!-- <span class="has-mr-6">10.2.1</span> -->
+        <span>10.2.1 flat shading</span>
+        </a></li><li>
+        <a class="is-flex" href="#10-2-2-Gouraud-shading">
+        <!-- 目录是否自动编号 -->
+        <!-- <span class="has-mr-6">10.2.2</span> -->
+        <span>10.2.2 Gouraud shading</span>
+        </a></li><li>
+        <a class="is-flex" href="#10-2-3-Phong-shading">
+        <!-- 目录是否自动编号 -->
+        <!-- <span class="has-mr-6">10.2.3</span> -->
+        <span>10.2.3 Phong shading</span>
+        </a></li></ul></li><li>
+        <a class="is-flex" href="#10-3-雾化">
+        <!-- 目录是否自动编号 -->
+        <!-- <span class="has-mr-6">10.3</span> -->
+        <span>10.3 雾化</span>
+        </a></li></ul></li><li>
+        <a class="is-flex" href="#11-纹理映射">
+        <!-- 目录是否自动编号 -->
+        <!-- <span class="has-mr-6">11</span> -->
+        <span>11. 纹理映射</span>
+        </a><ul class="menu-list"><li>
+        <a class="is-flex" href="#11-3-纹理复用">
+        <!-- 目录是否自动编号 -->
+        <!-- <span class="has-mr-6">11.1</span> -->
+        <span>11.3 纹理复用</span>
+        </a></li></ul></li><li>
+        <a class="is-flex" href="#12-双缓存">
+        <!-- 目录是否自动编号 -->
+        <!-- <span class="has-mr-6">12</span> -->
+        <span>12. 双缓存</span>
+        </a></li><li>
+        <a class="is-flex" href="#13-可见性检测">
+        <!-- 目录是否自动编号 -->
+        <!-- <span class="has-mr-6">13</span> -->
+        <span>13 可见性检测</span>
+        </a></li><li>
+        <a class="is-flex" href="#14-抗锯齿">
+        <!-- 目录是否自动编号 -->
+        <!-- <span class="has-mr-6">14</span> -->
+        <span>14 抗锯齿</span>
+        </a></li><li>
+        <a class="is-flex" href="#附录">
+        <!-- 目录是否自动编号 -->
+        <!-- <span class="has-mr-6">15</span> -->
+        <span>附录</span>
+        </a><ul class="menu-list"><li>
+        <a class="is-flex" href="#多坐标系">
+        <!-- 目录是否自动编号 -->
+        <!-- <span class="has-mr-6">15.1</span> -->
+        <span>多坐标系</span>
+        </a></li><li>
+        <a class="is-flex" href="#欧拉角">
+        <!-- 目录是否自动编号 -->
+        <!-- <span class="has-mr-6">15.2</span> -->
+        <span>欧拉角</span>
+        </a><ul class="menu-list"><li>
+        <a class="is-flex" href="#万向锁问题">
+        <!-- 目录是否自动编号 -->
+        <!-- <span class="has-mr-6">15.2.1</span> -->
+        <span>万向锁问题</span>
+        </a></li><li>
+        <a class="is-flex" href="#矩阵和欧拉角的转换">
+        <!-- 目录是否自动编号 -->
+        <!-- <span class="has-mr-6">15.2.2</span> -->
+        <span>矩阵和欧拉角的转换</span>
+        </a></li><li>
+        <a class="is-flex" href="#欧拉角和四元数的转换">
+        <!-- 目录是否自动编号 -->
+        <!-- <span class="has-mr-6">15.2.3</span> -->
+        <span>欧拉角和四元数的转换</span>
+        </a></li></ul></li><li>
+        <a class="is-flex" href="#四元数">
+        <!-- 目录是否自动编号 -->
+        <!-- <span class="has-mr-6">15.3</span> -->
+        <span>四元数</span>
+        </a><ul class="menu-list"><li>
+        <a class="is-flex" href="#矩阵和四元数的转换">
+        <!-- 目录是否自动编号 -->
+        <!-- <span class="has-mr-6">15.3.1</span> -->
+        <span>矩阵和四元数的转换</span>
+        </a></li><li>
+        <a class="is-flex" href="#欧拉角和四元数的转换-1">
+        <!-- 目录是否自动编号 -->
+        <!-- <span class="has-mr-6">15.3.2</span> -->
+        <span>欧拉角和四元数的转换</span>
+        </a></li><li>
+        <a class="is-flex" href="#四元数插值">
+        <!-- 目录是否自动编号 -->
+        <!-- <span class="has-mr-6">15.3.3</span> -->
+        <span>四元数插值</span>
+        </a></li></ul></li></ul></li></ul>
+            </div>
+        </div>
+    </div>
+
+    
+        <div class="card widget">
+    <div class="card-content">
+        <h3 class="menu-label">
+            推荐阅读
+        </h3>
+        
+        <article class="media">
+            
+            <a href="/Others/node-editor.md/" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="images/loading.gif" data-original="https://cdn.jsdelivr.net/gh/wjwABCDEFG/blog_img/img/20250401154214355.jpeg" alt="Line-It 节点编辑器.md">
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2025-04-01T07:28:20.000Z">2025-04-01</time></div>
+                    <a href="/Others/node-editor.md/" class="title has-link-black-ter is-size-6 has-text-weight-normal">Line-It 节点编辑器.md</a>
+                    <p class="is-size-7 is-uppercase">
+                        <a class="has-link-grey -link" href="/categories/Others/">Others</a>
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+        <article class="media">
+            
+            <a href="/games/Unity3D-note/" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="images/loading.gif" data-original="https://cdn.jsdelivr.net/gh/wjwABCDEFG/blog_img/img/20210728004637.jpg" alt="Unity3D学习笔记">
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2021-07-28T12:42:07.000Z">2021-07-28</time></div>
+                    <a href="/games/Unity3D-note/" class="title has-link-black-ter is-size-6 has-text-weight-normal">Unity3D学习笔记</a>
+                    <p class="is-size-7 is-uppercase">
+                        <a class="has-link-grey -link" href="/categories/games/">游戏和引擎</a>
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+        <article class="media">
+            
+            <a href="/life/%E4%B8%BA%E6%AF%95%E4%B8%9A%E5%81%9A%E5%87%86%E5%A4%87/" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="images/loading.gif" data-original="https://cdn.jsdelivr.net/gh/wjwABCDEFG/blog_img/img/20210717225951.jpeg" alt="为毕业做准备">
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2021-03-31T13:13:32.000Z">2021-03-31</time></div>
+                    <a href="/life/%E4%B8%BA%E6%AF%95%E4%B8%9A%E5%81%9A%E5%87%86%E5%A4%87/" class="title has-link-black-ter is-size-6 has-text-weight-normal">为毕业做准备</a>
+                    <p class="is-size-7 is-uppercase">
+                        <a class="has-link-grey -link" href="/categories/life/">生活随笔</a>
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+        <article class="media">
+            
+            <a href="/life/mhxy-experience/" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="images/loading.gif" data-original="https://cdn.jsdelivr.net/gh/wjwABCDEFG/blog_img/img/20210717223725.png" alt="梦幻西游游戏体验">
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2021-03-31T08:29:35.000Z">2021-03-31</time></div>
+                    <a href="/life/mhxy-experience/" class="title has-link-black-ter is-size-6 has-text-weight-normal">梦幻西游游戏体验</a>
+                    <p class="is-size-7 is-uppercase">
+                        <a class="has-link-grey -link" href="/categories/life/">生活随笔</a>
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+        <article class="media">
+            
+            <a href="/games/3DMath-Primerfor-Graphics-and-Game-Development-note/" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="images/loading.gif" data-original="https://cdn.jsdelivr.net/gh/wjwABCDEFG/blog_img/img/20210717223435.jpeg" alt="3D数学基础图形与游戏研发笔记">
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2021-03-06T10:55:07.000Z">2021-03-06</time></div>
+                    <a href="/games/3DMath-Primerfor-Graphics-and-Game-Development-note/" class="title has-link-black-ter is-size-6 has-text-weight-normal">3D数学基础图形与游戏研发笔记</a>
+                    <p class="is-size-7 is-uppercase">
+                        <a class="has-link-grey -link" href="/categories/games/">游戏和引擎</a>
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+    </div>
+</div>
+    
+    
+</div>
+
+            </div>
+        </div>
+    </section>
+    <footer class="footer">
+    <div class="container">
+        <div class="level">
+            <div class="level-start has-text-centered-mobile">
+                <a class="footer-logo is-block has-mb-6" href="/">
+                
+                    <img src="images/loading.gif" data-original="https://cdn.jsdelivr.net/gh/wjwABCDEFG/blog_img/img/20210717231246.png" alt="3D数学基础图形与游戏研发笔记" height="28">
+                
+                </a>
+                <p class="is-size-7">
+                &copy; 2025 wjw&nbsp;
+                Powered by <a href="https://hexo.io/" target="_blank" rel="noopener">Hexo</a> & <a
+                        href="https://github.com/ppoffice/hexo-theme-icarus" target="_blank" rel="noopener">Icarus</a>
+                
+                <br>
+                <!-- <span id="busuanzi_container_site_uv">
+                共<span id="busuanzi_value_site_uv">0</span>个访客
+                </span> -->
+                <span id="busuanzi_container_site_uv"> 来访 <span id="busuanzi_value_site_uv"></span>人</span>
+                <span id="busuanzi_container_site_pv">, 总访问 <span id="busuanzi_value_site_pv"></span>次</span>
+
+                <span id="timeDate">载入天数...</span><span id="times">载入时分秒...</span>
+                    <script>
+                        var now = new Date(); 
+                        function createtime() { 
+                            var grt= new Date("03/06/2020 00:00:00"); /*建站时间*/
+                            now.setTime(now.getTime()+250); 
+                            days = (now - grt ) / 1000 / 60 / 60 / 24; dnum = Math.floor(days); 
+                            hours = (now - grt ) / 1000 / 60 / 60 - (24 * dnum); hnum = Math.floor(hours); 
+                            if(String(hnum).length ==1 ){hnum = "0" + hnum;} minutes = (now - grt ) / 1000 /60 - (24 * 60 * dnum) - (60 * hnum); 
+                            mnum = Math.floor(minutes); if(String(mnum).length ==1 ){mnum = "0" + mnum;} 
+                            seconds = (now - grt ) / 1000 - (24 * 60 * 60 * dnum) - (60 * 60 * hnum) - (60 * mnum); 
+                            snum = Math.round(seconds); if(String(snum).length ==1 ){snum = "0" + snum;} 
+                            document.getElementById("timeDate").innerHTML = "本站已安全运行 "+dnum+" 天 "; 
+                            document.getElementById("times").innerHTML = hnum + " 小时 " + mnum + " 分 " + snum + " 秒"; 
+                        } 
+                    setInterval("createtime()",250);
+                    </script>
+                
+                </p>
+            </div>
+            <div class="level-end">
+            
+                <div class="field has-addons is-flex-center-mobile has-mt-5-mobile is-flex-wrap is-flex-middle">
+                
+                <p class="control">
+                    <a class="button is-white is-large" target="_blank" rel="noopener" title="Creative Commons" href="https://creativecommons.org/">
+                        
+                        <i class="fab fa-creative-commons"></i>
+                        
+                    </a>
+                </p>
+                
+                <p class="control">
+                    <a class="button is-white is-large" target="_blank" rel="noopener" title="Attribution 4.0 International" href="https://creativecommons.org/licenses/by/4.0/">
+                        
+                        <i class="fab fa-creative-commons-by"></i>
+                        
+                    </a>
+                </p>
+                
+                <p class="control">
+                    <a class="button is-white is-large" target="_blank" rel="noopener" title="Download on GitHub" href="https://github.com/ppoffice/hexo-theme-icarus">
+                        
+                        <i class="fab fa-github"></i>
+                        
+                    </a>
+                </p>
+                
+                </div>
+            
+            </div>
+        </div>
+    </div>
+</footer>
+    <script src="https://cdn.jsdelivr.net/npm/jquery@3.3.1/dist/jquery.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/moment@2.22.2/min/moment-with-locales.min.js"></script>
+<script>moment.locale("zh-CN");</script>
+
+
+<script>
+var IcarusThemeSettings = {
+    site: {
+        url: 'https://wjw.today',
+        external_link: {"enable":true,"exclude":[]}
+    },
+    article: {
+        highlight: {
+            clipboard: true,
+            fold: 'unfolded'
+        }
+    }
+};
+</script>
+
+
+<script src="https://cdn.jsdelivr.net/npm/clipboard@2.0.4/dist/clipboard.min.js" defer></script>
+
+
+
+
+
+<script src="/js/animation.js"></script>
+
+
+
+<script src="https://cdn.jsdelivr.net/npm/lightgallery@1.6.8/dist/js/lightgallery.min.js" defer></script>
+<script src="https://cdn.jsdelivr.net/npm/justifiedGallery@3.7.0/dist/js/jquery.justifiedGallery.min.js" defer></script>
+<script src="/js/gallery.js" defer></script>
+
+
+
+<div id="outdated">
+    <h6>Your browser is out-of-date!</h6>
+    <p>Update your browser to view this website correctly. <a id="btnUpdateBrowser" href="http://outdatedbrowser.com/">Update
+            my browser now </a></p>
+    <p class="last"><a href="#" id="btnCloseUpdateBrowser" title="Close">&times;</a></p>
+</div>
+<script src="https://cdn.jsdelivr.net/npm/outdatedbrowser@1.1.5/outdatedbrowser/outdatedbrowser.min.js" defer></script>
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+        outdatedBrowser({
+            bgColor: '#f25648',
+            color: '#ffffff',
+            lowerThan: 'flex'
+        });
+    });
+</script>
+
+
+<script src="https://cdn.jsdelivr.net/npm/mathjax@2.7.5/unpacked/MathJax.js?config=TeX-MML-AM_CHTML" defer></script>
+<script>
+document.addEventListener('DOMContentLoaded', function () {
+    MathJax.Hub.Config({
+        'HTML-CSS': {
+            matchFontHeight: false
+        },
+        SVG: {
+            matchFontHeight: false
+        },
+        CommonHTML: {
+            matchFontHeight: false
+        },
+        tex2jax: {
+            inlineMath: [
+                ['$','$'],
+                ['\\(','\\)']
+            ]
+        }
+    });
+});
+</script>
+
+
+<a id="back-to-top" title="回到顶端" href="javascript:;">
+    <i class="fas fa-chevron-up"></i>
+</a>
+<script src="/js/back-to-top.js" defer></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<script src="/js/main.js" defer></script>
+
+    
+    <div class="searchbox ins-search">
+    <div class="searchbox-container ins-search-container">
+        <div class="searchbox-input-wrapper">
+            <input type="text" class="searchbox-input ins-search-input" placeholder="想要查找什么..." />
+            <span class="searchbox-close ins-close ins-selectable"><i class="fa fa-times-circle"></i></span>
+        </div>
+        <div class="searchbox-result-wrapper ins-section-wrapper">
+            <div class="ins-section-container"></div>
+        </div>
+    </div>
+</div>
+<script>
+    (function (window) {
+        var INSIGHT_CONFIG = {
+            TRANSLATION: {
+                POSTS: '文章',
+                PAGES: '页面',
+                CATEGORIES: '分类',
+                TAGS: '标签',
+                UNTITLED: '(无标题)',
+            },
+            CONTENT_URL: '/content.json',
+        };
+        window.INSIGHT_CONFIG = INSIGHT_CONFIG;
+    })(window);
+</script>
+<script src="/js/insight.js" defer></script>
+<link rel="stylesheet" href="/css/search.css">
+<link rel="stylesheet" href="/css/insight.css">
+    
+
+        <style>
+            [bg-lazy] {
+                background-image: none !important;
+                background-color: #eee !important;
+            }
+        </style>
+        <script>
+            window.imageLazyLoadSetting = {
+                isSPA: false,
+                preloadRatio: 1,
+                processImages: null,
+            };
+        </script><script>window.addEventListener("load",function(){var t=/\.(gif|jpg|jpeg|tiff|png)$/i,r=/^data:image\/[a-z\d\-\.\+]+;base64,/;Array.prototype.slice.call(document.querySelectorAll("img[data-original]")).forEach(function(a){var e=a.parentNode;"A"===e.tagName&&(t.test(e.href)||r.test(e.href))&&(e.href=a.dataset.original)})});</script><script>(r=>{r.imageLazyLoadSetting.processImages=t;var a=r.imageLazyLoadSetting.isSPA,o=r.imageLazyLoadSetting.preloadRatio||1,d=i();function i(){var t=Array.prototype.slice.call(document.querySelectorAll("img[data-original]")),e=Array.prototype.slice.call(document.querySelectorAll("[bg-lazy]"));return t.concat(e)}function t(t){(a||t)&&(d=i());for(var e,n=0;n<d.length;n++)0<=(e=(e=d[n]).getBoundingClientRect()).bottom&&0<=e.left&&e.top<=(r.innerHeight*o||document.documentElement.clientHeight*o)&&(()=>{var t,e,a,o,i=d[n];e=function(){d=d.filter(function(t){return i!==t}),r.imageLazyLoadSetting.onImageLoaded&&r.imageLazyLoadSetting.onImageLoaded(i)},(t=i).dataset.loaded||(t.hasAttribute("bg-lazy")?(t.removeAttribute("bg-lazy"),e&&e()):(a=new Image,o=t.getAttribute("data-original"),a.onload=function(){t.src=o,t.removeAttribute("data-original"),t.setAttribute("data-loaded",!0),e&&e()},a.onerror=function(){t.removeAttribute("data-original"),t.setAttribute("data-loaded",!1),t.src=o},t.src!==o&&(a.src=o)))})()}function e(){clearTimeout(t.tId),t.tId=setTimeout(t,500)}t(),document.addEventListener("scroll",e),r.addEventListener("resize",e),r.addEventListener("orientationchange",e)})(this);</script></body>
+</html>

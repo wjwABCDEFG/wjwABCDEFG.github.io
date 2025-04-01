@@ -1,0 +1,1998 @@
+<!DOCTYPE html>
+<html  lang="zh">
+<head>
+    <meta charset="utf-8" />
+
+<meta name="generator" content="Hexo 4.2.1" />
+
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+
+<title>计算机网络基础 - 小温 blog</title>
+
+
+    <meta name="description" content="网络的知识太多了，我决定慢慢写，零零散散写，有很多对软件学生来说不太重要的知识点，我还是记下来了，但有标注重要😀&#x2F;一般般🤪&#x2F;不重要😭">
+<meta property="og:type" content="article">
+<meta property="og:title" content="计算机网络基础">
+<meta property="og:url" content="https://wjw.today/cs/network/index.html">
+<meta property="og:site_name" content="小温 blog">
+<meta property="og:description" content="网络的知识太多了，我决定慢慢写，零零散散写，有很多对软件学生来说不太重要的知识点，我还是记下来了，但有标注重要😀&#x2F;一般般🤪&#x2F;不重要😭">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/wjwABCDEFG/blog_img/img/20210717214812.jpg">
+<meta property="article:published_time" content="2020-11-13T06:16:28.000Z">
+<meta property="article:modified_time" content="2021-07-17T13:52:55.276Z">
+<meta property="article:author" content="wjw">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://cdn.jsdelivr.net/gh/wjwABCDEFG/blog_img/img/20210717214812.jpg">
+
+
+
+
+
+
+
+<link rel="icon" href="/images/favicon.ico">
+
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.7.2/css/bulma.css">
+<link rel="stylesheet" href="https://cdn.bootcss.com/font-awesome/5.4.1/css/all.css">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Ubuntu:400,600|Source+Code+Pro">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@9.12.0/styles/atom-one-dark.css">
+
+
+    
+    
+<style>body>.footer,body>.navbar,body>.section{opacity:0}</style>
+
+    
+    
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/lightgallery@1.6.8/dist/css/lightgallery.min.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/justifiedGallery@3.7.0/dist/css/justifiedGallery.min.css">
+
+    
+    
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/outdatedbrowser@1.1.5/outdatedbrowser/outdatedbrowser.min.css">
+
+    
+    
+    
+    
+<link rel="stylesheet" href="/css/back-to-top.css">
+
+    
+    
+    
+    
+    
+    
+    
+    <link rel="stylesheet" href="/css/progressbar.css">
+<script src="https://cdn.jsdelivr.net/npm/pace-js@1.0.2/pace.min.js"></script>
+    
+    <script async="" src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+    
+
+
+<link rel="stylesheet" href="/css/style.css">
+</head>
+<body class="is-3-column">
+    <nav class="navbar navbar-main">
+    <div class="container">
+        <div class="navbar-brand is-flex-center">
+            <a class="navbar-item navbar-logo" href="/">
+            
+                <img src="images/loading.gif" data-original="https://cdn.jsdelivr.net/gh/wjwABCDEFG/blog_img/img/20210717231246.png" alt="计算机网络基础" height="28">
+            
+            </a>
+        </div>
+        <div class="navbar-menu">
+            
+            <div class="navbar-start">
+                
+                <a class="navbar-item"
+                href="/">主页</a>
+                
+                <a class="navbar-item"
+                href="/archives">归档</a>
+                
+                <a class="navbar-item"
+                href="/categories">分类</a>
+                
+                <a class="navbar-item"
+                href="/tags">标签</a>
+                
+                <a class="navbar-item"
+                href="/about">关于</a>
+                
+            </div>
+            
+            <div class="navbar-end">
+                
+                    
+                    <a class="navbar-item" target="_blank" rel="noopener" title="View My GitHub" href="https://github.com/wjwABCDEFG">
+                        
+                        <i class="fab fa-github"></i>
+                        
+                    </a>
+                    
+                
+                
+                <a class="navbar-item is-hidden-tablet catalogue" title="目录" href="javascript:;">
+                    <i class="fas fa-list-ul"></i>
+                </a>
+                
+                
+                <a class="navbar-item search" title="搜索" href="javascript:;">
+                    <i class="fas fa-search"></i>
+                </a>
+                
+            </div>
+        </div>
+    </div>
+</nav>
+    
+    <section class="section">
+        <div class="container">
+            <div class="columns">
+                <div class="column is-8-tablet is-8-desktop is-6-widescreen has-order-2 column-main">
+<div class="card">
+    
+    <div class="card-image">
+        <span  class="image is-7by1">
+            <img class="thumbnail" src="images/loading.gif" data-original="https://cdn.jsdelivr.net/gh/wjwABCDEFG/blog_img/img/20210717214812.jpg" alt="计算机网络基础">
+        </span>
+    </div>
+    
+    <div class="card-content article ">
+        
+        <div class="level article-meta is-size-7 is-uppercase is-mobile is-overflow-x-auto">
+            <div class="level-left">
+                <time class="level-item has-text-grey" datetime="2020-11-13T06:16:28.000Z">2020-11-13</time>
+                
+                <div class="level-item">
+                <a class="has-link-grey -link" href="/categories/cs/">计算机基础</a>
+                </div>
+                
+                
+                <span class="level-item has-text-grey">
+                    
+                    
+                    1 小时 读完 (大约 9129 个字)
+                </span>
+                
+                
+                <span class="level-item has-text-grey" id="busuanzi_container_page_pv">
+                    <i class="far fa-eye"></i>
+                    <span id="busuanzi_value_page_pv">0</span>次访问
+                </span>
+                
+            </div>
+        </div>
+        
+        <h1 class="title is-size-3 is-size-4-mobile has-text-weight-normal">
+            
+                计算机网络基础
+            
+        </h1>
+        <div class="content">
+            <p>网络的知识太多了，我决定慢慢写，零零散散写，有很多对软件学生来说不太重要的知识点，我还是记下来了，但有标注重要😀/一般般🤪/不重要😭</p>
+<a id="more"></a>
+
+<h1 id="1-TCP-IP-5层模型😀"><a href="#1-TCP-IP-5层模型😀" class="headerlink" title="1. TCP/IP 5层模型😀"></a>1. TCP/IP 5层模型😀</h1><p><img src="images/loading.gif" data-original="https://cdn.jsdelivr.net/gh/wjwABCDEFG/blog_img/img/20210717214816.png" alt="网上一张充满水印的图"></p>
+<p><strong>物理层</strong>：负责转换比特流(101001010)和高低电平。中继器、集线器、RJ45接口</p>
+<p><strong>数据链路层</strong>：负责网络间数据传送。路由器、以太网、MAC、网桥、交换机、VLAN</p>
+<p><strong>网络层</strong>：主机对主机。IP、ARP、RARP、ICMP、IGMP、RIP等协议</p>
+<p><strong>传输层</strong>：端口对端口(说白了就是程序对程序)。TCP、UDP、SSL等协议</p>
+<p><strong>应用层</strong>：应用和展示。HTTP、SSH、FTP、DNS、DHCP、RPC</p>
+<br>
+
+<hr>
+<h1 id="2-物理层😭"><a href="#2-物理层😭" class="headerlink" title="2. 物理层😭"></a>2. 物理层😭</h1><p>物理层有个东西要知道：信道复用技术，<strong>快速划过知道有哪几种复用技术就行</strong></p>
+<p><img src="images/loading.gif" data-original="https://cdn.jsdelivr.net/gh/wjwABCDEFG/blog_img/img/20210717214831.png" alt=""></p>
+<h2 id="频分复用FDM😭"><a href="#频分复用FDM😭" class="headerlink" title="频分复用FDM😭"></a>频分复用FDM😭</h2><p><img src="images/loading.gif" data-original="https://cdn.jsdelivr.net/gh/wjwABCDEFG/blog_img/img/20210717214836.png" alt=""></p>
+<h2 id="时分复用TDM😭"><a href="#时分复用TDM😭" class="headerlink" title="时分复用TDM😭"></a>时分复用TDM😭</h2><p><img src="images/loading.gif" data-original="https://cdn.jsdelivr.net/gh/wjwABCDEFG/blog_img/img/20210717214844.png" alt=""></p>
+<p>统计时分复用STDM：数据到达的时间是不固定的</p>
+<p><img src="images/loading.gif" data-original="https://cdn.jsdelivr.net/gh/wjwABCDEFG/blog_img/img/20210717214851.png" alt=""></p>
+<h2 id="波分复用WDM😭"><a href="#波分复用WDM😭" class="headerlink" title="波分复用WDM😭"></a>波分复用WDM😭</h2><p>不介绍了</p>
+<h2 id="码分复用CDM🤪"><a href="#码分复用CDM🤪" class="headerlink" title="码分复用CDM🤪"></a>码分复用CDM🤪</h2><p>这里可能会有笔试题：</p>
+<p>S站的码片序列是 00011011（也有些地方0用-1表示）</p>
+<p>发送比特 1 时，就发送序列 00011011</p>
+<p>发送比特 0 时，就发送反码 11100100</p>
+<p>如果多个站，每个站的码片序列必须正交（也就是对应相乘再相加等于0）比如</p>
+<p>S站(–1 –1 –1 +1 +1 –1 +1 +1)</p>
+<p>T站(–1 –1 +1 –1 +1 +1 +1 –1)</p>
+<br>
+
+<hr>
+<h1 id="3-数据链路层🤪"><a href="#3-数据链路层🤪" class="headerlink" title="3. 数据链路层🤪"></a>3. 数据链路层🤪</h1><p>下图红线过程就是数据链路层的工作</p>
+<p><img src="images/loading.gif" data-original="https://cdn.jsdelivr.net/gh/wjwABCDEFG/blog_img/img/20210717214859.png" alt=""></p>
+<h2 id="特点🤪"><a href="#特点🤪" class="headerlink" title="特点🤪"></a>特点🤪</h2><p>这层解决了三个基本问题</p>
+<ul>
+<li><p>封装成帧</p>
+</li>
+<li><p>透明传输</p>
+</li>
+<li><p>差错控制</p>
+</li>
+</ul>
+<h3 id="封装成帧😭"><a href="#封装成帧😭" class="headerlink" title="封装成帧😭"></a>封装成帧😭</h3><p>也就是用开始和结束符分段标记了数据</p>
+<p><img src="images/loading.gif" data-original="https://cdn.jsdelivr.net/gh/wjwABCDEFG/blog_img/img/20210717214905.png" alt=""></p>
+<h3 id="透明传输😭"><a href="#透明传输😭" class="headerlink" title="透明传输😭"></a>透明传输😭</h3><p>帧的数据部分如果恰好也有开始/结束符，那么也要求能接收并且正确传，而不是规定数据不能含开始/结束符，这就叫透明传输。</p>
+<p>实现方式有字节填充和零比特填充两种</p>
+<p><strong>字节填充</strong></p>
+<p>“SOH”或“EOT”的前面插入一个转义字符“ESC”(十六进制编码是 1B)</p>
+<p>如果转义字符也出现数据当中，那么应在转义字符前面插入一个转义字符</p>
+<p>接收端必须将转义字符删除再将数据移交给上层</p>
+<p><img src="images/loading.gif" data-original="https://cdn.jsdelivr.net/gh/wjwABCDEFG/blog_img/img/20210717214914.png" alt=""></p>
+<p><strong>零比特填充</strong></p>
+<p>将数据字段中出现连续6个1的情况破坏</p>
+<p>发送端：只要发现有5 个连续 1，立即填入一个 0</p>
+<p>接收端：只要发现 5 个连续1，对之后一位进行检查，若为0，则删除；若为1，则表示帧开始或帧结束。</p>
+<p><img src="images/loading.gif" data-original="https://cdn.jsdelivr.net/gh/wjwABCDEFG/blog_img/img/20210717214932.png" alt=""></p>
+<h3 id="差错控制🤪"><a href="#差错控制🤪" class="headerlink" title="差错控制🤪"></a>差错控制🤪</h3><p>由于物理和环境原因，传输数据可能出现差错，比如由1变成0，所以接收端需要循环冗余检验CRC</p>
+<p>//TODO</p>
+<p><strong>注意：循环冗余检验CRC差错检测技术只能做到无差错接受，而不是可靠传输</strong></p>
+<br>
+
+<h2 id="MAC子层😀"><a href="#MAC子层😀" class="headerlink" title="MAC子层😀"></a>MAC子层😀</h2><blockquote>
+<p>IEEE802委员会将局域网的数据链路层拆成两个子层</p>
+<p>逻辑链路控制 LLC (Logical Link Control)子层</p>
+<p>媒体接入控制 MAC (Medium Access Control)子层</p>
+<p>LLC子层的作用已经消失</p>
+</blockquote>
+<p><strong>MAC地址</strong>又称为<strong>硬件地址</strong>或<strong>物理地址</strong>。 固化在计算机的网卡的ROM中,实际上是适配器（网卡）的标识符</p>
+<p>MAC地址6个字节,48位。前三个字节(即高位 24 位)是组织唯一标识符，有注册机构RA向生产网卡的厂家分配。后三个字节(即低位 24 位)是扩展标识符，一个地址块可以生成2^24个不同的地址</p>
+<br>
+
+<h2 id="交换机😀"><a href="#交换机😀" class="headerlink" title="交换机😀"></a>交换机😀</h2><p>交换机刚接入以太网时，交换表是空白的，交换机通过自学习算法处理收到的数据帧，从而逐步建立起交换表：交换机每收到一个数据帧，就将其源地址写到交换表的地址项，将其进入的接口写到交换表的接口项</p>
+<p><strong>帧转发过程</strong></p>
+<p>转发帧。查找交换表</p>
+<p>如没有，则向所有其他接口（进入的接口除外）转发。</p>
+<p>如有，则转发给对应接口。</p>
+<p>若交换表中给出的接口就是该帧进入交换机的接口，则应丢弃这个帧</p>
+<p><img src="images/loading.gif" data-original="https://cdn.jsdelivr.net/gh/wjwABCDEFG/blog_img/img/20210717214939.png" alt=""></p>
+<br>
+
+<h2 id="VLAN😀"><a href="#VLAN😀" class="headerlink" title="VLAN😀"></a>VLAN😀</h2><p>虚拟局域网 VLAN（Virtual LAN）</p>
+<p><img src="images/loading.gif" data-original="https://cdn.jsdelivr.net/gh/wjwABCDEFG/blog_img/img/20210717214945.png" alt=""></p>
+<p>这图什么意思呢？是说原来的局域网分配的不合理，可以通过VLAN重新分配局域网。</p>
+<p>举个例子：公司原来是每层楼一个部门（财务部，开发部），每层各自为一个局域网，有一天领导改战略了，每层楼组成一个子公司，财务人员和开发人员都分区各个子公司，但是电脑呢还是想开发人员和开发人员共用一个局域网，那么就可以添加交换机4，重组VLAN，如上图，VLAN1为一个局域网，VLAN2为一个局域网。</p>
+<p>交换机的接口分为两种类别：</p>
+<ul>
+<li><p>接入接口（access接口）：用于连接主机设备，只能转发某一特定VLAN的数据。即上图的交换机1-3的1-4号接口</p>
+</li>
+<li><p>干道接口（trunk接口）：通常用于交换机互连，它能转发所有VLAN的数据。即上图的交换机1-3的5号接口，交换机4的1-3号接口</p>
+</li>
+</ul>
+<p><img src="images/loading.gif" data-original="https://cdn.jsdelivr.net/gh/wjwABCDEFG/blog_img/img/20210717214952.png" alt=""></p>
+<br>
+
+<hr>
+<h1 id="4-网络层😀"><a href="#4-网络层😀" class="headerlink" title="4. 网络层😀"></a>4. 网络层😀</h1><p>网络层负责的是主机到主机之间的通信以及IP数据包的路径选择</p>
+<p><img src="images/loading.gif" data-original="https://cdn.jsdelivr.net/gh/wjwABCDEFG/blog_img/img/20210717215001.png" alt=""></p>
+<p>链路层是两个节点之间，网络层是多个节点可能构成不同的通路，负责选择路径</p>
+<p>网络层提供<strong>无连接的，尽最大努力交付的，不可靠的</strong>传输服务</p>
+<p>这一层最主要的是IP(Internet Protocol)协议，与之配套的</p>
+<p>地址解析协议 ARP(Address Resolution Protocol)<br>逆地址解析协议 RARP(Reverse Address Resolution Protocol)<br>网际控制报文协议 ICMP(Internet Control Message Protocol)<br>网际组管理协议 IGMP (Internet Group Management Protocol)</p>
+<br>
+
+<h2 id="IP地址和编址方法😀"><a href="#IP地址和编址方法😀" class="headerlink" title="IP地址和编址方法😀"></a>IP地址和编址方法😀</h2><p>全世界范围是唯一的32位的标识符，现在由“因特网名字与号码指派公司”ICANN进行分配。</p>
+<p><strong>两个特点</strong></p>
+<ol>
+<li><p>ICANN只分配网络号，主机号可以自行编址。</p>
+</li>
+<li><p>路由器路由表仅根据目的主机所连接的网络号来转发分组，而不考虑目的主机号（下面讲arp的时候会用到，记住它）</p>
+</li>
+</ol>
+<p>编址方法经历了3个阶段：分类的IP地址、子网的划分、构造超网。三个阶段是因为ip地址不够用了，原来的方法要么太多要么太少太浪费了！</p>
+<h3 id="分类的IP地址😀"><a href="#分类的IP地址😀" class="headerlink" title="分类的IP地址😀"></a>分类的IP地址😀</h3><p>网络号 + 主机号   net-id + host-id</p>
+<p><strong>注：判断是否是同一个网络，就看net-id是否一样</strong></p>
+<p>分成了这几类</p>
+<p><img src="images/loading.gif" data-original="https://cdn.jsdelivr.net/gh/wjwABCDEFG/blog_img/img/20210717215011.png" alt=""></p>
+<p>常表示成<strong>点分十进制记法</strong>，也就是每8个转换成十进制，我们常见的192.168.1.1就是这么来的</p>
+<p>有一些ip比较特殊（网络号全0,主机号全0），所以实际上可用的网络号和主机号为</p>
+<p><img src="images/loading.gif" data-original="https://cdn.jsdelivr.net/gh/wjwABCDEFG/blog_img/img/20210717215018.png" alt=""></p>
+<p>说明：</p>
+<p><strong>A类：</strong></p>
+<p>网络位全0为00000000表示本网络，全1为01111111用于软件环回测试(也就是127开头的比如127.0.0.1)，因此要-2</p>
+<p>所以第一个可用的网络号为00000001，最后一个为01111110</p>
+<p>主机数2^24 - 2，全0和全1的主机号有特殊的作用</p>
+<p><strong>B类：</strong></p>
+<p>网络位全100000000 00000000不指派，因此要-1（B、C类不需要软件环回测试）</p>
+<p>所以第一个可用的网络号为100000000 00000001即128.1.0.0，最后一个为10111111 11111111即191.255.0.0</p>
+<p>主机数2^24 - 2，全0和全1的主机号有特殊的作用</p>
+<p><strong>C类：</strong></p>
+<p>网络位全110000000 00000000 00000000不指派，因此要-1</p>
+<p>所以第一个可用的网络号为110000000 00000000 00000001即192.0.1.0，最后一个为11011111 11111111 11111111即223.255.255.0</p>
+<p>主机数2^8 - 2，全0和全1的主机号有特殊的作用</p>
+<p>特殊作用究竟是指什么呢？这里有一张表</p>
+<p><img src="images/loading.gif" data-original="https://cdn.jsdelivr.net/gh/wjwABCDEFG/blog_img/img/20210717215025.png" alt=""></p>
+<br>
+
+<h3 id="划分子网和子网掩码😀"><a href="#划分子网和子网掩码😀" class="headerlink" title="划分子网和子网掩码😀"></a>划分子网和子网掩码😀</h3><p>分类的IP地址有不合理的地方，比如我编址的时候有300台机子，C类网络不够，B类又太浪费。</p>
+<p>引入了子网掩码的概念：子网掩码说白了就是11100000…000这样的标志位，和ip地址一样也是32位，1代表网络位，0代表主机位。如何得到网络号呢？用ip和子网掩码相与，由于&amp;运算的性质，会使得网络号留下，主机号全变为0，。</p>
+<p>比如192.168.10.1,子网掩码是255.255.255.0，那么二进制来看，192.168.10都能&amp;1被保留下来，而最后的.1&amp;0，得到0，那么就得到了网络号192.168.10.0</p>
+<p>这样一来，可以任意的划分网络位了，7位，10位，12位……</p>
+<p>因特网规定：所有的网络都必须使用子网掩码，在路由器的路由表中也必须有子网掩码字段</p>
+<p>如果一个网络不划分子网，则该网络使用默认的子网掩码</p>
+<p><img src="images/loading.gif" data-original="https://cdn.jsdelivr.net/gh/wjwABCDEFG/blog_img/img/20210717215033.png" alt=""></p>
+<p>注：划分子网属于单位内部的事情，对外仍然表现为一个网络</p>
+<p>ABC3个企业都是300人，申请了3个B类子网，现在可以成立一个联盟，申请一个B类网络，划分给3个企业</p>
+<br>
+
+<h3 id="无分类编址CIDR😀"><a href="#无分类编址CIDR😀" class="headerlink" title="无分类编址CIDR😀"></a>无分类编址CIDR😀</h3><p>划分子网在一定程度上缓解了因特网在发展中遇到的困难。然而因特网仍然面临三个必须尽早解决的问题：B类地址在1992年已分配了近一半，眼看就要全部分配完毕！因特网主干网上的路由表中的项目数急剧增长。整个 IPv4 的地址空间最终将全部耗尽</p>
+<br>
+
+<p>CIDR 消除了传统的 A 类、B 类和 C 类地址以及划分子网的概念，将IP地址分为两部分：前面部分是网络前缀，用于指明网络，后面部分指明主机。即网络前缀 + host-id</p>
+<p><strong>斜线记法</strong>：如128.14.35.7/20表示前面20位是网络前缀，后面的12位是主机号</p>
+<p>假设一个企业有800台主机，2^9&lt;800&lt;2^10，32-10=22，现在可以申请一个网络前缀为22的地址块了</p>
+<p><strong>最长前缀匹配</strong>：如果路由表两条路由都可以匹配，优先选哦前缀最大的，也就是22和25要选25</p>
+<p>如果</p>
+<br>
+
+<h3 id="构造超网（路由聚合）😀"><a href="#构造超网（路由聚合）😀" class="headerlink" title="构造超网（路由聚合）😀"></a>构造超网（路由聚合）😀</h3><p>构成超网，也称为路由聚合，目的在于减少路由表的路由条目</p>
+<p><img src="images/loading.gif" data-original="https://cdn.jsdelivr.net/gh/wjwABCDEFG/blog_img/img/20210717215040.png" alt=""></p>
+<p>化成二进制一看就明白了，不解释</p>
+<br>
+
+<h3 id="编址题😀"><a href="#编址题😀" class="headerlink" title="编址题😀"></a>编址题😀</h3><p>先编网络，根据题目对应的编址方法（分类/子网/超网）合理的划分对应的网络，怎么才算合理？要看主机数量，比如下面这题，如果题目制定采用分类的IP地址进行编址，发现同一网络主机数量最多为4台，加上路由器的接口也才5个主机号，那么肯定采用C类</p>
+<p>如果题目允许自由发挥，那么我随便编，比如222.1.x（当然每个点8位最大也是225你不能555.555.1.0），那么LAN1为222.1.1.0，LAN2为222.1.2.0以此类推</p>
+<p><strong>路由器之间</strong>：每个接口要属于不同的网络，所以才有图中的222.1.4.0，222.1.5.0，222.1.6.0</p>
+<p>看一看就会了，采用其他编址方式大体也是一样的，主要是以路由器为划分的网络号不同</p>
+<p><img src="images/loading.gif" data-original="https://cdn.jsdelivr.net/gh/wjwABCDEFG/blog_img/img/20210717215047.png" alt=""></p>
+<br>
+
+<h2 id="分组转发和路由表🤪"><a href="#分组转发和路由表🤪" class="headerlink" title="分组转发和路由表🤪"></a>分组转发和路由表🤪</h2><h3 id="路由表🤪"><a href="#路由表🤪" class="headerlink" title="路由表🤪"></a>路由表🤪</h3><p>讲清楚了IP地址，下面我们来看网络中的IP数据包是如何转发的</p>
+<p>IP数据报（也称为网络层的分组）是由路由器转发的，路由器转发分组的依据是路由表，路由表最主要的两个信息：目的网络地址，下一跳地址[或转发接口]</p>
+<ul>
+<li>目的网络地址：要到达的目的主机的网络号</li>
+<li>下一跳地址（<strong>遥远网络</strong>）：路由器为了能将分组送达目的网络，下一步应将分组交付给哪个IP地址的接口</li>
+<li>转发接口（<strong>相邻网络</strong>）：路由器将分组从自己的哪个接口转发</li>
+</ul>
+<p>路由表可以通过以下命令查看</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">route -n</span><br></pre></td></tr></table></figure>
+
+<p><img src="images/loading.gif" data-original="https://cdn.jsdelivr.net/gh/wjwABCDEFG/blog_img/img/20210717215055.png" alt=""></p>
+<p>要找的ip与子网掩码相与，能匹配的就是下一跳。一般子网掩码为0.0.0.0都是在最后一条，接口enp6s0代表的是路由器，前面的是局域网，当然图中没有局域网，局域网匹配到的话直接走交换机的接口</p>
+<p>抽象一点的图可以帮助理解：</p>
+<p><img src="images/loading.gif" data-original="https://cdn.jsdelivr.net/gh/wjwABCDEFG/blog_img/img/20210717215101.png" alt=""></p>
+<p>路由表中的每一条记录称为一条路由，路由的类型主要有三种：</p>
+<ul>
+<li>网络路由：如果记录的是主机号，路由表过于庞大，所以记录的是一个网络</li>
+<li>特定主机路由：有时就像指定路由到某一个主机，或者网络管理人员为了更方便地控制网络和测试网络，可以是一个特定的目的主机的IP地址</li>
+<li>默认路由：0.0.0.0，能与所有网络匹配，其实就是现在的路由表中没有，得从因特网找地址</li>
+</ul>
+<p><img src="images/loading.gif" data-original="https://cdn.jsdelivr.net/gh/wjwABCDEFG/blog_img/img/20210717215108.png" alt=""></p>
+<p>下面是一张带特定主机路由的路由表，自己试试写下一跳看掌握没有</p>
+<p><img src="images/loading.gif" data-original="https://cdn.jsdelivr.net/gh/wjwABCDEFG/blog_img/img/20210717215116.png" alt=""></p>
+<br>
+
+<h3 id="分组转发算法😀"><a href="#分组转发算法😀" class="headerlink" title="分组转发算法😀"></a>分组转发算法😀</h3><ol>
+<li>从数据报的首部提取目的地址D, 和<strong>子网掩码相与</strong>提取出目的网络地址为N</li>
+<li>N为<strong>本网络</strong>则直接通过arp协议转发到目的主机(arp协议下面会讲)，否则执行3</li>
+<li>若网络 N 与此路由器直接相连，则把数据报<strong>直接交付</strong>目的网络，随后经arp协议交给目的主机，否则间接交付，执行4</li>
+<li>若路由表中有目的地址为 D 的<strong>特定主机路由</strong>，则把数据报传送给路由表中所指明的下一跳路由器，否则执行5</li>
+<li>对路由表中的每一行的子网掩码和 D 逐位相“与”看是否有到达网络 N 的路由，则把数据报传送给路由表指明的<strong>下一跳路由器</strong>，否则执行6</li>
+<li>走<strong>默认路由</strong>0.0.0.0，从internet上找</li>
+<li>找不到，分组转发出错</li>
+</ol>
+<br>
+
+<h2 id="ARP协议😀"><a href="#ARP协议😀" class="headerlink" title="ARP协议😀"></a>ARP协议😀</h2><p>地址解析协议ARP：就是将同一个局域网内IP地址转换为MAC地址</p>
+<p>还记得数据链路层说的“主机A/路由器发送帧给主机D时查找和建立交换表的过程吗”（不记得的可以点击目录中的“交换机”那节），主机A怎么知道要发送给主机D呢？通过IP地址？ip地址是个虚拟的东西，必须要映射成物理地址（MAC地址才可以知道是哪台主机）</p>
+<p>或者看前面说的ip分组转发，转发到目的网络了，如何给目的主机呢？ip是不行的，必须要物理地址</p>
+<p>arp协议相当于网络层和数据链路层中间的一个东西</p>
+<p>每一个主机、路由器都设有一个 ARP高速缓存(ARP cache)，里面有所在的局域网上的各主机和路由器的 IP 地址到硬件地址的映射表</p>
+<p><img src="images/loading.gif" data-original="https://cdn.jsdelivr.net/gh/wjwABCDEFG/blog_img/img/20210717215122.png" alt=""></p>
+<p>可以通过arp -a命令来看arp映射表</p>
+<p><img src="images/loading.gif" data-original="https://cdn.jsdelivr.net/gh/wjwABCDEFG/blog_img/img/20210717215127.png" alt=""></p>
+<p>太少了效果不是很好，其实就是ip和mac</p>
+<p>1.　当主机A（或路由器）欲向本局域网上的某个主机B（或路由器）发送IP数据报时，就先在自己的 ARP 高速缓存中查看有无主机B的IP地址</p>
+<p>2.　如有，则将其对应的硬件地址写入MAC帧，然后通过局域网将该MAC帧发往主机B</p>
+<p>3.　如果没有，则进行ARP广播，得到主机B的硬件地址，写入MAC帧，再发送</p>
+<p>如何验证呢？</p>
+<p>还是通过抓包</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">tcpdump -nn -i enp6s0 -p 80 or arp</span><br></pre></td></tr></table></figure>
+
+<p>另一个窗口</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">arp -d 本机ip &amp;&amp; curl www.baidu.com</span><br></pre></td></tr></table></figure>
+
+<p>如果没有建立过映射，那么在三次握手之前会发arp包</p>
+<p><img src="images/loading.gif" data-original="https://cdn.jsdelivr.net/gh/wjwABCDEFG/blog_img/img/20210717215133.png" alt=""></p>
+<br>
+
+<hr>
+<h1 id="5-传输层😀"><a href="#5-传输层😀" class="headerlink" title="5. 传输层😀"></a>5. 传输层😀</h1><p>提供端到端的逻辑通信，也就是端口或者说进程之间</p>
+<p><img src="images/loading.gif" data-original="https://cdn.jsdelivr.net/gh/wjwABCDEFG/blog_img/img/20210717215141.png" alt=""></p>
+<h2 id="Socket😭"><a href="#Socket😭" class="headerlink" title="Socket😭"></a>Socket😭</h2><p>我们说网络编程学过socket，它到底是什么？他是<strong>网络中进程通信的一种方式</strong>。起源于Unix/Linux基本哲学之一就是“一切皆文件”，理解为一种特殊的文件，<strong>用“打开open –&gt; 读写write/read –&gt; 关闭close”模式来完成网络间的进程通信</strong>。Socket不是什么模型啊层啊，只<strong>是一个接口</strong>，接口无非就是类似协议/标准/规范嘛，TCP/UDP连接就可以用它来实现建立</p>
+<p>我们能看到吗？能！文件嘛怎么不能看到呢！我们首先要抛开java的socket封装，咱们用ubuntu看看这个socket“文件”</p>
+<p>和百度进行socket连接</p>
+<p><code>exec 8&lt;&gt; /dev/tcp/www.baidu.com/80</code></p>
+<p>使用的是tcp方式（别问为什么tcp这个目录就可以建立tcp连接，还是那句话，一切皆文件）</p>
+<p>8是什么？8就是这个socket文件</p>
+<p>&lt;&gt;是输入输出流</p>
+<p>翻译过来就是：用一个称为8的文件代表了这个socket连接</p>
+<p>建立了tcp连接后可以发送http请求根目录</p>
+<p><code>echo -e &quot;GET / HTTP/1.0\n&quot; 1&gt;&amp; 8</code></p>
+<p>echo是输出， -e是解析\n转移字符串，1是输入流，&gt;是重定向，也就是本来echo是输出在控制台上的，用了&gt;就被输入到了这个叫8的文件中去</p>
+<p>既然发送了请求，打开看一下这个8响应了什么？</p>
+<p><code>cat 0&lt;&amp; 8</code></p>
+<p><img src="images/loading.gif" data-original="https://cdn.jsdelivr.net/gh/wjwABCDEFG/blog_img/img/20210717215151.png" alt=""></p>
+<p>这不就是我们熟悉的http响应头和html嘛，这不就是所谓的tcp后发送了http嘛</p>
+<p>从目录中看看这个8，也就是这个socket文件</p>
+<p>$$代表当前进程的意思，/proc里面一个进程就是一个文件夹，别问我为什么文件夹可以代表进程，问就是linux一切皆文件</p>
+<p><img src="images/loading.gif" data-original="https://cdn.jsdelivr.net/gh/wjwABCDEFG/blog_img/img/20210717215158.png" alt=""></p>
+<p>总之，我想说的就是socket是确实存在的，让你能真实的感受到这个socket像一个管道一样能输入输出进行进程间的通信，在linux下表现为一个文件，其他系统有其他系统的表现方式</p>
+<br>
+
+<h3 id="套接字究竟是什么😭"><a href="#套接字究竟是什么😭" class="headerlink" title="套接字究竟是什么😭"></a>套接字究竟是什么😭</h3><p>我们常把socket翻译成套接字，套接字是什么？为什么要这么翻译？所谓套接字，就是</p>
+<p>src: port -&gt; dest: port</p>
+<p>你想，网络中主机和端口千千万，将某两个对应起来，这不就“套接”上了嘛，所以叫套接字</p>
+<p>我们通过netstat命令可以查看，这个命令使用来查看网络状态的</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">netstat -natp</span><br></pre></td></tr></table></figure>
+
+<p><img src="images/loading.gif" data-original="https://cdn.jsdelivr.net/gh/wjwABCDEFG/blog_img/img/20210717215206.png" alt=""></p>
+<p>参数t代表只看tcp的，n代表不解析名称（否则local那里显示的是wjw）p代表显示pid（就是最后一列），a自然是代表全部</p>
+<blockquote>
+<p>参考：简书yongfutian</p>
+<p>链接：<a href="https://www.jianshu.com/p/066d99da7cbd">https://www.jianshu.com/p/066d99da7cbd</a></p>
+</blockquote>
+<br>
+
+<h3 id="三大要素🤪"><a href="#三大要素🤪" class="headerlink" title="三大要素🤪"></a>三大要素🤪</h3><p>与其说是socket三个参数，不如说是网络进程通信的三大要素</p>
+<p>（ip地址，协议，端口）</p>
+<p>协议就是tcp和udp，当然实际上参数为以下两个</p>
+<ul>
+<li><p>SOCK_STREAM：表示面向连接的数据传输方式，也就是建立tcp连接</p>
+</li>
+<li><p>SOCK_DGRAM：表示无连接的数据传输方式，即udp</p>
+</li>
+</ul>
+<p>端口，服务端需要监听一个端口（不能冲突），客户端的端口是随机的（0～65535）</p>
+<p><strong>这里有一道面试题：两个服务端ipA:80，ipB:80，问客户端ipC最多可以建立多少个tcp/udp连接？</strong>或者说socket连接</p>
+<p>要想弄明白这个问题，首先是看服务端，两个不一样的ip，肯定没有关系，比如ipA是阿里的服务器，ipB是腾讯的服务器，都能用80端口对吧，不影响，这个好理解。问题在于客户端呢？我们说不考虑任何系统和其他应用进程的情况下，最多是65536个，那么ipC:3000访问ipA:80后还可以访问ipB:80吗？</p>
+<p>答案是<strong>可以</strong>，我们说socket是采用套接字，也就是src: port -&gt; dest: port，那么ipC:3000 -&gt; ipA:80和ipC:3000 -&gt; ipB:80自然不是一个东西(其实就是上面netstat那张图的最后一列PID)</p>
+<br>
+
+<p><strong>题目2：客户端多个连接，服务端消耗多少个端口号？</strong>这个问题比较简单，答案就是监听的那一个，不管多少个连接进来，linux表现为fork那个文件8，java表现为开启一个线程完成请求。但是端口代表进程，一直就一个</p>
+<br>
+
+<p><strong>能不能多个socket对应一个进程呢？</strong>能！这个就叫做多路复用比如epoll，这里就不展开了，埋个坑以后有机会填</p>
+<br>
+
+<h2 id="UDP😀"><a href="#UDP😀" class="headerlink" title="UDP😀"></a>UDP😀</h2><p>用户数据报协议 UDP (User Datagram Protocol)</p>
+<h3 id="特点😀"><a href="#特点😀" class="headerlink" title="特点😀"></a>特点😀</h3><ul>
+<li><p>面向数据报（无连接）</p>
+</li>
+<li><p>最大努力交付（不可靠）</p>
+</li>
+<li><p>一次发送一个报文（不分段）</p>
+</li>
+<li><p>支持一对一、一对多、多对一和多对多的交互通信</p>
+</li>
+<li><p>开销小</p>
+</li>
+</ul>
+<h3 id="首部格式😀"><a href="#首部格式😀" class="headerlink" title="首部格式😀"></a>首部格式😀</h3><p><img src="images/loading.gif" data-original="https://cdn.jsdelivr.net/gh/wjwABCDEFG/blog_img/img/20210717215214.png" alt=""></p>
+<p>伪首部仅仅是为了计算检验和</p>
+<h3 id="计算检验和😭"><a href="#计算检验和😭" class="headerlink" title="计算检验和😭"></a>计算检验和😭</h3><p><img src="images/loading.gif" data-original="https://cdn.jsdelivr.net/gh/wjwABCDEFG/blog_img/img/20210717215220.png" alt=""></p>
+<h3 id="停止等待协议ARQ"><a href="#停止等待协议ARQ" class="headerlink" title="停止等待协议ARQ"></a>停止等待协议ARQ</h3><p>//TODO</p>
+<br>
+
+<h2 id="TCP😀"><a href="#TCP😀" class="headerlink" title="TCP😀"></a>TCP😀</h2><p>传输控制协议 TCP (Transmission Control Protocol)</p>
+<h3 id="特点😀-1"><a href="#特点😀-1" class="headerlink" title="特点😀"></a>特点😀</h3><ul>
+<li>面向连接</li>
+<li>字节流，可拆分</li>
+<li>可靠交付</li>
+<li>一对一</li>
+<li>确认、超时重传、流量控制、拥塞控制</li>
+</ul>
+<br>
+
+<h3 id="首部格式😀-1"><a href="#首部格式😀-1" class="headerlink" title="首部格式😀"></a>首部格式😀</h3><p><img src="images/loading.gif" data-original="https://cdn.jsdelivr.net/gh/wjwABCDEFG/blog_img/img/20210717215228.png" alt=""></p>
+<h3 id="三次握手😀"><a href="#三次握手😀" class="headerlink" title="三次握手😀"></a>三次握手😀</h3><ol>
+<li>第一次握手：Client将标志位SYN置为1，随机产生一个值seq=J，并将该数据包发送给Server，Client进入<strong>SYN_SENT状态</strong>，等待Server确认。</li>
+<li>第二次握手：Server收到数据包后由标志位SYN=1知道Client请求建立连接，Server将标志位SYN和ACK都置为1，ack=J+1(这是值而不是标志位)，随机产生一个值seq=K，并将该数据包发送给Client以确认连接请求，Server进入<strong>SYN_RCVD</strong>状态。</li>
+<li>第三次握手：Client收到确认后，检查ack是否为J+1，ACK标志位是否为1，如果正确则将标志位ACK置为1，并将该数据包发送给Server，Server检查ACK是否为1，如果正确则连接建立成功，Client和Server进入<strong>ESTABLISHED状态</strong>，完成三次握手，随后Client与Server之间可以开始传输数据了。</li>
+</ol>
+<h3 id="四次挥手😀"><a href="#四次挥手😀" class="headerlink" title="四次挥手😀"></a>四次挥手😀</h3><ol>
+<li>第一次挥手，客户端设置seq和 ACK ,向服务器发送一个 FIN(终结)报文段。此时，客户端进入<strong>FIN_WAIT_1</strong>状态，表示客户端没有数据要发送给服务端了。</li>
+<li>第二次挥手，服务端收到了客户端发送的 FIN 报文段，向客户端回了一个 ACK 报文段。服务端进入<strong>CLOSE_WAIT状态</strong>，客户端进入<strong>FIN_WAIT_2</strong>状态</li>
+<li>第三次挥手，服务端向客户端发送FIN 报文段，请求关闭连接，同时服务端进入<strong>LAST_ACK状态</strong>。</li>
+<li>第四次挥手，客户端收到服务端发送的 FIN 报文段后，向服务端发送 ACK 报文段,然后客户端进入 <strong>TIME_WAIT状态</strong>。服务端收到客户端的 ACK 报文段以后，就关闭连接。此时，<strong>客户端</strong>等待2MSL（指一个片段在网络中最大的存活时间）后依然没有收到回复，则说明服务端已经正常关闭，这样客户端就可以关闭连接了。</li>
+</ol>
+<blockquote>
+<p>为什么第二次挥手的时候服务端不发FIN直接关闭？</p>
+<p>因为服务端还有数据未发送，发送完再主动关闭</p>
+</blockquote>
+<p><strong>一张充满水印的图道清了一切…</strong></p>
+<p><img src="images/loading.gif" data-original="https://cdn.jsdelivr.net/gh/wjwABCDEFG/blog_img/img/20210717215234.png" alt=""></p>
+<br>
+
+
+
+<br>
+
+<hr>
+<h1 id="6-应用层😀"><a href="#6-应用层😀" class="headerlink" title="6. 应用层😀"></a>6. 应用层😀</h1><h2 id="HTTP😀"><a href="#HTTP😀" class="headerlink" title="HTTP😀"></a>HTTP😀</h2><h3 id="常见的HTTP请求动词😀"><a href="#常见的HTTP请求动词😀" class="headerlink" title="常见的HTTP请求动词😀"></a>常见的HTTP请求动词😀</h3><blockquote>
+<p>GET: 从服务器获取资源<br>POST: 在服务器新建资源<br>PUT: 在服务器更新资源<br>DELETE: 在服务器删除资源<br>HEAD: 获取资源的元数据<br>OPTIONAL: 查询对指定的资源支持的方法</p>
+</blockquote>
+<br>
+
+<h3 id="HTTP状态码表😀"><a href="#HTTP状态码表😀" class="headerlink" title="HTTP状态码表😀"></a>HTTP状态码表😀</h3><table>
+<thead>
+<tr>
+<th align="left">状态码</th>
+<th align="left">状态码英文名称</th>
+<th align="left">中文描述</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left">1**</td>
+<td align="left"></td>
+<td align="left"><strong>信息，服务器收到请求，需要请求者继续执行操作</strong></td>
+</tr>
+<tr>
+<td align="left">100</td>
+<td align="left">Continue</td>
+<td align="left">继续。<a href="http://www.dreamdu.com/webbuild/client_vs_server/">客户端</a>应继续其请求</td>
+</tr>
+<tr>
+<td align="left">101</td>
+<td align="left">Switching Protocols</td>
+<td align="left">切换协议。服务器根据客户端的请求切换协议。只能切换到更高级的协议，例如，切换到HTTP的新版本协议</td>
+</tr>
+<tr>
+<td align="left"></td>
+<td align="left"></td>
+<td align="left"></td>
+</tr>
+<tr>
+<td align="left">2**</td>
+<td align="left"></td>
+<td align="left"><strong>成功，操作被成功接收并处理</strong></td>
+</tr>
+<tr>
+<td align="left">200</td>
+<td align="left">OK</td>
+<td align="left">请求成功。一般用于GET与POST请求</td>
+</tr>
+<tr>
+<td align="left">201</td>
+<td align="left">Created</td>
+<td align="left">已创建。成功请求并创建了新的资源</td>
+</tr>
+<tr>
+<td align="left">202</td>
+<td align="left">Accepted</td>
+<td align="left">已接受。已经接受请求，但未处理完成</td>
+</tr>
+<tr>
+<td align="left">203</td>
+<td align="left">Non-Authoritative Information</td>
+<td align="left">非授权信息。请求成功。但返回的meta信息不在原始的服务器，而是一个副本</td>
+</tr>
+<tr>
+<td align="left">204</td>
+<td align="left">No Content</td>
+<td align="left">无内容。服务器成功处理，但未返回内容。在未更新网页的情况下，可确保浏览器继续显示当前文档</td>
+</tr>
+<tr>
+<td align="left">205</td>
+<td align="left">Reset Content</td>
+<td align="left">重置内容。服务器处理成功，用户终端（例如：浏览器）应重置文档视图。可通过此返回码清除浏览器的表单域</td>
+</tr>
+<tr>
+<td align="left">206</td>
+<td align="left">Partial Content</td>
+<td align="left">部分内容。服务器成功处理了部分GET请求</td>
+</tr>
+<tr>
+<td align="left"></td>
+<td align="left"></td>
+<td align="left"></td>
+</tr>
+<tr>
+<td align="left">3**</td>
+<td align="left"></td>
+<td align="left"><strong>重定向，需要进一步的操作以完成请求</strong></td>
+</tr>
+<tr>
+<td align="left">300</td>
+<td align="left">Multiple Choices</td>
+<td align="left">多种选择。请求的资源可包括多个位置，相应可返回一个资源特征与地址的列表用于用户终端（例如：浏览器）选择</td>
+</tr>
+<tr>
+<td align="left">301</td>
+<td align="left">Moved Permanently</td>
+<td align="left">永久移动。请求的资源已被永久的移动到新URI，返回信息会包括新的URI，浏览器会自动定向到新URI。今后任何新的请求都应使用新的URI代替</td>
+</tr>
+<tr>
+<td align="left">302</td>
+<td align="left">Found</td>
+<td align="left">临时移动。与301类似。但资源只是临时被移动。客户端应继续使用原有URI</td>
+</tr>
+<tr>
+<td align="left">303</td>
+<td align="left">See Other</td>
+<td align="left">查看其它地址。与301类似。使用GET和POST请求查看</td>
+</tr>
+<tr>
+<td align="left">304</td>
+<td align="left">Not Modified</td>
+<td align="left">未修改。所请求的资源未修改，服务器返回此状态码时，不会返回任何资源。客户端通常会缓存访问过的资源，通过提供一个头信息指出客户端希望只返回在指定日期之后修改的资源</td>
+</tr>
+<tr>
+<td align="left">305</td>
+<td align="left">Use Proxy</td>
+<td align="left">使用代理。所请求的资源必须通过代理访问</td>
+</tr>
+<tr>
+<td align="left">306</td>
+<td align="left">Unused</td>
+<td align="left">已经被废弃的HTTP状态码</td>
+</tr>
+<tr>
+<td align="left">307</td>
+<td align="left">Temporary Redirect</td>
+<td align="left">临时重定向。与302类似。使用GET请求重定向</td>
+</tr>
+<tr>
+<td align="left"></td>
+<td align="left"></td>
+<td align="left"></td>
+</tr>
+<tr>
+<td align="left">4**</td>
+<td align="left"></td>
+<td align="left"><strong>客户端错误，请求包含语法错误或无法完成请求</strong></td>
+</tr>
+<tr>
+<td align="left">400</td>
+<td align="left">Bad Request</td>
+<td align="left">客户端请求的语法错误，服务器无法理解</td>
+</tr>
+<tr>
+<td align="left">401</td>
+<td align="left">Unauthorized</td>
+<td align="left">请求要求用户的身份认证</td>
+</tr>
+<tr>
+<td align="left">402</td>
+<td align="left">Payment Required</td>
+<td align="left">保留，将来使用</td>
+</tr>
+<tr>
+<td align="left">403</td>
+<td align="left">Forbidden</td>
+<td align="left">服务器理解请求客户端的请求，但是拒绝执行此请求</td>
+</tr>
+<tr>
+<td align="left">404</td>
+<td align="left">Not Found</td>
+<td align="left">服务器无法根据客户端的请求找到资源（网页）。通过此代码，网站设计人员可设置”您所请求的资源无法找到”的个性页面</td>
+</tr>
+<tr>
+<td align="left">405</td>
+<td align="left">Method Not Allowed</td>
+<td align="left">客户端请求中的方法被禁止</td>
+</tr>
+<tr>
+<td align="left">406</td>
+<td align="left">Not Acceptable</td>
+<td align="left">服务器无法根据客户端请求的内容特性完成请求</td>
+</tr>
+<tr>
+<td align="left">407</td>
+<td align="left">Proxy Authentication Required</td>
+<td align="left">请求要求代理的身份认证，与401类似，但请求者应当使用代理进行授权</td>
+</tr>
+<tr>
+<td align="left">408</td>
+<td align="left">Request Time-out</td>
+<td align="left">服务器等待客户端发送的请求时间过长，超时</td>
+</tr>
+<tr>
+<td align="left">409</td>
+<td align="left">Conflict</td>
+<td align="left">服务器完成客户端的 PUT 请求时可能返回此代码，服务器处理请求时发生了冲突</td>
+</tr>
+<tr>
+<td align="left">410</td>
+<td align="left">Gone</td>
+<td align="left">客户端请求的资源已经不存在。410不同于404，如果资源以前有现在被永久删除了可使用410代码，网站设计人员可通过301代码指定资源的新位置</td>
+</tr>
+<tr>
+<td align="left">411</td>
+<td align="left">Length Required</td>
+<td align="left">服务器无法处理客户端发送的不带Content-Length的请求信息</td>
+</tr>
+<tr>
+<td align="left">412</td>
+<td align="left">Precondition Failed</td>
+<td align="left">客户端请求信息的先决条件错误</td>
+</tr>
+<tr>
+<td align="left">413</td>
+<td align="left">Request Entity Too Large</td>
+<td align="left">由于请求的实体过大，服务器无法处理，因此拒绝请求。为防止客户端的连续请求，服务器可能会关闭连接。如果只是服务器暂时无法处理，则会包含一个Retry-After的响应信息</td>
+</tr>
+<tr>
+<td align="left">414</td>
+<td align="left">Request-URI Too Large</td>
+<td align="left">请求的URI过长（URI通常为网址），服务器无法处理</td>
+</tr>
+<tr>
+<td align="left">415</td>
+<td align="left">Unsupported Media Type</td>
+<td align="left">服务器无法处理请求附带的媒体格式</td>
+</tr>
+<tr>
+<td align="left">416</td>
+<td align="left">Requested range not satisfiable</td>
+<td align="left">客户端请求的范围无效</td>
+</tr>
+<tr>
+<td align="left">417</td>
+<td align="left">Expectation Failed</td>
+<td align="left">服务器无法满足Expect的请求头信息</td>
+</tr>
+<tr>
+<td align="left"></td>
+<td align="left"></td>
+<td align="left"></td>
+</tr>
+<tr>
+<td align="left">5**</td>
+<td align="left"></td>
+<td align="left"><strong>服务器错误，服务器在处理请求的过程中发生了错误</strong></td>
+</tr>
+<tr>
+<td align="left">500</td>
+<td align="left">Internal Server Error</td>
+<td align="left">服务器内部错误，无法完成请求</td>
+</tr>
+<tr>
+<td align="left">501</td>
+<td align="left">Not Implemented</td>
+<td align="left">服务器不支持请求的功能，无法完成请求</td>
+</tr>
+<tr>
+<td align="left">502</td>
+<td align="left">Bad Gateway</td>
+<td align="left">作为网关或者代理工作的服务器尝试执行请求时，从远程服务器接收到了一个无效的响应</td>
+</tr>
+<tr>
+<td align="left">503</td>
+<td align="left">Service Unavailable</td>
+<td align="left">由于超载或系统维护，服务器暂时的无法处理客户端的请求。延时的长度可包含在服务器的Retry-After头信息中</td>
+</tr>
+<tr>
+<td align="left">504</td>
+<td align="left">Gateway Time-out</td>
+<td align="left">充当网关或代理的服务器，未及时从远端服务器获取请求</td>
+</tr>
+<tr>
+<td align="left">505</td>
+<td align="left">HTTP Version not supported</td>
+<td align="left">服务器不支持请求的HTTP协议的版本，无法完成处理</td>
+</tr>
+</tbody></table>
+<br>
+
+<h3 id="HTTP和HTTPS的区别🤪"><a href="#HTTP和HTTPS的区别🤪" class="headerlink" title="HTTP和HTTPS的区别🤪"></a>HTTP和HTTPS的区别🤪</h3><p>HTTPS（Hyper Text Transfer Protocol over SecureSocket Layer）是身披SSL外壳的HTTP，与HTTP明文协议对比，HTTPS具备两大网络安全功能：加密以及身份验证。 </p>
+<ul>
+<li>加密：HTTPS传输协议可对客户端与服务器之间的传输数据进行加密，防止第三方的窃取、篡改、窥视等中间人攻击（中间人攻击可以看大佬的讲解<a href="https://www.zhihu.com/question/304030251）。">https://www.zhihu.com/question/304030251）。</a></li>
+<li>身份验证：客户端用户可通过HTTPS背后的SSL证书对服务器进行身份验证，辨别真假网站，避免掉入钓鱼网站的陷阱。</li>
+</ul>
+<br>
+
+<p>//TODO</p>
+<br>
+
+<h2 id="输入网址敲下回车后发生了什么😀"><a href="#输入网址敲下回车后发生了什么😀" class="headerlink" title="输入网址敲下回车后发生了什么😀"></a>输入网址敲下回车后发生了什么😀</h2><p><strong>第一步：浏览器查找域名的IP地址（DNS协议）</strong></p>
+<ol>
+<li>查找浏览器缓存：因为浏览器一般会缓存DNS记录一段时间，如果有缓存则返回IP</li>
+<li>查找系统缓存：浏览器会进行系统调用，查找本机的hosts文件，如果找到则返回IP</li>
+<li>查找路由器缓存：借助网络，路由器一般都有自己的DNS缓存，会去查找ISP 服务商缓存DNS的服务器，如果查找到则返回IP</li>
+<li>递归查询：所谓递归查询就是如果主机所询问的本地域名服务器不知道被查询域名的IP地址，那么本地域名服务器就以DNS客户的身份，向其他根域名服务器继续发出查询请求报文</li>
+<li>迭代查询：其他根域名服务器告诉本地域名服务器下一级的服务器ip，本地域名服务器向这个服务器ip查找，再得到下一级，本地域名服务器再查找，直到找到想查找的域名对应的ip，本地服务器再发送给主机</li>
+</ol>
+<p><strong>第二步：浏览器与目标服务器建立TCP连接（TCP协议）</strong></p>
+<ol start="6">
+<li>三次握手，参考上面第5小结TCP三次握手</li>
+</ol>
+<p><strong>第三步：浏览器发送HTTP请求（HTTP协议）</strong></p>
+<ol start="7">
+<li>就是我们熟悉的http请求，这里包括了请求头，get的话可能会有查询字符串，post的话可能还有请求体：</li>
+</ol>
+<p><img src="images/loading.gif" data-original="https://cdn.jsdelivr.net/gh/wjwABCDEFG/blog_img/img/20210717215247.png" alt=""></p>
+<p><strong>第四步：可能会有重定向</strong></p>
+<p>部分网站会显示300开头的重定向，这是因为有些网站展示页需要做SEO优化。为了提高SEO排名，通常将<a href="http://www.wjw.today和wjw.today绑定为一个网站，统一经过一个服务器，再做负载均衡到不同主机服务器。">www.wjw.today和wjw.today绑定为一个网站，统一经过一个服务器，再做负载均衡到不同主机服务器。</a></p>
+<p>如果有重定向，那么获取到重定向的访问地址后，会再发送一次http请求</p>
+<p><strong>第四步：服务器处理和响应</strong></p>
+<p>也就是我们常说的后台，接收到请求后做处理，通常是操作数据库啦等等等等，然后返回一个响应，可能是整页HTML，也可能是现在流行的json，并返回一个200 OK状态码</p>
+<p><strong>第五步：释放TCP连接</strong></p>
+<p>四次挥手，参考上面第5小结TCP四次挥手</p>
+<p><strong>第六步：浏览器渲染</strong></p>
+<p>浏览器根据Content-type对返回的数据进行渲染，html就是text/html，json是application/json，这里通常都是异步的，浏览器不需要完全接收到响应数据包就已经开始渲染了，接收到数据后再进行相应的渲染。接下来是一些样式/图片/js文件，浏览器通过这些文件的url发送对应的请求，和之前的html页面一样的过程，只是有时这些文件不在自己的服务器，而是缓存或者cdn托管</p>
+<blockquote>
+<p>参考</p>
+<p><a href="https://blog.csdn.net/jiao_0509/article/details/82491299">https://blog.csdn.net/jiao_0509/article/details/82491299</a></p>
+</blockquote>
+
+        </div>
+        
+        
+        
+    </div>
+</div>
+
+
+
+
+
+<div class="card card-transparent">
+    <div class="level post-navigation is-flex-wrap is-mobile">
+        
+        <div class="level-start">
+            <a class="level level-item has-link-grey  article-nav-prev" href="/Java/java%E4%B8%AD%E7%9A%84%E5%BC%95%E7%94%A8/">
+                <i class="level-item fas fa-chevron-left"></i>
+                <span class="level-item">java中的引用</span>
+            </a>
+        </div>
+        
+        
+        <div class="level-end">
+            <a class="level level-item has-link-grey  article-nav-next" href="/algorithms/count-numbers-with-unique-digits/">
+                <span class="level-item">357-计算各个位数不同的数字个数</span>
+                <i class="level-item fas fa-chevron-right"></i>
+            </a>
+        </div>
+        
+    </div>
+</div>
+
+
+</div>
+                
+
+
+
+
+<div class="column is-4-tablet is-4-desktop is-3-widescreen  has-order-1 column-left ">
+    
+        
+<div class="card widget">
+    <div class="card-content">
+        <nav class="level">
+            <div class="level-item has-text-centered" style="flex-shrink: 1">
+                <div>
+                    
+                    <figure class="image is-128x128 has-mb-6">
+                        <img class="is-rounded" src="images/loading.gif" data-original="https://cdn.jsdelivr.net/gh/wjwABCDEFG/blog_img/img/20210717231547.jpeg" alt="wjwABCDEFG">
+                    </figure>
+                    
+                    <p class="is-size-4 is-block">
+                        wjwABCDEFG
+                    </p>
+                    
+                    
+                    
+                    <p class="is-size-6 is-flex is-flex-center has-text-grey">
+                        <i class="fas fa-map-marker-alt has-mr-7"></i>
+                        <span>Shaoguan, China</span>
+                    </p>
+                    
+                </div>
+            </div>
+        </nav>
+        <nav class="level is-mobile">
+            <div class="level-item has-text-centered is-marginless">
+                <div>
+                    <p class="heading">
+                        文章
+                    </p>
+                    <a href="/archives">
+                        <p class="title has-text-weight-normal">
+                            103
+                        </p>
+                    </a>
+                </div>
+            </div>
+            <div class="level-item has-text-centered is-marginless">
+                <div>
+                    <p class="heading">
+                        分类
+                    </p>
+                    <a href="/categories">
+                        <p class="title has-text-weight-normal">
+                            14
+                        </p>
+                    </a>
+                </div>
+            </div>
+            <div class="level-item has-text-centered is-marginless">
+                <div>
+                    <p class="heading">
+                        标签
+                    </p>
+                    <a href="/tags">
+                        <p class="title has-text-weight-normal">
+                            26
+                        </p>
+                    </a>
+                </div>
+            </div>
+        </nav>
+        
+        <div class="level">
+            <a class="level-item button is-link is-rounded" href="https://github.com/wjwABCDEFG" target="_blank" rel="noopener">
+                关注我</a>
+        </div>
+        
+        
+        
+    </div>
+</div>
+    
+        
+<div class="card widget">
+    <div class="card-content">
+        <div class="menu">
+            <h3 class="menu-label">
+                分类
+            </h3>
+            <ul class="menu-list">
+            <li>
+        <a class="level is-marginless" href="/categories/Java/">
+            <span class="level-start">
+                <span class="level-item">Java基础</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">7</span>
+            </span>
+        </a></li><li>
+        <a class="level is-marginless" href="/categories/Mysql/">
+            <span class="level-start">
+                <span class="level-item">Mysql</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">3</span>
+            </span>
+        </a></li><li>
+        <a class="level is-marginless" href="/categories/Others/">
+            <span class="level-start">
+                <span class="level-item">Others</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">8</span>
+            </span>
+        </a></li><li>
+        <a class="level is-marginless" href="/categories/Spring/">
+            <span class="level-start">
+                <span class="level-item">Spring</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">6</span>
+            </span>
+        </a></li><li>
+        <a class="level is-marginless" href="/categories/SpringCloud/">
+            <span class="level-start">
+                <span class="level-item">SpringCloud</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">4</span>
+            </span>
+        </a></li><li>
+        <a class="level is-marginless" href="/categories/util/">
+            <span class="level-start">
+                <span class="level-item">Util工具类</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">3</span>
+            </span>
+        </a></li><li>
+        <a class="level is-marginless" href="/categories/redis/">
+            <span class="level-start">
+                <span class="level-item">redis</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">1</span>
+            </span>
+        </a></li><li>
+        <a class="level is-marginless" href="/categories/frontend/">
+            <span class="level-start">
+                <span class="level-item">前端</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">3</span>
+            </span>
+        </a></li><li>
+        <a class="level is-marginless" href="/categories/algorithms/">
+            <span class="level-start">
+                <span class="level-item">数据结构和算法</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">60</span>
+            </span>
+        </a></li><li>
+        <a class="level is-marginless" href="/categories/games/">
+            <span class="level-start">
+                <span class="level-item">游戏和引擎</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">2</span>
+            </span>
+        </a></li><li>
+        <a class="level is-marginless" href="/categories/deeplearning/">
+            <span class="level-start">
+                <span class="level-item">玄学</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">1</span>
+            </span>
+        </a></li><li>
+        <a class="level is-marginless" href="/categories/life/">
+            <span class="level-start">
+                <span class="level-item">生活随笔</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">6</span>
+            </span>
+        </a></li><li>
+        <a class="level is-marginless" href="/categories/cs/">
+            <span class="level-start">
+                <span class="level-item">计算机基础</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">1</span>
+            </span>
+        </a></li><li>
+        <a class="level is-marginless" href="/categories/designpattern/">
+            <span class="level-start">
+                <span class="level-item">设计模式</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">1</span>
+            </span>
+        </a></li>
+            </ul>
+        </div>
+    </div>
+</div>
+    
+        <div class="card widget">
+    <div class="card-content">
+        <h3 class="menu-label">
+            标签云
+        </h3>
+        <a href="/tags/DL-ML/" style="font-size: 10px;">DL/ML</a> <a href="/tags/http/" style="font-size: 10px;">http</a> <a href="/tags/lintcode/" style="font-size: 10px;">lintcode</a> <a href="/tags/markdown/" style="font-size: 10px;">markdown</a> <a href="/tags/mysql/" style="font-size: 11.67px;">mysql</a> <a href="/tags/spring/" style="font-size: 11.67px;">spring</a> <a href="/tags/springcloud/" style="font-size: 10px;">springcloud</a> <a href="/tags/%E4%BA%8C%E5%88%86%E6%9F%A5%E6%89%BE/" style="font-size: 10px;">二分查找</a> <a href="/tags/%E5%89%91%E6%8C%87offer/" style="font-size: 10px;">剑指offer</a> <a href="/tags/%E5%8A%9B%E6%89%A3/" style="font-size: 20px;">力扣</a> <a href="/tags/%E5%8A%A0%E5%AF%86/" style="font-size: 10px;">加密</a> <a href="/tags/%E5%8A%A8%E6%80%81%E8%A7%84%E5%88%92/" style="font-size: 13.33px;">动态规划</a> <a href="/tags/%E5%8D%95%E8%B0%83%E6%A0%88/" style="font-size: 15px;">单调栈</a> <a href="/tags/%E5%9B%9E%E6%BA%AF/" style="font-size: 16.67px;">回溯</a> <a href="/tags/%E5%AD%97%E7%AC%A6%E4%B8%B2/" style="font-size: 10px;">字符串</a> <a href="/tags/%E5%AD%A6%E4%B9%A0%E8%AE%B0%E5%BD%95/" style="font-size: 10px;">学习记录</a> <a href="/tags/%E5%BC%80%E5%8F%91/" style="font-size: 18.33px;">开发</a> <a href="/tags/%E6%8E%92%E5%BA%8F/" style="font-size: 10px;">排序</a> <a href="/tags/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/" style="font-size: 13.33px;">数据结构</a> <a href="/tags/%E6%A0%88/" style="font-size: 10px;">栈</a> <a href="/tags/%E6%A0%91/" style="font-size: 15px;">树</a> <a href="/tags/%E6%B8%B8%E6%88%8F%E5%92%8C%E5%BC%95%E6%93%8E/" style="font-size: 11.67px;">游戏和引擎</a> <a href="/tags/%E7%AC%94%E8%AF%95/" style="font-size: 10px;">笔试</a> <a href="/tags/%E7%AC%94%E8%AF%95%E9%9D%A2%E8%AF%95/" style="font-size: 13.33px;">笔试面试</a> <a href="/tags/%E7%AE%97%E6%B3%95/" style="font-size: 10px;">算法</a> <a href="/tags/%E9%80%92%E5%BD%92/" style="font-size: 10px;">递归</a>
+    </div>
+</div>
+    
+    
+        <div class="column-right-shadow is-hidden-widescreen is-sticky">
+        
+            
+
+    <div class="card widget" id="toc">
+        <div class="card-content">
+            <div class="menu">
+                <h3 class="menu-label">
+                    目录
+                </h3>
+                <ul class="menu-list"><li>
+        <a class="is-flex" href="#1-TCP-IP-5层模型😀">
+        <!-- 目录是否自动编号 -->
+        <!-- <span class="has-mr-6">1</span> -->
+        <span>1. TCP/IP 5层模型😀</span>
+        </a></li><li>
+        <a class="is-flex" href="#2-物理层😭">
+        <!-- 目录是否自动编号 -->
+        <!-- <span class="has-mr-6">2</span> -->
+        <span>2. 物理层😭</span>
+        </a><ul class="menu-list"><li>
+        <a class="is-flex" href="#频分复用FDM😭">
+        <!-- 目录是否自动编号 -->
+        <!-- <span class="has-mr-6">2.1</span> -->
+        <span>频分复用FDM😭</span>
+        </a></li><li>
+        <a class="is-flex" href="#时分复用TDM😭">
+        <!-- 目录是否自动编号 -->
+        <!-- <span class="has-mr-6">2.2</span> -->
+        <span>时分复用TDM😭</span>
+        </a></li><li>
+        <a class="is-flex" href="#波分复用WDM😭">
+        <!-- 目录是否自动编号 -->
+        <!-- <span class="has-mr-6">2.3</span> -->
+        <span>波分复用WDM😭</span>
+        </a></li><li>
+        <a class="is-flex" href="#码分复用CDM🤪">
+        <!-- 目录是否自动编号 -->
+        <!-- <span class="has-mr-6">2.4</span> -->
+        <span>码分复用CDM🤪</span>
+        </a></li></ul></li><li>
+        <a class="is-flex" href="#3-数据链路层🤪">
+        <!-- 目录是否自动编号 -->
+        <!-- <span class="has-mr-6">3</span> -->
+        <span>3. 数据链路层🤪</span>
+        </a><ul class="menu-list"><li>
+        <a class="is-flex" href="#特点🤪">
+        <!-- 目录是否自动编号 -->
+        <!-- <span class="has-mr-6">3.1</span> -->
+        <span>特点🤪</span>
+        </a><ul class="menu-list"><li>
+        <a class="is-flex" href="#封装成帧😭">
+        <!-- 目录是否自动编号 -->
+        <!-- <span class="has-mr-6">3.1.1</span> -->
+        <span>封装成帧😭</span>
+        </a></li><li>
+        <a class="is-flex" href="#透明传输😭">
+        <!-- 目录是否自动编号 -->
+        <!-- <span class="has-mr-6">3.1.2</span> -->
+        <span>透明传输😭</span>
+        </a></li><li>
+        <a class="is-flex" href="#差错控制🤪">
+        <!-- 目录是否自动编号 -->
+        <!-- <span class="has-mr-6">3.1.3</span> -->
+        <span>差错控制🤪</span>
+        </a></li></ul></li><li>
+        <a class="is-flex" href="#MAC子层😀">
+        <!-- 目录是否自动编号 -->
+        <!-- <span class="has-mr-6">3.2</span> -->
+        <span>MAC子层😀</span>
+        </a></li><li>
+        <a class="is-flex" href="#交换机😀">
+        <!-- 目录是否自动编号 -->
+        <!-- <span class="has-mr-6">3.3</span> -->
+        <span>交换机😀</span>
+        </a></li><li>
+        <a class="is-flex" href="#VLAN😀">
+        <!-- 目录是否自动编号 -->
+        <!-- <span class="has-mr-6">3.4</span> -->
+        <span>VLAN😀</span>
+        </a></li></ul></li><li>
+        <a class="is-flex" href="#4-网络层😀">
+        <!-- 目录是否自动编号 -->
+        <!-- <span class="has-mr-6">4</span> -->
+        <span>4. 网络层😀</span>
+        </a><ul class="menu-list"><li>
+        <a class="is-flex" href="#IP地址和编址方法😀">
+        <!-- 目录是否自动编号 -->
+        <!-- <span class="has-mr-6">4.1</span> -->
+        <span>IP地址和编址方法😀</span>
+        </a><ul class="menu-list"><li>
+        <a class="is-flex" href="#分类的IP地址😀">
+        <!-- 目录是否自动编号 -->
+        <!-- <span class="has-mr-6">4.1.1</span> -->
+        <span>分类的IP地址😀</span>
+        </a></li><li>
+        <a class="is-flex" href="#划分子网和子网掩码😀">
+        <!-- 目录是否自动编号 -->
+        <!-- <span class="has-mr-6">4.1.2</span> -->
+        <span>划分子网和子网掩码😀</span>
+        </a></li><li>
+        <a class="is-flex" href="#无分类编址CIDR😀">
+        <!-- 目录是否自动编号 -->
+        <!-- <span class="has-mr-6">4.1.3</span> -->
+        <span>无分类编址CIDR😀</span>
+        </a></li><li>
+        <a class="is-flex" href="#构造超网（路由聚合）😀">
+        <!-- 目录是否自动编号 -->
+        <!-- <span class="has-mr-6">4.1.4</span> -->
+        <span>构造超网（路由聚合）😀</span>
+        </a></li><li>
+        <a class="is-flex" href="#编址题😀">
+        <!-- 目录是否自动编号 -->
+        <!-- <span class="has-mr-6">4.1.5</span> -->
+        <span>编址题😀</span>
+        </a></li></ul></li><li>
+        <a class="is-flex" href="#分组转发和路由表🤪">
+        <!-- 目录是否自动编号 -->
+        <!-- <span class="has-mr-6">4.2</span> -->
+        <span>分组转发和路由表🤪</span>
+        </a><ul class="menu-list"><li>
+        <a class="is-flex" href="#路由表🤪">
+        <!-- 目录是否自动编号 -->
+        <!-- <span class="has-mr-6">4.2.1</span> -->
+        <span>路由表🤪</span>
+        </a></li><li>
+        <a class="is-flex" href="#分组转发算法😀">
+        <!-- 目录是否自动编号 -->
+        <!-- <span class="has-mr-6">4.2.2</span> -->
+        <span>分组转发算法😀</span>
+        </a></li></ul></li><li>
+        <a class="is-flex" href="#ARP协议😀">
+        <!-- 目录是否自动编号 -->
+        <!-- <span class="has-mr-6">4.3</span> -->
+        <span>ARP协议😀</span>
+        </a></li></ul></li><li>
+        <a class="is-flex" href="#5-传输层😀">
+        <!-- 目录是否自动编号 -->
+        <!-- <span class="has-mr-6">5</span> -->
+        <span>5. 传输层😀</span>
+        </a><ul class="menu-list"><li>
+        <a class="is-flex" href="#Socket😭">
+        <!-- 目录是否自动编号 -->
+        <!-- <span class="has-mr-6">5.1</span> -->
+        <span>Socket😭</span>
+        </a><ul class="menu-list"><li>
+        <a class="is-flex" href="#套接字究竟是什么😭">
+        <!-- 目录是否自动编号 -->
+        <!-- <span class="has-mr-6">5.1.1</span> -->
+        <span>套接字究竟是什么😭</span>
+        </a></li><li>
+        <a class="is-flex" href="#三大要素🤪">
+        <!-- 目录是否自动编号 -->
+        <!-- <span class="has-mr-6">5.1.2</span> -->
+        <span>三大要素🤪</span>
+        </a></li></ul></li><li>
+        <a class="is-flex" href="#UDP😀">
+        <!-- 目录是否自动编号 -->
+        <!-- <span class="has-mr-6">5.2</span> -->
+        <span>UDP😀</span>
+        </a><ul class="menu-list"><li>
+        <a class="is-flex" href="#特点😀">
+        <!-- 目录是否自动编号 -->
+        <!-- <span class="has-mr-6">5.2.1</span> -->
+        <span>特点😀</span>
+        </a></li><li>
+        <a class="is-flex" href="#首部格式😀">
+        <!-- 目录是否自动编号 -->
+        <!-- <span class="has-mr-6">5.2.2</span> -->
+        <span>首部格式😀</span>
+        </a></li><li>
+        <a class="is-flex" href="#计算检验和😭">
+        <!-- 目录是否自动编号 -->
+        <!-- <span class="has-mr-6">5.2.3</span> -->
+        <span>计算检验和😭</span>
+        </a></li><li>
+        <a class="is-flex" href="#停止等待协议ARQ">
+        <!-- 目录是否自动编号 -->
+        <!-- <span class="has-mr-6">5.2.4</span> -->
+        <span>停止等待协议ARQ</span>
+        </a></li></ul></li><li>
+        <a class="is-flex" href="#TCP😀">
+        <!-- 目录是否自动编号 -->
+        <!-- <span class="has-mr-6">5.3</span> -->
+        <span>TCP😀</span>
+        </a><ul class="menu-list"><li>
+        <a class="is-flex" href="#特点😀-1">
+        <!-- 目录是否自动编号 -->
+        <!-- <span class="has-mr-6">5.3.1</span> -->
+        <span>特点😀</span>
+        </a></li><li>
+        <a class="is-flex" href="#首部格式😀-1">
+        <!-- 目录是否自动编号 -->
+        <!-- <span class="has-mr-6">5.3.2</span> -->
+        <span>首部格式😀</span>
+        </a></li><li>
+        <a class="is-flex" href="#三次握手😀">
+        <!-- 目录是否自动编号 -->
+        <!-- <span class="has-mr-6">5.3.3</span> -->
+        <span>三次握手😀</span>
+        </a></li><li>
+        <a class="is-flex" href="#四次挥手😀">
+        <!-- 目录是否自动编号 -->
+        <!-- <span class="has-mr-6">5.3.4</span> -->
+        <span>四次挥手😀</span>
+        </a></li></ul></li></ul></li><li>
+        <a class="is-flex" href="#6-应用层😀">
+        <!-- 目录是否自动编号 -->
+        <!-- <span class="has-mr-6">6</span> -->
+        <span>6. 应用层😀</span>
+        </a><ul class="menu-list"><li>
+        <a class="is-flex" href="#HTTP😀">
+        <!-- 目录是否自动编号 -->
+        <!-- <span class="has-mr-6">6.1</span> -->
+        <span>HTTP😀</span>
+        </a><ul class="menu-list"><li>
+        <a class="is-flex" href="#常见的HTTP请求动词😀">
+        <!-- 目录是否自动编号 -->
+        <!-- <span class="has-mr-6">6.1.1</span> -->
+        <span>常见的HTTP请求动词😀</span>
+        </a></li><li>
+        <a class="is-flex" href="#HTTP状态码表😀">
+        <!-- 目录是否自动编号 -->
+        <!-- <span class="has-mr-6">6.1.2</span> -->
+        <span>HTTP状态码表😀</span>
+        </a></li><li>
+        <a class="is-flex" href="#HTTP和HTTPS的区别🤪">
+        <!-- 目录是否自动编号 -->
+        <!-- <span class="has-mr-6">6.1.3</span> -->
+        <span>HTTP和HTTPS的区别🤪</span>
+        </a></li></ul></li><li>
+        <a class="is-flex" href="#输入网址敲下回车后发生了什么😀">
+        <!-- 目录是否自动编号 -->
+        <!-- <span class="has-mr-6">6.2</span> -->
+        <span>输入网址敲下回车后发生了什么😀</span>
+        </a></li></ul></li></ul>
+            </div>
+        </div>
+    </div>
+
+        
+            <div class="card widget">
+    <div class="card-content">
+        <h3 class="menu-label">
+            推荐阅读
+        </h3>
+        
+        <article class="media">
+            
+            <a href="/Others/node-editor.md/" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="images/loading.gif" data-original="https://cdn.jsdelivr.net/gh/wjwABCDEFG/blog_img/img/20250401154214355.jpeg" alt="Line-It 节点编辑器.md">
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2025-04-01T07:28:20.000Z">2025-04-01</time></div>
+                    <a href="/Others/node-editor.md/" class="title has-link-black-ter is-size-6 has-text-weight-normal">Line-It 节点编辑器.md</a>
+                    <p class="is-size-7 is-uppercase">
+                        <a class="has-link-grey -link" href="/categories/Others/">Others</a>
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+        <article class="media">
+            
+            <a href="/games/Unity3D-note/" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="images/loading.gif" data-original="https://cdn.jsdelivr.net/gh/wjwABCDEFG/blog_img/img/20210728004637.jpg" alt="Unity3D学习笔记">
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2021-07-28T12:42:07.000Z">2021-07-28</time></div>
+                    <a href="/games/Unity3D-note/" class="title has-link-black-ter is-size-6 has-text-weight-normal">Unity3D学习笔记</a>
+                    <p class="is-size-7 is-uppercase">
+                        <a class="has-link-grey -link" href="/categories/games/">游戏和引擎</a>
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+        <article class="media">
+            
+            <a href="/life/%E4%B8%BA%E6%AF%95%E4%B8%9A%E5%81%9A%E5%87%86%E5%A4%87/" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="images/loading.gif" data-original="https://cdn.jsdelivr.net/gh/wjwABCDEFG/blog_img/img/20210717225951.jpeg" alt="为毕业做准备">
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2021-03-31T13:13:32.000Z">2021-03-31</time></div>
+                    <a href="/life/%E4%B8%BA%E6%AF%95%E4%B8%9A%E5%81%9A%E5%87%86%E5%A4%87/" class="title has-link-black-ter is-size-6 has-text-weight-normal">为毕业做准备</a>
+                    <p class="is-size-7 is-uppercase">
+                        <a class="has-link-grey -link" href="/categories/life/">生活随笔</a>
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+        <article class="media">
+            
+            <a href="/life/mhxy-experience/" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="images/loading.gif" data-original="https://cdn.jsdelivr.net/gh/wjwABCDEFG/blog_img/img/20210717223725.png" alt="梦幻西游游戏体验">
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2021-03-31T08:29:35.000Z">2021-03-31</time></div>
+                    <a href="/life/mhxy-experience/" class="title has-link-black-ter is-size-6 has-text-weight-normal">梦幻西游游戏体验</a>
+                    <p class="is-size-7 is-uppercase">
+                        <a class="has-link-grey -link" href="/categories/life/">生活随笔</a>
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+        <article class="media">
+            
+            <a href="/games/3DMath-Primerfor-Graphics-and-Game-Development-note/" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="images/loading.gif" data-original="https://cdn.jsdelivr.net/gh/wjwABCDEFG/blog_img/img/20210717223435.jpeg" alt="3D数学基础图形与游戏研发笔记">
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2021-03-06T10:55:07.000Z">2021-03-06</time></div>
+                    <a href="/games/3DMath-Primerfor-Graphics-and-Game-Development-note/" class="title has-link-black-ter is-size-6 has-text-weight-normal">3D数学基础图形与游戏研发笔记</a>
+                    <p class="is-size-7 is-uppercase">
+                        <a class="has-link-grey -link" href="/categories/games/">游戏和引擎</a>
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+    </div>
+</div>
+        
+        </div>
+    
+</div>
+
+                
+
+
+
+
+<div class="column is-4-tablet is-4-desktop is-3-widescreen is-hidden-touch is-hidden-desktop-only has-order-3 column-right is-sticky">
+    
+        
+
+    <div class="card widget" id="toc">
+        <div class="card-content">
+            <div class="menu">
+                <h3 class="menu-label">
+                    目录
+                </h3>
+                <ul class="menu-list"><li>
+        <a class="is-flex" href="#1-TCP-IP-5层模型😀">
+        <!-- 目录是否自动编号 -->
+        <!-- <span class="has-mr-6">1</span> -->
+        <span>1. TCP/IP 5层模型😀</span>
+        </a></li><li>
+        <a class="is-flex" href="#2-物理层😭">
+        <!-- 目录是否自动编号 -->
+        <!-- <span class="has-mr-6">2</span> -->
+        <span>2. 物理层😭</span>
+        </a><ul class="menu-list"><li>
+        <a class="is-flex" href="#频分复用FDM😭">
+        <!-- 目录是否自动编号 -->
+        <!-- <span class="has-mr-6">2.1</span> -->
+        <span>频分复用FDM😭</span>
+        </a></li><li>
+        <a class="is-flex" href="#时分复用TDM😭">
+        <!-- 目录是否自动编号 -->
+        <!-- <span class="has-mr-6">2.2</span> -->
+        <span>时分复用TDM😭</span>
+        </a></li><li>
+        <a class="is-flex" href="#波分复用WDM😭">
+        <!-- 目录是否自动编号 -->
+        <!-- <span class="has-mr-6">2.3</span> -->
+        <span>波分复用WDM😭</span>
+        </a></li><li>
+        <a class="is-flex" href="#码分复用CDM🤪">
+        <!-- 目录是否自动编号 -->
+        <!-- <span class="has-mr-6">2.4</span> -->
+        <span>码分复用CDM🤪</span>
+        </a></li></ul></li><li>
+        <a class="is-flex" href="#3-数据链路层🤪">
+        <!-- 目录是否自动编号 -->
+        <!-- <span class="has-mr-6">3</span> -->
+        <span>3. 数据链路层🤪</span>
+        </a><ul class="menu-list"><li>
+        <a class="is-flex" href="#特点🤪">
+        <!-- 目录是否自动编号 -->
+        <!-- <span class="has-mr-6">3.1</span> -->
+        <span>特点🤪</span>
+        </a><ul class="menu-list"><li>
+        <a class="is-flex" href="#封装成帧😭">
+        <!-- 目录是否自动编号 -->
+        <!-- <span class="has-mr-6">3.1.1</span> -->
+        <span>封装成帧😭</span>
+        </a></li><li>
+        <a class="is-flex" href="#透明传输😭">
+        <!-- 目录是否自动编号 -->
+        <!-- <span class="has-mr-6">3.1.2</span> -->
+        <span>透明传输😭</span>
+        </a></li><li>
+        <a class="is-flex" href="#差错控制🤪">
+        <!-- 目录是否自动编号 -->
+        <!-- <span class="has-mr-6">3.1.3</span> -->
+        <span>差错控制🤪</span>
+        </a></li></ul></li><li>
+        <a class="is-flex" href="#MAC子层😀">
+        <!-- 目录是否自动编号 -->
+        <!-- <span class="has-mr-6">3.2</span> -->
+        <span>MAC子层😀</span>
+        </a></li><li>
+        <a class="is-flex" href="#交换机😀">
+        <!-- 目录是否自动编号 -->
+        <!-- <span class="has-mr-6">3.3</span> -->
+        <span>交换机😀</span>
+        </a></li><li>
+        <a class="is-flex" href="#VLAN😀">
+        <!-- 目录是否自动编号 -->
+        <!-- <span class="has-mr-6">3.4</span> -->
+        <span>VLAN😀</span>
+        </a></li></ul></li><li>
+        <a class="is-flex" href="#4-网络层😀">
+        <!-- 目录是否自动编号 -->
+        <!-- <span class="has-mr-6">4</span> -->
+        <span>4. 网络层😀</span>
+        </a><ul class="menu-list"><li>
+        <a class="is-flex" href="#IP地址和编址方法😀">
+        <!-- 目录是否自动编号 -->
+        <!-- <span class="has-mr-6">4.1</span> -->
+        <span>IP地址和编址方法😀</span>
+        </a><ul class="menu-list"><li>
+        <a class="is-flex" href="#分类的IP地址😀">
+        <!-- 目录是否自动编号 -->
+        <!-- <span class="has-mr-6">4.1.1</span> -->
+        <span>分类的IP地址😀</span>
+        </a></li><li>
+        <a class="is-flex" href="#划分子网和子网掩码😀">
+        <!-- 目录是否自动编号 -->
+        <!-- <span class="has-mr-6">4.1.2</span> -->
+        <span>划分子网和子网掩码😀</span>
+        </a></li><li>
+        <a class="is-flex" href="#无分类编址CIDR😀">
+        <!-- 目录是否自动编号 -->
+        <!-- <span class="has-mr-6">4.1.3</span> -->
+        <span>无分类编址CIDR😀</span>
+        </a></li><li>
+        <a class="is-flex" href="#构造超网（路由聚合）😀">
+        <!-- 目录是否自动编号 -->
+        <!-- <span class="has-mr-6">4.1.4</span> -->
+        <span>构造超网（路由聚合）😀</span>
+        </a></li><li>
+        <a class="is-flex" href="#编址题😀">
+        <!-- 目录是否自动编号 -->
+        <!-- <span class="has-mr-6">4.1.5</span> -->
+        <span>编址题😀</span>
+        </a></li></ul></li><li>
+        <a class="is-flex" href="#分组转发和路由表🤪">
+        <!-- 目录是否自动编号 -->
+        <!-- <span class="has-mr-6">4.2</span> -->
+        <span>分组转发和路由表🤪</span>
+        </a><ul class="menu-list"><li>
+        <a class="is-flex" href="#路由表🤪">
+        <!-- 目录是否自动编号 -->
+        <!-- <span class="has-mr-6">4.2.1</span> -->
+        <span>路由表🤪</span>
+        </a></li><li>
+        <a class="is-flex" href="#分组转发算法😀">
+        <!-- 目录是否自动编号 -->
+        <!-- <span class="has-mr-6">4.2.2</span> -->
+        <span>分组转发算法😀</span>
+        </a></li></ul></li><li>
+        <a class="is-flex" href="#ARP协议😀">
+        <!-- 目录是否自动编号 -->
+        <!-- <span class="has-mr-6">4.3</span> -->
+        <span>ARP协议😀</span>
+        </a></li></ul></li><li>
+        <a class="is-flex" href="#5-传输层😀">
+        <!-- 目录是否自动编号 -->
+        <!-- <span class="has-mr-6">5</span> -->
+        <span>5. 传输层😀</span>
+        </a><ul class="menu-list"><li>
+        <a class="is-flex" href="#Socket😭">
+        <!-- 目录是否自动编号 -->
+        <!-- <span class="has-mr-6">5.1</span> -->
+        <span>Socket😭</span>
+        </a><ul class="menu-list"><li>
+        <a class="is-flex" href="#套接字究竟是什么😭">
+        <!-- 目录是否自动编号 -->
+        <!-- <span class="has-mr-6">5.1.1</span> -->
+        <span>套接字究竟是什么😭</span>
+        </a></li><li>
+        <a class="is-flex" href="#三大要素🤪">
+        <!-- 目录是否自动编号 -->
+        <!-- <span class="has-mr-6">5.1.2</span> -->
+        <span>三大要素🤪</span>
+        </a></li></ul></li><li>
+        <a class="is-flex" href="#UDP😀">
+        <!-- 目录是否自动编号 -->
+        <!-- <span class="has-mr-6">5.2</span> -->
+        <span>UDP😀</span>
+        </a><ul class="menu-list"><li>
+        <a class="is-flex" href="#特点😀">
+        <!-- 目录是否自动编号 -->
+        <!-- <span class="has-mr-6">5.2.1</span> -->
+        <span>特点😀</span>
+        </a></li><li>
+        <a class="is-flex" href="#首部格式😀">
+        <!-- 目录是否自动编号 -->
+        <!-- <span class="has-mr-6">5.2.2</span> -->
+        <span>首部格式😀</span>
+        </a></li><li>
+        <a class="is-flex" href="#计算检验和😭">
+        <!-- 目录是否自动编号 -->
+        <!-- <span class="has-mr-6">5.2.3</span> -->
+        <span>计算检验和😭</span>
+        </a></li><li>
+        <a class="is-flex" href="#停止等待协议ARQ">
+        <!-- 目录是否自动编号 -->
+        <!-- <span class="has-mr-6">5.2.4</span> -->
+        <span>停止等待协议ARQ</span>
+        </a></li></ul></li><li>
+        <a class="is-flex" href="#TCP😀">
+        <!-- 目录是否自动编号 -->
+        <!-- <span class="has-mr-6">5.3</span> -->
+        <span>TCP😀</span>
+        </a><ul class="menu-list"><li>
+        <a class="is-flex" href="#特点😀-1">
+        <!-- 目录是否自动编号 -->
+        <!-- <span class="has-mr-6">5.3.1</span> -->
+        <span>特点😀</span>
+        </a></li><li>
+        <a class="is-flex" href="#首部格式😀-1">
+        <!-- 目录是否自动编号 -->
+        <!-- <span class="has-mr-6">5.3.2</span> -->
+        <span>首部格式😀</span>
+        </a></li><li>
+        <a class="is-flex" href="#三次握手😀">
+        <!-- 目录是否自动编号 -->
+        <!-- <span class="has-mr-6">5.3.3</span> -->
+        <span>三次握手😀</span>
+        </a></li><li>
+        <a class="is-flex" href="#四次挥手😀">
+        <!-- 目录是否自动编号 -->
+        <!-- <span class="has-mr-6">5.3.4</span> -->
+        <span>四次挥手😀</span>
+        </a></li></ul></li></ul></li><li>
+        <a class="is-flex" href="#6-应用层😀">
+        <!-- 目录是否自动编号 -->
+        <!-- <span class="has-mr-6">6</span> -->
+        <span>6. 应用层😀</span>
+        </a><ul class="menu-list"><li>
+        <a class="is-flex" href="#HTTP😀">
+        <!-- 目录是否自动编号 -->
+        <!-- <span class="has-mr-6">6.1</span> -->
+        <span>HTTP😀</span>
+        </a><ul class="menu-list"><li>
+        <a class="is-flex" href="#常见的HTTP请求动词😀">
+        <!-- 目录是否自动编号 -->
+        <!-- <span class="has-mr-6">6.1.1</span> -->
+        <span>常见的HTTP请求动词😀</span>
+        </a></li><li>
+        <a class="is-flex" href="#HTTP状态码表😀">
+        <!-- 目录是否自动编号 -->
+        <!-- <span class="has-mr-6">6.1.2</span> -->
+        <span>HTTP状态码表😀</span>
+        </a></li><li>
+        <a class="is-flex" href="#HTTP和HTTPS的区别🤪">
+        <!-- 目录是否自动编号 -->
+        <!-- <span class="has-mr-6">6.1.3</span> -->
+        <span>HTTP和HTTPS的区别🤪</span>
+        </a></li></ul></li><li>
+        <a class="is-flex" href="#输入网址敲下回车后发生了什么😀">
+        <!-- 目录是否自动编号 -->
+        <!-- <span class="has-mr-6">6.2</span> -->
+        <span>输入网址敲下回车后发生了什么😀</span>
+        </a></li></ul></li></ul>
+            </div>
+        </div>
+    </div>
+
+    
+        <div class="card widget">
+    <div class="card-content">
+        <h3 class="menu-label">
+            推荐阅读
+        </h3>
+        
+        <article class="media">
+            
+            <a href="/Others/node-editor.md/" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="images/loading.gif" data-original="https://cdn.jsdelivr.net/gh/wjwABCDEFG/blog_img/img/20250401154214355.jpeg" alt="Line-It 节点编辑器.md">
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2025-04-01T07:28:20.000Z">2025-04-01</time></div>
+                    <a href="/Others/node-editor.md/" class="title has-link-black-ter is-size-6 has-text-weight-normal">Line-It 节点编辑器.md</a>
+                    <p class="is-size-7 is-uppercase">
+                        <a class="has-link-grey -link" href="/categories/Others/">Others</a>
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+        <article class="media">
+            
+            <a href="/games/Unity3D-note/" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="images/loading.gif" data-original="https://cdn.jsdelivr.net/gh/wjwABCDEFG/blog_img/img/20210728004637.jpg" alt="Unity3D学习笔记">
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2021-07-28T12:42:07.000Z">2021-07-28</time></div>
+                    <a href="/games/Unity3D-note/" class="title has-link-black-ter is-size-6 has-text-weight-normal">Unity3D学习笔记</a>
+                    <p class="is-size-7 is-uppercase">
+                        <a class="has-link-grey -link" href="/categories/games/">游戏和引擎</a>
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+        <article class="media">
+            
+            <a href="/life/%E4%B8%BA%E6%AF%95%E4%B8%9A%E5%81%9A%E5%87%86%E5%A4%87/" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="images/loading.gif" data-original="https://cdn.jsdelivr.net/gh/wjwABCDEFG/blog_img/img/20210717225951.jpeg" alt="为毕业做准备">
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2021-03-31T13:13:32.000Z">2021-03-31</time></div>
+                    <a href="/life/%E4%B8%BA%E6%AF%95%E4%B8%9A%E5%81%9A%E5%87%86%E5%A4%87/" class="title has-link-black-ter is-size-6 has-text-weight-normal">为毕业做准备</a>
+                    <p class="is-size-7 is-uppercase">
+                        <a class="has-link-grey -link" href="/categories/life/">生活随笔</a>
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+        <article class="media">
+            
+            <a href="/life/mhxy-experience/" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="images/loading.gif" data-original="https://cdn.jsdelivr.net/gh/wjwABCDEFG/blog_img/img/20210717223725.png" alt="梦幻西游游戏体验">
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2021-03-31T08:29:35.000Z">2021-03-31</time></div>
+                    <a href="/life/mhxy-experience/" class="title has-link-black-ter is-size-6 has-text-weight-normal">梦幻西游游戏体验</a>
+                    <p class="is-size-7 is-uppercase">
+                        <a class="has-link-grey -link" href="/categories/life/">生活随笔</a>
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+        <article class="media">
+            
+            <a href="/games/3DMath-Primerfor-Graphics-and-Game-Development-note/" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="images/loading.gif" data-original="https://cdn.jsdelivr.net/gh/wjwABCDEFG/blog_img/img/20210717223435.jpeg" alt="3D数学基础图形与游戏研发笔记">
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2021-03-06T10:55:07.000Z">2021-03-06</time></div>
+                    <a href="/games/3DMath-Primerfor-Graphics-and-Game-Development-note/" class="title has-link-black-ter is-size-6 has-text-weight-normal">3D数学基础图形与游戏研发笔记</a>
+                    <p class="is-size-7 is-uppercase">
+                        <a class="has-link-grey -link" href="/categories/games/">游戏和引擎</a>
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+    </div>
+</div>
+    
+    
+</div>
+
+            </div>
+        </div>
+    </section>
+    <footer class="footer">
+    <div class="container">
+        <div class="level">
+            <div class="level-start has-text-centered-mobile">
+                <a class="footer-logo is-block has-mb-6" href="/">
+                
+                    <img src="images/loading.gif" data-original="https://cdn.jsdelivr.net/gh/wjwABCDEFG/blog_img/img/20210717231246.png" alt="计算机网络基础" height="28">
+                
+                </a>
+                <p class="is-size-7">
+                &copy; 2025 wjw&nbsp;
+                Powered by <a href="https://hexo.io/" target="_blank" rel="noopener">Hexo</a> & <a
+                        href="https://github.com/ppoffice/hexo-theme-icarus" target="_blank" rel="noopener">Icarus</a>
+                
+                <br>
+                <!-- <span id="busuanzi_container_site_uv">
+                共<span id="busuanzi_value_site_uv">0</span>个访客
+                </span> -->
+                <span id="busuanzi_container_site_uv"> 来访 <span id="busuanzi_value_site_uv"></span>人</span>
+                <span id="busuanzi_container_site_pv">, 总访问 <span id="busuanzi_value_site_pv"></span>次</span>
+
+                <span id="timeDate">载入天数...</span><span id="times">载入时分秒...</span>
+                    <script>
+                        var now = new Date(); 
+                        function createtime() { 
+                            var grt= new Date("03/06/2020 00:00:00"); /*建站时间*/
+                            now.setTime(now.getTime()+250); 
+                            days = (now - grt ) / 1000 / 60 / 60 / 24; dnum = Math.floor(days); 
+                            hours = (now - grt ) / 1000 / 60 / 60 - (24 * dnum); hnum = Math.floor(hours); 
+                            if(String(hnum).length ==1 ){hnum = "0" + hnum;} minutes = (now - grt ) / 1000 /60 - (24 * 60 * dnum) - (60 * hnum); 
+                            mnum = Math.floor(minutes); if(String(mnum).length ==1 ){mnum = "0" + mnum;} 
+                            seconds = (now - grt ) / 1000 - (24 * 60 * 60 * dnum) - (60 * 60 * hnum) - (60 * mnum); 
+                            snum = Math.round(seconds); if(String(snum).length ==1 ){snum = "0" + snum;} 
+                            document.getElementById("timeDate").innerHTML = "本站已安全运行 "+dnum+" 天 "; 
+                            document.getElementById("times").innerHTML = hnum + " 小时 " + mnum + " 分 " + snum + " 秒"; 
+                        } 
+                    setInterval("createtime()",250);
+                    </script>
+                
+                </p>
+            </div>
+            <div class="level-end">
+            
+                <div class="field has-addons is-flex-center-mobile has-mt-5-mobile is-flex-wrap is-flex-middle">
+                
+                <p class="control">
+                    <a class="button is-white is-large" target="_blank" rel="noopener" title="Creative Commons" href="https://creativecommons.org/">
+                        
+                        <i class="fab fa-creative-commons"></i>
+                        
+                    </a>
+                </p>
+                
+                <p class="control">
+                    <a class="button is-white is-large" target="_blank" rel="noopener" title="Attribution 4.0 International" href="https://creativecommons.org/licenses/by/4.0/">
+                        
+                        <i class="fab fa-creative-commons-by"></i>
+                        
+                    </a>
+                </p>
+                
+                <p class="control">
+                    <a class="button is-white is-large" target="_blank" rel="noopener" title="Download on GitHub" href="https://github.com/ppoffice/hexo-theme-icarus">
+                        
+                        <i class="fab fa-github"></i>
+                        
+                    </a>
+                </p>
+                
+                </div>
+            
+            </div>
+        </div>
+    </div>
+</footer>
+    <script src="https://cdn.jsdelivr.net/npm/jquery@3.3.1/dist/jquery.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/moment@2.22.2/min/moment-with-locales.min.js"></script>
+<script>moment.locale("zh-CN");</script>
+
+
+<script>
+var IcarusThemeSettings = {
+    site: {
+        url: 'https://wjw.today',
+        external_link: {"enable":true,"exclude":[]}
+    },
+    article: {
+        highlight: {
+            clipboard: true,
+            fold: 'unfolded'
+        }
+    }
+};
+</script>
+
+
+<script src="https://cdn.jsdelivr.net/npm/clipboard@2.0.4/dist/clipboard.min.js" defer></script>
+
+
+
+
+
+<script src="/js/animation.js"></script>
+
+
+
+<script src="https://cdn.jsdelivr.net/npm/lightgallery@1.6.8/dist/js/lightgallery.min.js" defer></script>
+<script src="https://cdn.jsdelivr.net/npm/justifiedGallery@3.7.0/dist/js/jquery.justifiedGallery.min.js" defer></script>
+<script src="/js/gallery.js" defer></script>
+
+
+
+<div id="outdated">
+    <h6>Your browser is out-of-date!</h6>
+    <p>Update your browser to view this website correctly. <a id="btnUpdateBrowser" href="http://outdatedbrowser.com/">Update
+            my browser now </a></p>
+    <p class="last"><a href="#" id="btnCloseUpdateBrowser" title="Close">&times;</a></p>
+</div>
+<script src="https://cdn.jsdelivr.net/npm/outdatedbrowser@1.1.5/outdatedbrowser/outdatedbrowser.min.js" defer></script>
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+        outdatedBrowser({
+            bgColor: '#f25648',
+            color: '#ffffff',
+            lowerThan: 'flex'
+        });
+    });
+</script>
+
+
+<script src="https://cdn.jsdelivr.net/npm/mathjax@2.7.5/unpacked/MathJax.js?config=TeX-MML-AM_CHTML" defer></script>
+<script>
+document.addEventListener('DOMContentLoaded', function () {
+    MathJax.Hub.Config({
+        'HTML-CSS': {
+            matchFontHeight: false
+        },
+        SVG: {
+            matchFontHeight: false
+        },
+        CommonHTML: {
+            matchFontHeight: false
+        },
+        tex2jax: {
+            inlineMath: [
+                ['$','$'],
+                ['\\(','\\)']
+            ]
+        }
+    });
+});
+</script>
+
+
+<a id="back-to-top" title="回到顶端" href="javascript:;">
+    <i class="fas fa-chevron-up"></i>
+</a>
+<script src="/js/back-to-top.js" defer></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<script src="/js/main.js" defer></script>
+
+    
+    <div class="searchbox ins-search">
+    <div class="searchbox-container ins-search-container">
+        <div class="searchbox-input-wrapper">
+            <input type="text" class="searchbox-input ins-search-input" placeholder="想要查找什么..." />
+            <span class="searchbox-close ins-close ins-selectable"><i class="fa fa-times-circle"></i></span>
+        </div>
+        <div class="searchbox-result-wrapper ins-section-wrapper">
+            <div class="ins-section-container"></div>
+        </div>
+    </div>
+</div>
+<script>
+    (function (window) {
+        var INSIGHT_CONFIG = {
+            TRANSLATION: {
+                POSTS: '文章',
+                PAGES: '页面',
+                CATEGORIES: '分类',
+                TAGS: '标签',
+                UNTITLED: '(无标题)',
+            },
+            CONTENT_URL: '/content.json',
+        };
+        window.INSIGHT_CONFIG = INSIGHT_CONFIG;
+    })(window);
+</script>
+<script src="/js/insight.js" defer></script>
+<link rel="stylesheet" href="/css/search.css">
+<link rel="stylesheet" href="/css/insight.css">
+    
+
+        <style>
+            [bg-lazy] {
+                background-image: none !important;
+                background-color: #eee !important;
+            }
+        </style>
+        <script>
+            window.imageLazyLoadSetting = {
+                isSPA: false,
+                preloadRatio: 1,
+                processImages: null,
+            };
+        </script><script>window.addEventListener("load",function(){var t=/\.(gif|jpg|jpeg|tiff|png)$/i,r=/^data:image\/[a-z\d\-\.\+]+;base64,/;Array.prototype.slice.call(document.querySelectorAll("img[data-original]")).forEach(function(a){var e=a.parentNode;"A"===e.tagName&&(t.test(e.href)||r.test(e.href))&&(e.href=a.dataset.original)})});</script><script>(r=>{r.imageLazyLoadSetting.processImages=t;var a=r.imageLazyLoadSetting.isSPA,o=r.imageLazyLoadSetting.preloadRatio||1,d=i();function i(){var t=Array.prototype.slice.call(document.querySelectorAll("img[data-original]")),e=Array.prototype.slice.call(document.querySelectorAll("[bg-lazy]"));return t.concat(e)}function t(t){(a||t)&&(d=i());for(var e,n=0;n<d.length;n++)0<=(e=(e=d[n]).getBoundingClientRect()).bottom&&0<=e.left&&e.top<=(r.innerHeight*o||document.documentElement.clientHeight*o)&&(()=>{var t,e,a,o,i=d[n];e=function(){d=d.filter(function(t){return i!==t}),r.imageLazyLoadSetting.onImageLoaded&&r.imageLazyLoadSetting.onImageLoaded(i)},(t=i).dataset.loaded||(t.hasAttribute("bg-lazy")?(t.removeAttribute("bg-lazy"),e&&e()):(a=new Image,o=t.getAttribute("data-original"),a.onload=function(){t.src=o,t.removeAttribute("data-original"),t.setAttribute("data-loaded",!0),e&&e()},a.onerror=function(){t.removeAttribute("data-original"),t.setAttribute("data-loaded",!1),t.src=o},t.src!==o&&(a.src=o)))})()}function e(){clearTimeout(t.tId),t.tId=setTimeout(t,500)}t(),document.addEventListener("scroll",e),r.addEventListener("resize",e),r.addEventListener("orientationchange",e)})(this);</script></body>
+</html>
