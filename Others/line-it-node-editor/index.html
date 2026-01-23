@@ -19,7 +19,7 @@
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="https://cdn.jsdelivr.net/gh/wjwABCDEFG/blog_img/img/20250401154214355.jpeg">
 <meta property="article:published_time" content="2025-04-01T07:28:20.000Z">
-<meta property="article:modified_time" content="2025-04-01T12:05:09.684Z">
+<meta property="article:modified_time" content="2025-04-04T10:22:54.934Z">
 <meta property="article:author" content="wjw">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:image" content="https://cdn.jsdelivr.net/gh/wjwABCDEFG/blog_img/img/20250401154214355.jpeg">
@@ -156,7 +156,7 @@
                 <span class="level-item has-text-grey">
                     
                     
-                    41 分钟 读完 (大约 6193 个字)
+                    43 分钟 读完 (大约 6378 个字)
                 </span>
                 
                 
@@ -312,6 +312,7 @@
 <p>考虑到用户可能会自定义节点，因此在node_base中也暴露了detailsInfo:属性， 类型为List[QWidget]，自定义节点时，可以通过往该属性中不断append widget，即可在Details面板中看到需要的属性</p>
 <p>需要注意的是，这个面板里的参数如果需要保存，应该加入到序列化的value中</p>
 <h1 id="开关"><a href="#开关" class="headerlink" title="开关"></a>开关</h1><p>在自动化测试中，根据以往的经验，有几次可能要执行某一段代码，而有几次又要不执行某一段代码。因此为每个节点设计了开关，如果关闭，则此次执行跳过该节点</p>
+<p><img src="images/loading.gif" data-original="https://cdn.jsdelivr.net/gh/wjwABCDEFG/blog_img/img/20250403215542295.png" alt="image-20250403215538932"></p>
 <h1 id="eval执行流程设计"><a href="#eval执行流程设计" class="headerlink" title="eval执行流程设计"></a>eval执行流程设计</h1><p>考虑自动化需求，重新实现了计算流程，a -&gt; b -&gt; c -&gt; d，有可能需要先执行到c出错了，此时希望不重复执行ab，而是从c开始继续执行，由于前面已经实现了前向计算和后向计算的基本操作，这里考虑如下设计方案</p>
 <p>方案一（向后执行）：</p>
 <p>将c mark dirty，会把后续的子节点都mark dirty，对着c或者b进行eval向后执行</p>
@@ -329,8 +330,19 @@
 <p>在以前工作时使用的节点编辑器中，爷爷节点的数据需要一路传下来，链路上保存的数据就越来越多，而且每次都得往下传！！（即使这个节点编辑器的数据是不在链路上而在节点中，但依然存在这个问题），虽然自动化测试更加接近流水线一点，但使用历史数据问题肯定是在所难免的，因此要解决这个设计缺陷</p>
 <p>Store节点，本质上是往一个空的global_data存东西，这里用的是模块，有点数据总线的味道~</p>
 <p>由于output socket本身就可以连接多根线，所以不用担心从哪个socket出来的问题，在LineIt中，本身output大概率就只有一个socket</p>
-<h1 id="接口类型颜色"><a href="#接口类型颜色" class="headerlink" title="接口类型颜色"></a>接口类型颜色</h1><p>也许在上一个节点value的类型转换成颜色值，下一个的getInput里面验证，不一样类型的就不允许连接</p>
-<p>TODO，暂时搁置，很多连接点其实是没有类型传输给下个节点的，不确定这种功能是否会导致操作不便，需要再仔细考量</p>
+<h1 id="接口类型颜色"><a href="#接口类型颜色" class="headerlink" title="接口类型颜色"></a>接口类型颜色</h1><p>用户在自定义节点重写evalOperation时可以通过typehint或者三引号注释指定类型</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 以下两种方式均可</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">evalOperation</span><span class="params">(self, a:int, *args)</span> -&gt; list:</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">evalOperation</span><span class="params">(self, a, *args)</span>:</span></span><br><span class="line">    <span class="string">"""</span></span><br><span class="line"><span class="string">    :param a: int</span></span><br><span class="line"><span class="string">    :return: list</span></span><br><span class="line"><span class="string">    """</span></span><br></pre></td></tr></table></figure>
+
+<p>这样就会使得输入槽变成int的颜色，输出槽变成list的颜色，该功能<strong>支持任意类型</strong></p>
+<p><img src="images/loading.gif" data-original="https://cdn.jsdelivr.net/gh/wjwABCDEFG/blog_img/img/20250404181446909.png" alt="image-20250404181444588"></p>
+<p>颜色表如下：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">int: &#39;#FF0000&#39;,     # 红色</span><br><span class="line">str: &#39;#00FF00&#39;,     # 绿色</span><br><span class="line">list: &#39;#0000FF&#39;,    # 蓝色</span><br><span class="line">dict: &#39;#FF00FF&#39;,    # 品红</span><br><span class="line">float: &#39;#FFFF00&#39;,   # 黄色</span><br><span class="line">bool: &#39;#00FFFF&#39;,    # 青色</span><br><span class="line">tuple: &#39;#FFA500&#39;,   # 橙色</span><br><span class="line">set: &#39;#800080&#39;,     # 紫色</span><br><span class="line">other: 通过hash(type)来生成对应的颜色值</span><br></pre></td></tr></table></figure>
+
+<p>当为自定义class类型时，会根据类型的hash值来确定一种颜色，从而达到不同类型不同颜色的效果</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">type_name = type_obj.__name__.encode(<span class="string">'utf-8'</span>)</span><br><span class="line">hash_hex = hashlib.md5(type_name).hexdigest()</span><br><span class="line"></span><br><span class="line">hash_int = int(hash_hex, <span class="number">16</span>)</span><br><span class="line">hue = (hash_int % <span class="number">360</span>) / <span class="number">360.0</span>  <span class="comment"># 色相分布在0-360度</span></span><br><span class="line">saturation = <span class="number">0.7</span>  <span class="comment"># 固定饱和度70%</span></span><br><span class="line">lightness = <span class="number">0.5</span>  <span class="comment"># 固定亮度50%</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 将HLS转换为RGB</span></span><br><span class="line">r, g, b = colorsys.hls_to_rgb(hue, lightness, saturation)</span><br><span class="line">r, g, b = int(r * <span class="number">255</span>), int(g * <span class="number">255</span>), int(b * <span class="number">255</span>)</span><br><span class="line"></span><br><span class="line">color_code = <span class="string">f'#<span class="subst">&#123;r:<span class="number">02</span>x&#125;</span><span class="subst">&#123;g:<span class="number">02</span>x&#125;</span><span class="subst">&#123;b:<span class="number">02</span>x&#125;</span>'</span></span><br></pre></td></tr></table></figure>
+
+
+
 <h1 id="动态增加ouput数量"><a href="#动态增加ouput数量" class="headerlink" title="动态增加ouput数量"></a>动态增加ouput数量</h1><p>TODO，在LineIt中，本身output大概率就只有一个socket，所以可能没多大用处，暂时搁置</p>
 <h1 id="节点列表"><a href="#节点列表" class="headerlink" title="节点列表"></a>节点列表</h1><p>既然是做自动化了，那就尝试性的把一些功能封装成节点吧</p>
 <h2 id="移动设备操作类"><a href="#移动设备操作类" class="headerlink" title="移动设备操作类"></a>移动设备操作类</h2><p>这里要注意尽量兼容多平台，主流就是android/iOS，android使用adb，iOS使用tidevice/wda，相当于做了之前airtest的一些工作，但是这样更加原生一点，也避免引入了很多不必要的东西</p>
@@ -1353,7 +1365,7 @@
                 
                 </a>
                 <p class="is-size-7">
-                &copy; 2025 wjw&nbsp;
+                &copy; 2026 wjw&nbsp;
                 Powered by <a href="https://hexo.io/" target="_blank" rel="noopener">Hexo</a> & <a
                         href="https://github.com/ppoffice/hexo-theme-icarus" target="_blank" rel="noopener">Icarus</a>
                 
@@ -1382,6 +1394,8 @@
                     setInterval("createtime()",250);
                     </script>
                 
+                <br>
+                <a href="https://beian.miit.gov.cn/" target="_blank">粤ICP备2022130730号</a >
                 </p>
             </div>
             <div class="level-end">
